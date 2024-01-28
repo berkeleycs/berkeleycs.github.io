@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>B-Trees Study Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">B-Trees Study Guide</header><div class="due-date">Author: Brandon Lee</div><ul id="markdown-toc">
+  <li><a href="lec17.html#qa" id="markdown-toc-qa">QA</a></li>
+  <li><a href="lec17.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec17.html#bsts" id="markdown-toc-bsts">BSTs</a></li>
+  <li><a href="lec17.html#b-trees" id="markdown-toc-b-trees">B-Trees</a>    <ul>
+      <li><a href="lec17.html#b-tree-invariants" id="markdown-toc-b-tree-invariants">B-Tree invariants</a></li>
+    </ul>
+  </li>
+  <li><a href="lec17.html#practice-problems" id="markdown-toc-practice-problems">Practice Problems</a></li>
+</ul>
+
+<h2 id="qa">QA</h2>
+<p>Linked <a href="https://youtu.be/KH49oWy-WjI">here</a>.</p>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/W2TXgv2RDrF72Tf68">here</a>.</p>
+
+<h2 id="bsts">BSTs</h2>
+
+<p><strong>Depth</strong> We define the depth of a <em>node</em> as how far it is from the root. For consistency, we say the root has a depth of 0.</p>
+
+<p><strong>Height</strong> We define the height of a tree as the depth of the deepest node.</p>
+
+<p>Notice that depending on how we insert into our BST, our height could vary drastically. We say a tree is “spindly”
+if it has height close to N and a tree is “bushy” if its height is closer to logN. For operations such as getting a node,
+we want to have the height to be as small as possible, thus favoring “bushy” BSTs</p>
+
+<h2 id="b-trees">B-Trees</h2>
+
+<p>Two specific B-Trees in this course are 2-3 Trees (A B-Tree where each node has 2 or 3 children),
+and 2-3-4/2-4 Trees (A B-Tree where each node has 2, 3, or 4 children). The key idea of a B-Tree
+is to over stuff the nodes at the bottom to prevent increaseing the height of the tree. This allows
+us to ensure a max height of logN.</p>
+
+<p>Make sure you know how to insert into a B-Tree. Refer back to lecture slides for examples.</p>
+
+<p>With our restriction on height, we get that the runtime for contains and add are both THETA(LogN)</p>
+
+<h3 id="b-tree-invariants">B-Tree invariants</h3>
+<p>Because of how we add to our tree, we get two nice invariants for B-Trees:</p>
+
+<ol>
+  <li>All leaves must be the same distance from the source</li>
+  <li>A non-leaf node with k items mut has exactly k+1 children.</li>
+</ol>
+
+<h2 id="practice-problems">Practice Problems</h2>
+
+<ol>
+  <li>Draw the 2-3 tree that results when you insert the keys A B C D E F G in
+order.</li>
+  <li>How many compares does it take in the worst case to decide whether to go
+left, middle, or right from a 3 node?</li>
+  <li><a href="https://d1b10bmlvqabco.cloudfront.net/attach/hx9h4t96ea8qv/h32s1vxe6mb5o0/i7vkubmrxjn0/fa14_mt2.pdf">Problem
+5</a>
+of the Fall 2014 midterm.</li>
+  <li><a href="https://tbp.berkeley.edu/exams/6137/download/">Problem 1c, e</a> of the Spring 2018 Midterm 2</li>
+  <li><a href="https://tbp.berkeley.edu/exams/5286/download/">Problem 8b</a> of the Spring 2016 Midterm 2</li>
+</ol>
+
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trees and Graph Traversals Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Trees and Graph Traversals Guide</header><div class="due-date">Author: Josh Hug</div><ul id="markdown-toc">
+  <li><a href="lec23.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec23.html#overview" id="markdown-toc-overview">Overview</a></li>
+  <li><a href="lec23.html#recommended-problems" id="markdown-toc-recommended-problems">Recommended Problems</a>    <ul>
+      <li><a href="lec23.html#c-level" id="markdown-toc-c-level">C level</a></li>
+      <li><a href="lec23.html#b-level" id="markdown-toc-b-level">B level</a></li>
+      <li><a href="lec23.html#a-level" id="markdown-toc-a-level">A level</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/jyHWEXvWBZc3fnEw6">here</a>.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p><strong>Trees.</strong> A tree consists of a set of nodes and a set of edges connecting the nodes, where there is only one path between any two nodes. A tree is thus a graph with no cycles and all vertices connected.</p>
+
+<p><strong>Traversals.</strong> When we iterate over a tree, we call this a “tree traversal”.</p>
+
+<p><strong>Level Order Traversal.</strong> A level-order traversal visits every item at level 0,
+then level 1, then level 2, and so forth.</p>
+
+<p><strong>Depth First Traversals.</strong> We have three depth first traversals: Pre-order,
+in-order and post-order. In a pre-order traversal, we visit a node, then
+traverse its children. In an in-order traversal, we traverse the left child,
+visit a node, then traverse the right child. In a post-order traversal, we
+traverse both children before visiting. These are very natural to implement
+recursively. Pre-order and post-order generalize naturally to trees with
+arbtirary numbers of children. In-order only makes sense for binary trees.</p>
+
+<p><strong>Graphs.</strong> A graph consists of a set of nodes and a set of edges connecting the nodes. However, unlike our tree definition, we can have more than one path between nodes. Note that all trees are graphs. In CS 61B, we can assume all graphs are simple graphs (AKA no loops or parallel edges).</p>
+
+<p><strong>Depth First Traversals.</strong> DFS for graphs is similar to DFS for trees, but since there are potential cycles within our graph, we add the constraint that each vertex should be visited at most once. This can be accomplished by marking nodes as visited and only visiting a node if it had not been marked as visited already.</p>
+
+<h2 id="recommended-problems">Recommended Problems</h2>
+
+<h3 id="c-level">C level</h3>
+
+<ol>
+  <li><a href="http://inst.eecs.berkeley.edu/~cs61b/fa14/ta-materials/discussion7.pdf">Question 1</a> from the Fall 2014 discussion worksheet.</li>
+</ol>
+
+<h3 id="b-level">B level</h3>
+
+<ol>
+  <li><a href="https://d1b10bmlvqabco.cloudfront.net/attach/hx9h4t96ea8qv/h32s1vxe6mb5o0/i7vkubmrxjn0/fa14_mt2.pdf">Question 4</a> from the Fall 2014 midterm.</li>
+</ol>
+
+<h3 id="a-level">A level</h3>
+
+<ol>
+  <li><a href="http://datastructur.es/sp15/materials/guerrilla/guerrilla2.pdf">Question 7</a> from the guerrilla section worksheet #2 from Spring 2015.</li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

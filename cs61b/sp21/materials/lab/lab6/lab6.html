@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 6: Getting Started on Project 2 | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 6: Getting Started on Project 2</header><ul id="markdown-toc">
+  <li><a href="lab6.html#intro" id="markdown-toc-intro">Intro</a></li>
+  <li><a href="lab6.html#persistence-conceptually" id="markdown-toc-persistence-conceptually">Persistence (Conceptually)</a></li>
+  <li><a href="lab6.html#java-and-compilation" id="markdown-toc-java-and-compilation">Java and Compilation</a></li>
+  <li><a href="lab6.html#make" id="markdown-toc-make">Make</a></li>
+  <li><a href="lab6.html#files-and-directories-in-java" id="markdown-toc-files-and-directories-in-java">Files and Directories in Java</a>    <ul>
+      <li><a href="lab6.html#current-working-directory" id="markdown-toc-current-working-directory">Current Working Directory</a></li>
+      <li><a href="lab6.html#absolute-and-relative-paths" id="markdown-toc-absolute-and-relative-paths">Absolute and Relative Paths</a></li>
+      <li><a href="lab6.html#file--directory-manipulation-in-java" id="markdown-toc-file--directory-manipulation-in-java">File &amp; Directory Manipulation in Java</a>        <ul>
+          <li><a href="lab6.html#files" id="markdown-toc-files">Files</a></li>
+          <li><a href="lab6.html#directories" id="markdown-toc-directories">Directories</a></li>
+          <li><a href="lab6.html#summary" id="markdown-toc-summary">Summary</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="lab6.html#serializable" id="markdown-toc-serializable">Serializable</a></li>
+  <li><a href="lab6.html#exercise-canine-capers" id="markdown-toc-exercise-canine-capers">Exercise: Canine Capers</a>    <ul>
+      <li><a href="lab6.html#main" id="markdown-toc-main">Main</a></li>
+      <li><a href="lab6.html#useful-util-functions" id="markdown-toc-useful-util-functions">Useful Util Functions</a></li>
+      <li><a href="lab6.html#suggested-order-of-completion" id="markdown-toc-suggested-order-of-completion">Suggested Order of Completion</a></li>
+      <li><a href="lab6.html#usage" id="markdown-toc-usage">Usage</a></li>
+    </ul>
+  </li>
+  <li><a href="lab6.html#testing" id="markdown-toc-testing">Testing</a></li>
+  <li><a href="lab6.html#submission" id="markdown-toc-submission">Submission</a></li>
+  <li><a href="lab6.html#mandatory-epilogue-debugging" id="markdown-toc-mandatory-epilogue-debugging">Mandatory Epilogue: Debugging</a></li>
+  <li><a href="lab6.html#tips-faqs-misconceptions" id="markdown-toc-tips-faqs-misconceptions">Tips, FAQs, Misconceptions</a>    <ul>
+      <li><a href="lab6.html#tips" id="markdown-toc-tips">Tips</a></li>
+      <li><a href="lab6.html#faqs--misconceptions" id="markdown-toc-faqs--misconceptions">FAQs &amp; Misconceptions</a></li>
+    </ul>
+  </li>
+  <li><a href="lab6.html#credits" id="markdown-toc-credits">Credits</a></li>
+</ul>
+
+<h2 id="intro">Intro</h2>
+
+<p>The goal of this lab is to prepare you for success on Project 2: Gitlet. In
+this lab, you will learn:</p>
+
+<ol>
+  <li>How to run Java from the command line and run the tests for Capers (the
+tests for Gitlet are very very similar).</li>
+  <li>How to work with files and directories in Java.</li>
+  <li>How to serialize Java objects to a file and read them back later (also
+called Persistence).</li>
+</ol>
+
+<p>So far in this class, you have exclusively made programs whose state only persists while the program is running, and all traces of the program disappear once the program exits. For example, in Project 0, you created a game that you could play while the program was running, but there was no way to save the game state, quit the program, go do some other stuff, and then run the program again, load up your previous progress, and continue playing the game. In this lab, we will go over two methods to make the state of your program <a href="https://en.wikipedia.org/wiki/Persistence_(computer_science)">persist</a> past the execution of your program: one through writing plain text to a file, and the other through serializing objects to a file. This will be directly applicable to Project 2 Gitlet as well as any future projects you want to do where you want to be able to save state between programs (like Project 3).</p>
+
+<p>As always, you can get the skeleton files with the following command:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull skeleton master
+</code></pre></div></div>
+
+<p>There’s a lot of background info to get started with this lab. The actual task starts in the section labeled “Exercise: Canine Capers”. However, it’s important to carefully read and do all the sections of the lab that precede this exercise, otherwise it won’t make any sense.</p>
+
+<h2 id="persistence-conceptually">Persistence (Conceptually)</h2>
+
+<p>As noted above, all of the programs you’ve written in this class have had no capability to remember anything about their prior executions. For example, when you ran 2048, there was no ability to save your progress to be resumed at a later date.</p>
+
+<p>By contrast, many real world programs out there have the ability to maintain a state that persists across multiple executions. For example, consider the git version control tool. For example, when you call <code class="language-plaintext highlighter-rouge">git add</code>, git makes a note of which files you’d like to add.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add Hello.java Friends.java
+</code></pre></div></div>
+
+<p>If you then enter <code class="language-plaintext highlighter-rouge">git status</code>, the correct files will be listed:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git restore --staged &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+        modified:   Hello.java
+        modified:   Friends.java
+</code></pre></div></div>
+
+<p>Git is able to do this even though the program completely terminates in between these two commands. In other words, if you run <code class="language-plaintext highlighter-rouge">git add</code>, then turn your computer off entirely for a year, then come back later, <code class="language-plaintext highlighter-rouge">git status</code> will still somehow do the right thing. Git is somehow exhibiting <strong>persistence</strong>.</p>
+
+<p>The key idea that makes this possible is to use your computer’s file system. By storing information to your hard drive, programs are able to leave information for later executions to utilize.</p>
+
+<p><strong>Important note:</strong> Static variables do NOT persist in Java between executions. When a program completes execution, all instance and static variables are completely lost. The only way we can maintain persistence between executions is to store data on the file system.</p>
+
+<p>For the next several sections, we’ll go over a lot of command line and file system knowledge that you’ll need to complete lab 6 and project 2. Some of it may be review for some of you, but we still encourage you to read the entire thing.</p>
+
+<h2 id="java-and-compilation">Java and Compilation</h2>
+
+<p>A walkthrough of “Java Compilation” and “Make” can be found
+<a href="https://youtu.be/jW0GQqUzs2Y">here</a>. The video simply goes over the steps listed in the spec, so if you find yourself confused on the directions then check it out.</p>
+
+<p>Up until now, we have been running our Java code on IntelliJ by clicking
+the magic green button. Perhaps surprisingly, there are other more primitive
+ways of running Java code that aren’t graphical. What we’re
+referring to here is compiling and running Java code through the <em>command line</em>
+(your terminal). You may be used to this idea from CS 61A, where we often ran code directly from terminal using <code class="language-plaintext highlighter-rouge">python3 myprogram.py</code>.</p>
+
+<p>The Java implementations we use compile Java <em>source code</em>, written by
+the programmer in a <code class="language-plaintext highlighter-rouge">.java</code> file, into Java <code class="language-plaintext highlighter-rouge">.class</code> files containing <em>Java byte code</em>, which may then be executed by a separate program. Often, this separate program, called <code class="language-plaintext highlighter-rouge">java</code>, does a mix of interpreting the class file and compiling it into machine code and then having the bare hardware execute it.</p>
+
+<p>We’re going to walk through how to compile and run a <code class="language-plaintext highlighter-rouge">.java</code> file from just
+your terminal. In order for this all to work, ensure that the following are both
+version 15 or above:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>javac <span class="nt">-version</span>
+<span class="nv">$ </span>java <span class="nt">-version</span>
+</code></pre></div></div>
+
+<p>NOTE: If you’re in Windows, make sure that you’re using a Bash prompt. That is, if your terminal starts with “C:", you’re in the wrong kind of terminal window. Open up git bash intead.</p>
+
+<p>If they aren’t, please redo the relevant part from <a href="https://sp21.datastructur.es/materials/lab/lab1setup/lab1setup">lab1setup</a>.</p>
+
+<p>First ensure your current working directory is <code class="language-plaintext highlighter-rouge">sp21-s***/lab6/capers</code>.
+These commands will take you there:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$REPO_DIR</span>
+<span class="nv">$ </span><span class="nb">cd </span>lab6/capers
+</code></pre></div></div>
+
+<p>While you’re here, go ahead and run the <code class="language-plaintext highlighter-rouge">ls</code> command. You’ll see all the
+capers files, but the one we want to focus on is a file called <code class="language-plaintext highlighter-rouge">Main.java</code>.</p>
+
+<p>To compile the source file and all of its dependencies, run this command within your terminal:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>javac <span class="k">*</span>.java
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">*.java</code> wildcard simply returns all the <code class="language-plaintext highlighter-rouge">.java</code> files in the current directory. Run <code class="language-plaintext highlighter-rouge">ls</code> again, and you’ll see a bunch of new <code class="language-plaintext highlighter-rouge">.class</code> files, including <code class="language-plaintext highlighter-rouge">Main.class</code>. These files constitute the <em>compiled code</em>. Let’s see what it looks like.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>Main.class
+</code></pre></div></div>
+
+<p>That command will print out the contents of the file. You’ll see mostly garbage
+with many special characters. This is called <em>bytecode</em>, and even though it looks foreign to us, the <code class="language-plaintext highlighter-rouge">java</code> program can take this compiled code and actually interpret it to run the program. Let’s see it happen:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java Main
+</code></pre></div></div>
+
+<p>Oops! We got an error.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Could not find or load main class Main
+Caused by: java.lang.NoClassDefFoundError: capers/Main <span class="o">(</span>wrong name: Main<span class="o">)</span>
+</code></pre></div></div>
+
+<p>If we were to translate this error to English, it’s saying “I don’t know what
+<code class="language-plaintext highlighter-rouge">Main</code> you’re talking about.” That’s because <code class="language-plaintext highlighter-rouge">Main.java</code> is inside a package,
+so we must use it’s fully canonical name which is <code class="language-plaintext highlighter-rouge">capers.Main</code>. To do this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ..                 <span class="c"># takes us up a directory to sp21-s***/lab6</span>
+<span class="nv">$ </span>java capers.Main
+</code></pre></div></div>
+
+<p>And now the program finally runs and prints out</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Must have at least one argument
+</code></pre></div></div>
+
+<p>The lesson: to run a Java file that is within a package, we must enter the
+parent directory (in our case, <code class="language-plaintext highlighter-rouge">lab6</code>) and use the fully canonical name.</p>
+
+<p>One last thing about command line execution: how do we pass arguments to the
+<code class="language-plaintext highlighter-rouge">main</code> method? Recall that when we run a class (i.e. <code class="language-plaintext highlighter-rouge">java Main</code>), what really
+happens is the <code class="language-plaintext highlighter-rouge">main(String[] args)</code> method of the class is called. To pass
+arguments, simply add them in the call to <code class="language-plaintext highlighter-rouge">java</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java capers.Main story <span class="s2">"this is a single argument"</span>
+</code></pre></div></div>
+
+<p>As demonstrated, you can have a space in one of your elements of <code class="language-plaintext highlighter-rouge">String[] args</code>
+by wrapping that argument in quotation marks.</p>
+
+<p>In the above execution, the <code class="language-plaintext highlighter-rouge">String[] args</code> variable had these contents:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s">"story"</span><span class="o">,</span> <span class="s">"this is a single argument"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>You’ll be using the <code class="language-plaintext highlighter-rouge">String[] args</code> variable in this lab and in Gitlet. Some
+skeleton is already provided to show you how it’s done in the <code class="language-plaintext highlighter-rouge">main</code> method
+of the <code class="language-plaintext highlighter-rouge">Main</code> class.</p>
+
+<p>Although we will be using command-line compilation to run and debug our code, we will still be using IntelliJ to make edits to the code. Please open up Lab 6 in IntelliJ by opening the <code class="language-plaintext highlighter-rouge">sp21-s***/lab6/pom.xml</code> file.</p>
+
+<p>Open Main.java, and find the line (around line number 40) that looks like:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Utils</span><span class="o">.</span><span class="na">exitWithError</span><span class="o">(</span><span class="s">"Must have at least one argument"</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Immediately below this code add <code class="language-plaintext highlighter-rouge">System.out.println("args: " + Arrays.toString(args));</code>, so that the code now reads:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Utils</span><span class="o">.</span><span class="na">exitWithError</span><span class="o">(</span><span class="s">"Must have at least one argument"</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"args: "</span> <span class="o">+</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="n">args</span><span class="o">));</span>
+</code></pre></div></div>
+
+<p>The word <code class="language-plaintext highlighter-rouge">Arrays</code> will be in red, so you’ll want to put your cursor on the red word and press alt+enter (or option+enter on a Mac) to import the <code class="language-plaintext highlighter-rouge">java.util.Arrays</code> class. Once you’ve done this, try compiling and running the code <strong>from the command line</strong> (not IntelliJ!) using the commands below:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>javac capers/Main.java
+<span class="nv">$ </span>java capers.Main story <span class="s2">"this is a single argument"</span>
+</code></pre></div></div>
+
+<p>This time, your program should print out:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>args: <span class="o">[</span>story, this is a single argument]
+</code></pre></div></div>
+
+<p>Note: You may notice a bunch of .class files in IntelliJ in the same folder as your code. As you may recall, we did not have such .class files in project 0, project 1, or in previous labs. This is because IntelliJ stores the .class files that it generates in another folder (usually called either <code class="language-plaintext highlighter-rouge">out</code> or <code class="language-plaintext highlighter-rouge">target</code>).</p>
+
+<h2 id="make">Make</h2>
+
+<p>Unfortunately, using JUnit testing for this lab and project 2 is awkward, so we’re going to use a more sophisticated command line based testing infrastructure to run automated tests for this lab and project 2.</p>
+
+<p>The key reason is that Capers (this lab) and Gitlet (project 2) are both programs that have persistent state, i.e. each time you run them, they “remember” what they did during previous runs of the program. For example, when you call <code class="language-plaintext highlighter-rouge">git add</code>, then <code class="language-plaintext highlighter-rouge">git status</code>, the <code class="language-plaintext highlighter-rouge">git</code> program somehow keeps track of which files were added, even though it completely terminates execution in between the <code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">status</code> commands.</p>
+
+<p>For example, a test for the <code class="language-plaintext highlighter-rouge">status</code> command for Gitlet would need to:</p>
+
+<ol>
+  <li>Run Gitlet’s <code class="language-plaintext highlighter-rouge">Main</code> class with the <code class="language-plaintext highlighter-rouge">add</code> argument.</li>
+  <li>Let your program finish and exit.</li>
+  <li>Run Gitlet’s <code class="language-plaintext highlighter-rouge">Main</code> class a second time with the <code class="language-plaintext highlighter-rouge">status</code> argument.</li>
+  <li>Test that the printed output of the program shows that it correctly “remembers” what happened in the earlier execution of the program.</li>
+</ol>
+
+<p>Another issue that makes testing hard is that the output of Gitlet is complicated. Gitlet tests must be able to parse the printed output of the program, while also testing that various files contain the right contents.</p>
+
+<p>The end result of all of this is that we’ll be using a custom command line testing suite built by Paul Hilfinger and 61B TAs that uses python as the basic engine for verifying program correctness for this lab and in project 2.</p>
+
+<p>The testing suite is executed using a standard unix tool called <code class="language-plaintext highlighter-rouge">make</code>. We won’t talk about how to use <code class="language-plaintext highlighter-rouge">make</code> in detail. Just know that there are two things that you can use <code class="language-plaintext highlighter-rouge">make</code> for:</p>
+
+<ol>
+  <li>Compiling your code by using the <code class="language-plaintext highlighter-rouge">make</code> command.</li>
+  <li>Running the test suite by using <code class="language-plaintext highlighter-rouge">make check</code> command.</li>
+</ol>
+
+<p>In order to use <code class="language-plaintext highlighter-rouge">make</code>, you’ll need to follow the brief instructions <a href="../../guides/make-install.html">here</a> to install <code class="language-plaintext highlighter-rouge">make</code>. Additionally, you’ll need Python so follow <a href="https://www.python.org/downloads/">these</a> instructions if you do not already have Python installed.</p>
+
+<!-- You may have noticed it's a little annoying to manually compile then run your code. Running tests from the command line using indivdual commands will be even worse. Thus, to save time and keep things simpler, we'll be using a build system called `make`.  -->
+
+<p>Once you have <code class="language-plaintext highlighter-rouge">make</code> and <code class="language-plaintext highlighter-rouge">python</code> installed, let’s see how to use <code class="language-plaintext highlighter-rouge">make</code> to compile your code.</p>
+
+<!-- There are just 2 _make targets_ we need to use: the first is the default, and
+the second is `check`. -->
+
+<p>You can run <code class="language-plaintext highlighter-rouge">make</code> within any directory as long as it’s within <code class="language-plaintext highlighter-rouge">lab6</code> (
+i.e. <code class="language-plaintext highlighter-rouge">lab6/capers</code>, <code class="language-plaintext highlighter-rouge">lab6</code>, <code class="language-plaintext highlighter-rouge">lab6/testing</code>), though for simplicity let’s just
+stay in the <code class="language-plaintext highlighter-rouge">lab6</code> directory on our terminals). Try typing the following command in your terminal.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
+</code></pre></div></div>
+
+<p>When you run this command, it will compile all of the <code class="language-plaintext highlighter-rouge">.java</code> files in your project directory and
+place the <code class="language-plaintext highlighter-rouge">.class</code> files in the project folder (in our case, the <code class="language-plaintext highlighter-rouge">capers</code>
+folder). The output will look something like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"/Library/Developer/CommandLineTools/usr/bin/make" -C capers default
+javac -g -Xlint:unchecked -Xlint:deprecation -cp "..::;..;" CapersRepository.java Dog.java Main.java Utils.java
+touch sentinel
+</code></pre></div></div>
+
+<p>You don’t need to understand what any of this means, but basically it’s just compiling your files.</p>
+
+<p>To run the test suite, enter:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make check
+</code></pre></div></div>
+
+<p>NOTE: If you get an error that looks like “/bin/bash: python3: command not found” or “python3: Permission denied”, see the FAQ at the end of this spec.</p>
+
+<p><code class="language-plaintext highlighter-rouge">make check</code> launches our tests and prints out which ones you passed and
+which ones you did not. Initially, you’ll fail all of the tests since you
+haven’t completed this lab assignment yet.</p>
+
+<p>There is also a thread way to use <code class="language-plaintext highlighter-rouge">make</code>. Specifically <code class="language-plaintext highlighter-rouge">make clean</code> will remove all the
+<code class="language-plaintext highlighter-rouge">.class</code> files and other clutter if it bothers you having so many files in your
+project folder. We suggest running this after you’re done testing for the
+moment and want to go back to editing your <code class="language-plaintext highlighter-rouge">.java</code> files in IntelliJ.</p>
+
+<p>Terminology note: <code class="language-plaintext highlighter-rouge">check</code> and <code class="language-plaintext highlighter-rouge">clean</code> are known as <em>make targets</em>. You can actually define more targets for <code class="language-plaintext highlighter-rouge">make</code> by creating a custom <code class="language-plaintext highlighter-rouge">Makefile</code>. Doing so is well beyond the scope of 61B.</p>
+
+<p>If the above command successfully ran (i.e., you are able to see test output), then you’re ready to start the lab! If you did encounter issues regarding not being able to run <code class="language-plaintext highlighter-rouge">make</code>, then get assistance from your TA by putting yourself on the lab queue.</p>
+
+<p>We’ll now move onto how to manipulate files and directories in Java.</p>
+
+<h2 id="files-and-directories-in-java">Files and Directories in Java</h2>
+<p>Before we jump into manipulating files and directories in Java, let’s go through some file system basics.</p>
+
+<h3 id="current-working-directory">Current Working Directory</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Working_directory">current working directory</a> (CWD) of a Java program is the directory from where you execute that Java program. You can access the CWD from within a Java program by using <code class="language-plaintext highlighter-rouge">System.getProperty("user.dir")</code>. Examples follow for Windows &amp; Mac/Linux users - they are very similar, just different stylistically.</p>
+
+<p><strong>Windows</strong>
+For example, for Windows users, let’s say we have this small Java program located in the folder <code class="language-plaintext highlighter-rouge">C:/Users/Michelle/example</code> (or <code class="language-plaintext highlighter-rouge">~/example</code>) named <code class="language-plaintext highlighter-rouge">Example.java</code> :</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// file C:/Users/Michelle/example/Example.java</span>
+<span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<p>This is a program that prints out the CWD of that Java program.</p>
+
+<p>If I ran:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>C:/Users/Michelle/example/
+<span class="nv">$ </span>javac Example.java
+<span class="nv">$ </span>java Example
+</code></pre></div></div>
+
+<p>the output should read:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:<span class="se">\U</span>sers<span class="se">\M</span>ichelle<span class="se">\e</span>xample
+</code></pre></div></div>
+
+<p>Note: This Example.java file was just a hypothetical. You will not find it in the lab 6 skeleton.</p>
+
+<p><strong>Mac &amp; Linux</strong>
+For example, for Mac &amp; Linux users, let’s say we have this small Java program located in the folder <code class="language-plaintext highlighter-rouge">/home/Michelle/example</code> (or <code class="language-plaintext highlighter-rouge">~/example</code>) named <code class="language-plaintext highlighter-rouge">Example.java</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// file /home/Michelle/example/Example.java</span>
+<span class="kd">class</span> <span class="nc">Example</span> <span class="o">{</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">getProperty</span><span class="o">(</span><span class="s">"user.dir"</span><span class="o">));</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is a program that prints out the CWD of that Java program.</p>
+
+<p>If I ran:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /home/Michelle/Example
+<span class="nv">$ </span>javac Example.java
+<span class="nv">$ </span>java Example
+</code></pre></div></div>
+
+<p>the output should read:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/home/Michelle/example
+</code></pre></div></div>
+
+<p>Note: This Example.java file was just a hypothetical. You will not find it in the lab 6 skeleton.</p>
+
+<p><strong>IntelliJ</strong></p>
+
+<p>Above, we saw how the “current working directory” is the directory that we’re in when we launch a program. You might wonder what the working directory is when using IntelliJ, since we’re not running it from a directory at all, but rather using the IntelliJ GUI.</p>
+
+<p>In IntelliJ, the CWD is given by the specified directory under Run &gt; Edit Configurations &gt; Working Directory:</p>
+
+<p><img src="img/intellij_cwd.png" alt="IntelliJ Working Directory" />
+You can see that my CWD is <code class="language-plaintext highlighter-rouge">/Users/omarkhan902/cs61b/61b_sp21_stuff/sp21-s3/lab6</code>. Note that you may have to run <code class="language-plaintext highlighter-rouge">Main.java</code> once for this option to appear.</p>
+
+<p><strong>Terminal</strong>
+In terminal / Git Bash, the command <code class="language-plaintext highlighter-rouge">pwd</code> will give you the CWD.</p>
+
+<h3 id="absolute-and-relative-paths">Absolute and Relative Paths</h3>
+<p>A <a href="https://en.wikipedia.org/wiki/Path_(computing)">path</a> is the location of a file or directory. There are two kinds of paths: absolute paths and relative paths.</p>
+
+<ul>
+  <li>An <strong>absolute path</strong> is the location of a file or directory relative to the <strong>root</strong> of the file system.
+    <ul>
+      <li>In the example above, the absolute path of <code class="language-plaintext highlighter-rouge">Example.java</code> was <code class="language-plaintext highlighter-rouge">C:/Users/Michelle/example/Example.java</code> (Windows) or <code class="language-plaintext highlighter-rouge">/home/Michelle/example/Example.java</code> (Mac/Linux). Notice that these paths start with the root which is <code class="language-plaintext highlighter-rouge">C:/</code> for Windows and <code class="language-plaintext highlighter-rouge">/</code> for Mac/Linux.</li>
+    </ul>
+  </li>
+  <li>A <strong>relative path</strong> is the location of a file or directory relative to the CWD of your program.
+    <ul>
+      <li>In the example above, if I was in the <code class="language-plaintext highlighter-rouge">C:/Users/Michelle/example/</code> (Windows) or <code class="language-plaintext highlighter-rouge">/home/Michelle/example/</code> (Mac/Linux) folders, then the relative path to <code class="language-plaintext highlighter-rouge">Example.java</code> would just be <code class="language-plaintext highlighter-rouge">Example.java</code>.</li>
+      <li>If I were in <code class="language-plaintext highlighter-rouge">C:/Users/Michelle/</code> or <code class="language-plaintext highlighter-rouge">/home/Michelle/</code>, then the relative path to <code class="language-plaintext highlighter-rouge">Example.java</code> would be <code class="language-plaintext highlighter-rouge">example/Example.java</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><em>Note: the root of your file system is different from your home directory. Your home directory is usually located at <code class="language-plaintext highlighter-rouge">C:/Users/&lt;your username&gt;</code> (Windows) or <code class="language-plaintext highlighter-rouge">/home/&lt;your username&gt;</code> (Mac/Linux). We use <code class="language-plaintext highlighter-rouge">~</code> as a shorthand to refer to your home directory, so when you are at <code class="language-plaintext highlighter-rouge">~/sp21-s***</code>, you are actually at <code class="language-plaintext highlighter-rouge">C:/Users/&lt;your username&gt;/sp21-s***</code> (Windows) or <code class="language-plaintext highlighter-rouge">/home/&lt;your username&gt;/sp21-s***</code> (Mac/Linux).</em></p>
+
+<p>When using paths, <code class="language-plaintext highlighter-rouge">.</code> refers to the CWD. Therefore, the relative path <code class="language-plaintext highlighter-rouge">./example/Example.java</code> is the same as <code class="language-plaintext highlighter-rouge">example/Example.java</code>.</p>
+
+<p>Similarly, <code class="language-plaintext highlighter-rouge">..</code> refers to the parent (or enclosing) directory. So the command</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ..
+</code></pre></div></div>
+<p>is a quick and simply way to navigate to your parent directory. If you want
+to go to your parent’s parent directory, you can string these together like so:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ../..
+</code></pre></div></div>
+
+<p>And similar for your parent’s parent’s parent directory. You shouldn’t need to
+do this in this lab/project, though it’s a useful thing to quickly navigate
+around your terminal.</p>
+
+<h3 id="file--directory-manipulation-in-java">File &amp; Directory Manipulation in Java</h3>
+<p>The Java <a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html">File</a> class represents a file or directory in your operating system and allows you to do operations on those files and directories. In this class, you usually will want to be doing operations on files and directories by referring to them to their relative paths. You’ll want any new files or directories you create to be in the same directory as where you run your program (in this lab, the <code class="language-plaintext highlighter-rouge">sp21-s***/lab6</code> folder) and not some random place on your computer.</p>
+
+<h4 id="files">Files</h4>
+<p>You can make a File object in Java with the File constructor and passing in the path to the file:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">File</span> <span class="n">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"dummy.txt"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The above path is a relative path where we are referring to the file <code class="language-plaintext highlighter-rouge">dummy.txt</code> in our Java program’s CWD. You can think of this File object as a reference to the actual file <code class="language-plaintext highlighter-rouge">dummy.txt</code> - <strong>when we create the new File object, we aren’t actually creating the <code class="language-plaintext highlighter-rouge">dummy.txt</code> file itself</strong>, we are just saying, “in the future, when I do operations with <code class="language-plaintext highlighter-rouge">f</code>, I want to do these operations on <code class="language-plaintext highlighter-rouge">dummy.txt</code>”. To actually create this <code class="language-plaintext highlighter-rouge">dummy.txt</code> file, we could call</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="na">createNewFile</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>and then the file <code class="language-plaintext highlighter-rouge">dummy.txt</code> will actually now exist (and you could see it in File Explorer / Finder).</p>
+
+<p>You can check if the file “dummy.txt” already exists or not with the <code class="language-plaintext highlighter-rouge">exists</code> method of the File class:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="na">exists</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p>Actually writing to a file is pretty ugly in Java. To keep things simple, we’ve
+provided you with a <code class="language-plaintext highlighter-rouge">Utils.java</code>. This class will be very handy for this lab and
+in Gitlet. You should look at the list of available methods in <code class="language-plaintext highlighter-rouge">Utils.java</code> to
+get a sense of what it can do for you. See the FAQ at the bottom of this lab for
+hints on what to focus on.</p>
+
+<p>As an example, if you want to write a String to a file, you can do the following:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Utils</span><span class="o">.</span><span class="na">writeContents</span><span class="o">(</span><span class="n">f</span><span class="o">,</span> <span class="s">"Hello World"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Now <code class="language-plaintext highlighter-rouge">dummy.txt</code> would now have the text “Hello World” in it.</p>
+
+<h4 id="directories">Directories</h4>
+<p>Directories in Java are also represented with File objects. For example, you can make a File object that represents a directory:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">File</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="s">"dummy"</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Similar to files, this directory might not actually exist in your file system. To actually create the folder in your file system, you can run:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="o">.</span><span class="na">mkdir</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>and now there should be a folder called <code class="language-plaintext highlighter-rouge">dummy</code> in your CWD. You should also checkout the <code class="language-plaintext highlighter-rouge">mkdirs()</code> method, whose documentation can be found <a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html">here</a>.</p>
+
+<h4 id="summary">Summary</h4>
+<p>There are many more ways to manipulate files in Java, and you can explore more by looking at the <a href="https://docs.oracle.com/javase/7/docs/api/java/io/File.html">File javadocs</a> and Googling. There are a ton of resources online and, if you Google it, doing more extensive file operations in Java can get a bit complicated. We recommend understanding the basics by doing this lab, and in the future if you come across a use case you don’t know how to handle, then start searching or asking on Ed. For this lab and Gitlet, you should use our <code class="language-plaintext highlighter-rouge">Utils.java</code> class that has many useful helper functions for file operations.</p>
+
+<h2 id="serializable">Serializable</h2>
+<p>Writing text to files is great and all, but what if we want to save some more complex state in our program? For example, what if we want to be able to save the <code class="language-plaintext highlighter-rouge">Model</code> object in 2048 so we can come back to it later? We could write a toString method to convert a <code class="language-plaintext highlighter-rouge">Model</code> to a <code class="language-plaintext highlighter-rouge">String</code> and then write that <code class="language-plaintext highlighter-rouge">String</code> to a file. However, we’d then have to also write code that is able to read the <code class="language-plaintext highlighter-rouge">String</code> and then parse it back into a <code class="language-plaintext highlighter-rouge">Model</code>. While it is certainly possible to do so, it’s tedious to write such code.</p>
+
+<p>Luckily, we have an alternative called <a href="https://en.wikipedia.org/wiki/Serialization">serialization</a> which Java has already implemented for us. Serialization is the process of translating an object to a series of bytes that can then be stored in the file. We can then <em>deserialize</em> those bytes and get the original object back in a future invocation of the program.</p>
+
+<p>To enable this feature for a given class in Java, this simply involves implementing the <code class="language-plaintext highlighter-rouge">java.io.Serializable</code> interface:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.io.Serializable</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Model</span> <span class="kd">implements</span> <span class="nc">Serializable</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This interface has no methods; it simply marks its subtypes for the benefit of some special Java classes for performing I/O on objects. For example,</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Model</span> <span class="n">m</span> <span class="o">=</span> <span class="o">....;</span>
+<span class="nc">File</span> <span class="n">outFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">saveFileName</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="nc">ObjectOutputStream</span> <span class="n">out</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="nf">ObjectOutputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileOutputStream</span><span class="o">(</span><span class="n">outFile</span><span class="o">));</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">m</span><span class="o">);</span>
+    <span class="n">out</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="n">excp</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>will convert <code class="language-plaintext highlighter-rouge">m</code> to a stream of bytes and store it in the file whose name is stored in <code class="language-plaintext highlighter-rouge">saveFileName</code>. The object may then be reconstructed with a code sequence such as</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Model</span> <span class="n">m</span><span class="o">;</span>
+<span class="nc">File</span> <span class="n">inFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">saveFileName</span><span class="o">);</span>
+<span class="k">try</span> <span class="o">{</span>
+    <span class="nc">ObjectInputStream</span> <span class="n">inp</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="nf">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="n">inFile</span><span class="o">));</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Model</span><span class="o">)</span> <span class="n">inp</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+    <span class="n">inp</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">IOException</span> <span class="o">|</span> <span class="nc">ClassNotFoundException</span> <span class="n">excp</span><span class="o">)</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The Java runtime does all the work of figuring out what fields need to be converted to bytes and how to do so. You’ll be serializing objects left and right, so to lower the amount of code you have to write we have provided helper function in <code class="language-plaintext highlighter-rouge">Utils.java</code> that handles reading and writing objects.</p>
+
+<p>Note that the code above is pretty annoying, with lots of mystery classes and try/catch statements. If you use our helper functions from the <code class="language-plaintext highlighter-rouge">Utils</code> class, serializing is as easy as:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Model</span> <span class="n">m</span><span class="o">;</span>
+<span class="nc">File</span> <span class="n">outFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">saveFileName</span><span class="o">);</span>
+
+<span class="c1">// Serializing the Model object</span>
+<span class="n">writeObject</span><span class="o">(</span><span class="n">outFile</span><span class="o">,</span> <span class="n">m</span><span class="o">);</span>
+</code></pre></div></div>
+<p>And similarly, deserializing is simply:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Model</span> <span class="n">m</span><span class="o">;</span>
+<span class="nc">File</span> <span class="n">inFile</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">File</span><span class="o">(</span><span class="n">saveFileName</span><span class="o">);</span>
+
+<span class="c1">// Deserializing the Model object</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">readObject</span><span class="o">(</span><span class="n">inFile</span><span class="o">,</span> <span class="nc">Model</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><em>Note: There are some limitations to Serializable that are noted in the Project 2 spec. You will not encounter them in this lab.</em></p>
+
+<h2 id="exercise-canine-capers">Exercise: Canine Capers</h2>
+
+<p>Whew! We’re finally read to get started on the actual work for this lab. For this lab, you will be writing a program that will be taking advantage of file operations and serialization. We have provided you with three files:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Main.java</code>: The main method of your program. Run it with <code class="language-plaintext highlighter-rouge">java capers.Main [args]</code> to do the operations specified below. This class doesn’t have too much logic itself: rather, it serves as an “entry point” and simply knows when to call the right method in <code class="language-plaintext highlighter-rouge">CapersRepository.java</code></li>
+  <li><code class="language-plaintext highlighter-rouge">CapersRepository.java</code>: Handles all coordination among the other classes. The majority of the FIXMEs in this program are in here.</li>
+  <li><code class="language-plaintext highlighter-rouge">Dog.java</code>: Represents a dog that has a name, breed, and age. Contains a few FIXMEs.</li>
+  <li><code class="language-plaintext highlighter-rouge">Utils.java</code>: Utility functions for file operations and serialization. These are a subset of those provided with Gitlet.</li>
+</ul>
+
+<p>You do not need to worry about error cases or invalid input, we aren’t testing you on that in this lab (though beware, you will need to do this for Gitlet). You are able to complete this lab with just the methods provided in <code class="language-plaintext highlighter-rouge">Utils.java</code> and other <code class="language-plaintext highlighter-rouge">File</code> class methods mentioned in this spec, but feel free to experiment with other methods if you’re feeling adventurous.</p>
+
+<h3 id="main">Main</h3>
+<p>Your code will support the following three commands:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">story [text]</code>: Appends “text” + a newline (i.e. <code class="language-plaintext highlighter-rouge">"\n"</code>) to a story file in the .capers directory. Additionally, prints out the current story (the current story should include the recently added “text”).</li>
+  <li><code class="language-plaintext highlighter-rouge">dog [name] [breed] [age]</code>: Persistently creates a dog with the specified parameters; should also print the dog’s <code class="language-plaintext highlighter-rouge">toString()</code>. Assume dog names are unique.</li>
+  <li><code class="language-plaintext highlighter-rouge">birthday [name]</code>: Advances a dog’s age persistently and prints out a celebratory message.</li>
+</ul>
+
+<p>As an example, below we see a series of executions of capers.Main, followed by the output of each command.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java capers.Main story <span class="s2">"Once upon a time, there was a beautiful dog."</span>
+Once upon a <span class="nb">time</span>, there was a beautiful dog.
+
+<span class="nv">$ </span>java capers.Main story <span class="s2">"That dog was named Fjerf."</span>
+Once upon a <span class="nb">time</span>, there was a beautiful dog.
+That dog was named Fjerf.
+
+<span class="nv">$ </span>java capers.Main story <span class="s2">"Fjerf loved to run and jump."</span>
+Once upon a <span class="nb">time</span>, there was a beautiful dog.
+That dog was named Fjerf.
+Fjerf loved to run and jump.
+
+<span class="nv">$ </span>java capers.Main dog Mammoth <span class="s2">"German Spitz"</span> 10
+Woof! My name is Mammoth and I am a German Spitz! I am 10 years old! Woof!
+<span class="nv">$ </span>java capers.Main dog Qitmir Saluki 3 
+Woof! My name is Qitmir and I am a Saluki! I am 3 years old! Woof!
+<span class="nv">$ </span>java capers.Main birthday Qitmir
+Woof! My name is Qitmir and I am a Saluki! I am 4 years old! Woof!
+Happy birthday! Woof! Woof!
+<span class="nv">$ </span>java capers.Main birthday Qitmir
+Woof! My name is Qitmir and I am a Saluki! I am 5 years old! Woof!
+Happy birthday! Woof! Woof!
+</code></pre></div></div>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">dog</code> and <code class="language-plaintext highlighter-rouge">birthday</code> commands have related functionality. Note that the <code class="language-plaintext highlighter-rouge">story</code> command has functionality that is entirely independent of <code class="language-plaintext highlighter-rouge">dog</code> or <code class="language-plaintext highlighter-rouge">birthday</code>.</p>
+
+<p>Also note that your code should NOT print out the command line arguments at each step. In other words, you should delete the call to <code class="language-plaintext highlighter-rouge">System.out.println("args: " + Arrays.toString(args));</code> that you added earlier in this lab.</p>
+
+<p>All persistent data should be stored in a <code class="language-plaintext highlighter-rouge">.capers</code> directory in the current working directory. We prepend a <code class="language-plaintext highlighter-rouge">.</code> because files and directories preceded by a <code class="language-plaintext highlighter-rouge">.</code> are hidden in the file viewer by default. After all, we wouldn’t want the users of our Java program to care about how/where/if we store persistent data. They should only care that the program works. Both IntelliJ and Git take advantage of this idea: whenever you create an IntelliJ project, it creates a hidden <code class="language-plaintext highlighter-rouge">.idea</code> folder in the CWD to store all of its metadata. Similarly, whenever you initialize a Git repository, it stores all of its persistent data in a <code class="language-plaintext highlighter-rouge">.git</code> folder. You can view hidden files in terminal by typing <code class="language-plaintext highlighter-rouge">ls -a</code> instead of just <code class="language-plaintext highlighter-rouge">ls</code>.</p>
+
+<p>Recommended file structure (you do not have to follow this):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.capers/ -- top level folder for all persistent data
+    - dogs/ -- folder containing all of the persistent data for dogs
+    - story -- file containing the current story
+</code></pre></div></div>
+
+<p>You should not create these manually, your program should create these folders and files (hint: scroll up to see how do we create a directory/file in Java). If you want to remove all saved data from your program, just remove the <code class="language-plaintext highlighter-rouge">.capers</code> directory (NOT the <code class="language-plaintext highlighter-rouge">capers</code> directory) with <code class="language-plaintext highlighter-rouge">rm -rf .capers</code>.</p>
+
+<h3 id="useful-util-functions">Useful Util Functions</h3>
+<p>Useful Util functions (as a start, may need more and you may not need all of them):</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">static void writeContents(File file, Object... contents)</code> - writes out strings/byte arrays to a file. The <code class="language-plaintext highlighter-rouge">...</code> allows us to use <em>variable arguments</em>, meaning we can call <code class="language-plaintext highlighter-rouge">writeContents</code> with any number of arguments. For example, we can call <code class="language-plaintext highlighter-rouge">writeContents(outFile, "dog", "cat", "mouse")</code>, and the function <code class="language-plaintext highlighter-rouge">writeContents</code> will have access to all three objects we pass in via an array.</li>
+  <li><code class="language-plaintext highlighter-rouge">static String readContentsAsString(File file)</code> - reads in a file as a string</li>
+  <li><code class="language-plaintext highlighter-rouge">static byte[] readContents(File file)</code> - reads in a file as a byte array</li>
+  <li><code class="language-plaintext highlighter-rouge">static void writeObject(File file, Serializable obj)</code> - writes a serializable object to a file</li>
+  <li><code class="language-plaintext highlighter-rouge">static &lt;T extends Serializable&gt; T readObject(File file, Class&lt;T&gt; expectedClass)</code> - reads in a serializable object from a file. You can get a <code class="language-plaintext highlighter-rouge">Class</code> object by using <code class="language-plaintext highlighter-rouge">&lt;Class name&gt;.class</code>, (e.g. <code class="language-plaintext highlighter-rouge">Dog d = readObject(inFile, Dog.class)</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">static File join(String first, String... others)</code> - joins together strings or files into a path. E.g. <code class="language-plaintext highlighter-rouge">Utils.join(".capers", "dogs")</code> would give you a <code class="language-plaintext highlighter-rouge">File</code>object with the path of “.capers/dogs”, and <code class="language-plaintext highlighter-rouge">Utils.join(".capers", "dogs", "shitzus")</code> would give you a <code class="language-plaintext highlighter-rouge">File</code> object with the path of <code class="language-plaintext highlighter-rouge">".capers/dogs/shitzus"</code>. You should <strong>not</strong> create files by String concatenation! This can create weird bugs depending on the system you are running.</li>
+</ul>
+
+<h3 id="suggested-order-of-completion">Suggested Order of Completion</h3>
+
+<p>Please be sure to read the comments above each method in the skeleton for a description of what they do.</p>
+
+<ol>
+  <li>Fill out <code class="language-plaintext highlighter-rouge">CAPERS_FOLDER</code> in <code class="language-plaintext highlighter-rouge">CapersRepository.java</code>, then <code class="language-plaintext highlighter-rouge">DOG_FOLDER</code> in <code class="language-plaintext highlighter-rouge">Dog.java</code>, and then <code class="language-plaintext highlighter-rouge">setUpPersistence</code> in <code class="language-plaintext highlighter-rouge">CapersRepository.java</code>.</li>
+  <li>Fill out the <code class="language-plaintext highlighter-rouge">main</code> method in <code class="language-plaintext highlighter-rouge">Main.java</code>. This should consist mostly of calling other methods from <code class="language-plaintext highlighter-rouge">CapersRepository</code>.</li>
+  <li>Fill out <code class="language-plaintext highlighter-rouge">writeStory</code> in <code class="language-plaintext highlighter-rouge">CapersRepository</code>.java. The story command should now work.</li>
+  <li>Try using the story command manually and verify that it is behaving properly.</li>
+  <li>Fill out <code class="language-plaintext highlighter-rouge">saveDog</code> and then <code class="language-plaintext highlighter-rouge">fromFile</code> in <code class="language-plaintext highlighter-rouge">Dog.java</code>. You will also need to address the <code class="language-plaintext highlighter-rouge">TODO</code> at the top of <code class="language-plaintext highlighter-rouge">Dog.java</code>. Remember dog names are unique!</li>
+  <li>Fill out <code class="language-plaintext highlighter-rouge">makeDog</code> and <code class="language-plaintext highlighter-rouge">celebrateBirthday</code> in <code class="language-plaintext highlighter-rouge">CapersRepository.java</code> using methods in <code class="language-plaintext highlighter-rouge">Dog.java</code>. You will find the <code class="language-plaintext highlighter-rouge">haveBirthday</code> method in the Dog class useful. The dog and birthday commands should now work.</li>
+  <li>Try using the dog and birthday commands manually and verify that they are working properly.</li>
+  <li>Run make check and verify that you code passes all the tests. If you are failing tests and don’t know why, see the debugging section later in this lab.</li>
+</ol>
+
+<p>Each <code class="language-plaintext highlighter-rouge">TODO</code> should take at most around 8 lines, but many are fewer.</p>
+
+<h3 id="usage">Usage</h3>
+<p>The easiest way to run and test your program is to compile it in terminal with <code class="language-plaintext highlighter-rouge">make</code> and then run it from there. E.g.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$REPO_DIR</span>
+<span class="nv">$ </span><span class="nb">cd </span>lab6                      <span class="c"># Make sure you are in your lab6 folder (NOT the lab6/capers folder)</span>
+
+<span class="nv">$ </span>make                         <span class="c"># or javac capers/*.java, make sure to recompile your program each time you make changes</span>
+<span class="nv">$ </span>java capers.Main <span class="o">[</span>args]      <span class="c"># Run the commands you want! e.g., java story hello</span>
+</code></pre></div></div>
+
+<p>For the <code class="language-plaintext highlighter-rouge">story</code> command, if you want to pass in a long string that includes spaces as the argument, you will want to put it in quotes, e.g.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java capers.Main story <span class="s2">"hello world"</span>
+</code></pre></div></div>
+
+<!-- If running in IntelliJ, you will need to use Run > Edit Configurations > Program Arguments to add the arguments. -->
+
+<h2 id="testing">Testing</h2>
+
+<p>As discussed earlier, tests are run using the <code class="language-plaintext highlighter-rouge">check</code> make target, i.e.:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make check
+</code></pre></div></div>
+
+<p>These are the exact tests on Gradescope, so if you pass them locally you should
+get a full score on Gradescope.</p>
+
+<p>However, you should also do some ad-hoc testing. That looks something like this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make              <span class="c"># to compile all your .java files</span>
+<span class="nv">$ </span>java capers.Main story Hello
+Hello               <span class="c"># this should be printed</span>
+<span class="nv">$ </span>java capers.Main story World
+Hello               <span class="c"># this should be printed</span>
+World
+<span class="nv">$ </span><span class="nb">ls</span> .capers        <span class="c"># investigate the .capers folder to make sure it looks how</span>
+                    <span class="c"># you expect</span>
+...                 <span class="c"># More commands + investivgation</span>
+</code></pre></div></div>
+
+<p>Recall we said we aren’t using JUnit tests for Capers nor Gitlet. A single test
+is represented as a file with the file extension <code class="language-plaintext highlighter-rouge">.in</code>: all of our tests are in
+the <code class="language-plaintext highlighter-rouge">lab6/testing/our</code> directory. Here is what the <code class="language-plaintext highlighter-rouge">test02-two-part-story.in</code>
+looks like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Two uses of the `story` command
+&gt; story "Hello"
+Hello
+&lt;&lt;&lt;
+&gt; story "World"
+Hello
+World
+&lt;&lt;&lt;
+</code></pre></div></div>
+
+<p>The first line is a comment telling us what the test does. If you’re failing a
+test, you should read the top line to get a sense of what the test is doing.</p>
+
+<p>The next 3 lines make up a section corresponding to a single execution to the
+program:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; [args given to capersMain.main()]
+[first line of expected output]
+[second line of expected output]
+[...]
+&lt;&lt;&lt;
+</code></pre></div></div>
+
+<p>So we see that all of the text on the same line as the <code class="language-plaintext highlighter-rouge">&gt;</code> corresponds to the
+command given to <code class="language-plaintext highlighter-rouge">capers.Main.main()</code>, and the next lines up until the <code class="language-plaintext highlighter-rouge">&lt;&lt;&lt;</code> are
+the expected output.</p>
+
+<p>So that first section is saying “If I run the program with args <code class="language-plaintext highlighter-rouge">story
+"Hello"</code>, then the program should output <code class="language-plaintext highlighter-rouge">Hello</code>.” If your program doesn’t have
+the exact same output, then our tests will fail and tell you your output
+differs.</p>
+
+<p>With this in mind, let’s make sense of the next section:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; story "World"
+Hello
+World
+&lt;&lt;&lt;
+</code></pre></div></div>
+
+<p>When we run the command <code class="language-plaintext highlighter-rouge">capers.Main story "World"</code> after the first capers
+command, the output should now be the concatenated story “Hello” followed by a
+new-line character then “World”. The word <code class="language-plaintext highlighter-rouge">"Hello"</code> is there because of
+persistence: even though these are separate executions of the program, your code
+should have somehow recorded the fact that <code class="language-plaintext highlighter-rouge">"Hello"</code> is part of the story
+(likely putting this string in some file).</p>
+
+<p>We call these <em>integration tests</em>. As opposed to <em>unit tests</em>, integration tests
+test many things in cohesion. A (good) unit test will only test one specific
+portion of your program: in our integration tests, we test multiple things. You
+can see from the names of these integration tests that we’ve tried to provide
+some tests to isolate a particular functionality of capers, so those should help
+you get started and give you a basic sanity check of your work so far.</p>
+
+<h2 id="submission">Submission</h2>
+<p>Once you have passed all of the integration tests that are run when you call <code class="language-plaintext highlighter-rouge">make check</code>, youa ready to submit. You should have made changes in <code class="language-plaintext highlighter-rouge">capers/Main.java</code>, <code class="language-plaintext highlighter-rouge">capers/Dog.java</code>, and 
+<code class="language-plaintext highlighter-rouge">capers/CapersRepository.java</code>. Submit the lab as always:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"&lt;commit message&gt;"</span>
+<span class="nv">$ </span>git push origin master
+</code></pre></div></div>
+
+<p>And then submit on Gradescope. There is no style check for this lab.</p>
+
+<h2 id="mandatory-epilogue-debugging">Mandatory Epilogue: Debugging</h2>
+
+<p>Before completing this section you should have passed all of the make check tests. You should also have submitted to gradescope. Even though you have your points for the lab, there is one more thing to do.</p>
+
+<p>In this section, we’ll talk about how to use the IntelliJ debugger to debug lab 6. This might seem impossible at first glance, since we’re running everything from the command line. However, IntelliJ provides a feature called “remote JVM debugging” that will allow you to add breakpoints that trigger during our integration tests.</p>
+
+<p>Start by using git to checkout the original version of the skeleton code. That is, after checking out, you should be back right where you started at the very beginning of this lab. If you don’t know how to do that, read <a href="https://sp21.datastructur.es/materials/lab/lab4/lab4#step-6">this</a> section from Lab 4.</p>
+
+<p>A walkthrough of the remainder of this section of the lab can be found
+<a href="https://youtu.be/jO4lLWHHygs">here</a>. The video simply goes over the steps
+listed in the spec, so if you find yourself confused on the directions then
+check it out.</p>
+
+<p>Without JUnit tests, you may be wondering how to debug your code. We’ll walk
+you through how you will do that in Capers and in Gitlet.</p>
+
+<p>First, let’s discuss how you would know you have a bug. If you run the
+the <code class="language-plaintext highlighter-rouge">make check</code> tests, you’ll see that you’re failing the test
+<code class="language-plaintext highlighter-rouge">test02-two-part-story.in</code>. Now we need
+to figure out which <em>execution</em> of your program was buggy. Remember that our
+tests will run your program multiple times; in this case, the <code class="language-plaintext highlighter-rouge">.in</code> file has
+2 lines that call <code class="language-plaintext highlighter-rouge">capers.Main</code>, so this test runs it
+twice (though in Gitlet it’ll typically be more than that).</p>
+
+<p>To debug this integration test, we first need to let IntelliJ know that we want to debug remotely.
+Navigate to your IntelliJ and open your <code class="language-plaintext highlighter-rouge">lab6</code> project if you don’t have
+it open already. At the top, go to “Run” -&gt; “Run”:</p>
+
+<p><img src="img/run.png" alt="Run to Run" /></p>
+
+<p>You’ll get a box asking you to Edit Configurations that will look like the
+below:</p>
+
+<p><img src="img/edit-box.png" alt="Edit Box" /></p>
+
+<p>Yours might have more or less of those boxes with other names if you tried
+running a class within IntelliJ already. If that’s the case, just click the one
+that says “Edit Configurations”</p>
+
+<p>In this box, you’ll want to hit the “+” button in the top left corner and
+select “Remote JVM Debug.” It should now look like this:</p>
+
+<p><img src="img/remote-debug.png" alt="Remote Debug" /></p>
+
+<p>We just need the default settings. You should add a descriptive name in the top
+box, perhaps “Capers Remote Debug”. After you add a name, go ahead and hit
+“Apply” and then exit from this screen. <strong>Before we leave IntelliJ</strong>, place a
+breakpoint in the <code class="language-plaintext highlighter-rouge">main</code> method of the <code class="language-plaintext highlighter-rouge">Main</code> class so we can actually debug.
+Make sure this breakpoint will actually be reached, so just put it on the first
+line of the <code class="language-plaintext highlighter-rouge">main</code> method.</p>
+
+<p>Now you’ll navigate to the <code class="language-plaintext highlighter-rouge">testing</code> directory within your terminal.
+The script that will connect to the IntelliJ JVM is <code class="language-plaintext highlighter-rouge">runner.py</code>: use the
+following command to launch the testing script:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 runner.py <span class="nt">--debug</span> our/test02-two-part-story.in
+</code></pre></div></div>
+
+<p>If you wanted to run a different test, then simply put a different <code class="language-plaintext highlighter-rouge">.in</code> file.
+If you’d like the <code class="language-plaintext highlighter-rouge">.capers</code> folder to stay after the test is completed to
+investigate its contents, then use the <code class="language-plaintext highlighter-rouge">--keep</code> flag:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 runner.py <span class="nt">--keep</span> <span class="nt">--debug</span> our/test02-two-part-story.in
+</code></pre></div></div>
+
+<p>For our example it doesn’t matter what you do; we’ve just included it in case
+you’d like to take a look around. By default, the <code class="language-plaintext highlighter-rouge">.capers</code> that is generated
+is deleted.</p>
+
+<p>If you see an error message, then it means you are either not in the <code class="language-plaintext highlighter-rouge">testing</code>
+directory, or your <code class="language-plaintext highlighter-rouge">REPO_DIR</code> environment variable isn’t set correctly. Check
+those two things, and if you’re still confused then ask a TA.</p>
+
+<p>Otherwise, you should be ready to debug! You’ll see something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   ============================================================================
+  |                   ~~~~~  You are in debug mode  ~~~~~                      |
+  |   In this mode, you will be shown each command from the test case.         |
+  |                                                                            |
+  |   There are three commands:                                                |
+  |                                                                            |
+  |   1. 'n' - type in 'n' to go to the next command without debugging the     |
+  |            current one (analogous to "Step Over" in IntelliJ).             |
+  |                                                                            |
+  |   2. 's' - type in 's' to debug the current command (analogous to          |
+  |            "Step Into" in IntelliJ). Make sure to set breakpoints!         |
+  |                                                                            |
+  |   3. 'q' - type in 'q' to quit and stop debugging. If you had the `--keep` |
+  |            flag, then your directory state will be saved and you can       |
+  |            investigate it.                                                 |
+   ============================================================================
+
+test02-two-part-story: 
+&gt;&gt;&gt; capers story "Hello"
+&gt;
+
+</code></pre></div></div>
+
+<p>The top box contains helpful tips. What we see next is the name of the <code class="language-plaintext highlighter-rouge">.in</code>
+file we’re debugging, then a series of lines that begin with <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code> and <code class="language-plaintext highlighter-rouge">&gt;</code>.</p>
+
+<p>Lines that begin with <code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code> are the capers commands that will be run on your
+<code class="language-plaintext highlighter-rouge">Main</code> class, i.e. a specific execution of your program. These correspond to the
+commands we saw in the <code class="language-plaintext highlighter-rouge">.in</code> file on the right side of the <code class="language-plaintext highlighter-rouge">&gt;</code>.</p>
+
+<p>Lines that begin with <code class="language-plaintext highlighter-rouge">&gt;</code> are for you to enter debug commands on. The 3
+commands are listed in the helpful box.</p>
+
+<p>Remember that each input file will list multiple commands and therefore
+multiple executions of our program. We need to first figure out what command
+is the culprit.</p>
+
+<p>Type in the single character “n” (short for “next”) to execute this command
+without debugging it. You can think of it as bringing you to the next command.</p>
+
+<p>One of these will error: either your code will produce a runtime error, or
+your output wasn’t the same. For example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   ============================================================================
+  |                   ~~~~~  You are in debug mode  ~~~~~                      |
+  |   In this mode, you will be shown each command from the test case.         |
+  |                                                                            |
+  |   There are three commands:                                                |
+  |                                                                            |
+  |   1. 'n' - type in 'n' to go to the next command without debugging the     |
+  |            current one (analogous to "Step Over" in IntelliJ).             |
+  |                                                                            |
+  |   2. 's' - type in 's' to debug the current command (analogous to          |
+  |            "Step Into" in IntelliJ). Make sure to set breakpoints!         |
+  |                                                                            |
+  |   3. 'q' - type in 'q' to quit and stop debugging. If you had the `--keep` |
+  |            flag, then your directory state will be saved and you can       |
+  |            investigate it.                                                 |
+   ============================================================================
+
+test02-two-part-story: 
+&gt;&gt;&gt; capers story "Hello"
+&gt; n
+ERROR (incorrect output)
+
+Directory state saved in test02-two-part-story_0
+
+Ran 1 tests. 0 passed.
+
+</code></pre></div></div>
+
+<p>For us, it was our first command. Notice also it tells us <code class="language-plaintext highlighter-rouge">Directory state saved
+in test02-two-part-story_0</code> because we had the <code class="language-plaintext highlighter-rouge">--keep</code> flag enabled. We could
+now investigate that directory to see what happened. If we debugged again with
+the <code class="language-plaintext highlighter-rouge">--keep</code> flag on the same test, we’ll get a new directory <code class="language-plaintext highlighter-rouge">Directory state
+saved in test02-two-part-story_1</code> and so on.</p>
+
+<p>Once you’ve found the command that errors, do it all again except now you can
+hit “s” (short for “step”) to “step into” that command, so to speak. Really
+what happens is the IntelliJ JVM waits for our script to start and then
+attaches itself to that execution. So after you press “s”, you should hit the
+“Debug” button in IntelliJ. Make sure in the top right the configuration is set
+to the name of the remote JVM config you added earlier (this is why it is
+helpful to give it a good name).</p>
+
+<p>This will stop your program at wherever your breakpoint was as it’s trying
+to run that command you hit “s” on. Now you can use your normal debugging
+techniques to step around and see if you’re improperly reading/writing some
+data or some other mistake.</p>
+
+<p>You might get scenarios where the command you’re debugging did
+everything it was supposed to: in these cases, it
+means you had a bug on a previous command with persistence. For example:
+let’s say your second invocation looks like it is doing everything correctly,
+except when it tries to read the previous story (that should have been
+persistently stored in a file) it receives a blank file (or maybe the file
+isn’t even there). Then, even though the second execution of the program has
+output that doesn’t match the expected, it was really the previous (first)
+execution that
+has the bug since it didn’t properly persist the data.</p>
+
+<p>These are very common since persistence is a new and initially tricky concept,
+so when debugging, your first priority is to find the execution that produced the
+bug. If you didn’t, then you would be debugging the second (non-buggy) execution
+for hours to no avail, since the bug already happened.</p>
+
+<p><strong>Debugging will look exactly the same for Gitlet</strong> as described in this section. Even though your work for this debugging epilogue is not graded, you should still complete it!</p>
+
+<p>Don’t forget to checkout your lab6 back to your solution and not the skeleton!</p>
+
+<h2 id="tips-faqs-misconceptions">Tips, FAQs, Misconceptions</h2>
+
+<h4 id="tips">Tips</h4>
+<p>These are tips if you’re stuck!</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">setUpPersistence</code>: In <code class="language-plaintext highlighter-rouge">setUpPersistence</code>, you should make sure that if the files and folders you need for the program to work don’t exist yet that they are made.</li>
+  <li><code class="language-plaintext highlighter-rouge">writeStory</code>: You should be using <code class="language-plaintext highlighter-rouge">readContentsAsString</code> and <code class="language-plaintext highlighter-rouge">writeContents</code>. It is not sufficient to just use <code class="language-plaintext highlighter-rouge">writeContents</code>, since that method <em>overwrites</em> the file instead of appending to it. Since the story is just plain text (i.e. it’s just a string), you do not need to serialize anything.</li>
+  <li><code class="language-plaintext highlighter-rouge">saveDog</code>: You should be using <code class="language-plaintext highlighter-rouge">writeObject</code>, since Dogs aren’t Strings so we want to be able to serialize them. Make sure you’re writing your dog to a File object that represents a file and not a folder!</li>
+  <li><code class="language-plaintext highlighter-rouge">fromFile</code>: You should be using <code class="language-plaintext highlighter-rouge">readObject</code>. This should be similar to <code class="language-plaintext highlighter-rouge">saveDog</code> except you’re loading a Dog from your filesystem instead of writing it!</li>
+</ul>
+
+<h4 id="faqs--misconceptions">FAQs &amp; Misconceptions</h4>
+<ul>
+  <li>If make check isn’t working, you may need to add an additional argument when you call <code class="language-plaintext highlighter-rouge">make check</code>. Most computers take the command <code class="language-plaintext highlighter-rouge">python3</code> in order to run Python. However, on
+some computers you may need to type <code class="language-plaintext highlighter-rouge">python</code> or <code class="language-plaintext highlighter-rouge">py</code> to run Python. If this is the case for you, you should use the flag:</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make check <span class="nv">PYTHON</span><span class="o">=</span>&lt;whatever you use to run Python files&gt;
+</code></pre></div></div>
+
+<p>So if you use <code class="language-plaintext highlighter-rouge">py</code> to run Python, then use the command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make check <span class="nv">PYTHON</span><span class="o">=</span>py
+</code></pre></div></div>
+
+<p>If you don’t want to keep adding this extra text to <code class="language-plaintext highlighter-rouge">make check</code> every time, you can edit line 25 of the file called <code class="language-plaintext highlighter-rouge">Makefile</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">writeObject</code>: <code class="language-plaintext highlighter-rouge">writeObject</code> takes in (1) the <code class="language-plaintext highlighter-rouge">File</code> object that represents the <em>file</em> you want to write the object to and (2) the object you want to serialize and write into the file. The first argument should be a <code class="language-plaintext highlighter-rouge">File</code> object that represents a <em>file</em> on your filesystem, not a directory.</li>
+  <li>File objects can represent both <em>files</em> and <em>directories</em> in your filesystem. The only way to differentiate between them is the methods you use with the File object. You can check if a File object represents a directory with <code class="language-plaintext highlighter-rouge">.isDir()</code>, which you shouldn’t need for the lab since you should already know which File objects represent files and which represent directories.</li>
+  <li>Creating a new File object in Java <em>does not create the corresponding file or directory on your computer.</em> The file is only created when you call <code class="language-plaintext highlighter-rouge">.createNewFile()</code> or <code class="language-plaintext highlighter-rouge">mkdir()</code> on that File object. You can think of <code class="language-plaintext highlighter-rouge">File</code> objects as pointers to files or directories - you can have multiple of them, and whenever you want to actually change the corresponding file or directory, you will need to call specific methods (usually the ones in <code class="language-plaintext highlighter-rouge">Utils</code> with “read” and “write” in the name).</li>
+  <li><code class="language-plaintext highlighter-rouge">Utils.join(File d, String s)</code> is shorthand for <code class="language-plaintext highlighter-rouge">new File(File d, String s)</code> (and <code class="language-plaintext highlighter-rouge">Utils.join(String d, String s)</code> is shorthand for <code class="language-plaintext highlighter-rouge">new File(new File(d), String s)</code>), both of which will create a new File object that represents the file or folder called <code class="language-plaintext highlighter-rouge">s</code> in the <code class="language-plaintext highlighter-rouge">d</code> directory. Again, this doesn’t make the actual file/folder in your filesystem until you call appropriate methods.</li>
+  <li>When we say “make changes persistently”, that means you should make the changes in Java and then also make sure that those changes are reflected on your filesystem by writing those changes back into the appropriate files.</li>
+</ul>
+
+<h2 id="credits">Credits</h2>
+<p>Capers was originally written by Sean Dooher in Fall 2019. Spec and lab adaptation were written by Michelle Hwang in Spring 2020 and then Omar Khan in Spring 2021.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

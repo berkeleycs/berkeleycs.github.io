@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 1: Snaps Installation (MacOS and Linux) | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 1: Snaps Installation (MacOS and Linux)</header><ul id="markdown-toc">
+  <li><a href="lab1SnapsSetupMacAndLinux.html#setting-up-environment-variables-in-mac-os-and-linux" id="markdown-toc-setting-up-environment-variables-in-mac-os-and-linux">Setting Up Environment Variables in Mac OS and Linux</a>    <ul>
+      <li><a href="lab1SnapsSetupMacAndLinux.html#repo_dir" id="markdown-toc-repo_dir">REPO_DIR</a></li>
+      <li><a href="lab1SnapsSetupMacAndLinux.html#snaps_dir" id="markdown-toc-snaps_dir">SNAPS_DIR</a></li>
+      <li><a href="lab1SnapsSetupMacAndLinux.html#shell-only-for-mac-users" id="markdown-toc-shell-only-for-mac-users">SHELL (Only for Mac Users)</a></li>
+      <li><a href="lab1SnapsSetupMacAndLinux.html#wrapping-up" id="markdown-toc-wrapping-up">Wrapping Up</a></li>
+    </ul>
+  </li>
+  <li><a href="lab1SnapsSetupMacAndLinux.html#launching-intellij-from-the-terminal" id="markdown-toc-launching-intellij-from-the-terminal">Launching IntelliJ from the Terminal</a></li>
+</ul>
+
+<h3 id="setting-up-environment-variables-in-mac-os-and-linux">Setting Up Environment Variables in Mac OS and Linux</h3>
+
+<p>In IntelliJ, open the <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code> class. The first few lines should look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//  Fill in the path to your sp21-s*** folder between the quotes
+public static String REPO_DIR = "";
+
+//  Fill in the path to your snaps-sp21-s*** folder between the quotes
+public static String SNAPS_DIR = "";
+
+// Fill in the type of your shell by running 'echo $0` in your terminal. It should be zsh or bash.
+public static String SHELL = "";
+
+</code></pre></div></div>
+
+<h5 id="repo_dir">REPO_DIR</h5>
+
+<p>In your terminal, navigate to your <code class="language-plaintext highlighter-rouge">sp21-s***</code> folder. For example, if your repo number is 123, and you put it on your desktop, you would type:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/Desktop/sp21-s123/
+</code></pre></div></div>
+
+<p>Now enter <code class="language-plaintext highlighter-rouge">pwd</code>. This command outputs the “present working directory” (so, it tells you where you are in your machine). Copy the output, and paste it in your <code class="language-plaintext highlighter-rouge">getEnvironmentVariables</code> between the empty quotes here <code class="language-plaintext highlighter-rouge">REPO_DIR = "";</code>. For the example above, <code class="language-plaintext highlighter-rouge">pwd</code> will output something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Users/&lt;your name&gt;/Desktop/sp21-s123
+</code></pre></div></div>
+<p>And when pasted in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String REPO_DIR = "Users/&lt;your name&gt;/Desktop/sp21-s123";
+</code></pre></div></div>
+
+<p><strong>WARNING:</strong> Your terminal may be case <strong>in</strong>sensitive, which means that it may allow you to navigate into a folder on the Desktop using <code class="language-plaintext highlighter-rouge">cd ~/desktop/...</code>. Don’t do this. This will cause <code class="language-plaintext highlighter-rouge">pwd</code> to give a path where letters don’t match the case they should have. Make sure that the path you paste in is case <strong>sensitive</strong>. That is, if your folder is on your Desktop, the path you paste in should be <code class="language-plaintext highlighter-rouge">Users/&lt;your name&gt;/Desktop/...</code> and NOT <code class="language-plaintext highlighter-rouge">Users/&lt;your name&gt;/desktop/...</code>.</p>
+
+<h5 id="snaps_dir">SNAPS_DIR</h5>
+
+<p>In your terminal, navigate to your <code class="language-plaintext highlighter-rouge">snaps-sp21-s***</code> folder. For example, if your repo number is 123, and you followed the instructions from the spec, you would type:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/snaps-sp21-s123/
+</code></pre></div></div>
+
+<p>Now enter <code class="language-plaintext highlighter-rouge">pwd</code>. Copy the output, and paste it in your <code class="language-plaintext highlighter-rouge">getEnvironmentVariables</code> between the empty quotes here <code class="language-plaintext highlighter-rouge">SNAPS_DIR = "";</code>. For the example above, <code class="language-plaintext highlighter-rouge">pwd</code> will output something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Users/&lt;your name&gt;/snaps-sp21-s123
+</code></pre></div></div>
+<p>And when pasted in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String SNAPS_DIR = "Users/&lt;your name&gt;/snaps-sp21-s123";
+</code></pre></div></div>
+
+<h5 id="shell-only-for-mac-users">SHELL (Only for Mac Users)</h5>
+
+<p>In your terminal, run the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo $0
+</code></pre></div></div>
+
+<p>It should output either</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-zsh
+</code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-bash
+</code></pre></div></div>
+
+<p>If you get a different output, run <code class="language-plaintext highlighter-rouge">chsh -s /bin/zsh</code>. This will change your shell to zsh.</p>
+
+<p>Copy the result without the preceding dash, and paste it in your <code class="language-plaintext highlighter-rouge">getEnvironmentVariables</code> between the empty quotes here <code class="language-plaintext highlighter-rouge">SHELL = "";</code>. For the example if the output was <code class="language-plaintext highlighter-rouge">-bash</code>, when pasted in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>, you should get:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHELL = "bash";
+</code></pre></div></div>
+
+<h4 id="wrapping-up">Wrapping Up</h4>
+
+<p>Great job! Now it’s time to introduce these environment variables to your machine.
+Run the code in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>. You can do so, by clicking the little play button near line 14, and then choosing <code class="language-plaintext highlighter-rouge">Run 'GetEnvironmentVariables.main()''</code>.</p>
+
+<p><img src="img4/run_shortcut.png" alt="run shortcut" /></p>
+
+<p>For the examples above, you would get an output that looks like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Keep reading the spec to know what to do with this output
+----------------------------------------------------------
+echo 'export REPO_DIR=Users/&lt;your name&gt;/Desktop/sp21-s123' &gt;&gt; ~/.bash_profile
+echo 'export SNAPS_DIR=Users/&lt;your name&gt;/snaps-sp21-s123' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">bash_profile</code> may be replaced by some other file name, depending on your operating system and its version.</p>
+
+<p>Copy and paste these lines in your terminal <strong>one by one</strong>. After you paste each line, hit enter. There should be no output. When you are done, close your terminal, and open it again. You should make sure that all terminal windows are closed. Then, open a new one.</p>
+
+<h2 id="launching-intellij-from-the-terminal">Launching IntelliJ from the Terminal</h2>
+
+<p>In intelliJ, go to the top bar menu and choose “Tools” → “Create Command-Line Launcher…”.</p>
+
+<p>In the pop-up window, click “OK”. You should now be able to launch intelliJ from your terminal. Open a new terminal window and run</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>idea
+</code></pre></div></div>
+<p>Verify that intelliJ launches.</p>
+
+<p>You may now return back to the main lab 1 page.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

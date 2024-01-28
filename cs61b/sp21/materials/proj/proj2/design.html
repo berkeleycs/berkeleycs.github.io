@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gitlet Design Document | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Gitlet Design Document</header><ul id="markdown-toc">
+  <li><a href="design.html#design-document-guidelines" id="markdown-toc-design-document-guidelines">Design Document Guidelines</a></li>
+  <li><a href="design.html#1-classes-and-data-structures" id="markdown-toc-1-classes-and-data-structures">1. Classes and Data Structures</a></li>
+  <li><a href="design.html#2-algorithms" id="markdown-toc-2-algorithms">2. Algorithms</a></li>
+  <li><a href="design.html#3-persistence" id="markdown-toc-3-persistence">3. Persistence</a></li>
+  <li><a href="design.html#example" id="markdown-toc-example">Example</a></li>
+</ul>
+
+<h2 id="design-document-guidelines">Design Document Guidelines</h2>
+
+<p>Please use the following format for your Gitlet design document. Your design
+document should be written in markdown, a language that allows you to nicely format and style a text file. 
+Organize your design document in a way that will make it easy for you
+or a course-staff member to read.</p>
+
+<h2 id="1-classes-and-data-structures">1. Classes and Data Structures</h2>
+
+<p>Include here any class definitions. For each class list the instance
+variables and static variables (if any). Include a <strong><em>brief description</em></strong>
+of each variable and its purpose in the class. Your explanations in
+this section should be as concise as possible. Leave the full
+explanation to the following sections. You may cut this section short
+if you find your document is too wordy.</p>
+
+<h2 id="2-algorithms">2. Algorithms</h2>
+
+<p>This is where you tell us how your code works. For each class, include
+a high-level description of the methods in that class. That is, do not
+include a line-by-line breakdown of your code, but something you would
+write in a javadoc comment above a method, <strong><em>including any edge cases
+you are accounting for</em></strong>. We have read the project spec too, so make
+sure you do not repeat or rephrase what is stated there.  This should
+be a description of how your code accomplishes what is stated in the
+spec.</p>
+
+<p>The length of this section depends on the complexity of the task and
+the complexity of your design. However, simple explanations are
+preferred. Here are some formatting tips:</p>
+
+<ul>
+  <li>
+    <p>For complex tasks, like determining merge conflicts, we recommend
+that you split the task into parts. Describe your algorithm for each
+part in a separate section. Start with the simplest component and
+build up your design, one piece at a time. For example, your
+algorithms section for Merge Conflicts could have sections for:</p>
+
+    <ul>
+      <li>Checking if a merge is necessary.</li>
+      <li>Determining which files (if any) have a conflict.</li>
+      <li>Representing the conflict in the file.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Try to clearly mark titles or names of classes with white space or
+some other symbols.</p>
+  </li>
+</ul>
+
+<h2 id="3-persistence">3. Persistence</h2>
+
+<p>Describe your strategy for ensuring that you don’t lose the state of your program across multiple runs. Here are some tips for writing this section:</p>
+
+<ul>
+  <li>
+    <p>This section should be structured as a list of all the times you
+will need to record the state of the program or files. For each
+case, you must prove that your design ensures correct behavior. For
+example, explain how you intend to make sure that after we call
+     java gitlet.Main add wug.txt,
+on the next execution of
+     java gitlet.Main commit -m “modify wug.txt”, 
+the correct commit will be made.</p>
+  </li>
+  <li>
+    <p>A good strategy for reasoning about persistence is to identify which
+pieces of data are needed across multiple calls to Gitlet. Then,
+prove that the data remains consistent for all future calls.</p>
+  </li>
+  <li>
+    <p>This section should also include a description of your .gitlet
+directory and any files or subdirectories you intend on including
+there.</p>
+  </li>
+</ul>
+
+<h2 id="example">Example</h2>
+
+<p>To illustrate all this, we’ve created a <a href="capers-example.html">sample design
+document</a> for the Capers lab.</p>
+
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

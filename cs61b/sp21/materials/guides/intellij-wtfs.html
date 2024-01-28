@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IntelliJ WTFS | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/sunburst.css">
+
+  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">IntelliJ WTFS</header><div class="due-date">Author: Brandon Lee, Omar Khan</div><ul id="markdown-toc">
+  <li><a href="intellij-wtfs.html#i-cant-run-my-java-filefiles-dont-show-up-as-java-files" id="markdown-toc-i-cant-run-my-java-filefiles-dont-show-up-as-java-files">I can’t run my Java file/Files don’t show up as java files</a></li>
+  <li><a href="intellij-wtfs.html#junit-things-show-up-as-red-in-intellij" id="markdown-toc-junit-things-show-up-as-red-in-intellij">JUnit things show up as red in IntelliJ</a></li>
+  <li><a href="intellij-wtfs.html#package-orgjunit-does-not-exist" id="markdown-toc-package-orgjunit-does-not-exist">package org.junit does not exist</a></li>
+  <li><a href="intellij-wtfs.html#output-path-is-not-specified" id="markdown-toc-output-path-is-not-specified">Output path is not specified</a></li>
+  <li><a href="intellij-wtfs.html#everything-looks-right-but-it-still-doesnt-work" id="markdown-toc-everything-looks-right-but-it-still-doesnt-work">Everything looks right but it still doesn’t work!</a></li>
+</ul>
+
+<p>This document is intended to help you through frequently encountered weird
+technical failure scenarios (WTFS) in IntelliJ. It will be populated as questions
+arise.</p>
+
+<h2 id="i-cant-run-my-java-filefiles-dont-show-up-as-java-files">I can’t run my Java file/Files don’t show up as java files</h2>
+
+<p><img src="img/intellij-import-error.png" alt="IntelliJ Import Error" /></p>
+
+<p>If your files look like this then you haven’t properly imported the project.
+To fix this, you must simply right-click the outer-most folder which will be your
+assignment folder, in this case, <code class="language-plaintext highlighter-rouge">proj2ab</code>, and scroll down to “Mark directory as …”
+and hit “Sources Root”. It’ll look like this:</p>
+
+<p><img src="img/intellij-mark-dir-as.png" alt="IntelliJ Mark directory as" /></p>
+
+<p>See <a href="../lab/lab2setup/lab2setup.html#project-setup">Lab 2 Setup</a> for additional
+instructions on importing a new project.</p>
+
+<h2 id="junit-things-show-up-as-red-in-intellij">JUnit things show up as red in IntelliJ</h2>
+
+<p><img src="img/intellij-missing-javalib.png" alt="IntelliJ Missing Javalib" /></p>
+
+<p>This means that you forgot to add the CS 61B <code class="language-plaintext highlighter-rouge">javalib</code> as a library for this project!
+IntelliJ cannot find the JUnit specific things like <code class="language-plaintext highlighter-rouge">@Test</code> or <code class="language-plaintext highlighter-rouge">assertEquals</code>
+since you forgot to import them.</p>
+
+<p>Every time you start a new assignment (unfortunately, EVERY TIME) you must readd
+the <code class="language-plaintext highlighter-rouge">javalib</code>. To do this, simply go to “File” -&gt; “Project Structure” -&gt; “Libraries”
+and add the javalib inside your repo. See <a href="../lab/lab2setup/lab2setup.html#getting-java-libraries">Lab 2 Setup</a> 
+for additional instructions on adding Java libraries.</p>
+
+<h2 id="package-orgjunit-does-not-exist">package org.junit does not exist</h2>
+
+<p><img src="img/intellij-junit-dnt-exist.png" alt="IntelliJ package org.junit doesn't exist" /></p>
+
+<p>This sometimes happens with IntelliJ where you’ve added the correct libraries,
+but cannot run the code. To fix this, you need to add the libraries as a direct
+dependency to the module. To do that, go to “File” -&gt; “Project Structure” -&gt;
+“Modules” -&gt; “Dependencies” and hit the “+” icon in the bottom left and select
+“JARs or directories”. Now, highlight every <code class="language-plaintext highlighter-rouge">.jar</code> file in your <code class="language-plaintext highlighter-rouge">javalib</code> folder
+and add them. This is what the setting should look like right before you add
+the JARs:</p>
+
+<p><img src="img/intellij-adding-deps.png" alt="IntelliJ adding deps" /></p>
+
+<h2 id="output-path-is-not-specified">Output path is not specified</h2>
+
+<p><img src="img/intellij-out-not-specified.png" alt="IntelliJ output path not specified" /></p>
+
+<p>IntelliJ puts all the compiled Java <code class="language-plaintext highlighter-rouge">.class</code> files in a special folder called
+<code class="language-plaintext highlighter-rouge">out</code>. You may have seen it before. Usually, IntelliJ will be able to determine
+where to put the <code class="language-plaintext highlighter-rouge">out</code> folder, but sometimes it cannot and needs your help. To
+specify where to put the out foler, go to:</p>
+
+<p>“File” &gt; “Project Structure” &gt; “Project” &gt; “Project compiler output” and simply
+add the output path. The output path should be of the form <code class="language-plaintext highlighter-rouge">path/to/assignment/out</code>
+where the prefix is dependent on the path to your assignment (hw, lab, proj, etc)
+and the suffix must be <code class="language-plaintext highlighter-rouge">/out</code>. Example for homework 2:</p>
+
+<p><img src="img/intellij-specifying-out.png" alt="IntelliJ output path not specified" /></p>
+
+<h2 id="everything-looks-right-but-it-still-doesnt-work">Everything looks right but it still doesn’t work!</h2>
+
+<p>Sometimes the easiest thing is to simply do it all over again. Even if you know you
+just did everything correctly, starting over very often just fixes the problem.
+First close the project (“File” -&gt; “Close Project”), quit the IntelliJ application,
+and then reimport the project from the beginning.</p>
+
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

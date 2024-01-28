@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Staff Gitlet Guide (Instructional Servers) | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/sunburst.css">
+
+  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Staff Gitlet Guide (Instructional Servers)</header><div class="due-date">Author: Boren Tsai</div><ul id="markdown-toc">
+  <li><a href="staff-gitlet.html#using-the-staff-gitlet-implementation" id="markdown-toc-using-the-staff-gitlet-implementation">Using the Staff Gitlet Implementation</a>    <ul>
+      <li><a href="staff-gitlet.html#instructional-account-signing-up-and-signing-in" id="markdown-toc-instructional-account-signing-up-and-signing-in">Instructional Account: Signing Up and Signing In</a></li>
+      <li><a href="staff-gitlet.html#staff-gitlet-usage" id="markdown-toc-staff-gitlet-usage">Staff Gitlet: Usage</a></li>
+      <li><a href="staff-gitlet.html#staff-gitlet-testing-your-tests" id="markdown-toc-staff-gitlet-testing-your-tests">Staff Gitlet: Testing Your Tests</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="using-the-staff-gitlet-implementation">Using the Staff Gitlet Implementation</h1>
+<p>To help you in Project 2: Gitlet, we’ve provided a way for you to run the staff’s implementation of the
+project. This will allow you to test your understanding of the spec; specifically edge cases that you may be confused on (like <code class="language-plaintext highlighter-rouge">checkout</code> and <code class="language-plaintext highlighter-rouge">merge</code> commands). You’ll also be able to use this to validate test cases you create since you wouldn’t want to spend hours debugging a test just to find out your code was correct and your test was wrong the whole time :)</p>
+
+<p>All of you will be able to access it via your cs61b instructional accounts. If you’re confused about what an
+instructional account is, don’t worry! Basically, they are computers that are locked in the dungeons of Soda that you 
+have remote terminal access to! Magic! But I digress. Here’s a guide to help you get started.</p>
+
+<h2 id="instructional-account-signing-up-and-signing-in">Instructional Account: Signing Up and Signing In</h2>
+<ul>
+  <li>Visit this <a href="https://acropolis.cs.berkeley.edu/~account/webacct/">link</a> to sign-up for an instructional account</li>
+  <li>Log in using your Cal-Net information</li>
+  <li>Under the column “Account Services”, click “get new account’ for cs61b</li>
+  <li>Confirm on the subsequent page that loads</li>
+  <li>Mark down your login and password information. We advise clicking “download
+  named acct form” to save a .pdf hardcopy of your account information. Note
+  that your login will be 3 letters, and your password will be some random
+  string. We’ll show you later how to change your password to something more
+  memorable.</li>
+  <li>Using your account login, use <code class="language-plaintext highlighter-rouge">ssh cs61b-***@cory.eecs.berkeley.edu</code> or <code class="language-plaintext highlighter-rouge">ssh
+cs61b-***@ashby.cs.berkeley.edu</code>. Note that this <code class="language-plaintext highlighter-rouge">***</code> is NOT your class id
+(the numbers), but rather the 3 letter ID you got in the previous step.</li>
+  <li>You should be prompted if you want to
+continue connecting; type <code class="language-plaintext highlighter-rouge">yes</code>. Then enter your password. <b>Note</b> when
+typing your password it will not show up on your terminal for security
+reasons, but it’s still capturing your keystrokes, so keep typing and just
+hit enter when you’re done.</li>
+  <li>You should now be ssh’d into your instructional server. This means that this
+tab of your terminal is really issuing commands to the instructional server
+and displaying the results of those commands.</li>
+  <li>After running the <code class="language-plaintext highlighter-rouge">ssh</code> command and logging into your instructional account, please
+run the command <code class="language-plaintext highlighter-rouge">register</code> then complete the following prompts.</li>
+  <li><strong>Optional:</strong> If you’d like to have a more memorable password, run <code class="language-plaintext highlighter-rouge">sshupdate</code>
+when inside your instructional server and follow the directions on how to
+change your password. It’ll first ask for your old password, so be ready to
+type in the mumbo jumbo default password again. If you ever forget your
+password or need to reset it, you can do so <a href="https://inst.eecs.berkeley.edu/webacct">here</a></li>
+</ul>
+
+<h2 id="staff-gitlet-usage">Staff Gitlet: Usage</h2>
+<p>All of your instructional accounts will have access to our staff solution. You can use this to see what the solution
+does in particular edge cases as well as use it to validate your test cases. Remember, you can create files with
+<code class="language-plaintext highlighter-rouge">touch</code>, remove files with <code class="language-plaintext highlighter-rouge">rm</code>, and edit files using <code class="language-plaintext highlighter-rouge">nano</code> or <code class="language-plaintext highlighter-rouge">vim</code>. You can
+learn how to use nano <a href="https://linuxize.com/post/how-to-use-nano-text-editor/">here</a>
+and vim
+<a href="https://computers.tutsplus.com/tutorials/vim-for-beginners--cms-21118">here</a>.</p>
+
+<p>Run commands using <code class="language-plaintext highlighter-rouge">staff-gitlet [...cmd...]</code>
+Here’s an example sequence of commands</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>staff-gitlet init
+<span class="nb">touch </span>wug.txt
+staff-gitlet add wug.txt
+staff-gitlet commit <span class="s2">"Add wug.txt"</span>
+</code></pre></div></div>
+
+<p>NOTE: you will not see a <code class="language-plaintext highlighter-rouge">.gitlet</code> folder; instead there will be a <code class="language-plaintext highlighter-rouge">.gitlet.enc</code>
+file contains the encrypted version of .gitlet. This is so we do not leak how
+staff organizes the <code class="language-plaintext highlighter-rouge">.gitlet</code> directory.</p>
+
+<h2 id="staff-gitlet-testing-your-tests">Staff Gitlet: Testing Your Tests</h2>
+<p>We’ve provided a way to test the tests (<code class="language-plaintext highlighter-rouge">.in</code> files) that you create! You will
+need to clone your repository onto the instructional machines, so follow
+these steps to do so:</p>
+
+<ol>
+  <li>First you’ll need to retrieve the <code class="language-plaintext highlighter-rouge">staff-runner.py</code> script in your
+<code class="language-plaintext highlighter-rouge">proj2/testing/</code> folder. This will run the staff gitlet solution on your
+tests to verify their correctness. If the <code class="language-plaintext highlighter-rouge">staff-runner.py</code> file is currently
+not in your <code class="language-plaintext highlighter-rouge">proj2/testing/</code> folder, run <code class="language-plaintext highlighter-rouge">git pull skeleton master</code> to get it
+from the skeleton.</li>
+  <li>To use this script on the instructional machines, push your most up-to-date
+tests and <code class="language-plaintext highlighter-rouge">staff-runner.py</code> to Github. This is done via <code class="language-plaintext highlighter-rouge">git add</code>, <code class="language-plaintext highlighter-rouge">git
+commit</code>, and finally <code class="language-plaintext highlighter-rouge">git push</code>.</li>
+  <li>Now ssh into your instructional account using the above directions.</li>
+  <li>Now we will clone your repository via <code class="language-plaintext highlighter-rouge">git clone https://github.com/Berkeley-CS61B-Student/sp21-s***</code>
+with your own class id. You should now see a folder <code class="language-plaintext highlighter-rouge">sp21-s***</code> when you
+type <code class="language-plaintext highlighter-rouge">ls</code>!</li>
+  <li>Change directories into your <code class="language-plaintext highlighter-rouge">proj2/testing/</code> folder, and you can use the
+following command to verify the correctness of your tests:</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 staff-runner.py <span class="o">[</span><span class="nb">test </span>to run]
+</code></pre></div></div>
+
+<p>For example, if you created a test called
+<code class="language-plaintext highlighter-rouge">student-test01-complicated-checkout.in</code> in the <code class="language-plaintext highlighter-rouge">student_tests</code> directory that
+you wanted to verify, you’d run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 staff-runner.py student_tests/student-test01-complicated-checkout.in
+</code></pre></div></div>
+
+<p>Feel free to use flags like <code class="language-plaintext highlighter-rouge">--keep</code> or <code class="language-plaintext highlighter-rouge">--verbose</code> to look at the output of the
+staff gitlet implementation in more depth, but the <code class="language-plaintext highlighter-rouge">.gitlet.enc</code> folder will
+still be encrypted. Remember to use the <code class="language-plaintext highlighter-rouge">python3</code> command in the instructional
+account, even if you use the <code class="language-plaintext highlighter-rouge">py</code> or <code class="language-plaintext highlighter-rouge">python</code> command on your own machine
+(remember the instructional machine is an entirely different computer in the
+Soda dungeons that you’re remotely issuing commands to).</p>
+
+<p><strong>If you add tests later</strong> you’ll need to pull them: this is done via <code class="language-plaintext highlighter-rouge">git pull</code>
+on your instructional machine (make sure you’ve done <code class="language-plaintext highlighter-rouge">git push</code> from your local
+machine first!).</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

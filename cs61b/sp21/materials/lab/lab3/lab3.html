@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 3: Timing Tests and Randomized Comparison Tests | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 3: Timing Tests and Randomized Comparison Tests</header><ul id="markdown-toc">
+  <li><a href="lab3.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab3.html#timing-tests-for-list61b" id="markdown-toc-timing-tests-for-list61b">Timing Tests for List61B</a>    <ul>
+      <li><a href="lab3.html#timing-the-construction-of-an-alist-with-a-bad-resize-strategy" id="markdown-toc-timing-the-construction-of-an-alist-with-a-bad-resize-strategy">Timing the construction of an AList with a bad resize strategy</a></li>
+      <li><a href="lab3.html#timing-the-construction-of-an-alist-with-a-good-resize-strategy" id="markdown-toc-timing-the-construction-of-an-alist-with-a-good-resize-strategy">Timing the construction of an AList with a good resize strategy</a></li>
+      <li><a href="lab3.html#timing-the-getlast-method-of-sllist" id="markdown-toc-timing-the-getlast-method-of-sllist">Timing the getLast method of SLList</a></li>
+    </ul>
+  </li>
+  <li><a href="lab3.html#randomized-comparison-tests" id="markdown-toc-randomized-comparison-tests">Randomized Comparison Tests</a>    <ul>
+      <li><a href="lab3.html#simple-comparison-test" id="markdown-toc-simple-comparison-test">Simple Comparison Test</a></li>
+      <li><a href="lab3.html#randomized-function-calls" id="markdown-toc-randomized-function-calls">Randomized Function Calls</a></li>
+      <li><a href="lab3.html#conditional-breakpoints" id="markdown-toc-conditional-breakpoints">Conditional Breakpoints</a></li>
+      <li><a href="lab3.html#adding-more-randomized-calls" id="markdown-toc-adding-more-randomized-calls">Adding More Randomized Calls</a></li>
+      <li><a href="lab3.html#adding-randomized-comparisons" id="markdown-toc-adding-randomized-comparisons">Adding Randomized Comparisons</a></li>
+      <li><a href="lab3.html#running-our-randomized-test" id="markdown-toc-running-our-randomized-test">Running our Randomized Test</a></li>
+      <li><a href="lab3.html#fixing-the-bug-and-execution-breakpoints" id="markdown-toc-fixing-the-bug-and-execution-breakpoints">Fixing the Bug and Execution Breakpoints</a></li>
+      <li><a href="lab3.html#cleaning-up" id="markdown-toc-cleaning-up">Cleaning Up</a></li>
+    </ul>
+  </li>
+  <li><a href="lab3.html#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="lab3.html#submission" id="markdown-toc-submission">Submission</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>In this lab, you’ll create a timing test for the <code class="language-plaintext highlighter-rouge">SLList</code> and <code class="language-plaintext highlighter-rouge">AList</code> classes. You’ll also create a randomized comparison test for a buggy implementation of the <code class="language-plaintext highlighter-rouge">AList</code> class.</p>
+
+<p>Along the way, we will also explore three new debugger features: conditional breakpoints, the resume button, and execution breakpoints.</p>
+
+<h2 id="timing-tests-for-list61b">Timing Tests for List61B</h2>
+
+<p>For this part of the lab, make sure you’re opening the code in the <code class="language-plaintext highlighter-rouge">timingtest</code> package, not the code in the <code class="language-plaintext highlighter-rouge">randomizedtest</code> package.</p>
+
+<h3 id="timing-the-construction-of-an-alist-with-a-bad-resize-strategy">Timing the construction of an AList with a bad resize strategy</h3>
+
+<p>As discussed <a href="https://docs.google.com/presentation/d/1ZKSPKdEjlLlzmf7LoQJlTUC3w0MPInSXy2DxTEva0yo/edit#slide=id.g625dc7e36_0943">in lecture</a>, a multiplicative resizing strategy will result in fast add operations / good performance, whereas an additive resizing strategy will result in slow add operations / bad performance. In this part of the lab, we’ll show how we can demonstrate this empirically.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">timingtest</code> package, we’ve provided the <code class="language-plaintext highlighter-rouge">AList</code> class created in lecture with the bad resizing strategy below:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addLast</span><span class="o">(</span><span class="nc">Item</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">items</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">resize</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">items</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Your goal for this part of the lab is to write code that tabulates the amount of time needed to create a <code class="language-plaintext highlighter-rouge">AList</code> of various sizes using the <code class="language-plaintext highlighter-rouge">addLast</code> method above. The output of this timing test will look something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for addLast
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+        1000         0.00         1000         0.20
+        2000         0.01         2000         0.20
+        4000         0.01         4000         1.20
+        8000         0.04         8000         4.30
+       16000         0.10        16000        10.00
+       32000         0.50        32000        49.70
+       64000         1.15        64000       114.80
+      128000         3.74       128000       374.30
+</code></pre></div></div>
+
+<p>The first column <code class="language-plaintext highlighter-rouge">N</code> gives the size of the data structure (how many elements it contains). The second column <code class="language-plaintext highlighter-rouge">time (s)</code> gives the time required to complete all operations. The third column <code class="language-plaintext highlighter-rouge"># ops</code> gives the number of calls to <code class="language-plaintext highlighter-rouge">addLast</code> made during the timing experiment. And finally the fourth column <code class="language-plaintext highlighter-rouge">microsec/op</code> gives the number of microseconds it took on average to complete each call to <code class="language-plaintext highlighter-rouge">addLast</code>. Note that for this experiment, <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge"># ops</code> is redundant, since the result of making 128,000 calls to <code class="language-plaintext highlighter-rouge">addLast</code> will result in an <code class="language-plaintext highlighter-rouge">N</code> of 128,000.</p>
+
+<p>The important thing to notice here is that <code class="language-plaintext highlighter-rouge">addLast</code> is not “constant time”. That is, the time it takes each <code class="language-plaintext highlighter-rouge">addLast</code> call to complete varies significantly with the size of the list: 374.30 microseconds when the list is long, and only 0.20 microseconds when the list is short. This is essentially how our autograder tests work for the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> classes from project 1, i.e. we make sure that the time was constant for operations that should have been constant.</p>
+
+<p>You might notice that the time per <code class="language-plaintext highlighter-rouge">addLast</code> operation is the same for N = 1000 and N = 2000. This is common for timing tests. For small inputs, results are unreliable for two reasons: The variance in runtime is high (due to issues like caching, process switching, branch prediction, etc. which you’ll learn about if you take 61C), and the accuracy of our timer (milliseconds) is insufficient to resolve the difference between N = 1000 and N = 2000. This can even lead to the runtime for N = 1000 being greater than that of N = 2000. For this reason, when we run empirical timing tests, we want to focus on the behavior for large N, e.g. N = 32000 vs N = 64000.</p>
+
+<p>Another thing you may notice is that the times you get from this table for your machine may be much different than what is written above. That’s okay, as long as the <em>general trend</em> is the same. In 61C, you will see exactly why the same code may take vastly different amounts of time on different hardware. In 61B (and in most theory-based classes) we are only concerned with general trends, which mask non-idealities like the type of processor you are using. While reasoning about “general trends” may seem tricky, we will learn a formalism for this later in the course (asymptotics). For now, use your intuition!</p>
+
+<p>Now that you understand the table above, add a function <code class="language-plaintext highlighter-rouge">public void timeAListConstruction</code> to the class <code class="language-plaintext highlighter-rouge">TimeAList</code> that generates the table above for an <code class="language-plaintext highlighter-rouge">AList</code>. Note: If your computer is a little slow, you might want to stop at 64,000 instead of 128,000. Make sure to add a function call to <code class="language-plaintext highlighter-rouge">timeAListConstruction</code> to the <code class="language-plaintext highlighter-rouge">main</code> method of <code class="language-plaintext highlighter-rouge">TimeAList</code> class.</p>
+
+<p>For your convenience, we’ve provided a method called <code class="language-plaintext highlighter-rouge">printTimingTable(AList&lt;Integer&gt; Ns, AList&lt;Double&gt; times, AList&lt;Integer&gt; opCounts)</code> that will print the table above, where <code class="language-plaintext highlighter-rouge">Ns</code> is the first column, <code class="language-plaintext highlighter-rouge">times</code> is the second column, and <code class="language-plaintext highlighter-rouge">opCounts</code> is the third column. The fourth column (<code class="language-plaintext highlighter-rouge">microsec/op</code>) is automatically computed for you. Your times should be in seconds. You should use the <code class="language-plaintext highlighter-rouge">Stopwatch</code> class. See <code class="language-plaintext highlighter-rouge">stopwatchDemo</code> for an example. Interestingly, note that we are using the same data structure that we are timing (an <code class="language-plaintext highlighter-rouge">AList</code>) to store the timing data! The way we accomplish this is by using many different instances of the data structure; the one that is being timed is not the same as the ones that are storing the timing data.</p>
+
+<h3 id="timing-the-construction-of-an-alist-with-a-good-resize-strategy">Timing the construction of an AList with a good resize strategy</h3>
+
+<p>Now modify the <code class="language-plaintext highlighter-rouge">AList</code>  class so that the resize strategy is multiplicative instead of additive and rerun <code class="language-plaintext highlighter-rouge">timeAListConstruction</code>. Your <code class="language-plaintext highlighter-rouge">AList</code> objects should now be constructed nearly instantly, even for N = 128,000, and each add operation should only take a fraction of a microsecond.</p>
+
+<p>Optional: Try increasing the maximum N to larger values, e.g. 10 million. You should see that the time per add operation remains constant.</p>
+
+<p>Optional: Try experimenting with different resizing factors and see how the runtimes change. For example, if you resize by a factor of 1.01, you should still get constant time addLast operations! Note that to use a non-integer factor you’ll need to convert to the nearest integer. For example you can use <code class="language-plaintext highlighter-rouge">Math.round()</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addLast</span><span class="o">(</span><span class="nc">Item</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">items</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">resize</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">size</span> <span class="o">*</span> <span class="mf">1.01</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="n">items</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="timing-the-getlast-method-of-sllist">Timing the getLast method of SLList</h3>
+
+<p>Above, we showed how we can time the construction of a data structure. However, sometimes we’re interested in the dependence of the runtime of a method on the size of an existing data structure that has already been constructed.</p>
+
+<p>For example, in your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code>, you are supposed to have <code class="language-plaintext highlighter-rouge">addLast</code> operations that are fast… a single <code class="language-plaintext highlighter-rouge">addLast</code> operation must take “constant time”, i.e. execution time should not depend on the size of the deque.</p>
+
+<p>In this part of the lab, we’ll show you how to empirically test whether a method’s runtime depends on the size of the data structure.</p>
+
+<p>Suppose we want to compute the time per operation for <code class="language-plaintext highlighter-rouge">getLast</code> for an <code class="language-plaintext highlighter-rouge">SLList</code> and want to know how this runtime depends on N. To do this, we need to follow the procedure below:</p>
+
+<ol>
+  <li>Create an <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li>Add N items to the <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li>Start the timer.</li>
+  <li>Perform M getLast operations on the <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li>Check the timer. This gives the total time to complete all M operations.</li>
+</ol>
+
+<p><strong>It’s important that we do not start the timer until after step 2 has been completed.</strong> Otherwise the timing test includes the runtime to build the data structure, whereas we’re only interested how the runtime for <code class="language-plaintext highlighter-rouge">getLast</code> depends on the size of the <code class="language-plaintext highlighter-rouge">SLList</code>.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">TimeSLList</code> class, edit the function <code class="language-plaintext highlighter-rouge">timeGetLast</code> to perform the procedure above, and generate a table similar to the one shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for getLast
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+        1000         0.02        10000         1.70
+        2000         0.03        10000         3.10
+        4000         0.06        10000         6.20
+        8000         0.13        10000        12.50
+       16000         0.25        10000        25.00
+       32000         0.53        10000        52.80
+       64000         1.35        10000       135.30
+      128000         2.57        10000       257.30
+</code></pre></div></div>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge"># ops</code> columns are no longer the same. This is because we are always calling <code class="language-plaintext highlighter-rouge">getLast</code> the same number of times regardless of the size of the list, i.e. <code class="language-plaintext highlighter-rouge">M = 10000</code> for step 4 of the procedure described above.</p>
+
+<p>Note that the operations are again not constant time! (If your results imply that the operations <em>are</em> constant time, make sure you’re running your tests on the <code class="language-plaintext highlighter-rouge">SLList</code> instead of the <code class="language-plaintext highlighter-rouge">AList</code>!). This means that as the list gets bigger, the <code class="language-plaintext highlighter-rouge">getLast</code> operation becomes slower. This would be a serious problem in a real world application. For example, suppose the list is of ATM transactions, and the <code class="language-plaintext highlighter-rouge">getLast</code> operation was being called in order to get the most recent transaction to print a receipt. Every time the ATM is used, the next receipt would take a little bit longer to print. Eventually over many months or years, the list would become so large that the <code class="language-plaintext highlighter-rouge">getLast</code> operation would be unusably slow. While this is a contrived example, similar problems have plagued real world systems!</p>
+
+<p>For this reason, the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> that you build in project 1 will be required to have a runtime that is independent of the size of the data structure. In other words, the last column will be some approximately constant value.</p>
+
+<p>Optional question to ponder: Why is <code class="language-plaintext highlighter-rouge">getLast</code> so slow? What is special about your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> that makes the <code class="language-plaintext highlighter-rouge">getLast</code> function faster?</p>
+
+<h2 id="randomized-comparison-tests">Randomized Comparison Tests</h2>
+
+<p>For this part of the lab, make sure you’re using the code in the <code class="language-plaintext highlighter-rouge">randomizedtest</code> package, not the <code class="language-plaintext highlighter-rouge">timingtest</code> package.</p>
+
+<h4 id="simple-comparison-test">Simple Comparison Test</h4>
+
+<p>One technique for testing code is to do a “comparison test”. In such a test, we have two implementations of the same class. One implementation is known (or strongly believed) to be correct, and the other is under development and not yet verified.</p>
+
+<p>For example, we’ve provided the <code class="language-plaintext highlighter-rouge">AListNoResizing</code> class. This class does not support any resizing operations and simply has a hard-coded array size of 1000. This means that it isn’t practically useful since it can never hold more than 1000 items. However, because it is extremely simple, we have high confidence that it works.</p>
+
+<p>By contrast, we’ve also provided the <code class="language-plaintext highlighter-rouge">BuggyAList</code> class. This class has an underlying array that resizes up and down depending on how much data is stored. Since resizing is a bit tricky to get right, we are more suspicious of the correctness of this class. And as the name implies, it does have a bug somewhere. The goal of the rest of this lab is to find this bug.</p>
+
+<p>Let’s start by writing a practice JUnit test as a warmup. Write a test called <code class="language-plaintext highlighter-rouge">testThreeAddThreeRemove</code> that adds the same value to both the correct and buggy AList implementations, then checks that the results of three subsequent removeLast calls are the same. For example, you might <code class="language-plaintext highlighter-rouge">addLast</code> 4 to both, then <code class="language-plaintext highlighter-rouge">addLast</code> 5 to both, then <code class="language-plaintext highlighter-rouge">addLast</code> 6 to both. Then you’ll <code class="language-plaintext highlighter-rouge">removeLast</code> from both, and verify that the results are equal. Then you’ll <code class="language-plaintext highlighter-rouge">removeLast</code> again from both and check that they’re equal. Then finally you’ll <code class="language-plaintext highlighter-rouge">removeLast</code> the final item (which is 4) and verify that they’re equal. When you’re done, or if you’re stuck, see the code <a href="testThreeAddThreeRemove.txt">at this link</a> for a solution, but try first without looking at the code!</p>
+
+<p>Run your test, and you’ll see it should pass. This test is not strong enough to identify the bug in <code class="language-plaintext highlighter-rouge">BuggyAList</code>.</p>
+
+<h4 id="randomized-function-calls">Randomized Function Calls</h4>
+
+<p>In principle, it’s possible to carefully craft a set of comparison tests that will eventually find the bug. However, an alternate and complementary strategy is to use a randomized approach where we make random calls to both implementations and use JUnit methods to verify that they always return the same values.</p>
+
+<p>As an example of a function that randomly calls <code class="language-plaintext highlighter-rouge">AList</code> methods, the code below randomly calls <code class="language-plaintext highlighter-rouge">addLast</code> and <code class="language-plaintext highlighter-rouge">size</code> on an <code class="language-plaintext highlighter-rouge">AListNoResizing</code> object for a total of N total calls to one of these functions.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nc">AListNoResizing</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="no">L</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AListNoResizing</span><span class="o">&lt;&gt;();</span>
+
+        <span class="kt">int</span> <span class="no">N</span> <span class="o">=</span> <span class="mi">500</span><span class="o">;</span>
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">operationNumber</span> <span class="o">=</span> <span class="nc">StdRandom</span><span class="o">.</span><span class="na">uniform</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">operationNumber</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// addLast</span>
+                <span class="kt">int</span> <span class="n">randVal</span> <span class="o">=</span> <span class="nc">StdRandom</span><span class="o">.</span><span class="na">uniform</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">100</span><span class="o">);</span>
+                <span class="no">L</span><span class="o">.</span><span class="na">addLast</span><span class="o">(</span><span class="n">randVal</span><span class="o">);</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"addLast("</span> <span class="o">+</span> <span class="n">randVal</span> <span class="o">+</span> <span class="s">")"</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">operationNumber</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// size</span>
+                <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="no">L</span><span class="o">.</span><span class="na">size</span><span class="o">();</span>
+                <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"size: "</span> <span class="o">+</span> <span class="n">size</span><span class="o">);</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Create a new JUnit test called <code class="language-plaintext highlighter-rouge">randomizedTest()</code> and copy and paste the code above and you should see something like this:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">size: 0
+addLast(68)
+size: 1
+size: 1
+addLast(12)
+addLast(19)
+addLast(79)
+</span><span class="c">...
+</span><span class="go">size: 265
+</span></code></pre></div></div>
+
+<h4 id="conditional-breakpoints">Conditional Breakpoints</h4>
+
+<p>Though it won’t be useful for finding the bug today, let’s introduce two new debugger features: “resume” and “conditional breakpoints”.</p>
+
+<ol>
+  <li>
+    <p>Set a breakpoint on the line that says <code class="language-plaintext highlighter-rouge">int operationNumber = StdRandom.uniform(0, 2);</code>.</p>
+  </li>
+  <li>
+    <p>Then use the debug option to stop on this line in IntelliJ. If you don’t remember how to use the debug option, see <a href="https://sp21.datastructur.es/materials/lab/lab2/lab2">lab 2</a>.</p>
+  </li>
+  <li>
+    <p>Click the visualizer, and you’ll see an array with lots and lots of nulls that will eventually store the data being added to our list.</p>
+  </li>
+  <li>
+    <p>Click step over, and you’ll see that operationNumber is set to either 0 or 1. This is because the <code class="language-plaintext highlighter-rouge">StdRandom.uniform(0, 2)</code> function returns a random integer in the range [0, 2), i.e. exclusive of the right argument. If the chosen number is 0, then a random number will be added to the end of the list. If the chose number is 1, then the size will be printed.</p>
+  </li>
+  <li>
+    <p>Click the <code class="language-plaintext highlighter-rouge">resume</code> button on the debugger, highlighted in yellow below, and our code will run into it hits the breakpoint again.
+<img src="img/resume_button.png" alt="folder structure" /></p>
+  </li>
+  <li>
+    <p>Try clicking resume a few times, and you’ll see values start filling out the array. Note that every time you click resume, the code is running (as if you pressed step-over a bunch of times) until it gets back to the breakpoint again.</p>
+  </li>
+  <li>
+    <p>We can also switch away from the visualizer and back to being able to see the output of our print statements. To do this, click on <code class="language-plaintext highlighter-rouge">Debugger</code> again (next to <code class="language-plaintext highlighter-rouge">Java Visualizer</code>) and continue to click resume. On some machines, you may have to click on <code class="language-plaintext highlighter-rouge">Console</code> instead of <code class="language-plaintext highlighter-rouge">Debugger</code>. Each type you click resume, you’ll see another print statement corresponding to either a call to addLast or size.</p>
+  </li>
+  <li>
+    <p>Let’s now try out a conditional breakpoint. Right-click on your breakpoint and you’ll see a box pop up that says “Condition:”. In the box, type <code class="language-plaintext highlighter-rouge">L.size() == 12</code>.
+<img src="img/conditional_breakpoint.png" alt="folder structure" /></p>
+  </li>
+  <li>
+    <p>Click resume, and the code will run until the condition of the breakpoint is met, i.e. the size is 12. Try it out and click the visualizer, and you should see the size is now 12, with 12 items in the array. If you accidentally click too far, you must unfortunately restart the test.</p>
+  </li>
+</ol>
+
+<p>These two new features (resume and conditional breakpoints) won’t be useful for the rest of lab 3. However, they may come in handy on future projects, and you’ll need to use them on lab 4. You should remove the conditional breakpoint at this point so that it does not affect the rest of the lab.</p>
+
+<h4 id="adding-more-randomized-calls">Adding More Randomized Calls</h4>
+
+<p>Modify the randomized test so that it now has the possibility of two additional operations: <code class="language-plaintext highlighter-rouge">getLast</code> and <code class="language-plaintext highlighter-rouge">removeLast</code>. Note, you’ll need to change the call to <code class="language-plaintext highlighter-rouge">StdRandom.uniform</code> so that it picks a number between 0 and 3.</p>
+
+<p>Important: You should only call <code class="language-plaintext highlighter-rouge">getLast</code> and <code class="language-plaintext highlighter-rouge">removeLast</code> if <code class="language-plaintext highlighter-rouge">L.size</code> is greater than 0! These methods will crash if size is 0. In other words, have an <code class="language-plaintext highlighter-rouge">if</code> statement that skips the call to <code class="language-plaintext highlighter-rouge">getLast</code> or <code class="language-plaintext highlighter-rouge">removelast</code> if the size is zero.</p>
+
+<p>Optional: Once you’ve added these methods, use a breakpoint to stop the code on the line that calls <code class="language-plaintext highlighter-rouge">removeLast</code>, and use the step-over feature of the debugger to convince yourself that <code class="language-plaintext highlighter-rouge">removeLast</code> looks like it is working correctly.</p>
+
+<h4 id="adding-randomized-comparisons">Adding Randomized Comparisons</h4>
+
+<p>The code we built above only makes calls to our known good implementation. Modify the code so that for every call made to the <code class="language-plaintext highlighter-rouge">AListNoResizing</code> method, it also makes a call to the same method in <code class="language-plaintext highlighter-rouge">TestBuggyAList</code>. Your code should also compare the return values of every method which has a return value.</p>
+
+<p>If you’re stuck, see the code <a href="partialRandomizedComparisons.txt">at this link</a> for a <em>partial</em> solution, but try first without looking at the code!</p>
+
+<h4 id="running-our-randomized-test">Running our Randomized Test</h4>
+
+<p>Try running the test several times. It might pass or it might fail. Now try increasing N to 5000. It should fail almost every time.</p>
+
+<p>This raises an important point about randomized tests: If you apply random operations and the bug is fairly obscure, your random sequence of operations may not detect the bug! There are ways to improve randomized tests to avoid this issue, but this is beyond the scope of our course.</p>
+
+<p>Another note: Randomized tests should not be used as a replacement for well-designed unit tests! I personally generally lean towards non-random tests where possible, and think of randomized tests as a supplemental testing approach. See <a href="https://news.ycombinator.com/item?id=24349522">this thread</a> for a debate on this issue.</p>
+
+<h4 id="fixing-the-bug-and-execution-breakpoints">Fixing the Bug and Execution Breakpoints</h4>
+
+<p>Now that we have a test that is failing, we’d like to understand why.</p>
+
+<p>You’ll notice that every time the test fails, the message that we get is something like:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 7
+
+at randomizedtest.BuggyAList.resize(BuggyAList.java:31)
+</span></code></pre></div></div>
+
+<p>One way to do this would be to set a conditional breakpoint on line 31 of <code class="language-plaintext highlighter-rouge">BuggyAList.java</code> with the condition <code class="language-plaintext highlighter-rouge">i == items.length</code>. This will work fine, and you’re welcome to try it.</p>
+
+<p>However, we’ll take this opportunity to instead show you how to set up an “Execution Breakpoint” so that we can stop the code and visualize what’s going on when your code crashes.</p>
+
+<p>To this, click “Run -&gt; View Breakpoints”. You should see a window like this pop up:</p>
+
+<p><img src="img/breakpoints.png" alt="folder structure" /></p>
+
+<p>Click on the checkbox on the left that says “any exception” and then click on that says “Condition:” and in the window and enter exactly:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span> <span class="k">instanceof</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span>
+</code></pre></div></div>
+
+<p>Once you’ve done this, your breakpoints window should look like:</p>
+
+<p><img src="img/breakpoints_filled_in.png" alt="folder structure" /></p>
+
+<p>Click the debug button and your code should stop right at the moment the exception is about to occur. Click the visualizer and try to figure out why the code is crashing. Now the real problem solving can start!</p>
+
+<p>In the visualizer window are a bunch of clues as to what the issue is exactly. It’s a tricky and subtle issue but if you’re systematic in your approach you should be able to identify the problem. Highlight the hidden text in the next paragraph that follows if you’re stuck:</p>
+
+<p style="background-color:black;color:black;">Focus on the parameter passed to the resize function. Try to figure out what's wrong with it, and using that information try to work out by looking at the code of `removeLast` how that bad parameter ended up getting passed in.
+</p>
+
+<p>Once you’ve identified the bug, fix it. Rerun the test to verify that <code class="language-plaintext highlighter-rouge">BuggyAList</code> works correctly now.</p>
+
+<p>If you’re having trouble, make sure to ask your GSI or other students for help!</p>
+
+<p><strong>NOTE: If you use the debug feature without specifying a condition, your code will stop in some various mysterious places. Make sure you never have “Any Exception” checked without having a specified condition.</strong> This is because the process of starting JUnit tests generates a bunch of exceptions that ultimately get ignored. This is well beyond the scope of our class. If you’re done using an execution breakpoint, you should uncheck the “Java Exceptions Breakpoints” box in the top left.</p>
+
+<h4 id="cleaning-up">Cleaning Up</h4>
+
+<p>Lastly: Our JUnit tests have print statements in them to create a log of all the randomized calls. While this was useful for instruction purposes, it is not something you want in real world tests since it just generates a big mess of text that isn’t useful. Remove all print statements from your JUnit tests.</p>
+
+<p>Note: Often it is useful to “log” rather than print out the function calls made by randomized tests. For more on this, complete the project 1 extra credit assignment.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this lab, we’ve seen how to:</p>
+<ul>
+  <li>Empirically measure the time it takes to construct a data structure.</li>
+  <li>Empirically measure the runtime of a data structure’s methods as a function of the size of the data structure.</li>
+  <li>Perform a comparison test between two implementations of a class.</li>
+  <li>Randomly call methods inside of a class.</li>
+  <li>Perform random comparison tests between two implementations of a class.</li>
+  <li>Use the resume button in IntelliJ.</li>
+  <li>Add a condition to a breakpoint.</li>
+  <li>Create an execution breakpoint.</li>
+</ul>
+
+<h2 id="submission">Submission</h2>
+
+<p>As usual, submit your code to the autograder. The autograder will examine the output of your timing tests and the correctness of your <code class="language-plaintext highlighter-rouge">BuggyAList</code> class.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

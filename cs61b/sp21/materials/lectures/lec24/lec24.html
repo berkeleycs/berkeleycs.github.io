@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Graphs Traversals and Implementation Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Graphs Traversals and Implementation Guide</header><div class="due-date">Author: Josh Hug</div><ul id="markdown-toc">
+  <li><a href="lec24.html#qa" id="markdown-toc-qa">QA</a></li>
+  <li><a href="lec24.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec24.html#overview" id="markdown-toc-overview">Overview</a></li>
+  <li><a href="lec24.html#recommended-problems" id="markdown-toc-recommended-problems">Recommended Problems</a>    <ul>
+      <li><a href="lec24.html#c-level" id="markdown-toc-c-level">C level</a></li>
+      <li><a href="lec24.html#b-level" id="markdown-toc-b-level">B level</a></li>
+      <li><a href="lec24.html#a-level" id="markdown-toc-a-level">A level</a></li>
+      <li><a href="lec24.html#just-for-fun" id="markdown-toc-just-for-fun">Just for fun</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="qa">QA</h2>
+<p>Linked <a href="https://youtu.be/-OuYtTGTsN8">here</a>.</p>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/hL5aztEoMbbXsKgR9">here</a>.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p><strong>Graph Traversals Overview.</strong> Just as we had both depth-first (preorder,
+inorder, and postorder) traversals and a breath-first (level order) traversal
+for trees, we can generalize these concepts to graphs. Specifically, given a
+source vertex, we can “visit” vertices in:</p>
+<ul>
+  <li>DFS Preorder: order in which DFS is called on each vertex.</li>
+  <li>DFS Postorder: order in which we return from DFS calls.</li>
+  <li>BFS: order of distance from the source. The lecture originally called this “level order”
+before we banish that term since nobody uses it in the real world for general
+graphs.</li>
+</ul>
+
+<p>We use the term “depth first”, because we will explore “deeply” first (a la
+<a href="https://sp21.datastructur.es/materials/lectures/lec24/this&#32;xkcd">https://xkcd.com/761/</a>]), and use the term “breadth first” because
+we go wide before we go deep.</p>
+
+<p>If we use BFS on a vertex of a graph that happens to be the root of a tree, we
+get exactly the same thing as level order traversal.</p>
+
+<p><strong>Breadth First Search.</strong> Unlike DFS, BFS lends itself more naturally to an
+iterative solution than a recursive one. When we perform BFS, we visit a source
+vertex s, then visit every vertex that is one link away from s, then visite very
+vertex that is two links away from s, and so forth.</p>
+
+<p>To achieve this, we use a simple idea: Create a so-called “fringe” of vertices
+that we think of as the next vertices to be explored. In the case of BFS, this
+fringe is a Queue, since we want to visit vertices in the order that we observe
+them. The pseudocode is as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bfs</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">fringe</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">mark</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">fringe</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">empty</span><span class="p">:</span>
+        <span class="n">dequeue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">visit</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">each</span> <span class="n">unmarked</span> <span class="n">neighbor</span> <span class="n">of</span> <span class="n">s</span><span class="p">:</span>
+            <span class="n">mark</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">enqueue</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In class, we discussed how we could use BFS to solve the shortest paths problem:
+Given a source vertex, find the shortest path from that source to every other
+vertex. When solving shortest paths, we add additional logic to our BFS
+traversal, where we also set the edgeTo for every vertex at the same time that
+it is marked and enqueued.</p>
+
+<p><strong>Graph API.</strong> In lecture, we used the Graph API from the Princeton algorithms book. Choice of API determines how clients need to think to write codes, since certain API’s can make certain tasks easier or harder. This can also affect runtime and memory.</p>
+
+<p><strong>Graph Implementations.</strong> Several graph API implementations we explored included an adjacency matrix, list of edges, and adjacency lists. With an adjacency matrix, we essentially have a 2D array with a boolean indicating whether two vertices are adjacent. A list of edges is simply that – a collection of all edges, such as HashSet<Edge>. The most common approach, adjacency lists, maintains an array of lists indexed by vertex number which stores the vertex numbers of all vertices adjacent to the given vertex.</Edge></p>
+
+<h2 id="recommended-problems">Recommended Problems</h2>
+<h3 id="c-level">C level</h3>
+
+<ol>
+  <li>
+    <p>Problem 2a from <a href="http://www.cs.princeton.edu/courses/archive/spring15/cos226/exams/fin-f09.pdf">Princeton’s Fall 2009 final</a></p>
+  </li>
+  <li>
+    <p>Suppose we run BFS from a vertex s. The edgeTo[] array we get back is
+sometimes known as a ‘Breadth First Paths Tree’. What, if anything, does the
+BFS tree tell us about the shortest path from v to w, assuming that neither
+is the source?</p>
+  </li>
+  <li>
+    <p>Problem 1a and 1b from <a href="http://www.cs.princeton.edu/courses/archive/spring15/cos226/exams/fin-s08.pdf">Princeton’s Spring 2008 final</a>.</p>
+  </li>
+  <li>
+    <p>Problem 3a from <a href="http://www.cs.princeton.edu/courses/archive/spring15/cos226/exams/fin-f10.pdf">Princeton’s Fall 2010 final</a>.</p>
+  </li>
+  <li>
+    <p><a href="https://tbp.berkeley.edu/exams/5662/download/">Problem 1a and 1b</a> of the Spring 2018 final.</p>
+  </li>
+  <li>
+    <p><a href="https://tbp.berkeley.edu/exams/5773/download/">Problem 1a</a> of the Spring 2017 midterm 2.</p>
+  </li>
+</ol>
+
+<h3 id="b-level">B level</h3>
+
+<ol>
+  <li>
+    <p>Problem 2b from <a href="http://www.cs.princeton.edu/courses/archive/spring15/cos226/exams/fin-f09.pdf">Princeton’s Fall 2009 final</a>.</p>
+  </li>
+  <li>
+    <p>Problem 1c from <a href="http://www.cs.princeton.edu/courses/archive/spring15/cos226/exams/fin-s08.pdf">Princeton’s Spring 2008 final</a>.</p>
+  </li>
+  <li>
+    <p>Problem 3b from <a href="http://www.cs.princeton.edu/courses/archive/spring15/cos226/exams/fin-f10.pdf">Princeton’s Fall 2010 final</a>.</p>
+  </li>
+  <li>
+    <p>Problems 4 and 5 from <a href="http://datastructur.es/sp16/materials/discussion/discussion11.pdf">Spring 2016’s discussion worksheet</a>.</p>
+  </li>
+  <li>
+    <p>Problem 4c from <a href="https://tbp.berkeley.edu/exams/5239/download/">my Spring 2015 Midterm 2</a>.</p>
+  </li>
+</ol>
+
+<h3 id="a-level">A level</h3>
+
+<ol>
+  <li>
+    <p>Develop an algorithm that determines whether or not a directed graph contains
+an Eulerian tour, i.e. a tour that visits every vertex exactly once.</p>
+  </li>
+  <li>
+    <p>Adapted from Algorithms textbook 4.2.27: Show that the number of different
+V-vertex directed graphs is 2^(V^2) (reminder, in our course, we do not allow “parallel edges”, i.e. you cannot have two or more edges from a vertex v to another vertex w).</p>
+
+    <p>Then compute an upper bound on the percentage of 20-vertex digraphs that could ever be examined by
+any computer, under the assumptions that every electron in the universe
+examines a digraph every nanosecond, that the universe has fewer than 10^80
+electrons, and that the age of the universe will be less than 10^20 years.</p>
+  </li>
+</ol>
+
+<h3 id="just-for-fun">Just for fun</h3>
+
+<ol>
+  <li>Adapted from Algorithms textbook 4.2.40: Run experiments to determine
+empirically the probability that DepthFirstDirectedPaths finds a path between
+two randomly chosen vertices and to calculate the average length of the paths
+found, for various random digraph models.</li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 2: JUnit Tests and Debugging | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 2: JUnit Tests and Debugging</header><ul id="markdown-toc">
+  <li><a href="lab2.html#pre-lab" id="markdown-toc-pre-lab">Pre-lab</a></li>
+  <li><a href="lab2.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab2.html#debugger-basics" id="markdown-toc-debugger-basics">Debugger Basics</a>    <ul>
+      <li><a href="lab2.html#breakpoints-and-step-into" id="markdown-toc-breakpoints-and-step-into">Breakpoints and Step Into</a></li>
+      <li><a href="lab2.html#step-over-and-step-out" id="markdown-toc-step-over-and-step-out">Step Over and Step Out</a>        <ul>
+          <li><a href="lab2.html#further-guidance-for-those-who-want-it" id="markdown-toc-further-guidance-for-those-who-want-it">Further Guidance (for those who want it)</a></li>
+        </ul>
+      </li>
+      <li><a href="lab2.html#recap-debugging" id="markdown-toc-recap-debugging">Recap: Debugging</a></li>
+    </ul>
+  </li>
+  <li><a href="lab2.html#junit-and-unit-testing" id="markdown-toc-junit-and-unit-testing">JUnit and Unit Testing</a>    <ul>
+      <li><a href="lab2.html#junit-syntax" id="markdown-toc-junit-syntax">JUnit Syntax</a></li>
+    </ul>
+  </li>
+  <li><a href="lab2.html#running-junit-tests-in-intellij-or-another-ide" id="markdown-toc-running-junit-tests-in-intellij-or-another-ide">Running JUnit Tests in IntelliJ (or another IDE)</a></li>
+  <li><a href="lab2.html#application-intlists" id="markdown-toc-application-intlists">Application: IntLists</a>    <ul>
+      <li><a href="lab2.html#starter-code" id="markdown-toc-starter-code">Starter Code</a></li>
+      <li><a href="lab2.html#part-a-intlist-iteration" id="markdown-toc-part-a-intlist-iteration">Part A: IntList Iteration</a></li>
+      <li><a href="lab2.html#part-b-nested-helper-methods-and-refactoring-for-debugging" id="markdown-toc-part-b-nested-helper-methods-and-refactoring-for-debugging">Part B: Nested Helper Methods and Refactoring for Debugging</a></li>
+      <li><a href="lab2.html#part-c-tricky-intlists" id="markdown-toc-part-c-tricky-intlists">Part C: Tricky IntLists!</a></li>
+    </ul>
+  </li>
+  <li><a href="lab2.html#submission" id="markdown-toc-submission">Submission</a></li>
+  <li><a href="lab2.html#full-recap" id="markdown-toc-full-recap">Full Recap</a></li>
+  <li><a href="lab2.html#faq-and-common-issues" id="markdown-toc-faq-and-common-issues">FAQ and Common Issues</a>    <ul>
+      <li><a href="lab2.html#things-like-string-or-stringequals-are-red" id="markdown-toc-things-like-string-or-stringequals-are-red">Things like String or String.equals() are red!</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="pre-lab">Pre-lab</h2>
+
+<ul>
+  <li><a href="https://sp21.datastructur.es/materials/lab/lab2setup/lab2setup">Lab 2 Setup</a></li>
+  <li>Run <code class="language-plaintext highlighter-rouge">git pull skeleton master</code> in your repo. You should get a <code class="language-plaintext highlighter-rouge">lab2/</code> folder.</li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>In this lab, you will learn about how to use the IntelliJ debugger and how to use JUnit tests in IntelliJ.</p>
+
+<h2 id="debugger-basics">Debugger Basics</h2>
+<p>Repeat the “Project Setup” process from lab 2 setup. However, this time, you should “open or import” the <code class="language-plaintext highlighter-rouge">lab2/pom.xml</code> file instead of the <code class="language-plaintext highlighter-rouge">lab2setup/pom.xml</code> file.</p>
+
+<p>After importing, your IntelliJ should look something like the following:
+<img src="img2/folder_structure.png" alt="folder structure" /></p>
+
+<h3 id="breakpoints-and-step-into">Breakpoints and Step Into</h3>
+
+<p>We’ll start by running the main method in <code class="language-plaintext highlighter-rouge">DebugExercise1</code>. Open up this file in IntelliJ and click the run button. You should see three statements printed to the console, one of which should strike you as incorrect. If you’re not sure how to run <code class="language-plaintext highlighter-rouge">DebugExercise1</code>, right click on it in the list of files and click the <code class="language-plaintext highlighter-rouge">Run DebugExercise1.main</code> button as shown below:
+<img src="img2/run_button.png" alt="run button" /></p>
+
+<p>Somewhere in our code there is a bug, but don’t go carefully reading the code for it! While you might be able to spot this particular bug, often bugs are nearly impossible to see without actually trying to run the code and probe what’s going on as it executes.</p>
+
+<p>Many of you have had lots of experience with using print statements to probe what a program is thinking as it runs. While print statements can be very useful for debugging, they have a few disadvantages:</p>
+<ol>
+  <li>They require you to modify your code (to add print statements).</li>
+  <li>They require you to explicitly state what you want to know (since you have to say precisely what you want to print).</li>
+  <li>And they provide their results in a format that can be hard to read, since it’s just a big blob of text in the execution window.</li>
+</ol>
+
+<p>Often (but not always) it takes less time and mental effort to find a bug if you use a debugger. The IntelliJ debugger allows you to pause the code in the middle of execution, step the code line by line, and even visualize the organization of complex data structures like linked lists.</p>
+
+<p>While they are powerful, debuggers have to be used properly to gain any advantage. We encourage you to do what one might call “scientific debugging”, that is, debugging by using something quite similar to the scientific method!</p>
+
+<p>Generally speaking, you should formulate hypotheses about how segments of your code should behave, and then use the debugger to resolve whether those hypotheses are true. With each new piece of evidence, you will refine your hypotheses, until finally, you cannot help but stumble right into the bug.</p>
+
+<p>Our first exercise introduces us to two of our core tools, the <code class="language-plaintext highlighter-rouge">breakpoint</code> and the
+<code class="language-plaintext highlighter-rouge">step over</code> button. In the left-hand Project view, right click (or two finger click) on the
+<code class="language-plaintext highlighter-rouge">DebugExercise1</code> file and this time select the <code class="language-plaintext highlighter-rouge">Debug</code> option rather than the <code class="language-plaintext highlighter-rouge">Run</code> option. If the
+Debug option doesn’t appear, it’s because you didn’t properly import your <code class="language-plaintext highlighter-rouge">lab2</code>
+project (see the instructions in <code class="language-plaintext highlighter-rouge">lab2setup</code>).
+<img src="img2/debug_button.png" alt="folder structure" /></p>
+
+<p>You’ll see that the program simply runs again, with no apparent difference! That’s because we haven’t give the debugger anything interesting to do. Let’s fix that by “setting a breakpoint”. To do so, scroll to the line that says <code class="language-plaintext highlighter-rouge">int t3 = 3;</code>, then click just to the right of the line number. You should see a red dot appear that vaguely resembles a stop sign, which means we have now set a breakpoint. If we run the program in debug mode again it’ll stop at that line. If you’d prefer to avoid right-clicking to run your program again, you can click the bug icon in the top right of the screen instead. An animated gif showing off the steps in this paragraph (from a previous semester) is available <a href="https://gfycat.com/ThickBarrenFrogmouth">at this link</a>.</p>
+
+<p><img src="img2/breakpoint.png" alt="breakpoint" /></p>
+
+<p>If the text console (that says things like “round(10/2)”) does not appear when you click the debug button, you may need to perform one additional step before proceeding. At the top left of the information window in the bottom panel, you should see tabs labeled “Debugger” and “Console” (and “Java Visualizer”). Click and drag the “Console” window to the far right of the bottom panel. This will allow you to show both the debugger and the console at the same time. An animated gif showing off this process (from a previous semester) is available <a href="https://gfycat.com/SmugAbleAustraliankelpie">at this link</a>.</p>
+
+<p>Once you’ve clicked the debug button (and made your console window visible if necessary), you should see that the program has paused at the line at which you set a breakpoint, and you should also see a list of all the variables at the bottom, including <code class="language-plaintext highlighter-rouge">t</code>, <code class="language-plaintext highlighter-rouge">b</code>, <code class="language-plaintext highlighter-rouge">result</code>, <code class="language-plaintext highlighter-rouge">t2</code>, <code class="language-plaintext highlighter-rouge">b2</code>, and <code class="language-plaintext highlighter-rouge">result2</code>. We can advance the program one step by clicking on the “step into” button, which is an arrow that points down as shown on the next line:</p>
+
+<p><img src="img2/step_into.png" alt="step_into" /></p>
+
+<p>We’ll discuss the other buttons later in this lab. <strong>Make sure you’re pressing ‘step into’ rather than ‘step over’.</strong> Step-into points straight down, whereas step-over points up to the right and then down to the right.</p>
+
+<p>Each time you click this button, the program will advance one step. <strong>Before you click each time, formulate a hypothesis about how the variables should change.</strong></p>
+
+<p>Note that the currently highlighted line is the line <em>that is about to execute</em>, not the line that has just executed.</p>
+
+<p>Repeat this process until you find a line where the result does not match your expectations or the expectations of the person who wrote the code. Try and figure out why the line doesn’t do what you expect. If you miss the bug the first time, click the stop button (red square), and then the debug button to start back over. Optionally, you may fix the bug once you’ve found it.</p>
+
+<h3 id="step-over-and-step-out">Step Over and Step Out</h3>
+
+<p>Just as we rely on layering abstractions to construct and compose programs, we should also rely on abstraction to debug our programs. The “step over” button in IntelliJ makes this possible. Whereas the “step into” from the previous exercise shows the literal next step of the program, the “step over” button allows us to complete a function call without showing the function executing.</p>
+
+<p>The main method in <code class="language-plaintext highlighter-rouge">DebugExercise2</code> is supposed to take two arrays, compute the element-wise max of those two arrays, and then sum the resulting maxes. For example, suppose the two arrays are <code class="language-plaintext highlighter-rouge">{2, 0, 10, 14}</code> and <code class="language-plaintext highlighter-rouge">{-5, 5, 20, 30}</code>. The element-wise max is <code class="language-plaintext highlighter-rouge">{2, 5, 20, 30}</code>, e.g. in the second position, the larger of “0” and “5” is 5. The sum of this element-wise max is 2 + 5 + 20 + 30 = 57.</p>
+
+<p>There are two different bugs in the provided code. Your job for this exercise is to fix the two bugs, with one special rule: <strong>You should NOT step into the <code class="language-plaintext highlighter-rouge">max</code> or <code class="language-plaintext highlighter-rouge">add</code> functions or even try to understand them.</strong> These are very strange functions that use syntax (and bad style) to do easy tasks in an incredibly obtuse way. If you find yourself accidentally stepping into one of these two functions, use the “step out” button (an upwards pointing arrow) to escape.</p>
+
+<p>Even without stepping INTO these functions, you should be able to tell whether they have a bug or not. That’s the glory of abstraction! Even if I don’t know how a fish works at a molecular level, there are some cases where I can clearly tell that a fish is dead.</p>
+
+<p>If you find that one of these functions has a bug, you should completely rewrite it rather than trying to fix it.</p>
+
+<p>Now that we’ve told you what “step over” does, try exploring how it works exactly and try to find the two bugs. <strong>If you’re having the issue that the using run (or debug) button in the top right keeps running DebugExercise1, right click on DebugExercise2 to run it instead.</strong></p>
+
+<p>If you get stuck or just want more guidance, read the directions below.</p>
+
+<h4 id="further-guidance-for-those-who-want-it">Further Guidance (for those who want it)</h4>
+
+<p>To start, try running the program. The <code class="language-plaintext highlighter-rouge">main</code> method will compute and print an answer to the console. Try manually computing the answer, and you’ll see that the printed answer is incorrect. If you don’t know how to manually compute the answer, reread the description of what the function is supposed to do above, or read the comments in the provided code.</p>
+
+<p>Next, set a breakpoint to the line in <code class="language-plaintext highlighter-rouge">main</code> that calls <code class="language-plaintext highlighter-rouge">sumOfElementwiseMaxes</code>. Then use the debug button, followed by the step-into function to reach the first line of <code class="language-plaintext highlighter-rouge">sumOfElementWiseMaxes</code>. Then use the “step over” button on the line that calls <code class="language-plaintext highlighter-rouge">arrayMax</code>. What is wrong with the output (if anything), i.e. how does it fail to match your expectations? Note that to see the contents of an array, you may need to click the rightward pointing triangle next to the variable name in the variables tab of the debugger window in the bottom panel.</p>
+
+<p>If you feel that there is a bug, step into <code class="language-plaintext highlighter-rouge">arrayMax</code> (instead of over it) and try to find the bug. Reminder: do not step into <code class="language-plaintext highlighter-rouge">max</code>. You should be able to tell if <code class="language-plaintext highlighter-rouge">max</code> has a bug using step over. If <code class="language-plaintext highlighter-rouge">max</code> has a bug, replace it completely.</p>
+
+<p>Repeat the same process with <code class="language-plaintext highlighter-rouge">arraySum</code> and <code class="language-plaintext highlighter-rouge">add</code>. Once you’ve fixed both bugs, double check that the <code class="language-plaintext highlighter-rouge">sumOfElementwiseMaxes</code> method works correctly for the provided inputs. Note: This is not proof that <code class="language-plaintext highlighter-rouge">sumOfElementwiseMaxes</code> is correct, but it’s not necessary to write any additional tests to help verify this fact (that will be coming next week).</p>
+
+<!-- NOTE: Conditional breakpoints will be in lab 4. -->
+
+<h3 id="recap-debugging">Recap: Debugging</h3>
+<p>By this point you should understand the following tools:</p>
+
+<ul>
+  <li>Breakpoints</li>
+  <li>Stepping over</li>
+  <li>Stepping into</li>
+  <li>Stepping out (though you might not have actually used this feature for this lab)</li>
+</ul>
+
+<p>However, this is simply scratching the surface of the features of the debugger!
+Feel free to experiment. For example you might try to figure out what the “Watches” tab does. Another handy feature we won’t cover is the “Evaluate Expression” button (one of the last buttons on the row of step
+into/over/out buttons – it looks like a calculator). In Lab 3 and 4, we will also show off some additional debugger features.</p>
+
+<p>Be sure to also check out our <a href="../../guides/debugging-guide.html">Debugging Guide</a>! It discusses some features that were not covered in this lab (e.g. conditional breakpoints), but is still a great overview of debugging if you need it!</p>
+
+<h2 id="junit-and-unit-testing">JUnit and Unit Testing</h2>
+
+<p>We now turn our attention to JUnit and Unit Testing, which were covered in lecture 3.</p>
+
+<p>Unit Testing is a great way to rigorously test each method of your code and
+ultimately ensure that you have a working project.</p>
+
+<p>The “Unit” part of Unit Testing comes from the idea that you can break your
+program down into units, or the smallest testable part of an application.
+Therefore, Unit Testing enforces good code structure (each method should only do
+“One Thing”), and allows you to consider all of the edge cases for each method
+and test for them individually.</p>
+
+<p>In this class, you will be using JUnit to create and run tests on your code to
+ensure its correctness. And when JUnit tests fail, you will have an excellent
+starting point for debugging. Furthermore, if you have some terrible bug that is
+hard to fix, you can use git to revert back to a state when your code was
+working properly according to the JUnit tests (we’ll talk about how to revert your code to old versions when we get to lab 4).</p>
+
+<h4 id="junit-syntax">JUnit Syntax</h4>
+<p>As discussed in lecture, JUnit tests are written in Java.</p>
+
+<p>Open <code class="language-plaintext highlighter-rouge">ArithmeticTest.java</code>.</p>
+
+<p>The first thing you’ll notice are the imports at the top (IntelliJ sometimes
+shortens these to <code class="language-plaintext highlighter-rouge">import ...</code>; just click on the <code class="language-plaintext highlighter-rouge">...</code> to expand this and
+see what exactly is being imported). These imports are what give you easy
+access to the JUnit methods and functionality that you’ll need to run JUnit
+tests. For more information, see the <a href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD4ZfVY8g8lo5dFrLP-ctGmT">Testing lecture video</a>.</p>
+
+<p>Next, you’ll see that there are two methods in <code class="language-plaintext highlighter-rouge">ArithmeticTest.java</code>:
+<code class="language-plaintext highlighter-rouge">testProduct</code> and <code class="language-plaintext highlighter-rouge">testSum</code>. These methods follow this format:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Test</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testMethod</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">assertEquals</span><span class="o">(&lt;</span><span class="n">expected</span><span class="o">&gt;,</span> <span class="o">&lt;</span><span class="n">actual</span><span class="o">&gt;);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">assertEquals</code> is a common method used in JUnit tests. It tests whether a
+variable’s actual value is equivalent to its expected value.</p>
+
+<p>When you create JUnit test files, you should precede each test method with a
+<code class="language-plaintext highlighter-rouge">@Test</code> annotation, and can have one or more <code class="language-plaintext highlighter-rouge">assertEquals</code> or <code class="language-plaintext highlighter-rouge">assertTrue</code>
+methods (provided by the JUnit library). <strong>All tests must be non-static.</strong>
+This may seem weird since your tests don’t use instance variables and you
+probably won’t instantiate the class. However, this is how the designers of
+JUnit decided tests should be written, so we’ll go with it.</p>
+
+<h2 id="running-junit-tests-in-intellij-or-another-ide">Running JUnit Tests in IntelliJ (or another IDE)</h2>
+
+<p>Note: If you’ve decided not to use IntelliJ, you are on your own when it comes to running JUnit tests. Staff are not trained for and will not provide support for students who want to use other IDEs or command line compilation and execution tools.</p>
+
+<p>With <code class="language-plaintext highlighter-rouge">ArithmeticTest.java</code> open, click the <code class="language-plaintext highlighter-rouge">Run...</code> option under the <code class="language-plaintext highlighter-rouge">Run</code>
+menu at the top of IntelliJ as shown in the following screenshot.</p>
+
+<p><img src="img/lab3_run.png" alt="Run Options" /></p>
+
+<p>After clicking “Run…”, you should see some number of options that will look
+something like the list below. The number of items in your list may vary.</p>
+
+<p><img src="img/lab3_run_menu.png" alt="Run Options" /></p>
+
+<p>The option we care about is the one that says “ArithmeticTest” next to the red
+and green arrows (next to the 1. in the image above).</p>
+
+<p>Select this one, and you should see something like:</p>
+
+<p><img src="img/default_renderer.png" alt="Run Options" /></p>
+
+<p>This is saying that the test on line 25 of <code class="language-plaintext highlighter-rouge">ArithmeticTest.java</code> failed. The test
+expected 5 + 6 to be 11, but the <code class="language-plaintext highlighter-rouge">Arithmetic</code> class claims 5 + 6 is 30. You’ll
+see that even though <code class="language-plaintext highlighter-rouge">testSum</code> includes many <code class="language-plaintext highlighter-rouge">assert</code> statements, only one
+failure is shown.</p>
+
+<p>This is because JUnit tests are short-circuiting – as soon as one of the asserts
+in a method fails, it will output the failure and move on to the next test.</p>
+
+<p>Try clicking on the <code class="language-plaintext highlighter-rouge">ArithmeticTest.java:27</code> in the window at the bottom of the
+screen and IntelliJ will take you straight to the line which caused the test to
+fail. This can come in handy when running your own tests on later projects.</p>
+
+<p>Now fix the bug, either by inspecting <code class="language-plaintext highlighter-rouge">Arithmetic.java</code> and finding the bug, or
+using the IntelliJ debugger to step through the code until you reach the bug.</p>
+
+<p>After fixing the bug, rerun the test, and if you’re using the default renderer,
+you should get a nice glorious green bar. Enjoy the rush.</p>
+
+<h2 id="application-intlists">Application: IntLists</h2>
+
+<p>As discussed in Monday’s lecture, an <code class="language-plaintext highlighter-rouge">IntList</code> is our CS61B implementation for a
+naked recursive linked list of integers. Each <code class="language-plaintext highlighter-rouge">IntList</code> has a <code class="language-plaintext highlighter-rouge">first</code> and <code class="language-plaintext highlighter-rouge">rest</code> variable. The <code class="language-plaintext highlighter-rouge">first</code> is
+the <code class="language-plaintext highlighter-rouge">int</code> element contained by the node, and the <code class="language-plaintext highlighter-rouge">rest</code> is the next chain in the
+list (another <code class="language-plaintext highlighter-rouge">IntList</code>!).</p>
+
+<p>We have created a file <code class="language-plaintext highlighter-rouge">IntListExercises.java</code> that contains three methods, each of which are buggy. Your task in this section is to find and fix the bugs! To assist you, we’ve added some helpful starter code and test skeletons, which we explain below.</p>
+
+<h3 id="starter-code">Starter Code</h3>
+
+<p>Added to our implementation in Monday’s lecture are two methods in the <code class="language-plaintext highlighter-rouge">IntList</code> class, <code class="language-plaintext highlighter-rouge">print</code> and <code class="language-plaintext highlighter-rouge">of</code>. The <code class="language-plaintext highlighter-rouge">of</code> method is a convenience method for creating <code class="language-plaintext highlighter-rouge">IntList</code>s. Here’s a quick demonstration of how it works. Consider the following code that you’ve seen in lecture for creating an <code class="language-plaintext highlighter-rouge">IntList</code> containing the elements 1, 2, and 3.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntList</span> <span class="n">lst</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="k">new</span> <span class="nc">IntList</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="kc">null</span><span class="o">)));</span>
+</code></pre></div></div>
+
+<p>That’s a lot of typing, and is quite confusing! The <code class="language-plaintext highlighter-rouge">IntList.of</code> method addresses this problem. To create an IntList containing the elements 1, 2, and 3, you can simply type:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntList</span> <span class="n">lst</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Isn’t that great?! It works for lists of any number of elements!</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Creates an empty list!</span>
+<span class="nc">IntList</span> <span class="n">empty</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">();</span>
+
+<span class="c1">// Creates an IntList one element, 7</span>
+<span class="nc">IntList</span> <span class="n">oneElem</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">7</span><span class="o">);</span>
+
+<span class="c1">// Creates an IntList with many elements</span>
+<span class="nc">IntList</span> <span class="n">manyElems</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">5</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>The other method <code class="language-plaintext highlighter-rouge">print</code> returns a String representation of an IntList.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntList</span> <span class="n">lst</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lst</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span>
+
+<span class="c1">// Output: 1 -&gt; 2 -&gt; 3</span>
+</code></pre></div></div>
+
+<p>These methods don’t add any real functionality to the <code class="language-plaintext highlighter-rouge">IntList</code> class per-se, but they do provide convenient ways of creating and displaying <code class="language-plaintext highlighter-rouge">IntList</code>s, respectively. We use these convenience methods to make testing easier, and you will get some practice with these methods when you write your own JUnit test for debugging <code class="language-plaintext highlighter-rouge">IntList</code>s!</p>
+
+<h3 id="part-a-intlist-iteration">Part A: IntList Iteration</h3>
+<p>In this part, we will be debugging the <code class="language-plaintext highlighter-rouge">addConstant</code> method in <code class="language-plaintext highlighter-rouge">IntListExercises.java</code>. This method is intended to take in an <code class="language-plaintext highlighter-rouge">IntList</code> and mutatively add a constant to each element of the list.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Expected Behavior */</span>
+
+<span class="nc">IntList</span> <span class="n">lst</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+
+<span class="n">addConstant</span><span class="o">(</span><span class="n">lst</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lst</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+<span class="c1">// Output: 2 -&gt; 3 -&gt; 4</span>
+
+<span class="n">addConstant</span><span class="o">(</span><span class="n">lst</span><span class="o">,</span> <span class="mi">4</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lst</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+<span class="c1">// Output: 6 -&gt; 7 -&gt; 8</span>
+</code></pre></div></div>
+
+<p>Uh oh! The <code class="language-plaintext highlighter-rouge">addConstant</code> implementation we have provided in the starter code is buggy! We have provided three tests in <code class="language-plaintext highlighter-rouge">AddConstantTest.java</code> that can help you isolate the bug. These tests exercise the <code class="language-plaintext highlighter-rouge">IntList.toString</code> and <code class="language-plaintext highlighter-rouge">IntList.of</code> methods mentioned above! Step through each of these tests with the Java Debugger to help you isolate the bug. Once you’ve isolated the bug, fix it.</p>
+
+<h3 id="part-b-nested-helper-methods-and-refactoring-for-debugging">Part B: Nested Helper Methods and Refactoring for Debugging</h3>
+
+<p>In this part, we will be debugging the <code class="language-plaintext highlighter-rouge">setToZeroIfMaxFEL</code> method in <code class="language-plaintext highlighter-rouge">IntListExercises.java</code>.</p>
+
+<p>This method performs a very strange task. Specifically, it replaces the value at a node in an IntList with 0 if (and only if) the max of the IntList <em>starting at that node</em> has the same first and last digit. Thus, in the method name <code class="language-plaintext highlighter-rouge">FEL</code> is an abbreviation for “first equals last”.</p>
+
+<p>For example, if we pass the IntList <code class="language-plaintext highlighter-rouge">55 -&gt; 22 -&gt; 45 -&gt; 44 -&gt; 5</code> it will set the values 55, 44, and 5 to zero so that the list becomes <code class="language-plaintext highlighter-rouge">0 -&gt; 22 -&gt; 45 -&gt; 0 -&gt; 0</code>. This is because:</p>
+
+<ul>
+  <li>The IntList starting from 55 has max value 55, which has the same first and last digit, so this value is set to zero.</li>
+  <li>The IntList starting from 22 has max value 45, which does not have the same first and last digit, so 22 is not changed.</li>
+  <li>The IntList starting from 45 has max value 45, which does not have the same first and last digit, so 45 is not changed.</li>
+  <li>The IntList starting from 44 has max value 44, which has the same first and last digit, so 44 is set to zero.</li>
+  <li>The IntList starting from 5 has max value 5, which has the same first and last digit, so 5 is set to zero.</li>
+</ul>
+
+<p>To test your understanding, consider the IntList <code class="language-plaintext highlighter-rouge">5 -&gt; 535 -&gt; 35 -&gt; 11 -&gt; 10 -&gt; 0</code>. What should be the list after calling <code class="language-plaintext highlighter-rouge">setToZeroIfMaxFEL</code> is called? Check our answer by looking at <code class="language-plaintext highlighter-rouge">testZeroOutFELMaxes3</code> in <code class="language-plaintext highlighter-rouge">SetToZeroIfMaxFELTest</code>.</p>
+
+<p>If you run the tests, you’ll see that the method is buggy. Specifically, test 3 fails.</p>
+
+<p>Set a breakpoint on the first line of <code class="language-plaintext highlighter-rouge">setToZeroIfMaxFEL</code> and debug only <code class="language-plaintext highlighter-rouge">testZeroOutFELMaxes3</code>. You can debug a single test by opening <code class="language-plaintext highlighter-rouge">SetToZeroIfMaxFELTest.java</code>, locating the method <code class="language-plaintext highlighter-rouge">testZeroOutFELMaxes3()</code>, and clicking on the green arrow icon to the left of the method definition. If the test has already been run before, the green arrow icon may turn into a green checkmark coupled with the green arrow (if the test passed before) OR it may turn into a red exclamation mark coupled with a green arrow (if the test failed before). An example of the latter two cases is depicted below.
+<img src="img2/how-to-run-a-single-test.png" alt="how-to-run-a-single-test" /></p>
+
+<p>Use step-in a couple of times, which will take you to the line that says <code class="language-plaintext highlighter-rouge">if (firstDigitEqualsLastDigit(max(p)))</code>. When you click step-in a third time, you’ll see both <code class="language-plaintext highlighter-rouge">firstDigitEqualsLastDigit</code> and <code class="language-plaintext highlighter-rouge">max</code> get highlighted, as shown below:</p>
+
+<p><img src="img2/debuggerPickAFunction.png" alt="debugger wants you to pick a function" /></p>
+
+<p>Since we have a nested function call, IntelliJ is asking us which function we’d like to step into. If you’d like, you can click on one or the other. If you click on <code class="language-plaintext highlighter-rouge">max</code>, you’ll see all the details of the call to <code class="language-plaintext highlighter-rouge">max</code>. If you click on <code class="language-plaintext highlighter-rouge">firstDigitEqualsLastDigit</code>, the call to <code class="language-plaintext highlighter-rouge">max</code> will get stepped-over.</p>
+
+<p>Personally, I find code like this hard to debug! One tactic I use in circumstances like this is to refactor my code to make it more debugging friendly. Let’s try this out!</p>
+
+<p>Change the code so that it looks like this:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">int</span> <span class="n">currentMax</span> <span class="o">=</span> <span class="n">max</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+    <span class="kt">boolean</span> <span class="n">firstEqualsLast</span> <span class="o">=</span> <span class="n">firstDigitEqualsLastDigit</span><span class="o">(</span><span class="n">currentMax</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">firstEqualsLast</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">p</span><span class="o">.</span><span class="na">first</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Now that you’ve done this, use the step-over feature to identify which call to <code class="language-plaintext highlighter-rouge">max</code> or <code class="language-plaintext highlighter-rouge">firstDigitEqualsLastDigit</code> is yielding the wrong answer. <strong>Important: Don’t use step-in until you’ve found a call to <code class="language-plaintext highlighter-rouge">max</code> or <code class="language-plaintext highlighter-rouge">firstDigitEqualsLastDigit</code> that yields the wrong answer.</strong> Otherwise you’re just wasting time running through every single line of code. That is, if you’re watching every single iteration of every single call of the max function, you’re not using the debugger properly!</p>
+
+<p>Once you’ve found a call to <code class="language-plaintext highlighter-rouge">max</code> or <code class="language-plaintext highlighter-rouge">firstDigitEqualsLastDigit</code> that yields a weird result, start the debugging process over, and this time, when you get back to the argument that yielded the weird result, click step-in instead of step-out. Note: In Lab 4, we’ll talk about a useful idea known as a “conditional breakpoint” that will avoid the need to start back over from the beginning.</p>
+
+<p>Once you’ve identified the bug, fix it. Also feel free to change the refactored code back into the one-line version i.e. <code class="language-plaintext highlighter-rouge">if (firstDigitEqualsLastDigit(max(p)))</code>.</p>
+
+<p>Note: In the real world, you would have ideally tested <code class="language-plaintext highlighter-rouge">max</code> and <code class="language-plaintext highlighter-rouge">firstDigitEqualsLastDigit</code> separately before using them in the <code class="language-plaintext highlighter-rouge">setToZeroIfMaxFEL</code> method.</p>
+
+<h3 id="part-c-tricky-intlists">Part C: Tricky IntLists!</h3>
+<p>In this part, we will be debugging the <code class="language-plaintext highlighter-rouge">squarePrimes</code> method in <code class="language-plaintext highlighter-rouge">IntListExercises.java</code>. This method is intended to take in an <code class="language-plaintext highlighter-rouge">IntList</code>, square all its prime elements, and leave the composite (not-prime) elements alone. It returns <code class="language-plaintext highlighter-rouge">true</code> if at least one of the elements got squared, and <code class="language-plaintext highlighter-rouge">false</code> otherwise.</p>
+
+<p>As an example, consider an <code class="language-plaintext highlighter-rouge">IntList</code> containing the elements 14, 15, 16, 17, and 18. After running <code class="language-plaintext highlighter-rouge">squarePrimes</code>, we expect the prime element (17) to be squared and the composite elements (14, 15, 16, 18) to remain the same. The output of the <code class="language-plaintext highlighter-rouge">squarePrimes</code> function should <code class="language-plaintext highlighter-rouge">true</code>, since it should modify the <code class="language-plaintext highlighter-rouge">IntList</code> to become <code class="language-plaintext highlighter-rouge">14, 15, 16, 289, 18</code>. In code:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Expected Behavior */</span>
+
+<span class="nc">IntList</span> <span class="n">lst</span> <span class="o">=</span> <span class="nc">IntList</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">14</span><span class="o">,</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">16</span><span class="o">,</span> <span class="mi">17</span><span class="o">,</span> <span class="mi">18</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lst</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+<span class="c1">// Output: 14 -&gt; 15 -&gt; 16 -&gt; 17 -&gt; 18</span>
+
+<span class="kt">boolean</span> <span class="n">changed</span> <span class="o">=</span> <span class="n">squarePrimes</span><span class="o">(</span><span class="n">lst</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lst</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+<span class="c1">// Output: 14 -&gt; 15 -&gt; 16 -&gt; 289 -&gt; 18</span>
+
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">changed</span><span class="o">);</span>
+<span class="c1">// Output: true</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">squarePrimes</code> method uses the function <code class="language-plaintext highlighter-rouge">Primes.isPrime(int x)</code> as a helper method. <code class="language-plaintext highlighter-rouge">isPrime</code> simply returns <code class="language-plaintext highlighter-rouge">true</code> if its argument is a prime number, and returns <code class="language-plaintext highlighter-rouge">false</code> if its argument is composite. You don’t have to worry about how it determines whether a number is prime or not – that’s rather complicated! (Optional: For the curious reader, check out the “Fermat Primality Test” online). Instead, we expect you to treat the <code class="language-plaintext highlighter-rouge">isPrime</code> function as a blackbox. While you are debugging, use the “Step Over” feature on the <code class="language-plaintext highlighter-rouge">isPrime</code> function. This will allow you to verify its inputs and outputs are correct without being concerned about its implementation.</p>
+
+<p>We’ve explained what the <code class="language-plaintext highlighter-rouge">squarePrimes</code> method is supposed to do above. Unfortunately, the <code class="language-plaintext highlighter-rouge">squarePrimes</code> method is buggy. It’s your job to find and fix the bug! In order to do this, we recommend that you:</p>
+
+<ol>
+  <li>Create JUnit Test(s) that test the <code class="language-plaintext highlighter-rouge">squarePrimes</code> method over a variety of different inputs. Make sure to test that it makes updates to the passed-in <code class="language-plaintext highlighter-rouge">IntList</code> correctly <em>and</em> returns the correct <code class="language-plaintext highlighter-rouge">boolean</code> value.</li>
+  <li>Once you’ve created a JUnit Test on which <code class="language-plaintext highlighter-rouge">squarePrimes</code> fails, you’ve made progress! Woohoo! Now use the Java Debugger to step through the problem and isolate the bug.</li>
+  <li>Finally, write a fix to the bug. For this particular bug, the fix is not many lines of code. Finding the bug is much more difficult than fixing it!</li>
+</ol>
+
+<p>To get you started on this task, we’ve created one JUnit Test for you, <code class="language-plaintext highlighter-rouge">SquarePrimesTest.testSquarePrimesSimple</code>. This method checks that the example we gave above (an <code class="language-plaintext highlighter-rouge">IntList</code> of 14, 15, 16, 17, and 18) is correctly modified by the <code class="language-plaintext highlighter-rouge">squarePrimes</code> function, and that the <code class="language-plaintext highlighter-rouge">squarePrimes</code> function returns the correct value (<code class="language-plaintext highlighter-rouge">true</code> in this case). Unfortunately this test passes: You’ll have to write another test that fails! You can use <code class="language-plaintext highlighter-rouge">testSquarePrimesSimple</code> as an example of how to write a JUnit Test. Good luck!</p>
+
+<!--
+A Debugging Mystery
+-------------------
+
+Another important skill to learn is how to exhaustively debug. When done
+properly, debugging should allow you to rapidly narrow down where a bug might be
+located, even when you are debugging code you don't fully understand. Consider
+the following scenario:
+
+Your company, Flik Enterprises, has released a fine software library called
+Flik.java that is able to determine whether two Integers are the same or not.
+
+You receive an email from someone named "Horrible Steve" who describes a problem
+they're having with your library:
+
+    "Dear Flik Enterprises,
+
+    Your library is very bad. See the attached code. It should print out 500
+    but actually it's printing out 128.
+
+    (attachment: HorribleSteve.java)"
+
+Using any combination of the following techniques, figure out whether the bug is
+in Horrible Steve's code or in Flik enterprise's library:
+ - Writing JUnit tests for the Flik library. If you want to try this, you will
+ to create a new file in the `Flik` directory and import `junit`. Look to the
+ tests from the previous problems for how to do this.
+ - Stretch Goal: **Using the IntelliJ debugger, especially [conditional breakpoints](https://www.jetbrains.com/help/idea/2016.3/configuring-breakpoints.html) or [breaking on exceptions](https://www.jetbrains.com/help/idea/using-breakpoints.html#exception-breakpoints) (try this: Run -> View Breakpoints -> Check "Java Exceptions Breakpoints" -> Uncheck "Caught Exceptions").**
+ - Using print statements.
+ - Refactoring Horrible Steve's code. Refactoring means changing the syntax
+   without changing the functionality. This may be hard to do since HS's code
+   uses lots of weird stuff.
+
+HorribleSteve.java and Flik.java both use syntax we haven't covered in class.
+**We do not expect you to fix the bug or even understand why it's happening once
+you have found it.** Instead, your job is simply to find the bug.
+
+Tip: JUnit provides methods `assertTrue(boolean)` and `assertTrue(String,
+boolean)` that you might find helpful.
+
+Try to come up with a short explanation of the bug! Google is your friend since
+we have not covered this exact issue in Lecture. Discuss with your lab partner
+and check in with your TA or an AI to see if your answer is right (not for a
+grade).
+-->
+
+<!--
+Deprecated since the IntList.java from lecture does not pass style check
+Running the 61B Style Checker
+--------------------------------
+
+We will be using the CS 61B IntelliJ Plugin to check for style (right click on
+the file, then select "Check Style"). Try it out on `BuggyIntDList.java` in your
+IntDList folder. You should see that there are a lot of style errors. Most of
+these should already be resolved if you replaced all the FIXMEs with your code,
+but if not, you should resolve these errors. If you're ever stuck on style
+issues, consult the [official 61B style guide](/materials/guides/style-guide).
+
+When you pass the style check, the output should look like:
+
+    Running style checker on 1 file(s)...
+    Style checker completed with 0 errors
+-->
+
+<h2 id="submission">Submission</h2>
+
+<p>As before, push your code to GitHub and submit to Gradescope to test your code. One thing you’ll notice is that some of the tests are “Hidden”. This means that we don’t reveal to you what the test does, and if you fail the test, we give a purposefully vague error message. This is because for this lab, we want you to focus on learning how to debug by yourselves without relying on informative messages from the autograder.</p>
+
+<h2 id="full-recap">Full Recap</h2>
+<p>In this lab, we went over:</p>
+
+<ul>
+  <li>Stepping into, over, and out inside the IntelliJ debugger (this will be handy
+for projects!)</li>
+  <li>Unit Testing (big picture)</li>
+  <li>JUnit syntax and details</li>
+  <li>Writing JUnit tests</li>
+  <li>Debugging Using JUnit</li>
+  <li>Running the Style Checker</li>
+</ul>
+
+<h2 id="faq-and-common-issues">FAQ and Common Issues</h2>
+
+<h3 id="things-like-string-or-stringequals-are-red">Things like String or String.equals() are red!</h3>
+<p>This is a JDK issue, go to File &gt; Project Structure &gt; Project &gt; Project SDK to
+troubleshoot. If your Java version is 15.0, then you should have a 15.0 SDK and a
+Level 15 “Project Language Level”.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

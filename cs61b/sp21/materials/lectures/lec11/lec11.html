@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exceptions, Iterators, Iterables | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Exceptions, Iterators, Iterables</header><div class="due-date">Author: Brandon Lee</div><ul id="markdown-toc">
+  <li><a href="lec11.html#lecture-code" id="markdown-toc-lecture-code">Lecture Code</a></li>
+  <li><a href="lec11.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec11.html#exceptions" id="markdown-toc-exceptions">Exceptions</a></li>
+  <li><a href="lec11.html#iterators-and-iterables" id="markdown-toc-iterators-and-iterables">Iterators and Iterables</a></li>
+  <li><a href="lec11.html#tostring" id="markdown-toc-tostring">toString</a></li>
+  <li><a href="lec11.html#-vs-equals" id="markdown-toc--vs-equals">== vs .equals</a></li>
+  <li><a href="lec11.html#past-exam-questions" id="markdown-toc-past-exam-questions">Past Exam Questions</a></li>
+</ul>
+
+<h2 id="lecture-code">Lecture Code</h2>
+
+<p>Code from this lecture available at</p>
+
+<p><a href="https://github.com/Berkeley-CS61B/lectureCode-fa20/tree/master/inheritance4">https://github.com/Berkeley-CS61B/lectureCode-fa20/tree/master/inheritance4</a>.</p>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/VWLpmhAwRova3X6p8">here</a>.</p>
+
+<h2 id="exceptions">Exceptions</h2>
+<p>Most likely you have encountered an exception in your code such as a <code class="language-plaintext highlighter-rouge">NullPointerException</code> or an <code class="language-plaintext highlighter-rouge">IndexOutOfBoundsException</code>.
+Now we will learn about how we can “throw” exceptions ourselves, and also handle thrown exceptions.
+Here is an example of an exception that we throw:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">throw</span> <span class="k">new</span> <span class="nc">RuntimeException</span><span class="o">(</span><span class="s">"For no reason."</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p><em>Note: Try/Catch is out of scope for now!</em></p>
+
+<p>Throwing exceptions is useful to notify your user of something wrong they have done. On the other hand, we can also “catch”
+exceptions that happen in our code! Here is an example:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span> <span class="o">{</span>
+    <span class="n">dog</span><span class="o">.</span><span class="na">run</span><span class="o">()</span>
+<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Tried to run: "</span> <span class="o">+</span> <span class="n">e</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>
+</code></pre></div></div>
+<p>There are a few key things to note. Firstly, the entirety of the <code class="language-plaintext highlighter-rouge">try</code> section is run until/if there is an exception thrown. If there never
+is an exception, the entire catch block is skipped. If there is an exception, the code immediately jumps into the catch block with the
+corresponding exception, and executes from there.</p>
+
+<h2 id="iterators-and-iterables">Iterators and Iterables</h2>
+<p>These two words are very closely related, but have two different meanings that are often easy to confuse.
+The first thing to know is that these are both Java interfaces, with different methods that need to be implemented.
+Here is a simplified interface for Iterator:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+  <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">();</span>
+  <span class="no">T</span> <span class="nf">next</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Here is a simplified interface for Iterable:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="nc">Iterator</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Notice that in order for an object (for example an ArrayList or LinkedList) to be <em>iterable</em>, it must include a method that
+returns an <em>iterator</em>. The iterator is the object that iterates over an iterable object. Keep this relationship and distinction
+in mind as you work with these two interfaces.</p>
+
+<h2 id="tostring">toString</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">toString()</code> method returns a string representation of objects.</p>
+
+<h2 id="-vs-equals">== vs .equals</h2>
+<p>We have two concepts of equality in Java- “==” and the “.equals()” method. The key difference is that when using ==, we are checking if two objects have the same address in memory (that they point to the same object). On the other hand, .equals() is a method that can be overridden by a class and can be used to define some custom way of determining equality.</p>
+
+<p>For example, say we wanted to check if two stones are equal:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Stone</span><span class="o">{</span>
+  <span class="kd">public</span> <span class="nf">Stone</span><span class="o">(</span><span class="kt">int</span> <span class="n">weight</span><span class="o">){...}</span>
+<span class="o">}</span>
+<span class="nc">Stone</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stone</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+<span class="nc">Stone</span> <span class="n">r</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Stone</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+</code></pre></div></div>
+<p>If we want to consider s and r equal because they have the same weight. If we do check equality using ==, these Stones would not be considered equal because they do not have the same memory address.</p>
+
+<p>On the other hand, if you override the equals method of Stone as follows</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public boolean equals(Object o){
+  return this.weight == ((Stone) o).weight
+}
+</code></pre></div></div>
+<p>We would have that the stones would be considered equal because they have the same weight.</p>
+
+<h2 id="past-exam-questions">Past Exam Questions</h2>
+
+<p><a href="https://tbp.berkeley.edu/exams/6137/download/#page=8">Spring2018MT2Q7</a></p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

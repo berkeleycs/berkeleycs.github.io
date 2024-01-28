@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debugging Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/sunburst.css">
+
+  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Debugging Guide</header><div class="due-date">Author: Anjali Kantharuban</div><ul id="markdown-toc">
+  <li><a href="debugging-guide.html#a-what-is-debugging" id="markdown-toc-a-what-is-debugging">A. What is Debugging?</a></li>
+  <li><a href="debugging-guide.html#b-why-should-i-learn-to-debug" id="markdown-toc-b-why-should-i-learn-to-debug">B. Why Should I Learn to Debug?</a></li>
+  <li><a href="debugging-guide.html#c-can-i-use-print-statements-instead" id="markdown-toc-c-can-i-use-print-statements-instead">C. Can I Use Print Statements Instead?</a></li>
+  <li><a href="debugging-guide.html#d-understanding-the-stack-trace" id="markdown-toc-d-understanding-the-stack-trace">D. Understanding The Stack Trace</a></li>
+  <li><a href="debugging-guide.html#e-what-does-this-error-mean" id="markdown-toc-e-what-does-this-error-mean">E. What Does This Error Mean</a></li>
+  <li><a href="debugging-guide.html#f-stepping-through-with-the-debugger" id="markdown-toc-f-stepping-through-with-the-debugger">F. Stepping Through With the Debugger</a>    <ul>
+      <li><a href="debugging-guide.html#running-code-through-intellij" id="markdown-toc-running-code-through-intellij">Running Code Through IntelliJ</a></li>
+      <li><a href="debugging-guide.html#setting-breakpoints" id="markdown-toc-setting-breakpoints">Setting Breakpoints</a></li>
+      <li><a href="debugging-guide.html#stepping-through-code" id="markdown-toc-stepping-through-code">Stepping Through Code</a>        <ul>
+          <li><a href="debugging-guide.html#top-toolbar" id="markdown-toc-top-toolbar">Top Toolbar</a></li>
+          <li><a href="debugging-guide.html#left-toolbar" id="markdown-toc-left-toolbar">Left Toolbar</a></li>
+        </ul>
+      </li>
+      <li><a href="debugging-guide.html#analyzing-the-current-state" id="markdown-toc-analyzing-the-current-state">Analyzing the Current State</a>        <ul>
+          <li><a href="debugging-guide.html#debug-view" id="markdown-toc-debug-view">Debug View</a></li>
+          <li><a href="debugging-guide.html#code-view" id="markdown-toc-code-view">Code View</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="debugging-guide.html#g-more-resources" id="markdown-toc-g-more-resources">G. More Resources</a></li>
+</ul>
+
+<h2 id="a-what-is-debugging">A. What is Debugging?</h2>
+
+<p>Whenever you write a lot of code, as you do in this class, you will come across
+errors of various types. Some of these errors, like syntax errors will be easy to
+catch because the compiler will let you know exactly where they are.
+Unfortunately, errors in the logic of your code are not so simple. They are less
+likely to be caught by the system because oftentimes your code compiles, it just
+returns the wrong value. IntelliJ (and most other IDEs) provide an array of
+tools that will help you trace through your code and see exactly where an
+inconsistency occurs.</p>
+
+<h2 id="b-why-should-i-learn-to-debug">B. Why Should I Learn to Debug?</h2>
+
+<p>The ability to debug is an extremely important part of being a programmer - no
+matter how clever you are, if it takes you a very long time to find out where
+your code is messing up, it will take you a very long time to finish a project.
+Every single programmer needs to know how to effectively debug. Within the scope
+of this class, learning to debug on your own will save you from having to wait
+in office hours for a TA to help you. With that in mind, this cheat sheet will
+give you all the tools you need to debug various types of errors!</p>
+
+<h2 id="c-can-i-use-print-statements-instead">C. Can I Use Print Statements Instead?</h2>
+
+<p>Technically, yes. There are times when print statements are more efficient, such
+as when you only need to track one variable through a loop in a fairly isolated
+portion of code. You are free to debug at first with print statements and then
+use the debugger if you are still struggling to find the bug after 5 minutes.
+The caveat here is that if you come to office hours without having had stepped
+through your code, we will point you towards this guide instead of finding your bug.</p>
+
+<h2 id="d-understanding-the-stack-trace">D. Understanding The Stack Trace</h2>
+
+<p><img src="img/debugging-stack-trace.png" alt="Sample Stack Trace" /></p>
+
+<p>When you see an exception like this, this means your computer caught a mistake
+while it was running your program. To be helpful, before it exits out, your
+computer tells you all the information you need to know to find out where the
+error happened. The first line follows this format:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Which thread errored] <span class="o">[</span>What error occurred] <span class="o">[</span>Any more information about the error]
+</code></pre></div></div>
+<p>What we want to focus on is the last two segments. In this case, that looks like:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Exception <span class="k">in </span>thread “main” java.lang.ArrayIndexOutOfBoundException: Index 5 out of bounds <span class="k">for </span>length 5
+</code></pre></div></div>
+
+<p>This gives you two pieces of information:</p>
+
+<ol>
+  <li>
+    <p>The error was an <em>Array Index Out of Bounds Exception</em>.</p>
+  </li>
+  <li>
+    <p>We tried to access item 5 in an array of length 5.</p>
+  </li>
+</ol>
+
+<p>This tells you what happened, but not where it happened. That’s where the stack
+trace is useful. The three (or however many) lines under the header describe
+where the computer was in the code when it errored. The top trace line is what
+the computer was executing when it crashed and the list describes what functions
+called each other in reverse order. Here, we see that our <code class="language-plaintext highlighter-rouge">main</code> function called
+<code class="language-plaintext highlighter-rouge">make2DArray</code> on line 6. Then, <code class="language-plaintext highlighter-rouge">make2DArray</code> called <code class="language-plaintext highlighter-rouge">makeArray</code> on line 14.
+Finally, the code errored on line 23 within <code class="language-plaintext highlighter-rouge">makeArray</code>. Clicking on the blue
+links will jump you to that part of the code, so you don’t have to spend time
+scrolling. Knowing this, you can start debugging the specific sequence of calls
+that caused the error.</p>
+
+<h2 id="e-what-does-this-error-mean">E. What Does This Error Mean</h2>
+
+<p>Perhaps you have read the stack trace, but you don’t understand what the error
+means. For the most part, Java errors are named such that they are
+understandable without prior knowledge, but in case you come across something
+you don’t recognize, here’s a cheat sheet:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Error</th>
+      <th>What it Usually Means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>___ expected</td>
+      <td>The parser can’t make sense of the line because there’s a character that it doesn’t understand or a missing character.</td>
+    </tr>
+    <tr>
+      <td>cannot find ___</td>
+      <td>You are calling a method or class that the computer doesn’t have access to.</td>
+    </tr>
+    <tr>
+      <td>Illegal start of expression</td>
+      <td>You are missing a closing brace somewhere before this line.</td>
+    </tr>
+    <tr>
+      <td>Illegal start of type</td>
+      <td>You wrote code outside of a function body that shouldn’t be there.</td>
+    </tr>
+    <tr>
+      <td>Incompatible types – expected ___</td>
+      <td>You are trying to assign something to a variable that is not the same type.</td>
+    </tr>
+    <tr>
+      <td>Missing method body</td>
+      <td>Your function declaration line has a semicolon.</td>
+    </tr>
+    <tr>
+      <td>Missing return statement</td>
+      <td>You should be returning something in this method but you aren’t.</td>
+    </tr>
+    <tr>
+      <td>Non-static method cannot be called from a static context</td>
+      <td>You called a method on the class itself instead of an instance of the class.</td>
+    </tr>
+    <tr>
+      <td>*Program Freezes*</td>
+      <td>You’re likely stuck in some sort of logical loop.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="f-stepping-through-with-the-debugger">F. Stepping Through With the Debugger</h2>
+
+<h4 id="running-code-through-intellij">Running Code Through IntelliJ</h4>
+
+<p><img src="img/debugging-edit-configurations.png" alt="Run Menu" /></p>
+
+<p>To use the debugger, you need to run your code through IntelliJ instead of
+through the console.</p>
+
+<ol>
+  <li>
+    <p>From the main menu, go to Run &gt; Edit Configurations.</p>
+  </li>
+  <li>
+    <p>Enter any arguments for your program into the field marked Program Arguments.
+These are the arguments you would pass into the command line if you were to run
+it in the console.</p>
+  </li>
+  <li>To run the debugger, either click Run &gt; Debug or right click on the green</li>
+  <li>arrow next to the function and select Debug.</li>
+</ol>
+
+<h4 id="setting-breakpoints">Setting Breakpoints</h4>
+
+<p>To examine how the code operates at runtime, we set <em>breakpoints</em>. Breakpoints
+pause your code at the line they are set so that you can see the state of all
+the variables around where an error occurred. To set a breakpoint, click on the
+space between a line number and the code:</p>
+
+<p><img src="img/debugging-normal-breakpoint.png" alt="Normal Breakpoint" /></p>
+
+<p>This kind of breakpoint just pauses the code the first time your computer comes
+across this line. If you are in a situation where the error only occurs when a
+variable is set to a certain value, you can set a <em>conditional breakpoint</em>.</p>
+
+<p><img src="img/debugging-conditional-breakpoint.png" alt="Conditional Breakpoint" /></p>
+
+<p>To do this, set a normal breakpoint and then right click the red circle that
+appears. Now, you can set the breakpoint condition in the given field. Your
+condition can be any True/False statement that would compile at this point in
+the code. This means you have to use variables that already exist in the current
+frame, but they don’t necessarily have to be referenced in the current line.</p>
+
+<h4 id="stepping-through-code">Stepping Through Code</h4>
+
+<h6 id="top-toolbar">Top Toolbar</h6>
+
+<p><img src="img/debugging-top-toolbar.png" alt="Top Toolbar" /></p>
+
+<p>To step through code, you need to understand the toolbar at the top of the debug
+view. To see their names, hover over the icons. From left to right, they are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Button</th>
+      <th>What It Does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Step Over</td>
+      <td>This allows you to execute the current line of code and move on to the next line in this frame.</td>
+    </tr>
+    <tr>
+      <td>Step Into</td>
+      <td>This allows you to step into any function calls in the current line given the functions are yours.</td>
+    </tr>
+    <tr>
+      <td>Force Step Into</td>
+      <td>This allows you to step into any function calls in the current line even if they are from some third party library. You should not need to do this.</td>
+    </tr>
+    <tr>
+      <td>Step Out</td>
+      <td>If you are in a function or loop, this allows you to skip the rest of the frame, essentially bringing you out to wherever this function was called.</td>
+    </tr>
+    <tr>
+      <td>Drop Frame</td>
+      <td>This allows you to reset the current frame by returning to the previous frame where it was called. This is useful if you missed the part of a function you were trying to see by essentially letting you rewind time.</td>
+    </tr>
+    <tr>
+      <td>Run to Cursor</td>
+      <td>If you are running in debug mode, you can quickly jump to areas of interest in the code by clicking run to cursor. This will act as if there is a temporary breakpoint set wherever your cursor is.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h6 id="left-toolbar">Left Toolbar</h6>
+
+<p><img src="img/debugging-left-toolbar.png" alt="Left Toolbar" /></p>
+
+<p>There is also a second toolbar along the left side of the debug menu. This menu
+is for more general controls. From top to bottom they are:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Button</th>
+      <th>What It Does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rerun</td>
+      <td>Rerun the debugger with the same settings as the current run.</td>
+    </tr>
+    <tr>
+      <td>Resume Program</td>
+      <td>Continues the program until it hits the next breakpoint.</td>
+    </tr>
+    <tr>
+      <td>Pause Program</td>
+      <td>If your program seems like it’s freezing, run it in debug mode with no breakpoints and click pause when your program freezes. It will most likely pause within whatever logical loop is causing the freeze.</td>
+    </tr>
+    <tr>
+      <td>Stop Program</td>
+      <td>If you’re done debugging, you can click this to end the program early.</td>
+    </tr>
+    <tr>
+      <td>View Breakpoints</td>
+      <td>This opens up a window that displays all your current breakpoints. Here, you can edit their settings and toggle them on/off.</td>
+    </tr>
+    <tr>
+      <td>Mute Breakpoints</td>
+      <td>Toggles all breakpoints on/off.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="analyzing-the-current-state">Analyzing the Current State</h4>
+
+<p>There are two places where you can get information about the state of your
+program while in debug mode.</p>
+
+<h6 id="debug-view">Debug View</h6>
+
+<p><img src="img/debugging-debug-view.png" alt="Debug View" />
+Firstly, in the debug view there are two columns:</p>
+
+<ol>
+  <li>
+    <p>The first column shows the stack trace up until this point. Each line
+describes a frame, in order of narrowest to widest. The name of the frame is
+first and refers to the name of the function called. Then, we see the line
+number we are currently on for that frame. In this example, <code class="language-plaintext highlighter-rouge">make2DArray</code> called
+<code class="language-plaintext highlighter-rouge">makeArray</code> on line 14, so it remains on that line until <code class="language-plaintext highlighter-rouge">makeArray</code> finishes
+running.</p>
+  </li>
+  <li>
+    <p>The second column lists all the variables in the current frame, which
+includes any global variables. You can’t see variables that don’t exist in the
+current frame. Here you can see what value they hold as of the line you are on.</p>
+  </li>
+</ol>
+
+<p>If you want more information than just the values of each variable, there’s a
+button called <em>evaluate expression</em> in the toolbar. Pressing this allows you to
+essentially insert lines on the fly to the program.</p>
+
+<p><img src="img/debugging-evaluate-expression.png" alt="Evaluate Expression" /></p>
+
+<p>For instance, here we have inserted the expression <code class="language-plaintext highlighter-rouge">arr[i] = 1000</code> and clicked
+<em>evaluate</em>, which is reflected in the <em>Result Panel</em> and in the
+<em>Variables Panel</em>. Essentially, it is as if we inserted the line <code class="language-plaintext highlighter-rouge">arr[i] = 1000</code>
+before <code class="language-plaintext highlighter-rouge">arr[i] = makeItem(i)</code>. A good use of this functionality is to ensure
+that two objects in your code are equal  (rather than being two instances of the
+same class) by evaluating a == b which can be difficult to tell from the
+Variables Panel alone. This has the added benefit of not changing any values in
+the code, so you don’t have to worry about accidentally modifying the behavior
+you trying to observe.</p>
+
+<h6 id="code-view">Code View</h6>
+
+<p>The second place to get information is on the code itself.</p>
+
+<p><img src="img/debugging-code-state.png" alt="Code View" /></p>
+
+<p>In debug mode, IntelliJ shows the value of every variable referenced in each
+line of code next to the line. In addition, it highlights the value of whatever
+variable was most recently changed.</p>
+
+<h2 id="g-more-resources">G. More Resources</h2>
+
+<p>If you want more details on using the IntelliJ debugger, JetBrains has some guides:</p>
+
+<ol>
+  <li>
+    <p><a href="https://www.jetbrains.com/help/idea/debugging-your-first-java-application.html">Debugging Your First Application</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.jetbrains.com/help/idea/using-breakpoints.html">Setting Breakpoints</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.jetbrains.com/help/idea/stepping-through-the-program.html">Stepping Through a Program</a></p>
+  </li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

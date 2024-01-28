@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Capers Design Document Example | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Capers Design Document Example</header><ul id="markdown-toc">
+  <li><a href="capers-example.html#capers-design-document" id="markdown-toc-capers-design-document">Capers Design Document</a>    <ul>
+      <li><a href="capers-example.html#classes-and-data-structures" id="markdown-toc-classes-and-data-structures">Classes and Data Structures</a>        <ul>
+          <li><a href="capers-example.html#main" id="markdown-toc-main">Main</a>            <ul>
+              <li><a href="capers-example.html#fields" id="markdown-toc-fields">Fields</a></li>
+            </ul>
+          </li>
+          <li><a href="capers-example.html#capersrepository" id="markdown-toc-capersrepository">CapersRepository</a>            <ul>
+              <li><a href="capers-example.html#fields-1" id="markdown-toc-fields-1">Fields</a></li>
+            </ul>
+          </li>
+          <li><a href="capers-example.html#dog" id="markdown-toc-dog">Dog</a>            <ul>
+              <li><a href="capers-example.html#fields-2" id="markdown-toc-fields-2">Fields</a></li>
+            </ul>
+          </li>
+          <li><a href="capers-example.html#utils" id="markdown-toc-utils">Utils</a></li>
+          <li><a href="capers-example.html#fields-3" id="markdown-toc-fields-3">Fields</a></li>
+        </ul>
+      </li>
+      <li><a href="capers-example.html#algorithms" id="markdown-toc-algorithms">Algorithms</a></li>
+      <li><a href="capers-example.html#persistence" id="markdown-toc-persistence">Persistence</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="capers-design-document">Capers Design Document</h1>
+
+<p><strong>CS 61B Staff</strong>:</p>
+
+<h2 id="classes-and-data-structures">Classes and Data Structures</h2>
+
+<h3 id="main">Main</h3>
+
+<p>This is the entry point to our program. It takes in arguments from the command
+line and based on the command (the first element of the <code class="language-plaintext highlighter-rouge">args</code> array) calls the
+corresponding command in <code class="language-plaintext highlighter-rouge">CapersRepository</code> which will actually execute the
+logic of the command. It also validates the arguments based on the command to
+ensure that enough arguments were passed in.</p>
+
+<h4 id="fields">Fields</h4>
+
+<p>This class has no fields and hence no associated state: it simply validates
+arguments and defers the execution to the <code class="language-plaintext highlighter-rouge">CapersRepository</code> class.</p>
+
+<h3 id="capersrepository">CapersRepository</h3>
+
+<p>This is where the main logic of our program will live. This file will handle all
+of the actual capers commands by reading/writing from/to the correct file,
+setting up persistence, and additional error checking.</p>
+
+<p>It will also be responsible for setting up all persistence within capers. This
+includes creating the <code class="language-plaintext highlighter-rouge">.capers</code> folder as well as the folder and file where we
+store all <code class="language-plaintext highlighter-rouge">Dog</code> objects and the current story.</p>
+
+<p>This class defers all <code class="language-plaintext highlighter-rouge">Dog</code> specific logic to the <code class="language-plaintext highlighter-rouge">Dog</code> class: for example,
+instead of having the <code class="language-plaintext highlighter-rouge">CapersRepository</code> class handle <code class="language-plaintext highlighter-rouge">Dog</code> serialization and
+deserialization, we have the <code class="language-plaintext highlighter-rouge">Dog</code> class contain the logic for that.</p>
+
+<h4 id="fields-1">Fields</h4>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">static final File CWD = new File(System.getProperty("user.dir"))</code>
+ The Current Working Directory. Since it has the package-private access
+ modifier (i.e. no access modifier), other classes in the package may use
+ this field. It is useful for the other <code class="language-plaintext highlighter-rouge">File</code> objects we need to use.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">static final File CAPERS_FOLDER = Utils.join(CWD, ".capers")</code>
+ The hidden <code class="language-plaintext highlighter-rouge">.capers</code> directory. This is where all of the state of the
+ <code class="language-plaintext highlighter-rouge">CapersRepository</code> will be stored, including additional things like the
+ <code class="language-plaintext highlighter-rouge">Dog</code> objects and the current story. It is also package private as other
+ classes will use it to store their state.</p>
+  </li>
+</ol>
+
+<p>These fields are both <code class="language-plaintext highlighter-rouge">static</code> since we don’t actually instantiate a
+<code class="language-plaintext highlighter-rouge">CapersRepository</code> object: we simply use it to house functions. If we had
+additional non-static state (like the <code class="language-plaintext highlighter-rouge">Dog</code> class), we’d need to serialize it
+and save it to a file.</p>
+
+<h3 id="dog">Dog</h3>
+
+<p>This class represents a <code class="language-plaintext highlighter-rouge">Dog</code> that will be stored in a file. Because each <code class="language-plaintext highlighter-rouge">Dog</code>
+will have a unique name, we may simply use that as the name of the file that the
+object is serialized to.</p>
+
+<p>All <code class="language-plaintext highlighter-rouge">Dog</code> objects are serialized within the <code class="language-plaintext highlighter-rouge">DOG_FOLDER</code> which is within the
+<code class="language-plaintext highlighter-rouge">CAPERS_FOLDER</code>. The <code class="language-plaintext highlighter-rouge">Dog</code> class has helpful methods that will return the <code class="language-plaintext highlighter-rouge">Dog</code>
+object corresponding to some <code class="language-plaintext highlighter-rouge">String</code> name given to it, as well as write that
+<code class="language-plaintext highlighter-rouge">Dog</code> to a file to persist its changes.</p>
+
+<h4 id="fields-2">Fields</h4>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">static final File DOG_FOLDER = Utils.join(CapersRepository.CAPERS_FOLDER, "dogs")</code>
+The <code class="language-plaintext highlighter-rouge">File</code> object that corresponds to the directory containing all the
+serialized <code class="language-plaintext highlighter-rouge">Dog</code> objects. This is <code class="language-plaintext highlighter-rouge">static</code> since all <code class="language-plaintext highlighter-rouge">Dog</code> objects are stored
+within the same directory. When</li>
+  <li><code class="language-plaintext highlighter-rouge">private int age</code>
+The age of this <code class="language-plaintext highlighter-rouge">Dog</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">private String breed</code>
+The breed of this <code class="language-plaintext highlighter-rouge">Dog</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">private String name</code>
+The name of this <code class="language-plaintext highlighter-rouge">Dog</code>. These names are unique and thus no two <code class="language-plaintext highlighter-rouge">Dog</code> objects can
+possibly have the same name (not enforced by capers, but a guarantee from the
+spec).</li>
+</ol>
+
+<h3 id="utils">Utils</h3>
+
+<p>This class contains helpful utility methods to read/write objects or <code class="language-plaintext highlighter-rouge">String</code>
+contents from/to files, as well as reporting errors when they occur.</p>
+
+<p>This is a staff-provided and PNH written class, so we leave the actual
+implementation as magic and simply read the helpful javadoc comments above each
+method to give us an idea of whether or not it’ll be useful for us.</p>
+
+<h3 id="fields-3">Fields</h3>
+
+<p>Only some <code class="language-plaintext highlighter-rouge">private</code> fields to aid in the magic.</p>
+
+<h2 id="algorithms">Algorithms</h2>
+
+<p>There aren’t any algorithms in this lab as we were just dipping our toes into
+serialization/persistence.</p>
+
+<h2 id="persistence">Persistence</h2>
+
+<p>The directory structure looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CWD                             &lt;==== Whatever the current working directory is.
+└── .capers                     &lt;==== All persistant data is stored within here
+    ├── story                   &lt;==== Where the story is stored (a file)
+    └── dogs                    &lt;==== All dogs are stored in this directory
+        ├── Dog1                &lt;==== A single Dog instance stored to a file
+        ├── Dog2
+        ├── ...
+        └── DogN
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">CapersRepository</code> will set up all persistence. It will:</p>
+
+<ol>
+  <li>Create the <code class="language-plaintext highlighter-rouge">.capers</code> folder if it doesn’t already exist</li>
+  <li>Create the <code class="language-plaintext highlighter-rouge">dogs</code> folder if it doesn’t arleady exist</li>
+</ol>
+
+<p>When the <code class="language-plaintext highlighter-rouge">story [text]</code> command is used we will do one of two things:</p>
+
+<ol>
+  <li>If the <code class="language-plaintext highlighter-rouge">.capers/story</code> file doesn’t exist, we will create it and write the
+<code class="language-plaintext highlighter-rouge">text</code> to the newly created file followed by a <code class="language-plaintext highlighter-rouge">\n</code> character after
+printinting it.</li>
+  <li>If the <code class="language-plaintext highlighter-rouge">.capers/story</code> file <em>does</em> exist, we’ll read the previous story using
+the <code class="language-plaintext highlighter-rouge">Utils.readContentsAsString</code> function, add the <code class="language-plaintext highlighter-rouge">text</code>, add a <code class="language-plaintext highlighter-rouge">\n</code>
+character, and write this new story back to the <code class="language-plaintext highlighter-rouge">.capers/story</code> file after
+printing it.</li>
+</ol>
+
+<p>The <code class="language-plaintext highlighter-rouge">Dog</code> class will handle the serialization of <code class="language-plaintext highlighter-rouge">Dog</code> objects. It has two
+methods that are useful for this:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">public static Dog fromFile(String name)</code> - Given the name of a <code class="language-plaintext highlighter-rouge">Dog</code> object,
+it retrieves the serialized data from the <code class="language-plaintext highlighter-rouge">DOG_FOLDER</code> (which is
+<code class="language-plaintext highlighter-rouge">.capers.dogs</code>) and uses the <code class="language-plaintext highlighter-rouge">Utils.readObject</code> method to convert it to an
+instance of <code class="language-plaintext highlighter-rouge">Dog</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void saveDog()</code> - Serializes this <code class="language-plaintext highlighter-rouge">Dog</code> object to the <code class="language-plaintext highlighter-rouge">DOG_FOLDER</code> in
+a file whose name is the same as the name of the <code class="language-plaintext highlighter-rouge">Dog</code> object (since we’re
+guaranteed the names are unique, there is no collision with any other <code class="language-plaintext highlighter-rouge">Dog</code>
+object). If this <code class="language-plaintext highlighter-rouge">Dog</code> already existed, this will also overwrite the old
+(now out-of-date) serialized data.</li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

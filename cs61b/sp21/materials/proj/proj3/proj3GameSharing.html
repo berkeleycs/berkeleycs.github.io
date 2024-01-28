@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 3 - Game Sharing | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 3 - Game Sharing</header><ul id="markdown-toc">
+  <li><a href="proj3GameSharing.html#author-boren-tsai" id="markdown-toc-author-boren-tsai">Author: Boren Tsai</a></li>
+  <li><a href="proj3GameSharing.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="proj3GameSharing.html#networking" id="markdown-toc-networking">Networking</a>    <ul>
+      <li><a href="proj3GameSharing.html#main" id="markdown-toc-main">Main</a></li>
+      <li><a href="proj3GameSharing.html#byowserver" id="markdown-toc-byowserver">BYOWServer</a></li>
+      <li><a href="proj3GameSharing.html#byowclient" id="markdown-toc-byowclient">BYOWClient</a></li>
+      <li><a href="proj3GameSharing.html#testing-your-code" id="markdown-toc-testing-your-code">Testing Your Code</a></li>
+      <li><a href="proj3GameSharing.html#supporting-remote-gameplay" id="markdown-toc-supporting-remote-gameplay">Supporting Remote Gameplay</a></li>
+      <li><a href="proj3GameSharing.html#the-one-point-bounty" id="markdown-toc-the-one-point-bounty">The One Point Bounty</a></li>
+    </ul>
+  </li>
+  <li><a href="proj3GameSharing.html#disclaimer" id="markdown-toc-disclaimer">Disclaimer</a></li>
+</ul>
+
+<h4 id="author-boren-tsai">Author: Boren Tsai</h4>
+<p>We’ve added a feature to Project 3: BYOW that will allow any pair of students to play each other’s
+games remotely. Woohoo for Covid safety.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>We have two 61B students, Alice and Bob. Alice and Bob have really awesome games that they each
+want to play but, due to shelter in place laws, they can’t meet. Alice is pretty dejected and goes
+to Office Hours to express their disappointment. Luckily, TA Arjun picks up Alice’s ticket and shares
+some exciting news: Alice and Bob can still play each other’s games! Arjun first instructs Alice
+to pull from <code class="language-plaintext highlighter-rouge">skeleton</code> again and then explains that Alice can use the provided <code class="language-plaintext highlighter-rouge">BYOWServer</code> to host
+a game that Bob can connect to and play using the <code class="language-plaintext highlighter-rouge">BYOWClient</code>. Arjun likens this scheme to playing minecraft online.
+The client is what the user uses to play the game. The client is in charge of all local calculations, such as graphics,
+audio, UI (User Interface), and registering inputs. Meanwhile the remote server (i.e. not your local machine), uses the
+internet to listen and execute client inputs. Then, the server sends the client back the information needed to render the
+correct game state, to output the correct audio, etc. More information can be found <a href="https://technical-minecraft.fandom.com/wiki/Server/Client_Communication">here</a>. 
+In order to share each other’s games, they will need to implement a new method in the <code class="language-plaintext highlighter-rouge">Engine</code> class: <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code>.</p>
+
+<h2 id="networking">Networking</h2>
+<p>In order to make this possible, we’ve added a layer of networking to proj3. The core functionality
+has been given to you in the <code class="language-plaintext highlighter-rouge">Networking</code> folder. Here you will find two classes: <code class="language-plaintext highlighter-rouge">BYOWClient</code> and
+<code class="language-plaintext highlighter-rouge">BYOWServer</code>. <b>Important</b>: In order to obtain this folder, you will need to re-pull from <code class="language-plaintext highlighter-rouge">skeleton</code>. You will not modify either of these files.</p>
+
+<p>As mentioned above, you will need to implement <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code> in  <code class="language-plaintext highlighter-rouge">Engine.java</code>. As implied by the method
+name, you will be using the <code class="language-plaintext highlighter-rouge">BYOWServer</code> in this method to interact with the <code class="language-plaintext highlighter-rouge">BYOWClient</code>.
+These classes are complete: you will not need to make any adjustments. The parameter for <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code> 
+is the input string <code class="language-plaintext highlighter-rouge">-p [4-digit port number]</code>.</p>
+
+<h3 id="main">Main</h3>
+<p>The “entry point” for the BYOW server is already there in your code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>else if (args.length == 2 &amp;&amp; args[0].equals("-p")) { System.out.println("Coming soon."); } 
+</code></pre></div></div>
+
+<p>You’ll be replacing the print statement with the code needed to support the server. In addition, you’ll need to modify the <code class="language-plaintext highlighter-rouge">main</code> method
+definition to throw an <code class="language-plaintext highlighter-rouge">IOException</code>. We’ve included our <code class="language-plaintext highlighter-rouge">main</code> method for reference.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span> <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Can only have two arguments - the flag and input string"</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"-s"</span><span class="o">))</span> <span class="o">{</span>
+        <span class="nc">Engine</span> <span class="n">engine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Engine</span><span class="o">();</span>
+        <span class="n">engine</span><span class="o">.</span><span class="na">interactWithInputString</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">engine</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">args</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">].</span><span class="na">equals</span><span class="o">(</span><span class="s">"-p"</span><span class="o">))</span> <span class="o">{</span>
+<span class="o">+</span>       <span class="nc">Engine</span> <span class="n">engine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Engine</span><span class="o">();</span>
+<span class="o">+</span>       <span class="n">engine</span><span class="o">.</span><span class="na">interactWithRemoteClient</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">1</span><span class="o">]);</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="nc">Engine</span> <span class="n">engine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Engine</span><span class="o">();</span>
+        <span class="n">engine</span><span class="o">.</span><span class="na">interactWithKeyboard</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To incorporate remote game sharing, we’ve included documentation and further guidelines below.</p>
+
+<h3 id="byowserver">BYOWServer</h3>
+
+<p>We provide a <code class="language-plaintext highlighter-rouge">BYOWServer</code> class that does all of the networking magic for you. You will not need to modify the class, though you’re welcome to if you’d like. The <code class="language-plaintext highlighter-rouge">BYOWServer</code> has the following interface:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">BYOWServer</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">BYOWServer</span><span class="o">(</span><span class="kt">int</span> <span class="n">port</span><span class="o">)</span>    
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendCanvasConfig</span><span class="o">(</span><span class="kt">int</span> <span class="n">width</span><span class="o">,</span> <span class="kt">int</span> <span class="n">height</span><span class="o">)</span>       
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">sendCanvas</span><span class="o">()</span>
+    
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">clientHasKeyTyped</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="kt">char</span> <span class="nf">clientNextKeyTyped</span><span class="o">()</span>
+    
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">stopConnection</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When a <code class="language-plaintext highlighter-rouge">BYOWServer</code> is created, you must provide a <code class="language-plaintext highlighter-rouge">port</code> number. The port number is an arbitrary integer of your choosing. We recommend choosing a port number that is at least four digits long, e.g. 4005. The number is entirely arbitrary. You’ll learn what ports are if you take a networking course, e.g. CS168. When a <code class="language-plaintext highlighter-rouge">BYOWServer</code> is instantiated, the <code class="language-plaintext highlighter-rouge">BYOWServer</code> will print the message “Server started. Waiting for client to connect…”, and the constructor will wait until a client connects. Once a client connects, the constructor will print “Client connected!’.</p>
+
+<ol>
+  <li>To communicate with the remote player, we provide four methods. The first method <code class="language-plaintext highlighter-rouge">sendCanvasConfig</code> is used to tell the client what size of StdDraw window it should create. The units are in pixels and should match whatever parameters you provided to <code class="language-plaintext highlighter-rouge">setCanvasSize</code> in the <code class="language-plaintext highlighter-rouge">TERenderer</code> class (line 35). You should call this function exactly once whenever your resize the canvas. For your reference, the default StdDraw canvas is 512 by 512 pixels.</li>
+  <li>The second method <code class="language-plaintext highlighter-rouge">sendCanvas</code>, sends over the contents of the hosting computer’s <code class="language-plaintext highlighter-rouge">StdDraw</code> window. You should call this every time that you update the screen (i.e. explicitly calling <code class="language-plaintext highlighter-rouge">StdDraw.showCanvas()</code> or <code class="language-plaintext highlighter-rouge">renderFrame</code> of <code class="language-plaintext highlighter-rouge">TERenderer</code>).</li>
+  <li>The third method <code class="language-plaintext highlighter-rouge">clientHasKeyTyped</code> is analogous to the <code class="language-plaintext highlighter-rouge">hasNextKeyTyped</code> method in <code class="language-plaintext highlighter-rouge">StdDraw</code>. You should call this in lieu of <code class="language-plaintext highlighter-rouge">StdDraw.hasNextKeyTyped()</code>.</li>
+  <li>The fourth method <code class="language-plaintext highlighter-rouge">clientNextKeyTyped</code> is analogous to the <code class="language-plaintext highlighter-rouge">nextKeyTyped</code> method in <code class="language-plaintext highlighter-rouge">StdDraw</code>. You should call this in lieu of <code class="language-plaintext highlighter-rouge">StdDraw.nextKeyTyped()</code>.</li>
+  <li>The fifth method <code class="language-plaintext highlighter-rouge">stopConnection</code> is used to prompt client to stop displaying the StdDraw canvas and then terminate the connection. We recommend calling this method before the game exits.</li>
+</ol>
+
+<p>We recommend creating a <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code> method that behaves very similarly to <code class="language-plaintext highlighter-rouge">interactWithKeyboard</code> method. With the right design, you can avoid code duplication, though you may find that getting your code to call <code class="language-plaintext highlighter-rouge">sendCanvas</code> at the right time is a little annoying. For reference, it took Josh Hug about 30 minutes to add server functionality to his existing BYOW client that he hadn’t looked at in a year.</p>
+
+<h3 id="byowclient">BYOWClient</h3>
+
+<p>We also provide a <code class="language-plaintext highlighter-rouge">BYOWClient</code> class. It is a complete class and ready to be run. When you run the main method of this 
+class, you’ll be prompted to provide an <code class="language-plaintext highlighter-rouge">IP address</code> and a <code class="language-plaintext highlighter-rouge">port</code>.</p>
+
+<p>If you want to test locally, enter “localhost” for the <code class="language-plaintext highlighter-rouge">IP address</code> and when prompted for the “port”, give the same number
+you used when instantiating your <code class="language-plaintext highlighter-rouge">BYOWServer</code>. For example, if you followed our suggestion, that number will be <code class="language-plaintext highlighter-rouge">4005</code>. An example is shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>BYOW Client. Please Enter the following information to connect to a server...
+IP Address: localhost
+Port (this must be a number): 4005
+CONFIGURING CANVAS
+</code></pre></div></div>
+
+<h3 id="testing-your-code">Testing Your Code</h3>
+
+<p>Once you’ve implemented <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code>, first run <code class="language-plaintext highlighter-rouge">Main</code> with the command line argument <code class="language-plaintext highlighter-rouge">-p 4005</code> (or whatever port number you picked). Then run <code class="language-plaintext highlighter-rouge">BYOWClient</code> and enter <code class="language-plaintext highlighter-rouge">localhost</code> and the same port number. You should see two StdDraw windows open, one representing the server, and one representing the client. If properly implemented, the two windows should show the same content.</p>
+
+<h3 id="supporting-remote-gameplay">Supporting Remote Gameplay</h3>
+
+<p>Once you’ve managed to get two <code class="language-plaintext highlighter-rouge">StdDraw</code> windows that mirror each other, one for the server, and one for the client, it’s time to allow true multiplayer.</p>
+
+<p><b>If you have not yet implemented <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code> <i>TURN BACK</i> until you have done so. </b>
+Once you’ve correctly implemented <code class="language-plaintext highlighter-rouge">interactWithRemoteClient</code>, you are now ready to support remote
+gameplay.</p>
+
+<p>First, you’ll will also need to download a super cool piece of software called ngrok.
+Sign-up for an account and download it <a href="https://ngrok.com">here</a>. Add the <code class="language-plaintext highlighter-rouge">ngrok</code> executable to your
+<code class="language-plaintext highlighter-rouge">PATH</code> environment variable; in terminal, use <code class="language-plaintext highlighter-rouge">export PATH=$PATH:[path to ngrok executable]</code>.
+For example, if the executable is located in my <code class="language-plaintext highlighter-rouge">Downloads</code> folder, the aforementioned command
+would be <code class="language-plaintext highlighter-rouge">export PATH=$PATH:~/Downloads/</code>.</p>
+
+<p>Now that you’ve added the <code class="language-plaintext highlighter-rouge">ngrok</code> executable to your path and are using the port <code class="language-plaintext highlighter-rouge">4005</code>, open a new terminal and use the command <code class="language-plaintext highlighter-rouge">ngrok tcp 4005</code>.
+What this does is expose your <code class="language-plaintext highlighter-rouge">localhost:4005</code> that the server is using to the entire internet that people can connect to 
+using the <code class="language-plaintext highlighter-rouge">tcp</code> protocol. Once you run that command, your terminal should look like this picture. <img src="img/ngrok.png" alt="" /></p>
+
+<p>By the line that says forwarding, we see the line <code class="language-plaintext highlighter-rouge">tcp://2.tcp.ngrok.io:17993 -&gt; localhost:4005</code>. In effect, this exposes my
+<code class="language-plaintext highlighter-rouge">localhost:4005</code> to the internet; as long as my ngrok session is running, all information sent to the address 
+<code class="language-plaintext highlighter-rouge">tcp://2.tcp.ngrok.io:17993</code> is forwarded to my <code class="language-plaintext highlighter-rouge">localhost:4005</code>. In our example, the <code class="language-plaintext highlighter-rouge">IP address</code> of the ngrok tunnel is
+<code class="language-plaintext highlighter-rouge">2.tcp.ngrok.io</code> and the <code class="language-plaintext highlighter-rouge">port</code> is <code class="language-plaintext highlighter-rouge">17993</code>. <b>Note</b>: the <code class="language-plaintext highlighter-rouge">tcp://</code> prefix is not needed for the <code class="language-plaintext highlighter-rouge">IP address</code>.</p>
+
+<p>Let’s now see how you can use <code class="language-plaintext highlighter-rouge">ngrok</code> to allow people on the internet to connect to your BYOW Server. First run the 
+<code class="language-plaintext highlighter-rouge">main</code> method of the <code class="language-plaintext highlighter-rouge">Main</code> class with the program arguments <code class="language-plaintext highlighter-rouge">-p 4005</code>. After this, enter the command
+<code class="language-plaintext highlighter-rouge">ngrok tcp 4005</code> into a new terminal. Send your friend the <code class="language-plaintext highlighter-rouge">IP address</code> and <code class="language-plaintext highlighter-rouge">port</code> of the tunnel that ngrok opens. Your friend,
+after running the <code class="language-plaintext highlighter-rouge">BYOWClient</code>, will enter in the information that you sent in the client. After the connection is established, 
+TADA! your friend should now be able to remotely play your game, while you are able to watch.</p>
+
+<p>Note: This opens up interesting possibilties for allowing the server to modify the world as the player plays. Have fun.</p>
+
+<h3 id="the-one-point-bounty">The One Point Bounty</h3>
+
+<p>In principle, it is possible to produce a web based client. We have not done so. However, if anyone creates a website which is capable
+of connecting to a BYOW server, we will award you ONE bonus point, and will likely use this as an official course resource in the future.</p>
+
+<h2 id="disclaimer">Disclaimer</h2>
+<p>Due to the added overhead of saving the StdDraw canvas and network limitations, you will most likely experience lag in this remote
+functionality. This is totally fine and expected behavior. We hope you enjoy playing each other’s games.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

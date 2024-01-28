@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 0: 2048 | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 0: 2048</header><ul id="markdown-toc">
+  <li><a href="proj0.html#due-1292021" id="markdown-toc-due-1292021">Due: 1/29/2021</a></li>
+  <li><a href="proj0.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="proj0.html#the-game" id="markdown-toc-the-game">The Game</a></li>
+  <li><a href="proj0.html#assignment-philosophy-and-program-design" id="markdown-toc-assignment-philosophy-and-program-design">Assignment Philosophy and Program Design</a>    <ul>
+      <li><a href="proj0.html#tile" id="markdown-toc-tile">Tile</a></li>
+      <li><a href="proj0.html#side" id="markdown-toc-side">Side</a></li>
+      <li><a href="proj0.html#model" id="markdown-toc-model">Model</a></li>
+      <li><a href="proj0.html#board" id="markdown-toc-board">Board</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#getting-started" id="markdown-toc-getting-started">Getting Started</a>    <ul>
+      <li><a href="proj0.html#getting-the-skeleton-files" id="markdown-toc-getting-the-skeleton-files">Getting the skeleton files</a></li>
+      <li><a href="proj0.html#getting-restarted-skeleton" id="markdown-toc-getting-restarted-skeleton">Getting restarted: Skeleton</a></li>
+      <li><a href="proj0.html#intellij-setup" id="markdown-toc-intellij-setup">IntelliJ Setup</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#your-assignment" id="markdown-toc-your-assignment">Your assignment</a>    <ul>
+      <li><a href="proj0.html#public-static-boolean-emptyspaceexistsboard-b" id="markdown-toc-public-static-boolean-emptyspaceexistsboard-b">public static boolean emptySpaceExists(Board b)</a></li>
+      <li><a href="proj0.html#public-static-boolean-maxtileexistsboard-b" id="markdown-toc-public-static-boolean-maxtileexistsboard-b">public static boolean maxTileExists(Board b)</a></li>
+      <li><a href="proj0.html#public-static-boolean-atleastonemoveexistsboard-b" id="markdown-toc-public-static-boolean-atleastonemoveexistsboard-b">public static boolean atLeastOneMoveExists(Board b)</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#main-task-building-the-game-logic" id="markdown-toc-main-task-building-the-game-logic">Main Task: Building the Game Logic</a>    <ul>
+      <li><a href="proj0.html#public-boolean-tiltside-side" id="markdown-toc-public-boolean-tiltside-side">public boolean tilt(Side side)</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#tips" id="markdown-toc-tips">Tips</a></li>
+  <li><a href="proj0.html#testing" id="markdown-toc-testing">Testing</a>    <ul>
+      <li><a href="proj0.html#testemptyspace" id="markdown-toc-testemptyspace">TestEmptySpace</a></li>
+      <li><a href="proj0.html#testmaxtileexists" id="markdown-toc-testmaxtileexists">TestMaxTileExists</a></li>
+      <li><a href="proj0.html#testatleastonemoveexists" id="markdown-toc-testatleastonemoveexists">TestAtLeastOneMoveExists</a></li>
+      <li><a href="proj0.html#testuponly" id="markdown-toc-testuponly">TestUpOnly</a></li>
+      <li><a href="proj0.html#testmodel" id="markdown-toc-testmodel">TestModel</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#grading" id="markdown-toc-grading">Grading</a></li>
+  <li><a href="proj0.html#extra-credit" id="markdown-toc-extra-credit">Extra Credit</a></li>
+  <li><a href="proj0.html#submission-and-version-control" id="markdown-toc-submission-and-version-control">Submission and Version Control</a></li>
+  <li><a href="proj0.html#getting-help" id="markdown-toc-getting-help">Getting Help</a></li>
+</ul>
+
+<h2 id="due-1292021">Due: 1/29/2021</h2>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>A high level overview of this project can be found at <a href="https://youtu.be/Xzihuj_JZBI">https://youtu.be/Xzihuj_JZBI</a>.</p>
+
+<p>The intent of this project is to give you a chance to get familiar with Java
+and the various tools used in the course like the IntelliJ IDE and JUnit
+for writing and running unit tests. Though you’ll find many files and lots of
+code in the <code class="language-plaintext highlighter-rouge">proj0</code> folder, your task only resides in <code class="language-plaintext highlighter-rouge">Model.java</code> and is
+constrained to just four methods.</p>
+
+<p>We will be grading <em>solely</em> on whether you manage to get your program to work
+(according to our tests) and to hand in the assigned pieces. <strong>There are no
+hidden tests</strong>. In future assignments we will also be grading you on style,
+but that isn’t the case with this project. We still recommend following our
+<a href="../../guides/style-guide.html">style61b guide</a> as you’ll find that it helps
+create clean code, but you won’t be graded on it.</p>
+
+<p>The spec for this assignment is quite long, and there is a lot of starter code. We recommend that you read the entire spec before you start doing any programming. It will probably feel overwhelming at first. You’ll probably need to reread sections of the spec several times to fully digest it, and some of the later parts might not make total sense until you’ve finished earlier parts of the project. Ultimately, we hope you leave this experience with a sense of empowerment that you were able to navigate such a large task.</p>
+
+<h2 id="the-game">The Game</h2>
+
+<p>You’ve probably seen and perhaps played the game “2048,” a single-player
+computer game written by Gabriele Cirulli, and based on an earlier game “1024”
+by Veewo Studio (see his
+<a href="http://gabrielecirulli.github.io/2048">on-line version of 2048</a>).</p>
+
+<p>In this project, you’ll be building the core logic of this game. That is,
+we’ve already put together all the GUI code, handle key-presses, and a ton
+of other scaffolding. Your job will be to do the most important and interesting
+part.</p>
+
+<p>Specifically, you will fill out 4 methods in the <code class="language-plaintext highlighter-rouge">Model.java</code> file which governs what
+happens after certain key-presses from the user.</p>
+
+<p>The game itself is quite simple. It’s played on a $4\times4$ grid of squares,
+each of which can either be empty or contain a tile bearing an integer–a
+power of 2 greater than or equal to 2. Before the first move, the application
+adds a tile containing either 2 or 4 to a random square on the initially empty
+board. The choice of 2 or 4 is random, with a 75% chance of choosing 2 and a
+25% chance of choosing 4.</p>
+
+<p>The player then chooses a direction via their arrow keys to <em>tilt</em> the board:
+north, south, east, or west. All tiles slide in that direction until there is
+no empty space left in the direction of motion (there might not be any to start
+with). A tile can possibly <em>merge</em> with another tile which earns the player
+points.</p>
+
+<p>The below GIF is an example to see what the result of a few moves looks like.</p>
+
+<p><img src="img/example-2048.gif" alt="2048 Examples" /></p>
+
+<p>Here are the full rules for when merges occur that are shown in the image above.</p>
+
+<ol>
+  <li>
+    <p>Two tiles of the same value <em>merge</em> into one tile containing double
+the initial number.</p>
+  </li>
+  <li>
+    <p>A tile that is the result of a merge will not merge again on that tilt. For
+example, if we have [X, 2, 2, 4], where X represents an empty space, and we
+move the tiles to the left, we should end up with [4, 4, X, X], not [8, X, X, X].
+This is because the leftmost 4 was already part of a merge so should not merge
+again.</p>
+  </li>
+  <li>
+    <p>When three adjacent tiles in the direction of motion have the same number,
+then the leading two tiles in the direction of motion merge, and the trailing
+tile does not. For example, if we have [X, 2, 2, 2] and move tiles left,
+we should end up with [4, 2, X, X] not [2, 4, X, X].</p>
+  </li>
+</ol>
+
+<p>As a corollary of these rules, if there are four adjacent tiles with the same
+number in the direction of motion, they form two merged tiles. For example, if we have [4, 4, 4, 4], then
+if we move to the left, we end up with [8, 8, X, X]. This is because
+the leading two tiles will be merged as a result of rule 3, then the trailing
+two tiles will be merged, but because of rule 2 these merged tiles (8 in our example) will
+not merge themselves on that tilt. 
+You’ll find applications of each of the 3 rules listed above in the animated GIF above,
+so watch through it a few times to get a good understanding of these rules.</p>
+
+<p>To test your understanding, you should complete this <a href="https://forms.gle/xW74vQnK7dZAjS6eA">Google Form quiz</a>. This quiz is not part of your 61B course grade.</p>
+
+<p>If the tilt did not change the board state, then no new tiles will be randomly
+generated. Otherwise, a single randomly generated tile will be added to the
+board on an empty square. Note: Your code will not be adding any new tiles! We’ve
+already done that part for you.</p>
+
+<p>You might also notice that there is a field “Score” at the bottom of the screen
+that is being updated with each move. The score will not always change every
+move, but only when two tiles merge. Your code will need to update the score.</p>
+
+<p>Each time two tiles merge to form a larger tile, the player earns the number of
+points on the new tile. The game ends when the current player has no available
+moves (no tilt can change the board), or a move forms a square containing 2048.
+Your code will be responsible for detecting when the game is over.</p>
+
+<p>The “Max Score” is the maximum score the user
+has achieved in that game session. It isn’t updated until the game is over, so
+that is why it remains 0 throughout the animated GIF example.</p>
+
+<h2 id="assignment-philosophy-and-program-design">Assignment Philosophy and Program Design</h2>
+
+<p>A video overview of this section of the spec can be found at <a href="https://youtu.be/3YbIOga6ZdQ">https://youtu.be/3YbIOga6ZdQ</a>.</p>
+
+<p>In this project, we’re giving you a TON of starter code that uses many 
+pieces of Java syntax that we have not covered yet, and even some syntax
+that we’ll never cover in our class.</p>
+
+<p>The idea here is that in the real world, you’ll often work with codebases
+that you don’t fully understand and will have to do some tinkering and
+experimentation to get the results you want. Don’t worry, when we get to
+project 1 next week, you’ll have a chance to start from scratch.</p>
+
+<p>Below, we describe some of the ideas behind the architecture of the
+given skeleton code, which was created by Paul Hilfinger. It is not
+important that you understand every detail, but you might find it interesting.</p>
+
+<p>The skeleton exhibits two <em>design patterns</em> in common use:
+the Model-View-Controller Pattern (MVC), and the Observer Pattern.</p>
+
+<p>The MVC pattern divides our problem into three parts:</p>
+
+<ul>
+  <li>The <strong>model</strong> represents the subject matter being represented and acted
+upon – in this case incorporating the state of a board game and the
+rules by which it may be modified. Our model resides in the <code class="language-plaintext highlighter-rouge">Model</code>,
+<code class="language-plaintext highlighter-rouge">Side</code>, <code class="language-plaintext highlighter-rouge">Board</code>, and <code class="language-plaintext highlighter-rouge">Tile</code> classes. The instance variables of <code class="language-plaintext highlighter-rouge">Model</code> fully
+determine what the state of the game is. Note: You’ll only be
+modifying the <code class="language-plaintext highlighter-rouge">Model</code> class.</li>
+  <li>A <strong>view</strong> of the model, which displays the game state to the user.
+Our view resides in the <code class="language-plaintext highlighter-rouge">GUI</code> and <code class="language-plaintext highlighter-rouge">BoardWidget</code> classes.</li>
+  <li>A <strong>controller</strong> for the game, which translates user actions into
+operations on the model.  Our controller resides mainly in the <code class="language-plaintext highlighter-rouge">Game</code> class,
+although it also uses the GUI class to read keystrokes.</li>
+</ul>
+
+<p>The MVC pattern is not a topic of 61B, nor will you be expected to know or understand this design pattern on exams or future projects.</p>
+
+<p>The second pattern utilized is the “Observer pattern”. Basically this means that the <strong>model</strong> doesn’t actually report changes to the <strong>view</strong>. Instead, the <strong>view</strong> <em>registers</em> itself as an <em>observer</em> of the <code class="language-plaintext highlighter-rouge">Model</code> object. This is a somewhat advanced topic so we will provide no additional information here.</p>
+
+<!--in our particular design, the **view** is notified of changes to the game
+state by *registering* itself as an *observer* of the `Model` object.
+The model does need not know that it is being observed.  Instead, the
+controller logic from time to time asks the model to notify all
+observers who have registered on it about changes to the model. -->
+<!--The
+observers then query the model for its current state.  The standard
+Java classes `java.util.Observer` and `java.util.Observable` handle this
+registration and notification: classes that wish to observe implement
+`Observer` and those that allow themselves to be observed extend
+`Observable`. Note: The class `java.util.Observer` is no longer
+recommended for use in new projects, i.e. it has been [deprecated](https://en.wikipedia.org/wiki/Deprecation#Software) by the company in charge of the Java programming
+language.
+
+**It's not required to understand the `Observable` and `Observer`
+interfaces,and no knowledge of these interfaces is required to complete the
+project;** this bit was just included to satisfy those curious.-->
+
+<p>We’ll now go over the different classes that you will interact with.</p>
+
+<h3 id="tile">Tile</h3>
+<p>This class represents numbered tiles on the board. If a variable of type <code class="language-plaintext highlighter-rouge">Tile</code>
+is <code class="language-plaintext highlighter-rouge">null</code>, it’s treated as an empty tile on the board. You will not need to
+create any of these objects, though you will need have an understanding of them
+since you will be using them in the <code class="language-plaintext highlighter-rouge">Model</code> class. The only method of this class
+you’ll need to use is <code class="language-plaintext highlighter-rouge">.value()</code> which returns the value of the given tile. For example if <code class="language-plaintext highlighter-rouge">Tile t</code> corresponds to a tile with the value 8, then <code class="language-plaintext highlighter-rouge">t.value()</code> will return <code class="language-plaintext highlighter-rouge">8</code>.</p>
+
+<h3 id="side">Side</h3>
+<p>The <code class="language-plaintext highlighter-rouge">Side</code> class is a special type of class called an <code class="language-plaintext highlighter-rouge">Enum</code>. An enum
+is similar has restricted functionality. Specifically, enums may take on only one of a finite
+set of values. In this case, we have a value for each of the 4 sides: <code class="language-plaintext highlighter-rouge">NORTH</code>,
+<code class="language-plaintext highlighter-rouge">SOUTH</code>, <code class="language-plaintext highlighter-rouge">EAST</code>, and <code class="language-plaintext highlighter-rouge">WEST</code>. You will not need to use any of
+the methods of this class nor manipulate the instance variables.</p>
+
+<p>Enums can be assigned with syntax like <code class="language-plaintext highlighter-rouge">Side s = Side.NORTH</code>. Note that rather than using the <code class="language-plaintext highlighter-rouge">new</code> keyword, we simply set the <code class="language-plaintext highlighter-rouge">Side</code> value equal to one of the four values. Similarly if we have a function like <code class="language-plaintext highlighter-rouge">public static void printSide(Side s)</code>, we can call this function as follows: <code class="language-plaintext highlighter-rouge">printSide(Side.NORTH)</code>, which will pass the value <code class="language-plaintext highlighter-rouge">NORTH</code> to the function.</p>
+
+<p>If you’re curous to learn more about Java enums, see <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html">https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html</a>.</p>
+
+<h3 id="model">Model</h3>
+<p>This class represents the entire state of the game. A <code class="language-plaintext highlighter-rouge">Model</code> object represents
+a game of 2048. It has instance variables for the state of the board (i.e.
+where all the <code class="language-plaintext highlighter-rouge">Tile</code> objects are, what the score is, etc) as well as a variety of methods. One of the challenges when you get to the fourth final task of this project (writing the <code class="language-plaintext highlighter-rouge">tilt</code> method) will be to figure out which of these methods and instance variables are useful.</p>
+
+<h3 id="board">Board</h3>
+<p>This class represents the board of tiles itself. It has three methods that you’ll
+use: <code class="language-plaintext highlighter-rouge">setViewingPerspective</code>, <code class="language-plaintext highlighter-rouge">tile</code>, <code class="language-plaintext highlighter-rouge">move</code>. Optionally, for experimentation,
+you can use <code class="language-plaintext highlighter-rouge">getRandomNonNullTile</code>.</p>
+
+<p><strong>You will only edit the <code class="language-plaintext highlighter-rouge">Model.java</code> file in this assignment.</strong> Gradescope will
+only take your <code class="language-plaintext highlighter-rouge">Model.java</code> file and use the skeleton versions of the other
+files, so if you make an edit to <code class="language-plaintext highlighter-rouge">Tile.java</code> for example, it will not be
+recognized by Gradescope.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p><strong>Firstly, ensure you’ve completed <a href="https://sp21.datastructur.es/materials/lab/lab1/lab1">lab 1</a></strong>. You will not
+be able to work on the project if haven’t completed all the necessary set up
+that you’re required to do in lab 1.</p>
+
+<h3 id="getting-the-skeleton-files">Getting the skeleton files</h3>
+
+<p>First, make sure that everything in your repository is properly
+updated and checked in.  Before you start, the command</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div></div>
+
+<p>when done in your <code class="language-plaintext highlighter-rouge">sp21-s***</code> directory should report that the directory is
+clean and that there are no untracked files that should be added and committed.
+If there are, simply add and commit.</p>
+
+<p><em>Never</em> start a new project without doing this.</p>
+
+<p>To obtain the skeleton files, you should use the command</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull skeleton master
+</code></pre></div></div>
+
+<p>in your <code class="language-plaintext highlighter-rouge">sp21-s***</code> directory. You’ll see a folder <code class="language-plaintext highlighter-rouge">proj0</code> containing all of the
+skeleton code is now in your student repo.</p>
+
+<p>In the unlikely event that we must update the skeleton, you can use the same
+command to update your project with the same changes.</p>
+
+<h3 id="getting-restarted-skeleton">Getting restarted: Skeleton</h3>
+
+<p>Rather than trying to get your current code to work, you might find yourself
+wanting to just restart completely. That is possible with Git! Simply run this
+command in your <code class="language-plaintext highlighter-rouge">sp21-s***</code> directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout skeleton/master -- proj0
+</code></pre></div></div>
+
+<p>Beware: this command will get rid of all changes to anything in the <code class="language-plaintext highlighter-rouge">proj0</code>
+directory that you haven’t committed. So if you think you <em>might</em> want the code
+you currently have, simply make a commit before running this command, and then
+you can use a similar command to revert your <code class="language-plaintext highlighter-rouge">proj0</code> directory to the state it
+was in the commit you just made.</p>
+
+<h3 id="intellij-setup">IntelliJ Setup</h3>
+
+<p>Let’s now open the files in IntelliJ. Firstly, launch IntelliJ. It will show
+you a list of your recent projects, but since you haven’t started this
+assignment yet, it won’t be there. To open the project, click the “Open” button
+at the top right of the application window which should bring up your operating
+system’s file browser. Navigate to the <code class="language-plaintext highlighter-rouge">proj0</code> folder in your student repo, and
+then hit open:</p>
+
+<p><img src="img/intellij-pre-open.png" alt="Opening the Project" /></p>
+
+<p><img src="img/intellij-open.png" alt="Opening the Project" /></p>
+
+<p>On the top left of the screen, you’ll see a list of the files/folders inside
+the <code class="language-plaintext highlighter-rouge">proj0</code> directory. If you don’t, click the down arrow on the <code class="language-plaintext highlighter-rouge">proj0</code> folder
+which will expand the folder below. It should look like this:</p>
+
+<p><img src="img/list-files.png" alt="Listed folders" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">.idea</code> folder is something that IntelliJ generates to store
+miscellaneous settings. You can ignore this folder.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">game2048</code> folder is the source for all the Java files. Everything you
+need to do lies in this folder.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">javalib</code> folder is a Java library. It holds three <code class="language-plaintext highlighter-rouge">.jar</code> files which are
+pre-compiled files of things we want to use. The three files it has allow us
+to run JUnit and then some UC Berkeley specific things to render the game in
+a nice window.</p>
+
+<p>IntelliJ is usually smart enough to set up the rest of the things for you, but
+in case your IntelliJ application is having a hard time we’ll walk through the
+setup procedures.</p>
+
+<p>Firstly, let’s tell IntelliJ that we’re using Java 15. Navigate to File &gt;
+Project Structure:</p>
+
+<p><img src="img/opening-project-structure.png" alt="Opening Project Structure" /></p>
+
+<p>Click on the box on the left-hand side of the “Edit” button which should allow
+you to select your JDK (i.e. your version of Java).</p>
+
+<p><img src="img/java15.png" alt="Java 15" /></p>
+
+<p>Now we’ll tell IntelliJ that we want to use those <code class="language-plaintext highlighter-rouge">.jar</code> files in the <code class="language-plaintext highlighter-rouge">javalib</code>
+folder. Still in the Project Structure, on the left-hand side click the
+secttion of the Project Settings called “Library”. If you see that <code class="language-plaintext highlighter-rouge">javalib</code> is
+already added, there is nothing to do. Else, we will click on the “+” button
+and then “Java” which will launch our operating system’s file browser, and
+we’ll click on the <code class="language-plaintext highlighter-rouge">javalib</code> folder. Then, in the bottom right of the screen,
+hit “Apply” and then the blue “OK” button.</p>
+
+<p>In all, the setup would look like this (sorry for the blurryness):</p>
+
+<p><img src="img/intellij-setup.gif" alt="IntelliJ Setup" /></p>
+
+<p>To make sure the setup is all fine, open the <code class="language-plaintext highlighter-rouge">game2048</code> folder and right click
+on the <code class="language-plaintext highlighter-rouge">Main</code> Java file: you’ll see a few options, but the one we care about is
+the green “Run Main.main()” button. It should look like the following image:</p>
+
+<p><img src="img/run-main.png" alt="Run Main" /></p>
+
+<p>Click that to launch the 2048 game. This
+will launch a new window with a blank board. Just close the window for now and we’ll come back to it later when we get to the section of this spec called “Main Task: Building the Game Logic”.</p>
+
+<p>If nothing pops up, it means your setup is incorrect. You should redo the above
+steps to make sure you didn’t miss anything, but don’t spend more than 10
+minutes on this. It’s best to get setup problems fixed with a TAs help, meaning
+you should post on Ed or go to Office Hours. If you post on Ed, you need to
+tell us <strong>everything</strong> you’ve done/tried so we can get a clear picture of what
+the error is. Include screenshots of everything, especially any error messages
+you might get.</p>
+
+<p>One weird quirk you might run into is that the code compiles and runs
+correctly, but you still get red underlines in IntelliJ. Go to the <code class="language-plaintext highlighter-rouge">Model</code>
+class, and find the <code class="language-plaintext highlighter-rouge">addTile</code> method. This is a method we provided, but you
+might see that the <code class="language-plaintext highlighter-rouge">tile</code> variable is underlined in red with the following
+error message:</p>
+
+<p><img src="img/intellij-error.png" alt="IntelliJ error" /></p>
+
+<p>But we know that clearly it’s correct because 1). the code ran and 2). it’s
+the starter code! While IntelliJ is incredibly powerful, it does get
+things wrong sometimes like this. To fix this, you should go to File &gt;
+Invalidate / Restart, then in the following window hit “Invalidate and Restart”</p>
+
+<p><img src="img/invalidate-caches.png" alt="Invalidate Caches" /></p>
+
+<p>This will take a minute or two as IntelliJ is re-indexing your JDK and setting
+up your project from scratch. After it finishes, you should see no red
+underlines in the source files.</p>
+
+<p>You won’t be able to work on the project unless the above setup is fine, so
+make it your priority to get setup as soon as you can.</p>
+
+<h2 id="your-assignment">Your assignment</h2>
+
+<p>Your job for this project is to modify and complete the <code class="language-plaintext highlighter-rouge">Model</code> class,
+specifically the <code class="language-plaintext highlighter-rouge">emptySpaceExists</code>, <code class="language-plaintext highlighter-rouge">maxTileExists</code>, <code class="language-plaintext highlighter-rouge">atLeastOneMoveExists</code> and
+<code class="language-plaintext highlighter-rouge">tilt</code> methods. Everything else has been
+implemented for you. We recommend completing them in this order. The first
+two are relatively straightforward. The third (<code class="language-plaintext highlighter-rouge">atLeastOneMoveExists</code>) is
+harder, and the final method <code class="language-plaintext highlighter-rouge">tilt</code> will probably be quite difficult. We
+anticipate that <code class="language-plaintext highlighter-rouge">tilt</code> will take you 3 to 10 hours to complete. The first three
+methods will handle the game over conditions, and the final method <code class="language-plaintext highlighter-rouge">tilt</code> will
+modify the board after key-presses from the user. You can read the very
+short body of the <code class="language-plaintext highlighter-rouge">checkGameOver</code> method to get an idea of how your methods
+will be used to check if the game is over.</p>
+
+<p>Let’s start by looking at the first three methods:</p>
+
+<h3 id="public-static-boolean-emptyspaceexistsboard-b">public static boolean emptySpaceExists(Board b)</h3>
+
+<p>This method should return true if any of the tiles in the given board are null.
+<strong>You should NOT modify the Board.java file in any way for this project</strong>. For this method, you’ll want to use the
+<code class="language-plaintext highlighter-rouge">tile(int col, int row)</code> and <code class="language-plaintext highlighter-rouge">size()</code> methods of the <code class="language-plaintext highlighter-rouge">Board</code> class. No other methods are necessary.</p>
+
+<p>Note: We’ve designed the <code class="language-plaintext highlighter-rouge">Board</code> class using a special keyword <code class="language-plaintext highlighter-rouge">private</code> that disallows
+you from using the instance variables of <code class="language-plaintext highlighter-rouge">Board</code> directly. For example, if you
+try to access <code class="language-plaintext highlighter-rouge">b.values[0][0]</code>, this will not work. This is a good thing! It forces
+you to learn to use the <code class="language-plaintext highlighter-rouge">tile</code> method, which you’ll use throughout the rest of the
+project.</p>
+
+<p>Try opening the <code class="language-plaintext highlighter-rouge">TestEmptySpace.java</code> folder. Run the tests. You should see that 6 of the tests fail and 2 of them pass. After you’ve correctly written the <code class="language-plaintext highlighter-rouge">emptySpaceExists</code> method, all 8 tests in <code class="language-plaintext highlighter-rouge">TestEmptySpace</code> should pass.</p>
+
+<p>A quick overview of how to get started writing this method is provided in <a href="https://youtu.be/13rdFndFNXc">this video</a>.</p>
+
+<h3 id="public-static-boolean-maxtileexistsboard-b">public static boolean maxTileExists(Board b)</h3>
+
+<p>This method should return true if any of the tiles in the board are equal to the
+winning tile value 2048. Note that rather than hard coding the constant 2048 into your
+code, you should use MAX_PIECE, which is a constant that is part of the <code class="language-plaintext highlighter-rouge">Model</code> class.
+In other words, you shouldn’t do <code class="language-plaintext highlighter-rouge">if (x == 2048)</code> but rather <code class="language-plaintext highlighter-rouge">if (x == MAX_PIECE)</code>.</p>
+
+<p>Leaving in hard coded numbers like <code class="language-plaintext highlighter-rouge">2048</code> is a bad programming practice sometimes
+referred to as a “magic number”. The danger of such magic numbers is that if you change
+them in one part of your code but not another, you might get unexpected results. By
+using a variable like <code class="language-plaintext highlighter-rouge">MAX_PIECE</code> you can ensure they all get changed together.</p>
+
+<p>After you’ve written the method, the tests in <code class="language-plaintext highlighter-rouge">TestMaxTileExists.java</code> should pass.</p>
+
+<h3 id="public-static-boolean-atleastonemoveexistsboard-b">public static boolean atLeastOneMoveExists(Board b)</h3>
+
+<p>This method is more challenging. It should return true if there are any valid moves. By a 
+“valid move”, we mean that if there is a button (UP, DOWN, LEFT, or RIGHT) that a user can 
+press while playing 2048 that causes at least one tile to move, then such a keypress is
+considered a valid move.</p>
+
+<p>There are two ways that there can be valid moves:</p>
+<ol>
+  <li>There is at least one empty space on the board.</li>
+  <li>There are two adjacent tiles with the same value.</li>
+</ol>
+
+<p>For example, for the board below, we should return true because there is at least one empty space.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|   2|    |   2|    |
+|   4|   4|   2|   2|
+|    |   4|    |    |
+|   2|   4|   4|   8|
+</code></pre></div></div>
+
+<p>For the board below, we should return false. No matter what button you press in 2048, nothing will happen, i.e. there are no two adjacent tiles with equal values.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|   2|   4|   2|   4|
+|  16|   2|   4|   2|
+|   2|   4|   2|   4|
+|   4|   2|   4|   2|
+</code></pre></div></div>
+
+<p>For the board below, we would return true since a move to the right or left would merge the two 64 tiles, and also a move up or down would merge the 32 tiles. Or in other words, there exist at least two adjacent tiles with equal values.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|   2|   4|  64|  64|
+|  16|   2|   4|   8|
+|   2|   4|   2|  32|
+|   4|   2|   4|  32|
+</code></pre></div></div>
+
+<p>After you’ve written the method, the tests in <code class="language-plaintext highlighter-rouge">TestAtLeastOneMoveExists.java</code> should pass.</p>
+
+<h2 id="main-task-building-the-game-logic">Main Task: Building the Game Logic</h2>
+
+<p>The fourth and final part of the assignment is to implement <code class="language-plaintext highlighter-rouge">tilt</code>. You should only start this method once you’re passing all the tests in <code class="language-plaintext highlighter-rouge">TestEmptySpace</code>, <code class="language-plaintext highlighter-rouge">TestMaxTileExists</code> and <code class="language-plaintext highlighter-rouge">TestAtLeastOneMoveExists</code>.</p>
+
+<p>Computer science is essentially about one thing: Managing complexity. Writing the
+<code class="language-plaintext highlighter-rouge">tilt</code> method is a rich experience that will give you a chance to try just that. 
+I must warn you, this is probably going to be a frustrating experience. It is
+likely that you will attempt several approaches that will ultimately fail before
+you have to start back over.</p>
+
+<p>Before we start talking about how <code class="language-plaintext highlighter-rouge">tilt</code> should work, let’s try running the game.</p>
+
+<p>Open the <code class="language-plaintext highlighter-rouge">Main</code> class and click the run button. You should see the game pop up.
+Try pressing the arrow keys. You should see that nothing is happening. This is because
+you have not implemented the <code class="language-plaintext highlighter-rouge">tilt</code> method yet. When you’re done writing <code class="language-plaintext highlighter-rouge">tilt</code>,
+you’ll be able to play the game.</p>
+
+<h3 id="public-boolean-tiltside-side">public boolean tilt(Side side)</h3>
+
+<p>The tilt method does the work of actually moving all the tiles around. For example,
+if we have the board given by:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|   2|    |   2|    |
+|   4|   4|   2|   2|
+|    |   4|    |    |
+|   2|   4|   4|   8|
+</code></pre></div></div>
+
+<p>And press up, <code class="language-plaintext highlighter-rouge">tilt</code> will modify the <code class="language-plaintext highlighter-rouge">board</code> instance variable so that the state of the
+game is now:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|   2|   8|   4|   2|
+|   4|   4|   4|   8|
+|   2|    |    |    |
+|    |    |    |    |
+</code></pre></div></div>
+
+<p>In addition to modifying the board, two other things must happen:</p>
+<ol>
+  <li>The score instance variable must be updated to reflect the total value of all tile
+merges (if any). For the example above, we merged two 4s into an 8, and two 2s into a 4, so the
+score should be incremented by 8 + 4 = 12.</li>
+  <li>If anything about the board changes, we must set the <code class="language-plaintext highlighter-rouge">changed</code> <strong>local variable</strong>
+to <code class="language-plaintext highlighter-rouge">true</code>. That’s because at the end of the skeleton code for <code class="language-plaintext highlighter-rouge">tilt</code>, you can
+see we call a <code class="language-plaintext highlighter-rouge">setChanged()</code> method: this informs the GUI that there is something
+to draw. You will not make any calls to <code class="language-plaintext highlighter-rouge">setChanged</code> yourself: only modifying
+the <code class="language-plaintext highlighter-rouge">changed</code> local variable.</li>
+</ol>
+
+<p>All movements of tiles on the board must be completed using the <code class="language-plaintext highlighter-rouge">move</code> method provided
+by the <code class="language-plaintext highlighter-rouge">Board</code> class. All tiles of the board must be accessed using the <code class="language-plaintext highlighter-rouge">tile</code> method
+provided by the <code class="language-plaintext highlighter-rouge">Board</code> class. <strong>Due to some details in the GUI implementation,
+you should only call <code class="language-plaintext highlighter-rouge">move</code> on a given tile once per call to <code class="language-plaintext highlighter-rouge">tilt</code></strong>. We’ll discuss
+this constraint further in the Tips section of this document.</p>
+
+<p>A quick overview of how to get started writing this method is provided in <a href="https://youtu.be/abFbbK1QY2k">this video</a>.</p>
+
+<h2 id="tips">Tips</h2>
+
+<p>We strongly recommend starting by thinking only about the up direction, i.e. when
+the provided <code class="language-plaintext highlighter-rouge">side</code> parameter is equal to <code class="language-plaintext highlighter-rouge">Side.NORTH</code>. To support you in this,
+we provide a <code class="language-plaintext highlighter-rouge">TestUpOnly</code> class that has four tests: <code class="language-plaintext highlighter-rouge">testUpNoMerge</code>, <code class="language-plaintext highlighter-rouge">testUpBasicMerge</code>, <code class="language-plaintext highlighter-rouge">testUpTripleMerge</code>, and <code class="language-plaintext highlighter-rouge">testUpTrickyMerge</code>. You’ll note that these tests involve only a single move up.</p>
+
+<p>When considering how to implement the up direction, consider the following:</p>
+
+<p>In a given column, the piece on the top row (row 3) stays put. The piece on
+row 2 can move up if the space above it is empty, or it can move up one if 
+the space above it has the same value as itself. In other words,
+when iterating over rows, it is safe to iterate starting from row 3 down, since
+there’s no way a tile will have to move again after moving once.</p>
+
+<p>While this sounds like it’s not going to be very hard, it really is. Be ready
+to bust out a notepad and work out a bunch of examples. Strive for elegant code, though
+elegance is hard to achieve with this problem. We strongly recommend the creation
+of one or more helper methods to keep your code clean.
+For example, you might have a helper function that processes a single column of
+the board, since each column is handled independently. Or you might have a helper
+function that can return a desired row value.</p>
+
+<p>Reminder: You should only call <code class="language-plaintext highlighter-rouge">move</code> on a given tile once. In other words, suppose
+you have the board below and press up.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|    |    |    |    |
+|    |    |    |    |
+|    |    |    |    |
+|    |    |    |   2|
+</code></pre></div></div>
+
+<p>One way we could accomplish this would be as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tile t = board.tile(3, 0)
+board.move(3, 1, t);
+board.move(3, 2, t);
+board.move(3, 3, t);
+setChanged();
+return true;
+</code></pre></div></div>
+
+<p>However, the GUI will get confused because the same tile is not supposed to move multiple times with only one call to setChanged. Instead, you’ll need to complete the entire move with one call to <code class="language-plaintext highlighter-rouge">move</code>, e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tile t = board.tile(3, 0)
+board.move(3, 3, t);
+</code></pre></div></div>
+
+<p>In a sense, the hard part is figuring out which row each tile should end up on.</p>
+
+<p>To test your understanding, you should complete this <a href="https://forms.gle/pubhRx4fxYnPTGNX8">Google Form quiz</a>. This quiz (and the following quizzes) are completely optional (i.e. no graded)
+but <strong>highly suggested</strong> as it’ll find any conceptual misunderstandings you might have
+about the game mechanics. You may attempt this quiz as many times as you’d like.</p>
+
+<p>To know when you should update the score, note that the <code class="language-plaintext highlighter-rouge">board.move(c, r, t)</code> method
+returns <code class="language-plaintext highlighter-rouge">true</code> if moving the tile <code class="language-plaintext highlighter-rouge">t</code> to column <code class="language-plaintext highlighter-rouge">c</code> and row <code class="language-plaintext highlighter-rouge">r</code> would replace
+an existing tile (i.e. you have a merge operation).</p>
+
+<p>To make matters seemingly much worse, even after you get tilt working for the
+up direction, you’ll have to do the same thing for the other
+three directions. If you do so naively, you’ll get a <em>lot</em> of repeated,
+slightly modified code, with ample opportunity to introduce obscure errors.</p>
+
+<p>For this problem, we’ve given away a clean solution. This will allow you to
+handle the other three directions with only two additional lines of code!
+Specifically, the <code class="language-plaintext highlighter-rouge">Board</code> class has a <code class="language-plaintext highlighter-rouge">setViewingPerspective(Side s)</code> function that will
+change the behavior of the <code class="language-plaintext highlighter-rouge">tile</code> and <code class="language-plaintext highlighter-rouge">move</code> classes so that they <em>behave as if
+the given side was NORTH</em>.</p>
+
+<p>For example, consider the board below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|    |    |    |    |
+|  16|    |  16|    |
+|    |    |    |    |
+|    |    |    |   2|
+</code></pre></div></div>
+
+<p>If we call <code class="language-plaintext highlighter-rouge">board.tile(0, 2)</code>, we’ll get <code class="language-plaintext highlighter-rouge">16</code>, since 16 is in column 0, row 2. If we call
+<code class="language-plaintext highlighter-rouge">board.setViewingPerspective(s)</code> where <code class="language-plaintext highlighter-rouge">s</code> is <code class="language-plaintext highlighter-rouge">WEST</code>, then the board will behave as if WEST
+was NORTH, i.e. you had your head turned 90 degrees to the left, as shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|    |    |  16|    |
+|    |    |    |    |
+|    |    |  16|    |
+|   2|    |    |    |
+</code></pre></div></div>
+
+<p>In other words, the <code class="language-plaintext highlighter-rouge">16</code> we had before would be at <code class="language-plaintext highlighter-rouge">board.tile(2, 3)</code>. If we were to call
+<code class="language-plaintext highlighter-rouge">board.tilt(Side.NORTH)</code> with a properly implemented <code class="language-plaintext highlighter-rouge">tilt</code>, the board would become:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|   2|    |  32|    |
+|    |    |    |    |
+|    |    |    |    |
+|    |    |    |    |
+</code></pre></div></div>
+
+<p>To get the board to go back to the original viewing perspective, we simply call
+<code class="language-plaintext highlighter-rouge">board.setViewingPerspective(Side.NORTH)</code>, which will make the board behave as if
+<code class="language-plaintext highlighter-rouge">NORTH</code> was <code class="language-plaintext highlighter-rouge">NORTH</code>. If we do this, the board will now behave as if it were:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|    |    |    |    |
+|  32|    |    |    |
+|    |    |    |    |
+|   2|    |    |    |
+</code></pre></div></div>
+
+<p>Observe that this is the same thing as if you’d slid the tiles of the original board
+to the <code class="language-plaintext highlighter-rouge">WEST</code>.</p>
+
+<p>Important: Make sure to use <code class="language-plaintext highlighter-rouge">board.setViewingPerpsective</code> to set the perspective back to <code class="language-plaintext highlighter-rouge">Side.NORTH</code>
+before you finish your call to <code class="language-plaintext highlighter-rouge">tilt</code>, otherwise weird stuff will happen.</p>
+
+<p>To test your understanding, try this third and final <a href="https://forms.gle/AGrhEFbwfMJ7qwaB6">Google Form quiz</a>. <!--(QA notes: Let me know if this quiz is too weird / if it is actually helpful).-->You may attempt this quiz as many times as you’d like.</p>
+
+<!--
+
+I like a lot of this but I inlined the getting started. I will incorporate into spec.
+
+Getting Started
+---------------
+
+You might be slightly overwhelmed at the amount of code there is and how long
+the spec is, so here is how we suggest you tackle the project.
+
+Firstly, ensure you're as caught up to lecture. If you're not 100% comfortable
+with Java yet that's OK; this assignment will help you become more proficient.
+
+Next, read through the spec in its entirety. A long spec is actually your
+friend because it clearly lists all of the requirements that your program must
+fulfil (something you will unfortunately rarely encounter in the "real world").
+
+Play the game a few times so you have an understanding of what it is you are
+going to be building and develop a mental model. This is one of the few times
+in your academic careers that playing a game is really studying, so don't take
+this for granted.
+
+Most importantly, you should read through the code provided to you. Focus your
+attention on `Model.java`, `Tile.java`, and `Side.java`. While you really only
+need to modify `Model.java`, reading through all of these files will let you
+know what methods are available to you and what the functionality of each of
+them is. You should first start by reading the javadoc comment at the top of
+each class which describes what the purpose of that class is, and then to the
+bottom of the class which lists all of the instance variables of that class
+along with a description of what each of these variables means/its purpose.
+Instance variables define the state of an Object, so it's very important you
+understand all of the instance variables (especially those of the `Model`
+class). Then, you can read through the javadoc comments over the methods and
+optionally the methods themselves if you really want to get a good
+understanding of how that method achieves its functionality.
+
+Reading and trying to understand these files and comments before beginning
+programming will be well worth the time. Spending up-front time before writing
+code can feel a bit counterintuitive at first. If you begin writing code before
+making an attempt to understand the preexisting code, you will surely struggle
+more and likely end up deleting much of it.
+
+You need not understand every line of the given code, but you should
+strive to understand the different objects, their instance variables, what
+their instance methods do, and how the methods relate to one another. The
+comments in line with the methods and instance methods are a great way to begin
+learning about the code.
+
+Once you've done all of this reading, you're finally equipped to start
+programming. If you've done your due diligence in reading and preparing a
+strategy before programming, you will likely save hours of time on this
+project.
+
+Yes, there is a lot of reading to be done for this project. One of the main
+goals of this project is to help you become comfortable reading someone elses
+code and then to be able to make meaningful changes and extensions. This is
+something you'll be doing very often in your careers and this is a great
+introduction to help you get your feet wet. Your initial feelings of confusion
+will quickly fade away and be replaced with confidence as you understand the
+codebase and the specifics of the assignment.
+
+-->
+
+<h2 id="testing">Testing</h2>
+
+<p>While in the future we expect you to be able to test your own programs, for
+this project we’ve given you the full test suite.</p>
+
+<p>The tests are split over 5 files: <code class="language-plaintext highlighter-rouge">TestEmptySpace</code>, <code class="language-plaintext highlighter-rouge">TestMaxTileExists</code>,
+<code class="language-plaintext highlighter-rouge">TestAtLeastOneMoveExists</code>, <code class="language-plaintext highlighter-rouge">TestUpOnly</code>, and <code class="language-plaintext highlighter-rouge">TestModel</code>. Each file tests a
+specific portion of the code with the exception of <code class="language-plaintext highlighter-rouge">TestModel</code> which tests all
+the things you write in coordination with each other. Such a test is called an
+<em>integration test</em> and are incredibly important in testing. While unit tests
+run things in isolation, integration tests run things all together and are
+designed to catch obscure bugs that occur as a result of the interaction
+between different functions you’ve written.</p>
+
+<p>So do not attempt to debug <code class="language-plaintext highlighter-rouge">TestModel</code> until you’re passing the rest of the 
+tests! In fact, the order in which we discuss the tests is the order you should
+attempt them in.</p>
+
+<p>We’ll now take a look at each of these tests and show you how to read the error
+messages.</p>
+
+<h3 id="testemptyspace">TestEmptySpace</h3>
+
+<p>These tests will check the correctness of your <code class="language-plaintext highlighter-rouge">emptySpaceExists</code> method. Here
+is what the error message would look like if you failed one of the tests:</p>
+
+<p><img src="img/test-empty-space-all-fail.png" alt="TestEmptySpace all fail" /></p>
+
+<p>On the left-hand side, you’ll see the list of all tests that were run. The
+yellow X means we failed a test while the green check means we passed it. On
+the right, you’ll see some useful error messages. To look at a single test and
+its error message in isolation, click the test on the left-hand side. For
+example, let’s say we want to look at the <code class="language-plaintext highlighter-rouge">testCompletelyEmpty</code> test.</p>
+
+<p><img src="img/test-completely-empty.png" alt="testCompletelyEmpty" /></p>
+
+<p>The right-hand side is now the isolated error message for this test. The top
+line has a useful message: <code class="language-plaintext highlighter-rouge">"Board is full of empty space"</code> followed by a
+String representation of the board. You’ll see that it’s clearly empty, yet
+our <code class="language-plaintext highlighter-rouge">emptySpaceExists</code> method is returning <code class="language-plaintext highlighter-rouge">false</code> and causing this test to
+fail. The javadoc comment at the top of the code for the test also has some
+useful information in case you’re failing a test.</p>
+
+<h3 id="testmaxtileexists">TestMaxTileExists</h3>
+
+<p>These tests will check the correctness of your <code class="language-plaintext highlighter-rouge">maxTileExists</code> method. The error
+messages will be similar to those for <code class="language-plaintext highlighter-rouge">TestEmptySpace</code>, and you can still click
+on each individual test to look at them in isolation. Remember that your
+<code class="language-plaintext highlighter-rouge">maxTileExists</code> method should <strong>only</strong> look for the max tile and not anything
+else (i.e. shouldn’t look for empty space). If yours does, you will not pass
+all of these tests.</p>
+
+<h3 id="testatleastonemoveexists">TestAtLeastOneMoveExists</h3>
+
+<p>These tests will check the correctness of your <code class="language-plaintext highlighter-rouge">atLeastOneMoveExists</code> method.
+The error messages are similar to the above two. Since the
+<code class="language-plaintext highlighter-rouge">atLeastOneMoveExists</code> method depends on the <code class="language-plaintext highlighter-rouge">emptySpaceExists</code> method, you
+shouldn’t expect to pass these tests until you are passing all of the tests
+in <code class="language-plaintext highlighter-rouge">TestEmptySpace</code>.</p>
+
+<h3 id="testuponly">TestUpOnly</h3>
+
+<p>These tests will check the correctness of your <code class="language-plaintext highlighter-rouge">tilt</code> method, but only in the
+up (<code class="language-plaintext highlighter-rouge">Side.NORTH</code>) direction. The error messages for these are different, so
+let’s look at one. Say we run all the tests, notice we’re failing the
+<code class="language-plaintext highlighter-rouge">testUpTrickyMerge</code> test. After clicking that test, we’ll see this:</p>
+
+<p><img src="img/test-up-error-msg.png" alt="testUpTrickyMerge Error Message" /></p>
+
+<p>The first line tells us the direction that was tilted (for these tests it’ll
+always be North), then what your board looked like before the tilt, then what
+we expected the board to look like, and finally what your board actually looked
+like.</p>
+
+<p>You’ll see that we’re merging a tile twice on a single call to tilt which
+results in a single tile with value 8 instead of two tiles both with value 4.
+As a result, our <code class="language-plaintext highlighter-rouge">score</code> is also incorrect as you can see in the bottom of the
+representation of the board.</p>
+
+<p>For other tests it might be difficult to notice the difference between the
+expected and actual boards right away; for those, you can click the blue
+“Click to see difference” text at the very bottom of the error message to
+get a side-by-side comparison of the expected (on the left) and actual (on the
+right) boards in a separate window. Here is what it looks like for this test:</p>
+
+<p><img src="img/comparison.png" alt="testUpTrickyMerge Comparison" /></p>
+
+<p>Debugging these can be a bit tricky because it’s hard to tell what you’re doing
+wrong. First, you should identify which of the 3 rules listed above you’re
+violating. In this case, we can see that it’s rule 2 since a tile is merging
+more than once. The javadoc comments on these methods are good resources for
+this as they specifically lay out what rule/configuration they’re testing. You
+might also be able to figure out what rule you’re violating by just looking at
+the before and after boards. Then, comes the tricky party: refactoring your
+existing code to properly account for that rule. We suggest writing out on pen
+and paper the steps your code takes so you can first understand why your board
+looks the way it does, then coming up with a fix. These tests only call <code class="language-plaintext highlighter-rouge">tilt</code>
+once, so you don’t need to worry about debugging multiple calls to tilt.</p>
+
+<h3 id="testmodel">TestModel</h3>
+
+<p>These tests will check the correctness of everything together. The majority of
+these tests are similar to the tests in <code class="language-plaintext highlighter-rouge">TestUpOnly</code> as they only call <code class="language-plaintext highlighter-rouge">tilt</code>
+once, but we also have tests for <code class="language-plaintext highlighter-rouge">gameOver</code> (which test all of your
+<code class="language-plaintext highlighter-rouge">emptySpaceExists</code>, <code class="language-plaintext highlighter-rouge">maxTileExists</code>, and <code class="language-plaintext highlighter-rouge">atLeastOneMoveExists</code> methods
+together) and tests that make many calls to <code class="language-plaintext highlighter-rouge">tilt</code> in a sequence.</p>
+
+<p>The error messages for these look exactly the same as those in <code class="language-plaintext highlighter-rouge">TestUpOnly</code>,
+and the javadoc comments are similarly useful in figuring out what the test
+is testing.</p>
+
+<p>Don’t worry about the actual code for the tests: you’re not required to
+understand or modify any of these, though you’re welcome to read through and
+get an idea for how test writing works and even add some of your own if you
+are feeling really ambitious.</p>
+
+<h2 id="grading">Grading</h2>
+
+<p>A full scoring project will pass all of the unit tests that we provide.
+Remember that <strong>there are no hidden tests</strong>, so if you’re passing all of these
+tests then you have a full scoring project!</p>
+
+<p>Some tests are weighted slightly differently than others on Gradescope, so if
+you’re not passing some fraction of the tests, your score as a percent will be
+some different fraction (likely higher).</p>
+
+<p>That’s because some parts of this project are harder than others, and we know
+this is many students’ first time using Java, so we’ve weighted each portion
+of the project with that in mind.</p>
+
+<p>Here is a breakdown of what percent you’d earn on this project with varying
+levels of completing:</p>
+<ol>
+  <li>Only implementing <code class="language-plaintext highlighter-rouge">emptySpaceExists</code> or <code class="language-plaintext highlighter-rouge">maxTileExists</code>: ~27%</li>
+  <li>Implementing everything except <code class="language-plaintext highlighter-rouge">tilt</code>: ~47%</li>
+  <li>Implementing everything, except <code class="language-plaintext highlighter-rouge">tilt</code> only works in the Up direction: ~68%</li>
+  <li>Implementing everything, except merging: ~64%</li>
+  <li>Implementing everything, except rule 2 of merging: ~93%</li>
+</ol>
+
+<p>You’ll note that getting the rule 2 of merging is only ~7% of the project. That
+is because it’s a difficult rule to handle that accounts for a very small
+portion of the game itself, so we’ve weighted it accordingly.</p>
+
+<h2 id="extra-credit">Extra Credit</h2>
+
+<p>2 points of extra credit will be awarded to those who submit their final
+submission to Gradescope before 11:59 PM on Thursday (i.e. a day before the
+project is due). The “final submission” is the activated one on Gradescope,
+so you could submit even more after the deadline, but the 2 points of extra
+credit will only be applied if your active submission is from before 11:59 PM
+on Thursday. The points will be applied after the deadline, so you will not see
+them until after the project is due.</p>
+
+<h2 id="submission-and-version-control">Submission and Version Control</h2>
+
+<p>It is important that you commit work to your repository <em>at frequent
+intervals</em>. Version control is a powerful tool for saving yourself when you
+mess something up or your dog eats your project, but you must use it regularly
+if it is to be of any use. Feel free to commit every 15 minutes; Git only saves
+what has changed, even though it acts as if it takes a snapshot of your entire
+project.</p>
+
+<p>The command <code class="language-plaintext highlighter-rouge">git status</code> will tell you what files you have modified,
+removed, or possibly added since the last commit.  It will also tell you
+how much you have not yet sent to your GitHub repository.</p>
+
+<p>The typical commands would look something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status                          # To see what needs to be added or committed.
+git add &lt;filepath&gt;                  # To add, or stage, any modified files.
+git commit -m "Commit message"      # To commit changes.
+git push
+</code></pre></div></div>
+
+<p>Then you can carry on working on the project until you’re ready to commit and
+push again, in which case you’ll repeat the above. It is in your best interest
+to get into the habit of comitting frequently with informative commit messages
+so that in the case that you need to revert back to an old version of code, it
+is not only possible but easy. We suggest you commit every time you add a
+significant portion of code or reach some milestone (passing a new test, for
+example).</p>
+
+<p>Once you’ve pushed your code to GitHub (i.e. ran <code class="language-plaintext highlighter-rouge">git push</code>), then you may go
+to Gradescope, find the <code class="language-plaintext highlighter-rouge">proj0</code> assignment, and submit the code there. Keep
+in mind that the version of code that Gradescope uses is the most recent commit
+you’ve pushed, so if you do not run <code class="language-plaintext highlighter-rouge">git push</code> before you submit on Gradescope,
+old code will be tested instead of the most recent code you have on your
+computer.</p>
+
+<h2 id="getting-help">Getting Help</h2>
+
+<p>While a little struggle and debugging is normal and even healthy, if you find
+yourself stuck for hours with no progress after doing all of the suggestions
+above, please get help from staff!</p>
+
+<p>The two ways of getting help in CS 61B are coming to Office Hours or posting on
+Ed so that a TA or another student can help you become unstuck.</p>
+
+<p>Remember that TAs will spend a maximum of 10 minutes per student in Office
+Hours. To speed things up, we ask that you bring a clear problem that you can
+voice to a TA rather than just telling us a test isn’t passing. For example, if
+a test isn’t passing, figure out which part isn’t passing and why there is a
+discrepancy. Maybe the <code class="language-plaintext highlighter-rouge">score</code> isn’t updating properly, or perhaps things don’t
+merge the way they should be. This helps speed things up and might even lead
+you to find your own bug.</p>
+
+<p>If you’re posting on Ed, please read our <a href="https://sp21.datastructur.es/materials/guides/ed-policies">Ed policies</a> to make sure
+you’re not accidentally posting part of your solution and hence violating our
+academic integrity policies. Otherwise, we welcome constructive discussion on
+our megathreads. Remember to search for your issue before posting a follow-up
+as many students have very similar bugs!</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

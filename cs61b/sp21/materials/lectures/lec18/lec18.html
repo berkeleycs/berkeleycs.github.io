@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Red Black Trees | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Red Black Trees</header><div class="due-date">Author: Brandon Lee</div><ul id="markdown-toc">
+  <li><a href="lec18.html#qa" id="markdown-toc-qa">QA</a></li>
+  <li><a href="lec18.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec18.html#overview" id="markdown-toc-overview">Overview</a></li>
+</ul>
+
+<h2 id="qa">QA</h2>
+<p>Linked <a href="https://youtu.be/8iPB_aXIq34">here</a>.</p>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/e1p2Ynzj6bDZYmoR6">here</a>.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p><strong>Tree rotaions</strong> We rotateLeft or rotateRight on a node, creating a different but valid BST with the same elements. Notice when we rotateLeft(G) we move the node G to be the left child of the new root.</p>
+
+<p><strong>Left Leaning Red Black Tree</strong> This is simply an implementation of a 2-3 Tree with the same ideas. Be able to convert between a 2-3 Tree and a LLRB tree. We use <em>red</em> links to indicate two nodes that would be in the same 2-3 Node. In a left leaning RB tree, we arbitrarily enforce that edges are always to the left (for convenience).</p>
+
+<p>There are two important propertires for LLRBs:</p>
+
+<ol>
+  <li>No node ever has 2 red links (It wouldn’t be a valid node in a 2-3 Tree if it did)</li>
+  <li>Every path from the root to a leaf has the same number of <em>black links</em>. This is because every leaf in a 2-3 tree has same numbers of links from root. Therefore, the tree is balanced.</li>
+</ol>
+
+<p><strong>LLRB operations</strong>
+Always insert with a red link at the correct location. Then use the following three operations to “fix” or LLRB tree. See slides for visual</p>
+
+<ol>
+  <li>If there is a right leaning red link, rotate that node left.</li>
+  <li>If there are two consecutive left leaning links, rotate right on the top node.</li>
+  <li>If there is a node with two red links to children, flip all links with that node.</li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 1 Setup: Windows | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 1 Setup: Windows</header><ul id="markdown-toc">
+  <li><a href="windows.html#a-install-java" id="markdown-toc-a-install-java">A. Install Java</a></li>
+  <li><a href="windows.html#b-install-git" id="markdown-toc-b-install-git">B. Install Git</a></li>
+  <li><a href="windows.html#c-install-windows-terminal-optional-but-recommended" id="markdown-toc-c-install-windows-terminal-optional-but-recommended">C. Install Windows Terminal (optional but recommended)</a></li>
+  <li><a href="windows.html#d-note-on-wsl2-experimental" id="markdown-toc-d-note-on-wsl2-experimental">D. Note on WSL2 (experimental)</a></li>
+</ul>
+
+<p>A video walkthrough for this guide is available at <a href="windows_setup_video.html">http://sp21.datastructur.es/materials/lab/lab1setup/windows_setup_video.html</a>.</p>
+
+<h2 id="a-install-java">A. Install Java</h2>
+
+<ol>
+  <li>
+    <p>The first step is install the latest version of the Java OpenJDK. The easiest way to do this is
+to get a pre-built binary from the AdoptOpenJDK project, which you can download from <a href="https://adoptopenjdk.net/?variant=openjdk15&amp;jvmVariant=hotspot">https://adoptopenjdk.net/?variant=openjdk15&amp;jvmVariant=hotspot</a>. You’ll want to select
+the latest version combined with the HotSpot JVM. At the time of this writing the latest
+version is marked with “Open JDK 15 (Latest)”, but if some later version of Java
+has been released at the time you’re reading this, you’re welcome to download that instead.</p>
+  </li>
+  <li>
+    <p><strong>Important</strong>: The installer will give you the following four options (note: the screenshots below show Java version 14 but yours should say 15):</p>
+
+    <p><img src="img/openJDK_install.png" alt="Git Download" /></p>
+
+    <p>You should click the small red Xs and change it from “Entire feature will be unavailable” to “Will be installed on local hard drive”. When you’ve done this, it should look like the following:</p>
+
+    <p><img src="img/openJDK_install_2.png" alt="Git Download" /></p>
+  </li>
+  <li>
+    <p>Click next until everything is installed.</p>
+  </li>
+</ol>
+
+<h2 id="b-install-git">B. Install Git</h2>
+
+<ol>
+  <li>Install git. Head to
+<a href="http://git-scm.com/download/">http://git-scm.com/download/</a> and download the Git for Windows 
+installer. 
+<img src="img/git_download.png" alt="Git Download" />
+    <ol>
+      <li>
+        <p>Run the installer. Let git be installed in the default location (C:\Program Files\git). You’ll be faced with many options. We have recommendations for the first two, show below:</p>
+      </li>
+      <li>
+        <p>The first choice is selecting which components to install. The one option to pay attention to is <code class="language-plaintext highlighter-rouge">Windows Explorer integration</code>. Checking <code class="language-plaintext highlighter-rouge">Windows Explorer integration</code> will add new options to the context menu that appears when you right click a file. These two new options (Git Bash and Git GUI) might maybe one day be helpful to you. Personally, though, I’d turn it off.
+ <img src="img/git_install1.png" alt="Git Installation 1" /></p>
+      </li>
+      <li>
+        <p>Next we’ll select a default Git Bash text editor. If you have a favorite text editor
+ that’s on the list, select it. Otherwise you can leave it as vim for now. 
+ <img src="img/git_text_editor.png" alt="Git Installation 2" /></p>
+      </li>
+      <li>
+        <p>For all of the remaining choices, the defaults are fine. For the option that looks like this below, make sure you select the default “Git from the command line also from 3rd-party software”
+ <img src="img/git-bash-install.png" alt="Git Installation 3" /></p>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>Open a git bash window (using the start menu, if you didn’t add a start menu link, you can go to C:\Program Files\Git\bin). The window that opens is a terminal window that allows you to interact with a bash shell. We’ll learn more about the bash shell in the lab1setup directions. To test that everything is working, try typing <code class="language-plaintext highlighter-rouge">javac --version</code> and press enter. If you see a message that says “javac version 15.0.1” (or other version number that is at least 15), then everything is working fine. You may have to restart your computer first before running this command.</p>
+  </li>
+  <li>Now type (or copy and paste) <code class="language-plaintext highlighter-rouge">git config --get core.editor</code>. If you picked a text editor other than vim, you should see something like the image below:
+ <img src="img/bash_text_editor_check.png" alt="Text Editor check" /></li>
+</ol>
+
+<p>If instead nothing is printed, this means your default text editor is vim. If you’ve never used vim before, type <code class="language-plaintext highlighter-rouge">git config --global core.editor "nano"</code> and press enter. This will change the default text editor from <code class="language-plaintext highlighter-rouge">vim</code> to <code class="language-plaintext highlighter-rouge">nano</code>. <code class="language-plaintext highlighter-rouge">nano</code> is much much easier to use. Note: If you’re an experienced vim user, you can skip this step.</p>
+
+<h2 id="c-install-windows-terminal-optional-but-recommended">C. Install Windows Terminal (optional but recommended)</h2>
+
+<p>As an alternative to the git bash terminal, you can use the new Windows terminal app. I personally think it’s smoother, aesthetically nicer, and has some useful additional features like tabs.</p>
+
+<p>It’s a bit annoying to set up, though, so if you don’t want to go to all the trouble below, the git bash terminal will work fine.</p>
+
+<ol>
+  <li>
+    <p>To install the Windows Terminal, I recommend using the Microsoft Store, which does not require a login or payment. Alternate installation instructions are at <a href="https://github.com/microsoft/terminal">https://github.com/microsoft/terminal</a>.</p>
+  </li>
+  <li>
+    <p>When you start up windows terminal, you’ll see something like the picture below:
+<img src="img/terminal_default.png" alt="PowerShell Terminal" /></p>
+  </li>
+  <li>
+    <p>We don’t want to use “PowerShell”, which is based on Windows. Instead, we want to use “bash shell”, which is based on Linux. To set this up, press “ctrl-,” (control and comma) inside the Windows Terminal and you should see a file called “settings.json” open up in a text editor, as shown below:
+<img src="img/terminal_setup_1.png" alt="Terminal Setup 1" /></p>
+  </li>
+  <li>
+    <p>We’re going to add something to this file where the purple arrow appears in the picture above.</p>
+
+    <p>Specifically, you should copy and paste EXACTLY the text below,</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> {
+     "guid": "{00000000-0000-0000-ba54-000000000002}",
+     "closeOnExit" : true,
+     "commandline" : "\"%PROGRAMFILES%\\git\\usr\\bin\\bash.exe\" -i -l",
+     "cursorColor" : "#FFFFFF",
+     "cursorShape" : "bar",
+     "fontFace" : "Consolas",
+     "fontSize" : 10,
+     "historySize" : 9001,
+     "icon" : "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
+     "name" : "Bash",
+     "padding" : "0, 0, 0, 0",
+     "snapOnInput" : true,
+     "startingDirectory" : "%USERPROFILE%"
+ }
+</code></pre></div>    </div>
+
+    <p>so that settings.json looks like the picture below:</p>
+
+    <p><img src="img/terminal_setup_2.png" alt="Terminal Setup 2" /></p>
+
+    <p>If you get an error like the message below, you did something slightly wrong. If you can’t figure out what you did to break the settings.json file, then you should delete the entire contents of settings.json, press save, close the text editor, then press ctrl-, to reopen settings.json and try all over again from scratch.</p>
+
+    <p><img src="img/terminal_setup_3.png" alt="Terminal Setup 3" /></p>
+
+    <p>(Thanks to <a href="https://stackoverflow.com/questions/56839307/adding-git-bash-to-the-new-windows-terminal">Archimedes Trajano</a> for the nicely written directions on Stack Overflow).</p>
+  </li>
+  <li>
+    <p>If you completed step 2 correctly, when you click on the little downward pointing arrow in the Windows Terminal (which creates a new tab), there should be an option called “Bash”. If you click on “Bash”, you should find yourself in a window that looks a lot like the git bash window. As before, use “javac –version” to verify that everything is working correctly.</p>
+
+    <p>If you want to change the default font size (I find size 10 too small, but I’m also almost 40 (WTF)), you can edit it inside settings.json.</p>
+
+    <p><img src="img/terminal_setup_4.png" alt="Terminal Setup 4" /></p>
+  </li>
+  <li>
+    <p>If you press the + sign, you’ll see that it opens a PowerShell window by default. To change the behavior of the “+” sign so that it opens a Bash window instead, you can edit the defaultProfile option in settings.json to be equal to “00000000-0000-0000-ba54-000000000002”, as shown below:</p>
+
+    <p><img src="img/terminal_setup_5.png" alt="Terminal Setup 5" /></p>
+
+    <p>After copying and pasting, settings.json should look like this:</p>
+
+    <p><img src="img/terminal_setup_6.png" alt="Terminal Setup 6" /></p>
+
+    <p>Try clicking the plus sign, and you should see a bash shell window open. At this point, you’re all done! You can now move on with the rest of lab 1.</p>
+  </li>
+</ol>
+
+<h2 id="d-note-on-wsl2-experimental">D. Note on WSL2 (experimental)</h2>
+
+<p>The Summer 2020 update of Windows contains a Linux kernel called WSL2. As of the time of this writing, this update is still not available on many Windows computers, so we will not be officially supporting WSL2 for Spring 2021. If you’re pretty computer savvy, you’re welcome to try it out though! One word of warning: You may need to install javac, java, and git inside WSL2 again. I’m not sure though since I haven’t had a chance to try it out myself.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

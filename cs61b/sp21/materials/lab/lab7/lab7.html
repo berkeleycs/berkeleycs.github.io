@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 7: BSTMap | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 7: BSTMap</header><ul id="markdown-toc">
+  <li><a href="lab7.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab7.html#bstmap" id="markdown-toc-bstmap">BSTMap</a></li>
+  <li><a href="lab7.html#so-how-fast-is-it" id="markdown-toc-so-how-fast-is-it">So… How Fast Is It?</a></li>
+  <li><a href="lab7.html#optional-exercises" id="markdown-toc-optional-exercises">Optional Exercises</a></li>
+  <li><a href="lab7.html#lab-debrief-and-submission" id="markdown-toc-lab-debrief-and-submission">Lab Debrief and Submission</a></li>
+  <li><a href="lab7.html#optional-asymptotics-problems" id="markdown-toc-optional-asymptotics-problems">Optional Asymptotics Problems</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>In this lab, you’ll create <strong>BSTMap</strong>, a BST-based implementation of the Map61B interface, which represents a basic tree-based map. You will be creating this completely from scratch, using the interface provided as your guide.</p>
+
+<p>After you’ve completed your implementation, you’ll compare the performance of your implementation to a list-based Map implementation <code class="language-plaintext highlighter-rouge">ULLMap</code> as well as the built-in Java <code class="language-plaintext highlighter-rouge">TreeMap</code> class (which also uses a BST).</p>
+
+<h2 id="bstmap">BSTMap</h2>
+
+<p>Create a class <strong>BSTMap</strong> that implements the <strong>Map61B</strong> interface using a BST (Binary Search Tree) as its core data structure. You must do this in a file named <code class="language-plaintext highlighter-rouge">BSTMap.java</code>. Your implementation is required to implement all of the methods given in <strong>Map61B</strong> <em>except</em> for <code class="language-plaintext highlighter-rouge">remove</code>, <code class="language-plaintext highlighter-rouge">iterator</code> and <code class="language-plaintext highlighter-rouge">keySet</code>. For these methods you should throw an <code class="language-plaintext highlighter-rouge">UnsupportedOperationException</code>.</p>
+
+<p>Your code will not compile until you create the <code class="language-plaintext highlighter-rouge">BSTMap</code> class and you implement all the methods of <strong>Map61B</strong>. You can implement methods one at a time by writing the method signatures of all the required methods, but throwing <code class="language-plaintext highlighter-rouge">UnsupportedOperationExceptions</code> for the implementations, until you get around to actually writing them.</p>
+
+<p>Your <code class="language-plaintext highlighter-rouge">BSTMap</code> should also add an additional method <code class="language-plaintext highlighter-rouge">printInOrder()</code> (not given in the <strong>Map61B</strong> interface) that prints out your <strong>BSTMap</strong> in order of increasing Key. We will not test the result of this method, but you will find this helpful for testing your implementation!</p>
+
+<p>In your implementation you should assume that generic keys <code class="language-plaintext highlighter-rouge">K</code> in <code class="language-plaintext highlighter-rouge">BSTMap&lt;K,V&gt;</code> extend <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Comparable.html">Comparable</a>. In other words, you can assume that generic keys <code class="language-plaintext highlighter-rouge">K</code> have a <code class="language-plaintext highlighter-rouge">compareTo</code> method. This can be enforced in Java with a <a href="https://docs.oracle.com/javase/tutorial/java/generics/bounded.html">bounded type parameter</a>. Consider the example below, taken from the Oracle docs:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+ * Bounded type parameters allow you to invoke methods defined in the bounds:
+ * The `isEven` method invokes the `intValue` method defined in the 
+ * `Integer` class through `n`.
+ */</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NaturalNumber</span><span class="o">&lt;</span><span class="no">T</span> <span class="kd">extends</span> <span class="nc">Integer</span><span class="o">&gt;</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="no">T</span> <span class="n">n</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">NaturalNumber</span><span class="o">(</span><span class="no">T</span> <span class="n">n</span><span class="o">)</span>  <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">;</span> <span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEven</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">n</span><span class="o">.</span><span class="na">intValue</span><span class="o">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We also recommend that you use a private nested <code class="language-plaintext highlighter-rouge">BSTNode</code> class to help facilitate your implementation. How you design and use this inner class is up to you!</p>
+
+<p>You can test your implementation using <code class="language-plaintext highlighter-rouge">TestBSTMap.java</code>.</p>
+
+<p>The following resources might prove useful:</p>
+
+<ul>
+  <li>Lecture 16 <a href="https://docs.google.com/presentation/d/1Bl-PTBfa5sp1vM1l0OSMpK_0JFQ-MT6je4O26-9ffpg/edit#slide=id.g50738e5fde_0_0">slides</a>.</li>
+  <li>BST code from pages 109 and 111 of <a href="http://www-inst.eecs.berkeley.edu/~cs61b/fa14/book2/data-structures.pdf">Data Structures Into Java</a>, from our course resources page.</li>
+  <li>BST code from <a href="https://algs4.cs.princeton.edu/32bst/BST.java.html">our optional textbook</a>.</li>
+  <li><code class="language-plaintext highlighter-rouge">ULLMap.java</code> (provided), a working unordered linked list based <strong>Map61B</strong> imlementation.</li>
+</ul>
+
+<h2 id="so-how-fast-is-it">So… How Fast Is It?</h2>
+
+<p>There are two interactive speed tests provided in <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest.java</code> and <code class="language-plaintext highlighter-rouge">InsertInOrderSpeedTest.java</code>. Do not attempt to run these tests before you’ve completed <strong>BSTMap</strong>. Once you’re ready, you can run the tests in IntelliJ.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest</code> class performs tests on element-insertion speed of your <strong>BSTMap</strong>, <strong>ULLMap</strong> (provided), Java’s built-in <strong>TreeMap</strong>, and Java’s built-in <strong>HashMap</strong> (which you’ll explore more in the next lab). It works by asking the user for a desired length of each String to insert, and also for an input size (the number of insertions to perform). It then generates that many Strings of length as specified and inserts them into the maps as <code class="language-plaintext highlighter-rouge">&lt;String,Integer&gt;</code> pairs.</p>
+
+<p>Try it out and see how your data structure scales with the number of insertions compared to the naive and industrial-strength implementations. Remember that asympototics aren’t representative on small samples, so make sure your inputs are sufficiently large if you are getting a confusing trend. Record your results in a file named <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>. There is no standard format required for your results, and there is no required number of data points.</p>
+
+<p>Now try running <code class="language-plaintext highlighter-rouge">InsertInOrderSpeedTest</code>, which behaves similarly to <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest</code>, except this time the Strings in <code class="language-plaintext highlighter-rouge">&lt;String, Integer&gt;</code> key-value pairs are inserted in <a href="http://en.wikipedia.org/wiki/Lexicographical_order">lexicographically-increasing order</a>. If you observed anything interesting (hopefully you did), you should discuss it with your fellow students and/or TA.</p>
+
+<h2 id="optional-exercises">Optional Exercises</h2>
+
+<p>This will not be graded, but you can still receive feedback on the autograder.</p>
+
+<p>Implement the methods <code class="language-plaintext highlighter-rouge">iterator()</code>, <code class="language-plaintext highlighter-rouge">keySet()</code>, <code class="language-plaintext highlighter-rouge">remove(K key)</code>, and <code class="language-plaintext highlighter-rouge">remove(K key, V value)</code>, in your <strong>BSTMap</strong> class. When implementing the <code class="language-plaintext highlighter-rouge">iterator</code> method, you should return an iterator over the <em>keys</em>. Implementing <code class="language-plaintext highlighter-rouge">remove()</code> is fairly challenging. For an extra challenge implement <code class="language-plaintext highlighter-rouge">keySet()</code> and <code class="language-plaintext highlighter-rouge">iterator</code> without using a second instance variable to store the set of keys.</p>
+
+<p>For <code class="language-plaintext highlighter-rouge">remove</code>, you should return null if the argument key does not exist in the <strong>BSTMap</strong>.
+Otherwise, delete the key-value pair (key, value) and return value.</p>
+
+<h2 id="lab-debrief-and-submission">Lab Debrief and Submission</h2>
+
+<p>At the end of lab, your TA will go over the reference solution. This will be helpful if you haven’t finished the lab, since we don’t want you to be stuck working on lab too much outside of lab. (This is also an incentive for you to go to lab!)</p>
+
+<p>Make sure to submit your completed <code class="language-plaintext highlighter-rouge">BSTMap.java</code> and <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>, and submit through git and Gradescope as usual.</p>
+
+<h2 id="optional-asymptotics-problems">Optional Asymptotics Problems</h2>
+
+<p>Given <code class="language-plaintext highlighter-rouge">B</code>, a <strong>BSTMap</strong> with <code class="language-plaintext highlighter-rouge">N</code> key-value pairs, and <code class="language-plaintext highlighter-rouge">(K, V)</code>, a random key-value pair, answer the following questions.</p>
+
+<p>Unless otherwise stated, “big-Oh” bounds (e.g. <code class="language-plaintext highlighter-rouge">O(N)</code>) and “big-Theta” bounds (e.g. Θ(<code class="language-plaintext highlighter-rouge">N</code>)) refer to the <strong>number of comparisons</strong> in the given method call(s).</p>
+
+<p>For questions 1-7, state whether the statement is true or false. For question 8, give a runtime bound.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">B.put(K, V)</code> ∈ O(log(<code class="language-plaintext highlighter-rouge">N</code>)).</li>
+  <li><code class="language-plaintext highlighter-rouge">B.put(K, V)</code> ∈ Θ(log(<code class="language-plaintext highlighter-rouge">N</code>)).</li>
+  <li><code class="language-plaintext highlighter-rouge">B.put(K, V)</code> ∈ Θ(<code class="language-plaintext highlighter-rouge">N</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">B.put(K, V)</code> ∈ O(<code class="language-plaintext highlighter-rouge">N</code>).</li>
+  <li><code class="language-plaintext highlighter-rouge">B.put(K, V)</code> ∈ O(<code class="language-plaintext highlighter-rouge">N</code><sup>2</sup>).</li>
+  <li>
+    <p>Let <code class="language-plaintext highlighter-rouge">g(N)</code> be the average number of comparisons required to complete <code class="language-plaintext highlighter-rouge">N</code> random calls to <code class="language-plaintext highlighter-rouge">B.put(K, V)</code> followed by <code class="language-plaintext highlighter-rouge">B.containsKey(K)</code>. Then, <code class="language-plaintext highlighter-rouge">g(N) ~ 2(ln(N))</code>.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Note: We write g(N)~f(N) to represent that g(N)/f(N) -&gt; 1 as N gets large.
+</code></pre></div>    </div>
+  </li>
+  <li>For key <code class="language-plaintext highlighter-rouge">C</code> != <code class="language-plaintext highlighter-rouge">K</code>, running both <code class="language-plaintext highlighter-rouge">B.containsKey(K)</code> and <code class="language-plaintext highlighter-rouge">B.containsKey(C)</code> ∈ Ω(log(<code class="language-plaintext highlighter-rouge">N</code>)).</li>
+  <li>
+    <p>Let <strong>BSTMap</strong> <code class="language-plaintext highlighter-rouge">b</code> be comprised of a <code class="language-plaintext highlighter-rouge">root</code> Node (Key, Value pair) and two <strong>BSTMap</strong> subtrees called <code class="language-plaintext highlighter-rouge">left</code> and <code class="language-plaintext highlighter-rouge">right</code>. Further, assume the method <code class="language-plaintext highlighter-rouge">numberOfNodes(BSTMap b)</code> returns the number of nodes of a <strong>BSTMap</strong> rooted in <code class="language-plaintext highlighter-rouge">b.root</code> and has a running time of Θ<code class="language-plaintext highlighter-rouge">(n)</code>, where <code class="language-plaintext highlighter-rouge">n</code> is the number of Nodes in the <strong>BSTMap</strong> rooted in <code class="language-plaintext highlighter-rouge">b</code>. What is the running time (in big O notation) of <code class="language-plaintext highlighter-rouge">mystery(b, z)</code> for some positive integer <code class="language-plaintext highlighter-rouge">z</code>? Give the tightest bound you can assuming <code class="language-plaintext highlighter-rouge">b</code> has <code class="language-plaintext highlighter-rouge">N</code> nodes. Your answer should not contain any unnecessary multiplicative constants or additive factors.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public Key mystery(BSTMap b, int z) {
+     if (z &gt; numberOfNodes(b) || z &lt;= 0)
+         return null;
+     if (numberOfNodes(b.left) == z-1)
+         return b.root.key;
+     else if (numberOfNodes(b.left) &gt; z)
+         return mystery(b.left, z);
+     else
+         return mystery(b.right, z-numberOfNodes(b.left) - 1);
+ }
+</code></pre></div>    </div>
+  </li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

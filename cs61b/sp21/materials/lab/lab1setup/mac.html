@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 1 Setup: Mac OS | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 1 Setup: Mac OS</header><ul id="markdown-toc">
+  <li><a href="mac.html#a-setup" id="markdown-toc-a-setup">A. Setup</a></li>
+  <li><a href="mac.html#b-java-install-issues" id="markdown-toc-b-java-install-issues">B. Java Install Issues</a></li>
+  <li><a href="mac.html#c-git-install-issues" id="markdown-toc-c-git-install-issues">C. Git Install Issues</a></li>
+</ul>
+
+<h2 id="a-setup">A. Setup</h2>
+
+<ol>
+  <li>Install <a href="https://brew.sh/">Homebrew</a>, a very easy to use package manager. To install, go to your
+Terminal and enter the following:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/bin/ruby <span class="nt">-e</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/master/install<span class="si">)</span><span class="s2">"</span>
+</code></pre></div>    </div>
+
+    <p><strong>Note:</strong> During the process, you may be prompted to enter a password. When
+ you enter your password, <em>nothing</em> will display on the terminal, but the
+ computer is actually recording your password. This is a security measure.
+ Just type your password and hit enter.</p>
+
+    <p>You may be prompted to hit enter again to start the installation after entering your password.</p>
+  </li>
+  <li>Then, check to make sure brew is working properly on your system by typing:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> brew doctor
+</code></pre></div>    </div>
+    <p>You may encounter warnings like this, but you should be fine. Proceed to the
+ next step.</p>
+
+    <p><img src="img/homebrew_warnings.png" alt="Homebrew Warnings" /></p>
+  </li>
+  <li>
+    <p>If you encounter a warning asking you to download Command Line Tools, you
+will need to do this. Please follow the StackOverflow post
+<a href="http://stackoverflow.com/questions/9329243/xcode-4-4-and-later-install-
+command-line-tools">here</a>.</p>
+  </li>
+  <li>Install the Java JDK and git. You can do this by typing:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> brew <span class="nb">install</span> <span class="nt">--cask</span> java
+ brew <span class="nb">install </span>git
+</code></pre></div>    </div>
+    <p>If you’re getting an error for the Java install, try simply:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> brew <span class="nb">install </span>java
+</code></pre></div>    </div>
+  </li>
+  <li>Verify your git installation by typing:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git <span class="nt">--version</span>
+</code></pre></div>    </div>
+    <p>You have successfully installed git if this command returns a valid version number and does not fail.</p>
+
+    <p>Similarly, you can verify your Java installation by typing:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> java <span class="nt">-version</span>
+ javac <span class="nt">-version</span>
+</code></pre></div>    </div>
+    <p>Both of these commands should succeed and show version 15. If both installations are good, woohoo! Skip the rest of this guide and return to the lab.</p>
+  </li>
+</ol>
+
+<h2 id="b-java-install-issues">B. Java Install Issues</h2>
+
+<p>If you are still having Java install issues with Homebrew after having retried the steps and/or conferring with your TA, it might be time for a manual install. To install Java manually, follow the steps below. If at any point, you believe one of the steps you have done did not work, please get in touch with your TA before proceeding.</p>
+
+<ol>
+  <li>Download <code class="language-plaintext highlighter-rouge">jdk-15.0.1_osx-x64_bin.dmg</code> from this <a href="https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html">link</a> and run the installer with the default options</li>
+  <li>Verify that the download succeeded by typing:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">ls</span> /Library/Java/JavaVirtualMachines
+</code></pre></div>    </div>
+    <p>Your output should include JDK 15 (<code class="language-plaintext highlighter-rouge">jdk-15.0.1.jdk</code>)</p>
+  </li>
+  <li>The Java installation should have included a script that outputs the file location of the most recent JDK installed. Run the following command:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/libexec/java_home
+</code></pre></div>    </div>
+    <p>The output you get should look similar to the following, which is the output on my personal computer. In particular, you should see JDK 15 in the output:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /Library/Java/JavaVirtualMachines/jdk-15.0.1.jdk/Contents/Home
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Now, all that remains to do is tell the system where our install folder is. First, run <code class="language-plaintext highlighter-rouge">echo $0</code> to determine if you are running zsh or bash. The next command you have to run will be slightly different depending on whether you are running zsh or bash.</p>
+
+    <p>If you are running zsh, type the following command:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">echo</span> <span class="s1">'export JAVA_HOME=$(/usr/libexec/java_home)'</span> <span class="o">&gt;&gt;</span> ~/.zprofile
+</code></pre></div>    </div>
+
+    <p>If you are running bash, type the following command:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">echo</span> <span class="s1">'export JAVA_HOME=$(/usr/libexec/java_home)'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>This step is important. <strong>Completely</strong> close out of your terminal window, by typing <code class="language-plaintext highlighter-rouge">Cmd + Q</code>. If you have worked with this type of stuff before, you may be tempted to source your zprofile or bash_profile. Do <strong>NOT</strong> be tempted; simply close out of your terminal with <code class="language-plaintext highlighter-rouge">Cmd + Q</code>.</p>
+  </li>
+  <li>Restart your terminal, and verify that your environment variables have been setup correctly by running:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">echo</span> <span class="nv">$JAVA_HOME</span>
+</code></pre></div>    </div>
+    <p>The output of this command should be non-empty and include the path to your JDK 15 installation</p>
+  </li>
+  <li>Java should properly be installed! As mentioned above, you can test this with the commands:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> java <span class="nt">-version</span>
+ javac <span class="nt">-version</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="c-git-install-issues">C. Git Install Issues</h2>
+
+<p>If you had installation issues with Git using Homebrew, try the instructions “Installing on macOS” at this <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">link</a>. Contact your TA if you are still having issues.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Asymptotics II Study Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Asymptotics II Study Guide</header><div class="due-date">Author: Josh Hug and Kartik Kapur</div><ul id="markdown-toc">
+  <li><a href="lec15.html#live-qa" id="markdown-toc-live-qa">Live QA</a></li>
+  <li><a href="lec15.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec15.html#overview" id="markdown-toc-overview">Overview</a></li>
+  <li><a href="lec15.html#recommended-problems" id="markdown-toc-recommended-problems">Recommended Problems</a>    <ul>
+      <li><a href="lec15.html#c-level" id="markdown-toc-c-level">C level</a></li>
+      <li><a href="lec15.html#b-level" id="markdown-toc-b-level">B level</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="live-qa">Live QA</h2>
+<p>Linked <a href="https://youtu.be/ClMh3FVA82Y">here</a>.</p>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/7QmMihPFqCEjJyuV8">here</a>.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p><strong>Runtime Analysis.</strong> Understanding the runtime of code involves deep thought.
+It amounts to asking: “How long does it take to do stuff?”, where stuff can be
+any conceivable computational process whatsoever. It simply cannot be done
+mechanically, at least for non-trivial problems. As an example, a pair of nested
+for loops does NOT mean $\Theta(N^2)$ runtime as we saw in lecture.</p>
+
+<p><strong>Cost Model.</strong> As an anchor for your thinking, recall the idea of a “cost
+model” from last lecture. Pick an operation and count them. You want the one
+whose count has the highest order of growth as a function of the input size.</p>
+
+<p><strong>Important Sums.</strong> This is not a math class so we’ll be a bit sloppy, but the
+two key sums that you should know are that:</p>
+<ul>
+  <li>$1 + 2 + 3 + … + N \in \Theta(N^2)$</li>
+  <li>$1 + 2 + 4 + 8 + … + N \in \Theta(N)$</li>
+</ul>
+
+<p><strong>Practice.</strong> The only way to learn this is through plenty of practice. Make sure to work through the problems in lecture and below when you have some time.</p>
+
+<h2 id="recommended-problems">Recommended Problems</h2>
+
+<h3 id="c-level">C level</h3>
+<ol>
+  <li>
+    <p>Prove that $O(N + \frac{N}{2} + \frac{N}{4} +…. 2 + 1)= O(N)$ (hand wavy proof is okay as long as you gain the intuition)</p>
+  </li>
+  <li>
+    <p>What would the runtime of <code class="language-plaintext highlighter-rouge">modified_fib</code> be. Assume that values is an array of
+size n. If a value in an int array is not initialized to a number, it is automatically
+set to 0.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public void modified_fib(int n, int[] values){
+   if(n &lt;= 1){
+     values[n] = n;
+     return n;
+   }
+   else{
+     int val = values[n];
+     if(val == 0){
+       val = modified_fib(n-1, values) + modified_fib(n-2, values);
+       values[n] = val;
+     }
+     return val;
+   }
+ }  
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Prove to yourself that $\Theta(log_2(n)) = \Theta(log_3(n)) $</p>
+  </li>
+</ol>
+
+<h3 id="b-level">B level</h3>
+
+<ol>
+  <li>
+    <p>Find the runtime of running print_fib with for arbitrary large n.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public void print_fib(int n){
+   for(int i = 0; i &lt; n; i++i){
+       System.out.println(fib(i));
+   }
+ }
+
+ public int fib(int n){
+   if(n &lt;= 0){
+     return 0;
+   }
+   elif(n == 1){
+     return 1;
+   }
+   else{
+     return fib(n-1) + fib(n-2);
+   }
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Do problem 5 again, but change the body of the for loop in <code class="language-plaintext highlighter-rouge">print_fib</code> to be</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> System.out.println(fib(n));
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Find the runtime of this function</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public void melo(int N){
+   for(int i = 0; i &lt; N*N; i++){
+     System.out.println("Gelo is fruit pudding");
+   }
+   for(int i = 0; i &lt; N*N*N; i++){
+     System.out.println("Zo Two the Warriors");
+   }
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Find the runtime of this function</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> public void grigobreath(int N){
+     if(N==0){
+       return;
+     }
+     for(int i  = 0; i &lt; N; i++){
+       System.out.println("Gul-great")
+     }
+     grigobreath(N * 1/2);
+     grigobreath(N * 1/4);
+     grigobreath(N * 1/4);
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><a href="https://tbp.berkeley.edu/exams/6137/download/">Problem 8</a> from Spring 2018 midterm #2</p>
+  </li>
+  <li>
+    <p><a href="https://tbp.berkeley.edu/exams/5773/download/">Problem 4</a> from Spring 2017 midterm #2</p>
+  </li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 4: Git and Debugging | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 4: Git and Debugging</header><ul id="markdown-toc">
+  <li><a href="lab4.html#pre-lab" id="markdown-toc-pre-lab">Pre-Lab</a></li>
+  <li><a href="lab4.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab4.html#git-background" id="markdown-toc-git-background">Git Background</a></li>
+  <li><a href="lab4.html#git-exercise" id="markdown-toc-git-exercise">Git Exercise</a>    <ul>
+      <li><a href="lab4.html#step-1" id="markdown-toc-step-1">Step 1</a></li>
+      <li><a href="lab4.html#step-2" id="markdown-toc-step-2">Step 2</a></li>
+      <li><a href="lab4.html#step-3" id="markdown-toc-step-3">Step 3</a></li>
+      <li><a href="lab4.html#step-4" id="markdown-toc-step-4">Step 4</a></li>
+      <li><a href="lab4.html#step-5" id="markdown-toc-step-5">Step 5</a></li>
+      <li><a href="lab4.html#step-6" id="markdown-toc-step-6">Step 6</a></li>
+    </ul>
+  </li>
+  <li><a href="lab4.html#a-debugging-mystery" id="markdown-toc-a-debugging-mystery">A Debugging Mystery</a></li>
+  <li><a href="lab4.html#submission" id="markdown-toc-submission">Submission</a></li>
+  <li><a href="lab4.html#full-recap" id="markdown-toc-full-recap">Full Recap</a></li>
+</ul>
+
+<h2 id="pre-lab">Pre-Lab</h2>
+<ul>
+  <li><strong>Don’t</strong> pull from the skeleton repository yet. Pulling from the skeleton repository will cause a merge conflict, which you will learn how to fix later in lab. Even if you already know how to fix merge conflicts, we want you to fix it in a very specific way, so please do not be tempted to pull yet!</li>
+  <li>If you’ve already pulled from skeleton, please contact your TA for how to proceed with the lab.</li>
+  <li>This lab requires that you got a full score on <code class="language-plaintext highlighter-rouge">lab1</code> on GS. If you haven’t please contact your TA before proceeding.</li>
+  <li>In this lab, we will be working with git. Before we do that, let’s make sure your repository is synced up with GitHub. To do this, simply run:</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin master
+</code></pre></div></div>
+
+<p>If the command succeeds, you’re good to go! If not, you likely got an error message like <a href="../../guides/git-wtfs.html#error-failed-to-push-some-refs">this one</a>. Please follow the instructions there for how to fix this error.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>Since this is midterm week, this lab will be shorter than usual. In this lab, you will take a deeper dive into git and also practice debugging one more time with a cool exercise. By the end of this lab, you should feel much stronger about the git workflow, and your debugging skills should be more refined!</p>
+
+<h2 id="git-background">Git Background</h2>
+<p>In this part, you will watch a series of videos that explain the major concepts of git, and then get some hands-on practice using git. Please watch all six videos below. Itai has been known to talk slowly, so feel free to increase the playback speed if necessary!</p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=yWBzCAY_5UI">Git Intro - Part 1</a></li>
+  <li><a href="https://www.youtube.com/watch?v=CnMpARAOhFg">Git Intro - Part 2</a></li>
+  <li><a href="https://www.youtube.com/watch?v=t0tzTcZESWk">Git Intro - Part 3</a></li>
+  <li><a href="https://www.youtube.com/watch?v=ca1oCEMQGRQ">Git Intro - Part 4</a></li>
+  <li><a href="https://www.youtube.com/watch?v=dZbj9gjjYv8">Git Intro - Part 5</a></li>
+  <li><a href="https://www.youtube.com/watch?v=r0oHi0vXhLE">Git Intro - Part 6</a></li>
+</ul>
+
+<p>In particular, after watching the video, you should understand the following concepts:</p>
+
+<ul>
+  <li>Local git workflow: <code class="language-plaintext highlighter-rouge">git add</code> and <code class="language-plaintext highlighter-rouge">git commit</code></li>
+  <li>Moving between commits and updating files with <code class="language-plaintext highlighter-rouge">git checkout</code></li>
+  <li>Detached <code class="language-plaintext highlighter-rouge">HEAD</code> states</li>
+  <li>Remote repositories, e.g. those hosted on <a href="https://github.com">GitHub</a></li>
+  <li>Local git integration with remote repositories: <code class="language-plaintext highlighter-rouge">origin/master</code> and <code class="language-plaintext highlighter-rouge">skeleton/master</code></li>
+  <li>How to resolve merge conflicts</li>
+</ul>
+
+<p>If you have any questions about the above concepts, you can reference <a href="https://sp19.datastructur.es/materials/guides/using-git">Sarah’s Git Guide</a>, <a href="https://sp19.datastructur.es/materials/guides/git-wtfs">Git WTFS</a> (Git Weird Technical Failure Scenarios – get your mind out of the gutter!), or you can always feel free to ask your TA to clarify concepts.</p>
+
+<p>We will warn you here: <em>be wary of git information that you find online</em>, since not all of it comes from trusted sources. Also, be sure to <strong>NEVER copy commands you find online or get from friends with git when you are stuck – always ask your TA when you are in doubt</strong>.</p>
+
+<h2 id="git-exercise">Git Exercise</h2>
+<p>Now, it’s time to practice what you’ve learned. Remember, this lab requires that you have gotten a full score on the Lab 1 Autograder on Gradescope. If you have not completed Lab 1, please consult with a TA. Whenever you’re ready, please pull the starter code using the following command, but <strong>don’t freak out when you get a merge conflict!</strong> Please read on for more information.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull skeleton master
+</code></pre></div></div>
+
+<p>We’ve purposely introduced a merge conflict in your <code class="language-plaintext highlighter-rouge">lab1</code> directory. The goal of this exercise is to have you practice some git concepts including merge conflicts, detached head states, and checking out files in your <code class="language-plaintext highlighter-rouge">sp21-s***</code> repo. By the end of this exercise, you should feel more comfortable maneuvering the commit tree on the commandline to keep your files in a desired state.</p>
+
+<p>The merge conflict in the <code class="language-plaintext highlighter-rouge">lab1</code> directory is in the file <code class="language-plaintext highlighter-rouge">lab1/Collatz.java</code> which you updated in Lab 1 to print out the <a href="https://en.wikipedia.org/wiki/Collatz_conjecture">Collatz Sequence</a> starting at <code class="language-plaintext highlighter-rouge">n = 5</code>. Your solution as it stood before you pulled the <code class="language-plaintext highlighter-rouge">lab4</code> starter code correctly printed out the Collatz sequence. The <code class="language-plaintext highlighter-rouge">skeleton</code> repository was updated to include the following buggy implementation of the <code class="language-plaintext highlighter-rouge">nextNumber(int n)</code> method, which returns the next number in the Collatz sequence after <code class="language-plaintext highlighter-rouge">n</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/** Buggy implementation of nextNumber! */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">nextNumber</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">n</span>  <span class="o">==</span> <span class="mi">128</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">5</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Before we get ahead of ourselves, please make sure to ask your TA if you have any trouble at any point during this assignment; it’s much better to get them involved earlier if you run into issues so that it’s easier for them to recover. Your tasks are as follows:</p>
+
+<h3 id="step-1">Step 1</h3>
+<p>Resolve the merge conflict, <em>ensuring that the result of the merge conflict contains the <strong>buggy</strong> version of the method</em>. In other words, after you are finished resolving the merge conflict, <code class="language-plaintext highlighter-rouge">Collatz.java</code> should compile and contain the buggy implementation of <code class="language-plaintext highlighter-rouge">nextNumber</code></p>
+
+<p>Now, if you run <code class="language-plaintext highlighter-rouge">git log</code> (which lists the commits before the current commit, in order), you should see something like the following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 8f0deeaef048f33a209f6f2fe5927a6fb04cc6cc
+Merge: 225d73e 7aa1b6f
+Author: Neil Kulkarni &lt;neil.kulkarni@berkeley.edu&gt;
+Date:   Sun Feb 7 14:36:52 2021 <span class="nt">-0700</span>
+
+    Merge branch <span class="s1">'master'</span> of https://github.com/Berkeley-CS61B/skeleton-sp21
+    
+    Fixed the merge conflict <span class="k">in </span>lab4 to contain buggy Collatz!
+
+commit 7aa1b6fc79cb752e1ed844cd9cdd8c9c21e7f3d4 <span class="o">(</span>HEAD -&gt; master<span class="o">)</span>
+Author: Neil Kulkarni &lt;neil.kulkarni@berkeley.edu&gt;
+Date:   Sun Feb 7 14:26:58 2021 <span class="nt">-0700</span>
+
+    Added Lab 4 Starter Files
+
+...
+
+commit 4050fd80377d85aaea6c7cdb486e581d8c422534
+Author: Neil Kulkarni &lt;neil.kulkarni@berkeley.edu&gt;
+Date:   Sat Jan 30 22:56:58 2021 <span class="nt">-0800</span>
+
+    Finished Lab 1! Collatz works!
+    
+...
+</code></pre></div></div>
+
+<p>Namely, you should see that the most recent commit is your merge commit that is the result of you fixing the merge conflict, and the second most recent commit is the commit where Neil added the Lab 4 Starter Files that you pulled from <code class="language-plaintext highlighter-rouge">skeleton</code>. You may have to go far back to see the commit you made when you finished Lab 1. For example, the commit that I made when I finished Lab 1 has the message “Finished Lab 1! Collatz works!”. Your commit will very likely have a different commit message, and should have a different commit hash, author, and date. <strong>Note down the commit hash of the commit in which you finished Lab 1</strong>. Let’s call this commit <code class="language-plaintext highlighter-rouge">lab1commit</code>, so we can refer back to it in future steps.</p>
+
+<h3 id="step-2">Step 2</h3>
+<p>Submit to the “Lab 4A: Git Exercise Part A” Autograder on Gradescope. It will verify that you correctly resolved the merge conflict to contain the buggy implementation of <code class="language-plaintext highlighter-rouge">nextNumber</code> in <code class="language-plaintext highlighter-rouge">Collatz.java</code>.</p>
+
+<h3 id="step-3">Step 3</h3>
+<p>Although your most recent commit includes a bug in <code class="language-plaintext highlighter-rouge">lab1/Collatz.java</code>, luckily at one point you committed a correct implementation of <code class="language-plaintext highlighter-rouge">Collatz</code>, namely in <code class="language-plaintext highlighter-rouge">lab1commit</code>! Since commits in git are snapshots of the state of files, <code class="language-plaintext highlighter-rouge">lab1commit</code> stores a snapshot of the correct version of <code class="language-plaintext highlighter-rouge">Collatz</code>. Don’t believe me? Let’s take a peek!</p>
+
+<p>Your next step is to checkout to <code class="language-plaintext highlighter-rouge">lab1commit</code>. If you don’t remember the syntax for this command, take a look at the materials linked above. Once you’re there, type <code class="language-plaintext highlighter-rouge">git status</code>. You should see that you are in a detached HEAD state. If you don’t remember what that is, please take a look at the materials above!</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NeilKulkarni@Neils-MacBook-Pro sp21-s58 % git status
+HEAD detached at 4050fd8
+nothing to commit, working tree clean
+</code></pre></div></div>
+
+<p>Remember, in a detached HEAD state, you are free to look around in the current commit, but you shouldn’t make any changes. Let’s take a look at <code class="language-plaintext highlighter-rouge">lab1/Collatz.java</code>. You should see that it has your old solution! You can open this file in any manner you’d like, but I recommend the <code class="language-plaintext highlighter-rouge">cat</code> terminal command, which prints the contents of a file:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NeilKulkarni@Neils-MacBook-Pro sp21-s58 % <span class="nb">cat </span>lab1/Collatz.java 
+/<span class="k">**</span> Class that prints the Collatz sequence starting from a given number.
+ <span class="k">*</span>  @author Neil Kulkarni
+ <span class="k">*</span>/
+public class Collatz <span class="o">{</span>
+    public static int nextNumber<span class="o">(</span>int n<span class="o">)</span> <span class="o">{</span>
+        <span class="k">return </span>n % 2 <span class="o">==</span> 0 ? n/2 : 3<span class="k">*</span>n + 1<span class="p">;</span>
+    <span class="o">}</span>
+
+    public static void main<span class="o">(</span>String[] args<span class="o">)</span> <span class="o">{</span>
+        int n <span class="o">=</span> 5<span class="p">;</span>
+        System.out.print<span class="o">(</span>n + <span class="s2">" "</span><span class="o">)</span><span class="p">;</span>
+        <span class="k">while</span> <span class="o">(</span>n <span class="o">!=</span> 1<span class="o">)</span> <span class="o">{</span>
+            n <span class="o">=</span> nextNumber<span class="o">(</span>n<span class="o">)</span><span class="p">;</span>
+            System.out.print<span class="o">(</span>n + <span class="s2">" "</span><span class="o">)</span><span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-4">Step 4</h3>
+<p>Now, get out of the detached HEAD state by checking out to the most recent commit. You should verify that since we are back at the most recent commit that <code class="language-plaintext highlighter-rouge">lab1/Collatz.java</code> has the buggy implementation again:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NeilKulkarni@Neils-MacBook-Pro sp21-s58 % <span class="nb">cat </span>lab1/Collatz.java 
+/<span class="k">**</span> Class that prints the Collatz sequence starting from a given number.
+ <span class="k">*</span>  @author YOUR NAME HERE
+ <span class="k">*</span>/
+public class Collatz <span class="o">{</span>
+
+    /<span class="k">**</span> Buggy implementation of nextNumber! <span class="k">*</span>/
+    public static int nextNumber<span class="o">(</span>int n<span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span>n  <span class="o">==</span> 128<span class="o">)</span> <span class="o">{</span>
+            <span class="k">return </span>1<span class="p">;</span>
+        <span class="o">}</span> <span class="k">else if</span> <span class="o">(</span>n <span class="o">==</span> 5<span class="o">)</span> <span class="o">{</span>
+            <span class="k">return </span>3 <span class="k">*</span> n + 1<span class="p">;</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="k">return </span>n <span class="k">*</span> 2<span class="p">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    public static void main<span class="o">(</span>String[] args<span class="o">)</span> <span class="o">{</span>
+        int n <span class="o">=</span> 5<span class="p">;</span>
+        System.out.print<span class="o">(</span>n + <span class="s2">" "</span><span class="o">)</span><span class="p">;</span>
+        <span class="k">while</span> <span class="o">(</span>n <span class="o">!=</span> 1<span class="o">)</span> <span class="o">{</span>
+            n <span class="o">=</span> nextNumber<span class="o">(</span>n<span class="o">)</span><span class="p">;</span>
+            System.out.print<span class="o">(</span>n + <span class="s2">" "</span><span class="o">)</span><span class="p">;</span>
+        <span class="o">}</span>
+        System.out.println<span class="o">()</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="step-5">Step 5</h3>
+<p>We’ve verified that <code class="language-plaintext highlighter-rouge">lab1commit</code> has the correct contents of <code class="language-plaintext highlighter-rouge">Collatz.java</code>, and we’re back at the most recent commit which contains the buggy implementation of <code class="language-plaintext highlighter-rouge">Collatz.java</code>. Now, let’s use <code class="language-plaintext highlighter-rouge">git checkout</code> to get <code class="language-plaintext highlighter-rouge">lab1/Collatz.java</code> to its state in <code class="language-plaintext highlighter-rouge">lab1commit</code>. If you’ve forgotten how to check out files, please review the materials at the beginning of lab!</p>
+
+<p>When you check out a file, git automatically adds that file. Immediately after you’ve checked out, <code class="language-plaintext highlighter-rouge">git status</code> should return something similar to this:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NeilKulkarni@Neils-MacBook-Pro sp21-s58 % git status
+On branch master
+Your branch is up to <span class="nb">date </span>with <span class="s1">'origin/master'</span><span class="nb">.</span>
+
+Changes to be committed:
+  <span class="o">(</span>use <span class="s2">"git reset HEAD &lt;file&gt;..."</span> to unstage<span class="o">)</span>
+
+	modified:   lab1/Collatz.java
+</code></pre></div></div>
+
+<p>Go ahead and <code class="language-plaintext highlighter-rouge">cat lab1/Collatz.java</code> one more time. You should see that the solution is now updated! Go ahead and commit and push your changes.</p>
+
+<h3 id="step-6">Step 6</h3>
+<p>Submit to the Lab 4B: Git Exercise Part B autograder to get credit for doing this assignment.</p>
+
+<p>Some parting words: what we did was very powerful. We took advantage of the fact that git stores snapshots of our files and used it to revert back to an older version! And, in the process, we learned how to resolve a merge conflict!</p>
+
+<p>This information is not just theoretical. You can find it comes in practical use when you are working on your projects. As Prof. Hug has said often, it’s okay (and encouraged!) to start over from scratch on your projects. Now, we have the means to do that! You can use the <code class="language-plaintext highlighter-rouge">git checkout</code> command to check out your project files to an older commit, before you made any changes to them. Specifically, if you want to checkout a project file from scratch (e.g. the <code class="language-plaintext highlighter-rouge">Model.java</code> file from Project 0), you can run the following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout skeleton/master <span class="nt">--</span> proj0/game2048/Model.java
+</code></pre></div></div>
+
+<p>Feel free to try this command out! <strong>In general, <code class="language-plaintext highlighter-rouge">git checkout skeleton/master -- &lt;file&gt;</code> reverts a file back to its skeleton-code state</strong>. Remember, you have commits of your progress on <code class="language-plaintext highlighter-rouge">proj0</code>, so you can always revert <code class="language-plaintext highlighter-rouge">Model.java</code> back to any of the states it was committed at (including the state at which the project was finished)! If you want to revert <code class="language-plaintext highlighter-rouge">Model.java</code> back to its most recent (and finished) state, you can run the following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout master <span class="nt">--</span> proj0/game2048/Model.java
+</code></pre></div></div>
+
+<p><strong>In general, <code class="language-plaintext highlighter-rouge">git checkout master -- &lt;file&gt;</code> reverts a file back to its state at the most recent commit</strong>. Now you know how to restart a project, or revert a restarted project back to its state at <code class="language-plaintext highlighter-rouge">master</code>, if you were unhappy with the restart!</p>
+
+<h2 id="a-debugging-mystery">A Debugging Mystery</h2>
+
+<p>Another important skill to learn is how to exhaustively debug. When done
+properly, debugging should allow you to rapidly narrow down where a bug might be
+located, even when you are debugging code you don’t fully understand. Consider
+the following scenario:</p>
+
+<p>Your company, Flik Enterprises, has released a fine software library called
+<code class="language-plaintext highlighter-rouge">Flik.java</code> that is able to determine whether two Integers are the same or not.</p>
+
+<p>You receive an email from someone named “Horrible Steve” who describes a problem
+they’re having with your library:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Dear Flik Enterprises,
+
+Your library is very bad. See the attached code. It should print out 500
+but actually it's printing out 128.
+
+(attachment: HorribleSteve.java)"
+</code></pre></div></div>
+
+<p>Using any combination of the following techniques, figure out whether the bug is
+in Horrible Steve’s code or in Flik enterprise’s library:</p>
+<ul>
+  <li>Writing JUnit tests for the Flik library. If you want to try this, you will
+ to create a new file in the <code class="language-plaintext highlighter-rouge">flik</code> directory and import <code class="language-plaintext highlighter-rouge">junit</code>. Look to the
+ tests from the previous problems for how to do this.</li>
+  <li><strong>Using the IntelliJ debugger, especially <a href="https://www.jetbrains.com/help/idea/2016.3/configuring-breakpoints.html">conditional breakpoints</a> or <a href="https://www.jetbrains.com/help/idea/using-breakpoints.html#exception-breakpoints">breaking on exceptions</a>, which you learned how to do in Lab 3!</strong></li>
+  <li>Using print statements.</li>
+  <li>Refactoring Horrible Steve’s code. Refactoring means changing the syntax
+without changing the functionality. This may be hard to do since HS’s code
+uses lots of weird stuff.</li>
+</ul>
+
+<p>Once you find the bug, fix it and submit your code to the Lab 4: Debugging autograder. The autograder for this part uses hidden tests, so you will not be able to get any information about the bug from the AG. If you think you’ve fixed the bug, but are not passing the AG, please consult a TA.</p>
+
+<p>Tip: JUnit provides methods <code class="language-plaintext highlighter-rouge">assertTrue(boolean)</code> and <code class="language-plaintext highlighter-rouge">assertTrue(String,
+boolean)</code> that you might find helpful.</p>
+
+<p>Try to come up with a short explanation of the bug! Google is your friend since
+we have not covered this exact issue in Lecture. Discuss with your lab partner
+and check in with your TA or an AI to see if your answer is right (not for a
+grade).</p>
+
+<h2 id="submission">Submission</h2>
+<p>For this lab assignment, there are three separate autograders. Lab 4A: Git Exercise Part A and Lab 4B: Git Exercise Part B confirm that you have completed the git exercise, and Lab 4: Debugging confirms that you found and fixed the bug  from “A Debugging Mystery”. This AG also checks style, so make sure your code passes the style check for each file! Remember, you can check style by right clicking a file &gt; Check Style. For more information about when to submit to each AG, please see the corresponding parts of the spec.</p>
+
+<p><strong>Extension Requests</strong>: There are three autograders (Lab 4, Lab 4A, and Lab 4B). On Beacon, if you make an extension request for Lab 4, it will apply to all three autograders.</p>
+
+<h2 id="full-recap">Full Recap</h2>
+<p>In this lab, we went over:</p>
+
+<ul>
+  <li>Git Basics</li>
+  <li>Merge Conflicts</li>
+  <li>Detached HEAD States</li>
+  <li>Checking Out Code with Git</li>
+  <li>Debugging Using JUnit</li>
+</ul>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

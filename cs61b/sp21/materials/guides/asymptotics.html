@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Asymptotics Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/sunburst.css">
+
+  <script src="../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Asymptotics Guide</header><div class="due-date">Author: Omar Khan</div><ul id="markdown-toc">
+  <li><a href="asymptotics.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="asymptotics.html#math-background" id="markdown-toc-math-background">Math background</a>    <ul>
+      <li><a href="asymptotics.html#summations" id="markdown-toc-summations">Summations</a>        <ul>
+          <li><a href="asymptotics.html#arithmetic-summation" id="markdown-toc-arithmetic-summation">Arithmetic Summation</a></li>
+          <li><a href="asymptotics.html#geometric-summation" id="markdown-toc-geometric-summation">Geometric Summation</a></li>
+          <li><a href="asymptotics.html#summation-summary" id="markdown-toc-summation-summary">Summation summary</a></li>
+        </ul>
+      </li>
+      <li><a href="asymptotics.html#sequences" id="markdown-toc-sequences">Sequences</a></li>
+    </ul>
+  </li>
+  <li><a href="asymptotics.html#single-loops" id="markdown-toc-single-loops">Single loops</a>    <ul>
+      <li><a href="asymptotics.html#loop-1" id="markdown-toc-loop-1">Loop 1</a></li>
+      <li><a href="asymptotics.html#loop-2" id="markdown-toc-loop-2">Loop 2</a></li>
+      <li><a href="asymptotics.html#loop-3" id="markdown-toc-loop-3">Loop 3</a></li>
+      <li><a href="asymptotics.html#sumary-of-single-loop-java-methods" id="markdown-toc-sumary-of-single-loop-java-methods">Sumary of single loop Java methods</a></li>
+    </ul>
+  </li>
+  <li><a href="asymptotics.html#double-loops" id="markdown-toc-double-loops">Double loops</a>    <ul>
+      <li><a href="asymptotics.html#double-loop-1" id="markdown-toc-double-loop-1">Double Loop 1</a></li>
+      <li><a href="asymptotics.html#double-loop-2" id="markdown-toc-double-loop-2">Double Loop 2</a></li>
+      <li><a href="asymptotics.html#double-loop-3" id="markdown-toc-double-loop-3">Double Loop 3</a></li>
+      <li><a href="asymptotics.html#summary-of-double-loop-java-methods" id="markdown-toc-summary-of-double-loop-java-methods">Summary of double loop Java methods</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This serves as a practical guide to asymptotics. We will not be talking about theory or why asymptotics is neccessary or useful. This guide assumes that you already know those things and want to apply them to find runtimes of actual Java methods. We’ll cover some strategies that you should know and then we’ll go over what I call “cheats,” (warning: there are a lot of cheats and I’ll only be discussing a few).</p>
+
+<p>Without further adiou, let’s start off by talking about some quick math things that you’ll absolutely need to know.</p>
+
+<h2 id="math-background">Math background</h2>
+
+<p>There are just a few tiny math things you’ll need to know for asymptotics. One will be simplifying summations, and the other is a quick trick on figuring out how many elements there are in a sequence.</p>
+
+<h3 id="summations">Summations</h3>
+<p>Most of asymptotics is really just simplifying the work done into a summation and then applying the right summation formula. The two types of summations you’ll see in CS 61B are the <strong>arithmetic summation</strong> and the <strong>geometric summation</strong>.</p>
+
+<h4 id="arithmetic-summation">Arithmetic Summation</h4>
+<p>An arithmetic summation is one where the difference between consecutive terms is some constant. The constant doesn’t matter. For example:</p>
+
+\[1 + 2 + 3 + 4 + 5 + ... + N\]
+
+\[1 + 3 + 5 + 7 + 9 + 11 + ... + N\]
+
+\[10 + 20 + 30 + 40 + 50 + ... + N\]
+
+<p>are all arithmetic summations.</p>
+
+<p>With an arithmetic summation, the entire summation is $\Theta$ of the last term
+squared. So all of the above summations are $\Theta(N^2)$ even though all the
+constants are different. If it seems too easy to be true, it’s not. It really is
+that simple.</p>
+
+<p><strong>Seemingly hard question:</strong> what is the $\Theta$ bound of the below sum:</p>
+
+\[1 + 2 + 3 + 4 + 5 + ... + \log N\]
+
+<p>You might think it’s hard because you see a $\log N$. But don’t forget what you just learned. Take the last term, square it, and then put a $\Theta$ on it. Hence, the above summation is $\Theta(\log^2 N)$. See? Not hard at all. Now let’s talk about the next type of summation.</p>
+
+<h4 id="geometric-summation">Geometric Summation</h4>
+<p>Arguably the easier summation. A geometric summation is one where the <em>ratio</em> of consecutive terms is constant. For example:</p>
+
+\[1 + 2  + 4 + 8 + ... + N\]
+
+\[1 + 3 + 9+ 27 + ... + N\]
+
+\[10 + 100 + 1\,000 + 10\,000 + ... + N\]
+
+<p>With a geometric summation, you still take the last term but <em>that’s it</em>. No squaring. Take the last term, throw a $\Theta$ on it, and that’s it. So, you guessed it, all of the above summations are $\Theta(N)$.</p>
+
+<p><strong>Seemingly hard question</strong>: what is the $\Theta$ bound of the below sum:</p>
+
+\[1 + 2 + 4 + 8 + 16 + ... \sqrt{\log N}\]
+
+<p>You’ve probably caught onto the trick. It’s not hard for you now since you’re equipped! We see from the first few terms that the summation is geometric and so we just throw a $\Theta$ bound on the last term. Hence, the above summation is $\Theta(\sqrt{\log N})$. Easy peasy.</p>
+
+<h4 id="summation-summary">Summation summary</h4>
+<p>Let’s quickly summarize the summation lessons. If you see a summation, take these 2 steps:</p>
+<ol>
+  <li>Look at the first few terms of the summation to see what type it is (arithmetic or geometric).</li>
+  <li>Figure out the last term, and then apply the appropriate simplification (if it is arithmetic, square and put a $\Theta$, and if it is geometric just put a $\Theta$).</li>
+</ol>
+
+<h3 id="sequences">Sequences</h3>
+<p>Sequences are slightly different than summations. Instead of summing things, it’s just a list of numbers. The following are sequences:</p>
+
+\[1, 2, 3, 4, 5, ... , N\]
+
+\[1, 2, 4, 8, 16, ... , 2^N\]
+
+<p>Notice the commas instead of $+$ signs.</p>
+
+<p>There is no concept of “arithmetic” or “geometric” sequence. They’re just sequences. Often we’ll boil the work done in a Java method to a <em>sequence</em> of numbers and we simply want to know how many numbers are here. So here is how I suggest you do that.</p>
+
+<p>You’ll need to know the last term. Let’s say it’s a function of $N$, call it
+$g(N)$. So, for the above, $g(N) = N$ for the first one and $g(N) = 2^N$ for the
+second one.</p>
+<ol>
+  <li>Figure out an expression for the $i$th element in the sequence. Call it
+$f(i)$.  You can make the sequence 0-indexed or 1-indexed, whichever leads to
+a cleaner expression for $f(i)$. 0-indexed means $f(0)$ is the first term,
+and 1-indexed means $f(1)$ is the first term.</li>
+  <li>Make a new variable called $k$ and set the number of elements in the sequence
+to $k$. Our objective is to determine $k$.</li>
+  <li>$g(N) = f(k)$ and solve for $k$. Read the above definitions of $g(N)$ and
+$f(i)$ if it doesn’t make sense why we do this.</li>
+</ol>
+
+<p>That’s it. Let’s do that for the above 2 sequences.
+\(1, 2, 3, 4, 5, ... , N\)
+Honestly, you don’t even need to do it here since there are clearly $N$ elements, but we’ll do it as a warm up.</p>
+
+<p>$g(N) = N$ and $f(i) = i$. Easy enough. Note that here we’re 1-indexing the elements.</p>
+
+\[g(N) = f(k)\]
+
+\[N = k\]
+
+<p>Oh look, we’re already done. So there are $N$ elements in this sequence. Onto the next one.</p>
+
+\[1, 2, 4, 8, 16, ... , 2^N\]
+
+<p>This one is a bit more complex, though you might be able to do it in your head. Regardless, let’s figure out $g(N)$ and $f(i)$.</p>
+
+<p>$g(N) = 2^N$ and $f(i) = 2^i$. Note that here we’re 0-indexing the elements.</p>
+
+\[g(N) = f(k)\]
+
+\[2^N = 2^k\]
+
+\[N = k\]
+
+<p>And that’s it! Now let’s talk about one sequence that you will see <strong>a lot</strong> and you might as well just memorize this instead of doing it every time.</p>
+
+\[1, 2, 4, 8, 16, ..., N\]
+
+<p>$g(N) = N$ and $f(i) = 2^i$.</p>
+
+\[g(N) = f(k)\]
+
+\[N = 2^k\]
+
+\[k = \log_2(N)\]
+
+<p>Voila. Remember that the base doesn’t matter with $\log$ for asymptotics purposes, so we can just say that $k$ is $\Theta(\log N)$.</p>
+
+<p>Here is a hard one that I’ll leave for you to do by yourself:</p>
+
+\[2, 4, 16, 256, 65536, 4294967296, ... N\]
+
+<p>Those might seem like random numbers, but I recommend writing each number as a
+power of $2$. You can solve this using the same steps as above. Ask a TA or a
+friend. Maybe even post on Ed.</p>
+
+<p>And with that, we’ve gone over the mathematical background. You’ll soon see how
+important these things are. It’s ok if you just memorized what was said so far.
+But from here on out, you shouldn’t memorize any formulas. Just the strategies.
+Without further adieu, let’s start with single loop Java methods!</p>
+
+<h2 id="single-loops">Single loops</h2>
+
+<p>This is the bread and butter of asymptotics questions. You’ll soon see how
+important those math things we did above were. First let’s look at a few
+examples of what these Java methods might look like:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop1</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This is a pretty standard function. Let’s look at another one.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop2</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">*</span><span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>One more.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop3</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>I think we’ve seen enough. All of these look basically the same. There isn’t much more to change here. Don’t worry about finding the runtimes of those things above, we’ll do that soon.</p>
+
+<p>Just 3 things changed across all of those functions:</p>
+<ol>
+  <li>The exit condition of the loop. Say the biggest value $i$ can be is $g(N)$.
+This means our exit condition is $i &lt; g(N)$.</li>
+  <li>How $i$ increments every iteration as a function of the previous $i$.</li>
+  <li>How much work gets done inside the loop as a function of $i$. Call this function $f(i)$.</li>
+</ol>
+
+<p>With these things, we can quickly find the runtime of the function by making a summation:</p>
+
+\[f(i_1) + f(i_2) + f(i_3) + ... + f(g(N))\]
+
+<p>Here, $i_1$ is the first value of $i$, $i_2$ is the second value of $i$ and so
+on. The way that $i$ increments will help us figure out these values. $g(N)$ is
+the last term as you might have guessed since it is the last value that $i$
+takes on, and we must take $f(g(N))$ to see how much work the last iteration
+does.</p>
+
+<p>You’ll find these functions $f, g$ in your problem as well as $i_1, i_2, i_3, …$ and then simplify the summation according to the correct formula (i.e. if it’s arithmetic square the last term, if it’s geometric do not square the last term).</p>
+
+<p>That’s it. Let’s revisit <code class="language-plaintext highlighter-rouge">loop1</code> and see how to actually do this.</p>
+
+<h3 id="loop-1">Loop 1</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop1</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>$i &lt; N$ is the exit condition, so $g(i) = N$</li>
+  <li>$i = i + 1$ is the increment function</li>
+  <li>???</li>
+</ol>
+
+<p>I hope you see how we got the first 2. I just looked at the for-loop and it’s those last 2 things. Pretty simple right?</p>
+
+<p>What about how much work gets done as a function of $i$? Well, it’s simply $1$. You might be confused, and that’s ok. Why $1$? Because printing an integer is a <strong>constant time</strong> operation. Another way of saying this is that <code class="language-plaintext highlighter-rouge">System.out.println(i)</code> is $\Theta(1)$. It doesn’t depend on $i$. So we say that $f(i) = 1$. Think of this as a definition.</p>
+
+<p>Ok, now we’re ready for the next step: making the summation.</p>
+
+\[f(i_1) + f(i_2) + f(i_3) + f(i_4) + ... + f(g(N))\]
+
+<p>We know that $i_1 = 0, i_2 = 1, i_3 = 2, i_4 = 3$ and so on. Also, we know that $g(N) = N$.</p>
+
+\[f(0) + f(1) + f(2) + f(3) + ... + f(N)\]
+
+<p>We know that $f(i) = 1$, so:</p>
+
+\[1 + 1 + 1 + 1 + ... + 1\]
+
+<p>This summation is super easy. It’s just $1$ repeatedly added! How many terms are here? Well, if we look at the values of $i$, it forms a simple sequence of numbers, and we quickly see that there are $N$ terms total. So we can simplify this to $N \cdot 1 = N \in \Theta(N)$.</p>
+
+<p>Important thing to notice: if the work done per iteraiton is constant with respect to $i$, you can simply <strong>count the number of iterations</strong> and put $\Theta$ on that number.</p>
+
+<p>Let’s do <code class="language-plaintext highlighter-rouge">loop2</code> which is slightly more complicated.</p>
+
+<h3 id="loop-2">Loop 2</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop2</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">*</span><span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>$i &lt; N^2$ is the exit condition, so $g(i) = N^2$</li>
+  <li>$i = i + 1$ is the increment function</li>
+  <li>???</li>
+</ol>
+
+<p>Again, the first 2 aren’t too bad to get. Just reading the code.</p>
+
+<p>What about how much work gets done as a function of $i$? The inside is a bit trickier. It’s making an array of length $i$, which does $i$ work (since it needs to make a memory box for every index). Thus, $f(i) = i$.</p>
+
+<p>Ok, now we’re ready for the next step: making the summation.</p>
+
+\[f(i_1) + f(i_2) + f(i_3) + f(i_4) + ... + f(g(N))\]
+
+<p>We know that $i_1 = 0, i_2 = 1, i_3 = 2, i_4 = 3, $ and so on. Also, we know that $g(N) = N^2$.</p>
+
+\[f(0) + f(1) + f(2) + f(3) + ... + f(N^2)\]
+
+<p>We know that $f(i) = i$, so:</p>
+
+\[0 + 1 + 2 + 3 + ... + N^2\]
+
+<p>Does this summation look familiar? It should. We look at the first few terms and determine it’s arithmetic, so we take the last term, square it, and put $\Theta$ on it. The last term is $N^2$, squaring that gives $N^4$, and putting the bound gives a final answer of $\Theta(N^4)$. Done.</p>
+
+<p>Finally, let’s do <code class="language-plaintext highlighter-rouge">loop3</code>.</p>
+
+<h3 id="loop-3">Loop 3</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">loop3</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>$i &lt; N$ is the exit condition, so $g(i) = N$</li>
+  <li>$i = i * 2$ is the increment function</li>
+  <li>???</li>
+</ol>
+
+<p>Again, the first 2 aren’t too bad to get. Just reading the code.</p>
+
+<p>What about how much work gets done as a function of $i$? It’s constant. Not a function of $i$. So, $f(i) = 1$.</p>
+
+<p>Now here we <em>could</em> continue with the rest of the problem, or remember what I said above. I’ll repeat it.</p>
+
+<blockquote>
+  <p>Important thing to notice: if the work done per iteraiton is constant with respect to $i$, you can simply <strong>count the number of iterations</strong> and put $\Theta$ on that number.</p>
+</blockquote>
+
+<p>Let’s generate a sequence of the values of $i$:</p>
+
+\[i_1, i_2, i_3, i_4, ... , g(N)\]
+
+\[1, 2, 4, 8, ... N\]
+
+<p>We’re basically done. I did this above in the previous section. We know there are $\Theta(\log N)$ terms here. So, that’s it. The work this Java function does is simply how many iterations there are which is $\Theta(\log N)$.  Done.</p>
+
+<h3 id="sumary-of-single-loop-java-methods">Sumary of single loop Java methods</h3>
+
+<p>We learned a strategy for approaching these.</p>
+
+<ol>
+  <li>Figure out the last value of $i$ as a function of $N$. Call this $g(N)$.</li>
+  <li>Figure out the increment function of $i$.</li>
+  <li>Figure out the work done per iteration as a function of $i$. Call this $f(i)$.</li>
+</ol>
+
+<p>Once you have the above, you simply write out the summation as:
+\(f(i_1) + f(i_2) + f(i_3) + f(i_4) + ... + f(g(N))\)</p>
+
+<p>You figure out what $i_1, i_2, i_3, i_4, …$ are by looking at the increment function for $i$. Then, plug in everything you know and then simplify the sum. Voila, that’s it.</p>
+
+<p>We also saw that if $f(i) = 1$ (i.e. the work done inside the for-loop is constant with respect to $i$), then we can just figure out how many elements are in the sequence $i_1, i_2, i_3, i_4, …$ and put a $\Theta$ on that.</p>
+
+<p>After a few of these problems, you’ll likely be able to look at a single loop and instantly tell what its runtime is. That’s good!</p>
+
+<p>You might think that I overcomplicated things here. That there are shortcuts. And you’re right. There are shortcuts. But there are so many shortcuts. There is no way I could possibly detail every shortcut you can take in this guide, nor is it that helpful for you as someone learning asymptotics. The goal of this is to give you <strong>strategies</strong> to figure out the answer yourself. You’ll see in the next section when we do double loops that this method pays off and is really easy to extend.</p>
+
+<p>You should try a few functions before moving onto the next section. Try making your own functions with different $f, g$ functions and different ways to increment $i$. You <em>might</em> run into summations that you don’t know how to simplify, and you should either ask a TA/friend/post on 
+Ed or just leave it. For example, you might get a summation like:
+\(\sqrt{1} + \sqrt{2} + \sqrt{3} + ... \sqrt{N}\)</p>
+
+<p>and you can just leave it like that. I don’t know how to simplify that and it’s out of the scope of this class.</p>
+
+<h2 id="double-loops">Double loops</h2>
+<p>I made this a separate section but really it’s no different than single loops. It is a bit more involved, so I want to go over them with you. Firstly, let me show you a few examples of double loops:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dLoop1</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Pretty standard. Let’s check out another one.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dLoop2</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And one more:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dLoop3</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span> <span class="o">*</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Firstly, do not fall down the oldest trick in the book. Do not multiply the number of iterations of the outer loop by the number of iteration of the inner loop. That’s almost never what you’re supposed to do. It’s a common mistake many students make because they try taking a shortcut. Shortcuts are nice, but don’t use them unless you’re sure of how to use it!!</p>
+
+<p>With that out of the way, let’s talk about how you do these. It’s literally the same as single loops:</p>
+<blockquote>
+
+  <ol>
+    <li>Figure out the last value of $i$ as a function of $N$. Call this $g(N)$.</li>
+    <li>Figure out the increment function of $i$.</li>
+    <li>Figure out the work done per iteration as a function of $i$. Call this $f(i)$.</li>
+  </ol>
+
+  <p>Once you have the above, you simply write out the summation as:
+\(f(i_1) + f(i_2) + f(i_3) + f(i_4) + ... + f(g(N))\)
+You figure out what $i_1, i_2, i_3, i_4, …$ are by looking at the increment function for $i$. Then, 
+plug in everything you know and then simplify the sum. Voila, that’s it.</p>
+</blockquote>
+
+<p>Here, $f(i)$ is the work of the inner loop as a function of $i$!!</p>
+
+<p>So, let’s make steps for ourselves:</p>
+<ol>
+  <li>Figure out the work done of the inner loop as a function of $i$. Call this $f(i)$.</li>
+  <li>Take this $f(i)$, and use it to find the work the outer loop does. Put $\Theta$ on it.</li>
+</ol>
+
+<p>Note that $i$ is held fixed within the inner loop. So $N$ is to $i$ as $i$ is to $j$. Hopefully that makes sense. What I mean is that when we figure out the asymptotic runtime of the outer loop, we do it with respect to $N$ and $i$ is the variable that increments. When we figure out the work done in the inner loop, we do it with respect to $i$ and $j$ is the variable that increments.</p>
+
+<p>That’s it. Let’s see it in action with <code class="language-plaintext highlighter-rouge">dLoop1</code></p>
+
+<h3 id="double-loop-1">Double Loop 1</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dLoop1</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Step 1 is to find the work done of the inner loop as a function of $i$. One neat little trick is to just isolate your attention to just look at the inner loop:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+	<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Do you notice anything peculiar about the inner loop? It has an $i$, but we just print it. So, the work done of the inner loop as a function of $i$ is … constant! Thus, $f(i) = 1$.</p>
+
+<p>Now, we see that it’s basically the same as <code class="language-plaintext highlighter-rouge">loop3</code> above, and we get a final answer of $\Theta(\log N)$. Next one.</p>
+
+<h3 id="double-loop-2">Double Loop 2</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dLoop2</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>A bit more complicated. Now $i$ is in the ending condition of the inner-loop.</p>
+
+<p>Remember, we just isolate ourselves to the inner loop.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="o">;</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>And we want to find the work done of this inner loop as a function of $i$.  Not the asymptotic runtime of this inner loop, but the work done (i.e. not a $\Theta$ bound).</p>
+
+<p>This is simply a single loop! We know how to do those! I’ll skip to the last step, but you should do all the steps to test your understanding and get more practice.</p>
+
+<p>You’ll get this summation:</p>
+
+\[0 + 1 + 2 + 4 + 8 + ... + i\]
+
+<p>We know this summation is $\Theta(i)$.</p>
+
+<p>But I said not to take a $\Theta$ of this since we want the work done.</p>
+
+<p>This is where things get a little bit weird.</p>
+
+<p>We can pretend that the work done is $i$, so we can pretend that</p>
+
+\[0 + 1 + 2  + 4 + 8 + ... + i\]
+
+<p>evaluates to $i$. It does not (clearly). But, since we’re doing asymptotics, we can do weird things like this. Bear with me for now.</p>
+
+<p>So $f(i) = i$.</p>
+
+<p>Now we do the single loop stuff and get this summation:</p>
+
+\[1 + 2 + 3 + 4 + ... + N\]
+
+<p>You’ve seen this many times now. It’s simply $\Theta(N^2)$.</p>
+
+<p>So <code class="language-plaintext highlighter-rouge">dloop2</code> has an asymptotic runtime of $\Theta(N^2)$.</p>
+
+<p>Back to the weirdness of earlier. We said that since $f(i) \in \Theta(i)$ that $f(i) = i$. This is not generally true, but for asymptotics we can just say this. If $f(i)$ was actually $10i$, we’d get the same answer. Go ahead, plug it in if you don’t believe me. So this is a <strong>shortcut</strong>.</p>
+
+<h3 id="double-loop-3">Double Loop 3</h3>
+
+<p>Final one:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">dLoop3</span><span class="o">(</span><span class="kt">int</span> <span class="no">N</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="no">N</span> <span class="o">*</span> <span class="no">N</span><span class="o">;</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Step 1 is to find the work done of the inner loop as a function of $i$.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="nc">Math</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">i</span><span class="o">);</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+	<span class="kt">int</span><span class="o">[]</span> <span class="n">x</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">j</span><span class="o">];</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>EDIT: in an earlier (wrong) version of this guide, the update was instead <code class="language-plaintext highlighter-rouge">j = j * 2</code> which lead to a weird sum that you’re not expected to know how to simplify (I don’t know how to simplify it either).</p>
+
+<p>I’ll again skip the steps and go straight to the summation, but you should do it from the start. Practice makes better.</p>
+
+\[1 + 2 + 3 + 4 + ... + \sqrt{i}\]
+
+<p>Which we know is $\Theta((\sqrt{i})^2) = \Theta(i)$, and we’ll do the same shortcut to say that $f(i) = i$.</p>
+
+<p>Now, with the outer loop we’ll use this function $f(i) = i$ and we get the summation:</p>
+
+\[1 + 2 + 3 + 4 + ... + N^2\]
+
+<p>This is an arithmetic summation, so we take the last term, square it, and throw a $\Theta$ on it.
+Thus, <code class="language-plaintext highlighter-rouge">dLoop3</code> has a running time that is $\Theta((N^2)^2) = \Theta(N^4)$.</p>
+
+<p>I hope you see that this is really not that bad. It’s just sticking to the rules.</p>
+
+<h3 id="summary-of-double-loop-java-methods">Summary of double loop Java methods</h3>
+
+<p>We learned a strategy for approaching these.</p>
+
+<ol>
+  <li>Figure out the work done in the inner loop as a function of $i$. Call this $f(i)$.</li>
+  <li>Use this $f(i)$ with the outer loop and the same exact process</li>
+</ol>
+
+<p>Unlike singe loops, you’ll likely <strong>not</strong> be able to look at a double loop and instantly tell what its runtime is. That’s OK. Whenever I do double loops I always write it out since it’s so easy to make. a mistake if you try to do it in your head. The process is tried and tested, so just practice using it and you’ll always get these ones right.</p>
+
+<p>You should now appreciate the way we did single loops. It made double loops so much easier. You could even do triple, quadruple, and more loops. But … that’s super annoying. I’m not saying it’s out of scope for any exam since it’s basically the same thing as a double loop, I’m just saying it’s annoying.</p>
+
+<p>You should try a few functions before moving onto the next section. Just like with single loops, try making your own functions with different $f, g$ functions and different ways to increment $i$. You’re more likely to run into summations that you don’t know how to simplify, and you should either ask a TA/friend/post on Ed or just leave it.</p>
+
+<p>That’s it for nested loop asymptotics questions. You are now certified to do loop problems and teach your friends too as that is the absolute best way to learn. Next up is recursion!</p>
+
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

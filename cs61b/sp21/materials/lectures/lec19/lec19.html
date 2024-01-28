@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multi-Dimensional Data Study Guide | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Multi-Dimensional Data Study Guide</header><div class="due-date">Author: Kartik Kapur</div><ul id="markdown-toc">
+  <li><a href="lec19.html#qa" id="markdown-toc-qa">QA</a></li>
+  <li><a href="lec19.html#check-in-exercise" id="markdown-toc-check-in-exercise">Check-in Exercise</a></li>
+  <li><a href="lec19.html#overview" id="markdown-toc-overview">Overview</a></li>
+</ul>
+
+<h2 id="qa">QA</h2>
+<p>Linked <a href="https://youtu.be/NAz4u_DdSqI">here</a>.</p>
+
+<h2 id="check-in-exercise">Check-in Exercise</h2>
+<p>Linked <a href="https://forms.gle/HgtAGmNKscfecc2v7">here</a>.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p><strong>Additional Set Operations</strong> There are many other operations we might be interested
+in supporting on a set. For example, we might have a <code class="language-plaintext highlighter-rouge">select(int i)</code> method that
+returns the ith smallest item in the set. Or we might have a <code class="language-plaintext highlighter-rouge">subSet(T from, T to)</code> operation that returns all items in the set between <code class="language-plaintext highlighter-rouge">from</code> and <code class="language-plaintext highlighter-rouge">to</code>. Or if we have some notion of distance, we
+might have a <code class="language-plaintext highlighter-rouge">nearest(T x)</code> method that finds the closest item in the set to x.</p>
+
+<p>On 1D data, it is relatively straightforward to support such operations efficiently. If we use only one of the coordinates (e.g. X or Y coordinate), the structure of our data will fail to reflect the full ordering of the data.</p>
+
+<p><strong>QuadTrees</strong></p>
+
+<p>A natural approach is to make a new type of Tree– the QuadTree. The QuadTree has 4 neighbors,
+ Northwest,Northeast, Southwest, and Southeast. As you move your way down the tree to support queries, it is possible to prune branches that do not contain a useful result.</p>
+
+<p><strong>K-D Trees</strong> One final data structure that we have for dealing with 2 dimensional
+data is the K-d Tree. Essentially the idea of a K-D tree is that it’s a
+normal Binary Search Tree, except we alternate what value we’re looking at when
+ we traverse through the tree. For example at the root everything to the left
+has an X value less than the root and everything to the right has a X value greater
+than the root. Then on the next level, every item to the left of some node has a
+Y value less than that item and everything to the right has a Y value greater than it. Somewhat surprisingly, KdTrees are quite efficient.</p>
+
+<!--Effectively, then, you know how to insert into an LLRB, but just in case you want to insert into LLRBs directly without interconverting, you can instead add the new node with a red link, and then apply the three cases below recursively.
+
+Case 3: A parent node has a black left child and a red right child, so rotate the parent left. The former right child is now the boss. Reminder: null links are considered black for the purposes of deciding cases.
+
+Case 2: A grandparent node has a red left child whose left child is also red. Rotate this grandparent right (so that one in the middle is now the boss).
+
+Case 1: A parent node has two red children. Flip colors.
+Conveniently, we can always apply case 3, case 2, then case 1 to every node in a tree, and we can guarantee that the entire tree will be an LLRB. -->
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

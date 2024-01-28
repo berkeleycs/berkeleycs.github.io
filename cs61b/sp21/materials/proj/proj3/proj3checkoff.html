@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 3 Lab Demo Checkoff Script | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 3 Lab Demo Checkoff Script</header><p>Project 3 Lab Demo Checkoff Script</p>
+
+<p>Project 3 Demos will be conducted asynchronously. By asynchronous, we mean that an instructor will pull your partner repository and go through the below checkoff list to grade your project submission. We’ll have an optional showcase near the end of the semester with the ability for other students to play your game if you feel as though you’ve built something you want to share with your classmates!</p>
+
+<p>With the nature of asynchronous demos, we will have you and your partner fill out a form in which you will detail all of your ambition features as well as clear and concise instructions on how to use these features. Be very specific here, as if you aren’t specific enough a TA might not be able to use your feature and mistakenly not give you those points. We will provide a way for you to request a regrade, but we recommend that you get it right the first time to avoid the trouble. It’s also of utmost importance that your code uses only libraries in java.* and the skeleton’s library-sp21 folder. If your code uses additional libraries, then the instructor will not be able to compile nor run your code and you will receive a 0 on the checkoff. The majority of the points are in the checkoff (1240 out of 1600), so please make sure you’ve only used those libraries.</p>
+
+<p>The following is what the instructor will exactly do when checking you off asynchronously: we recommend you do a dry-run of this to ensure you didn’t miss anything. You can clone your repository in some random destination on your computer (like your home directory) if you want to follow along and simulate your checkoff.</p>
+
+<ul>
+  <li>
+    <p>The Instructor will first clone your partner repository</p>
+  </li>
+  <li>
+    <p>Then, the Instructor will checkout to the commit SHA you specified in your form submission. If this SHA doesn’t exist, they’ll grade the origin/HEAD commit.</p>
+  </li>
+  <li>
+    <p>Then, the Instructor will see if the specified commit is before the due date.</p>
+  </li>
+  <li>
+    <p>Then, the Instructor will see if the specified commit matches the code
+submitted to the Phase 2 autograder on Gradescope.</p>
+  </li>
+  <li>
+    <p>The due date is the same as the due date for Phase 2 on Gradescope</p>
+  </li>
+  <li>
+    <p>If the date for the selected commit is late, the pair will receive a 50% point deduction on the demo checkoff grade: this means if your demo scored a 1000/1240 for the demo, you’ll get 500/1240 because of the lateness penalty.</p>
+  </li>
+  <li>
+    <p>They will then grade each requirement of the game. Each requirement can either be evaluated as full points, half points, or zero points</p>
+  </li>
+</ul>
+
+<h3 id="basic-world-functionality-572-points-total">Basic World Functionality (572 points total)</h3>
+
+<ul>
+  <li>
+    <p>The Instructor will run your project and will check for the following features</p>
+  </li>
+  <li>
+    <p>The world has a main menu screen with a New World, Load, and Quit option (15 points)</p>
+  </li>
+  <li>
+    <p>The Instructor will hit “n” or “N” (they may do either) and check that the world prompts for a seed (15 points)</p>
+  </li>
+  <li>
+    <p>The Instructor should type in a few random numbers and hit “s” or “S” (they may do either) which should immediately start the world (29 points)</p>
+  </li>
+  <li>
+    <p>At this point the program should be running and there should be a visible world</p>
+  </li>
+  <li>
+    <p>World has visually distinct walls and floors (29 points)</p>
+  </li>
+  <li>
+    <p>World has hallways which are 1 or 2 tiles wide with at least 1 containing a turn in it (44 points)</p>
+  </li>
+  <li>
+    <p>World has some number of rooms that are connected via hallways (88 points)</p>
+  </li>
+  <li>
+    <p>The Instructor will now try the basic commands that should be available during gameplay</p>
+  </li>
+  <li>
+    <p>Instructor should hit the W, A, S, and D keys randomly and check the player movement is consistent with the key pressed (29 points)</p>
+  </li>
+  <li>
+    <p>Instructor should hover over 3 different tiles and make sure their names show up somewhere on screen and that the names make sense (74 points)</p>
+  </li>
+  <li>
+    <p>Instructor should move into a wall and make sure the player stops at the wall instead of moving into it (29 points)</p>
+  </li>
+  <li>
+    <p>Instructor should type “:q” or “:Q” (they may do either) which should quit the world and close the program. Instructor should remember the world layout at this point (29 points)</p>
+  </li>
+  <li>
+    <p>The program is now closed and we will test the load feature</p>
+  </li>
+  <li>
+    <p>The Instructor will run the world again after it has been closed and the main menu should appear again.</p>
+  </li>
+  <li>
+    <p>Instructor should hit “l” or “L” and the world should immediately start (29 points)</p>
+  </li>
+  <li>
+    <p>Instructor should check that the world layout is exactly as it was before closing the world (44 points)</p>
+  </li>
+  <li>
+    <p>Instructor will run through the basic commands again (listed above) to make sure the world still works (37 points)</p>
+  </li>
+  <li>
+    <p>Instructor will quit and load again and make sure that the basic commands work (44 points).</p>
+  </li>
+  <li>
+    <p>Instructor will check that “q” or “Q” alone does not quit the game (37 points).</p>
+  </li>
+</ul>
+
+<h3 id="randomness-308-points-total">Randomness (308 points total)</h3>
+
+<ul>
+  <li>
+    <p>The Instructor should close the world again and will begin testing to see if worlds are randomly generated.</p>
+  </li>
+  <li>
+    <p>Instructor should check that the use of randomness does not lead to a severe limitation on the variety of worlds (ie. randomly choosing a world layout from a finite set of worlds)</p>
+  </li>
+  <li>
+    <p>The Instructor should open the world 3-5 times, making sure to use a different seed each time</p>
+  </li>
+  <li>
+    <p>The Instructor will be looking for your world’s ability to generate variety in both world structure and player experience while exploring that world. What this means is when two different seeds are used to generate new worlds, these worlds should not feel identical (or close to identical).</p>
+  </li>
+  <li>
+    <p>The grading breakdown is as follows:</p>
+  </li>
+  <li>
+    <p>308 points: The worlds are mainly random, as described by the above section.</p>
+  </li>
+  <li>
+    <p>154 points: The world exhibits a few random elements, but generally looks the same</p>
+  </li>
+  <li>
+    <p>0 points: The world contains no random elements.</p>
+  </li>
+</ul>
+
+<h3 id="ambition-points-360-points-max">Ambition Points (360 points max)</h3>
+
+<ul>
+  <li>
+    <p>The student should state and demonstrate the features that are in the Ambition category. You should be very explicit about how to “activate” or use that feature.</p>
+  </li>
+  <li>
+    <p>In the space below, the Instructor will write in the features the student successfully demonstrated and their point values based on the spec, awarding either Full, Half, or Zero credit for each item.</p>
+  </li>
+  <li>
+    <p>The list of possible ambition points can be found <a href="proj3.html#ambition-score">here</a></p>
+  </li>
+</ul>
+
+<h2 id="getting-a-second-opinion">Getting a Second Opinion</h2>
+
+<p>When we give you back your grades and did not agree with your score, you can submit a regrade request with evidence that you were misgraded, and the instructor will relook at your project. Details will be released as we approach the deadline.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

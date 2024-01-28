@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 1: Data Structures | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 1: Data Structures</header><ul id="markdown-toc">
+  <li><a href="proj1.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="proj1.html#getting-the-skeleton-files" id="markdown-toc-getting-the-skeleton-files">Getting the Skeleton Files</a>    <ul>
+      <li><a href="proj1.html#packages" id="markdown-toc-packages">Packages</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1.html#the-deque-api" id="markdown-toc-the-deque-api">The Deque API</a></li>
+  <li><a href="proj1.html#project-tasks" id="markdown-toc-project-tasks">Project Tasks</a>    <ul>
+      <li><a href="proj1.html#1-linked-list-deque" id="markdown-toc-1-linked-list-deque">1. Linked List Deque</a></li>
+      <li><a href="proj1.html#2-array-deque" id="markdown-toc-2-array-deque">2. Array Deque</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1.html#extra-credit-checkpoint" id="markdown-toc-extra-credit-checkpoint">Extra Credit: Checkpoint</a></li>
+  <li><a href="proj1.html#testing" id="markdown-toc-testing">Testing</a></li>
+  <li><a href="proj1.html#extra-credit-autograder" id="markdown-toc-extra-credit-autograder">Extra Credit: Autograder</a></li>
+  <li><a href="proj1.html#maxarraydeque" id="markdown-toc-maxarraydeque">MaxArrayDeque</a></li>
+  <li><a href="proj1.html#deque-interface" id="markdown-toc-deque-interface">Deque Interface</a></li>
+  <li><a href="proj1.html#guitar-hero" id="markdown-toc-guitar-hero">Guitar Hero</a>    <ul>
+      <li><a href="proj1.html#the-gh2-package" id="markdown-toc-the-gh2-package">The GH2 Package</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1.html#guitarstring" id="markdown-toc-guitarstring">GuitarString</a>    <ul>
+      <li><a href="proj1.html#guitarherolite" id="markdown-toc-guitarherolite">GuitarHeroLite</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1.html#just-for-fun-ttfaf" id="markdown-toc-just-for-fun-ttfaf">Just For Fun: TTFAF</a></li>
+  <li><a href="proj1.html#even-more-fun" id="markdown-toc-even-more-fun">Even More Fun</a></li>
+  <li><a href="proj1.html#why-it-works" id="markdown-toc-why-it-works">Why It Works</a></li>
+  <li><a href="proj1.html#submission-and-grading" id="markdown-toc-submission-and-grading">Submission and Grading</a></li>
+  <li><a href="proj1.html#frequently-asked-questions" id="markdown-toc-frequently-asked-questions">Frequently Asked Questions</a>    <ul>
+      <li><a href="proj1.html#deque" id="markdown-toc-deque">Deque</a>        <ul>
+          <li><a href="proj1.html#q-how-should-i-print-the-items-in-my-deque-when-i-dont-know-their-type" id="markdown-toc-q-how-should-i-print-the-items-in-my-deque-when-i-dont-know-their-type">Q: How should I print the items in my deque when I don’t know their type?</a></li>
+          <li><a href="proj1.html#q-i-cant-get-java-to-create-an-array-of-generic-objects" id="markdown-toc-q-i-cant-get-java-to-create-an-array-of-generic-objects">Q: I can’t get Java to create an array of generic objects!</a></li>
+          <li><a href="proj1.html#q-i-tried-that-but-im-getting-a-compiler-warning" id="markdown-toc-q-i-tried-that-but-im-getting-a-compiler-warning">Q: I tried that but I’m getting a compiler warning?</a></li>
+          <li><a href="proj1.html#q-how-do-i-make-my-arrows-point-to-particular-fields-of-a-data-structure" id="markdown-toc-q-how-do-i-make-my-arrows-point-to-particular-fields-of-a-data-structure">Q: How do I make my arrows point to particular fields of a data structure?</a></li>
+        </ul>
+      </li>
+      <li><a href="proj1.html#guitar-hero-1" id="markdown-toc-guitar-hero-1">Guitar Hero</a>        <ul>
+          <li><a href="proj1.html#im-getting-a-class-file-contains-wrong-class-error" id="markdown-toc-im-getting-a-class-file-contains-wrong-class-error">I’m getting a “class file contains wrong class” error.</a></li>
+          <li><a href="proj1.html#im-getting-a-message-that-i-did-not-override-an-abstract-method-but-i-am" id="markdown-toc-im-getting-a-message-that-i-did-not-override-an-abstract-method-but-i-am">I’m getting a message that I did not override an abstract method, but I am!</a></li>
+          <li><a href="proj1.html#when-i-try-to-run-the-provided-tests-i-get-no-runnable-methods" id="markdown-toc-when-i-try-to-run-the-provided-tests-i-get-no-runnable-methods">When I try to run the provided tests I get “No runnable methods”.</a></li>
+          <li><a href="proj1.html#when-i-try-to-compile-my-code-it-says-type-k1-is-not-compatible-with-type-k2-or-something-similar" id="markdown-toc-when-i-try-to-compile-my-code-it-says-type-k1-is-not-compatible-with-type-k2-or-something-similar">When I try to compile my code, it says type K#1 is not compatible with type K#2, or something similar.</a></li>
+          <li><a href="proj1.html#im-getting-a-strange-autograder-error" id="markdown-toc-im-getting-a-strange-autograder-error">I’m getting a strange autograder error!</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="proj1.html#tips" id="markdown-toc-tips">Tips</a></li>
+</ul>
+
+<p>The due date for this project is 02/16, but to keep you on track we have an
+extra credit checkpoint on 02/05 that will be a smaller version of the
+autograder for the project. More details later in the spec.</p>
+
+<p>You will also push your <code class="language-plaintext highlighter-rouge">snaps-sp21-s***</code> repo at the end of the assignment to
+get your Gradescope score into Beacon. More on that later.</p>
+
+<p><strong>Recall you can only use 2 slip days on this project</strong> because of the
+dependency between Project 1 and Lab 4.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In Project 1, we will build implementations of a “Double Ended Queue” using
+both lists and arrays in a <strong>package</strong> that other classes can use. The project
+is roughly split into two halves: the data structure portion and the application
+portion.</p>
+
+<p>In the data structure part of the project, you will create two Java files:
+<code class="language-plaintext highlighter-rouge">LinkedListDeque.java</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque.java</code>, with public methods listed
+below. You will be verifying the correctness of these data structures yourself
+using the randomized and timing test skills you gained from Lab 3.</p>
+
+<p>In the application part of this project, you’ll create a Java file
+<code class="language-plaintext highlighter-rouge">MaxArrayDeque.java</code> as well as use your package to ultimately 
+implement a sound synthesizer capable of playing music from Guitar Hero.
+You must test your <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code>, but we’ll provide the tests for sound
+synthesizer.</p>
+
+<p>We will provide relatively little scaffolding. In other
+words, we’ll say what you should do, but not how.</p>
+
+<p>For this project, you must work alone! Please carefully read the <a href="https://sp21.datastructur.es/about.html#project-collaboration-policy">Policy on
+Collaboration and Cheating</a> to see what
+this means exactly.</p>
+
+<p>Additionally, <strong>we will be enforcing style</strong>. You must follow the <a href="../../guides/style-guide.html">style guide</a> or you will lose points on the autograder.</p>
+
+<h2 id="getting-the-skeleton-files">Getting the Skeleton Files</h2>
+
+<p>As with Project 0, you should start by downloading the skeleton files.</p>
+
+<p>To do this, head to the folder containing your copy of your repository. For
+example, if your login is ‘s101’, then head to the ‘sp21-s101’ folder (or any
+subdirectory).</p>
+
+<p>To make sure you have the latest copy of the skeleton files, use the command:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull skeleton master
+</code></pre></div></div>
+<p>If you’re using a newer version of git, you might need to run:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull skeleton master <span class="nt">-allow-unrelated-histories</span>
+</code></pre></div></div>
+
+<p>You should now see a proj1 directory appear with two folders:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> proj1
+├── deque
+│   └── LinkedListDequeTest.java
+└── gh2
+    ├── GuitarHeroLite.java
+    ├── GuitarPlayer.java
+    ├── GuitarString.java
+    ├── TTFAF.java
+    └── TestGuitarString.java
+</code></pre></div></div>
+
+<p>If you get some sort of error, STOP and either figure it out by carefully
+reading the <a href="../../guides/using-git.html">git guide</a> or seek help at OH or Ed. You’ll potentially save
+yourself a lot of trouble vs. guess-and-check with git commands. If you find
+yourself trying to use commands recommended by Google like 
+<code class="language-plaintext highlighter-rouge">force push</code>,
+<a href="https://twitter.com/heathercmiller/status/526770571728531456">don’t</a>. <strong>Don’t
+use force push, even if a post you found on Stack Overflow says to do it!</strong></p>
+
+<p>The only provided files in the skeleton are the <code class="language-plaintext highlighter-rouge">deque/LinkedListDequeTest.java</code>
+file as well as some skeleton for the second part of this project located in
+the <code class="language-plaintext highlighter-rouge">gh2</code> folder (guitar hero 2).
+The <code class="language-plaintext highlighter-rouge">deque/LinkedListDequeTest.java</code> file provides examples of how you might
+write tests to verify the correctness of your code. We strongly encourage you
+try out the given tests, as well as to write your own, as these tests <strong>are
+not</strong> comprehensive.</p>
+
+<p>The tests in this file are also the exact tests that will be used in the
+checkpoint to assess your progress on your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> implementation,
+but we will also have additional tests for <code class="language-plaintext highlighter-rouge">ArrayDeque</code> that we do not give you.
+More details on the appear checkpoint later in the spec.</p>
+
+<p>Before we get into the details of the Deque API and the implementation
+requirements, let’s briefly talk about packages and why we are using them
+in this project.</p>
+
+<h3 id="packages">Packages</h3>
+
+<p>Part of this project is using packages to separate logic and functionality.
+At the end of the project, you’ll have two packages: the <code class="language-plaintext highlighter-rouge">deque</code> package that
+provides an implementation of the <code class="language-plaintext highlighter-rouge">Deque</code> data structure, and the <code class="language-plaintext highlighter-rouge">gh2</code> package
+that implements a synthesizer used to play guitar hero. You should already see
+folders with these names in the starter code, and your job is to implement them.
+Let’s look at the specifics for what a package really <em>is</em>.</p>
+
+<p>A package is a collection of Java classes that all work together towards some
+common goal. We’ve already seen packages in CS 61B without knowing it. For example,
+<code class="language-plaintext highlighter-rouge">org.junit</code> is a package that contains various classes useful for testing,
+including our familiar <code class="language-plaintext highlighter-rouge">Assert</code> class, which contains useful static methods like
+<code class="language-plaintext highlighter-rouge">assertEquals</code>. In other words, when we saw <code class="language-plaintext highlighter-rouge">org.junit.Assert.assertEquals</code>, the
+<code class="language-plaintext highlighter-rouge">org.junit</code> was the package name, <code class="language-plaintext highlighter-rouge">Assert</code> was the class name, and
+<code class="language-plaintext highlighter-rouge">assertEquals</code> was the method name. We call <code class="language-plaintext highlighter-rouge">org.junit.Assert.assertEquals</code> the
+“canonical name” of the method, and we call <code class="language-plaintext highlighter-rouge">assertEquals</code> the “simple name” of
+the method.</p>
+
+<p>When creating a package, we specify that code is part of a package by specifying
+the package name at the top of the file using the <code class="language-plaintext highlighter-rouge">package</code> keyword. For example,
+if we wanted to declare that a file is part of the <code class="language-plaintext highlighter-rouge">deque</code>
+package, we’d add the following line to the top of the file.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">deque</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>If a programmer wanted to use a class or method from our
+<code class="language-plaintext highlighter-rouge">deque</code> package, they would have to either use the full
+canonical name, e.g. <code class="language-plaintext highlighter-rouge">deque.ArrayDeque</code>, or alternately use <code class="language-plaintext highlighter-rouge">import
+deque.ArrayDeque</code>, at which point they could just use the simple
+name <code class="language-plaintext highlighter-rouge">ArrayDeque</code>. So <code class="language-plaintext highlighter-rouge">import</code> statements just allow you to use the simple
+name of a class/method.</p>
+
+<p>Typically, package names are the internet address of the entity writing the
+code, but backwards. For example, the JUnit library is hosted at <code class="language-plaintext highlighter-rouge">junit.org</code>, so
+the package is called <code class="language-plaintext highlighter-rouge">org.junit</code>.</p>
+
+<p>Why are packages useful? It all boils down to that word “canonical”. As long as
+no two programmers use the same package name for their package, we can freely
+use the same class name in several different contexts. For example, there might
+exist a class called <code class="language-plaintext highlighter-rouge">com.hrblock.TaxCalculator</code>, which is different from
+<code class="language-plaintext highlighter-rouge">com.turbotax.TaxCalculator</code>. Given the requirement to either use the full
+canonical name or to use an import, this means we’ll never accidentally use one
+class when we meant to use the other.</p>
+
+<p>Conceptually, you can think of packages as being similar to different folders on
+your computer. When you are building a large system, it is a good idea to
+organize it into different packages.</p>
+
+<p>From this point forwards, most of our code in CS 61B will be part of a package.</p>
+
+<p>With that out of the way, let’s talk about the methods that a Deque should have.</p>
+
+<h2 id="the-deque-api">The Deque API</h2>
+
+<p>The double ended queue is very similar to the SLList and AList classes that
+we’ve discussed in class. Here is a definition from
+<a href="http://www.cplusplus.com/reference/deque/deque/">cplusplus.com</a>.</p>
+
+<blockquote>
+  <p>Deque (usually pronounced like “deck”) is an irregular acronym of double-ended
+queue. Double-ended queues are sequence containers with dynamic sizes that can
+be expanded or contracted on both ends (either its front or its back).</p>
+</blockquote>
+
+<p>Specifically, any deque implementation must have exactly the following
+operations:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public void addFirst(T item)</code>: Adds an item of type <code class="language-plaintext highlighter-rouge">T</code> to the front of the
+deque. You can assume that <code class="language-plaintext highlighter-rouge">item</code> is never <code class="language-plaintext highlighter-rouge">null</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void addLast(T item)</code>: Adds an item of type <code class="language-plaintext highlighter-rouge">T</code> to the back of the
+deque. You can assume that <code class="language-plaintext highlighter-rouge">item</code> is never <code class="language-plaintext highlighter-rouge">null</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public boolean isEmpty()</code>: Returns <code class="language-plaintext highlighter-rouge">true</code> if deque is empty, <code class="language-plaintext highlighter-rouge">false</code> otherwise.</li>
+  <li><code class="language-plaintext highlighter-rouge">public int size()</code>: Returns the number of items in the deque.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void printDeque()</code>: Prints the items in the deque from first to last,
+separated by a space. Once all the items have been printed, print out a new line.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T removeFirst()</code>: Removes and returns the item at the front of the
+deque. If no such item exists, returns <code class="language-plaintext highlighter-rouge">null</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T removeLast()</code>: Removes and returns the item at the back of the
+deque. If no such item exists, returns <code class="language-plaintext highlighter-rouge">null</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T get(int index)</code>: Gets the item at the given index, where 0 is the
+front, 1 is the next item, and so forth. If no such item exists, returns <code class="language-plaintext highlighter-rouge">null</code>.
+Must not alter the deque!</li>
+</ul>
+
+<p>In addition, we also want our two Deques to implement these two special methods:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public Iterator&lt;T&gt; iterator()</code>: The Deque objects we’ll make are iterable (i.e. <code class="language-plaintext highlighter-rouge">Iterable&lt;T&gt;</code>)
+so we must provide this method to return an iterator.</li>
+  <li><code class="language-plaintext highlighter-rouge">public boolean equals(Object o)</code>: Returns whether or not the parameter <code class="language-plaintext highlighter-rouge">o</code> is
+equal to the Deque. <code class="language-plaintext highlighter-rouge">o</code> is considered equal if it is a Deque and if it contains
+the same contents (as goverened by the generic <code class="language-plaintext highlighter-rouge">T</code>’s <code class="language-plaintext highlighter-rouge">equals</code> method) in the same
+order. (ADDED 2/12: You’ll need to use the <code class="language-plaintext highlighter-rouge">instance of</code> keywords for this. Read <a href="https://www.javatpoint.com/downcasting-with-instanceof-operator">here</a> for more information)</li>
+</ul>
+
+<p>ADDED 2/12: You should not have your <code class="language-plaintext highlighter-rouge">Deque</code> interface implement <code class="language-plaintext highlighter-rouge">Iterable</code>
+but rather just the two implementations <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code>.
+If you do the former, our autograder will give you API errors.</p>
+
+<p>You’ll learn what an <code class="language-plaintext highlighter-rouge">Iterator</code> is in lecture 11 (2/12), so don’t worry for
+about it right now. This project is meant to be done little by little as you learn
+more things from lecture and discussion, and it’s a fantastic opportunity to
+practice all the things you learn in this course.</p>
+
+<p>Your class should accept any generic type (not just integers). For information
+on creating and using generic data structures, see <a href="https://docs.google.com/presentation/d/19TTe3JgFscc4RLwokvQ_gOM72DSrfs9Y6ZST_fv3aQ4">lecture
+5</a>.
+Make sure to pay close attention to the rules of thumb on the last slide about
+generics.</p>
+
+<p>In this project, you will provide two implementations for the Deque interface: one powered by a Linked List, and one by a resizing array.</p>
+
+<h2 id="project-tasks">Project Tasks</h2>
+
+<h3 id="1-linked-list-deque">1. Linked List Deque</h3>
+
+<p><em>Note: We covered everything needed in lecture to do this part in Lectures 4
+and 5 (1/27 and 1/25) with the exception of Iterators, which you’ll learn about
+in lecture 11 (2/12).</em></p>
+
+<p>Create a file called <code class="language-plaintext highlighter-rouge">LinkedListDeque.java</code> in your <code class="language-plaintext highlighter-rouge">proj1/deque</code> directory. Make
+sure you declare that it is in the <code class="language-plaintext highlighter-rouge">deque</code> package using the special <code class="language-plaintext highlighter-rouge">package</code>
+keyword.</p>
+
+<p>As your first deque implementation, you’ll build the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> class,
+which will be Linked List based.</p>
+
+<p>Your operations are subject to the following rules:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">remove</code> operations must not involve any looping or recursion. A
+single such operation must take “constant time”, i.e. execution time should not
+depend on the size of the deque. This means that you cannot use loops that go over all/most elements of the deque.</li>
+  <li><code class="language-plaintext highlighter-rouge">get</code> must use iteration, not recursion.</li>
+  <li><code class="language-plaintext highlighter-rouge">size</code> must take constant time.</li>
+  <li>Iterating over the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> using a for-each loop should take time
+proportional to the number of items.</li>
+  <li>Do not maintain references to items that are
+no longer in the deque. The amount of memory that your program uses at any given time must be
+proportional to the number of items. For example, if you add 10,000 items to
+the deque, and then remove 9,999 items, the resulting memory usage should amount to
+a deque with 1 item, and not 10,000. Remember that the Java garbage collector
+will “delete” things for us if and only if there are no pointers to that object.</li>
+</ul>
+
+<p>Implement all the methods listed above in “The Deque API” section.</p>
+
+<p>In addition, you also need to implement:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public LinkedListDeque()</code>: Creates an empty linked list deque.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T getRecursive(int index)</code>: Same as get, but uses recursion.</li>
+</ul>
+
+<p>You may add any private helper classes or methods in <code class="language-plaintext highlighter-rouge">LinkedListDeque.java</code> if
+you deem it necessary. If you do, please add helpful javadoc comments for your
+and your TAs sake.</p>
+
+<p>While this may sound simple, there are many design issues to consider, and you
+may find the implementation more challenging than you’d expect. Make sure to
+consult the lecture on doubly linked lists, particularly the slides on sentinel
+nodes: <a href="https://docs.google.com/presentation/d/1suIeJ1SIGxoNDT8enLwsSrMxcw4JTvJBsMcdARpqQCk/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g829fe3f43_0_291">two sentinel
+topology</a>,
+and <a href="https://docs.google.com/presentation/d/1suIeJ1SIGxoNDT8enLwsSrMxcw4JTvJBsMcdARpqQCk/pub?start=false&amp;loop=false&amp;delayms=3000&amp;slide=id.g829fe3f43_0_376">circular sentinel
+topology</a>.
+I prefer the circular approach. <strong>You are not allowed to use Java’s built in
+LinkedList data structure (or any data structure from <code class="language-plaintext highlighter-rouge">java.util.*</code>) in your
+implementation</strong> and the autograder will instantly give you a 0 if we detect
+that you’ve imported any such data structure.</p>
+
+<h3 id="2-array-deque">2. Array Deque</h3>
+
+<p><em>Note: We’ll have covered everything needed in lecture to do this part by
+lecture 7 (2/03) with the exception of Iterators, which you’ll learn about in
+lecture 11 (2/12).</em></p>
+
+<p>Create a file called <code class="language-plaintext highlighter-rouge">ArrayDeque.java</code> in your <code class="language-plaintext highlighter-rouge">proj1/deque</code> directory. Again,
+use the <code class="language-plaintext highlighter-rouge">package</code> keyword to tell this file that it is part of the <code class="language-plaintext highlighter-rouge">deque</code>
+package.</p>
+
+<p>As your second deque implementation, you’ll build the <code class="language-plaintext highlighter-rouge">ArrayDeque</code> class. This
+deque must use arrays as the core data structure.</p>
+
+<p>For this implementation, your operations are subject to the following rules:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">remove</code> must take constant time, except during resizing
+operations.</li>
+  <li><code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">size</code> must take constant time.</li>
+  <li>The starting size of your array should be 8.</li>
+  <li>The amount of memory that your program uses at any given time must be
+proportional to the number of items. For example, if you add 10,000 items to
+the deque, and then remove 9,999 items, you shouldn’t still be using an array
+of length 10,000ish. For arrays of length 16 or more, your usage factor should
+always be at least 25%. This means that before performing a remove operation that will bring the number of elements in the array under 25% the length of the array, you should resize the size of the array down. For smaller arrays, your usage factor can be
+arbitrarily low.</li>
+</ul>
+
+<p>Implement all the methods listed above in “The Deque API” section.</p>
+
+<p>In addition, you also need to implement:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public ArrayDeque()</code>: Creates an empty array deque.</li>
+</ul>
+
+<p>You may add any private helper classes or methods in <code class="language-plaintext highlighter-rouge">ArrayDeque.java</code> if you
+deem it necessary.</p>
+
+<p>You will need to somehow keep track of what array indices hold the Deque’s front and back elements. We <em>strongly recommend</em> that you treat your array as circular for this
+exercise. In other words, if your front item is at position zero, and you
+<code class="language-plaintext highlighter-rouge">addFirst</code>, the new front should loop back around to the end of the array
+(so the new front item in the deque will be the last item in the underlying
+array). This will result in far fewer headaches than non-circular approaches.
+See the <a href="https://docs.google.com/presentation/d/1XBJOht0xWz1tEvLuvOL4lOIaY0NSfArXAvqgkrx0zpc/edit#slide=id.g1094ff4355_0_450">project 1 demo
+slides</a>
+for more details.</p>
+
+<p>Correctly resizing your array is <strong>very tricky</strong>, and will require some deep thought. Try drawing out various approaches by hand. It may take you quite some time to come up with the right approach, and we encourage you to debate the big ideas with your fellow students or TAs. Make sure that your actual implementation <strong>is by you alone</strong>.</p>
+
+<h2 id="extra-credit-checkpoint">Extra Credit: Checkpoint</h2>
+
+<p>To keep you on track for this project, we have a checkpoint due on 2/05 for 16
+extra credit points. The autograder for the checkpoint will test basic
+functionality of your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> classes: specifically,
+the given tests in <code class="language-plaintext highlighter-rouge">LinkedListDequeTest.java</code> will be used to test
+your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> implementation, and we will use our own
+tests to test your <code class="language-plaintext highlighter-rouge">ArrayDeque</code> implementation. By “basic functionality”, we
+mean all the <code class="language-plaintext highlighter-rouge">add</code> methods, all the <code class="language-plaintext highlighter-rouge">remove</code> methods, the <code class="language-plaintext highlighter-rouge">size</code> method, the
+<code class="language-plaintext highlighter-rouge">isEmpty</code> method, and the
+<code class="language-plaintext highlighter-rouge">get</code> method. This means we will not test your <code class="language-plaintext highlighter-rouge">equals(Object o)</code> nor your
+<code class="language-plaintext highlighter-rouge">iterator()</code> methods.</p>
+
+<p>NOTE: the <code class="language-plaintext highlighter-rouge">isEmpty</code> has been on the grader the whole time but we added this
+to the spec today (2/5). However, if you made the <code class="language-plaintext highlighter-rouge">size</code> method, this method
+should be a piece of cake (you can make it a one-liner).</p>
+
+<p>Importantly, <strong>we will insert
+no more than 8 items in your <code class="language-plaintext highlighter-rouge">ArrayDeque</code></strong>, meaning you shouldn’t have to
+worry about resizing for this checkpoint.</p>
+
+<p>You may choose not to do the checkpoint, but we <strong>highly suggest you do</strong> so
+that you stay on track and earn some extra credit while you’re at it.</p>
+
+<p>The rest of the assignment will not be considered in the checkpoint.</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>Testing is an important part of code writing in industry and academia. It is an
+essential skill that can prevent monetary loss and hazardous bugs in industry,
+or in your case, losing points. Learning how to write good, comprehensive unit
+tests, and developing a good habit of always testing code before shipping are
+some core objectives of CS 61B.</p>
+
+<p>In the start code, we have provided you a very simple sanity check,
+<code class="language-plaintext highlighter-rouge">LinkedListDequeTest.java</code>. To use the sample testing file, you must uncomment
+the lines in the sample tests. Only uncomment a test once you have implemented
+all of the methods used by that test (otherwise it won’t compile). Execute the
+main method to run the tests. When testing your project, <strong>remember you can use
+the visualizer from inside IntelliJ!</strong></p>
+
+<p>You will not submit <code class="language-plaintext highlighter-rouge">LinkedListDequeTest.java</code>. It is for your benefit to write
+more comprehensive tests for both <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> before
+submitting. Note, passing the given tests in <code class="language-plaintext highlighter-rouge">LinkedListDequeTest.java</code> does
+<em>not necessarily</em> mean that you will pass all of the autograder tests or
+receive full credit on the full autograder</p>
+
+<p>Because the part of the goals for this project is for you to build something and assess the
+correctness by yourself, we do not want you to become to reliant on the full
+autograder to verify correctness. Thus, you will receive one autograder token
+that recharges every 8 hours. You cannot “stack” these tokens, so if you do
+not submit anything to the autograder for 3 days, you still only have one token.</p>
+
+<p>On Saturday 2/13, the recharge rate will permanently reduce to every 20 minutes.</p>
+
+<p>So how do you verify correctness of your data structure? You use your skills
+that you got from Lab 3! You are encouraged to copy and paste those tests for
+<code class="language-plaintext highlighter-rouge">SList</code> and <code class="language-plaintext highlighter-rouge">AList</code> and adapt them for these data structures. The tests will
+look very similar and only require basic changes.</p>
+
+<p>While it does seem very daunting and scary to do an entire project with very
+minimal access to the autograder, you should feel very confident in your
+implementation if your randomized tests are really big. With just a few lines
+of code, you could test your data structures with sizes in the 100,000’s and
+all sorts of random method calls in random order. In other words, you are
+testing a whole lot of cases on your data structures and are likely testing
+every possible edge case! This is the beauty of randomized testing: it allows
+us to leave the creativity of thinking of edge cases to randomness.</p>
+
+<p>The tests you create will not be graded, but there is an additional extra
+credit portion of this project in which you will write your own autograder.
+Details near the bottom of the spec.</p>
+
+<p><strong>Your code will not compile on the full autograder until you implement the <code class="language-plaintext highlighter-rouge">Deque</code>
+interface and all of the required methods.</strong> So if you’ve done everything on
+the spec up until this point, you should be using the checkpoint grader and
+not the full grader.</p>
+
+<h2 id="extra-credit-autograder">Extra Credit: Autograder</h2>
+
+<p>For 32 points of extra credit, you can create your own autograder for deques!
+Full details are on <a href="proj1ec.html">this</a> spec (to avoid cluttering this one). It
+is due the same day as Project 1 (2/16). You can use slip days on extra credit
+assignments, but understand that staff will prioritize the required portions
+when helping students on Ed and in Office Hours. We don’t suggest working on
+this extre credit assignment until you’ve finished the entire project, so keep
+this in mind but continue with the assignment for now.</p>
+
+<h2 id="maxarraydeque">MaxArrayDeque</h2>
+
+<p>After you’ve fully implemented your <code class="language-plaintext highlighter-rouge">ArrayDeque</code> and tested its correctness, you
+will now build the <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code>. A <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> has all of the methods
+that an <code class="language-plaintext highlighter-rouge">ArrayDeque</code> has, but it also has 2 additional methods and a new
+constructor:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public MaxArrayDeque(Comparator&lt;T&gt; c)</code>: creates a <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> with the
+given <code class="language-plaintext highlighter-rouge">Comparator</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T max()</code>: returns the maximum element in the deque as governed by the
+previously given <code class="language-plaintext highlighter-rouge">Comparator</code>. If the <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> is empty, simply return
+<code class="language-plaintext highlighter-rouge">null</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T max(Comparator&lt;T&gt; c)</code>: returns the maximum element in the deque as
+governed by the parameter <code class="language-plaintext highlighter-rouge">Comparator c</code>. If the <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> is empty,
+simply return <code class="language-plaintext highlighter-rouge">null</code>.</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> can either tell you the max element in itself by using the
+<code class="language-plaintext highlighter-rouge">Comparator&lt;T&gt;</code> given to it in the constructor, or an arbitrary <code class="language-plaintext highlighter-rouge">Comparator&lt;T&gt;</code>
+that is different from the one given in the constructor.</p>
+
+<p>We do not care about the <code class="language-plaintext highlighter-rouge">equals(Object o)</code> method of this class, so feel free
+to define it however you think is most appropriate. We will not test this
+method.</p>
+
+<p>If you find yourself starting off by copying your entire <code class="language-plaintext highlighter-rouge">ArrayDeque</code>
+implementation in a <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> file, then you’re doing it wrong. This is
+an exercise in clean code, and redundancy is one our worst enemies when
+battling complexity! For a hint, re-read the second sentence of this section
+above.</p>
+
+<p>There are no runtime requirements on these additional methods, we only care
+about the correctness of your answer. Sometimes, there might be multiple
+elements in the <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> that are all equal and hence all the max: in
+in this case, you can return any of them and they will be considered correct.</p>
+
+<p>You should write tests for this part as well! They do not need to be nearly as
+robust as your randomized and timing tests you created for the two Deque
+implementations above since the functionality you’re adding is fairly simple.
+You’ll likely be creating multiple <code class="language-plaintext highlighter-rouge">Comparator&lt;T&gt;</code> classes to test your code:
+this is the point! To get practice using <code class="language-plaintext highlighter-rouge">Comparator</code> objects to do something
+useful (find the maximum element) and to get practice writing your own
+<code class="language-plaintext highlighter-rouge">Comparator</code> classes. You will not be turning in these tests, but we still
+highly suggest making them for your sake.</p>
+
+<p>You will not use the <code class="language-plaintext highlighter-rouge">MaxArrayDeque</code> you made for the next part. It is it’s own
+isolated exercise.</p>
+
+<h2 id="deque-interface">Deque Interface</h2>
+
+<p>In the last part of this project, we’re actually going to use the data structure
+you made to solve a real world problem.</p>
+
+<p>Recall that we defined the <code class="language-plaintext highlighter-rouge">Deque</code> API, or behavior, by the following methods:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">addFirst</span><span class="o">(</span><span class="no">T</span> <span class="n">item</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addLast</span><span class="o">(</span><span class="no">T</span> <span class="n">item</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">printDeque</span><span class="o">()</span>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">removeFirst</span><span class="o">()</span>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">removeLast</span><span class="o">()</span>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> 
+</code></pre></div></div>
+
+<p>Since your program will rely on this behavior, it shouldn’t matter to it what <code class="language-plaintext highlighter-rouge">Deque</code> 
+implementation it is provided, <code class="language-plaintext highlighter-rouge">ArrayDeque</code> or <code class="language-plaintext highlighter-rouge">LinkedListDeque</code>, and should 
+work for both. To achieve this, we will use the power of interfaces.</p>
+
+<p>This first task is going to be a little tedious, but it won’t take long.</p>
+
+<p>Create an interface in a new file named <code class="language-plaintext highlighter-rouge">Deque.java</code> that contains all of the
+methods above.
+In IntelliJ, use “New → Java Class”. IntelliJ will assume you want a class, so make
+sure to replace the <code class="language-plaintext highlighter-rouge">class</code> keyword with <code class="language-plaintext highlighter-rouge">interface</code>. Don’t forget to declare that
+the <code class="language-plaintext highlighter-rouge">Deque</code> interface is part of the <code class="language-plaintext highlighter-rouge">deque</code> package!</p>
+
+<p>Modify your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and/or <code class="language-plaintext highlighter-rouge">ArrayDeque</code> so that they implement the <code class="language-plaintext highlighter-rouge">Deque</code>
+interface by adding <code class="language-plaintext highlighter-rouge">implements Deque&lt;T&gt;</code> to the line declaring the existence of the
+class. If IntelliJ yells at you with an error message like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The method ... of type LinkedListDeque has the same erasure as ... of type Deque but does not override it.
+</code></pre></div></div>
+
+<p>It means you forgot the generic <code class="language-plaintext highlighter-rouge">T</code> in the implements line (i.e. you wrote
+<code class="language-plaintext highlighter-rouge">implements Deque</code> instead of <code class="language-plaintext highlighter-rouge">implements Deque&lt;T&gt;</code>).</p>
+
+<p>If you used something other than <code class="language-plaintext highlighter-rouge">T</code> for your generic type parameter, use
+that instead. Add <code class="language-plaintext highlighter-rouge">@Override</code> tags to each method that overrides a <code class="language-plaintext highlighter-rouge">Deque</code> method.</p>
+
+<p>Now, in the <code class="language-plaintext highlighter-rouge">Deque</code> interface, give <code class="language-plaintext highlighter-rouge">isEmpty()</code> a <code class="language-plaintext highlighter-rouge">default</code> implementation, which returns <code class="language-plaintext highlighter-rouge">true</code> if the <code class="language-plaintext highlighter-rouge">size()</code> is <code class="language-plaintext highlighter-rouge">0</code>.
+Since your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> implement the <code class="language-plaintext highlighter-rouge">Deque</code> interface, given the default 
+<code class="language-plaintext highlighter-rouge">isEmpty()</code> implementation, you can remove that method from the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> that 
+you implemented earlier.</p>
+
+<p>Now, after you’ve implemented the <code class="language-plaintext highlighter-rouge">Deque</code> interface and removed the <code class="language-plaintext highlighter-rouge">isEmpty()</code>
+method from your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> implementations, your code
+will compile on the full autograder.</p>
+
+<h2 id="guitar-hero">Guitar Hero</h2>
+
+<p>In this part of the project, we will create another package for generating
+synthesized musical instruments using the <code class="language-plaintext highlighter-rouge">deque</code> package we just made. 
+We’ll get the opportunity to use our data structure for implementing an algorithm
+that allows us to simulate the plucking of a guitar string.</p>
+
+<h3 id="the-gh2-package">The GH2 Package</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">gh2</code> package has just one primary component that you will edit:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">GuitarString</code>, a class which uses an <code class="language-plaintext highlighter-rouge">Deque&lt;Double&gt;</code> to implement the
+<a href="http://en.wikipedia.org/wiki/Karplus%E2%80%93Strong_string_synthesis">Karplus-Strong algorithm</a>
+to synthesize a guitar string sound.</li>
+</ul>
+
+<p>We’ve provided you with skeleton code for <code class="language-plaintext highlighter-rouge">GuitarString</code> which is where you
+will use your <code class="language-plaintext highlighter-rouge">deque</code> package that you made in the first part of this project.</p>
+
+<h2 id="guitarstring">GuitarString</h2>
+
+<p>We want to finish the <code class="language-plaintext highlighter-rouge">GuitarString</code> file, which should use the <code class="language-plaintext highlighter-rouge">deque</code> package to
+replicate the sound of a plucked string. We’ll be using the Karplus-Strong
+algorithm, which is quite easy to implement with a <code class="language-plaintext highlighter-rouge">Deque</code>.</p>
+
+<p>The Karplus-Algorithm is simply the following three steps:</p>
+
+<ol>
+  <li>Replace every item in a <code class="language-plaintext highlighter-rouge">Deque</code> with random noise (<code class="language-plaintext highlighter-rouge">double</code> values
+between -0.5 and 0.5).</li>
+  <li>Remove the front double in the <code class="language-plaintext highlighter-rouge">Deque</code> and average it with the next
+double in the <code class="language-plaintext highlighter-rouge">Deque</code> (hint: use <code class="language-plaintext highlighter-rouge">removeFirst)</code> and <code class="language-plaintext highlighter-rouge">get()</code>) multiplied
+by an energy decay factor of 0.996 (we’ll call this entire quantity
+<code class="language-plaintext highlighter-rouge">newDouble</code>). Then, add <code class="language-plaintext highlighter-rouge">newDouble</code> to the back of the <code class="language-plaintext highlighter-rouge">Deque</code>.</li>
+  <li>Play the <code class="language-plaintext highlighter-rouge">double</code> (<code class="language-plaintext highlighter-rouge">newDouble</code>) that you dequeued in step 2. Go back to step
+2 (and repeat forever).</li>
+</ol>
+
+<p>Or visually, if the <code class="language-plaintext highlighter-rouge">Deque</code> is as shown on the top, we’d remove the 0.2,
+combine it with the 0.4 to form 0.2988, add the 0.2988, and play the 0.2.</p>
+
+<p><img src="karplus-strong.png" alt="karplus-strong" /></p>
+
+<p>You can play a <code class="language-plaintext highlighter-rouge">double</code> value with the <code class="language-plaintext highlighter-rouge">StdAudio.play</code> method. For example
+<code class="language-plaintext highlighter-rouge">StdAudio.play(0.333)</code> will tell the diaphragm of your speaker to extend itself
+to 1/3rd of its total reach, <code class="language-plaintext highlighter-rouge">StdAudio.play(-0.9)</code> will tell it to stretch its
+little heart backwards almost as far as it can reach. Movement of the speaker
+diaphragm displaces air, and if you displace air in nice patterns, these
+disruptions will be interpreted by your consciousness as pleasing thanks to
+billions of years of evolution. See <a href="http://electronics.howstuffworks.com/speaker6.htm">this
+page</a> for more. If you simply
+do <code class="language-plaintext highlighter-rouge">StdAudio.play(0.9)</code> and never play anything again, the diaphragm shown in
+the image would just be sitting still 9/10ths of the way forwards.</p>
+
+<p>Complete <code class="language-plaintext highlighter-rouge">GuitarString.java</code> so that it implements steps 1 and 2 of the
+Karplus-Strong algorithm. Note that you will have to fill you <code class="language-plaintext highlighter-rouge">Deque</code> buffer with zeros in the <code class="language-plaintext highlighter-rouge">GuitarString</code> constructor. Step 3 will be done by the client of the
+<code class="language-plaintext highlighter-rouge">GuitarString</code> class.</p>
+
+<p><em>Make sure to open your project with Maven, as usual, otherwise IntelliJ
+won’t be able to find <code class="language-plaintext highlighter-rouge">StdAudio</code></em>.</p>
+
+<p>For example, the provided <code class="language-plaintext highlighter-rouge">TestGuitarString</code> class provides a sample test
+<code class="language-plaintext highlighter-rouge">testPluckTheAString</code> that attempts to play an A-note on a guitar string. If you run the test
+should hear an A-note when you run this test. If you don’t, you should try the
+<code class="language-plaintext highlighter-rouge">testTic</code> method and debug from there. Consider adding a <code class="language-plaintext highlighter-rouge">print</code> or <code class="language-plaintext highlighter-rouge">toString</code>
+method to <code class="language-plaintext highlighter-rouge">GuitarString.java</code> that will help you see what’s going on between
+tics.</p>
+
+<p>Note: we’ve said <code class="language-plaintext highlighter-rouge">Deque</code> here, but not specified which <code class="language-plaintext highlighter-rouge">Deque</code> implementation
+to use. That is because we only need those operations <code class="language-plaintext highlighter-rouge">addLast</code>, <code class="language-plaintext highlighter-rouge">removeFirst</code>,
+and <code class="language-plaintext highlighter-rouge">get</code> and we know that classes that implement <code class="language-plaintext highlighter-rouge">Deque</code> have them. So you
+are free to choose either the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> for the actual implementation,
+or the <code class="language-plaintext highlighter-rouge">ArrayDeque</code>. For an optional (but highly suggested) exercise, think
+about the tradeoffs with using one vs the other and discuss with your friends
+what you think the better choice is, or if they’re both equally fine choices.</p>
+
+<h4 id="guitarherolite">GuitarHeroLite</h4>
+
+<p>You should now also be able to use the <code class="language-plaintext highlighter-rouge">GuitarHeroLite</code> class. Running it will
+provide a graphical interface, allowing the user (you!) to interactively play sounds
+using the <code class="language-plaintext highlighter-rouge">gh2</code> package’s <code class="language-plaintext highlighter-rouge">GuitarString</code> class.</p>
+
+<p>The following part of the assignment is not graded.</p>
+
+<p>Consider creating a program <code class="language-plaintext highlighter-rouge">GuitarHero</code> that is similar to <code class="language-plaintext highlighter-rouge">GuitarHeroLite</code>,
+but supports a total of 37 notes on the chromatic scale from 110Hz to 880Hz. Use
+the following 37 keys to represent the keyboard, from lowest note to highest
+note:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">keyboard</span> <span class="o">=</span> <span class="s">"q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' "</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>This keyboard arrangement imitates a piano keyboard: The “white keys” are on the
+qwerty and zxcv rows and the “black keys” on the 12345 and asdf rows of the
+keyboard.</p>
+
+<p>The ith character of the string keyboard corresponds to a frequency of $440
+\cdot 2^{(i - 24) / 12}$, so that the character ‘q’ is 110Hz, ‘i’ is 220Hz, ‘v’
+is 440Hz, and ‘ ‘ is 880Hz. Don’t even think of including 37 individual
+GuitarString variables or a 37-way if statement! Instead, create an array of 37
+<code class="language-plaintext highlighter-rouge">GuitarString</code> objects and use <code class="language-plaintext highlighter-rouge">keyboard.indexOf(key)</code> to figure out which key was
+typed. Make sure your program does not crash if a key is pressed that does not
+correspond to one of your 37 notes.</p>
+
+<h2 id="just-for-fun-ttfaf">Just For Fun: TTFAF</h2>
+
+<p>Once you’re relatively comfortable that <code class="language-plaintext highlighter-rouge">GuitarString</code> should be working, try
+running <code class="language-plaintext highlighter-rouge">TTFAF</code>.  <em>Make sure your sound is on!</em></p>
+
+<p>You can read the <code class="language-plaintext highlighter-rouge">GuitarPlayer</code> and <code class="language-plaintext highlighter-rouge">TTFAF</code> classes to figure out how they work.
+<code class="language-plaintext highlighter-rouge">TTFAF</code> in particular includes (as commented-out code) an example of how to use
+it another way.</p>
+
+<h2 id="even-more-fun">Even More Fun</h2>
+
+<p>This part of the assignment is not graded and just for fun.</p>
+
+<ul>
+  <li>Harp strings: Create a Harp class in the <code class="language-plaintext highlighter-rouge">gh2</code> package. 
+Flipping the sign of the new value before enqueueing it in <code class="language-plaintext highlighter-rouge">tic()</code>
+will change the sound from guitar-like to harp-like. You may want to play with
+the decay factors to improve the realism, and adjust the buffer sizes by a
+factor of two since the natural resonance frequency is cut in half by the
+<code class="language-plaintext highlighter-rouge">tic()</code> change.</li>
+  <li>Drums: Create a Drum class in the <code class="language-plaintext highlighter-rouge">gh2</code> package. 
+Flipping the sign of a new value with probability 0.5 before
+enqueueing it in <code class="language-plaintext highlighter-rouge">tic()</code> will produce a drum sound. A decay factor of 1.0 (no
+decay) will yield a better sound, and you will need to adjust the set of
+frequencies used.</li>
+  <li>Guitars play each note on one of 6 physical strings. To simulate this you can
+divide your <code class="language-plaintext highlighter-rouge">GuitarString</code> instances into 6 groups, and when a string is
+plucked, zero out all other strings in that group.</li>
+  <li>Pianos come with a damper pedal which can be used to make the strings
+stationary. You can implement this by, on iterations where a certain key
+(such as Shift) is held down, changing the decay factor.</li>
+  <li>While we have used equal temperament, the ear finds it more pleasing when
+musical intervals follow the small fractions in the just intonation system.
+For example, when a musician uses a brass instrument to play a perfect fifth
+harmonically, the ratio of frequencies is 3/2 = 1.5 rather than 27/12 ∼ 1.498.
+Write a program where each successive pair of notes has just intonation.</li>
+</ul>
+
+<h2 id="why-it-works">Why It Works</h2>
+<p>The two primary components that make the Karplus-Strong algorithm work are the
+ring buffer feedback mechanism and the averaging operation.</p>
+
+<ul>
+  <li><strong>The ring buffer feedback mechanism</strong>. The ring buffer models the medium (a
+string tied down at both ends) in which the energy travels back and forth.
+The length of the ring buffer determines the fundamental frequency of the
+resulting sound. Sonically, the feedback mechanism reinforces only the
+fundamental frequency and its harmonics (frequencies at integer multiples of
+the fundamental). The energy decay factor (.996 in this case) models the
+slight dissipation in energy as the wave makes a round trip through the
+string.</li>
+  <li><strong>The averaging operation</strong>. The averaging operation serves as a gentle low-pass
+filter (which removes higher frequencies while allowing lower frequencies to
+pass, hence the name). Because it is in the path of the feedback, this has
+the effect of gradually attenuating the higher harmonics while keeping the
+lower ones, which corresponds closely with how a plucked guitar string
+sounds.</li>
+</ul>
+
+<h2 id="submission-and-grading">Submission and Grading</h2>
+
+<p>To submit the project, add and commit your files, then push to your remote
+repository. Then on Gradescope go to the assignment and submit there.</p>
+
+<p>After your final submission on Gradescope, you must push your snaps repo.</p>
+
+<p><strong>Your Gradescope score will not be transferred to Beacon until you’ve pushed
+your snaps repo and submitted to the Snaps Gradescope assignment.</strong> To push your snaps repo, run these commands:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="nv">$SNAPS_DIR</span>
+git push
+</code></pre></div></div>
+
+<p>After you’ve pushed your snaps repository, there is a Gradescope assignment
+that you will submit your <code class="language-plaintext highlighter-rouge">snaps-sp21-s***</code> repository to (similar to Lab 1A).
+This is only for the full grader (not the checkpoint nor the extra credit
+assignment).</p>
+
+<p>You can do this up to <strong>a week</strong> after the deadline as well in case you forget.
+If you forget to push after a week, then you’ll have to use slip days.</p>
+
+<p>NOTE: we <em>slightly</em> edited the above snaps thing as of 2/07 from simply pushing
+your snaps repo to pushing and submitting on Gradescope so it’s more obvious for
+you, the student, that your submission went through.</p>
+
+<p>The entire project is worth 640 points</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">deque/LinkedListDeque</code>: 230 points</li>
+  <li><code class="language-plaintext highlighter-rouge">deque/ArrayDeque</code>: 230 points</li>
+  <li><code class="language-plaintext highlighter-rouge">deque/MaxArrayDeque</code>: 80 points</li>
+  <li><code class="language-plaintext highlighter-rouge">gh2/GuitarString</code>: 80 points</li>
+</ul>
+
+<p>And there are a total of 48 extra credit points available:</p>
+<ul>
+  <li>Full points on the checkpoint (16 points)</li>
+  <li>Making an autograder (32 points)</li>
+</ul>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+<h4 id="deque">Deque</h4>
+
+<h5 id="q-how-should-i-print-the-items-in-my-deque-when-i-dont-know-their-type">Q: How should I print the items in my deque when I don’t know their type?</h5>
+
+<p>A: It’s fine to use the default String that will be printed (this string comes
+from an Object’s implementation of <code class="language-plaintext highlighter-rouge">toString()</code>, which we’ll talk more about
+later this semester).  For example, if you called the generic type in your
+class <code class="language-plaintext highlighter-rouge">Jumanji</code>, to print <code class="language-plaintext highlighter-rouge">Jumanji j</code>, you can call <code class="language-plaintext highlighter-rouge">System.out.print(j)</code>.</p>
+
+<h5 id="q-i-cant-get-java-to-create-an-array-of-generic-objects">Q: I can’t get Java to create an array of generic objects!</h5>
+
+<p>A: Use the strange syntax we saw in lecture,
+i.e. <code class="language-plaintext highlighter-rouge">T[] a = (T[]) new Object[1000];</code>. Here, <code class="language-plaintext highlighter-rouge">T</code> is a generic type, it’s a placeholder for other
+Object types like “String” or “Integer”.</p>
+
+<h5 id="q-i-tried-that-but-im-getting-a-compiler-warning">Q: I tried that but I’m getting a compiler warning?</h5>
+
+<p>A: Sorry, this is something the designers of Java messed up when they introduced
+generics into Java. There’s no nice way around it. Enjoy your compiler warning.
+We’ll talk more about this in a few weeks.</p>
+
+<h5 id="q-how-do-i-make-my-arrows-point-to-particular-fields-of-a-data-structure">Q: How do I make my arrows point to particular fields of a data structure?</h5>
+<p>In your diagram from lecture it looked like the arrows were able to point to the
+middle of an array or at specific fields of a node.</p>
+
+<p>A: Any time I drew an arrow in class that pointed at an object, the pointer was to
+the ENTIRE object, not a particular field of an object. In fact it is
+impossible for a reference to point to the fields of an object in Java.</p>
+
+<h4 id="guitar-hero-1">Guitar Hero</h4>
+
+<h5 id="im-getting-a-class-file-contains-wrong-class-error">I’m getting a “class file contains wrong class” error.</h5>
+
+<p>Make sure all of your Java files have the right package declaration at the top.
+Also make sure that anything that is part of the <code class="language-plaintext highlighter-rouge">gh2</code>
+package is in a folder called “gh2”.</p>
+
+<h5 id="im-getting-a-message-that-i-did-not-override-an-abstract-method-but-i-am">I’m getting a message that I did not override an abstract method, but I am!</h5>
+
+<p>Chances are you have a typo. You should always use the @Override tag when
+overriding methods so that the compiler will find any such typos.</p>
+
+<h5 id="when-i-try-to-run-the-provided-tests-i-get-no-runnable-methods">When I try to run the provided tests I get “No runnable methods”.</h5>
+
+<p>Make sure you’ve uncommented the tests, including the <code class="language-plaintext highlighter-rouge">@Test</code> annotation.</p>
+
+<h5 id="when-i-try-to-compile-my-code-it-says-type-k1-is-not-compatible-with-type-k2-or-something-similar">When I try to compile my code, it says type K#1 is not compatible with type K#2, or something similar.</h5>
+
+<p>If you’re defining an inner class, make sure it does not redeclare a new generic
+type parameter, e.g. the first <code class="language-plaintext highlighter-rouge">&lt;Z&gt;</code> given in <code class="language-plaintext highlighter-rouge">private class MapWizard&lt;Z&gt;
+implements Iterator&lt;Z&gt;{</code> should not be there!</p>
+
+<h5 id="im-getting-a-strange-autograder-error">I’m getting a strange autograder error!</h5>
+
+<p>While <code class="language-plaintext highlighter-rouge">GuitarString</code> is a guitar string simulator, it should not involve playing
+any sounds. The playing should be done by the <code class="language-plaintext highlighter-rouge">GuitarString</code> client.</p>
+
+<p>Credits: RingBuffer figures from
+<a href="http://en.wikipedia.org/wiki/Circular_buffer">wikipedia</a>. This assignment
+adapted from <a href="http://nifty.stanford.edu/2012/wayne-guitar-heroine/">Kevin Wayne’s Guitar
+Heroine</a> assignment.</p>
+
+<h2 id="tips">Tips</h2>
+
+<ul>
+  <li>
+    <p>Check out the <a href="https://docs.google.com/presentation/d/1XBJOht0xWz1tEvLuvOL4lOIaY0NSfArXAvqgkrx0zpc/edit#slide=id.g1094ff4355_0_450">project 1
+slides</a>
+for some additional visually oriented tips.</p>
+  </li>
+  <li>
+    <p>If you’re stuck and don’t even know where to start: One great first step is
+implementing <code class="language-plaintext highlighter-rouge">SLList</code> and/or <code class="language-plaintext highlighter-rouge">AList</code>. For maximum efficiency, work with a friend 
+or two or three.</p>
+  </li>
+  <li>
+    <p>Take things a little at a time. Writing tons of code all at once is going to
+lead to misery and only misery. If you wrote too much stuff and feel
+overwhelmed, comment out whatever is unnecessary.</p>
+  </li>
+  <li>
+    <p>If your first try goes badly, don’t be afraid to scrap your code and start
+over. The amount of code for each class isn’t actually that much (my solution
+is about 130 lines for each .java file, including all comments and
+whitespace).</p>
+  </li>
+  <li>
+    <p>For <code class="language-plaintext highlighter-rouge">ArrayDeque</code>, consider not doing resizing at all until you know your code
+works without it. Resizing is a performance optimization (and is required for
+full credit).</p>
+  </li>
+  <li>
+    <p>Work out what your data structures will look like on paper before you try
+implementing them in code! If you can find a willing friend, have them give
+commands, while you attempt to draw everything out. Try to come up with
+operations that might reveal problems with your implementation.</p>
+  </li>
+  <li>
+    <p>Make sure you think carefully about what happens if the data structure goes
+from empty, to some non-zero size (e.g. 4 items) back down to zero again, and
+then back to some non-zero size. This is a common oversight.</p>
+  </li>
+  <li>
+    <p>Sentinel nodes make life <strong>much</strong> easier, once you understand them.</p>
+  </li>
+  <li>
+    <p>Circular data structures may take a little while to understand, but make life much easier for both implementations (but
+especially the <code class="language-plaintext highlighter-rouge">ArrayDeque</code>).</p>
+  </li>
+  <li>
+    <p>Consider a helper function to do little tasks like compute array indices. For
+example, in my implementation of <code class="language-plaintext highlighter-rouge">ArrayDeque</code>, I wrote a function called <code class="language-plaintext highlighter-rouge">int
+minusOne(int index)</code> that computed the index immediately “before” a given
+index.</p>
+  </li>
+  <li>
+    <p>Consider using the Java Visualizer (which you installed in lab2setup) to visualize 
+your Deque as you step through with the debugger. The visualizer is an icon of a blue 
+coffee cup with an eye, and is the tab next to the “Console” tab in the debugger 
+panel). See the <a href="https://fa20.datastructur.es/materials/guides/plugin.html#using-the-plugin">CS 61B plugin guide</a>
+if you can’t figure out how to get the visualizer to show. The visualizer will look something like this: <img src="java_visualizer.png" alt="java_visualizer" /></p>
+  </li>
+</ul>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

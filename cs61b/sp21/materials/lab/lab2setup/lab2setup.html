@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 2 Setup: Library Setup | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 2 Setup: Library Setup</header><h2 id="prerequisites">Prerequisites</h2>
+
+<p>You must complete lab 1 before completing these setup instructions.</p>
+
+<h2 id="getting-java-libraries">Getting Java Libraries</h2>
+
+<p>Start by using <code class="language-plaintext highlighter-rouge">git pull skeleton master</code> from your repository. If you do this right, you should see a <code class="language-plaintext highlighter-rouge">lab2setup</code> folder appear in your repository directory.</p>
+
+<!--
+	deprecated given the pom.xml / maven integration
+
+For many of the assignments in this class we will be using libraries that are not built into Java. For example, in the `lab2setup` folder, there are files called `Dog.java` and `DogTest.java`. `DogTest.java` uses the JUnit library. Let's try opening it up to see what happens:
+
+1. Double click on Dog.java, and you should see something like the screen below.
+There should be no errors (given in red). If
+you see any errors, please post to Ed or ask your lab TA.
+![After Opening Dog](/materials/lab/lab2setup/img3/main_screen_when_dog_open.png)
+
+2. Now double click on DogTest.java, and you should see something like the screen
+below. Notice that there are now lots of errors, shown in red.
+![After Opening DogTest](/materials/lab/lab2setup/img3/main_screen_when_dogtest_open.png)
+
+3. Hover over one of the red pieces of code. You'll see that the problem is that
+Java cannot "resolve" something. This is because we haven't downloaded the official
+61B libraries. We'll be doing this in the next section of this lab.
+![After Opening DogTest Hover](/materials/lab/lab2setup/img3/main_screen_when_dogtest_open_hover.png) 
+-->
+
+<p>Next, let’s download the Java libraries that you’ll need to complete future assignments (including this one).</p>
+
+<ol>
+  <li>First, open up a terminal window and <code class="language-plaintext highlighter-rouge">cd</code> into your <code class="language-plaintext highlighter-rouge">sp21-s**</code> repository.</li>
+  <li>Run
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git submodule update <span class="nt">--init</span>
+</code></pre></div>    </div>
+    <p>You should get output like this:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Submodule <span class="s1">'library-sp21'</span> <span class="o">(</span>https://github.com/Berkeley-CS61B/library-sp21<span class="o">)</span> registered <span class="k">for </span>path <span class="s1">'./'</span>
+Cloning into <span class="s1">'/Users/Connor/Downloads/sp21-s1/library-sp21'</span>...
+Submodule path <span class="s1">'./'</span>: checked out <span class="s1">'1fbc26d69f044b48346849989aeeff9761b00abf'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Ta-da! You now have libraries!
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>library-sp21/
+javalib/
+</code></pre></div>    </div>
+    <p>Below is shown the directory structure of <code class="language-plaintext highlighter-rouge">library-sp21</code>. Look inside the folder and make sure you see exactly the files below. If you’re using your operating system’s file explorer the ‘jar’ part might not show up in the filenames, and that’s OK.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library-fa21/
+└── javalib
+ ├── 61b_checks.xml
+ ├── CS61B
+ ├── algs4.jar
+ ├── hamcrest-core-1.3.jar
+ ├── jh61b.jar
+ ├── junit-4.12.jar
+ ├── masterpom.xml
+ ├── org
+ ├── stdlib-package.jar
+ ├── stdlib.jar
+ ├── ucb.jar
+ └── xchart-3.5.1.jar
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<!--
+
+	Deprecated since we're using maven / pom.xml this semester
+
+Importing Libraries and Running Code
+------------------------------------
+Now it's time to get rid of the errors in DogTest.java.
+
+Click **"File" &rarr; "Project Structure"** in the top left of IntelliJ. A window should
+pop up, and you should click **Libraries** on the left panel of this window. Then click the
+plus sign at the top left of the window and you should see an option pop up that says "Java",
+"From Maven", and "Kotlin/JS" as shown below.
+![add libraries step 1](/materials/lab/lab2setup/img3/add_libs1.png)
+
+Click on the word Java, and navigate to the
+`javalib` folder (which is in `library-sp21`). With the library-sp21 fold highlighted,
+press OK. Then press OK at the next window again.
+![add libraries step 2](/materials/lab/lab2setup/img3/add_libs2.png)
+
+If you did everything correctly, you should see something similar to the screen below.
+![add libraries step 3](/materials/lab/lab2setup/img3/add_libs3.png)
+
+Press OK one more time, and you'll find yourself looking at `DogTest.java` again.
+This time, the red text should be gone. 
+-->
+
+<h2 id="pomxml">pom.xml</h2>
+
+<p>For all future assignments, instead of importing the entire folder like we did for lab1 and proj0, we’ll be importing a file called <code class="language-plaintext highlighter-rouge">pom.xml</code>.</p>
+
+<p>The reason is that the <code class="language-plaintext highlighter-rouge">pom.xml</code> tells IntelliJ where to find the library for 61B. It is also possible to manually specify where the libraries are, but this process is a bit cumbersome (see the lab2setup directions from fa20 if you’re curious).</p>
+
+<h3 id="one-time-setup">One-Time Setup</h3>
+<p>First, we will have to do one tiny tidbit of setup to make sure your system is ready to start using <code class="language-plaintext highlighter-rouge">pom.xml</code> files to import projects.</p>
+
+<p>First, open up IntelliJ. Make sure you are on the home screen, as depicted below. If you are currently in an open IntelliJ project, you can go back to the home screen by navigating to <code class="language-plaintext highlighter-rouge">File &gt; Close Project</code>.
+<img src="img3/intellij-home-screen-for-maven.png" alt="intellij-home-screen-for-maven" /></p>
+
+<p>Now that you are on the home screen, open up IntelliJ’s preferences with by selecting <code class="language-plaintext highlighter-rouge">IntelliJ IDEA | Preferences</code> for macOS (Shortcut: <code class="language-plaintext highlighter-rouge">⌘,</code>) or <code class="language-plaintext highlighter-rouge">File | Settings</code> for Windows and Linux.</p>
+
+<p>Navigate to Build, Execution, Deployment &gt; Build Tools &gt; Maven. You should see a screen like the following.
+<img src="img3/maven-settings.png" alt="maven-settings" /></p>
+
+<p>Make sure that it says “For new projects” in the top right corner. Update the following settings:</p>
+
+<ol>
+  <li>Check the “Use plugin registry” button</li>
+  <li>At the bottom, check the override button on the “Local repository” row</li>
+  <li>Update the “Local Repository” path to <code class="language-plaintext highlighter-rouge">javalib</code> in your <code class="language-plaintext highlighter-rouge">sp21-s***/library-sp21</code> folder. You can do this by clicking on the folder icon and navigating through your file system OR by <code class="language-plaintext highlighter-rouge">cd</code>ing into <code class="language-plaintext highlighter-rouge">sp21-s***/library-sp21/javalib</code>, typing <code class="language-plaintext highlighter-rouge">pwd</code>, and copying that path into the text box. For example, my path is <code class="language-plaintext highlighter-rouge">/Users/NeilKulkarni/Documents/Teaching/CS61B/sp21-s58/library-sp21/javalib</code></li>
+  <li>Make sure to hit “Apply” then “OK” to save your changes</li>
+</ol>
+
+<p><img src="img3/maven-settings-highlighted.png" alt="maven-settings-highlighted" /></p>
+
+<h3 id="importing-projects-with-pomxml">Importing Projects with pom.xml</h3>
+<p>Once the one-time setup instructions are complete, opening a project with Maven is easy! Open up IntelliJ, and make sure you are on the home screen. If you are currently in an open IntelliJ project, you can go back to the home screen by navigating to File &gt; Close Project.</p>
+
+<p>Now, click “Open” and navigate through your file system to the project you want to open (e.g. <code class="language-plaintext highlighter-rouge">lab2setup</code>). Open the <code class="language-plaintext highlighter-rouge">pom.xml</code> file inside that directory. You might get a popup window at this point that is similar to the one in the image below. Make sure to choose “Open as Project”. Once you do this, Maven will automatically import all the dependencies for you, and you’re ready to go!
+<img src="img3/open-as-file-or-project.png" alt="open-as-file-or-project" /></p>
+
+<h2 id="verifying-your-setup">Verifying Your Setup</h2>
+
+<p>Open the <code class="language-plaintext highlighter-rouge">lab2setup</code> project as described in the “Importing Projects with pom.xml” section. Try opening up <code class="language-plaintext highlighter-rouge">DogTest.java</code> in the <code class="language-plaintext highlighter-rouge">lab2setup</code> folder. This file uses the JUnit library, as indicated by the import statements at the top of the file. If <code class="language-plaintext highlighter-rouge">@Test</code> or <code class="language-plaintext highlighter-rouge">assertEquals</code> statements appear in red, this means something went wrong when you were downloading the libraries. Make sure to ask your GSI before proceeding.</p>
+
+<p>Next, try running the code by clicking <strong>“Run” → “Run…“</strong>, as shown below.
+<img src="img3/run_run.png" alt="run -&gt; run" /></p>
+
+<p>This will probably pop up a very small dialog window like the one shown.
+Basically IntelliJ is saying that it isn’t quite sure what you mean by running
+the program and is giving you three choices (yours may look slightly different).</p>
+<ul>
+  <li>Option 0 is to edit the configuration before running the program (which we won’t do).</li>
+  <li>Option 2 is to run the tests in the DogTest class.</li>
+  <li>Option 3 is ALSO to run the tests in the DogTest class.
+<img src="img3/run_dialog.png" alt="run -&gt; run dialog" /></li>
+</ul>
+
+<p>Click on either of the DogTest options and a green bar should appear with the message “Tests passed: 2 of 2 tests” as shown below.
+	<img src="img3/tests_passed.png" alt="tests passed" /></p>
+
+<p>You’ll notice after running your code that the green play and green bug icons in
+the upper right are now green; this is because when you clicked “2.”, IntelliJ
+memorized what you meant by Run for this project and you can now click this
+button to run your program. You’ll learn more about this over time as we use
+more advanced features of IntelliJ.</p>
+
+<p>In case you’re curious why there were two <code class="language-plaintext highlighter-rouge">DogTest</code> icons above, it’s because one
+of them runs the tests as if it is designed for the Android operating system (the little alien)
+and the other (red and green triangles) runs the test as if it is just plain old Java. For the purposes of 61B,
+these two choices will always do the exact same thing, so either one is fine.</p>
+
+<!---
+
+	Deprecated because of pom.xml
+
+Setting up JUnit configurations
+--------------------------------
+We will need to do a tad bit more to set up JUnit to be as helpful as possible
+for us. Specifically, we'll be adding what are called **VM options** for
+IntelliJ to use whenever we're running a JUnit test or test suite. VM options
+are meta-options that the JVM is given that can alter the way things are run,
+and we want to add just 1 VM option that will make NullPointerException
+messages much easier to understand.
+
+Firstly, go to `File` > `New Project Settings` > `Run Configuration Templates for New
+Projects...` and click it
+
+![Configurations Location](img/configuration_location.png)
+
+Now, on the left side, you should click on `JUnit`. In the text bar labeled `VM
+options`, you should delete whatever might already be there and paste the
+following:
+
+```
+-XX:+ShowCodeDetailsInExceptionMessages
+```
+
+It should look like this:
+
+![VM Options](img/vm_options.png)
+
+Go ahead and hit `Apply` then `OK` in the bottom right corner.
+
+Now, any future IntelliJ projects you open will have this VM option set.
+-->
+
+<p>You’re now ready to move on to lab2.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

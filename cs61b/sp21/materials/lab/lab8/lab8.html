@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 8: HashMap | CS 61B Spring 2021</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://sp21.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="https://sp21.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://sp21.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="../../../exams.html"><div class="navitem">Exams</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://edstem.org/us/courses/3735/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 8: HashMap</header><ul id="markdown-toc">
+  <li><a href="lab8.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab8.html#myhashmap" id="markdown-toc-myhashmap">MyHashMap</a>    <ul>
+      <li><a href="lab8.html#overview" id="markdown-toc-overview">Overview</a></li>
+      <li><a href="lab8.html#skeleton-code" id="markdown-toc-skeleton-code">Skeleton Code</a></li>
+      <li><a href="lab8.html#implementation-requirements" id="markdown-toc-implementation-requirements">Implementation Requirements</a></li>
+      <li><a href="lab8.html#testing" id="markdown-toc-testing">Testing</a></li>
+      <li><a href="lab8.html#resources" id="markdown-toc-resources">Resources</a></li>
+    </ul>
+  </li>
+  <li><a href="lab8.html#hashmap-speed-test" id="markdown-toc-hashmap-speed-test">HashMap Speed Test</a></li>
+  <li><a href="lab8.html#change-bucket-types-speed-test" id="markdown-toc-change-bucket-types-speed-test">Change Bucket Types: Speed Test</a></li>
+  <li><a href="lab8.html#optional-exercises" id="markdown-toc-optional-exercises">Optional Exercises</a></li>
+  <li><a href="lab8.html#lab-debrief-and-submission" id="markdown-toc-lab-debrief-and-submission">Lab Debrief and Submission</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this lab, you’ll work on <strong>MyHashMap</strong>, an implementation of the <code class="language-plaintext highlighter-rouge">Map61B</code> interface, which represents a hash map. This will be very similar to Lab 7, except this time we’re building a Hash Map rather than a Tree Map.</p>
+
+<p>After you’ve completed your implementation, you’ll compare the performance of your implementation to a list-based Map implementation <code class="language-plaintext highlighter-rouge">ULLMap</code> as well as the built-in Java <code class="language-plaintext highlighter-rouge">HashMap</code> class (which also uses a hash table). We’ll also compare the performance of <code class="language-plaintext highlighter-rouge">MyHashMap</code> when it uses different data structures to be the buckets.</p>
+
+<h2 id="myhashmap">MyHashMap</h2>
+
+<h3 id="overview">Overview</h3>
+
+<p>We’ve created a class <strong>MyHashMap</strong> in <code class="language-plaintext highlighter-rouge">MyHashMap.java</code>, with very minimal starter code. Your goal is to implement all of the methods in the <strong>Map61B</strong> interface from which <strong>MyHashMap</strong> inherits, <em>except for</em> <code class="language-plaintext highlighter-rouge">remove</code>. For <code class="language-plaintext highlighter-rouge">remove</code>, you should throw an <code class="language-plaintext highlighter-rouge">UnsupportedOperationException</code>. Note that you should implement <code class="language-plaintext highlighter-rouge">keySet</code> and <code class="language-plaintext highlighter-rouge">iterator</code> this time, where <code class="language-plaintext highlighter-rouge">iterator</code> returns an <code class="language-plaintext highlighter-rouge">Iterator</code> that iterates over the stored keys. Both of these functions may return the keys in any order. For these methods, we recommend you simply create a <code class="language-plaintext highlighter-rouge">HashSet</code> instance variable that holds all your keys.</p>
+
+<p>Note that your code will not compile until you implement all the methods of <strong>Map61B</strong>. You can implement methods one at a time by writing the method signatures of all the required methods, but throwing <code class="language-plaintext highlighter-rouge">UnsupportedOperationExceptions</code> for the implementations, until you get around to actually writing them.</p>
+
+<h3 id="skeleton-code">Skeleton Code</h3>
+
+<p>You might recall from lecture that when we build a hash table, we can choose a number of different data structures to be the buckets. The classic approach is to choose a <code class="language-plaintext highlighter-rouge">LinkedList</code>. But we can also choose <code class="language-plaintext highlighter-rouge">ArrayList</code>s, <code class="language-plaintext highlighter-rouge">TreeSet</code>s, or even other crazier data structures like <code class="language-plaintext highlighter-rouge">PriorityQueue</code>s or even other <code class="language-plaintext highlighter-rouge">HashSet</code>s!</p>
+
+<p><img src="img/ht-buckets.png" alt="ht-buckets" /></p>
+
+<p>During this lab, we will try out hash tables with different data structures for each of the buckets, and see empirically if there is an asymptotic difference between using different data structures as hash table buckets.</p>
+
+<p>You can maybe imagine that if we implemented <code class="language-plaintext highlighter-rouge">MyHashMap</code> without any care, it would take a lot of effort with Find + Replace to be able to change out the bucket type with a different bucket type. For example, if we wanted to change all our <code class="language-plaintext highlighter-rouge">ArrayList</code> buckets to <code class="language-plaintext highlighter-rouge">LinkedList</code> buckets, we would have to Find + Replace for all occurrences of <code class="language-plaintext highlighter-rouge">ArrayList</code> and replace that with <code class="language-plaintext highlighter-rouge">LinkedList</code>. This is not ideal.</p>
+
+<p>The purpose of the starter code is to have an eaiser way to try out different bucket types with <code class="language-plaintext highlighter-rouge">MyHashMap</code>. It accomplishes this through polymorphism and inheritance, which we learned about earlier this semester. It also makes use of <strong>factory methods</strong>, which are used to create objects. We will use factory methods to create the buckets. The inheritance structure of the starter files is as follows:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Map61B.java
+└── MyHashMap.java
+    ├── MyHashMapALBuckets.java
+    ├── MyHashMapHSBuckets.java
+    ├── MyHashMapLLBuckets.java
+    ├── MyHashMapPQBuckets.java
+    └── MyHashMapTSBuckets.java
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">MyHashMap</code> implements the <code class="language-plaintext highlighter-rouge">Map61B</code> interface through use of a hash table. In the starter code, we give the instance variable <code class="language-plaintext highlighter-rouge">private Collection&lt;Node&gt;[] buckets</code>, which is the underlying data structure of the hash table. Let’s unpack what this code means:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">buckets</code> is a <code class="language-plaintext highlighter-rouge">private</code> variable in the <code class="language-plaintext highlighter-rouge">MyHashMap</code> class</li>
+  <li>It is an array (or table) of <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;</code> objects, where each <code class="language-plaintext highlighter-rouge">Collection</code> of <code class="language-plaintext highlighter-rouge">Node</code>s represents a single bucket in the hash table</li>
+  <li><code class="language-plaintext highlighter-rouge">Node</code> is a private helper class we give that stores a single key-value mapping. The starter code for this class should be straightforward to understand, and should not require any modification</li>
+  <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html"><code class="language-plaintext highlighter-rouge">java.util.Collection</code></a> is an interface which most data structures inherit from, and it represents a group of objects. The <code class="language-plaintext highlighter-rouge">Collection</code> interface supprots methods like <code class="language-plaintext highlighter-rouge">add</code> to the group, <code class="language-plaintext highlighter-rouge">remove</code> from the group, and <code class="language-plaintext highlighter-rouge">iterate</code> over a group. Many data structures in <code class="language-plaintext highlighter-rouge">java.util</code> implement <code class="language-plaintext highlighter-rouge">Collection</code>, including <code class="language-plaintext highlighter-rouge">ArrayList</code>, <code class="language-plaintext highlighter-rouge">LinkedList</code>, <code class="language-plaintext highlighter-rouge">TreeSet</code>, <code class="language-plaintext highlighter-rouge">HashSet</code>, <code class="language-plaintext highlighter-rouge">PriorityQueue</code>, and many others. Note that because these data structures implement <code class="language-plaintext highlighter-rouge">Collection</code>, we can assign them to a variable of static type <code class="language-plaintext highlighter-rouge">Collection</code> with polymorphism</li>
+  <li>Therefore, our array of <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;</code> objects can be instantated by many different types of data structures, e.g. <code class="language-plaintext highlighter-rouge">LinkedList&lt;Node&gt;</code> or <code class="language-plaintext highlighter-rouge">ArrayList&lt;Node&gt;</code></li>
+  <li>When creating a new <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;[]</code> to store in our <code class="language-plaintext highlighter-rouge">buckets</code> variable, be aware that in Java, you <a href="https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html#createArrays">cannot create an array of parameterized type</a>. <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;</code> is a parameterized type, because we parameterize the <code class="language-plaintext highlighter-rouge">Collection</code> class with the <code class="language-plaintext highlighter-rouge">Node</code> class. Therefore, the expression <code class="language-plaintext highlighter-rouge">new Collection&lt;Node&gt;[size]</code> is illegal, for any given <code class="language-plaintext highlighter-rouge">size</code>. To get around this, you should instead create a <code class="language-plaintext highlighter-rouge">new Collection[size]</code>, where <code class="language-plaintext highlighter-rouge">size</code> is the desired size. The elements of a <code class="language-plaintext highlighter-rouge">Collection[]</code> can be a collection of any type, like a <code class="language-plaintext highlighter-rouge">Collection&lt;Integer&gt;</code> or a <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;</code>. For our purposes, we will only add elements of type <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;</code> to our <code class="language-plaintext highlighter-rouge">Collection[]</code>.</li>
+</ul>
+
+<p>Each of the <code class="language-plaintext highlighter-rouge">MyHashMap*Buckets</code> classes instantiates <code class="language-plaintext highlighter-rouge">buckets</code> with a different type of data structure. For example, <code class="language-plaintext highlighter-rouge">MyHashMapLLBuckets</code> instantiates <code class="language-plaintext highlighter-rouge">buckets</code> with a <code class="language-plaintext highlighter-rouge">new LinkedList&lt;Node&gt;()</code>. The mechanism by which this happens is a factory method <code class="language-plaintext highlighter-rouge">protected Collection&lt;Node&gt; createBucket()</code>, which simply returns a data structure that implements <code class="language-plaintext highlighter-rouge">Collection</code>. For <code class="language-plaintext highlighter-rouge">MyHashMap.java</code>, you can choose any data structure you’d like. For example, if you choose <code class="language-plaintext highlighter-rouge">LinkedList</code>, the body of <code class="language-plaintext highlighter-rouge">createBucket</code> would simply be:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">protected</span> <span class="nc">Collection</span><span class="o">&lt;</span><span class="nc">Node</span><span class="o">&gt;</span> <span class="nf">createBucket</span><span class="o">()</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="k">new</span> <span class="nc">LinkedList</span><span class="o">&lt;&gt;();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Instead of creating new bucket data structures with the <code class="language-plaintext highlighter-rouge">new</code> operator, you must use the <code class="language-plaintext highlighter-rouge">createBucket</code> method instead</strong>. This might seem useless at first, but it allows the <code class="language-plaintext highlighter-rouge">MyHashMap*Buckets.java</code> classes to override the <code class="language-plaintext highlighter-rouge">createBucket</code> method and provide different data structures as each of the buckets. Then, we end up with multiple different classes (<code class="language-plaintext highlighter-rouge">MyHashMapTSBuckets.java</code> <code class="language-plaintext highlighter-rouge">MyHashMapPQBuckets.java</code>, etc.) that all use your implementation in <code class="language-plaintext highlighter-rouge">MyHashMap</code> but they provide different types for the buckets (<code class="language-plaintext highlighter-rouge">TreeSet</code>, <code class="language-plaintext highlighter-rouge">PQ</code>, etc.). We can even have a hash table that has buckets that are other hash tables (<code class="language-plaintext highlighter-rouge">MyHashMapHSBuckets.java</code>)! We can then directly compare each of the <code class="language-plaintext highlighter-rouge">MyHashMap*Buckets.java</code> classes directly in a speed test similar to the one you saw in Lab 7.</p>
+
+<p>We provide additional factory methods <code class="language-plaintext highlighter-rouge">createTable</code> to create the backing array of the hash table and <code class="language-plaintext highlighter-rouge">createNode</code> to create new <code class="language-plaintext highlighter-rouge">Node</code> objects as well. It’s okay if you use <code class="language-plaintext highlighter-rouge">new</code> operators to create the backing array and <code class="language-plaintext highlighter-rouge">Node</code> objects instead of the factory method, but we added them for uniformity.</p>
+
+<h3 id="implementation-requirements">Implementation Requirements</h3>
+
+<p>You should implement the following constructors:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="kd">public</span> <span class="nf">MyHashMap</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="nf">MyHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialSize</span><span class="o">);</span>
+	<span class="kd">public</span> <span class="nf">MyHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">initialSize</span><span class="o">,</span> <span class="kt">double</span> <span class="n">loadFactor</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>Some additional requirements for <code class="language-plaintext highlighter-rouge">MyHashMap</code> are below:</p>
+
+<ul>
+  <li>Your hash map should initially have a number of buckets equal to <code class="language-plaintext highlighter-rouge">initialSize</code>. You should increase the size of your <code class="language-plaintext highlighter-rouge">MyHashMap</code> when the load factor exceeds the set <code class="language-plaintext highlighter-rouge">loadFactor</code>. Recall that the <strong>load factor</strong> can be computed as <code class="language-plaintext highlighter-rouge">loadFactor = N/M</code>, where <code class="language-plaintext highlighter-rouge">N</code> is the number of elements in the map and <code class="language-plaintext highlighter-rouge">M</code> is the number of buckets. The load factor represents the amount of elements per bucket, on average. If <code class="language-plaintext highlighter-rouge">initialSize</code> and <code class="language-plaintext highlighter-rouge">loadFactor</code> aren’t given, you should set defaults <code class="language-plaintext highlighter-rouge">initialSize = 16</code> and <code class="language-plaintext highlighter-rouge">loadFactor = 0.75</code> (as Java’s <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html#%3Cinit%3E()">built-in HashMap</a> does)</li>
+  <li>You should handle collisions with separate chaining. You may not import any libraries other than <code class="language-plaintext highlighter-rouge">ArrayList</code>, <code class="language-plaintext highlighter-rouge">LinkedList</code>, <code class="language-plaintext highlighter-rouge">Collection</code>, <code class="language-plaintext highlighter-rouge">HashSet</code>, <code class="language-plaintext highlighter-rouge">iterator</code> and <code class="language-plaintext highlighter-rouge">Set</code>. This means that for <code class="language-plaintext highlighter-rouge">MyHashMap.java</code>, you should use either an <code class="language-plaintext highlighter-rouge">ArrayList</code>, <code class="language-plaintext highlighter-rouge">LinkedList</code> or <code class="language-plaintext highlighter-rouge">HashSet</code> for the bucket types in <code class="language-plaintext highlighter-rouge">MyHashMap.java</code>. For more detail on how you should implement separate chaining, see the <strong>Skeleton Code</strong> setion above.</li>
+  <li>Because we use a <code class="language-plaintext highlighter-rouge">Collection&lt;Node&gt;[]</code> as our <code class="language-plaintext highlighter-rouge">buckets</code>, when implementing <code class="language-plaintext highlighter-rouge">MyHashMap</code>, you are restricted to using methods that are supported by the <code class="language-plaintext highlighter-rouge">Collection</code> interface. The only methods you will need are <code class="language-plaintext highlighter-rouge">add</code>, <code class="language-plaintext highlighter-rouge">remove</code>, and <code class="language-plaintext highlighter-rouge">iterator</code>. When you are searching for a <code class="language-plaintext highlighter-rouge">Node</code> in a <code class="language-plaintext highlighter-rouge">Collection</code>, simply iterate over the <code class="language-plaintext highlighter-rouge">Collection</code>, and find the <code class="language-plaintext highlighter-rouge">Node</code> whose <code class="language-plaintext highlighter-rouge">key</code> is <code class="language-plaintext highlighter-rouge">.equal()</code> to the key you are searching for</li>
+  <li>When resizing, make sure to multiplicatively resize, not additively resize. You are <strong>not</strong> required to resize down</li>
+  <li>Your <code class="language-plaintext highlighter-rouge">MyHashMap</code> operations should all be constant amortized time, assuming that the <code class="language-plaintext highlighter-rouge">hashCode</code> of any objects inserted spread things out nicely (recall: every <code class="language-plaintext highlighter-rouge">Object</code> in Java has its own <code class="language-plaintext highlighter-rouge">hashCode()</code> method). <strong>Note</strong>: <code class="language-plaintext highlighter-rouge">hashCode()</code> can return a <em>negative value</em>! Please take this into account when writing your code. Take a look at the lecture slides linked below for a hint on how to cleanly handle this case.</li>
+  <li>If the same key is inserted more than once, the value should be updated each time. You can assume <code class="language-plaintext highlighter-rouge">null</code> keys will never be inserted.</li>
+</ul>
+
+<h3 id="testing">Testing</h3>
+
+<p>You can test your implementation using <code class="language-plaintext highlighter-rouge">TestMyHashMap.java</code>. If you choose to implement the additional <code class="language-plaintext highlighter-rouge">remove</code> method, we provide tests in <code class="language-plaintext highlighter-rouge">TestHashMapExtra.java</code>. If you’ve correctly implemented generic <code class="language-plaintext highlighter-rouge">Collection</code> buckets, you should also be passing the tests in <code class="language-plaintext highlighter-rouge">TestMyHashMapBuckets.java</code>. The <code class="language-plaintext highlighter-rouge">TestHashMapBuckets.java</code> file simply calls methods in <code class="language-plaintext highlighter-rouge">TestMyHashMap.java</code> for each of the different map subclasses that implement a different bucket data structure.</p>
+
+<p>Before moving on from this section, be sure you’re passing the tests in <code class="language-plaintext highlighter-rouge">TestMyHashMap.java</code> and <code class="language-plaintext highlighter-rouge">TestMyHashMapBuckets.java</code>.</p>
+
+<h3 id="resources">Resources</h3>
+
+<p>You may find the following resources useful:</p>
+
+<ul>
+  <li>HashMap code from pages 136 and 137 of <a href="http://www-inst.eecs.berkeley.edu/~cs61b/fa14/book2/data-structures.pdf">Data Structures Into Java</a>, from our course references page</li>
+  <li><a href="https://algs4.cs.princeton.edu/34hash">Chapter 3.4</a> of our optional Algorithms textbook</li>
+  <li><a href="http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html">HashTable code</a> from our optional textbook</li>
+  <li><code class="language-plaintext highlighter-rouge">ULLMap.java</code> (provided), a working unordered linked list based <strong>Map61B</strong> implementation</li>
+  <li>Lecture slides on <a href="https://docs.google.com/presentation/d/1TG0MooBux5DPr7NYUQiwA8W6iub4ZGKViSXFGwx_Kak/edit#slide=id.g409413421_0637">HashMaps</a>, <a href="https://docs.google.com/presentation/d/1EUOpd9NXq28eEUqQMZoo_rRpxw8EekQ2LEp61U9bnDc/edit#slide=id.g109ce79706_0_122">inheritance</a>, and <a href="https://docs.google.com/presentation/d/13SVUU8oeTch0ex42hBQLGTZ4XAaMKDJmuXMqegEoVqM/edit#slide=id.gbc763503d0_1_0">subtype polymorphism</a></li>
+</ul>
+
+<h2 id="hashmap-speed-test">HashMap Speed Test</h2>
+
+<p>There are two interactive speed tests provided in <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest.java</code> and <code class="language-plaintext highlighter-rouge">InsertInOrderSpeedTest.java</code>. Do not attempt to run these tests before you’ve completed <strong>MyHashMap</strong>. Once you’re ready, you can run the tests in IntelliJ.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest</code> class performs tests on element-insertion speed of your <strong>MyHashMap</strong>, <strong>ULLMap</strong> (provided), and Java’s built-in <strong>HashMap</strong>. It works by asking the user for an input size <code class="language-plaintext highlighter-rouge">N</code>, then generates <code class="language-plaintext highlighter-rouge">N</code> Strings of length <code class="language-plaintext highlighter-rouge">10</code> and inserts them into the maps as <code class="language-plaintext highlighter-rouge">&lt;String, Integer&gt;</code> pairs.</p>
+
+<p>Try it out and see how your data structure scales with <code class="language-plaintext highlighter-rouge">N</code> compared to the naive and industrial-strength implementations. Record your results in the provided file named <code class="language-plaintext highlighter-rouge">lab8/speedTestResults.txt</code>. There is no standard format required for your results, and there is no required number of data points.</p>
+
+<p>Now try running <code class="language-plaintext highlighter-rouge">InsertInOrderSpeedTest</code>, which behaves similarly to <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest</code>, except this time the Strings in <code class="language-plaintext highlighter-rouge">&lt;String, Integer&gt;</code> key-value pairs are inserted in <a href="http://en.wikipedia.org/wiki/Lexicographical_order">lexicographically-increasing order</a>. Note that unlike Lab 7, your code should be in the rough ballpark of Java’s built in solution – say within a factor of <code class="language-plaintext highlighter-rouge">10</code> or so. What this tells us is that state-of-the-art <code class="language-plaintext highlighter-rouge">HashMaps</code> are relatively easy to implement compared to state-of-the-art <code class="language-plaintext highlighter-rouge">TreeMaps</code>. When would it be better to use a <code class="language-plaintext highlighter-rouge">BSTMap</code>/<code class="language-plaintext highlighter-rouge">TreeMap</code> instead of a <code class="language-plaintext highlighter-rouge">HashMap</code>? Discuss this with your labmates, and add your answer to <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>.</p>
+
+<h2 id="change-bucket-types-speed-test">Change Bucket Types: Speed Test</h2>
+<p>If you’ve correctly implemented generic <code class="language-plaintext highlighter-rouge">Collection</code> buckets, most of the work is done! We can directly compare the different data structures <code class="language-plaintext highlighter-rouge">MyHashMap*Buckets.java</code>. We provide <code class="language-plaintext highlighter-rouge">speed/BucketsSpeedTest.java</code>, which is an interactive test that queries the user for an integer <code class="language-plaintext highlighter-rouge">L</code> for the length of string to use on subsequent operations. Then, in a loop, it queries the user for an integer <code class="language-plaintext highlighter-rouge">N</code>, and runs a speed test on each of the five data structures:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">MyHashMapALBuckets</code>, which uses <code class="language-plaintext highlighter-rouge">ArrayList</code> buckets</li>
+  <li><code class="language-plaintext highlighter-rouge">MyHashMapLLBuckets</code>, which uses <code class="language-plaintext highlighter-rouge">LinkedList</code> buckets</li>
+  <li><code class="language-plaintext highlighter-rouge">MyHashMapTSBuckets</code>, which uses <code class="language-plaintext highlighter-rouge">TreeSet</code> buckets</li>
+  <li><code class="language-plaintext highlighter-rouge">MyHashMapPQBuckets</code>, which uses <code class="language-plaintext highlighter-rouge">PriorityQueue</code> buckets</li>
+  <li><code class="language-plaintext highlighter-rouge">MyHashMapHSBuckets</code>, which uses <code class="language-plaintext highlighter-rouge">HashSet</code> buckets</li>
+</ul>
+
+<p>Try it out and compare how the different implementations scale with <code class="language-plaintext highlighter-rouge">N</code>. Discuss your results with your labmates, and record your responses in <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>.</p>
+
+<p>You might notice that our implementation of <code class="language-plaintext highlighter-rouge">MyHashMapTSBuckets</code> and <code class="language-plaintext highlighter-rouge">MyHashMapHSBuckets</code> searches for a <code class="language-plaintext highlighter-rouge">Node</code> by iterating over the entire data structure. But from what we know, trees and hash tables support more efficient lookups than that. Would our hash table speed up if we were able to use a logarithmic search over the <code class="language-plaintext highlighter-rouge">TreeSet</code> or a constant-time search over the <code class="language-plaintext highlighter-rouge">HashSet</code>? You do not need to implement anything new here, just discuss with your labmates, and record your ideas in <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>.</p>
+
+<h2 id="optional-exercises">Optional Exercises</h2>
+
+<p>This will not be graded, but you can still receive feedback on the autograder.</p>
+
+<p>Implement the methods <code class="language-plaintext highlighter-rouge">remove(K key)</code> and <code class="language-plaintext highlighter-rouge">remove(K key, V value)</code>, in your <strong>MyHashMap</strong> class. For an extra challenge, implement <code class="language-plaintext highlighter-rouge">keySet()</code> and <code class="language-plaintext highlighter-rouge">iterator</code> without using a second instance variable to store the set of keys.</p>
+
+<p>For <code class="language-plaintext highlighter-rouge">remove</code>, you should return null if the argument key does not exist in the <strong>MyHashMap</strong>. Otherwise, delete the key-value pair (key, value) and return value.</p>
+
+<h2 id="lab-debrief-and-submission">Lab Debrief and Submission</h2>
+
+<p>At the end of lab, your TA will go over the reference solution. This will be helpful if you haven’t finished the lab, since we don’t want you to be stuck working on lab too much outside of lab. (This is also an incentive for you to go to lab!)</p>
+
+<p>Make sure to submit your completed <code class="language-plaintext highlighter-rouge">MyHashMap.java</code> and <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>, and submit through git and Gradescope as usual.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>
