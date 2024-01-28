@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Homework 04 Self Grades</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/self_grades_style.css">
+  </head>
+  <body>
+
+    <script type="application/javascript">
+      function updateCommentRequired(part) { // e.g. "q1f"
+        var sel = document.querySelector('input[name="' + part + '"]:checked')
+        if (sel == null) {
+          setCommentRequired(part, true);
+        } else {
+          setCommentRequired(part, (sel.value != "10" && sel.value != "0"));
+        }
+      }
+      function setCommentRequired(part, isRequired) { // e.g. "q1f", true
+        if (isRequired) {
+          document.getElementById(part + "-comment").setAttribute("required", "");
+        } else {
+          document.getElementById(part + "-comment").removeAttribute("required");
+        }
+      }
+    </script>
+    <section class="content">
+      <h1 class="content__heading">Submit Homework 04 Self Grades</h1>
+      <form class="content__form contact-form">
+        <div class="txt">
+          <p>Please fill out the form below <i>(preferably using Chrome or Firefox)</i>!</p>
+          <p class="content__lede">All fields, including all comments, should be filled out. Comments should be single-lined (don't press Enter/Return) and should not contain any special characters. The self-grade scale is as follows:</p>
+          <p>
+            <table>
+              <tr><td class="selfgrade_table" style="text-align: center"><b>0</b></td><td class="selfgrade_table">Didn&#x27;t attempt or very very wrong</td></tr>
+              <tr><td class="selfgrade_table" style="text-align: center"><b>2</b></td><td class="selfgrade_table">Got started and made some progress, but went off in the wrong direction or with no clear direction</td></tr>
+              <tr><td class="selfgrade_table" style="text-align: center"><b>5</b></td><td class="selfgrade_table">Right direction and got half-way there</td></tr>
+              <tr><td class="selfgrade_table" style="text-align: center"><b>8</b></td><td class="selfgrade_table">Mostly right but a minor thing missing or wrong</td></tr>
+              <tr><td class="selfgrade_table" style="text-align: center"><b>10</b></td><td class="selfgrade_table">100% correct</td></tr>
+            </table>
+          </p>
+        </div>
+        <!-- Name -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="name">Name</label>
+          <input class="contact-form__input contact-form__input--text" id="name" name="name" type="text" required/>
+        </div>
+        <!-- Email Address -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="email">E-mail Address (Enter complete Berkeley E-mail ID, such as mudit@berkeley.edu)</label>
+          <input class="contact-form__input contact-form__input--email" id="email" name="email" type="email" required/>
+        </div>
+        <!-- SID Here -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="sid">SID</label>
+          <input class="contact-form__input contact-form__input--text" id="sid" name="sid" type="text" required/>
+        </div>
+        <!-- Question 1a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 1a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q1a0" name="q1a" type="radio" value="0" onclick="updateCommentRequired('q1a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q1a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q1a2" name="q1a" type="radio" value="2" onclick="updateCommentRequired('q1a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q1a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q1a5" name="q1a" type="radio" value="5" onclick="updateCommentRequired('q1a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q1a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q1a8" name="q1a" type="radio" value="8" onclick="updateCommentRequired('q1a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q1a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q1a10" name="q1a" type="radio" value="10" onclick="updateCommentRequired('q1a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q1a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q1a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q1a-comment" name="q1a-comment" type="text" required/>
+        </div>
+        <!-- Question 2a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 2a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q2a0" name="q2a" type="radio" value="0" onclick="updateCommentRequired('q2a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q2a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q2a2" name="q2a" type="radio" value="2" onclick="updateCommentRequired('q2a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q2a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q2a5" name="q2a" type="radio" value="5" onclick="updateCommentRequired('q2a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q2a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q2a8" name="q2a" type="radio" value="8" onclick="updateCommentRequired('q2a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q2a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q2a10" name="q2a" type="radio" value="10" onclick="updateCommentRequired('q2a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q2a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q2a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q2a-comment" name="q2a-comment" type="text" required/>
+        </div>
+        <!-- Question 3a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3a0" name="q3a" type="radio" value="0" onclick="updateCommentRequired('q3a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3a2" name="q3a" type="radio" value="2" onclick="updateCommentRequired('q3a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3a5" name="q3a" type="radio" value="5" onclick="updateCommentRequired('q3a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3a8" name="q3a" type="radio" value="8" onclick="updateCommentRequired('q3a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3a10" name="q3a" type="radio" value="10" onclick="updateCommentRequired('q3a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3a-comment" name="q3a-comment" type="text" required/>
+        </div>
+        <!-- Question 3b) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3b</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3b0" name="q3b" type="radio" value="0" onclick="updateCommentRequired('q3b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3b0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3b2" name="q3b" type="radio" value="2" onclick="updateCommentRequired('q3b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3b2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3b5" name="q3b" type="radio" value="5" onclick="updateCommentRequired('q3b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3b5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3b8" name="q3b" type="radio" value="8" onclick="updateCommentRequired('q3b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3b8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3b10" name="q3b" type="radio" value="10" onclick="updateCommentRequired('q3b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3b10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3b-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3b-comment" name="q3b-comment" type="text" required/>
+        </div>
+        <!-- Question 3c) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3c</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3c0" name="q3c" type="radio" value="0" onclick="updateCommentRequired('q3c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3c0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3c2" name="q3c" type="radio" value="2" onclick="updateCommentRequired('q3c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3c2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3c5" name="q3c" type="radio" value="5" onclick="updateCommentRequired('q3c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3c5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3c8" name="q3c" type="radio" value="8" onclick="updateCommentRequired('q3c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3c8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3c10" name="q3c" type="radio" value="10" onclick="updateCommentRequired('q3c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3c10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3c-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3c-comment" name="q3c-comment" type="text" required/>
+        </div>
+        <!-- Question 3d) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3d</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3d0" name="q3d" type="radio" value="0" onclick="updateCommentRequired('q3d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3d0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3d2" name="q3d" type="radio" value="2" onclick="updateCommentRequired('q3d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3d2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3d5" name="q3d" type="radio" value="5" onclick="updateCommentRequired('q3d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3d5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3d8" name="q3d" type="radio" value="8" onclick="updateCommentRequired('q3d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3d8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3d10" name="q3d" type="radio" value="10" onclick="updateCommentRequired('q3d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3d10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3d-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3d-comment" name="q3d-comment" type="text" required/>
+        </div>
+        <!-- Question 3e) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3e</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3e0" name="q3e" type="radio" value="0" onclick="updateCommentRequired('q3e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3e0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3e2" name="q3e" type="radio" value="2" onclick="updateCommentRequired('q3e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3e2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3e5" name="q3e" type="radio" value="5" onclick="updateCommentRequired('q3e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3e5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3e8" name="q3e" type="radio" value="8" onclick="updateCommentRequired('q3e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3e8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3e10" name="q3e" type="radio" value="10" onclick="updateCommentRequired('q3e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3e10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3e-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3e-comment" name="q3e-comment" type="text" required/>
+        </div>
+        <!-- Question 3f) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3f</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3f0" name="q3f" type="radio" value="0" onclick="updateCommentRequired('q3f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3f0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3f2" name="q3f" type="radio" value="2" onclick="updateCommentRequired('q3f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3f2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3f5" name="q3f" type="radio" value="5" onclick="updateCommentRequired('q3f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3f5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3f8" name="q3f" type="radio" value="8" onclick="updateCommentRequired('q3f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3f8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3f10" name="q3f" type="radio" value="10" onclick="updateCommentRequired('q3f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3f10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3f-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3f-comment" name="q3f-comment" type="text" required/>
+        </div>
+        <!-- Question 3g) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3g</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3g0" name="q3g" type="radio" value="0" onclick="updateCommentRequired('q3g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3g0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3g2" name="q3g" type="radio" value="2" onclick="updateCommentRequired('q3g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3g2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3g5" name="q3g" type="radio" value="5" onclick="updateCommentRequired('q3g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3g5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3g8" name="q3g" type="radio" value="8" onclick="updateCommentRequired('q3g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3g8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3g10" name="q3g" type="radio" value="10" onclick="updateCommentRequired('q3g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3g10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3g-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3g-comment" name="q3g-comment" type="text" required/>
+        </div>
+        <!-- Question 3h) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3h</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3h0" name="q3h" type="radio" value="0" onclick="updateCommentRequired('q3h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3h0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3h2" name="q3h" type="radio" value="2" onclick="updateCommentRequired('q3h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3h2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3h5" name="q3h" type="radio" value="5" onclick="updateCommentRequired('q3h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3h5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3h8" name="q3h" type="radio" value="8" onclick="updateCommentRequired('q3h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3h8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3h10" name="q3h" type="radio" value="10" onclick="updateCommentRequired('q3h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3h10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3h-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3h-comment" name="q3h-comment" type="text" required/>
+        </div>
+        <!-- Question 3i) -->
+        <div class="contact-form__input-group">
+          <h5>Question 3i</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q3i0" name="q3i" type="radio" value="0" onclick="updateCommentRequired('q3i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3i0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3i2" name="q3i" type="radio" value="2" onclick="updateCommentRequired('q3i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3i2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3i5" name="q3i" type="radio" value="5" onclick="updateCommentRequired('q3i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3i5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3i8" name="q3i" type="radio" value="8" onclick="updateCommentRequired('q3i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3i8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q3i10" name="q3i" type="radio" value="10" onclick="updateCommentRequired('q3i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q3i10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q3i-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q3i-comment" name="q3i-comment" type="text" required/>
+        </div>
+        <!-- Question 4a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 4a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q4a0" name="q4a" type="radio" value="0" onclick="updateCommentRequired('q4a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4a2" name="q4a" type="radio" value="2" onclick="updateCommentRequired('q4a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4a5" name="q4a" type="radio" value="5" onclick="updateCommentRequired('q4a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4a8" name="q4a" type="radio" value="8" onclick="updateCommentRequired('q4a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4a10" name="q4a" type="radio" value="10" onclick="updateCommentRequired('q4a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q4a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q4a-comment" name="q4a-comment" type="text" required/>
+        </div>
+        <!-- Question 4b) -->
+        <div class="contact-form__input-group">
+          <h5>Question 4b</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q4b0" name="q4b" type="radio" value="0" onclick="updateCommentRequired('q4b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4b0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4b2" name="q4b" type="radio" value="2" onclick="updateCommentRequired('q4b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4b2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4b5" name="q4b" type="radio" value="5" onclick="updateCommentRequired('q4b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4b5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4b8" name="q4b" type="radio" value="8" onclick="updateCommentRequired('q4b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4b8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4b10" name="q4b" type="radio" value="10" onclick="updateCommentRequired('q4b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4b10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q4b-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q4b-comment" name="q4b-comment" type="text" required/>
+        </div>
+        <!-- Question 4c) -->
+        <div class="contact-form__input-group">
+          <h5>Question 4c</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q4c0" name="q4c" type="radio" value="0" onclick="updateCommentRequired('q4c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4c0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4c2" name="q4c" type="radio" value="2" onclick="updateCommentRequired('q4c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4c2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4c5" name="q4c" type="radio" value="5" onclick="updateCommentRequired('q4c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4c5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4c8" name="q4c" type="radio" value="8" onclick="updateCommentRequired('q4c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4c8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4c10" name="q4c" type="radio" value="10" onclick="updateCommentRequired('q4c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4c10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q4c-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q4c-comment" name="q4c-comment" type="text" required/>
+        </div>
+        <!-- Question 4d) -->
+        <div class="contact-form__input-group">
+          <h5>Question 4d</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q4d0" name="q4d" type="radio" value="0" onclick="updateCommentRequired('q4d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4d0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4d2" name="q4d" type="radio" value="2" onclick="updateCommentRequired('q4d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4d2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4d5" name="q4d" type="radio" value="5" onclick="updateCommentRequired('q4d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4d5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4d8" name="q4d" type="radio" value="8" onclick="updateCommentRequired('q4d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4d8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4d10" name="q4d" type="radio" value="10" onclick="updateCommentRequired('q4d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4d10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q4d-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q4d-comment" name="q4d-comment" type="text" required/>
+        </div>
+        <!-- Question 4e) -->
+        <div class="contact-form__input-group">
+          <h5>Question 4e</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q4e0" name="q4e" type="radio" value="0" onclick="updateCommentRequired('q4e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4e0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4e2" name="q4e" type="radio" value="2" onclick="updateCommentRequired('q4e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4e2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4e5" name="q4e" type="radio" value="5" onclick="updateCommentRequired('q4e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4e5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4e8" name="q4e" type="radio" value="8" onclick="updateCommentRequired('q4e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4e8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4e10" name="q4e" type="radio" value="10" onclick="updateCommentRequired('q4e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4e10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q4e-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q4e-comment" name="q4e-comment" type="text" required/>
+        </div>
+        <!-- Question 4f) -->
+        <div class="contact-form__input-group">
+          <h5>Question 4f</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q4f0" name="q4f" type="radio" value="0" onclick="updateCommentRequired('q4f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4f0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4f2" name="q4f" type="radio" value="2" onclick="updateCommentRequired('q4f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4f2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4f5" name="q4f" type="radio" value="5" onclick="updateCommentRequired('q4f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4f5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4f8" name="q4f" type="radio" value="8" onclick="updateCommentRequired('q4f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4f8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q4f10" name="q4f" type="radio" value="10" onclick="updateCommentRequired('q4f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q4f10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q4f-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q4f-comment" name="q4f-comment" type="text" required/>
+        </div>
+        <!-- Question 5a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 5a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q5a0" name="q5a" type="radio" value="0" onclick="updateCommentRequired('q5a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q5a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q5a2" name="q5a" type="radio" value="2" onclick="updateCommentRequired('q5a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q5a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q5a5" name="q5a" type="radio" value="5" onclick="updateCommentRequired('q5a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q5a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q5a8" name="q5a" type="radio" value="8" onclick="updateCommentRequired('q5a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q5a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q5a10" name="q5a" type="radio" value="10" onclick="updateCommentRequired('q5a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q5a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q5a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q5a-comment" name="q5a-comment" type="text" required/>
+        </div>
+        <!-- Question 6a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6a0" name="q6a" type="radio" value="0" onclick="updateCommentRequired('q6a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6a2" name="q6a" type="radio" value="2" onclick="updateCommentRequired('q6a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6a5" name="q6a" type="radio" value="5" onclick="updateCommentRequired('q6a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6a8" name="q6a" type="radio" value="8" onclick="updateCommentRequired('q6a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6a10" name="q6a" type="radio" value="10" onclick="updateCommentRequired('q6a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6a-comment" name="q6a-comment" type="text" required/>
+        </div>
+        <!-- Question 6b) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6b</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6b0" name="q6b" type="radio" value="0" onclick="updateCommentRequired('q6b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6b0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6b2" name="q6b" type="radio" value="2" onclick="updateCommentRequired('q6b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6b2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6b5" name="q6b" type="radio" value="5" onclick="updateCommentRequired('q6b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6b5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6b8" name="q6b" type="radio" value="8" onclick="updateCommentRequired('q6b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6b8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6b10" name="q6b" type="radio" value="10" onclick="updateCommentRequired('q6b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6b10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6b-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6b-comment" name="q6b-comment" type="text" required/>
+        </div>
+        <!-- Question 6c) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6c</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6c0" name="q6c" type="radio" value="0" onclick="updateCommentRequired('q6c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6c0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6c2" name="q6c" type="radio" value="2" onclick="updateCommentRequired('q6c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6c2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6c5" name="q6c" type="radio" value="5" onclick="updateCommentRequired('q6c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6c5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6c8" name="q6c" type="radio" value="8" onclick="updateCommentRequired('q6c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6c8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6c10" name="q6c" type="radio" value="10" onclick="updateCommentRequired('q6c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6c10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6c-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6c-comment" name="q6c-comment" type="text" required/>
+        </div>
+        <!-- Question 6d) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6d</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6d0" name="q6d" type="radio" value="0" onclick="updateCommentRequired('q6d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6d0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6d2" name="q6d" type="radio" value="2" onclick="updateCommentRequired('q6d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6d2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6d5" name="q6d" type="radio" value="5" onclick="updateCommentRequired('q6d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6d5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6d8" name="q6d" type="radio" value="8" onclick="updateCommentRequired('q6d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6d8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6d10" name="q6d" type="radio" value="10" onclick="updateCommentRequired('q6d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6d10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6d-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6d-comment" name="q6d-comment" type="text" required/>
+        </div>
+        <!-- Question 6e) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6e</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6e0" name="q6e" type="radio" value="0" onclick="updateCommentRequired('q6e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6e0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6e2" name="q6e" type="radio" value="2" onclick="updateCommentRequired('q6e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6e2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6e5" name="q6e" type="radio" value="5" onclick="updateCommentRequired('q6e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6e5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6e8" name="q6e" type="radio" value="8" onclick="updateCommentRequired('q6e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6e8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6e10" name="q6e" type="radio" value="10" onclick="updateCommentRequired('q6e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6e10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6e-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6e-comment" name="q6e-comment" type="text" required/>
+        </div>
+        <!-- Question 6f) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6f</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6f0" name="q6f" type="radio" value="0" onclick="updateCommentRequired('q6f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6f0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6f2" name="q6f" type="radio" value="2" onclick="updateCommentRequired('q6f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6f2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6f5" name="q6f" type="radio" value="5" onclick="updateCommentRequired('q6f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6f5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6f8" name="q6f" type="radio" value="8" onclick="updateCommentRequired('q6f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6f8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6f10" name="q6f" type="radio" value="10" onclick="updateCommentRequired('q6f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6f10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6f-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6f-comment" name="q6f-comment" type="text" required/>
+        </div>
+        <!-- Question 6g) -->
+        <div class="contact-form__input-group">
+          <h5>Question 6g</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q6g0" name="q6g" type="radio" value="0" onclick="updateCommentRequired('q6g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6g0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6g2" name="q6g" type="radio" value="2" onclick="updateCommentRequired('q6g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6g2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6g5" name="q6g" type="radio" value="5" onclick="updateCommentRequired('q6g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6g5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6g8" name="q6g" type="radio" value="8" onclick="updateCommentRequired('q6g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6g8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q6g10" name="q6g" type="radio" value="10" onclick="updateCommentRequired('q6g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q6g10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q6g-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q6g-comment" name="q6g-comment" type="text" required/>
+        </div>
+        <!-- Question 7a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 7a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q7a0" name="q7a" type="radio" value="0" onclick="updateCommentRequired('q7a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q7a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q7a2" name="q7a" type="radio" value="2" onclick="updateCommentRequired('q7a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q7a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q7a5" name="q7a" type="radio" value="5" onclick="updateCommentRequired('q7a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q7a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q7a8" name="q7a" type="radio" value="8" onclick="updateCommentRequired('q7a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q7a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q7a10" name="q7a" type="radio" value="10" onclick="updateCommentRequired('q7a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q7a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q7a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q7a-comment" name="q7a-comment" type="text" required/>
+        </div>
+        <!-- Question 8a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8a0" name="q8a" type="radio" value="0" onclick="updateCommentRequired('q8a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8a2" name="q8a" type="radio" value="2" onclick="updateCommentRequired('q8a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8a5" name="q8a" type="radio" value="5" onclick="updateCommentRequired('q8a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8a8" name="q8a" type="radio" value="8" onclick="updateCommentRequired('q8a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8a10" name="q8a" type="radio" value="10" onclick="updateCommentRequired('q8a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8a-comment" name="q8a-comment" type="text" required/>
+        </div>
+        <!-- Question 8b) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8b</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8b0" name="q8b" type="radio" value="0" onclick="updateCommentRequired('q8b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8b0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8b2" name="q8b" type="radio" value="2" onclick="updateCommentRequired('q8b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8b2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8b5" name="q8b" type="radio" value="5" onclick="updateCommentRequired('q8b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8b5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8b8" name="q8b" type="radio" value="8" onclick="updateCommentRequired('q8b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8b8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8b10" name="q8b" type="radio" value="10" onclick="updateCommentRequired('q8b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8b10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8b-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8b-comment" name="q8b-comment" type="text" required/>
+        </div>
+        <!-- Question 8c) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8c</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8c0" name="q8c" type="radio" value="0" onclick="updateCommentRequired('q8c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8c0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8c2" name="q8c" type="radio" value="2" onclick="updateCommentRequired('q8c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8c2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8c5" name="q8c" type="radio" value="5" onclick="updateCommentRequired('q8c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8c5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8c8" name="q8c" type="radio" value="8" onclick="updateCommentRequired('q8c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8c8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8c10" name="q8c" type="radio" value="10" onclick="updateCommentRequired('q8c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8c10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8c-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8c-comment" name="q8c-comment" type="text" required/>
+        </div>
+        <!-- Question 8d) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8d</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8d0" name="q8d" type="radio" value="0" onclick="updateCommentRequired('q8d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8d0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8d2" name="q8d" type="radio" value="2" onclick="updateCommentRequired('q8d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8d2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8d5" name="q8d" type="radio" value="5" onclick="updateCommentRequired('q8d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8d5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8d8" name="q8d" type="radio" value="8" onclick="updateCommentRequired('q8d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8d8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8d10" name="q8d" type="radio" value="10" onclick="updateCommentRequired('q8d')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8d10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8d-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8d-comment" name="q8d-comment" type="text" required/>
+        </div>
+        <!-- Question 8e) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8e</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8e0" name="q8e" type="radio" value="0" onclick="updateCommentRequired('q8e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8e0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8e2" name="q8e" type="radio" value="2" onclick="updateCommentRequired('q8e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8e2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8e5" name="q8e" type="radio" value="5" onclick="updateCommentRequired('q8e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8e5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8e8" name="q8e" type="radio" value="8" onclick="updateCommentRequired('q8e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8e8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8e10" name="q8e" type="radio" value="10" onclick="updateCommentRequired('q8e')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8e10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8e-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8e-comment" name="q8e-comment" type="text" required/>
+        </div>
+        <!-- Question 8f) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8f</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8f0" name="q8f" type="radio" value="0" onclick="updateCommentRequired('q8f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8f0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8f2" name="q8f" type="radio" value="2" onclick="updateCommentRequired('q8f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8f2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8f5" name="q8f" type="radio" value="5" onclick="updateCommentRequired('q8f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8f5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8f8" name="q8f" type="radio" value="8" onclick="updateCommentRequired('q8f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8f8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8f10" name="q8f" type="radio" value="10" onclick="updateCommentRequired('q8f')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8f10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8f-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8f-comment" name="q8f-comment" type="text" required/>
+        </div>
+        <!-- Question 8g) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8g</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8g0" name="q8g" type="radio" value="0" onclick="updateCommentRequired('q8g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8g0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8g2" name="q8g" type="radio" value="2" onclick="updateCommentRequired('q8g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8g2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8g5" name="q8g" type="radio" value="5" onclick="updateCommentRequired('q8g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8g5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8g8" name="q8g" type="radio" value="8" onclick="updateCommentRequired('q8g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8g8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8g10" name="q8g" type="radio" value="10" onclick="updateCommentRequired('q8g')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8g10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8g-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8g-comment" name="q8g-comment" type="text" required/>
+        </div>
+        <!-- Question 8h) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8h</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8h0" name="q8h" type="radio" value="0" onclick="updateCommentRequired('q8h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8h0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8h2" name="q8h" type="radio" value="2" onclick="updateCommentRequired('q8h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8h2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8h5" name="q8h" type="radio" value="5" onclick="updateCommentRequired('q8h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8h5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8h8" name="q8h" type="radio" value="8" onclick="updateCommentRequired('q8h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8h8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8h10" name="q8h" type="radio" value="10" onclick="updateCommentRequired('q8h')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8h10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8h-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8h-comment" name="q8h-comment" type="text" required/>
+        </div>
+        <!-- Question 8i) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8i</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8i0" name="q8i" type="radio" value="0" onclick="updateCommentRequired('q8i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8i0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8i2" name="q8i" type="radio" value="2" onclick="updateCommentRequired('q8i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8i2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8i5" name="q8i" type="radio" value="5" onclick="updateCommentRequired('q8i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8i5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8i8" name="q8i" type="radio" value="8" onclick="updateCommentRequired('q8i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8i8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8i10" name="q8i" type="radio" value="10" onclick="updateCommentRequired('q8i')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8i10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8i-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8i-comment" name="q8i-comment" type="text" required/>
+        </div>
+        <!-- Question 8j) -->
+        <div class="contact-form__input-group">
+          <h5>Question 8j</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q8j0" name="q8j" type="radio" value="0" onclick="updateCommentRequired('q8j')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8j0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8j2" name="q8j" type="radio" value="2" onclick="updateCommentRequired('q8j')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8j2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8j5" name="q8j" type="radio" value="5" onclick="updateCommentRequired('q8j')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8j5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8j8" name="q8j" type="radio" value="8" onclick="updateCommentRequired('q8j')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8j8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q8j10" name="q8j" type="radio" value="10" onclick="updateCommentRequired('q8j')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q8j10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q8j-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q8j-comment" name="q8j-comment" type="text" required/>
+        </div>
+        <!-- Question 9a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 9a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q9a0" name="q9a" type="radio" value="0" onclick="updateCommentRequired('q9a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9a2" name="q9a" type="radio" value="2" onclick="updateCommentRequired('q9a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9a5" name="q9a" type="radio" value="5" onclick="updateCommentRequired('q9a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9a8" name="q9a" type="radio" value="8" onclick="updateCommentRequired('q9a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9a10" name="q9a" type="radio" value="10" onclick="updateCommentRequired('q9a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q9a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q9a-comment" name="q9a-comment" type="text" required/>
+        </div>
+        <!-- Question 9b) -->
+        <div class="contact-form__input-group">
+          <h5>Question 9b</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q9b0" name="q9b" type="radio" value="0" onclick="updateCommentRequired('q9b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9b0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9b2" name="q9b" type="radio" value="2" onclick="updateCommentRequired('q9b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9b2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9b5" name="q9b" type="radio" value="5" onclick="updateCommentRequired('q9b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9b5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9b8" name="q9b" type="radio" value="8" onclick="updateCommentRequired('q9b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9b8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9b10" name="q9b" type="radio" value="10" onclick="updateCommentRequired('q9b')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9b10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q9b-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q9b-comment" name="q9b-comment" type="text" required/>
+        </div>
+        <!-- Question 9c) -->
+        <div class="contact-form__input-group">
+          <h5>Question 9c</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q9c0" name="q9c" type="radio" value="0" onclick="updateCommentRequired('q9c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9c0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9c2" name="q9c" type="radio" value="2" onclick="updateCommentRequired('q9c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9c2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9c5" name="q9c" type="radio" value="5" onclick="updateCommentRequired('q9c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9c5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9c8" name="q9c" type="radio" value="8" onclick="updateCommentRequired('q9c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9c8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q9c10" name="q9c" type="radio" value="10" onclick="updateCommentRequired('q9c')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q9c10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q9c-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q9c-comment" name="q9c-comment" type="text" required/>
+        </div>
+        <!-- Question 10a) -->
+        <div class="contact-form__input-group">
+          <h5>Question 10a</h5>
+          <input class="contact-form__input contact-form__input--radio" id="q10a0" name="q10a" type="radio" value="0" onclick="updateCommentRequired('q10a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q10a0">0</label>
+          <input class="contact-form__input contact-form__input--radio" id="q10a2" name="q10a" type="radio" value="2" onclick="updateCommentRequired('q10a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q10a2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="q10a5" name="q10a" type="radio" value="5" onclick="updateCommentRequired('q10a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q10a5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="q10a8" name="q10a" type="radio" value="8" onclick="updateCommentRequired('q10a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q10a8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="q10a10" name="q10a" type="radio" value="10" onclick="updateCommentRequired('q10a')" required />
+          <label class="contact-form__label contact-form__label--radio" for="q10a10">10</label>
+        </div>
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="q10a-comment">Comment</label>
+          <input class="contact-form__input contact-form__input--text" id="q10a-comment" name="q10a-comment" type="text" required/>
+        </div>
+        <h3>Survey</h3>
+        <!-- Survey: Difficulty level -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="Problem Set Difficulty">Rate the difficulty of this homework. (1: not difficult, 10: very difficult)</label>
+          <input class="contact-form__input contact-form__input--radio" id="d1" name="Problem Set Difficulty" type="radio" value="1" required />
+          <label class="contact-form__label contact-form__label--radio" for="d1">1</label>
+          <input class="contact-form__input contact-form__input--radio" id="d2" name="Problem Set Difficulty" type="radio" value="2" required />
+          <label class="contact-form__label contact-form__label--radio" for="d2">2</label>
+          <input class="contact-form__input contact-form__input--radio" id="d3" name="Problem Set Difficulty" type="radio" value="3" required />
+          <label class="contact-form__label contact-form__label--radio" for="d3">3</label>
+          <input class="contact-form__input contact-form__input--radio" id="d4" name="Problem Set Difficulty" type="radio" value="4" required />
+          <label class="contact-form__label contact-form__label--radio" for="d4">4</label>
+          <input class="contact-form__input contact-form__input--radio" id="d5" name="Problem Set Difficulty" type="radio" value="5" required />
+          <label class="contact-form__label contact-form__label--radio" for="d5">5</label>
+          <input class="contact-form__input contact-form__input--radio" id="d6" name="Problem Set Difficulty" type="radio" value="6" required />
+          <label class="contact-form__label contact-form__label--radio" for="d6">6</label>
+          <input class="contact-form__input contact-form__input--radio" id="d7" name="Problem Set Difficulty" type="radio" value="7" required />
+          <label class="contact-form__label contact-form__label--radio" for="d7">7</label>
+          <input class="contact-form__input contact-form__input--radio" id="d8" name="Problem Set Difficulty" type="radio" value="8" required />
+          <label class="contact-form__label contact-form__label--radio" for="d8">8</label>
+          <input class="contact-form__input contact-form__input--radio" id="d9" name="Problem Set Difficulty" type="radio" value="9" required />
+          <label class="contact-form__label contact-form__label--radio" for="d9">9</label>
+          <input class="contact-form__input contact-form__input--radio" id="d10" name="Problem Set Difficulty" type="radio" value="10" required />
+          <label class="contact-form__label contact-form__label--radio" for="d10">10</label>
+        </div>
+        <!-- Survey: Time Cost -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="Hours Spent">How many hours did the HW take you?</label>
+          <input class="contact-form__input contact-form__input--number" id="Hours Spent" name="Hours Spent" type="number" required/>
+        </div>
+        <!-- Survey: Peer Count -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="Teammate Headcount">How many other people did you work with on the HW?</label>
+          <input class="contact-form__input contact-form__input--number" id="Teammate Headcount" name="Teammate Headcount" type="number" required/>
+        </div>
+        <!-- Survey: Homework party attendance -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="Attended Homework Party">Did you go to HW party?</label>
+          <input class="contact-form__input contact-form__input--radio" id="Y" name="Attended Homework Party" type="radio" value="Y" required />
+          <label class="contact-form__label contact-form__label--radio" for="Y">Yes</label>
+          <input class="contact-form__input contact-form__input--radio" id="N" name="Attended Homework Party" type="radio" value="N" required />
+          <label class="contact-form__label contact-form__label--radio" for="N">No</label>
+        </div>
+        <!-- Survey: General comments about the homework -->
+        <div class="contact-form__input-group">
+          <label class="contact-form__label" for="HW Feedback">Do you have any comments about the homework?</label>
+          <textarea class="contact-form__input contact-form__input--text" id="HW Feedback" name="HW Feedback" ></textarea>
+        </div>
+
+<!--        <h3>Survey for Fall 2020 Discussion</h3>-->
+<!--        &lt;!&ndash; Survey: Discussion type &ndash;&gt;-->
+<!--        <div class="contact-form__input-group">-->
+<!--          <label class="contact-form__label" for="Discussion Type">Fall semester course staff are implementing different types of discussion sections. The following are types of sections for which there have be choices about how many of each section to implement. Choose which of the following section types you would attend.</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d1" name="Discussion Type" type="radio" value="Lecture" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d1">Lecture Style: TA walks through worksheet problems.</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d2" name="Discussion Type" type="radio" value="Interactive" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d2">Interactive Lecture Style: TA walks through worksheet while requesting student engagement through polls, voice, chat, annotation (drawing on screen), and participant buttons. Other staff present assist in answering questions in chat.</label></br>-->
+
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d3" name="Discussion Type" type="radio" value="Individual" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d3">Discussion with Individual Work Time: For each problem, the TA introduces the premise, gives work time (5-10 minutes), then goes over solution. Other staff present can assist in answering questions in chat, or can go to breakout rooms with individual students if there are personal questions or clarifications.</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d4" name="Discussion Type" type="radio" value="Group" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d4">Group Discussion Style: Everyone is sent into breakout rooms to work on all the problems of the worksheet for the first half of the time with peer groups. Come back together at the end to walk through solutions with the TA. Other staff are present in each breakout room to answer questions from each group and encourage discussion by providing ideas and suggestions. Possibility for choosing or coordinating peer groups in breakout rooms.</label>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Survey: Preference explanation &ndash;&gt;-->
+<!--        <div class="contact-form__input-group">-->
+<!--          <label class="contact-form__label" for="Style Preference">(Required) Please explain your preference above.</label>-->
+<!--          <textarea class="contact-form__input contact-form__input&#45;&#45;text" id="Style Preference" name="Style Preference" required ></textarea>-->
+<!--        </div>-->
+<!--        <h3>Factors that Influenced Discussion Attendance</h3>-->
+<!--        &lt;!&ndash; Survey: Start &ndash;&gt;-->
+<!--        <div class="contact-form__input-group">-->
+<!--          <label class="contact-form__label" for="Start Attendance">At the beginning of the semester, how would you characterize your discussion attendance?</label>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d1" name="Start Attendance" type="radio" value="In Person" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d1">Attended in person</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d2" name="Start Attendance" type="radio" value="Watched" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d2">Watched the recordings</label></br>-->
+
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d3" name="Start Attendance" type="radio" value="Both" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d3">Both</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d4" name="Start Attendance" type="radio" value="Neither" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d4">Neither</label>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Survey: End &ndash;&gt;-->
+<!--        <div class="contact-form__input-group">-->
+<!--          <label class="contact-form__label" for="End Attendance">At the end of the semester, how would you characterize your discussion attendance?</label>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d1" name="End Attendance" type="radio" value="In Person" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d1">Attended in person</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d2" name="End Attendance" type="radio" value="Watched" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d2">Watched the recordings</label></br>-->
+
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d3" name="End Attendance" type="radio" value="Both" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d3">Both</label></br>-->
+<!--          <input class="contact-form__input contact-form__input&#45;&#45;radio" id="d4" name="End Attendance" type="radio" value="Neither" required />-->
+<!--          <label class="contact-form__label contact-form__label&#45;&#45;radio" for="d4">Neither</label>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Survey: What changed? &ndash;&gt;-->
+<!--        <div class="contact-form__input-group">-->
+<!--          <label class="contact-form__label" for="Attendance Factors">(Required) What factors contributed to your discussion attendance chosen above? If you changed attendance over the semester, why?</label>-->
+<!--          <textarea class="contact-form__input contact-form__input&#45;&#45;text" id="Attendance Factors" name="Attendance Factors" required ></textarea>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Survey: Ohter comments? &ndash;&gt;-->
+<!--        <div class="contact-form__input-group">-->
+<!--          <label class="contact-form__label" for="Discussion Comments">(Optional) Other thoughts, comments, and concerns for improvement not captured in either section above about discussion? (e.g. checkoff form effectiveness, other format suggestions)</label>-->
+<!--          <textarea class="contact-form__input contact-form__input&#45;&#45;text" id="Discussion Comments" name="Discussion Comments"></textarea>-->
+<!--        </div>-->
+        <!-- Submit Button -->
+        <p align="center"><button class="contact-form__button" type="submit">Generate!</button></p>
+      </form>
+    </section>
+    <!-- JSON Data displayer -->
+    <div class="results" style="display:none" id="results-div">
+      <h2 class="results__heading">Form Data</h2>
+      <p align="center"><a class="contact-form__button" id="json-download" data-file="selfgrades-04.txt"></a></p>
+      <p class="content__lede"><i>OR</i> copy and paste the output below to <b>selfgrades-04.txt</b> <i>and upload to the "Homework 04 Self Grade" assignment on Gradescope!</i> Double check that the file name and contents match what's seen below and that all fields are filled out. Chrome or Firefox will warn you if you've missed a form field, but browsers like Safari won't :(. <b>After uploading, verify that the Gradescope autograder correctly calculated your score.</b> If it didn't, double check that the JSON is valid, and/or post on <a href="https://piazza.com/class/kjxe8woei5v5hr">Piazza</a> for help.</p>
+      <pre class="results__display-wrapper"><code class="results__display"></code></pre>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.13.0/polyfill.min.js'></script>
+    <script src="js/self-grade.js"></script>
+  </body>
+</html>
