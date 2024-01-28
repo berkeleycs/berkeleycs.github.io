@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="../assets/images/neuralnet.png">
+  <link rel="manifest" href="../site.webmanifest.html">
+
+	<meta name="apple-mobile-web-app-title" content="EECS 182">
+	<meta name="application-name" content="EECS 182">
+	<meta name="msapplication-TileColor" content="#3b7ea1">
+	<meta name="msapplication-TileImage" content="/~cs182/fa22/mstile-144x144.png">
+	<meta name="theme-color" content="#3b7ea1">
+
+	<title>
+
+		Schedule - CS 182: Deep Neural Networks, Fall 2022
+
+	</title>
+
+	<link rel="stylesheet" href="../assets/css/main.css" type="text/css">
+
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="../assets/js/bootstrap-toc.min.js"></script>
+
+
+	<script src="../assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+	<script src="../assets/js/moment.min.js"></script>
+	<script src="../assets/js/fullcalendar.min.js"></script>
+
+	<script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      SVG: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      }
+      });
+    </script>
+	<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+
+<body data-spy="scroll" data-target="#toc">
+
+	<div id="navscroll">
+		<nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+			<div class="container">
+				<a class="navbar-brand" href="../index.html" style="color: #000;"><strong>EECS 182</strong> | Fall 2022</a>
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a href="../index.html" class="nav-link">Syllabus</a></li>
+						<li class="nav-item"><a href="../policies.html" class="nav-link">Policies</a></li>
+						<li class="nav-item active"><a href="../schedule.html"
+								class="nav-link active">Schedule</a></li>
+						<li class="nav-item"><a href="../staff.html" class="nav-link">Staff</a></li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://edstem.org/us/courses/26833/discussion/">Ed Forum
+								<i class="fal fa-link"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Return to Top -->
+	<a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+	<script>
+		// ===== Scroll to Top ====
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+				$('#return-to-top').fadeIn(200);    // Fade in the arrow
+			} else {
+				$('#return-to-top').fadeOut(200);   // Else fade out the arrow
+			}
+		});
+		$('#return-to-top').click(function () {  // When arrow is clicked
+			$('body,html').animate({
+				scrollTop: 0                       // Scroll to top of body
+			}, 500);
+		});
+	</script>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+	<script>var $j = jQuery.noConflict(true);</script>
+	<script>
+		$(document).ready(function () {
+			console.log($().jquery); // this prints v1.11.0
+			console.log($j().jquery); // this prints v3.1.0
+		});
+	</script>
+	<script src="../assets/js/parallax.min.js"></script>
+
+	<script src="../assets/js/main.min.js"></script>
+
+
+	<div class='container'>
+
+		<script src="../assets/js/calendar.js"></script>
+		<script src="../assets/js/gcal.js"></script>
+
+		<h1>Discussion Schedule</h1>
+
+		<div class="col-sm-9">
+
+			<p>
+				Each discussion will be taught by a TA and have a course tutor present to help out in small groups.
+				To amortize TA/tutor prep time, discussions will be taught by different TAs/tutors in alternating weeks.
+				Some TAs will teach in odd-numbered weeks, while others teach in even-numbered weeks. The week numbers
+				are on the <a href="../index.html">homepage</a>. Discussions start week 1.
+			</p>
+
+			<table class="discussion" id="regular-discussion-wed">
+				<thead>
+					<th>Time</th>
+					<th>Room</th>
+					<th>TA 1 (odd weeks)</th>
+					<th>Tutor 1 (odd weeks)</th>
+					<th>TA 2 (even weeks)</th>
+					<th>Tutor 2 (even weeks)</th>
+				</thead>
+
+				<tbody>
+
+					<tr class="odd">
+						<td>Wed 10-11am</td>
+						<td>Wheeler 224</td>
+						<td>Kumar Agrawal</td>
+						<td>Anrui Gu</td>
+						<td>Saagar Sanghavi</td>
+						<td>Shivam Singhal</td>
+					</tr>
+
+					<tr class="even">
+						<td>Wed 11am-12pm</td>
+						<td>Wheeler 202</td>
+						<td>Kumar Agrawal</td>
+						<td>Anrui Gu</td>
+						<td>Saagar Sanghavi</td>
+						<td>Shivam Singhal</td>
+					</tr>
+
+					<tr class="odd">
+						<td>Wed 12-1pm</td>
+						<td>Evans 3</td>
+						<td>Sheng Shen</td>
+						<td>Danny Reidenbach</td>
+						<td>Suhong Moon</td>
+						<td>Kevin Li</td>
+					</tr>
+
+					<tr class="even">
+						<td>Wed 1-2pm</td>
+						<td>Wheeler 130</td>
+						<td>Sheng Shen</td>
+						<td>Danny Reidenbach</td>
+						<td>Jerome Quenum</td>
+						<td>Kevin Li</td>
+					</tr>
+
+					<tr class="odd">
+						<td>Wed 2-3pm</td>
+						<td>Cory 241</td>
+						<td>Olivia Watkins</td>
+						<td>Matthew Lacayo</td>
+						<td>Jerome Quenum</td>
+						<td>Bryan Wu</td>
+					</tr>
+
+					<tr class="even">
+						<td>Wed 3-4pm</td>
+						<td>Wheeler 200</td>
+						<td>Olivia Watkins</td>
+						<td>Matthew Lacayo</td>
+						<td>Suhong Moon</td>
+						<td>Bryan Wu</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+			<p>
+				We highly encourage students to attend discussions every week. Working
+				through problems is the best way to learn this material. You cannot
+				learn deep learning by simply reading about it or watching lectures.
+				You	need to practice solving problems.
+			</p>
+
+		</div>
+
+		<h1>Office Hours</h1>
+		<div class="col-sm-9">
+			Office hours will prioritize conceptual questions, but we will try our best to help all students as much as possible! Feel free to come with homework questions, and also you are welcome to come to the OH room to just work on the HW, find study groups, etc.
+			<div class="table-responsive">
+				<table class="discussion" id="office-hours">
+					<thead>
+						<th>Time</th>
+						<th>Location</th>
+						<th colspan="6">Instructor</th>
+					</thead>
+					<tbody>
+
+						<tr>
+							<td>Tue 11am-12pm</td>
+							<td>Cory 258</td>
+							<td>Anant Sahai (Professor OH)</td>
+						</tr>
+
+						<tr>
+                                                        <td>Tue 12-1pm</td>
+                                                        <td>Cory 529</td>
+                                                        <td>Sheng Shen</td>
+                                                </tr>
+
+						<tr>
+							<td>Tue 3-4pm</td>
+							<td>Wheeler 120</td>
+							<td>Jerome Quenum</td>
+						</tr>
+
+						<tr>
+							<td>Tue 5-6pm</td>
+							<td>Wheeler 20</td>
+							<td>Suhong Moon</td>
+						</tr>
+
+						<tr>
+							<td>Wed 4-5pm</td>
+							<td>Evans 9</td>
+							<td>Shivam Singhal</td>
+
+						<tr>
+							<td>Thu 11am-12pm</td>
+							<td>Cory 258</td>
+							<td>Anant Sahai (Professor OH)</td>
+						</tr>
+						
+						<tr>
+                                                        <td>Fri 12-1pm</td>
+                                                        <td>Cory 284</td>
+                                                        <td>Saagar Sanghavi</td>
+                                                </tr>
+
+						<tr>
+                                                        <td>Fri 2-3pm</td>
+                                                        <td>Soda 411</td>
+                                                        <td>Olivia Watkins</td>
+                                                </tr>
+
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+				
+		<h1>Project Support Office Hours</h1>
+                <div class="col-sm-9">
+                        For the remainder of the semester, course tutors will host additional office hours to provide support on the projects! We encourage you to come by to get help, discuss your ideas and progress, or just come and work. 
+			
+			For Nov 14, Nov 15, Nov 17, and Nov 21, the office hours will be dedicated to project meetings with each group. Signups for this are posted on Ed.
+			<div class="table-responsive">
+                                <table class="discussion" id="office-hours">
+                                        <thead>
+                                                <th>Time</th>
+                                                <th>Location</th>
+                                                <th colspan="6">Tutor</th>
+                                        </thead>
+                                        <tbody>
+						<tr>
+							<td>Mon 9-10am</td>
+							<td>Cory 531</td>
+							<td>Matthew</td>
+						</tr>
+
+						<tr>
+							<td>Mon 12-1pm</td>
+							<td>Cory 531</td>
+							<td>Jake</td>
+						</tr>
+
+						<tr>
+							<td>Mon 3-4pm</td>
+							<td>Soda 411</td>
+							<td>Bryan</td>
+						</tr>
+						
+						<tr>
+							<td>Thu 1-2pm</td>
+							<td>Cory 284</td>
+							<td>Danny</td>
+						</tr>
+
+						<tr>
+							<td>Thu 3-4pm</td>
+							<td>Cory 284</td>
+							<td>Allie</td>
+						</tr>
+
+						<tr>
+							<td>Thu 4-5pm</td>
+							<td>Cory 258</td>
+							<td>Kevin</td>
+						</tr>
+
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+
+			<h1>Homework Party</h1>
+
+			<div class="col-sm-9">
+				Homework Party will be held every <b>Wed, 7-9pm in Cory 540AB</b>. We will have 4-5 course tutors present at HW party to provide support and help you work through the problems.
+				We encourage you to use homework party to work with classmates, find study groups, and get help from course staff on the homework.
+				If you do attend HW party, please mention it when you credit collaborators in your homework submission.
+			</div>
+
+			<h1>Calendar</h1>
+			<div class="col-sm-9">
+
+				<iframe
+					src="https://calendar.google.com/calendar/embed?src=c_a42b5n9hbsv42savunpba4i4tc%40group.calendar.google.com&ctz=America%2FLos_Angeles"
+					style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+			</div>
+
+			<!-- 	<h2><br/>Office Hour Queuing Website: <a href="https://cs182-oh.apps.cs61a.org/">https://cs182-oh.apps.cs61a.org/</a></h2> -->
+
+			<footer class="py-4 container">
+				<div class="row text-center">
+					<div class="col-md-6 col-sm-12">
+						<h3 data-toc-skip><a href="javascript:void(0)">EECS 182</a></h3>
+						<ul class="nav nav-pills flex-column">
+							<li class="nav-item"><a href="../schedule.html" class="nav-link">Weekly Schedule</a>
+							</li>
+							<li class="nav-item"><a href="../schedule.html" class="nav-link">Office Hours</a>
+							</li>
+							<li class="nav-item"><a href="../staff.html" class="nav-link">Staff</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-md-6 col-sm-12">
+						<h3 data-toc-skip><a href="../policies.html">Policies</a></h3>
+						<ul class="nav nav-pills flex-column">
+							<li class="nav-item"><a href="../policies.html#Assignments"
+									class="nav-link">Assignments</a>
+							</li>
+							<li class="nav-item"><a href="../policies.html#Exams" class="nav-link">Exams</a>
+							</li>
+							<li class="nav-item"><a href="../policies.html#Grading" class="nav-link">Grading</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<script src="../assets/js/clipboard.min.js"></script>
+				<script src="../assets/js/codeselect.js"></script>
+			</footer>
+
+		</div>
+
+</body>
+
+<!-- <script>w3.includeHTML();</script> -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>

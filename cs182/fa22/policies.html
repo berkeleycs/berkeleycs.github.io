@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" href="assets/images/neuralnet.png">
+  <link rel="manifest" href="site.webmanifest.html">
+
+	<meta name="apple-mobile-web-app-title" content="EECS 182">
+	<meta name="application-name" content="EECS 182">
+	<meta name="msapplication-TileColor" content="#3b7ea1">
+	<meta name="theme-color" content="#3b7ea1">
+
+	<title>
+
+		Policies - CS 182: Deep Neural Networks, Fall 2022
+
+	</title>
+
+	<link rel="stylesheet" href="assets/css/main.css" type="text/css">
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+	<script src="assets/js/bootstrap-toc.min.js"></script>
+
+
+	<script src="assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+	<script src="assets/js/moment.min.js"></script>
+	<script src="assets/js/fullcalendar.min.js"></script>
+
+	<script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      SVG: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      }
+      });
+    </script>
+	<script type="text/javascript" async
+		src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+	<div id="navscroll">
+		<nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+			<div class="container">
+				<a class="navbar-brand" href="index.html" style="color: #000;"><strong>EECS 182</strong> | Fall
+					2022</a>
+				<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a href="index.html" class="nav-link">Syllabus</a></li>
+						<li class="nav-item active"><a href="policies.html"
+								class="nav-link active">Policies</a></li>
+						<li class="nav-item"><a href="schedule.html" class="nav-link">Schedule</a></li>
+						<li class="nav-item"><a href="staff.html" class="nav-link">Staff</a></li>
+						<li class="nav-item">
+							<a class="nav-link" href="https://edstem.org/us/courses/26833/discussion/">Ed Forum
+								<i class="fal fa-link"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Return to Top -->
+	<a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+	<script>
+		// ===== Scroll to Top ====
+		$(window).scroll(function () {
+			if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+				$('#return-to-top').fadeIn(200);    // Fade in the arrow
+			} else {
+				$('#return-to-top').fadeOut(200);   // Else fade out the arrow
+			}
+		});
+		$('#return-to-top').click(function () {  // When arrow is clicked
+			$('body,html').animate({
+				scrollTop: 0                       // Scroll to top of body
+			}, 500);
+		});
+	</script>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+	<script>var $j = jQuery.noConflict(true);</script>
+	<script>
+		$(document).ready(function () {
+			console.log($().jquery); // this prints v1.11.0
+			console.log($j().jquery); // this prints v3.1.0
+		});
+	</script>
+	<script src="assets/js/parallax.min.js"></script>
+
+	<script src="assets/js/main.min.js"></script>
+
+	<div class="container">
+
+		<script>
+			document.getElementById('announcementTime').innerHTML = moment([2020, 5, 25, 21, 35]).fromNow()
+		</script>
+
+
+		<div class="row">
+			<div class="col-sm-3">
+				<nav id="toc" data-toggle="toc" class="sticky-top" style="top: 40px; margin-bottom: 40px"></nav>
+			</div>
+
+			<div class="col-sm-9">
+				<h1 class="mt-0">Policies</h1>
+
+				<p><strong>Note: The syllabus is subject to change.</strong></p>
+
+				<h2 id="communication">Course Platforms</h2>
+
+				<p>This course will use several platforms:</p>
+
+				<ul>
+					<li><b>Website</b>: This website includes all public course information, syllabus, resources, and schedule.</li>
+					<li><b>Gradescope</b>: for submitting HW, corrections, self-grades, and exam scoring. Please join the course using the access code: <b>NXPW8B</b>	</li>
+					<li><b>Ed Forum</b>: We will use Ed as a forum for discussing course material and for sending out course announcements. If you haven’t been added, please <a href='https://edstem.org/us/join/ceJauC'>join using this link</a>.
+				</ul>
+
+				<hr />
+
+				<h2 id="prerequisites">Prerequisites</h2>
+
+				This is a graduate-level/advanced undergraduate course about a particular approach to information processing using (simulated) analog circuits where the desired circuit behavior is tuned via optimization involving data since we have no idea how to do hand-tuning at scale. Probabilistic frames are useful to understand what is going on, as well as how we navigate certain design choices. Overall, we expect students to have a strong mathematical background in calculus, linear algebra, probability, optimization, and statistical learning. Berkeley undergraduate courses that can help build maturity include:
+
+				<ul>
+					<li><strong>Calculus</strong>: Math 53 (note: Math 1B or AP Math is not enough)
+					</li>
+					<li><strong>Linear Algebra and Optimization</strong>: EECS 16B and EECS 127/227A is ideal, but EECS 16B alone might be enough if students have complete mastery of that material. Math 110 is also helpful. (note: Math 54 or EECS 16A is required as a minimum, but are not nearly enough.)
+					</li>
+					<li><strong>Probability</strong>: EECS 126, Stat 134, or Stat 140 (note: CS 70 is required at a minimum, but might not be enough for everyone)
+ 					</li>
+					<li><strong>Statistical Learning</strong>: CS 189/289A or Stat 154 (note: Data 102 is insufficient, even when combined with Data 100.)
+					</li>
+				</ul>
+
+				<p><em>Math 53 and EECS 126 and EECS 127 and CS 189 is the recommended background.</em></p>
+
+				Prerequisites are not enforced for enrollment, but we encourage you to consider taking some of the classes listed above and save this course for a future semester if you feel shaky on the fundamentals.
+
+				<p>The course assumes familiarity with programming in a high-level language with data structures. Homeworks and projects will typically use Python. We encourage you to check out this <a href=https://docs.python.org/3/tutorial/>tutorial</a> if you haven’t used it before. Students who have taken Berkeley courses like CS 61A and CS 61B are well-prepared for the programming components of the class.</p>
+
+				We do not have the staff bandwidth to help students with material that they should have understood before taking this course. If you choose to proceed with this course, you are accepting full responsibility to teach yourself anything in your background that you are missing. We will not be slowing down to accommodate you, and questions pertaining to background material will always have the lowest priority in all course forums.
+
+				<hr />
+
+				<h2 id="outline">Course Outline</h2>
+				The goal is to teach a principled course in Deep Learning that serves the diverse needs of our students while also codifying the present understanding of the field. Topics covered may include, but are not limited to:
+				<ul>
+					<li>Underlying themes of deep learning, including building beyond underlying machine learning concepts like supervised vs unsupervised learning, regression and classification, training/validation/testing, distribution shifts, regularization, the fundamental underlying tradeoffs;
+					</li>
+					<li>Defining and training neural networks: features, computation graphs, backpropagation, iterative optimization (SGD, Newton’s Method, Momentum, RMSProp, AdaGrad, Adam), strategies for training (explicit and implicit regularization, batch and layer normalization, weight initialization, gradient clipping, ensembles, dropout), hyperparameter tuning
+					</li>
+					<li>Families of contemporary models: fully connected networks, convolutional nets, graph neural nets, recurrent neural nets, transformers
+					</li>
+					<li>Problems that utilize neural networks: computer vision, natural language processing, generative models, and others.
+					</li>
+					<li>Conducting experiments in a systematic, repeatable way, leveraging and presenting data from experiments to reason about network behavior.
+					</li>
+				</ul>
+
+				<hr />
+
+				<p><a name="Assignments"></a></p>
+				<h2 id="assignments">Assignments</h2>
+
+				<p>This class includes more or less <b>weekly homework assignments</b> (written and coding components), a <b>course project</b>, a <b>midterm exam</b>, and a <b>final exam.</b></p>
+
+				<p><a name="Homework"></a></p>
+				<h3 id="homework-policy">Homework</h3>
+
+				<p>Weekly homeworks will involve both written and coding components. Homeworks will be due on <b>Fridays at 10:59 PM</b>, with the first homework being due Sep 2. You get a 1 hour “grace period” until 11:59 PM to submit your homework with no penalty, but we strongly recommend you use this grace period to protect against technical issues and to have your assignments finished before 10:59 PM.
+				</p>
+
+				<p>Homework exists mainly for you to learn. We encourage collaboration in teams of 2-4, but everyone turns in their own submission.
+				</p>
+
+				<p><b>HW Corrections</b>: Scoring on the homework is effort-based. Scores will be adjusted so that 80% is full credit, capped at full score.  To get full credit on a part, you need to either get it right the first time or after you see the solutions, write out the correct answer along with a comment on what you did not get right the first time and why. At least 50% of parts need to be attempted in the original submission to be eligible for credit.
+				</p>
+
+				<p><b>Self-grading deadlines</b>: You have two weeks from the initial HW deadline to submit your resubmission (with correct answers for at least 80% of the parts for full credit) along with an appropriately formatted file detailing the appropriate grade for what you did. We will randomly check a subset of students to verify that self-grades are correct and apply negative points if students abuse the self-grade system. If you don’t think you have enough time each week to actually attempt at least half the homework and read through and truly understand at least 80% of the solutions, you probably shouldn’t be taking this course for credit this semester.
+				</p>
+
+				<p><b>HW Drops</b>: The lowest 2 homework scores will not be included in your grade, to account for things like falling sick, other commitments, etc.
+				</p>
+
+				<p><b>HW Party</b>: Weekly on Wednesday evenings, course staff will provide an collaborative space and extra  support to help students work together and finish the assignment. More details will be posted on Ed.
+				</p>
+
+
+				<p><a name="Project"></a></p>
+				<h3 id="project-policy">Course Project</h3>
+
+				<p>As a design course, CS 182 requires all students to complete a final project done in teams of four.
+				</p>
+				<ul>
+					<li>Entire team gets the same grade.
+					</li>
+					<li>The project details will be announced later, but there will be a range of possibilities including some that are of lower difficulty
+					</li>
+					<li>A part of doing the project will be doing rubric-based peer evaluation of other students’ projects. Objective peer review is a standard part of academic practice, and this component of the project is designed to simulate this
+					</li>
+				</ul>
+
+				<p><a name="Exams"></a></p>
+				<h3 id="exams">Exams</h2>
+				<p>The Midterm will be on <strong>Oct 26th at 8-10pm</strong> in the evening, in-person, on the Berkeley campus. There will be no alternative exams or remote options.
+
+				</p>
+
+				<p>The Final will be in our designated slot based on the lecture time, which will be Exam Group 7: <b>Tue, Dec 13th from 3-6pm</b> in-person on the Berkeley campus. There will be no alternative exams or remote options.</p>
+
+				<p>If you cannot make these exam times, you should drop the class and take it in a future semester. Again, there will be <b>no alternative exams or remote options</b> (except as mandated by DSP letter). Please do not email the staff requesting alternative exams.</p>
+
+				<p>Exams in EECS 182 will be challenging and serve as the main evaluation criteria for this class. </p>
+
+				<p><a name="Participation"></a></p>
+				<h3 id="participation-policy">Participation and Good Citizenship</h3>
+
+				<p>We expect students to participate in the class in a way that contributes to a positive and inclusive learning atmosphere for fellow students, and helps everyone deepen their mastery of the subject. Actions done in furtherance of these goals earn positive points. Bad citizenship and non-constructive behavior gets negative points. Doing nothing gets zero points. More details will be provided in a relevant Ed thread.
+				</p>
+
+				<p><a name="scribing"></a></p>
+				<h3 id="scribing">Lecture Scribing/Demo Creation (graduate students)</h2>
+
+				<p>
+				Graduate students must sign up for one of the 28 lectures and either sign up for making a solid demo relevant to the topics in that lecture, or to LaTeX scribe the lecture. Grad students can work in teams of at most two on either the demo or the scribing. The LaTeX scribing is a serious task where they need to write things up in a way that comprehensive and clear to understand. As with the projects, following academic practice, all writing comes with reviewing responsibilities. Teams will also need to sign up to peer review three other notes or demos against a rubric (details will be provided in the relevant Ed thread).
+				</p>
+
+				<p><a name="late-policy"></a></p>
+				<h3 id="late-policy">Late Policy</h3>
+
+				<p>Late HWs and Projects will generally not be accepted, unless you have a DSP accommodation. If you miss the deadline, you will have to use your homework drops. However, exceptional circumstances such as student illness, serious illness of close family member, or family bereavement may merit an extension. Please fill out the form linked in the next section to request an extension. 
+				</p>
+
+				<h2 id="extensions">Extensions/Accomodations for DSP</h2>
+
+				<p>Please have your DSP advisor submit a letter.</p>
+
+				<p>Our course manager Michael-David will be managing extension requests and accommodations this
+				semester. If you require a DSP extension for any assignment, please fill out 
+				<a href=https://forms.gle/Q7iuRzpd6bVRUCieA>this form</a> that 
+				is only seen by him. Non-DSP students may also use the form to request extensions for any exceptional circumstances. 
+				Please do not email staff or post on Ed requesting an extension.</p>
+				
+
+				<p>If you have any questions, concerns, or want to reach out to Michael-David directly, feel free to
+					email him at eecs-course-management@eecs.berkeley.edu.</p>
+				<hr />
+
+				<p><a name="Grading"></a></p>
+				<h2 id="grading">Grading</h2>
+
+				<p>Weights (undergrad students):</p>
+				<ul>
+					<li>Homework (20%)</li>
+					<li>Midterm Exam (20%)</li>
+					<li>Final Exam (30%)</li>
+					<li>Project (25%)</li>
+					<li>Participation (5%)</li>
+				</ul>
+
+				<p>Weights (graduate students):</p>
+				<ul>
+					<li>Homework (20%)</li>
+					<li>Midterm Exam (20%)</li>
+					<li>Final Exam (20%)</li>
+					<li>Project (25%)</li>
+					<li>Participation (5%)</li>
+					<li>Lecture Scribing/Content Creation (10%)</li>
+				</ul>
+
+				<p>This class is <b>not graded on a curve</b>. We follow fixed grade bins, and your grade is determined on how well you do, not how well your peers do. Everyone can earn an A. Everyone can fail. The course staff sincerely wants ALL of you to succeed in this class.
+				</p>
+
+				<table class="discussion" id="regular-discussion-wed">
+					<thead>
+						<th>Grade</th>
+						<th>Overall Percentage</th>
+					</thead>
+
+					<tbody>
+
+						<tr>
+							<td>A</td>
+							<td>[90, 100]</td>
+						</tr>
+
+						<tr>
+							<td>A-</td>
+							<td>[88, 90) </td>
+						</tr>
+
+						<tr>
+							<td>B+</td>
+							<td>[84, 88)</td>
+						</tr>
+
+						<tr>
+							<td>B</td>
+							<td>[75, 84) </td>
+						</tr>
+
+						<tr>
+							<td>C+</td>
+							<td>[65, 68)</td>
+						</tr>
+
+						<tr>
+							<td>C</td>
+							<td>[62, 65)</td>
+						</tr>
+
+						<tr>
+							<td>C-</td>
+							<td>[58, 62)</td>
+						</tr>
+
+						<tr>
+							<td>D</td>
+							<td>[53, 58)</td>
+						</tr>
+
+						<tr>
+							<td>F</td>
+							<td>[0, 53)</td>
+						</tr>
+					</tbody>
+				</table>
+
+
+
+				<p>The instructors may adjust grades upward based on class participation, extra credit, etc. The grade
+					of A+ will be awarded at the instructor's discretion based on exceptional performance.</p>
+
+				<p>If you are taking the class PNP, you will need to attain a letter grade of C- or higher AND take the
+					final to pass. If you are a graduate student taking the class SUS, you will need to attain a letter
+					grade of B- or higher AND take the final to pass.</p>
+				<p><strong>Regrade Policy:</strong> If you believe an error has been made in the grading of one of your
+					exams or assignments, you may resubmit it for a regrade. Regrades for cases where we misapplied a
+					rubric in an individual case are much more likely to be successful than regrades that argue about
+					relative point values within the rubric, as the rubric is applied to the entire class. Because we
+					will examine your entire submission in detail, your grade can go up or down as a result of a regrade
+					request.</p>
+
+				<h2 id="collaboration">Collaboration</h2>
+				<p>We encourage you to work in groups of 2-4 students in completing the homework—however, <b>each student must write up their own solutions and submit individually</b>. You should never directly copy solutions from other students or material from books/online resources. As per standard academic practice, you should should acknowledge any collaborators on an assignment and credit any external sources that you used in your writeup. A failure to cite or acknowledge collaboration is grounds for immediately failing the course.</p>
+
+				<h2 id="content">Course Content and Plagiarism</h2>
+
+				<p>Please follow the <a href="https://sa.berkeley.edu/classroom-note-taking-and-recording-policy">University Policy on Notetaking</a>. You are encouraged to use course materials to teach something to a friend, for personal use, in your research, etc. However, you are strictly prohibited from uploading course-related material (including your own solutions and notes taken from discussion or lecture) to websites such as CourseHero or Chegg, which monetize on copyrighted material without instructor permission. Doing so will be considered academic misconduct and will result in a referral to the Center of Student Conduct.
+
+
+
+				<hr />
+				<h2 id="inclusion">Inclusion</h2>
+				We believe in the crucial importance of creating a learning environment that is welcoming and respectful
+				to students of all backgrounds. The following are specific steps that will help us in achieving this
+				goal:
+				<ul>
+					<li>If you feel your academic performance has been impacted negatively due to a lack of inclusion,
+						or due to experiences outside of class such as current events or family matters, please reach
+						out to the instructors and staff. Our job is not only to teach but to support you in every way
+						we can.</li>
+					<li>If something happens in the course that runs counter to the goal of making every student feel
+						safe, respected, and welcome, please contact the head TA or the instructors; if you don't feel
+						comfortable contacting course staff, you can fill out <a
+							href="https://docs.google.com/forms/d/e/1FAIpQLSc4NYHdUJ8IzYA1SoiTinWBybGWkj0mfmdnHAeygAxkZajelQ/viewform">this
+							form</a> to anonymously let the department know.</li>
+					<li>You may also consult a departmental <a
+							href="https://diversity.berkeley.edu/faculty-equity-advisors">Faculty Equity Advisor</a>, or
+						fill out the <a
+							href="https://engineering.berkeley.edu/about/equity-and-inclusion/feedback/">anonymous
+							feedback form</a> for the College of Engineering for equity and inclusion related feedback.
+					</li>
+					<li>If you have a preferred name or set of pronouns that differ from your legal name, you may
+						designate a preferred name for the classroom by following these <a
+							href="https://registrar.berkeley.edu/academic-records/your-name-records-rosters">steps</a>.
+					</li>
+
+					<li>As a member of the CS 182/282A community, please realize that you have an important duty to help other
+						students feel respected in helping create an inclusive learning environment.</li>
+				</ul>
+				<br>
+
+				<hr />
+
+				<h2 id="enrollment">Enrollment</h2>
+
+				<p>Here are <a href="http://www.eecs.berkeley.edu/Policies/enrollment.shtml">the policies that govern
+						admission into classes</a>. The course staff does not control enrollment!</p>
+
+						<p>For students on the waitlist, please participate in the course as though you are in it. We expect many students to drop as is typical in advanced high workload courses of this type. If pre-pandemic past experience is any indication, enough students will drop so that everyone on the waitlist who is still interested will likely get enrolled. Of course, we don't know how well pre-pandemic experience extrapolates to now, so reality might be different.
+						</p>
+						<p>For concurrent enrollment students, your applications will be processed by whatever process the department sets up. We hope that everyone gets in who is adequately prepared to take the class and put in the work that will be demanded from you.
+						</p>
+
+			</div>
+		</div>
+		<footer class="py-4 container">
+			<div class="row text-center">
+				<div class="col-md-6 col-sm-12">
+					<h3 data-toc-skip><a href="javascript:void(0)">EECS 182</a></h3>
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item"><a href="schedule.html" class="nav-link">Weekly Schedule</a>
+						</li>
+						<li class="nav-item"><a href="schedule.html" class="nav-link">Office Hours</a>
+						</li>
+						<li class="nav-item"><a href="staff.html" class="nav-link">Staff</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-md-6 col-sm-12">
+					<h3 data-toc-skip><a href="policies.html">Policies</a></h3>
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item"><a href="policies.html#Assignments"
+								class="nav-link">Assignments</a>
+						</li>
+						<li class="nav-item"><a href="policies.html#Exams" class="nav-link">Exams</a>
+						</li>
+						<li class="nav-item"><a href="policies.html#Grading" class="nav-link">Grading</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<script src="assets/js/clipboard.min.js"></script>
+			<script src="assets/js/codeselect.js"></script>
+		</footer>
+
+	</div>
+
+</body>
+
+<!-- <script>w3.includeHTML();</script> -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>
