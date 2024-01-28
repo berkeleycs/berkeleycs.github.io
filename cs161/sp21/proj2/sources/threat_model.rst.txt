@@ -1,0 +1,65 @@
+Threat Model
+============
+
+Remember Shannon's Maxim and Kerckhoffs' principle: You should assume that all
+adversaries know the design of your client application and have access to your
+source code.
+
+Keystore (trusted)
+------------------
+
+The Keystore is a **trusted** service hosted on a server and network to which
+the adversary does not have access. It will will honestly execute the
+:doc:`Keystore API <servers/keystore>`. No adversary will be able to maliciously
+overwrite, modify, or otherwise tamper with any key-value entry stored on the
+Keystore server.
+
+Since Keystore can only store public keys and its API is publicly available, all
+actors can look up any entry in the Keystore.
+
+Datastore (untrusted)
+---------------------
+
+The Datastore is an **untrusted** service hosted on a server and network
+controlled by an adversary. The adversary can view and record the content and
+metadata of all requests (set/get/delete) to the :doc:`Datastore API
+<servers/datastore>`. This allows the adversary to know who stored which
+key-value entry, when, and what the contents is.
+
+The adversary can add new key-value entries at anytime and can modify any
+existing key-value entry, including reverting individual files to previous
+versions. However, since the client application is :ref:`requirement_stateless`,
+there is no way for it to detect if the Datastore were to revert a key-value
+entry to a previous point in time (i.e. a rollback attack). The Datastore will
+never execute a rollback attack (full or partial).
+
+Malicious Users
+---------------
+
+Assume that any user can record all Datastore get/set calls that are made as a
+result of their API calls.
+
+Users who were granted access to a file (via ShareFile()), but have since had
+their access revoked, may become malicious. These users may attempt to use the
+Datastore API to perform operations on files using information they have
+previously recorded.
+
+Assume that users will only take malicious actions **after** their access has
+been revoked. All datastore writes made by a user in an attempt to modify or
+re-acquire file privileges are malicious actions.
+
+.. _threat_model_user_comms:
+
+User Communications
+-------------------
+
+After a user shares a file with another user via :doc:`ShareFile()
+</client_api/sharefile>`, the sender will share the resulting `accessToken`
+with the recipient via a chat app that uses insecure HTTP. Therefore, the
+adversary can execute a MiTM attack to record and modify messages, including
+accessTokens, that users send to each other. However, the adversary does not
+execute any Denial of Service (DoS) style attacks that prevent (potentially
+modified) messages from eventually being delivered to the intended recipient.
+
+Users only use the chat app to send each other `accessTokens` and do not use it
+to send each other keys or any other kind of message.

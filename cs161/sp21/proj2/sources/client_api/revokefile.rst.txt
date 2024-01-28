@@ -1,0 +1,38 @@
+User.RevokeFile: Revoke file access
+===================================
+
+.. function:: RevokeFile(filename string, targetUsername string) (error)
+
+    You may assume this function will only be called by the file owner.
+
+    Revokes access to the given file from ``targetUsername`` and any other users
+    with whom ``targetUsername`` has shared the file. The secure file share
+    invitation(s) should be revoked even if the recipient has not yet called
+    ``ReceiveFile()``.
+
+    Revoked users cannot take any actions on the file (see
+    :ref:`requirement_sharing_and_revoking`).
+
+    Returns an error if:
+
+      - the given file does not exist in the caller's personal file namespace;
+        or
+
+      - the given file is not currently shared with ``targetUsername``; or
+
+      - revocation cannot complete due to malicious action.
+
+    :param filename: The name of the file in the caller's personal file
+                     namespace.
+    :type filename: string
+    :param targetUsername: Username of the user to revoke access from.
+    :type targetUsername: string
+
+    :rtype: error
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+
+    #. All :ref:`requirement_access_tokens` requirements.
+
+    #. All :ref:`requirement_sharing_and_revoking` requirements.

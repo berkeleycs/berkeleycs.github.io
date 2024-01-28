@@ -1,0 +1,30 @@
+Hash-Based Message Authentication Code (HMAC)
+=============================================
+
+HMAC generates a MAC given a 16 byte (128-bit) symmetric key and a message.
+
+**Functions**:
+
+.. function:: HMACEval(key []byte, msg []byte) ([]byte, error)
+
+    Compute a HMAC-SHA512 of the message.
+
+    :param key: 16-byte symmetric MAC key
+    :type key: []byte
+    :param msg: Arbitrary-length message to HMAC
+    :type msg: []byte
+
+    :returns: 64-byte HMAC
+    :rtype: []byte, error
+
+.. function:: HMACEqual(a []byte, b []byte) (bool)
+
+    Compare whether two MACs are the same in a constant-time manner.
+
+    :param a: First MAC
+    :type key: []byte
+    :param b: Second MAC
+    :type msg: []byte
+
+    :rtype: bool
+

@@ -1,0 +1,44 @@
+User.ReceiveFile: Add a shared file to personal file namespace
+==============================================================
+
+.. function:: ReceiveFile(filename string, sender string, accessToken UUID) (error)
+
+  Adds a file that was previously shared with the caller (i.e. the recipient) to
+  the personal file namespace of the caller.
+
+  Returns an error if:
+
+  - the secure file share invitation pointed to by ``accessToken`` has been
+    revoked; or
+
+  - the recipient already has a file with the given ``filename`` in their
+    personal file namespace; or
+
+  - the recipient is unable to verify that the secure file share invitation
+    pointed to by the given ``accessToken`` was sent by the given ``sender``; or
+
+  - the recipient is unable to verify the integrity of the secure file share
+    invitation pointed to by the given ``accessToken``.
+
+  :param filename: The filename that the recipient would like to assign to the
+                   shared file in their personal file namespace.
+  :type filename: string
+  :param sender: The username of the sender.
+  :type sender: string
+  :param accessToken: The UUID storage key at which the sender's secure file
+                       share invitation is stored in the
+                       :doc:`/servers/datastore`.
+  :type accessToken: UUID
+
+  :rtype: error
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+
+    #. There must only be a single copy of the file (see
+       :ref:`requirement_sharing_and_revoking` #2).
+
+    #. All :ref:`requirement_access_tokens` requirements.
+
+    #. Users can have multiple active user sessions at once (see
+       :ref:`requirement_user_sessions`).

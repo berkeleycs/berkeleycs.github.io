@@ -1,0 +1,45 @@
+Symmetric Encryption
+====================
+
+**Functions**:
+
+.. function:: SymEnc(key []byte, iv []byte, plaintext []byte) ([]byte)
+
+    Encrypt the plaintext using AES-CBC mode with the provided key and IV.
+
+    Returns the ciphertext, which will contain the IV (you do not need to store
+    the IV separately).
+    
+    This function will panic if the plaintext is not a multiple of the AES block
+    size, which is 16 bytes. You can use the constant
+    ``userlib.AESBlockSizeBytes`` in your code.
+
+    :param key: 16-byte symmetric key for encryption
+    :type key: []byte
+    :param iv: 16-byte initialization vector
+    :type iv: []byte
+    :param plaintext: Message to encrypt, length a multiple of 16 bytes
+    :type plaintext: []byte
+
+    :returns: Ciphertext, length a multiple of 16 bytes
+    :rtype: []byte
+
+.. function:: SymDec(key []byte, ciphertext []byte) ([]byte)
+
+    Decrypt the ciphertext using the key.
+    
+    This function will panic if the ciphertext is not a multiple of the AES
+    block size, which is 16 bytes. You can use the constant
+    ``userlib.AESBlockSizeBytes`` in your code.
+
+    :param key: 16-byte symmetric key for decryption
+    :type key: []byte
+    :param ciphertext: Message to decrypt, length a multiple of 16 bytes
+    :type ciphertext: []byte
+
+    :returns: Plaintext, length a multiple of 16 bytes
+    :rtype: []byte
+
+.. warning::
+    Remember: one key, one purpose. If we use a key for HKDF or HMAC, we should
+    not use the same key for symmetric encryption.

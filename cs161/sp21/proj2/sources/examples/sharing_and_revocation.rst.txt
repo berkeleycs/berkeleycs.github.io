@@ -1,0 +1,37 @@
+Sharing and Revocation
+======================
+
+Your client application must allow users to share files (see
+:ref:`requirement_sharing_and_revoking`).
+
+Your code should provide the following functionality:
+
+- If Alice wants to share a file with Bob, Alice assembles an `accessToken` and
+  sends this to Bob.
+
+- Bob can use this access token to obtain full permission to the file, which
+  should let Bob read, write, and share the file.
+
+- After sharing a file with another user, Alice can revoke that user's access to
+  the file. After revocation, the user should no longer have access to the file.
+
+**Example**: Here is an example code snippet to help you understand the required
+functionality.
+
+
+.. code-block:: go
+
+    u1, _ := InitUser("user_alice", "password1")
+    u2, _ := InitUser("user_bob", "password2")
+
+    f1 := []byte("content")
+
+    u1.StoreFile("file_to_share_with_Bob", f1)
+    accessToken, err := u1.ShareFile("file_to_share_with_Bob", "user_bob")
+
+    u2.ReceiveFile("the_file_from_alice", "user_alice", accessToken)
+    f2, _ = u2.LoadFile("the_file_from_alice")
+    // f1 should be the same as f2
+
+As demonstrated, after Alice gives Bob the access token, Bob can access the file
+(under a filename of Bob's choice).

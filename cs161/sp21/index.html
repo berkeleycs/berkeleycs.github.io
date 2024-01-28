@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>CS 161 | CS 161: Computer Security</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="CS 161" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="CS 161: Computer Security" />
+<meta property="og:description" content="CS 161: Computer Security" />
+<link rel="canonical" href="https://www.cs161.org//" />
+<meta property="og:url" content="https://www.cs161.org//" />
+<meta property="og:site_name" content="CS 161" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="CS 161" />
+<script type="application/ld+json">
+{"headline":"CS 161","description":"CS 161: Computer Security","url":"https://www.cs161.org//","@type":"WebSite","name":"CS 161","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<style type="text/css">
+    body,h1,h2,h3,h4,h5,h6,p,blockquote,pre,hr,dl,dd,ol,ul,figure{margin:0;padding:0}body{font:400 16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";color:#111;background-color:#fdfdfd;-webkit-text-size-adjust:100%;-webkit-font-feature-settings:"kern" 1;-moz-font-feature-settings:"kern" 1;-o-font-feature-settings:"kern" 1;font-feature-settings:"kern" 1;font-kerning:normal;display:flex;min-height:100vh;flex-direction:column}h1,h2,h3,h4,h5,h6,p,blockquote,pre,ul,ol,dl,figure,.highlight{margin-bottom:15px}main{display:block}img{max-width:100%;vertical-align:middle}figure>img{display:block}figcaption{font-size:14px}ul,ol{margin-left:30px}li>ul,li>ol{margin-bottom:0}h1,h2,h3,h4,h5,h6{font-weight:400}a{color:#2a7ae2;text-decoration:none}a:visited{color:#1756a9}a:hover{color:#111;text-decoration:underline}blockquote{color:#828282;border-left:4px solid #e8e8e8;padding-left:15px;font-size:18px;letter-spacing:-1px;font-style:italic}blockquote>:last-child{margin-bottom:0}pre,code{font-size:15px;border:1px solid #e8e8e8;border-radius:3px;background-color:#eef}code{padding:1px 5px}pre{padding:8px 12px;overflow-x:auto}pre>code{border:0;padding-right:0;padding-left:0}.wrapper{max-width:-webkit-calc(1000px - (30px));max-width:calc(1000px - (30px));margin-right:auto;margin-left:auto;padding-right:15px;padding-left:15px}@media screen and (min-width: 1000px){.wrapper{max-width:-webkit-calc(1000px - (30px * 2));max-width:calc(1000px - (30px * 2));padding-right:30px;padding-left:30px}}.wrapper:after{content:"";display:table;clear:both}.orange{color:#f66a0a}.grey{color:#828282}.svg-icon{width:16px;height:16px;display:inline-block;fill:currentColor;padding:5px 3px 2px 5px;vertical-align:text-bottom}table{margin-bottom:30px;width:100%;text-align:left;color:#3f3f3f;border-collapse:collapse;border:1px solid #e8e8e8}table tr.is-even{background-color:#f7f7f7}table tr p{margin:0}table th,table td{padding:10px 15px}table th{background-color:#f0f0f0;border:1px solid #dedede;border-bottom-color:#c9c9c9}table td{border:1px solid #e8e8e8}.alert-warning{color:#856404;background-color:#fff3cd;border-color:#ffeeba;border-radius:0.25rem;padding:15px}.site-header{border-bottom:1px solid #e8e8e8;min-height:55.95px;line-height:54px;position:relative}.site-title{font-size:26px;font-weight:300;letter-spacing:-1px;margin-bottom:0;float:left}@media screen and (max-width: 800px){.site-title{padding-right:45px}}.site-title,.site-title:visited{color:#424242}.site-title:hover{text-decoration:none}.site-title img{vertical-align:sub}.site-nav{position:absolute;top:9px;right:15px;background-color:#fdfdfd;border:1px solid #e8e8e8;border-radius:5px;text-align:right;z-index:10000}.site-nav .nav-trigger{display:none}.site-nav .menu-icon{float:right;width:36px;height:26px;line-height:0;padding-top:10px;text-align:center}.site-nav .menu-icon>svg path{fill:#424242}.site-nav label[for="nav-trigger"]{display:block;float:right;width:36px;height:36px;z-index:10000;cursor:pointer}.site-nav input ~ .trigger{clear:both;display:none}.site-nav input:checked ~ .trigger{display:block;padding-bottom:5px}.site-nav .page-link{color:#111;line-height:1.5;display:block;padding:5px 10px;margin-left:20px}.site-nav .page-link:not(:last-child){margin-right:0}@media screen and (min-width: 800px){.site-nav{position:static;float:right;border:none;background-color:inherit}.site-nav label[for="nav-trigger"]{display:none}.site-nav .menu-icon{display:none}.site-nav input ~ .trigger{display:block}.site-nav .page-link{display:inline;padding:0;margin-left:auto}.site-nav .page-link:not(:last-child){margin-right:20px}}.page-content{padding:30px 0;flex:1 0 auto}.page-heading{font-size:32px}.post-list-heading{font-size:28px}.post-list{margin-left:0;list-style:none}.post-list>li{margin-bottom:30px}.post-meta{font-size:14px;color:#828282}.post-link{display:block;font-size:24px}.post-header{margin-bottom:30px}.post-title,.post-content h1{font-size:42px;letter-spacing:-1px;line-height:1}@media screen and (min-width: 1000px){.post-title,.post-content h1{font-size:42px}}.post-content{margin-bottom:30px}.post-content h2{font-size:28px}@media screen and (min-width: 1000px){.post-content h2{font-size:32px}}.post-content h3{font-size:22px}@media screen and (min-width: 1000px){.post-content h3{font-size:26px}}.post-content h4{font-size:18px}@media screen and (min-width: 1000px){.post-content h4{font-size:20px}}.one-half{width:-webkit-calc(50% - (30px / 2));width:calc(50% - (30px / 2))}.highlight{background:#fff}.highlighter-rouge .highlight{background:#eef}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k{font-weight:bold}.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#aaa}.highlight .gt{color:#a00}.highlight .kc{font-weight:bold}.highlight .kd{font-weight:bold}.highlight .kp{font-weight:bold}.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:teal}.highlight .nb{color:#0086B3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:teal}.highlight .ni{color:purple}.highlight .ne{color:#900;font-weight:bold}.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:navy}.highlight .nv{color:teal}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf{color:#099}.highlight .mh{color:#099}.highlight .mi{color:#099}.highlight .mo{color:#099}.highlight .sb{color:#d14}.highlight .sc{color:#d14}.highlight .sd{color:#d14}.highlight .s2{color:#d14}.highlight .se{color:#d14}.highlight .sh{color:#d14}.highlight .si{color:#d14}.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc{color:teal}.highlight .vg{color:teal}.highlight .vi{color:teal}.highlight .il{color:#099}.schedule__agenda-elem ol,.schedule__agenda-elem ul{margin-bottom:0}.schedule__discussion--examprep{font-style:italic}.schedule__event-elem{text-align:center}.staff-container{display:flex;flex-direction:row;justify-content:space-evenly;flex-wrap:wrap}.staff-portrait{margin:25px}.staff-name{text-align:center}
+
+  </style>
+  <link rel="icon" type="image/x-icon" href="assets/logo.gif" >
+
+  <link rel="prefetch" href="calendar.js" as="script">
+  <link rel="prefetch" href="calendar.css" as="style">
+</head>
+</head>
+
+  <body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="index.html">
+      <img src="assets/logo.gif" height="34" width="34" alt="" />
+      CS 161
+    </a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="https://cs161.org/calendar.html">Calendar</a><a class="page-link" href="staff.html">Staff</a><a class="page-link" href="policies.html">Policies</a><a class="page-link" href="resources.html">Resources</a><a class="page-link" href="oh.html">Queue</a><a class="page-link" href="https://cs161.org/extensions.html">Extensions</a><a class="page-link" href="https://cs161.org/exam.html">Exam Logistics</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home"><h1 class="page-heading">CS 161: Computer Security</h1><p>
+    <strong>
+      Announcements:
+    </strong>
+  </p>
+
+  <p>
+     <ul>
+  <li>The final exam is <strong>Friday, May 14, 11:30am-2:30pm PT</strong>. See the <a href="exam.html">exam logistics page</a> for details.</li>
+</ul>
+
+  </p>
+
+  <p><!-- for the curious one: https://cs161.org/assets/misc/7ut9pm.pdf -->
+
+    <strong>
+      Instructor:
+    </strong>
+    Nicholas Weaver
+  </p>
+
+  <p><strong>Lecture:</strong> Tu/Th, 6:30pm-8:00pm PT</p>
+
+  <p><a href="javascript:optionalShow()">Show/hide optional textbook readings</a></p><p><a href="index.html#week-19">Skip to current week</a></p>
+
+<div>
+  <table>
+    <thead>
+      <th>Date</th>
+      <th>Lecture</th>
+      <th>Readings</th>
+      <th>Discussion</th>
+      <th>HW</th>
+    </thead>
+
+    <tbody><tr class="">
+          <td>Tue<br>01/19</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec01.pdf">Introduction</a><br><a href="https://www.youtube.com/watch?v=90T1tJCmVzA&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=1">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p>Optional: <a href="review/0.html">61C review</a></p>
+  </li>
+  <li>
+    <p><a href="assets/notes/memory-safety.pdf">Memory Safety notes, section 1</a></p>
+  </li>
+  <li>
+    <p><a href="assets/projects/1/cheatsheet.pdf">C, x86, and GDB cheatsheet</a></p>
+  </li>
+  <li>
+    <p><a href="https://youtu.be/JvxI8g4fLyA">Project 1 Q1 video walkthrough</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/1.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 1.1, Craft § 1-1.1, 1.3
+
+</div>
+</td>
+<td rowspan="2" id="week-03">No discussion
+  
+  </td><td rowspan="5" id="hw-1" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/947479">HW1</a></td></tr><tr class="">
+          <td>Thu<br>01/21</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec02.pdf">Security Principles</a><br><a href="https://www.youtube.com/watch?v=8CeVnHUJiU0&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=2">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/security-principles.pdf">Security Principles notes</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/2.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 1.1.4, 3.4.6
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Mon<br>01/25</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="assets/projects/1/project1-spec.pdf">Project 1 released</a></p>
+</td>
+<td rowspan="3" id="week-04"><a href="assets/sections/01-questions.pdf">61C Review, Security Principles</a>
+  <a href="assets/sections/01-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=nNmaui6SwYY&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=1">(recording)</a>
+  </td></tr><tr class="is-even">
+          <td>Tue<br>01/26</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec03.pdf">Buffer Overflows</a><br><a href="https://www.youtube.com/watch?v=TVHaSCkv0hU&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=3">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/memory-safety.pdf">Memory Safety notes, section 2</a></p>
+  </li>
+  <li>
+    <p><a href="https://inst.eecs.berkeley.edu/~cs161/fa08/papers/stack_smashing.pdf">Smashing The Stack For Fun And Profit</a></p>
+  </li>
+  <li>
+    <p>Slides on <a href="review/3/overflow-normal.pdf">a normal x86 function call</a>, <a href="review/3/overflow-crash.pdf">a crash</a>, <a href="review/3/overflow-divert.pdf">a control-flow diversion</a>, and <a href="review/3/overflow-inject.pdf">code injection</a>.</p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/3.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 3.4, Craft § 6.1-6.3
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Thu<br>01/28</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec04.pdf">Buffer Overflow Defenses</a><br><a href="https://www.youtube.com/watch?v=UKW0CMdvSm4&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=4">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/memory-safety.pdf">Memory Safety notes, section 3</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf">Pointer Authentication</a></p>
+  </li>
+  <li>
+    <p><a href="https://blog.ret2.io/2018/07/11/pwn2own-2018-jsc-exploit/">Real World Exploit Example</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/4.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 9.4-9.5; Craft § 6.5-6.7
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Mon<br>02/01</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="assets/labs/padding-oracle.zip">Optional Lab 1 released</a></p>
+</td>
+<td rowspan="3" id="week-05"><a href="assets/sections/02-questions.pdf">Memory Safety</a>
+  <a href="assets/sections/02-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=cxFenwmNlHE&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=2">(recording)</a>
+  </td><td rowspan="5" id="hw-2" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/985291">HW2</a></td></tr><tr class="">
+          <td>Tue<br>02/02</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec05.pdf">IND-CPA + One-Time Pads + Block Ciphers + Symmetric Key Encryption</a><br><a href="https://www.youtube.com/watch?v=5OGVwCacIUQ&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=5">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/cryptography.pdf">Cryptography notes, sections 1-3</a></p>
+  </li>
+  <li>
+    <p><a href="https://observablehq.com/@tmcw/enigma-machine">Enigma Machine Notebook</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/5.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 8.1.0-8.1.3, 8.1.6-8.1.7; Craft § 7.1, 7.3.2 - 7.3.3
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Thu<br>02/04</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec06.pdf">Symmetric Key Encryption (cont.) + Hashing + Integrity (MACs) + Pseudorandom Generators</a><br><a href="https://www.youtube.com/watch?v=jg5HcrpYrVk&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=6">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/cryptography.pdf">Cryptography notes, sections 4-6</a></p>
+  </li>
+  <li>
+    <p><a href="assets/sections/AES_demo.ipynb">AES Demo</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/6.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  <a href="http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html">Stick figure guide to AES</a>, G&amp;T § 8.1.0-8.1.3, 8.1.6-8.1.7; Craft § 7.1, 7.3.2 - 7.3.3
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Tue<br>02/09</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec07.pdf">Pseudorandom Generators (cont.) + Public Key Exchange</a><br><a href="https://www.youtube.com/watch?v=Xkdae-Ji5aA&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=7">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/cryptography.pdf">Cryptography notes, section 7</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/7.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 1.3-1.3.1, 1.3.3, 8.2, 8.5.2; Craft § 7.5
+
+</div>
+</td>
+<td rowspan="2" id="week-06"><a href="assets/sections/03-questions.pdf">Symmetric-Key Cryptography</a>
+  <a href="assets/sections/03-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=OQC5ZTF_hms&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=3">(recording)</a><a href="assets/sections/03-examprep-questions.pdf"><br><span class="schedule__discussion--examprep">Exam Prep</span></a>
+  <a href="assets/sections/03-examprep-solutions.pdf"><br><span class="schedule__discussion--examprep">(solutions)</span></a></td></tr><tr class="is-even">
+          <td>Thu<br>02/11</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec08.pdf">Public Key Encryption + Digital Signatures</a><br><a href="https://www.youtube.com/watch?v=guCZUjaz_aY&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=8">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/cryptography.pdf">Cryptography notes, sections 8-9</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/8.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 1.3-1.3.1, 1.3.3, 8.2, 8.5.2
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Tue<br>02/16</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec09.pdf">Certificates</a><br><a href="https://www.youtube.com/watch?v=0XezyYqlK7o&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=9">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/cryptography.pdf">Cryptography notes, section 10</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/9.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+Optional:  G&amp;T § 1.3.2, 1.3.4, 8.2.3, 8.3, 8.4.1, 8.4.3; Craft § 7.4.2
+
+</div>
+</td>
+<td rowspan="3" id="week-07"><a href="assets/sections/04-questions.pdf">Asymmetric Cryptography</a>
+  <a href="assets/sections/04-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=FRJiDw9JCB4&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=4">(recording)</a>
+  </td><td rowspan="6" id="hw-3" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/1022295">HW3</a></td></tr><tr class="">
+          <td>Thu<br>02/18</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec10.pdf">Password Hashing + Blockchain</a><br><a href="https://www.youtube.com/watch?v=CqPoJe_RUms&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=10">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/cryptography.pdf">Cryptography notes, sections 11-12</a></p>
+  </li>
+  <li>
+    <p><a href="https://www1.icsi.berkeley.edu/~nweaver/papers/cryptorisks.pdf">Risks of Cryptocurrencies</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.buttcoinfoundation.org/how-to-make-money-with-bitcoin-in-10-easy-steps/">How to make money with Bitcoin</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/10.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Fri<br>02/19</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="assets/projects/1/project1-spec.pdf">Project 1 due (11:59pm PT)</a></p>
+</td>
+</tr><tr class="is-even">
+          <td>Mon<br>02/22</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="proj2/index.html">Project 2 released</a></p>
+</td>
+<td rowspan="3" id="week-08"><a href="assets/sections/05-questions.pdf">Public Key Cryptography</a>
+  <a href="assets/sections/05-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=JFny29StdnE&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=5">(recording)</a>
+  </td></tr><tr class="is-even">
+          <td>Tue<br>02/23</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec11.pdf">Signal + Tor</a><br><a href="https://www.youtube.com/watch?v=nlgkWkldgWs&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=11">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>Optional: <a href="review/11.html">Review videos</a></li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Thu<br>02/25</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec12.pdf">Command Injection + SQL Injection</a><br><a href="https://www.youtube.com/watch?v=QnBovlCjw1M&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=12">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/web.pdf">Web notes, section 5</a></p>
+  </li>
+  <li>
+    <p><a href="assets/squigler.zip">Squigler demo</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/12.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Tue<br>03/02</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec13.pdf">Intro to Web + Cookies</a><br><a href="https://www.youtube.com/watch?v=4oe07gu8CxM&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=13">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/web.pdf">Web notes, sections 1-4, 7</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/13.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="3" id="week-09">Midterm Review
+  
+  </td><td rowspan="9" id="hw-4" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/1065545">HW4</a></td></tr><tr class="">
+          <td>Thu<br>03/04</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec14.pdf">Cross-Site Request Forgery (CSRF) + Cross-Site Scripting (XSS)</a><br><a href="https://www.youtube.com/watch?v=lXjxZsgG_dM&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=14">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/web.pdf">Web notes, sections 6, 8</a></p>
+  </li>
+  <li>
+    <p><a href="https://owasp.org/www-community/attacks/csrf">OWASP page on CSRF</a></p>
+  </li>
+  <li>
+    <p><a href="https://owasp.org/www-community/attacks/xss">OWASP page on XSS</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/14.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Fri<br>03/05</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="exam.html">Midterm (5:00pm-7:00pm PT)</a></p>
+</td>
+</tr><tr class="is-even">
+          <td>Tue<br>03/09</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec15.pdf">XSS (continued) + UI Attacks</a><br><a href="https://www.youtube.com/watch?v=X-CMX95qXJM&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=15">(recording)</a></td>
+<td class="schedule__agenda-elem"><p><a href="assets/notes/web.pdf">Web notes, section 6</a></p>
+
+<p><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">XSS Prevention Cheat Sheet</a></p>
+
+<p><a href="https://developers.google.com/web/fundamentals/security/csp">Content Security Policy</a></p>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="2" id="week-10"><a href="assets/sections/07-questions.pdf">SQL Injection and Cookies</a>
+  <a href="assets/sections/07-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=WSRy4ies5to&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=6">(recording)</a>
+  </td></tr><tr class="is-even">
+          <td>Thu<br>03/11</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec16.pdf">Captchas + Networking Background</a><br><a href="https://www.youtube.com/watch?v=vpxdSMdKhHM&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=16">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/networking.pdf">Networking notes, section 1</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/16.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Tue<br>03/16</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec17.pdf">Low-Level Network Attacks</a><br><a href="https://www.youtube.com/watch?v=P9OD4mXyjok&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=17">(recording)</a></td>
+<td class="schedule__agenda-elem"><p><a href="assets/notes/networking.pdf">Networking notes, sections 2-4</a></p>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="4" id="week-11"><a href="assets/sections/08-questions.pdf">CSRF and XSS</a>
+  <a href="assets/sections/08-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=TY2j2Cw7P4g&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=7">(recording)</a>
+  </td></tr><tr class="">
+          <td>Thu<br>03/18</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec18.pdf">Layer 3 (IP) + BGP + DNS</a><br><a href="https://www.youtube.com/watch?v=DJtYjdP9BDE&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=18">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/networking.pdf">Networking notes, sections 5, 8-9</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/18.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Fri<br>03/19</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="assets/labs/padding-oracle.zip">Optional Lab 1 due (11:59pm PT)</a></p>
+</td>
+</tr><tr class="">
+          <td>Fri<br>03/19</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="proj2/index.html">Project 2 design doc draft due (11:59pm PT)</a></p>
+</td>
+</tr><tr class="is-even">
+          <td>Tue<br>03/23</td>
+          <td class="schedule__agenda-elem">Spring Break (No Lecture)</td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="2" id="week-12">Spring Break (No discussion)
+  
+  </td><td rowspan="2" id="no-hw" style="background-color:#FFFFFF">
+                </td></tr><tr class="is-even">
+          <td>Thu<br>03/25</td>
+          <td class="schedule__agenda-elem">Spring Break (No Lecture)</td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Tue<br>03/30</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec19.pdf">TCP + TLS</a><br><a href="https://www.youtube.com/watch?v=daO3u5_DYXQ&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=19">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/networking.pdf">Networking notes, sections 6-7</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/19.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="2" id="week-13"><a href="assets/sections/09-questions.pdf">UI Based Attacks and Privacy</a>
+  <a href="assets/sections/09-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=LbkvYhNPGqU&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=8">(recording)</a>
+  </td><td rowspan="5" id="hw-5" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/1137435">HW5</a></td></tr><tr class="">
+          <td>Thu<br>04/01</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec20.pdf">TLS (continued) + Denial of Service</a><br><a href="https://www.youtube.com/watch?v=qMCuMFjfyhg&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=20">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/networking.pdf">Networking notes, section 7</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/20.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Mon<br>04/05</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="assets/labs/lab2.pdf">Optional Lab 2 released</a></p>
+</td>
+<td rowspan="3" id="week-14"><a href="assets/sections/10-questions.pdf">TLS and TCP</a>
+  <a href="assets/sections/10-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=PHdoMi_wTrE&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=9">(recording)</a>
+  </td></tr><tr class="is-even">
+          <td>Tue<br>04/06</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec21.pdf">DNSSEC</a><br><a href="https://www.youtube.com/watch?v=CU8TXsQ1I00&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=21">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>
+    <p><a href="assets/notes/networking.pdf">Networking notes, section 10</a></p>
+  </li>
+  <li>
+    <p>Optional: <a href="review/21.html">Review videos</a></p>
+  </li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Thu<br>04/08</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec22.pdf">Intrusion Detection</a><br><a href="https://www.youtube.com/watch?v=Z0KZNtUhJLE&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=22">(recording)</a></td>
+<td class="schedule__agenda-elem"><ul>
+  <li>Optional: <a href="review/22.html">Review videos</a></li>
+</ul>
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Mon<br>04/12</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="proj3/index.html">Project 3 released</a></p>
+</td>
+<td rowspan="4" id="week-15"><a href="assets/sections/11-questions.pdf">DNS</a>
+  <a href="assets/sections/11-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=3r8yZd4totI&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=10">(recording)</a>
+  </td><td rowspan="6" id="hw-6" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/1174682">HW6</a></td></tr><tr class="">
+          <td>Tue<br>04/13</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec23.pdf">Abusing Intrusion Detection</a><br><a href="https://www.youtube.com/watch?v=TgjBe0SxNHc&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=23">(recording)</a></td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Thu<br>04/15</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec24.pdf">Network Censorship + Malware</a><br><a href="https://www.youtube.com/watch?v=Gon8fhDxEzE&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=24">(recording)</a></td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Fri<br>04/16</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="proj2/index.html">Project 2 due (11:59pm PT)</a></p>
+</td>
+</tr><tr class="is-even">
+          <td>Tue<br>04/20</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec25.pdf">Malcode + Special Topics - Boeing 737-MAX</a><br><a href="https://www.youtube.com/watch?v=48aavn3NjPM&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=25">(recording)</a></td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="2" id="week-16"><a href="assets/sections/12-questions.pdf">Intrusion Detection</a>
+  <a href="assets/sections/12-solutions.pdf"><br>(solutions)</a><br><a href="https://www.youtube.com/watch?v=k2dFUXfTH-M&list=PLfBkt1-_BHX8ubYl-82QPMBE6fv5K4sC5&index=11">(recording)</a>
+  </td></tr><tr class="is-even">
+          <td>Thu<br>04/22</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec26.pdf">Special Topics - Quantum + Nukes + Side channels</a><br><a href="https://www.youtube.com/watch?v=Ljn7Hm70NI8&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=26">(recording)</a></td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Tue<br>04/27</td>
+          <td class="schedule__agenda-elem"><a href="assets/lectures/lec27.pdf">Special Topics - Personal Security</a><br><a href="https://www.youtube.com/watch?v=ta6dsolR-YI&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=27">(recording)</a></td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="3" id="week-17"><a href="assets/sections/13-questions.pdf">Web Security and Special Topics</a>
+  <a href="assets/sections/13-solutions.pdf"><br>(solutions)</a>
+  </td><td rowspan="6" id="hw-7" style="background-color:#FFFFFF"><a href="https://www.gradescope.com/courses/230418/assignments/1209794">HW7</a></td></tr><tr class="">
+          <td>Thu<br>04/29</td>
+          <td class="schedule__agenda-elem">Project 2 Walkthrough + Ask Nick Anything<br><a href="https://www.youtube.com/watch?v=dUbu7U9Cw54&list=PLfBkt1-_BHX8fqPJt95_gNs3Q1V9xC9Yb&index=28">(recording)</a></td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="">
+          <td>Fri<br>04/30</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="proj3/index.html">Project 3 due (11:59pm PT)</a></p>
+</td>
+</tr><tr class="is-even">
+          <td>Tue<br>05/04</td>
+          <td class="schedule__agenda-elem">RRR Week</td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+<td rowspan="3" id="week-18">Final Review
+  
+  </td></tr><tr class="is-even">
+          <td>Thu<br>05/06</td>
+          <td class="schedule__agenda-elem">RRR Week</td>
+<td class="schedule__agenda-elem">
+
+<div class="optional" style="display:none;">
+ 
+
+</div>
+</td>
+</tr><tr class="is-even">
+          <td>Fri<br>05/07</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="assets/labs/lab2.pdf">Optional Lab 2 due (11:59pm PT)</a></p>
+</td>
+</tr><tr class="">
+          <td>Fri<br>05/14</td>
+          <td class="schedule__event-elem" colspan="2"><p><a href="exam.html">Final exam (11:30am-2:30pm PT)</a></p>
+</td>
+<td rowspan="1" id="week-19"></td></tr></tbody>
+  </table>
+</div>
+<script>
+function optionalShow() {
+  var x = document.getElementsByClassName("optional");
+  var i;
+  for (i = 0; i < x.length; i++) {
+    if (x[i].style.display === "none") {
+      x[i].style.display = "block";
+    } else {
+      x[i].style.display = "none";
+    }
+  }
+}
+</script>
+</div>
+
+      </div>
+    </main><script src="https://instant.page/1.2.2" type="module"
+        integrity="sha384-2xV8M5griQmzyiY3CDqh1dn4z3llDVqZDqzjzcY+jCBCk/a5fXJmuZ/40JJAPeoU"></script>
+</body>
+
+</html>

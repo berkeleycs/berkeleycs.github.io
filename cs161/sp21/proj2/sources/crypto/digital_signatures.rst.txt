@@ -1,0 +1,39 @@
+Digital Signatures (DS)
+=======================
+
+**Data Types**:
+
+:DSSignKey: The RSA private key for public-key signatures with RSA.
+:DSVerifyKey: The RSA public key, used for verifying RSA signatures.
+
+**Functions**:
+
+.. function:: DSKeyGen() (DSSignKey, DSVerifyKey, error)
+
+    Generate a 256-byte (2048-bit) RSA key pair for digital signatures.
+
+    :rtype: DSSignKey, DSVerifyKey, error
+
+.. function:: DSSign(sk DSSignKey, msg []byte) ([]byte, error)
+
+    Use the RSA private key to create a signature.
+
+    :param sk: RSA signing (private) key
+    :type sk: DSSignKey
+    :param msg: Arbitrary-length message to sign
+    :type msg: []byte
+
+    :rtype: []byte, error
+
+.. function:: DSVerify(vk DSVerifyKey, msg []byte, sig []byte) (error)
+
+    Use the RSA public key to verify a signature.
+
+    :param vk: RSA verification (public) key
+    :type vk: DSVerifyKey
+    :param msg: Arbitrary-length message to verify
+    :type msg: []byte
+    :param sig: Signature to verify
+    :type sig: []byte
+
+    :rtype: error

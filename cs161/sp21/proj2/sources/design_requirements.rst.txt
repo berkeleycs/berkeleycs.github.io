@@ -1,0 +1,248 @@
+Design Requirements
+===================
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in `RFC 2119 <https://tools.ietf.org/html/rfc2119>`_.
+
+Usernames and Passwords
+-----------------------
+
+1. Usernames
+
+    #. The client SHOULD assume that each user has a unique username.
+    #. Usernames are case-sensitive: ``Bob`` and ``bob`` are different users.
+    #. Usernames can be any length greater than zero (they CANNOT be empty).
+
+#. Passwords
+
+    #. The client MUST NOT assume each user has a unique password. Like the real
+       world, users may happen to choose the same password.
+    #. The client MAY assume each user’s password generally is a good source of
+       entropy. However, the attackers possess a precomputed lookup table
+       containing hashes of common passwords downloaded from the internet.
+
+.. _requirement_user_sessions:
+
+User Sessions
+-------------
+
+1. The client application MUST allow many different users to use the
+   application at the same time. Each user runs a client program on their
+   own device, which connects to the servers. For example, Bob and Alice can
+   each run the client application on their own devices at the same time.
+
+#. The client MUST support a single user having multiple active sessions at the
+   same time. For example, user ``bob`` can run the client application on
+   his laptop and tablet simultaneously. Each of ``bob``'s sessions, call
+   them ``S1`` and ``S2``, would be created by a call to ``GetUser()`` with
+   the same credentials. All file changes MUST be reflected in all current
+   user sessions immediately (i.e. without terminating the current session
+   and re-authenticating). Here are some examples
+             
+   * After ``bob`` stores a file ``F1`` in session ``S1``, session ``S2``
+     must be able to download ``F1``.
+     
+   * After ``bob`` appends to ``F1`` in session ``S1``, session ``S2`` must
+     be able to download the updated version.
+     
+   * After ``bob`` receives a file ``F2`` via ``ReceiveFile()`` in session
+     ``S1``, session ``S2`` must be able to download ``F2``.
+
+#. The client DOES NOT need to support concurrency. Globally, across all users
+   and user-sessions, all operations in the client application will be done
+   serially.
+
+Public keys
+-----------
+
+1. Each public key SHOULD be used for a single purpose, which means that each
+   user is likely to have more than one public key.
+
+#. A single user MAY have multiple entries in Keystore. However, the number of
+   keys per user MUST be a small constant; it MUST NOT  depend on the number
+   of files stored or length of any file, how many users a file has been
+   shared with, or the number of users already in the system.
+
+.. _requirement_stateless:
+
+Stateless
+---------
+
+1. The client MUST be stateless; it cannot save any data to the local file
+   system. If the client is restarted, it must be able to pick up where it left
+   off given only a username and password. Any data requiring permanent storage
+   MUST be stored in either :doc:`servers/keystore` or :doc:`servers/datastore`.
+
+.. _requirement_files:
+
+Files
+-----
+
+Any breach of IND-CPA security constitutes loss of confidentiality.
+
+1. The client MUST ensure confidentiality and integrity of file contents.
+
+#. The client design MAY leak the size of file contents.
+
+#. The client MUST ensure the confidentiality and integrity of filenames.
+
+#. Filenames MAY be any length, including zero (empty string), but the client
+   design MAY NOT leak the length of any filename.
+
+#. The client design MAY leak the number of files associated with a user.
+
+#. The client MUST NOT assume that filenames are globally unique. For example,
+   user ``bob`` can have a file named ``foo`` and user ``alice`` can have a file
+   named ``foo``. Though there is a single instance of the Datastore server that
+   is used by all users, the client application MUST keep each user’s file
+   namespace independent from one another.
+
+#. The client MUST enforce authorization for all files. The only
+   users who can access a file include: (1) the owner of the file; and (2) users
+   with whom the file has been shared and not revoked.
+
+#. Changes to the contents of a file MUST be available to all users who are
+   currently authorized to load the file. In other words, changes to the
+   contents of a file MUST NOT change who the file is shared with.
+
+#. The following SHOULD be avoided because they are dangerous design patterns
+   that often lead to subtle vulnerabilities. We test for them and treat any
+   instance of them as a breach of confidentiality/integrity.
+    
+    #. reusing the same key for multiple purposes (e.g. encryption,
+       authentication, key- derivation, etc); and
+    #. authenticate-then-encrypt; and
+    #. decrypt-then-verify.
+
+.. _requirement_sharing_and_revoking:
+
+Sharing and Revoking
+--------------------
+
+.. figure:: /images/sharing_tree.png
+
+    Figure 1 - Example of how a file could be shared between users.
+    (1) Alice shares the file with Bob.
+    (2) Alice shares the file with Nilufar.
+    (3) Bob shares the file with Olga.
+    (4) Bob shares the file with Marco.
+    (5) Nilufar tries to share the file with Marco.
+    (6) Nilufar tries to share the file with Alice.
+
+1. The client MUST allow any user with whom a file is currently shared to take
+   the following actions on the file:
+
+   - read the file contents;
+   - overwrite the file contents;
+   - append additional content to the file;
+   - share the file with other users.
+
+   For example, all of the users listed in Figure 1 are authorized to take
+   the listed actions on the file.
+
+#. The client MUST enforce that there is only a single copy of a file. Sharing
+   the file MAY NOT create a copy of the file.
+
+#. The client MAY assume that ``ShareFile()`` will never be called on recipients
+   who currently have access to the file. This implies that any sharing behavior
+   that does not result in a well-formed tree structure is undefined behavior
+   and will not be tested.
+
+   For example, in Figure 1, ``Nilufar``'s attempts to share with ``Marco`` or
+   ``Alice`` in steps 5 and 6 would be undefined behavior, since both users
+   already have access to the file. Neither of these shares would result in a
+   well-formed tree and are thus undefined behavior.
+
+#. The client MUST enforce that the file owner is able to revoke access from
+   users that they directly shared the file with. Any other revocation behavior
+   is considered to be undefined. (Note, however, that there may be others who
+   lose access to the file because of this direct revocation. See requirement
+   6.)
+
+   For example, in Figure 1, ``Alice`` is the only user who MUST be able to
+   revoke access, and she MUST be able to directly revoke access from ``Bob``
+   and ``Nilufar``. If any user other than ``Alice`` attempts to revoke access,
+   or ``Alice`` attempts to revoke access from any user other than ``Bob`` or
+   ``Nilufar``, this is undefined behavior and will not be tested.
+
+#. The client MUST allow the access to be revoked from another user even if the
+   other user is currently offline.
+
+#. The client MUST enforce that when a user has their access directly revoked,
+   any other users with whom they shared the file also have their access
+   indirectly revoked.
+
+   All requirements that apply to a user who has their access directly revoked
+   also apply to all users who have their access indirectly revoked.
+
+   For example, in Figure 1, if ``Alice`` revokes access directly from ``Bob``,
+   then all of the following users MUST indirectly lose access: ``Bob``,
+   ``Olga``, and ``Marco``. ``Alice`` maintains her access because she is the
+   file owner and ``Nilufar`` maintains her access because ``Alice`` was the
+   user who granted ``Nilufar`` access.
+
+#. The client MUST prevent a revoked user from taking any action on the file
+   unless a currently authorized user shares the file with them again.
+
+#. The client MAY leak any information except filenames, lengths of filenames,
+   and file contents.
+
+.. _requirement_efficiency:
+
+Efficiency
+----------
+
+#. The client MUST allow users to **efficiently** append new content to
+   previously stored files.
+   
+   We measure efficiency in terms of the bandwidth used by the ``AppendFile()``
+   operation (the total size of the data uploaded and downloaded via calls to
+   ``DatastoreGet()`` and ``DatastoreSet()``).
+   
+   The bandwidth of the ``AppendFile()`` operation MUST scale linearly with only
+   the size of data being appended and the number of users the file is shared
+   with, and nothing else. Logarithmic and constant scaling in other terms is
+   fine.
+
+   For example, appending 100 B to a 10 TB file should not use 10 TB of
+   bandwidth. The 1,000th and 10,000th append operations to the same file should
+   not use significantly more bandwidth than the 1st append operation. This is
+   not an exhaustive list of restrictions.
+
+#. ``AppendFile()`` is the only function that has an explicit requirement for
+   efficiency. However, the client MUST implement other functions such that they
+   do not time out the autograder (e.g. they cannot be grossly inefficient).
+
+   You can submit to Gradescope as often as you like to verify whether your
+   tests finish within the allotted time (usually about ~10 minutes max).
+
+.. _requirement_access_tokens:
+
+Access Tokens
+-------------
+
+Any breach of IND-CPA security constitutes loss of confidentiality.
+
+1. The client MUST ensure the confidentiality and integrity of the secure file
+   share invitations pointed to by accessTokens generated by ``ShareFile()``.
+
+#. The client SHOULD assume that users share accessTokens with each other
+   directly via the :ref:`threat_model_user_comms` detailed in the Threat
+   Model. You do not need to implement the passing of accessToken from one user
+   to another. You just have to implement the ``ShareFile()`` and
+   ``ReceiveFile()`` functions according to their defined APIs.
+
+.. _requirement_golang:
+
+Golang
+------
+
+#. The client application code MUST NOT use global variables (execpt for basic
+   constants).
+
+#. Your Go functions MUST return an error if malicious action prevents them from
+   functioning properly. Do not panic, do not segfault; return an error.
+
+#. Return ``nil`` as the error iff an operation succeeds. Return a value other
+   than ``nil`` as the error iff an operation fails.

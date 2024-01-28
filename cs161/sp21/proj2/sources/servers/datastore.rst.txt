@@ -1,0 +1,89 @@
+Datastore
+=========
+
+As stated in the :doc:`../threat_model`, Datastore is an **untrusted** server
+that provides persistent storage. Since Datastore can be malicious, you must
+protect the confidentiality and integrity of any sensitive data you store on it.
+
+Datastore is structured as a `key-value store
+<https://en.wikipedia.org/wiki/Key-value_database>`_. In this context, key
+refers to an unique identifier that is used to index the value in the database,
+and does not refer to a crypographic key.
+
+All key-value entries in Datastore exist in a single, global namespace and
+Datastore does not perform any access control. Therefore, any *value* entry can
+be overwritten or deleted by any user who knows the corresponding storage *key*.
+
+An implementation of Datastore is provided for you (see source code in userlib_)
+and is already imported into proj2.go_.
+
+The client application can interact with Datastore using the API documented
+below.
+
+.. function:: userlib.DatastoreSet(key UUID, value []byte)
+
+    Stores the given *value* at the given storage *key*.
+
+    Unlike the :doc:`keystore`, key-value entries in the Datastore are mutable;
+    if *key* already maps to a *value*, then *value* can be overwritten with a
+    call to *DatastoreSet()* using the same *key*.
+
+    :param key: Unique identifier used to index *value* in the database.
+    :type key: UUID
+    :param value: Value
+    :type value: []byte
+
+    **Example:**
+
+    .. code-block:: go
+
+        UUID := uuid.New()
+        data := []byte("This is some data")
+        userlib.DatastoreSet(UUID, data)
+
+.. function:: userlib.DatastoreGet(key UUID) (value []byte, ok bool)
+
+    If the given *key* does exist in Datastore, return the *value* stored at
+    *key* and *ok* is set to true.
+
+    If the given *key* does not exist in Datastore, then *ok* is set to false.
+
+    :param key: Key
+    :type key: UUID
+
+    :rtype: []byte
+
+    **Example:**
+
+    .. code-block:: go
+
+        UUID := uuid.New()
+        data := []byte("This is some data")
+        userlib.DatastoreSet(UUID, data)
+        download_data, _ := userlib.DatastoreGet(UUID)
+        if data != download_data {
+            panic("The data should match.")
+        }
+
+.. function:: userlib.DatastoreDelete(key UUID)
+
+    Delete the given key-value entry from the Datastore, if it exists.
+
+    :param key: Key
+    :type key: UUID
+
+    **Example:**
+
+    .. code-block:: go
+
+        UUID := uuid.New()
+        data := []byte("This is some data")
+        userlib.DatastoreSet(UUID, data)
+        userlib.DatastoreDelete(UUID)
+        _, ok := userlib.DatastoreGet(UUID)
+        if ok {
+            panic("The data is still there.")
+        }
+
+.. _userlib: https://github.com/cs161-staff/project2-userlib/blob/master/userlib.go
+.. _proj2.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go

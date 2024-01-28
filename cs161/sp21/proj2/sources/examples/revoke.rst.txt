@@ -1,0 +1,38 @@
+Revoke
+======
+
+**Example**: Here is an example workflow of `RevokeFile`.
+
+Suppose user Alice owns "file" and shared the file with Bob.
+
+.. code-block:: go
+
+    u1, _ := GetUser("user_alice", "pw1")
+    u2, _ := InitUser("user_bob", "pw2")
+    accessToken, err := u1.ShareFile("file", "user_bob")
+    u2.ReceiveFile("file_from_alice", "user_alice", accessToken)
+
+Then Bob will have access to Alice’s file, under the filename “file_from_alice”.
+
+Next, Alice revokes Bob’s permission to this file:
+
+.. code-block:: go
+
+    u1, _ := GetUser("user_alice", "pw1")
+    u1.RevokeFile("file", "user_bob")
+
+Now, Alice can still access "file", but Bob cannot.
+
+.. code-block:: go
+
+    file_data, _ := u1.LoadFile("file")
+
+Alice can update the file:
+
+.. code-block:: go
+
+    u1, _ := GetUser("user_alice", "pw1")
+    u1.StoreFile("file", new_file_data)
+
+This file is no longer shared with Bob. You must ensure
+that Bob does not have access to the new file content.

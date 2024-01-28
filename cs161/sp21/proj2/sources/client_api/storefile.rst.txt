@@ -1,0 +1,28 @@
+User.StoreFile: Store user files
+================================
+
+Implement this method:
+
+.. function:: StoreFile(filename string, data []byte) (err error)
+
+    - Stores the file persistently for future retrieval.
+
+    - If a user calls StoreFile() on a filename that already exists, the content
+      of the existing file is overwritten.
+
+    :param filename: File name
+    :type filename: string
+    :param data: File contents
+    :type data: []byte
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+    
+    #. Different users can store files using the same filename because each user
+       must have a separate file namespace (see :ref:`requirement_files` #6).
+
+    #. Overwriting the contents of a file  does not change who the file is
+       shared with (see :ref:`requirement_files` #8).
+
+    #. Users can have multiple active user sessions at once (see
+       :ref:`requirement_user_sessions`).

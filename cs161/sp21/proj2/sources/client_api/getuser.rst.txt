@@ -1,0 +1,30 @@
+GetUser: Log in using username and password
+===========================================
+
+Implement this function:
+
+
+.. function:: GetUser(username string, password string) (userdataptr *User, err error)
+
+    * Obtains the User struct of a user who has already been initialized and returns a pointer to it.
+    * Returns an error if user has not been initialized or user credentials are invalid.
+    * Returns an error if the User struct cannot be obtained due to malicious action or the integrity of the User struct has been compromised.
+
+    :param username: Username
+    :type username: string
+    :param password: Password
+    :type password: string
+
+    :rtype: userdataptr, error
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+    
+    #. The client application must be stateless (see
+       :ref:`requirement_stateless`).
+    
+    #. You cannot use global variables to store user information (see
+       :ref:`requirement_golang`).
+
+    #. Users can have multiple active user sessions at once (see
+       :ref:`requirement_user_sessions`).

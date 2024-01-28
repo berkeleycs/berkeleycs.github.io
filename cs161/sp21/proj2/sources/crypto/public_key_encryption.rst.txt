@@ -1,0 +1,41 @@
+Public Key Encryption (PKE)
+===========================
+
+**Data Types**:
+
+:PKEEncKey: The RSA public key for public-key encryption with RSA.
+:PKEDecKey: The RSA private key, used for RSA decryption.
+
+**Functions**:
+
+.. function:: PKEKeyGen() (PKEEncKey, PKEDecKey, error)
+
+    Generate a 2048-bit RSA key pair for public-key encryption.
+
+    :rtype: PKEEncKey, PKEDecKey, error
+
+.. function:: PKEEnc(ek PKEEncKey, plaintext []byte) ([]byte, error)
+
+    Use the RSA public key to encrypt a message.
+
+    :param ek: RSA encryption (public) key
+    :type ek: PKEEncKey
+    :param plaintext: Message to encrypt, no longer than 126 bytes
+    :type plaintext: []byte
+
+    :rtype: []byte, error
+
+.. function:: PKEDec(dk PKEDecKey, ciphertext []byte) ([]byte, error)
+
+    Use the RSA private key to decrypt a ciphertext.
+
+    :param ek: RSA encryption (private) key
+    :type ek: PKEDecKey
+    :param ciphertext: Message to decrypt
+    :type ciphertext: []byte
+
+    :rtype: []byte, error
+
+.. warning::
+    PKEEnc does not support very long plaintext.
+

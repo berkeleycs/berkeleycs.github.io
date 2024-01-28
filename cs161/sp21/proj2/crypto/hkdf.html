@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>7.5. Hash-Based Key Derivation Function (HKDF) &mdash; CS161 Project 2 2.4.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7.6. Password-Based Key Derivation Function" href="password_key_derivation.html" />
+    <link rel="prev" title="7.4. Hash-Based Message Authentication Code (HMAC)" href="hmac.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CS161 Project 2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../story/index.html">Story</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../grading/index.html">1. Grading and Deliverables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../threat_model.html">2. Threat Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design_requirements.html">3. Design Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/index.html">4. Server APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_api/index.html">5. Client Application API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">6. Some helpful examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">7. Cryptographic Functions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="public_key_encryption.html">7.1. Public Key Encryption (PKE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="digital_signatures.html">7.2. Digital Signatures (DS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hash.html">7.3. Hash Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hmac.html">7.4. Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="hkdf.html#">7.5. Hash-Based Key Derivation Function (HKDF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="password_key_derivation.html">7.6. Password-Based Key Derivation Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="symmetric_encryption.html">7.7. Symmetric Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random_byte_generator.html">7.8. Random Byte Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../start_coding.html">8. Getting Started Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_tips/index.html">9. Coding Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">10. Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS161 Project 2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html"><span class="section-number">7. </span>Cryptographic Functions</a> &raquo;</li>
+        
+      <li><span class="section-number">7.5. </span>Hash-Based Key Derivation Function (HKDF)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../sources/crypto/hkdf.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hash-based-key-derivation-function-hkdf">
+<h1><span class="section-number">7.5. </span>Hash-Based Key Derivation Function (HKDF)<a class="headerlink" href="hkdf.html#hash-based-key-derivation-function-hkdf" title="Permalink to this headline">¶</a></h1>
+<p>Hash-Based Key Derivation Functions (HKDFs) are keyed hash functions that can be
+used to deterministically derive multiple child keys from a single parent key.
+This can simplify your key management schemes.</p>
+<p>Note that if the parent key is insecure because it has insufficient entropy,
+then the child keys will be insecure for the same reason.</p>
+<p>In contrast to <a class="reference internal" href="password_key_derivation.html"><span class="doc">Password-Based Key Derivation Functions (PBKDFs)</span></a> that use slow hash functions, HKDFs use cryptographic
+hash functions that are very quick to execute (i.e. <strong>not</strong> cpu and memory
+intensive).</p>
+<p>Since user generated password/passphrases typically have low entropy, a quick
+hash function will make it easier for an adversary to brute force the input
+space and “crack” the password hashes. For this reason, HKDFs are not suitable
+for deriving cryptographic keys from passwords/passphrases.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>DO NOT use HKDF to derive cryptographic keys from passwords.</strong></p>
+</div>
+<p><strong>Function</strong>:</p>
+<dl class="py function">
+<dt id="HashKDF">
+<code class="sig-name descname"><span class="pre">HashKDF</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">key</span> <span class="pre">[]byte</span></em>, <em class="sig-param"><span class="pre">purpose</span> <span class="pre">[]byte)</span> <span class="pre">([]byte</span></em>, <em class="sig-param"><span class="pre">error</span></em><span class="sig-paren">)</span><a class="headerlink" href="hkdf.html#HashKDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new child symmetric key deterministically derived from the given
+parent symmetric key and human readable explanation of the purpose of the
+new child key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>[</em><em>]</em><em>byte</em>) – 16-byte parent symmetric key</p></li>
+<li><p><strong>purpose</strong> (<em>[</em><em>]</em><em>byte</em>) – Arbitrary-length, human readable explanation of the purpose
+of the newly derived child key</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>64-byte derived symmetric key</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[]byte, error</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">key</span> <span class="o">:=</span> <span class="nx">userlib</span><span class="p">.</span><span class="nx">RandomBytes</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="nx">encryptionKey</span><span class="p">,</span> <span class="nx">err1</span> <span class="o">:=</span> <span class="nx">userlib</span><span class="p">.</span><span class="nx">HashKDF</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;encryption&quot;</span><span class="p">))</span>
+<span class="nx">encryptionKey</span> <span class="p">=</span> <span class="nx">encryptionKey</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span>
+
+<span class="nx">macKey</span><span class="p">,</span> <span class="nx">err2</span> <span class="o">:=</span> <span class="nx">userlib</span><span class="p">.</span><span class="nx">HashKDF</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;mac&quot;</span><span class="p">))</span>
+<span class="nx">anotherKey</span> <span class="p">=</span> <span class="nx">macKey</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span>
+
+<span class="nx">anotherKey</span><span class="p">,</span> <span class="nx">err3</span> <span class="o">:=</span> <span class="nx">userlib</span><span class="p">.</span><span class="nx">HashKDF</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;another purpose&quot;</span><span class="p">))</span>
+<span class="nx">anotherKey</span> <span class="p">=</span> <span class="nx">anotherKey</span><span class="p">[:</span><span class="mi">16</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Remember: one key, one purpose. If we use a key for symmetric encryption or
+HMAC, we should not use the same key for HKDF. Similarly, we should not use
+the same key for both encryption and HMAC.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="password_key_derivation.html" class="btn btn-neutral float-right" title="7.6. Password-Based Key Derivation Function" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hmac.html" class="btn btn-neutral float-left" title="7.4. Hash-Based Message Authentication Code (HMAC)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CS 161 staff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

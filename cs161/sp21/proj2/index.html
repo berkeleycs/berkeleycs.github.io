@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>An End-to-End Encrypted File Sharing System &mdash; CS161 Project 2 2.4.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
+    
+    <script type="text/javascript" src="static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Story" href="story/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html#" class="icon icon-home"> CS161 Project 2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="story/index.html">Story</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="grading/index.html">1. Grading and Deliverables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="threat_model.html">2. Threat Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design_requirements.html">3. Design Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="servers/index.html">4. Server APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_api/index.html">5. Client Application API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">6. Some helpful examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crypto/index.html">7. Cryptographic Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_coding.html">8. Getting Started Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding_tips/index.html">9. Coding Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">10. Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html#">CS161 Project 2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>An End-to-End Encrypted File Sharing System</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="an-end-to-end-encrypted-file-sharing-system">
+<h1>An End-to-End Encrypted File Sharing System<a class="headerlink" href="index.html#an-end-to-end-encrypted-file-sharing-system" title="Permalink to this headline">¶</a></h1>
+<a class="reference internal image-reference" href="../assets/misc/regulus/banner.jpg"><img alt="Project 2 banner" src="../assets/misc/regulus/banner.jpg" style="width: 1000px;" /></a>
+<p>In this project, you will apply the cryptographic primitives introduced in class
+to design and implement the client application for a secure file sharing system.
+Imagine something similar to Dropbox, but secured with cryptography so that the
+server cannot view or tamper with your data.</p>
+<p>The client will be written in Golang and will allow users to take the following
+actions:</p>
+<ol class="arabic simple">
+<li><p>Authenticate with a username and password;</p></li>
+<li><p>Save files to the server;</p></li>
+<li><p>Load saved files from the server;</p></li>
+<li><p>Overwrite saved files on the server;</p></li>
+<li><p>Append to saved files on the server;</p></li>
+<li><p>Share saved files with other users; and</p></li>
+<li><p>Revoke access to previously shared files.</p></li>
+</ol>
+<p>We provide several resources to get you started.</p>
+<ol class="arabic simple">
+<li><p>We provide two servers that you can utilize in the design of your client
+application: the <a class="reference internal" href="servers/keystore.html"><span class="doc">Keystore</span></a>, and the <a class="reference internal" href="servers/datastore.html"><span class="doc">Datastore</span></a>.</p></li>
+<li><p>We provide implementations of several cryptographic algorithms and a
+number of functions that you can use to interact with Keystore and Datastore.
+These utilities are defined in <a class="reference external" href="https://github.com/cs161-staff/project2-userlib/blob/master/userlib.go">userlib</a>, which is already imported into
+<a class="reference external" href="https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go">proj2.go</a>.</p></li>
+<li><p>The Project 2 - Starter Code defines 8 functions in <a class="reference external" href="https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go">proj2.go</a> that you
+<strong>must</strong> implement (see <a class="reference internal" href="grading/index.html"><span class="doc">Grading and Deliverables</span></a>).</p></li>
+</ol>
+<p>Using these resources and your knowledge of computer security, you will design a
+secure client application that satisfies all of the <a class="reference internal" href="design_requirements.html"><span class="doc">Design Requirements</span></a>.</p>
+<p>The best way to digest this project documentation is to read each section
+sequentially using the <code class="docutils literal notranslate"><span class="pre">Next</span></code> button at the bottom of each page.</p>
+<p>As always, if you have questions about this documentation (or find errors),
+please make a post on Piazza!</p>
+<div class="section" id="staff-advice">
+<span id="id1"></span><h2>Staff Advice<a class="headerlink" href="index.html#staff-advice" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Design a solution before starting the implementation. Students consistently
+agree that design is harder than implementation across multiple iterations of
+this project. A faithful implementation of a faulty design will not earn you
+many points.</p></li>
+<li><p>To approach the design process, read through the <a class="reference internal" href="design_requirements.html"><span class="doc">Design Requirements</span></a>
+and the function definitions that you are required to implement in
+<a class="reference external" href="https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go">proj2.go</a>. Think about how you can design your client to provide the
+required functionality. Here are some useful questions to get you started:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Where will you store data?</p></li>
+<li><p>What data will be stored on which server?</p></li>
+<li><p>What data structure will you use to store the data?</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If you are stuck, try ignoring the file sharing functionality and instead
+focus on how to provide just the store/load file functionality. While you
+might need to later change your design to support secure sharing, this project
+is much easier to grasp when sharing is not involved.</p></li>
+<li><p>Make sure your implementation does not panic on the basic functionality tests
+provided in <a class="reference external" href="https://github.com/cs161-staff/project2-starter-code/blob/main/proj2_test.go">proj2_test.go</a>. An implementation that panics on those tests
+will get a zero in the code section.</p></li>
+<li><p>Submit to the autograder once in a while. The autograder will warn you if your
+implementation panics in any of the hidden tests.</p></li>
+</ul>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="index.html#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="story/index.html">Story</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="story/regulus.html">Welcome to REGULUS - [REGU]lated [LU]nar [S]torage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="story/privacy.html">REGULUS Privacy Policy</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="grading/index.html">1. Grading and Deliverables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="grading/design_doc.html">1.1. Design Document</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="grading/design_doc.html#section-1-system-design">1.1.1. Section 1: System design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="grading/design_doc.html#section-2-security-analysis">1.1.2. Section 2: Security analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="grading/tests.html">1.2. Test Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grading/code.html">1.3. Autograded Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="grading/code.html#autograder-rules">1.3.1. Autograder rules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="threat_model.html">2. Threat Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="threat_model.html#keystore-trusted">2.1. Keystore (trusted)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threat_model.html#datastore-untrusted">2.2. Datastore (untrusted)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threat_model.html#malicious-users">2.3. Malicious Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="threat_model.html#user-communications">2.4. User Communications</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design_requirements.html">3. Design Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#usernames-and-passwords">3.1. Usernames and Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#user-sessions">3.2. User Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#public-keys">3.3. Public keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#stateless">3.4. Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#files">3.5. Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#sharing-and-revoking">3.6. Sharing and Revoking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#efficiency">3.7. Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#access-tokens">3.8. Access Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#golang">3.9. Golang</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="servers/index.html">4. Server APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="servers/keystore.html">4.1. Keystore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="servers/datastore.html">4.2. Datastore</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="client_api/index.html">5. Client Application API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="client_api/inituser.html">5.1. InitUser: Create a user account.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/getuser.html">5.2. GetUser: Log in using username and password</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/storefile.html">5.3. User.StoreFile: Store user files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/loadfile.html">5.4. User.LoadFile: Load user files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/appendfile.html">5.5. User.AppendFile: Efficiently append data to an existing file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/sharefile.html">5.6. User.ShareFile: Create a secure file share invitation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/receivefile.html">5.7. User.ReceiveFile: Add a shared file to personal file namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client_api/revokefile.html">5.8. User.RevokeFile: Revoke file access</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">6. Some helpful examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/basic_without_sharing.html">6.1. Single-User File Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/sharing_and_revocation.html">6.2. Sharing and Revocation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/revoke.html">6.3. Revoke</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crypto/index.html">7. Cryptographic Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="crypto/public_key_encryption.html">7.1. Public Key Encryption (PKE)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/digital_signatures.html">7.2. Digital Signatures (DS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/hash.html">7.3. Hash Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/hmac.html">7.4. Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/hkdf.html">7.5. Hash-Based Key Derivation Function (HKDF)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/password_key_derivation.html">7.6. Password-Based Key Derivation Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/symmetric_encryption.html">7.7. Symmetric Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crypto/random_byte_generator.html">7.8. Random Byte Generator</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="start_coding.html">8. Getting Started Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding_tips/index.html">9. Coding Tips</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="coding_tips/json.html">9.1. JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coding_tips/uuid.html">9.2. Universally Unique Identifier (UUID)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coding_tips/golang.html">9.3. Common Issues With Go</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">10. Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#unreleased">10.1. [Unreleased]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id1">10.2. [2.4.2] - 2021-04-16</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#fixed">10.2.1. Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id2">10.3. [2.4.1] - 2021-04-09</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#changed">10.3.1. Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id3">10.4. [2.4.0] - 2021-04-05</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id4">10.4.1. Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id5">10.5. [2.3.0] - 2021-04-03</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id6">10.5.1. Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id7">10.6. [2.2.0] - 2021-03-17</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#remove">10.6.1. Remove</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id8">10.7. [2.1.0] - 2021-03-16</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id9">10.7.1. Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#added">10.7.2. Added</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#removed">10.7.3. Removed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id10">10.7.4. Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id11">10.8. [2.0.0] - 2021-03-15</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id12">10.8.1. Added</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id13">10.9. [2.0.0] - 2021-03-10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id14">10.9.1. Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id15">10.9.2. Added</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id16">10.10. [2.0.0] - 2021-03-10</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id17">10.10.1. Changed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id18">10.10.2. Fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="CHANGELOG.html#id19">10.11. [2.0.0] - 2021-03-09</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CHANGELOG.html#id20">10.11.1. Changed</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="story/index.html" class="btn btn-neutral float-right" title="Story" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CS 161 staff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

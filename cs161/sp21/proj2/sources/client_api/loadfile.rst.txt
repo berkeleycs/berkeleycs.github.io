@@ -1,0 +1,30 @@
+User.LoadFile: Load user files
+==============================
+
+Implement this method:
+
+.. function:: LoadFile(filename string) (data []byte, err error)
+
+    If the file does not exist, return an error.
+
+    If the file exists, download the latest version of the file. If loading the
+    file cannot complete due to some malicious action, return an error.
+
+    Verify the integrity of the downloaded file. If there have been any
+    unauthorized modifications to the file, then return an error.
+    
+    If the file could be downloaded and its integrity was verified, then return
+    the contents of the file.
+
+    :param filename: File name
+    :type filename: string
+    :param data: File contents
+    :type data: []byte
+
+    :rtype: []byte, error
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+    
+    #. Users can have multiple active user sessions at once (see
+       :ref:`requirement_user_sessions`).

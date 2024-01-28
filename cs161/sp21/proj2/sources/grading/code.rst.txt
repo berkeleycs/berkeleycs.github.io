@@ -1,0 +1,61 @@
+Autograded Code
+===============
+
+Your client application **must** implement the following 8 functions defined in
+`proj2.go`_.
+
+1. **InitUser** (username string, password string) (userdataptr *User, err error)
+#. **GetUser** (username string, password string) (userdataptr *User, err error)
+#. **StoreFile** (filename string, data []byte)
+#. **LoadFile** (filename string) (data []byte, err error)
+#. **AppendFile** (filename string, data []byte) (err error)
+#. **ShareFile** (filename string, recipient string) (accessToken string, err error)
+#. **ReceiveFile** (filename string, sender string, accessToken string) error
+#. **RevokeFile** (filename string, targetUsername string) error
+
+You are allowed and encouraged to write any structs or helper functions to aid
+your implementation, but all of your code must be contained in `proj2.go`_.
+
+Your implementation of these 8 functions MUST satisfy all of the
+:doc:`/design_requirements`. The API of these required functions is documented
+in :doc:`/client_api/index`.
+
+We will test your client application with a series of functionality and security
+tests to determine your code score. Due to the nature of computer security, most
+of the tests are hidden. Some test results are available before the deadline,
+and others will only be available after the deadline.
+
+Each failed code test will incur a multiplicative penalty on your score. This
+means that each subsequent failed test has less impact on your grade. This
+emulates an environment where the existence of a vulnerability is more important
+than the exact scope of the vulnerability.
+
+As discussed in :doc:`tests`, your implementation must, at the very least, not
+panic on the basic functionality tests provided in `proj2_test.go`_. However, an
+implementation that panics on the provided tests **will not** receive a code
+score of zero for the code portion of the :doc:`total grade </grading/index>`.
+
+The autograder will run multiple fixed random seeds for each test. Because your
+code must be robust to failures, we will take the lowest score across these
+multiple runs as the score for your code. Thus, any nondeterminism introduced by
+your code will be penalized.
+
+Autograder rules
+----------------
+
+Your client application code will be run in an isolated sandbox and autograded
+against a series of hidden tests.
+
+**Adversarial behavior by your client will be considered cheating and dealt with
+accordingly.**
+
+The autograder flags and rejects any submission that:
+
+- Imports additional libraries (you can only use the existing libraries imported in `proj2.go`_).
+- Spawns other processes.
+- Reads or writes to the file system.
+- Creates any network connections.
+- Attacks the autograder by returning excessively long output.
+
+.. _proj2.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go
+.. _proj2_test.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2_test.go

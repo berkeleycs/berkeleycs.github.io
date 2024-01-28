@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1.1. Design Document &mdash; CS161 Project 2 2.4.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.2. Test Coverage" href="tests.html" />
+    <link rel="prev" title="1. Grading and Deliverables" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CS161 Project 2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../story/index.html">Story</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">1. Grading and Deliverables</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="design_doc.html#">1.1. Design Document</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design_doc.html#section-1-system-design">1.1.1. Section 1: System design</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design_doc.html#section-2-security-analysis">1.1.2. Section 2: Security analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">1.2. Test Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code.html">1.3. Autograded Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../threat_model.html">2. Threat Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design_requirements.html">3. Design Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/index.html">4. Server APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_api/index.html">5. Client Application API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">6. Some helpful examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crypto/index.html">7. Cryptographic Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start_coding.html">8. Getting Started Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../coding_tips/index.html">9. Coding Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">10. Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS161 Project 2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html"><span class="section-number">1. </span>Grading and Deliverables</a> &raquo;</li>
+        
+      <li><span class="section-number">1.1. </span>Design Document</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../sources/grading/design_doc.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="design-document">
+<h1><span class="section-number">1.1. </span>Design Document<a class="headerlink" href="design_doc.html#design-document" title="Permalink to this headline">¶</a></h1>
+<p>Write a clear, concise design document of your implementation. You will be
+graded on clarity and quality in accordance with the requirements outlined in
+the following subsections.</p>
+<div class="section" id="section-1-system-design">
+<h2><span class="section-number">1.1.1. </span>Section 1: System design<a class="headerlink" href="design_doc.html#section-1-system-design" title="Permalink to this headline">¶</a></h2>
+<p><strong>Length</strong>: maximum 2 pages, plus an optional third page for a diagram.</p>
+<p>Summarize the design of your system. Explain the major design choices you made,
+written in a manner such that an average 161 student could take it, re-implement
+your client, and achieve a grade similar to yours. As a part of your design
+document, answer the following questions about your design in number-list
+format:</p>
+<ol class="arabic simple">
+<li><p>How is a file stored on the server?</p></li>
+<li><p>How does a file get shared with another user?</p></li>
+<li><p>What is the process of revoking a user’s access to a file?</p></li>
+<li><p>How does your design support efficient file append?</p></li>
+</ol>
+</div>
+<div class="section" id="section-2-security-analysis">
+<h2><span class="section-number">1.1.2. </span>Section 2: Security analysis<a class="headerlink" href="design_doc.html#section-2-security-analysis" title="Permalink to this headline">¶</a></h2>
+<p><strong>Length</strong>: maximum 1 page.</p>
+<p>Present at least three (3) and at most five (5) concrete attacks that an
+attacker may conduct and explain how your design protects against each attack.
+You should not need more than one paragraph per analysis. You will be graded on
+the three analyses which provide you the most credit.</p>
+<p>You must make sure that your attacks:</p>
+<ul class="simple">
+<li><p><strong>Do</strong> cover different aspects of the design of your system. In other words,
+do not provide three attacks that all involve file storage and zero attacks
+involving sharing or revocation.</p></li>
+<li><p><strong>Do not</strong> include any of the following three kinds of attacks:</p>
+<ol class="arabic simple">
+<li><p>Breach of confidentiality of unencrypted data.</p></li>
+<li><p>Breach of integrity of unauthenticated data.</p></li>
+<li><p>An attack that results in leaking the length of a filename.</p></li>
+</ol>
+</li>
+</ul>
+<p>Here is an example of a more sophisticated analysis:</p>
+<blockquote>
+<div><p>“After user A shares a file with user B and later revokes access, user B may
+try to call ReceiveFile with the original access token to regain access to the
+file. To prevent a revoked user from regaining access this way, our design…”</p>
+</div></blockquote>
+<p>This analysis is satisfactory because it describes a concrete attack that can be
+derived from the provided <a class="reference internal" href="../threat_model.html"><span class="doc">Threat Model</span></a> and the 8 required functions
+defined in <a class="reference external" href="https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go">proj2.go</a>.</p>
+<p>Your security analysis write up <strong>may not</strong> include the specific attack
+described in this example analysis.</p>
+<p>The attack you describe must have a security consequence and cannot simply be a
+bug. The attack must result in an attacker discovering forbidden information or
+executing an unprivileged action.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="tests.html" class="btn btn-neutral float-right" title="1.2. Test Coverage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="1. Grading and Deliverables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CS 161 staff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

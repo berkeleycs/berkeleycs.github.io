@@ -1,0 +1,31 @@
+User.AppendFile: Efficiently append data to an existing file
+============================================================
+
+Implement this method:
+
+.. function:: AppendFile(filename string, data []byte) (err error)
+    
+    If the file does not exist, return an error.
+
+    If the file does exist, append the given content to the file.
+    
+    You are **not** required to check the integrity of the existing file before
+    appending the new content (integrity verification is allowed, but not
+    required). If you detect an integrity violation or the append operation
+    cannot proceed for any reason, return an error.
+
+    :param filename: File name
+    :type filename: string
+    :param data: Data to be appended to an existing file.
+    :type data: []byte
+
+    :rtype: error
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+
+    #. The implementation of ``AppendFile()`` must satisfy the efficiency
+       requirement (see :ref:`requirement_efficiency`).
+    
+    #. Users can have multiple active user sessions at once (see
+       :ref:`requirement_user_sessions`).

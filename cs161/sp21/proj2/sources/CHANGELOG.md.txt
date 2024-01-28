@@ -1,0 +1,140 @@
+# Changelog
+
+This file is an **informative** list of the notable changes that have been made
+to the Project 2 specification.
+
+In other words, this document is just a useful resource to quickly skim an
+*informal* explanation of changes made to various parts of the specification.
+Nothing in this document should be interpreted as requirements and/or
+clarifications on their own.
+
+The text of the specification itself is the only **normative** documentation of
+requirements and wording, so you must read the relevant sections of the
+specification itself.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic
+Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [2.4.2] - 2021-04-16
+### Fixed
+- Size of byte slice from HKDF is 64-bytes, not 16-bytes.
+
+## [2.4.1] - 2021-04-09
+### Changed
+- Update wording in changelog entry for v2.4.0.
+- State that the CHANGELOG is informative while spec text is normative.
+
+## [2.4.0] - 2021-04-05
+### Changed
+- Made several updates to clarify the requirements related to sharing /
+  receiving files:
+  - Updated ``ShareFile()`` docs to clarify that the recipient is considered to
+    have access to the file even if they choose not to use the secure file share
+    invitation to receive the file into their personal file namespace.
+  - Updated ``RevokeFile()`` docs to clarify that secure file share
+    invitation(s) should be revoked even if the recipient has not yet called
+    ``ReceiveFile()``.
+  - Clarified wording of several requirements in the ``Sharing and Revoking``
+    section. The requirements remain the same, but hopefully are more clear now.
+
+- Removed brute force wording from the Keystore section of Threat Model and
+  clarified that all actors are aware of the public key entries in the Keystore.
+
+- Updated Threat Model to state that all rollback attacks, full and partial, are
+  out of scope for the Datastore.
+
+## [2.3.0] - 2021-04-03
+### Changed
+- Updated the spec to clarify the length requirements for the inputs/outputs of
+  cryptographic functions.
+
+
+## [2.2.0] - 2021-03-17
+### Remove
+- Updated requirement 3.6.3 to remove the need to treat as a no-operation (noop)
+  the scenario in which a file is shared with a user who already has access. The
+  requirement now states that behavior is undefined and will not be tested.
+
+## [2.1.0] - 2021-03-16
+### Changed
+- Updated the Malicious Users section of Threat Model to clarify that any user
+  can record information and that users will only become malicious after they
+  are revoked.
+
+- Updated requirement 3.5.7 to clarify that files do not have versions.
+
+### Added
+- Added requirement 3.7.2 to clarify that the only efficiency requirements are
+  for the AppendFile() function.
+
+- Added requirement 3.7.8 that some information can be leaked.
+
+### Removed
+- Removed bullet in requirement 3.6.1 that said users could delete files.
+
+### Fixed
+- Fixed code examples in docs for Hash-Based Key Derivation Function (HKDF).
+
+## [2.0.0] - 2021-03-15
+### Added
+- Updated 3.6.4 to change the revoke requirement so that now the client only
+  needs to allow the file owner to revoke from users with whom they have
+  directly shared the file.
+
+- Added the fun story background to the project spec! 😎
+
+- Added link to Gradescope submission for the `Design Document - Draft`
+  deliverable.
+
+## [2.0.0] - 2021-03-10
+
+### Changed
+
+- Updated requirement 3.8.1 and ReceiveFile() docs to clarify that accessTokens
+  are pointers to share invitations and the invitation is what must be
+  protected.
+
+### Added
+
+- Added bullet to requirement 3.6.1 to explicitly state that users can read the
+  contents of shared files.
+
+## [2.0.0] - 2021-03-10
+### Changed
+- Updated requirement 3.1.1.1 to say that clients SHOULD assume that usernames
+  are unique, instead of MAY assume.
+
+- Updated requirement 3.5.1 to clarify that "the client design MAY NOT leak the
+  length of any filename".
+
+- Clarified requirement 3.2.3 that client DOES NOT need to support concurrency.
+
+- Updated User Communications section of Threat Model to clarify that the
+  insecure chat app is only used for sending accessTokens.
+
+### Fixed
+
+- Fixed broken link in Access Tokens section of Design Requirements.
+- Updated StoreFile() docs to indicate that the function can return an error.
+
+## [2.0.0] - 2021-03-09
+### Changed
+
+- Updated due date for design doc draft from March 12 to March 19
+
+<!-- [Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.3.0...v1.0.0
+[0.3.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.8...v0.1.0
+[0.0.8]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.7...v0.0.8
+[0.0.7]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.6...v0.0.7
+[0.0.6]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.5...v0.0.6
+[0.0.5]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.4...v0.0.5
+[0.0.4]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.3...v0.0.4
+[0.0.3]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.2...v0.0.3
+[0.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v0.0.1 -->

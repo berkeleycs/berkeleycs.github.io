@@ -1,0 +1,40 @@
+User.ShareFile: Create a secure file share invitation
+=====================================================
+
+.. function:: ShareFile(filename string, recipient string) (accessToken UUID, err error)
+
+  Shares the given file with the given recipient by creating a secure file share
+  invitation that immediately grants the recipient permission to access the
+  given file and take the actions detailed in
+  :ref:`requirement_sharing_and_revoking` #1.
+
+  The recipient is considered to have access to the file even if they choose not
+  to use the secure file share invitation to receive the file into their
+  personal file namespace.
+
+  The returned accessToken must be the UUID storage key at which the secure
+  file share invitation is stored in the :doc:`/servers/datastore`.
+
+  You may assume this function will only be called in a way that creates a valid
+  sharing tree (see :ref:`requirement_sharing_and_revoking`).
+
+  Returns an error if:
+
+    - the given file does not exist in the caller's personal file namespace; or
+
+    - sharing cannot complete due to any malicious action.
+
+  :param filename: The name of the file to share with the recipient.
+  :type filename: string
+  :param recipient: The username of the user with whom the file should be
+                    shared.
+  :type data: string
+
+  :rtype: UUID, error
+
+.. warning::
+    Do not forget that your design must satisfy **all** requirements, including:
+
+    #. All :ref:`requirement_access_tokens` requirements.
+
+    #. All :ref:`requirement_sharing_and_revoking` requirements.

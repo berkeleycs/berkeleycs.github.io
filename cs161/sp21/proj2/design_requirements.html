@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>3. Design Requirements &mdash; CS161 Project 2 2.4.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
+    
+    <script type="text/javascript" src="static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Server APIs" href="servers/index.html" />
+    <link rel="prev" title="2. Threat Model" href="threat_model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> CS161 Project 2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="story/index.html">Story</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="grading/index.html">1. Grading and Deliverables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="threat_model.html">2. Threat Model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="design_requirements.html#">3. Design Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#usernames-and-passwords">3.1. Usernames and Passwords</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#user-sessions">3.2. User Sessions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#public-keys">3.3. Public keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#stateless">3.4. Stateless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#files">3.5. Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#sharing-and-revoking">3.6. Sharing and Revoking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#efficiency">3.7. Efficiency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#access-tokens">3.8. Access Tokens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design_requirements.html#golang">3.9. Golang</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="servers/index.html">4. Server APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="client_api/index.html">5. Client Application API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">6. Some helpful examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crypto/index.html">7. Cryptographic Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="start_coding.html">8. Getting Started Coding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coding_tips/index.html">9. Coding Tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">10. Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CS161 Project 2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Design Requirements</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="sources/design_requirements.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="design-requirements">
+<h1><span class="section-number">3. </span>Design Requirements<a class="headerlink" href="design_requirements.html#design-requirements" title="Permalink to this headline">¶</a></h1>
+<p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,
+“SHOULD NOT”, “RECOMMENDED”,  “MAY”, and “OPTIONAL” in this document are to be
+interpreted as described in <a class="reference external" href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>.</p>
+<div class="section" id="usernames-and-passwords">
+<h2><span class="section-number">3.1. </span>Usernames and Passwords<a class="headerlink" href="design_requirements.html#usernames-and-passwords" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Usernames</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The client SHOULD assume that each user has a unique username.</p></li>
+<li><p>Usernames are case-sensitive: <code class="docutils literal notranslate"><span class="pre">Bob</span></code> and <code class="docutils literal notranslate"><span class="pre">bob</span></code> are different users.</p></li>
+<li><p>Usernames can be any length greater than zero (they CANNOT be empty).</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Passwords</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>The client MUST NOT assume each user has a unique password. Like the real
+world, users may happen to choose the same password.</p></li>
+<li><p>The client MAY assume each user’s password generally is a good source of
+entropy. However, the attackers possess a precomputed lookup table
+containing hashes of common passwords downloaded from the internet.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="user-sessions">
+<span id="requirement-user-sessions"></span><h2><span class="section-number">3.2. </span>User Sessions<a class="headerlink" href="design_requirements.html#user-sessions" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>The client application MUST allow many different users to use the
+application at the same time. Each user runs a client program on their
+own device, which connects to the servers. For example, Bob and Alice can
+each run the client application on their own devices at the same time.</p></li>
+<li><p>The client MUST support a single user having multiple active sessions at the
+same time. For example, user <code class="docutils literal notranslate"><span class="pre">bob</span></code> can run the client application on
+his laptop and tablet simultaneously. Each of <code class="docutils literal notranslate"><span class="pre">bob</span></code>’s sessions, call
+them <code class="docutils literal notranslate"><span class="pre">S1</span></code> and <code class="docutils literal notranslate"><span class="pre">S2</span></code>, would be created by a call to <code class="docutils literal notranslate"><span class="pre">GetUser()</span></code> with
+the same credentials. All file changes MUST be reflected in all current
+user sessions immediately (i.e. without terminating the current session
+and re-authenticating). Here are some examples</p>
+<ul class="simple">
+<li><p>After <code class="docutils literal notranslate"><span class="pre">bob</span></code> stores a file <code class="docutils literal notranslate"><span class="pre">F1</span></code> in session <code class="docutils literal notranslate"><span class="pre">S1</span></code>, session <code class="docutils literal notranslate"><span class="pre">S2</span></code>
+must be able to download <code class="docutils literal notranslate"><span class="pre">F1</span></code>.</p></li>
+<li><p>After <code class="docutils literal notranslate"><span class="pre">bob</span></code> appends to <code class="docutils literal notranslate"><span class="pre">F1</span></code> in session <code class="docutils literal notranslate"><span class="pre">S1</span></code>, session <code class="docutils literal notranslate"><span class="pre">S2</span></code> must
+be able to download the updated version.</p></li>
+<li><p>After <code class="docutils literal notranslate"><span class="pre">bob</span></code> receives a file <code class="docutils literal notranslate"><span class="pre">F2</span></code> via <code class="docutils literal notranslate"><span class="pre">ReceiveFile()</span></code> in session
+<code class="docutils literal notranslate"><span class="pre">S1</span></code>, session <code class="docutils literal notranslate"><span class="pre">S2</span></code> must be able to download <code class="docutils literal notranslate"><span class="pre">F2</span></code>.</p></li>
+</ul>
+</li>
+<li><p>The client DOES NOT need to support concurrency. Globally, across all users
+and user-sessions, all operations in the client application will be done
+serially.</p></li>
+</ol>
+</div>
+<div class="section" id="public-keys">
+<h2><span class="section-number">3.3. </span>Public keys<a class="headerlink" href="design_requirements.html#public-keys" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Each public key SHOULD be used for a single purpose, which means that each
+user is likely to have more than one public key.</p></li>
+<li><p>A single user MAY have multiple entries in Keystore. However, the number of
+keys per user MUST be a small constant; it MUST NOT  depend on the number
+of files stored or length of any file, how many users a file has been
+shared with, or the number of users already in the system.</p></li>
+</ol>
+</div>
+<div class="section" id="stateless">
+<span id="requirement-stateless"></span><h2><span class="section-number">3.4. </span>Stateless<a class="headerlink" href="design_requirements.html#stateless" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>The client MUST be stateless; it cannot save any data to the local file
+system. If the client is restarted, it must be able to pick up where it left
+off given only a username and password. Any data requiring permanent storage
+MUST be stored in either <a class="reference internal" href="servers/keystore.html"><span class="doc">Keystore</span></a> or <a class="reference internal" href="servers/datastore.html"><span class="doc">Datastore</span></a>.</p></li>
+</ol>
+</div>
+<div class="section" id="files">
+<span id="requirement-files"></span><h2><span class="section-number">3.5. </span>Files<a class="headerlink" href="design_requirements.html#files" title="Permalink to this headline">¶</a></h2>
+<p>Any breach of IND-CPA security constitutes loss of confidentiality.</p>
+<ol class="arabic">
+<li><p>The client MUST ensure confidentiality and integrity of file contents.</p></li>
+<li><p>The client design MAY leak the size of file contents.</p></li>
+<li><p>The client MUST ensure the confidentiality and integrity of filenames.</p></li>
+<li><p>Filenames MAY be any length, including zero (empty string), but the client
+design MAY NOT leak the length of any filename.</p></li>
+<li><p>The client design MAY leak the number of files associated with a user.</p></li>
+<li><p>The client MUST NOT assume that filenames are globally unique. For example,
+user <code class="docutils literal notranslate"><span class="pre">bob</span></code> can have a file named <code class="docutils literal notranslate"><span class="pre">foo</span></code> and user <code class="docutils literal notranslate"><span class="pre">alice</span></code> can have a file
+named <code class="docutils literal notranslate"><span class="pre">foo</span></code>. Though there is a single instance of the Datastore server that
+is used by all users, the client application MUST keep each user’s file
+namespace independent from one another.</p></li>
+<li><p>The client MUST enforce authorization for all files. The only
+users who can access a file include: (1) the owner of the file; and (2) users
+with whom the file has been shared and not revoked.</p></li>
+<li><p>Changes to the contents of a file MUST be available to all users who are
+currently authorized to load the file. In other words, changes to the
+contents of a file MUST NOT change who the file is shared with.</p></li>
+<li><p>The following SHOULD be avoided because they are dangerous design patterns
+that often lead to subtle vulnerabilities. We test for them and treat any
+instance of them as a breach of confidentiality/integrity.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>reusing the same key for multiple purposes (e.g. encryption,
+authentication, key- derivation, etc); and</p></li>
+<li><p>authenticate-then-encrypt; and</p></li>
+<li><p>decrypt-then-verify.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="section" id="sharing-and-revoking">
+<span id="requirement-sharing-and-revoking"></span><h2><span class="section-number">3.6. </span>Sharing and Revoking<a class="headerlink" href="design_requirements.html#sharing-and-revoking" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id1">
+<img alt="images/sharing_tree.png" src="images/sharing_tree.png" />
+<p class="caption"><span class="caption-text">Figure 1 - Example of how a file could be shared between users.
+(1) Alice shares the file with Bob.
+(2) Alice shares the file with Nilufar.
+(3) Bob shares the file with Olga.
+(4) Bob shares the file with Marco.
+(5) Nilufar tries to share the file with Marco.
+(6) Nilufar tries to share the file with Alice.</span><a class="headerlink" href="design_requirements.html#id1" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic">
+<li><p>The client MUST allow any user with whom a file is currently shared to take
+the following actions on the file:</p>
+<ul class="simple">
+<li><p>read the file contents;</p></li>
+<li><p>overwrite the file contents;</p></li>
+<li><p>append additional content to the file;</p></li>
+<li><p>share the file with other users.</p></li>
+</ul>
+<p>For example, all of the users listed in Figure 1 are authorized to take
+the listed actions on the file.</p>
+</li>
+<li><p>The client MUST enforce that there is only a single copy of a file. Sharing
+the file MAY NOT create a copy of the file.</p></li>
+<li><p>The client MAY assume that <code class="docutils literal notranslate"><span class="pre">ShareFile()</span></code> will never be called on recipients
+who currently have access to the file. This implies that any sharing behavior
+that does not result in a well-formed tree structure is undefined behavior
+and will not be tested.</p>
+<p>For example, in Figure 1, <code class="docutils literal notranslate"><span class="pre">Nilufar</span></code>’s attempts to share with <code class="docutils literal notranslate"><span class="pre">Marco</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Alice</span></code> in steps 5 and 6 would be undefined behavior, since both users
+already have access to the file. Neither of these shares would result in a
+well-formed tree and are thus undefined behavior.</p>
+</li>
+<li><p>The client MUST enforce that the file owner is able to revoke access from
+users that they directly shared the file with. Any other revocation behavior
+is considered to be undefined. (Note, however, that there may be others who
+lose access to the file because of this direct revocation. See requirement
+6.)</p>
+<p>For example, in Figure 1, <code class="docutils literal notranslate"><span class="pre">Alice</span></code> is the only user who MUST be able to
+revoke access, and she MUST be able to directly revoke access from <code class="docutils literal notranslate"><span class="pre">Bob</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Nilufar</span></code>. If any user other than <code class="docutils literal notranslate"><span class="pre">Alice</span></code> attempts to revoke access,
+or <code class="docutils literal notranslate"><span class="pre">Alice</span></code> attempts to revoke access from any user other than <code class="docutils literal notranslate"><span class="pre">Bob</span></code> or
+<code class="docutils literal notranslate"><span class="pre">Nilufar</span></code>, this is undefined behavior and will not be tested.</p>
+</li>
+<li><p>The client MUST allow the access to be revoked from another user even if the
+other user is currently offline.</p></li>
+<li><p>The client MUST enforce that when a user has their access directly revoked,
+any other users with whom they shared the file also have their access
+indirectly revoked.</p>
+<p>All requirements that apply to a user who has their access directly revoked
+also apply to all users who have their access indirectly revoked.</p>
+<p>For example, in Figure 1, if <code class="docutils literal notranslate"><span class="pre">Alice</span></code> revokes access directly from <code class="docutils literal notranslate"><span class="pre">Bob</span></code>,
+then all of the following users MUST indirectly lose access: <code class="docutils literal notranslate"><span class="pre">Bob</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Olga</span></code>, and <code class="docutils literal notranslate"><span class="pre">Marco</span></code>. <code class="docutils literal notranslate"><span class="pre">Alice</span></code> maintains her access because she is the
+file owner and <code class="docutils literal notranslate"><span class="pre">Nilufar</span></code> maintains her access because <code class="docutils literal notranslate"><span class="pre">Alice</span></code> was the
+user who granted <code class="docutils literal notranslate"><span class="pre">Nilufar</span></code> access.</p>
+</li>
+<li><p>The client MUST prevent a revoked user from taking any action on the file
+unless a currently authorized user shares the file with them again.</p></li>
+<li><p>The client MAY leak any information except filenames, lengths of filenames,
+and file contents.</p></li>
+</ol>
+</div>
+<div class="section" id="efficiency">
+<span id="requirement-efficiency"></span><h2><span class="section-number">3.7. </span>Efficiency<a class="headerlink" href="design_requirements.html#efficiency" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>The client MUST allow users to <strong>efficiently</strong> append new content to
+previously stored files.</p>
+<p>We measure efficiency in terms of the bandwidth used by the <code class="docutils literal notranslate"><span class="pre">AppendFile()</span></code>
+operation (the total size of the data uploaded and downloaded via calls to
+<code class="docutils literal notranslate"><span class="pre">DatastoreGet()</span></code> and <code class="docutils literal notranslate"><span class="pre">DatastoreSet()</span></code>).</p>
+<p>The bandwidth of the <code class="docutils literal notranslate"><span class="pre">AppendFile()</span></code> operation MUST scale linearly with only
+the size of data being appended and the number of users the file is shared
+with, and nothing else. Logarithmic and constant scaling in other terms is
+fine.</p>
+<p>For example, appending 100 B to a 10 TB file should not use 10 TB of
+bandwidth. The 1,000th and 10,000th append operations to the same file should
+not use significantly more bandwidth than the 1st append operation. This is
+not an exhaustive list of restrictions.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AppendFile()</span></code> is the only function that has an explicit requirement for
+efficiency. However, the client MUST implement other functions such that they
+do not time out the autograder (e.g. they cannot be grossly inefficient).</p>
+<p>You can submit to Gradescope as often as you like to verify whether your
+tests finish within the allotted time (usually about ~10 minutes max).</p>
+</li>
+</ol>
+</div>
+<div class="section" id="access-tokens">
+<span id="requirement-access-tokens"></span><h2><span class="section-number">3.8. </span>Access Tokens<a class="headerlink" href="design_requirements.html#access-tokens" title="Permalink to this headline">¶</a></h2>
+<p>Any breach of IND-CPA security constitutes loss of confidentiality.</p>
+<ol class="arabic simple">
+<li><p>The client MUST ensure the confidentiality and integrity of the secure file
+share invitations pointed to by accessTokens generated by <code class="docutils literal notranslate"><span class="pre">ShareFile()</span></code>.</p></li>
+<li><p>The client SHOULD assume that users share accessTokens with each other
+directly via the <a class="reference internal" href="threat_model.html#threat-model-user-comms"><span class="std std-ref">User Communications</span></a> detailed in the Threat
+Model. You do not need to implement the passing of accessToken from one user
+to another. You just have to implement the <code class="docutils literal notranslate"><span class="pre">ShareFile()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">ReceiveFile()</span></code> functions according to their defined APIs.</p></li>
+</ol>
+</div>
+<div class="section" id="golang">
+<span id="requirement-golang"></span><h2><span class="section-number">3.9. </span>Golang<a class="headerlink" href="design_requirements.html#golang" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>The client application code MUST NOT use global variables (execpt for basic
+constants).</p></li>
+<li><p>Your Go functions MUST return an error if malicious action prevents them from
+functioning properly. Do not panic, do not segfault; return an error.</p></li>
+<li><p>Return <code class="docutils literal notranslate"><span class="pre">nil</span></code> as the error iff an operation succeeds. Return a value other
+than <code class="docutils literal notranslate"><span class="pre">nil</span></code> as the error iff an operation fails.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="servers/index.html" class="btn btn-neutral float-right" title="4. Server APIs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="threat_model.html" class="btn btn-neutral float-left" title="2. Threat Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CS 161 staff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

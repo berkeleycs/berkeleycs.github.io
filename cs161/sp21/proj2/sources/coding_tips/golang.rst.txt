@@ -1,0 +1,19 @@
+Common Issues With Go
+=====================
+
+#. **How to append a byte to a slice without the bytes library**
+
+   The following will return a new slice with the second argument appended to
+   the first argument.
+
+   .. code-block:: go
+
+     append({byte slice}, byte({a number}))
+
+#. **How do we simulate "corruption" in our tests, without assuming anything
+   about the staff's implementation?**
+
+   ``DatastoreGetMap()`` might be helpful. You can compare the entries in
+   Datastore before/after calling an API function (StoreFile, AppendFile, etc),
+   and use the difference to deduce where things are stored.
+

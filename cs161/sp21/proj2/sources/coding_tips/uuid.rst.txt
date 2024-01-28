@@ -1,0 +1,46 @@
+Universally Unique Identifier (UUID)
+====================================
+
+The :doc:`/servers/datastore` accepts a UUID (a unique identifier) as the key to
+its key-value storage.
+
+The `Google UUID library`_ is already imported for you in `proj2.go`_.
+
+Below are functions you can use to generate a UUID, either randomly from
+scratch, or deterministically from a piece of data.
+
+
+.. function:: uuid.New()
+
+    Returns a randomly generated UUID.
+
+    :rtype: uuid.UUID
+
+    **Example:**
+
+    .. code-block:: go
+
+        new_UUID := uuid.New()
+
+.. function:: uuid.FromBytes(b []byte) (uuid UUID, err error)
+
+    FromBytes creates a new UUID from a byte slice. Returns an error if the
+    slice does not have a length of 16. The bytes are copied from the slice.
+    
+    Note that the generated UUID will reveal information about the input
+    bytestring. In other words, the generated UUID provides no confidentiality
+    for the input data in byte slice *b*.
+    
+    :param b: Byte slice from which to create a UUID.
+    :type b: []byte
+
+    :rtype: uuid.UUID
+
+    **Example:**
+
+    .. code-block:: go
+
+        (new_UUID, _) := uuid.FromBytes(byte_slice[:16])
+
+.. _Google UUID library: https://godoc.org/github.com/google/uuid
+.. _proj2.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go

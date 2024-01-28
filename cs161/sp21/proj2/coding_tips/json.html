@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>9.1. JSON &mdash; CS161 Project 2 2.4.2 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+        <script src="../static/jquery.js"></script>
+        <script src="../static/underscore.js"></script>
+        <script src="../static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="9.2. Universally Unique Identifier (UUID)" href="uuid.html" />
+    <link rel="prev" title="9. Coding Tips" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CS161 Project 2
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.4.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../story/index.html">Story</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../grading/index.html">1. Grading and Deliverables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../threat_model.html">2. Threat Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../design_requirements.html">3. Design Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../servers/index.html">4. Server APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../client_api/index.html">5. Client Application API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">6. Some helpful examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../crypto/index.html">7. Cryptographic Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../start_coding.html">8. Getting Started Coding</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">9. Coding Tips</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="json.html#">9.1. JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uuid.html">9.2. Universally Unique Identifier (UUID)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="golang.html">9.3. Common Issues With Go</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">10. Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CS161 Project 2</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html"><span class="section-number">9. </span>Coding Tips</a> &raquo;</li>
+        
+      <li><span class="section-number">9.1. </span>JSON</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../sources/coding_tips/json.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="json">
+<h1><span class="section-number">9.1. </span>JSON<a class="headerlink" href="json.html#json" title="Permalink to this headline">¶</a></h1>
+<p>While implementing your client app, you will want perform a variety of
+operations on data represented by Go stucts. For example, save/load data to/from
+<a class="reference internal" href="../servers/datastore.html"><span class="doc">Datastore</span></a>, or using any of the provided <a class="reference internal" href="../crypto/index.html"><span class="doc">Cryptographic Functions</span></a>.</p>
+<p>All of these functions require byte slices and cannot operate directly on Go
+structs. To transform a Go struct into a byte slice, you will serialize the Go
+struct into JSON using the <a class="reference external" href="https://golang.org/pkg/encoding/json/">Go JSON library</a>, which is already imported into
+<a class="reference external" href="https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go">proj2.go</a>.</p>
+<p>In particular, you will want to use the following these two functions:</p>
+<dl class="py function">
+<dt id="json.Marshal">
+<code class="sig-prename descclassname"><span class="pre">json.</span></code><code class="sig-name descname"><span class="pre">Marshal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">v</span> <span class="pre">interface{})</span> <span class="pre">([]byte</span></em>, <em class="sig-param"><span class="pre">err</span></em><span class="sig-paren">)</span><a class="headerlink" href="json.html#json.Marshal" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li><p>Converts an arbitrary Go value into a byte slice containing the JSON
+representation of the struct.</p></li>
+<li><p>Only public fields are converted. Private fields (fields starting with a
+lowercase letter) are not marshaled into the output.</p></li>
+<li><p>This function will automatically follow pointers and nested pointers when
+marshalling.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>interface{}</em>) – Value to be converted into JSON. This can be any data type.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[]byte, err</p>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">uid</span> <span class="o">:=</span> <span class="nx">uuid</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="nx">d</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">uid</span><span class="p">)</span>
+<span class="c1">// d is a []byte which can be converted easily back into a UUID</span>
+</pre></div>
+</div>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Username</span> <span class="kt">string</span>
+    <span class="nx">Password</span> <span class="kt">string</span>
+    <span class="nx">secret</span>   <span class="kt">int</span>
+<span class="p">}</span>
+
+<span class="nx">alice</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">User</span><span class="p">{</span>
+    <span class="s">&quot;alice&quot;</span><span class="p">,</span>
+    <span class="s">&quot;password&quot;</span><span class="p">,</span>
+    <span class="mi">42</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="nx">bytes</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">alice</span><span class="p">)</span>
+<span class="nx">userlib</span><span class="p">.</span><span class="nx">DebugMsg</span><span class="p">(</span><span class="s">&quot;%s\n&quot;</span><span class="p">,</span> <span class="nb">string</span><span class="p">(</span><span class="nx">bytes</span><span class="p">))</span>
+<span class="c1">// {&quot;Username&quot;:&quot;alice&quot;,&quot;Password&quot;:&quot;password&quot;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="json.Unmarshal">
+<code class="sig-prename descclassname"><span class="pre">json.</span></code><code class="sig-name descname"><span class="pre">Unmarshal</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">v</span> <span class="pre">[]byte</span></em>, <em class="sig-param"><span class="pre">obj</span> <span class="pre">interface{})</span> <span class="pre">(error</span></em><span class="sig-paren">)</span><a class="headerlink" href="json.html#json.Unmarshal" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li><p>Converts a byte slice generated by json.Marshal back into a Go struct.</p></li>
+<li><p>Public fields are restored if present, and private fields will be
+default-initialized.</p></li>
+<li><p>This function automatically generates nested pointers where needed to
+generate a valid struct.</p></li>
+<li><p>This function will return an error if there is a type mismatch between the
+JSON and the struct (e.g. storing a string into a number field in a
+struct).</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>[</em><em>]</em><em>byte</em>) – Output from a call to json.Marshal</p></li>
+<li><p><strong>obj</strong> (<em>interface{}</em>) – Pointer to the Go struct where values will be loaded</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>error</p>
+</dd>
+</dl>
+<p><strong>Examples:</strong></p>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="nx">uid</span> <span class="o">:=</span> <span class="nx">uuid</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+<span class="nx">d</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">uid</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">result</span> <span class="nx">UUID</span>
+<span class="nx">err</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">result</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+    <span class="c1">// Error! handle me</span>
+<span class="p">}</span>
+<span class="c1">// Now you can use result as with any other struct variable in Go.</span>
+</pre></div>
+</div>
+<div class="highlight-go notranslate"><div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">User</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Username</span> <span class="kt">string</span>
+    <span class="nx">Password</span> <span class="kt">string</span>
+    <span class="nx">secret</span>   <span class="kt">int</span>
+<span class="p">}</span>
+<span class="nx">bytes</span> <span class="o">:=</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="s">&quot;{\&quot;Username\&quot;:\&quot;alice\&quot;,\&quot;Password\&quot;:\&quot;password\&quot;}&quot;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">alice</span> <span class="nx">User</span><span class="p">;</span>
+<span class="nx">json</span><span class="p">.</span><span class="nx">Unmarshal</span><span class="p">(</span><span class="nx">bytes</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">alice</span><span class="p">)</span>
+<span class="nx">userlib</span><span class="p">.</span><span class="nx">DebugMsg</span><span class="p">(</span><span class="s">&quot;%v\n&quot;</span><span class="p">,</span> <span class="nx">alice</span><span class="p">)</span>
+<span class="c1">// {alice password 0}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="uuid.html" class="btn btn-neutral float-right" title="9.2. Universally Unique Identifier (UUID)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="9. Coding Tips" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, CS 161 staff.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

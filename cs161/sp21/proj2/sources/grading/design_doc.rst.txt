@@ -1,0 +1,64 @@
+Design Document
+===============
+
+Write a clear, concise design document of your implementation. You will be
+graded on clarity and quality in accordance with the requirements outlined in
+the following subsections.
+
+========================
+Section 1: System design
+========================
+
+**Length**: maximum 2 pages, plus an optional third page for a diagram.
+
+Summarize the design of your system. Explain the major design choices you made,
+written in a manner such that an average 161 student could take it, re-implement
+your client, and achieve a grade similar to yours. As a part of your design
+document, answer the following questions about your design in number-list
+format:
+
+1. How is a file stored on the server?
+#. How does a file get shared with another user?
+#. What is the process of revoking a user’s access to a file?
+#. How does your design support efficient file append?
+
+============================
+Section 2: Security analysis
+============================
+
+**Length**: maximum 1 page.
+
+Present at least three (3) and at most five (5) concrete attacks that an
+attacker may conduct and explain how your design protects against each attack.
+You should not need more than one paragraph per analysis. You will be graded on
+the three analyses which provide you the most credit.
+
+You must make sure that your attacks:
+
+* **Do** cover different aspects of the design of your system. In other words,
+  do not provide three attacks that all involve file storage and zero attacks
+  involving sharing or revocation.
+* **Do not** include any of the following three kinds of attacks:
+
+  1. Breach of confidentiality of unencrypted data.
+  #. Breach of integrity of unauthenticated data.
+  #. An attack that results in leaking the length of a filename.
+
+Here is an example of a more sophisticated analysis:
+
+  "After user A shares a file with user B and later revokes access, user B may
+  try to call ReceiveFile with the original access token to regain access to the
+  file. To prevent a revoked user from regaining access this way, our design..."
+
+This analysis is satisfactory because it describes a concrete attack that can be
+derived from the provided :doc:`../threat_model` and the 8 required functions
+defined in `proj2.go`_.
+
+Your security analysis write up **may not** include the specific attack
+described in this example analysis.
+
+The attack you describe must have a security consequence and cannot simply be a
+bug. The attack must result in an attacker discovering forbidden information or
+executing an unprivileged action.
+
+.. _proj2.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go

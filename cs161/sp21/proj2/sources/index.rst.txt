@@ -1,0 +1,95 @@
+.. CS161 Project 2 documentation master file
+
+An End-to-End Encrypted File Sharing System
+===========================================
+
+.. image:: https://cs161.org/assets/misc/regulus/banner.jpg
+    :width: 1000
+    :alt: Project 2 banner
+
+In this project, you will apply the cryptographic primitives introduced in class
+to design and implement the client application for a secure file sharing system.
+Imagine something similar to Dropbox, but secured with cryptography so that the
+server cannot view or tamper with your data.
+
+The client will be written in Golang and will allow users to take the following
+actions:
+
+1. Authenticate with a username and password;
+#. Save files to the server;
+#. Load saved files from the server;
+#. Overwrite saved files on the server;
+#. Append to saved files on the server;
+#. Share saved files with other users; and
+#. Revoke access to previously shared files.
+
+We provide several resources to get you started.
+
+1. We provide two servers that you can utilize in the design of your client
+   application: the :doc:`servers/keystore`, and the :doc:`servers/datastore`.
+#. We provide implementations of several cryptographic algorithms and a
+   number of functions that you can use to interact with Keystore and Datastore.
+   These utilities are defined in `userlib`_, which is already imported into
+   `proj2.go`_.
+#. The Project 2 - Starter Code defines 8 functions in `proj2.go`_ that you
+   **must** implement (see :doc:`/grading/index`).
+
+Using these resources and your knowledge of computer security, you will design a
+secure client application that satisfies all of the :doc:`design_requirements`.
+
+The best way to digest this project documentation is to read each section
+sequentially using the ``Next`` button at the bottom of each page.
+
+As always, if you have questions about this documentation (or find errors), 
+please make a post on Piazza!
+
+.. _staff_advice:
+
+Staff Advice
+------------
+
+- Design a solution before starting the implementation. Students consistently
+  agree that design is harder than implementation across multiple iterations of
+  this project. A faithful implementation of a faulty design will not earn you
+  many points.
+- To approach the design process, read through the :doc:`design_requirements`
+  and the function definitions that you are required to implement in
+  `proj2.go`_. Think about how you can design your client to provide the
+  required functionality. Here are some useful questions to get you started:
+  
+    - Where will you store data?
+    - What data will be stored on which server?
+    - What data structure will you use to store the data?
+- If you are stuck, try ignoring the file sharing functionality and instead
+  focus on how to provide just the store/load file functionality. While you
+  might need to later change your design to support secure sharing, this project
+  is much easier to grasp when sharing is not involved.
+- Make sure your implementation does not panic on the basic functionality tests
+  provided in `proj2_test.go`_. An implementation that panics on those tests
+  will get a zero in the code section.
+- Submit to the autograder once in a while. The autograder will warn you if your
+  implementation panics in any of the hidden tests.
+
+Contents
+--------
+
+.. toctree::
+    story/index
+
+.. toctree::
+    :numbered:
+
+    grading/index
+    threat_model
+    design_requirements
+    servers/index
+    client_api/index
+    examples/index
+    crypto/index
+    start_coding
+    coding_tips/index
+    CHANGELOG
+
+.. _userlib: https://github.com/cs161-staff/project2-userlib/blob/master/userlib.go
+.. _proj2.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2.go
+.. _proj2_test.go: https://github.com/cs161-staff/project2-starter-code/blob/main/proj2_test.go

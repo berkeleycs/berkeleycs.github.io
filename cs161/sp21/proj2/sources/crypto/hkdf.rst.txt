@@ -1,0 +1,60 @@
+Hash-Based Key Derivation Function (HKDF)
+=========================================
+
+Hash-Based Key Derivation Functions (HKDFs) are keyed hash functions that can be
+used to deterministically derive multiple child keys from a single parent key.
+This can simplify your key management schemes.
+
+Note that if the parent key is insecure because it has insufficient entropy,
+then the child keys will be insecure for the same reason.
+
+In contrast to :doc:`Password-Based Key Derivation Functions (PBKDFs)
+<password_key_derivation>` that use slow hash functions, HKDFs use cryptographic
+hash functions that are very quick to execute (i.e. **not** cpu and memory
+intensive).
+
+Since user generated password/passphrases typically have low entropy, a quick
+hash function will make it easier for an adversary to brute force the input
+space and "crack" the password hashes. For this reason, HKDFs are not suitable
+for deriving cryptographic keys from passwords/passphrases.
+
+.. warning::
+  **DO NOT use HKDF to derive cryptographic keys from passwords.**
+
+**Function**:
+
+.. function:: HashKDF(key []byte, purpose []byte) ([]byte, error)
+
+    Returns a new child symmetric key deterministically derived from the given
+    parent symmetric key and human readable explanation of the purpose of the
+    new child key.
+
+    :param key: 16-byte parent symmetric key
+    :type key: []byte
+    :param purpose: Arbitrary-length, human readable explanation of the purpose
+                    of the newly derived child key
+    :type purpose: []byte
+
+    :returns: 64-byte derived symmetric key
+    :rtype: []byte, error
+
+    **Example:**
+
+    .. code-block:: go
+
+      key := userlib.RandomBytes(16)
+      
+      encryptionKey, err1 := userlib.HashKDF(key, []byte("encryption"))
+      encryptionKey = encryptionKey[:16]
+      
+      macKey, err2 := userlib.HashKDF(key, []byte("mac"))
+      anotherKey = macKey[:16]
+
+      anotherKey, err3 := userlib.HashKDF(key, []byte("another purpose"))
+      anotherKey = anotherKey[:16]
+
+
+.. important::
+    Remember: one key, one purpose. If we use a key for symmetric encryption or
+    HMAC, we should not use the same key for HKDF. Similarly, we should not use
+    the same key for both encryption and HMAC.
