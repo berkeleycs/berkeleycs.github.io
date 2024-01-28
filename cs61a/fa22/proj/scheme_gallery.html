@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="John DeNero, Justin Yokota" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../assets/js/hl.js"></script>
+    <script src="../assets/js/toggledarkmode.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mono-blue.css">
+    <link rel="icon" href="../assets/images/favicon.ico">
+
+    
+
+<link href="../assets/css/project.css" rel="stylesheet" type="text/css">
+<style>
+  img {
+    max-height:500px;
+  }
+</style>
+
+
+    <title>
+Scheme Art Gallery | CS 61A Fall 2022
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="scheme_gallery.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Calendar
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../weekly.html">Weekly Schedule</a></li>
+                <li><a href="../office-hours.html">Office Hours</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="scheme_gallery.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Links
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="https://go.cs61a.org/lecturezoom">Lecture Zoom Link</a></li>
+                <li><a href="https://sections.cs61a.org">Sections Tool</a></li>
+                <li><a href="https://oh.cs61a.org">Office Hours Queue</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="scheme_gallery.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../instructor.html">Instructors</a></li>
+                <li><a href="../TAs.html">TAs</a></li>
+                <li><a href="../tutors.html">Tutors</a></li>
+                <li><a href="../academic-interns.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="scheme_gallery.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Resources
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="https://go.cs61a.org/extensions">Request an Extension</a></li>
+                <li><a href="https://go.cs61a.org/accommodation-appts">Book an Accommodations Appointment</a></li>
+                <li><a href="../resources.html">Topical Resources + Past Exams</a></li>
+                <li><a href="https://tutor.cs61a.org/">PythonTutor</a></li>
+                <li><a href="https://code.cs61a.org/">Code</a></li>
+                <li><a href="https://edstem.org/us/courses/25379/discussion/" target="_blank">Ed</a></li>
+                <li><a href="../articles/campus-res/index.html">Department/Campus Resources</a></li>
+              </ul>
+            </li>
+            <li><a href="../articles/about.html">Syllabus</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li>
+              <label class="switch">
+                <input type="checkbox" id="toggle-mode-cb">
+                <span class="slider round"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Scheme Art Gallery
+
+        
+        
+        
+      </h1>
+    </header>
+    
+<div class="haiku">
+  <blockquote><cite>
+The output is art,<br>
+But what about its source code?<br>
+It's just as abstract.
+
+</cite></blockquote>
+</div>
+
+    
+<p>Please vote for your favorite entry in this semester's CS 61A Scheme Art
+Contest. The winner should exemplify the principles of elegance, beauty, and
+abstraction that are prized in the Berkeley computer science curriculum. As an
+academic community, we should strive to recognize and reward merit and
+achievement (in other words, please don't just vote for your friends).</p>
+
+<p><a href="https://forms.gle/uszEBJ7FkmnRX92w7">Cast your vote by submitting this form</a>. Voting is due <strong>11:59 PM
+on Wednesday, 12/7</strong>.</p>
+
+
+<h1 id="featherweight-division">Featherweight Division</h1>
+
+
+
+<h2 id="sunflower">SunFlower</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/37369ac0/artwork.png">
+  <blockquote>Under the sun,<br>smile with passion and happiness,<br>spread warmth around.</blockquote>
+  <p>Tokens: 503</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/37369ac0/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="hailstone-city">Hailstone City</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/5a17c6bb/artwork.png">
+  <blockquote>The smallest buildings <br> Or the largest skyscrapers <br> All fall down to one.</blockquote>
+  <p>Tokens: 218</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/5a17c6bb/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="schematic-mandelbrot">Schematic Mandelbrot</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/6d1e2d4d/artwork.png">
+  <blockquote>Dynamic systems <br> are quintessential objects <br> in iteration</blockquote>
+  <p>Tokens: 360</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/6d1e2d4d/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="a-minimalist-portrait-of-my-cat-cloudy">A Minimalist Portrait of My Cat, Cloudy</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/7c39254a/artwork.png">
+  <blockquote>i hope my intricate portrait captures the essence of cloudy's beauty,<br>i am brimming with excitement to see her this winter break.</blockquote>
+  <p>Tokens: 369</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/7c39254a/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="eyeball">Eyeball</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/9d74a1e0/artwork.png">
+  <blockquote>Seeing the world through a bear's perspective</blockquote>
+  <p>Tokens: 227</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/9d74a1e0/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="ඞ-do-not-search-up-what-i-love-gus-is-in-italian-ඞ">ඞ do NOT search up what "i love gus" is in italian!!! ඞ</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/9d9112a9/artwork.png">
+  <blockquote>My name is Amongus, <br> Sussiest of Bakas <br> Look on my Tasks, ye Mighty, and despair! </blockquote>
+  <p>Tokens: 194</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/9d9112a9/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="sakura">Sakura</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/ba7e5dca/artwork.png">
+  <blockquote>It is a good thing <br> that these cherry blossoms are <br> not tree recursion</blockquote>
+  <p>Tokens: 465</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/ba7e5dca/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="collatz-conjecture">Collatz Conjecture</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/bf9b0967/artwork.png">
+  <blockquote>3n + 1<br>So simple yet so complicated<br>But kinda looks like coral reef, weird huh</blockquote>
+  <p>Tokens: 260</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/bf9b0967/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="lerna-the-recursive-hydra">Lerna: The Recursive Hydra</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/c8251a28/artwork.png">
+  <blockquote>recursive hydras <br> cool, passing 61a<br> be even cooler</blockquote>
+  <p>Tokens: 507</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/c8251a28/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="flowerworks">Flowerworks</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/ca1788a7/artwork.png">
+  <blockquote>Fireworks at night<br>Background color call won't work<br>Or are they flowers?</blockquote>
+  <p>Tokens: 143</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/ca1788a7/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="a-line-i-m-submitting-so-i-can-satisfy-the-urge-to-complete-every-assignment">A Line I'm Submitting So I Can Satisfy The Urge To Complete Every Assignment</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/ea7072ed/artwork.png">
+  <blockquote>I must submit now<br>It's an urge I can't avoid<br>Now please forgive me</blockquote>
+  <p>Tokens: 16</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/ea7072ed/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="storm">Storm</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/fdcf3cdc/artwork.png">
+  <blockquote>A art of chaos<br>Some lines, resembling lightning<br>Just like finals week</blockquote>
+  <p>Tokens: 507</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/fdcf3cdc/contest.scm", target="__blank">View Code</a>
+
+
+<h1 id="heavyweight-division">Heavyweight Division</h1>
+
+
+
+<h2 id="the-golden-age-of-the-internet">The Golden Age of the Internet</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/19be2706/artwork.png">
+  <blockquote>Behold the stickman<br>Mascot of an antique time<br>Never to return</blockquote>
+  <p>Tokens: 983</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/19be2706/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="oskiomedra-galaxy">Oskiomedra Galaxy</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/313fd044/artwork.png">
+  <blockquote>If you're ever sad, <br> know Oski protects us all, <br> day in and day out.  </blockquote>
+  <p>Tokens: 955</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/313fd044/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="hilfinger-with-googly-eyes">Hilfinger with googly eyes</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/3a41f60a/artwork.png">
+  <blockquote>Inspired by the UPE office</blockquote>
+  <p>Tokens: 26006</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/3a41f60a/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="the-very-hungry-catepython">The Very Hungry CatePython</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/52db608f/artwork.png">
+  <blockquote>This; took; longer than expected.</blockquote>
+  <p>Tokens: 1272</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/52db608f/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="sphere-tracing">Sphere Tracing</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/5ca0344d/artwork.png">
+  <blockquote>Signed distance field rendering in scheme! (it's really slow)</blockquote>
+  <p>Tokens: 1924</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/5ca0344d/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="can-t-live-without-tas-and-tutors-and-ais-and-all-staff-members">Can't Live Without TAs (and Tutors (and AIs (and all Staff Members)))</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/7712a34d/artwork.png">
+  <blockquote>Without my dear TA<br>My world is dark and grey<br>UC please give them a higher pay</blockquote>
+  <p>Tokens: 1066</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/7712a34d/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="frosty-s-existential-dread">Frosty's Existential Dread</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/7bc01bd7/artwork.png">
+  <blockquote>Frosty, the snowman <br> was a jolly, happy soul <br> dreading the unknown.</blockquote>
+  <p>Tokens: 2881</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/7bc01bd7/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="surprised-pikachu">Surprised Pikachu</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/7f373769/artwork.png">
+  <blockquote>You teach me and I'll <br> teach you. Pokémon!<br> Gotta catch 'em all!</blockquote>
+  <p>Tokens: 3541</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/7f373769/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="there-are-overflowerror-imposters-among-us">There are <em>OverflowError</em> Imposters among us</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/966c7f69/artwork.png">
+  <blockquote>Crimson, heaven's stead <br><br>How many innocent dead? <br><br>Paranoia's Red.</blockquote>
+  <p>Tokens: 913</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/966c7f69/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="mesh-rendered-torus">Mesh rendered torus</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/bdeb8eb3/artwork.png">
+  <blockquote>It has triangles <br> That come together to make <br> Most of a donut</blockquote>
+  <p>Tokens: 3937</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/bdeb8eb3/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="sir-sierpinski-s-star">Sir Sierpinski's Star</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="scheme_gallery/entries/d28359c4/artwork.png">
+  <blockquote>Sir Sierpinski's star, 💫<br>A 3D engine, you are! 💻<br>One day you'll go far. 😌</blockquote>
+  <p>Tokens: 3022</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/fa22/proj/scheme_gallery/entries/d28359c4/contest.scm", target="__blank">View Code</a>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="scheme_gallery.html#featherweight-division">Featherweight Division</a></li>
+  <ul>
+    <li><a href="scheme_gallery.html#sunflower">SunFlower</a></li>
+    <li><a href="scheme_gallery.html#hailstone-city">Hailstone City</a></li>
+    <li><a href="scheme_gallery.html#schematic-mandelbrot">Schematic Mandelbrot</a></li>
+    <li><a href="scheme_gallery.html#a-minimalist-portrait-of-my-cat-cloudy">A Minimalist Portrait of My Cat, Cloudy</a></li>
+    <li><a href="scheme_gallery.html#eyeball">Eyeball</a></li>
+    <li><a href="scheme_gallery.html#ඞ-do-not-search-up-what-i-love-gus-is-in-italian-ඞ">ඞ do NOT search up what "i love gus" is in italian!!! ඞ</a></li>
+    <li><a href="scheme_gallery.html#sakura">Sakura</a></li>
+    <li><a href="scheme_gallery.html#collatz-conjecture">Collatz Conjecture</a></li>
+    <li><a href="scheme_gallery.html#lerna-the-recursive-hydra">Lerna: The Recursive Hydra</a></li>
+    <li><a href="scheme_gallery.html#flowerworks">Flowerworks</a></li>
+    <li><a href="scheme_gallery.html#a-line-i-m-submitting-so-i-can-satisfy-the-urge-to-complete-every-assignment">A Line I'm Submitting So I Can Satisfy The Urge To Complete Every Assignment</a></li>
+    <li><a href="scheme_gallery.html#storm">Storm</a></li>
+  </ul>
+  <li><a href="scheme_gallery.html#heavyweight-division">Heavyweight Division</a></li>
+  <ul>
+    <li><a href="scheme_gallery.html#the-golden-age-of-the-internet">The Golden Age of the Internet</a></li>
+    <li><a href="scheme_gallery.html#oskiomedra-galaxy">Oskiomedra Galaxy</a></li>
+    <li><a href="scheme_gallery.html#hilfinger-with-googly-eyes">Hilfinger with googly eyes</a></li>
+    <li><a href="scheme_gallery.html#the-very-hungry-catepython">The Very Hungry CatePython</a></li>
+    <li><a href="scheme_gallery.html#sphere-tracing">Sphere Tracing</a></li>
+    <li><a href="scheme_gallery.html#can-t-live-without-tas-and-tutors-and-ais-and-all-staff-members">Can't Live Without TAs (and Tutors (and AIs (and all Staff Members)))</a></li>
+    <li><a href="scheme_gallery.html#frosty-s-existential-dread">Frosty's Existential Dread</a></li>
+    <li><a href="scheme_gallery.html#surprised-pikachu">Surprised Pikachu</a></li>
+    <li><a href="scheme_gallery.html#there-are-overflowerror-imposters-among-us">There are <em>OverflowError</em> Imposters among us</a></li>
+    <li><a href="scheme_gallery.html#mesh-rendered-torus">Mesh rendered torus</a></li>
+    <li><a href="scheme_gallery.html#sir-sierpinski-s-star">Sir Sierpinski's Star</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../office-hours.html">Office Hours</a></li>
+            <li><a href="../staff.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../resources.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../articles/studying.html">Studying Guide</a></li>
+            <li><a href="../articles/debugging.html">Debugging Guide</a></li>
+            <li><a href="../articles/composition.html">Composition Guide</a></li>
+            <li><a href="../articles/pair-programming.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../articles/about.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../articles/about.html#assignments">Assignments</a></li>
+            <li><a href="../articles/about.html#exams">Exams</a></li>
+            <li><a href="../articles/about.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../assets/js/network_storage.js"></script>
+    <script src="../assets/js/storable.js"></script>
+    <script src="../assets/js/editor.js"></script>
+    <script src="../assets/js/copy-button.js"></script>
+    <script src="../assets/js/env-diagram.js"></script>
+    
+<script src="../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

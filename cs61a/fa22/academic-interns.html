@@ -1,0 +1,4926 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="John DeNero, Justin Yokota" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="assets/js/hl.js"></script>
+    <script src="assets/js/toggledarkmode.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mono-blue.css">
+    <link rel="icon" href="assets/images/favicon.ico">
+
+    
+
+    <title>
+Academic Interns | CS 61A Fall 2022
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="academic-interns.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Calendar
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="weekly.html">Weekly Schedule</a></li>
+                <li><a href="office-hours.html">Office Hours</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="academic-interns.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Links
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="https://go.cs61a.org/lecturezoom">Lecture Zoom Link</a></li>
+                <li><a href="https://sections.cs61a.org">Sections Tool</a></li>
+                <li><a href="https://oh.cs61a.org">Office Hours Queue</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="academic-interns.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="instructor.html">Instructors</a></li>
+                <li><a href="TAs.html">TAs</a></li>
+                <li><a href="tutors.html">Tutors</a></li>
+                <li><a href="academic-interns.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="academic-interns.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Resources
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="https://go.cs61a.org/extensions">Request an Extension</a></li>
+                <li><a href="https://go.cs61a.org/accommodation-appts">Book an Accommodations Appointment</a></li>
+                <li><a href="resources.html">Topical Resources + Past Exams</a></li>
+                <li><a href="https://tutor.cs61a.org/">PythonTutor</a></li>
+                <li><a href="https://code.cs61a.org/">Code</a></li>
+                <li><a href="https://edstem.org/us/courses/25379/discussion/" target="_blank">Ed</a></li>
+                <li><a href="articles/campus-res/index.html">Department/Campus Resources</a></li>
+              </ul>
+            </li>
+            <li><a href="articles/about.html">Syllabus</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <label class="switch">
+                <input type="checkbox" id="toggle-mode-cb">
+                <span class="slider round"></span>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<header>
+  <h1>Meet the academic interns</h1>
+</header>
+
+<p>Academic interns help students in lab sections and office hours.</p>
+
+
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/aayaan-arora.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Aayaan Arora
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:aayaanarora6@berkeley.edu">aayaanarora6@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">What's up. My name is Aayaan and I am a second year student studying computer science. I am a big soccer fan, particularly the English Premier League and Arsenal FC. I also enjoy working out, watching Netflix, hiking, listening to podcasts, and hooping. Look forward to seeing you guys!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/aayushi-chaudhry.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Aayushi Chaudhry
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:aayushi.chaudhry@berkeley.edu">aayushi.chaudhry@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi!! I am a sophomore from San Diego. I am studying Computer Science and Data Science. I love Thai food, dancing, and watching sunsets. Feel free to reach out whenever :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/aayushi-jain.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Aayushi Jain
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:aayushijain@berkeley.edu">aayushijain@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi there, i'm a sophomore studying EECS :) i love music, beaches, soccer and volleyball, exploring cities, and trying new foods. see you around!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/aditya-iyer.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Adi Iyer
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:aditya.iyer@berkeley.edu">aditya.iyer@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm a sophomore form Bangalore, India and I'm double majoring in Physics and CS! I'm interested in tech and martial arts so feel free to talk to me about those! I'm also down to talk about anything that interests you and learn from you! Looking forward to meeting you all in session. </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/aditya-rao.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Aditya Rao
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:adrao@berkeley.edu">adrao@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! My name is Aditya, and I am a sophomore studying eecs. I like to play guitar and go on bike rides. I'm excited to meet you all!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/albert-guo.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Albert Guo
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:albertguo888@berkeley.edu">albertguo888@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello! My name is Albert and I'm a second year studying EECS. My hobbies include TFT, tennis, and watching anime. If you ever need help feel free to ask me!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/alejandro-dominguez.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Alejandro Dominguez
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:alejodomcar@berkeley.edu">alejodomcar@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/alex-luu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Alex Luu
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:alexluu@berkeley.edu">alexluu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I’m Alex and I look forward to being an AI this semester. I really enjoyed this class and I hope you will too! Feel free to reach out to me if you have any questions!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ali-khani.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ali Khani
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:khani@berkeley.edu">khani@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Salam! I'm Ali, a second-year CS major from Tracy, CA. I teach cool things to cool people.
+
+Some fast facts: I play tennis, I lightsaber duel, and I LOVE road trips.
+
+Reach out to me via email for the best sunset spot recs, CS advice, or anything in between — I'd love to chat!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/alireza-keshmiri.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Alireza Keshmiri
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:Alirezak@berkeley.edu">Alirezak@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">I'm Alireza, I study Cognitive Science and Data Science. I enjoy climbing, camping and cooking semi-fire Persian food from time to time :)
+It's going to be a great semester !</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/amy-stanley.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Amy Stanley
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:amystanley@berkeley.edu">amystanley@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi!! I’m a sophomore from the Bay Area studying Bioengineering + EECS. I enjoy dancing, hiking, and playing badminton! Looking forward to meeting you all:)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/an-le.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          An Le
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:anl2002@berkeley.edu">anl2002@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! My name is An and I'm a 3rd year CS Major from San Jose, CA. I solve Rubik's Cubes competitively, play lots of Genshin Impact (AR 59), and waste money on custom keyboards.  Feel free to reach out to me about 61A or anything else! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/andy-wei.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Andy Wei
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:awei22@berkeley.edu">awei22@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/aneesh-durai.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Aneesh Durai
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:aneesh.durai@berkeley.edu">aneesh.durai@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I’m a second-year from New Jersey intending to major in CS. I like playing tennis and drinking tea. Looking forward to meeting you all and feel free to reach out anytime!!!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/angela-he.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Angela He
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:angela.he@berkely.edu">angela.he@berkely.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Angela, I'm a 2nd year studying computer science and I'm from San Jose. I enjoy hiking, baking and working with clay, and I love a good song/book/movie rec, so feel free to reach out if you got any or if you've got a questions or anything else! Excited to meet you all in class!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/anish-maram.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Anish Maram
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:anish.maram@berkeley.edu">anish.maram@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm Anish, a junior from the Bay Area studying CS. In my free time, I like videogames, anime, and finding new music. Looking forward to a fun semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/anna-dymchenko.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Anna Dymchenko
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:adymchenko@berkeley.edu">adymchenko@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm a junior majoring in EECS from Saratoga, CA. I love hiking through redwood forests, scoping out good sushi restaurants, and vintage computing & media about it (check out Halt and Catch Fire!). Feel free to talk to me any time!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/anna-hashimoto.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Anna Hashimoto
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:hashimotoanna@berkeley.edu">hashimotoanna@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello! My name is Anna Hashimoto and I'm a fourth year majoring in Integrative Biology and minoring in Data Science. I'm looking forward to an amazing semester!!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/anthony-ge.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Anthony Ge
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:anthonyge@berkeley.edu">anthonyge@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/antonio-sanchez.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Antonio Sanchez
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:antonio.sanchez@berkeley.edu">antonio.sanchez@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi my name is Antonio. I’m a transfer student who really loves all things physics, math, and CS. I’m a senior physics major and looking forward to learning together! In my spare time I like to play guitar and read. Let’s have a good semester. </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/anu-lkhagvasuren.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Anu Lkhagvasuren
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:anu.lkh@berkeley.edu">anu.lkh@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/anvi-kunta.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Anvi Kunta
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:anvikunta@berkeley.edu">anvikunta@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Anvi! I'm a junior majoring in computer science and minoring in data science. I'm super excited to be an AI for 61a and I'm looking forward to meeting everyone. Feel free to reach out to me about anything!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/arihant-choudhary.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Arihant Choudhary
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:arihant@berkeley.edu">arihant@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I’m a sophomore studying CS and Data Science. I like puzzle-solving and watching soccer. I took 61A in the Summer of 2021 and am excited to be back as an AI for this class. Feel free to reach out to me with any questions!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/arthi-matrubutham.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Arthi Matrubutham
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:apm.butham8@berkeley.edu">apm.butham8@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I’m Arthi and this is my first time serving as an AI for 61A (I’m super excited). I’m a fan of Tame Impala and Nicki Minaj, and I love binge-watching comedy shows.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/audrey-burnett.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Audrey Burnett
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:audrey.burnett@berkeley.edu">audrey.burnett@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/avi-shah.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Avi Shah
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:amcshah@berkeley.edu">amcshah@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm Avi, a sophomore from New Jersey studying Math and CS. Reach out if you like swimming, lifting, or online card games (LOR and Hearthstone are my favorites). 61A was my favorite class at Berkeley so far and I'm super excited to be an AI this semester. Looking forward to meeting all of you!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/avo-arabetyan.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Avo Arabetyan
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:aarabetyan@berkeley.edu">aarabetyan@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Avo and I'm an intended CS major from SoCal. Outside of class I'm usually hiking with friends, watching Warriors games, or grinding away at League. I also really love camping trips. Feel free to reach out if you have any questions and I hope you all enjoy this class as much as I did!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ayah-jiha.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ayah Jiha
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ayahjjiha@berkeley.edu">ayahjjiha@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I’m Ayah, a junior studying CS. Outside of that, I like hiking, playing smash & exploring music in various languages.
+
+I took CS61a this past summer and decided to switch to CS afterwards. Suffice to say, I loved it and I hope you do too :) </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/calvin-duong.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Calvin Duong
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:calvinduong11@berkeley.edu">calvinduong11@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello ! My name is Calvin and I'm a sophomore from the Bay Area. I enjoy going to gym, listening to new songs (send recommendations !!) , and spending time with friends. Super excited to be an AI for this semester, and feel free to reach out for anything ! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/camille-lojewski.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Camille Lojewski
+        
+        
+          
+            <div class="badge badge-info">they/them/theirs</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:lojewski@berkeley.edu">lojewski@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">I took PreCalculus over summer and was so bored with it I wrote a Python OOP PreCalc calculator so I exactly didn't have to do PreCalculus. Unleash 61A on your dreams of doing formulas just once then never again! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/carolyn-liu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Carolyn Liu
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:caliu@berkeley.edu">caliu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Carolyn, a freshman computer science major from San Jose, CA. I like spending my time playing games (boardgames, card games, etc.) and always enjoy getting some boba. I'm excited to be one of your AIs and looking forward to a great semester! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/celine-choi.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Celine Choi
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:celinejwchoi@berkeley.edu">celinejwchoi@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey, my name is Celine and I am a second-year from Seoul, South Korea. I am majoring in CS and this is my first time being an AI for 61A. Super excited to meet you all! Feel free to send me an email if you have any questions :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/chloe-yeo.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Chloe Yeo
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:chloeyeo@berkeley.edu">chloeyeo@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I'm a sophomore from Malaysia majoring in CS and minoring in Rhetoric. Outside of classes, I enjoy trying out new recipes, reading, and playing tennis. Looking forward to meeting everyone and feel free to reach out about anything! :))</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/christian-perez.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Christian Perez
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:christian9720@berkeley.edu">christian9720@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a junior transfer majoring in EECS from the Bay Area. I enjoy running, bike riding, and exercising. This is my first semester on course staff and I'm excited to help ya'll succeed. So far CS61A is my favorite class at Cal. I hope I can help you learn and enjoy the class too!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/christina-yao.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Christina Yao
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:christinayao@berkeley.edu">christinayao@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi there! I'm a sophomore majoring in CS. In my free time I love hiking, rock climbing, and anything outdoorsy. I also play bass drum in Cal Band so say hi if you see me at a football game :) I loved 61A and it convinced me to switch majors from bio to CS, so feel free to ask me any questions!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/christy-quang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Christy Quang
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:christyquang@berkeley.edu">christyquang@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! My name is Christy and I'm a sophomore data science major from the East Bay. In my free time, I enjoy watching basketball (Warriors) and kdramas, playing Valorant, listening to kpop and baking! Super excited for a fun semester together!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/coco-zhang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Coco Zhang
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:czhangyx@berkeley.edu">czhangyx@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey everyone! I'm a sophomore studying bioengineering. Being a TA for 61A is on my bucket list at Cal along with other things like learning to play the Campanile bells and being a tour guide. I love golf, anime, and intellectual & controversial conversations! Feel free to email me at any time :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/daisy-wang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Daisy Wang
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:daisyw2003@berkeley.edu">daisyw2003@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Daisy, a sophomore majoring in Applied Math and Statistics. I'm also hoping to minor in Creative Writing. In my free time, I like reading, gaming (video games, board games, card games), watching c-drama/reality TV, and listening to music! 
+</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/daniel-jiang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Daniel Jiang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ddanieljiang@berkeley.edu">ddanieljiang@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/daniel-nathanson.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Daniel Nathanson
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:daniel.nathanson@berkeley.edu">daniel.nathanson@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi guys! My name is Daniel, and I'm a sophomore majoring in Computer Science. Some things I like to do are cruising around on my skateboard, rock climbing, and talking about philosophy. I'm so excited for another semester of cs61a!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/darian-gonzales.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Darian Gonzales
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:14d.a.gonzales@berkeley.edu">14d.a.gonzales@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Darian, a second year intended Physics and CS major. I like drumming, Top Dog, music, baseball, boba, and rock climbing. Feel free to email me for help or anything. </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/darren-zhang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Darren Zhang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:darrenzjd@berkeley.edu">darrenzjd@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey,
+
+I'm a sophomore from Toronto, Canada studying Business Admin and Comp Sci
+I like watching the NBA
+I like Gordon Ramsay 
+Reach out to me if you like Gordon Ramsay (or if you like the NBA, or if you need help)
+Looking forward to working with yall!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/david-li.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          David Li
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:davidkl1202@berkeley.edu">davidkl1202@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey, I am David, a sophomore majoring math and cs. I like running, Weiqi aka Go, Premier League, Netherland national soccer team, Chinese history, Russian literature, Mexican food (realized recently), Mark Rothko, Lana Del Rey, and math. I love Berkeley CS 61A and hope to help you love this class. </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/david-qing.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          David Qing
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:davidqing@berkeley.edu">davidqing@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hey i'm david i'm a sophomore studying cs
+
+tell me your favorite song/artist if you see me i'm trying to find new music</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/dhruv-kumar.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Dhruv Kumar
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:dhruvkumar@berkeley.edu">dhruvkumar@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Dhruv and I'm from San Diego. In addition to teaching, I love playing basketball, tennis, guitar, ping pong, origami, and hiking. I look forward to seeing you all this semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/emily-xiao.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Emily Xiao
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:emilyxiao@berkeley.edu">emilyxiao@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello! My name is Emily and I'm a 2nd year intended CS major from Toronto:)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/emily-zhou.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Emily Zhou
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:emily.zhou@berkeley.edu">emily.zhou@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/eric-ibanez-.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Eric Ibanez 
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:Eric.ibanez@berkeley.edu">Eric.ibanez@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey I'm a sophomore studying EECS I'm from SoCal south LA. In my free time I love to sleep, skate or go surfing. I love in-n-out. I love listening to Kanye, J. Cole, Kid Cudi, and other artists. Feel free to reach out to me about anything, good luck you got these : ) </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/erica-ying.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Erica Ying
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:yexuan_ying@berkeley.edu">yexuan_ying@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! My name is Erica, and I'm a second-year student studying CS. I love cooking, playing the guitar, and solving Rubik's cubes. I'm excited to be teaching 61a this semester. Feel free to reach out if you like to chat anytime!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/erik-kizior.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Erik Kizior
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:erikkizior@berkeley.edu">erikkizior@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I’m Erik, a second year EECS major who loves La Burrita and sleeping. My hobbies include Smash Bros, volleyball, poker, and Catan. Reach out anytime, I would love to chat!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ethan-preston.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ethan Preston
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ethanpreston@berkeley.edu">ethanpreston@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi all! My name is Ethan, and I'm a second-year student here at Berkeley from Seattle, WA. Excited to get to meet all of you :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ethan-saso.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ethan Saso
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ethansaso@berkeley.edu">ethansaso@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi all. I'm Ethan, a third-year studying ecology and computer science at Cal. I'm also a singer and avid mushroom hunter. Feel free to shoot me an email for help with 61a, music recs, or anything in between!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/evan-ellis.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Evan Ellis
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:evan.ellis@berkeley.edu">evan.ellis@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">I like hiking, skydiving, and anything ML.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/felix-zhu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Felix Zhu
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:felixzhu@berkeley.edu">felixzhu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">sophomore studying CS and music</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/fernanda-pisconte.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Fernanda Pisconte
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:fpisconte@berkeley.edu">fpisconte@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi!! I’m a third-year from Peru majoring in Computer Science and minoring in Data Science. In my free time I love painting and collaborating in projects related to education. DM me to talk about that, or anything :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/flora-zeng.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Flora Zeng
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:fhzeng@berkeley.edu">fhzeng@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I’m Flora, and I’m from the bay area. I’m always down for outdoor activities whether it’s running, hiking, climbing, dancing, or skateboarding, just name it and I’d be down to join you. I also love taking naps at Moffitt. :p Feel free to talk to me about anything, happy to meet you!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/gabriella-skavdahl.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Gabby Skavdahl
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:gabriellaskavdahl@berkeley.edu">gabriellaskavdahl@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I’m Gabby and I’m a second year student from Texas. I really enjoyed taking this class and I look forward to working with you all!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/gabriel-taboada.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Gabriel Taboada
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:gabtab@berkeley.edu">gabtab@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello, I am a sophomore from Colombia studying eecs. This class is awesome and you're going to love it. Email me if you want to chat about anything or if you want to play guitar with me :D</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/geoffrey-xiang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Geoffrey Xiang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:geoffreyxiang@berkeley.edu">geoffreyxiang@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/grant-zhao.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Grant Zhao
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:gz220310@berkeley.edu">gz220310@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello everyone! I'm Grant, and I'm a second year studying Computer Science and Data Science. In my free time I enjoy hanging out with friends, reading novels, and chatting a lot on discord! Excited to help you all!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/hailee-yun.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Hailee Yun
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:haileeyun@berkeley.edu">haileeyun@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a sophomore from Texas studying computer science + data science. I love Anya from Spy x Family, krnb/korean music, and rainy nights. Looking forward to an amazing semester and wishing you all the best of luck for 61A! You got this :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/hanqi-xiong.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Hanqi Xiong
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:hxiong@berkeley.edu">hxiong@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello, I'm Hanqi Xiong and I'm a sophomore studying computer science and data science. On my free time I love to go play badminton or playing geometry dash/overwatch/CIV 6. If you we share any interests feel free to contact me!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/haoyu-liu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Haoyu Liu
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:liu_haoyu@berkeley.edu">liu_haoyu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey everyone! My name is Haoyu and I am a senior majoring in Statistics & Economics. I enjoy traveling, playing basketball, and hanging out with my friends. I’m super excited to be an AI this semester and I hope you all will have an amazing experience!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/henry-song.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Henry Song
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:feidong2002@berkeley.edu">feidong2002@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I am Henry, a sophomore from China studying CS/Design. I love sports, especially basketball and workout. I also make different kinds of art including sculpture, oil painting, photography and so on. Feel free to reach out and go bears!!!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/henry-wu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Henry Wu
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:henrywu_1029@berkeley.edu">henrywu_1029@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi. My name is Henry. I'm a sophomore majoring EECS. Im excited to be AI :) </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jackie-thibault.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jackie Thibault
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jacqueline.thibault@berkeley.edu">jacqueline.thibault@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Jackie, a second year student studying applied math. I like exploring and eating, among other bodacious things. Excited for the semester! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jaeha-yi.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jaeha Yi
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jaehayi@berkeley.edu">jaehayi@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Jaeha, and I'm a sophomore majoring in EECS. In my free time, I enjoy making video games and listening to music. Excited to teach this semester! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jaewon-lee.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jaewon Lee
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jaewon.lee@berkeley.edu">jaewon.lee@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Sup y'all! My name is Jaewon Lee, and I am currently a sophomore studying EECS. In my spare time, I love watching K-dramas, playing tennis, going down rabbit holes on YouTube, and exploring all sorts of places. Feel free to reach out if you ever have any questions, and go bears! 🐻</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/james-rungsawang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          James Rungsawang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jamesrungsawang@berkeley.edu">jamesrungsawang@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm James and I am a junior transfer from Riverside, CA intending to major in CS. I enjoy playing rhythm games, going to concerts, and solving puzzles—whether it be Rubik's cubes or challenging coding problems! Super excited to be helping out this semester :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jason-huang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jason Huang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jasonhuang1103@berkeley.edu">jasonhuang1103@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Jason. I'm a second year currently studying CS and CogSci. I also learning how to play chess. Feel free to ask me if you have any question. Looking forward to a great semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jason-lee.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jason Lee
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:leejason2025@berkeley.edu">leejason2025@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">built different.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jeff-liu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jeff Liu
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jeffkl@berkeley.edu">jeffkl@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">What’s up guys, my name is Jeff and I am a second year CS major. Feel free to reach out for a round of tennis, or anything else!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jiaxin-fang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jiaxin Fang
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:fjx20030729@berkeley.edu">fjx20030729@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm Jiaxin, a sophomore majoring in Statistics and CS. I'm excited to meet you all this fall!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jinnie-kim.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jinnie Kim
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:eojinnie@berkeley.edu">eojinnie@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jocelyn-tao.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jocelyn Tao
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jtao25@berkeley.edu">jtao25@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/johnson-guo.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Johnson Guo
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:johnsonguo@berkeley.edu">johnsonguo@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a sophomore from socal studying cs. I enjoy listening to music (especially mandopop and kpop) and play video games whenever I can. I'm super excited for my first semester as an AI for you guys!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jon-chen.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jon Chen
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jonchen25@berkeley.edu">jonchen25@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I am Jon and I'm a sophomore majoring in computer science and statistics. 61A is my first computer science class at Berkeley and I'm super excited to be joining the course staff. I hope you enjoy the class as much as I did and feel free to reach out! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/jon-giller.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Jon Giller
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jonathan_giller@berkeley.edu">jonathan_giller@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! My name is Jon Giller and I am a second year studying chemistry! I am from around LA and love boba and the beach!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/joseph-liu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Joseph Liu
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:joseph.liu.927@berkeley.edu">joseph.liu.927@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey hey people, Joseph here. Welcome to a little game you will be completing for your 3rd project. If you are a real OG - like me - then you may remember an all time classic: Plants vs Zombies. Now get ready for the greatest sequel to that critically acclaimed mobile game: Ants vs Some Bees.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/kaashvi-agnihotri.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Kaashvi Agnihotri
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:kaashvia@berkeley.edu">kaashvia@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey, I'm Kaashvi! I'm a second-year CS student from the Bay Area who loves funky earrings, cooking, and drawing. Hit me up about anything CS related, or if you just wanna know what my latest random art project is :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/karena-chen.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Karena Chen
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:karena_chen@berkeley.edu">karena_chen@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/kelly-yeh.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Kelly Yeh
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:kellyyyeh@berkeley.edu">kellyyyeh@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a second year studying CS from San Jose. I love going on walks, playing video games, and eating good food. Super excited to meet y'all and don't hesitate to reach out. :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/kevin-lin.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Kevin Lin
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:kevinlinkevinlin@berkeley.edu">kevinlinkevinlin@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">What's up everyone! I'm a 2nd year hoping to study either CS or DS, whichever one I can get into :0 If you're interested in music production, hit me up for a collab and we can both make it big. Go bears!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/khankamol-chor-kongrukgreatiyos.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Khankamol Chor Kongrukgreatiyos
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:khankamolk@berkeley.edu">khankamolk@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello! My name is Khankamol but I also go by Jan. I'm a sophomore from Thailand studying CS + Statistics and possibly minoring in Data Science. Super excited for this semester with you all :D</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/kritika-pantha.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Kritika Pantha
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:kpantha@berkeley.edu">kpantha@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi i'm tika! i'm a 2nd year studying cs (hopefully) and environmental earth science. i love to skate, read, and watch an insane amount of tv shows. 61a is my favorite class so far and i hope you love it too!! feel free to email me abt anything!!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/kyle-kuwahara.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Kyle Kuwahara
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:kylekuwahara@berkeley.edu">kylekuwahara@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/luke-torre.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Luke Torre
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:luketorre10@berkeley.edu">luketorre10@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">1) Stop reading my bio.
+2) Finish your 61a work.
+3) Go outside.
+4) I told you to stop reading my bio.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/lynn-nguyen.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Lynn Nguyen
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ailynnguyen@berkeley.edu">ailynnguyen@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi! I'm lynn, a second year studying applied math and originally from south bay. i love going out to the marina to paddle and watching the great british baking show while completing 1000 piece puzzles :') super excited to meet you guys!! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/maanasa-vasam.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Maanasa Vasam
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:maanasa.vasam@berkeley.edu">maanasa.vasam@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/madeline-darmawangsa.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Madeline Darmawangsa
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:madelinedm@berkeley.edu">madelinedm@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a third-year Computer Science/Data Science major from Indonesia. I spend all my time hanging out with my friends, napping, and binge-watching bad rom-coms. I looking forward to meeting everyone!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/mahathi-ryali.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Mahathi Ryali
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:mahathiryali@berkeley.edu">mahathiryali@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hii! I'm Mahathi, and I'm a sophomore studying computer science and data science. I like dancing, baking, and playing the violin. I'm really excited for this semester and I'm looking to to working with you all! :) </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/mahum-khan.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Mahum Khan
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:mahumkhan@berkeley.edu">mahumkhan@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">x = 00000010 
+f"HEYY, I Am A {x}-year Intended Astrophysics Major (emphasis on intended) And I Am On A Mission To Help You Ace This Class.  I also really like eating food so please drop your favorites so I can eat and rate them."</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/matthew-ybarra.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Matthew Ybarra
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:Mjybarra03@berkeley.edu">Mjybarra03@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey, I'm Matt! I'm a second-year EECS major from Pico Rivera, CA and I'm excited to be an AI. I love playing and listening to music (BTS, Gorillaz, Beach Bunny), gaming (Destiny 2, Persona 5, Dark Souls) and I'm a cheese addict. Feel free to reach out if you ever need help or just want to talk!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/meher-kajaria.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Meher Kajaria
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:meherkajaria@berkeley.edu">meherkajaria@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hey, I'm Meher! I am a sophomore majoring in Applied Mathematics and Computer Science. My various interests include mathematics, strategy games, and swimming. Feel free to reach out to me to talk about anything, CS or non-CS related! Can't wait to meet y'all and hope you have a great semester! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/melody-lai.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Melody Lai
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:melody_lai@berkeley.edu">melody_lai@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Melody, a sophomore majoring in CS from Taipei, Taiwan. If you like singing, volleyball, or stand-up comedy feel free to reach out ;) Excited to meet you all!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/michael-haroon.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Michael Haroon
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:mrharoon@berkeley.edu">mrharoon@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello!
+
+I’m a transfer to Cal who did well in 61a with almost no CS background — you can do the same or better.
+
+I’m here to help. Contact me if you have any questions or if you are seeking some tips or advice — I’d love to help.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/michael-nammour.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Michael Nammour
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:michaelnammour@berkeley.edu">michaelnammour@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey y'all, I'm Mike, a second year CS major. I'm Lebanese, quadrilingual, and reciting 100 digits of π for the Berkeley instagram has become my only personality trait. I only do autographs if you finish your lab assignment, sorry. 
+
+CS61A was and remains my favorite course, so enjoy! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/michael-wiradharma.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Michael Wiradharma
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:michael.wiradharma@berkeley.edu">michael.wiradharma@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a sophomore studying EECS! In my free time I love playing video games, usually rocket league and minecraft. One fun fact about me is I can solve a Rubik's Cube in under 10 seconds, but I also love all things nature and beaches.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/michelle-zhao.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Michelle Zhao
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:michellezhao@berkeley.edu">michellezhao@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello! I'm Michelle, and I'm a third year Integrative Biology major. Things I adore include dance, musicals, and walks to the library :) Super stoked for the semester, and excited to meet you!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/mohammad-shahnawaz.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Mohammad Shahnawaz
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:mohammadshahnawaz@berkeley.edu">mohammadshahnawaz@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I'm Mohammad a AI this semester - I like anime, gaming, working out and I'm always looking for music recs. If you ever need any help let me know and I'll do my best!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/myles-fung.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Myles Fung
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:mylesfung@berkeley.edu">mylesfung@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm Myles, I'm from the Sacramento area, and I enjoy lifting and listening to sad indie pop, though not concurrently.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/namrit-ahluwalia.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Namrit Ahluwalia
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:namritahluwalia@berkeley.edu">namritahluwalia@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi guys! my name is Namrit and I’m a sophomore studying computer science and applied mathematics! I love listening to music, taking film photography, and hanging with friends. I’m so excited to help everyone out this semester :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/nithish-rajan.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Nithish Rajan
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:nithishrajan03@berkeley.edu">nithishrajan03@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey! I'm Nithish, and I'm a sophomore studying computer science and economics from San Ramon, CA. In my free time, you could probably catch me listening to a Kanye or Kid Cudi album, or hooping with some friends. I'm looking forward to being an AI and meeting all of you guys! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/owen-gozali.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Owen Gozali
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:owengozali@berkeley.edu">owengozali@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi guys! I'm Owen Gozali and I'm a second year studying CS and Economics from Indonesia. I'm excited to meet you all!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/owen-halpert.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Owen Halpert
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ohalpert@berkeley.edu">ohalpert@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">I'm Owen, a junior from LA studying CS and Music. 61A is my favorite class I've taken at Berkeley and I'm excited to help teach it this semester. Outside of class, I enjoy making music, DJing, solving puzzles, and trying new restaurants in Berkeley. </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/rachel-wang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Rachel Wang
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:w_ruiqi@berkeley.edu">w_ruiqi@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Rachel! I'm a sophomore majoring in CS from China. I love listening to music, having delicious food, and watching animes. This is my first time to be an AI for 61a and I'm super excited to meet you all! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ranaa-jamshed.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ranaa Jamshed
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ranaajamshed@berkeley.edu">ranaajamshed@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/rishi-nath.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Rishi Nath
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:rishi.nath@berkeley.edu">rishi.nath@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a sophomore EECS major from San Francisco. If you're feeling lost or have any questions, feel free to reach out to me for help or advice!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ritwik-srinivas.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ritwik Srinivas
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ritwiksrinivas@berkeley.edu">ritwiksrinivas@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey guys! I'm Ritwik, and I'm a sophomore studying computer science. I enjoy football (both kinds) and basketball, and I play a little bit of guitar on the side. Feel free to reach out for anything, and have fun in 61A! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/riya-singhal.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Riya Singhal
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:riya.singhal@berkeley.edu">riya.singhal@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi! i'm a sophomore from the bay area. i love hiking in National Parks, listening to music, and koalas!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/rohan-tibrewal.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Rohan Tibrewal
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:rtibrewal@berkeley.edu">rtibrewal@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/rosemary-ting.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Rosemary Ting
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:rosemaryting@berkeley.edu">rosemaryting@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello everyone! My name is Rosemary and I'm a sophomore pursuing computer science. I enjoy singing, reading, eating, playing badminton, and just hanging with friends in general! A fun (yet sad) fact about me is that I have a very low spice tolerance :'( but I can't wait to meet everyone!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/royce-ren.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Royce Ren
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:royce.ren@berkeley.edu">royce.ren@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a sophomore CS major from the Bay! In my free time, I enjoy playing games with my friends (yes yes League degen), working out, and recently, crocheting! Excited to meet y'all :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/rudy-aoun.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Rudy Aoun
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:rudyaoun@berkeley.edu">rudyaoun@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I'm Rudy and I'm a sophomore studying CS and Applied Math. I'm originally from Lebanon but grew up in the Bay Area. In my free time I enjoy swimming and binging Netflix shows. Looking forward to a great semester :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ryan-campbell.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ryan Campbell
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ryancampbell@berkeley.edu">ryancampbell@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Ryan, a sophomore studying math and cs from the bay area. I love playing soccer, writing music, and watching the nba. I'm looking forward to working with you all this semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ryan-crabbe.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ryan Crabbe
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:rcrabbe@berkeley.edu">rcrabbe@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi! im ryan, a senior studying ds. In my free time I love reading, and watching dramas. I'm really excited to be on course staff this semester and look forward to working with all of you this semester!  </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/samhith-kakarla.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Samhith Kakarla
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:skakarla@berkeley.edu">skakarla@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Happy to help. Go Bears.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sammie-shenon.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sammie Shenon
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sshenon@berkeley.edu">sshenon@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm a sophomore studying CS. In my free time I love to watch movies, read, get outdoors, and try new food spots! I look forward to being an AI this semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sasha-sato.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sasha Sato
+        
+        
+          
+            <div class="badge badge-info">ey/they/he/she</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:s.a.sato@berkeley.edu">s.a.sato@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">In addition to helping people understand computer science, I like ideas, learning, languages, writing, cybersecurity, and having good-natured but rigorous arguments about politics and philosophy. Feel free to email me!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sejin-an.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sejin An
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sejinan@berkeley.edu">sejinan@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Sejin, a second-year computer science major from South Korea. This is my first time on CS 61A course staff, and I'm super excited to meet everyone! Hope to see you around :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/shaurya-jain.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Shaurya Jain
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:shauryajain@berkeley.edu">shauryajain@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/shervil-patel.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Shervil Patel
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:shervil@berkeley.edu">shervil@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hey everyone! I'm a sophomore CS and Econ major from Union City, CA. I love watching basketball and soccer, cooking new foods, and playing video games. </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sima-kassianik.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sima Kassianik
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:skassianik@berkeley.edu">skassianik@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi all! I'm Sima and I am a junior transfer from San Francisco! I took CS 61A summer 22' and hope you have a great time in the class! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sol-cheung.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sol Cheung
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:solc@berkeley.edu">solc@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hey everyone! my name’s solomon, but everyone calls me sol. i’m a sophomore from socal studying cs. outside of the classroom, I’m a gym rat who spends way too much time editing videos and listening to icelandic hop and rap. super stoked to meet you all</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sophia-sunkin.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sophia Sunkin
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sophiasunkin@berkeley.edu">sophiasunkin@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sriteja-vijapurapu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sriteja Vijapurapu
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sritejav@berkeley.edu">sritejav@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi! i'm a sophomore studying computer science and pure mathematics. my hobbies include watching sitcoms and basically just writing code. i'm looking forward to this semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sriya-kappagantu.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sriya Kappagantu
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sriya.kappagantu@berkeley.edu">sriya.kappagantu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi guys! My name is Sriya and I'm a sophomore studying EECS + Business. In my free time I enjoy reading, writing, and listening to Kpop (BTS, Stray Kids, TxT, Enhypen). Reach out if you want to talk about the Berkeley EECS experience or tell me about your favorite groups!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/steffi--tan.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Steffi  Tan
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:steffitlw@berkeley.edu">steffitlw@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/stephen-su.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Stephen Su
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:jingzhisu@berkeley.edu">jingzhisu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! My name is Stephen, and I'm a sophomore majoring in CS from Miami, FL. During my free time, I enjoy traveling, cooking, and watching anime. Feel free to reach out to me with any questions!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sue-young-shim.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sue Young Shim
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sueyoungshim@berkeley.edu">sueyoungshim@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello! I'm Sue, a junior studying math and cs. I like playing wordle, rummikub, and jigsaw puzzles. Feel free to reach out, and I hope you enjoy 61A!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sueji-kim.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sueji Kim
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+            <div class="badge badge-info">they/them/theirs</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sueji.kim@berkeley.edu">sueji.kim@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/suhani-khosla.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Suhani Khosla
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:suhanikhosla@berkeley.edu">suhanikhosla@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/sylvester-seo.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Sylvester Seo
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:sylvesterseo@berkeley.edu">sylvesterseo@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Sylvester, a second-year student studying CS. I like fishing, solving puzzles, and playing Pokemon. I'm very excited to be an AI for this class! Let's have a great semester!  :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/tej-bade.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Tej Bade
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:tbade12@berkeley.edu">tbade12@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/teja-kanthamneni.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Teja Kanthamneni
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:tk164@berkeley.edu">tk164@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/tejas-jyothi.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Tejas Jyothi
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:tejas.jyothi@berkeley.edu">tejas.jyothi@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi, I'm Tejas, and I'm a sophomore studying data science. I love to go to the gym, try new foods, and lie on soft grass. I'm always checking up on current events and watching celebrity boxing matches. Looking forward to working with you guys!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/thomas-culhane.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Thomas Culhane
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:thomasjculhane@berkeley.edu">thomasjculhane@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! My name is Thomas, and I'm a second-year CS major from New Jersey! I'm super interested in the theoretical and mathematical side of CS, and when I'm not buried in the CS170 textbook you can find me playing video games, watching TV, or hanging out with friends. Hope you all enjoy 61A!! λ λ λ λ λ</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/thomas-seward.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Thomas Seward
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:tseward@berkeley">tseward@berkeley</a></li>
+          
+          
+          <br>
+          <li class="section bio"></li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/tommy-hang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Tommy Hang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:tommyhang@berkeley.edu">tommyhang@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">HI FRIENDS! If you ever want to eat at Crossroads, I'll always eat with you. I love LAUV and Ariana Grande, fencing, basketball, anything not computer science, money, and you <3</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/tommy-kim.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Tommy Kim
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:dtkim25@berkeley.edu">dtkim25@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I'm Tommy, and I'm a sophomore studying math and cs. I took 61A last semester and had an amazing time, so I'm really excited to help out this semester on course staff. Outside of class, I enjoy binging Netflix, hanging out with friends, and sleeping. Looking forward to a great semester!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/upasana-dilip.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Upasana Dilip
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:upasana_dilip@berkeley.edu">upasana_dilip@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello!! I'm Upasana, a sophomore from the South Bay. I enjoy running in my free time and listening exclusively to ~The Weeknd~. I loved CS61A and I'm so excited to be working with everyone this semester!! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/victor-shi.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Victor Shi
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:victor.shi@berkeley.edu">victor.shi@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">W mans
+
+love playing piano and going to the gym</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/victoria-lee.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Victoria Lee
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:vlee@berkeley.edu">vlee@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hello! I'm victoria and I'm a 2nd year prospective cs major. puppies are my favorite things, and I like playing genshin impact when I should be studying!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/vincent-lin.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Vincent Lin
+        
+        
+          
+            <div class="badge badge-info"></div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:vincentlin83@berkeley.edu">vincentlin83@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">hi! i'm a second-year cs major from the bay area. i love to take long walks by the beach. hope you have a great time in 61a!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/winston-li.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Winston Li
+        
+        
+          
+            <div class="badge badge-info">comrade </div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:winstoon@berkeley.edu">winstoon@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">My friend asked me to help him round up his 37 sheep
+
+I said "40" </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/xavier-plourde.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Xavier Plourde
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:plourde27@berkeley.edu">plourde27@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi! I’m a second-year CS + Physics major from Upstate New York. I really like working on large coding projects, and most recently I’ve been working on making a 3D skiing game. In my free time, I enjoy competitive programming, cycling, rock climbing, skiing, and playing the piano and saxophone.</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/yijun-zhou.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Yijun Zhou
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:zhouyijun@berkeley.edu">zhouyijun@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I’m Yijun, a sophomore majoring in EECS from Hunan, China. When I'm not shut up inside studying, I will operate my social media account or wander around outside looking for cuisine to eat. Super excited to become the AI this semester feel free to reach out to me for anything!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/yunze-du.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Yunze Du
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:yzdu@berkeley.edu">yzdu@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi there! This is Yunze from Guangzhou, China. My friends also call me Zedd but you will get special attention and appreciation from me if you pronounce my Chinese name correctly. I love specialty coffee, guitar, and the good food from my hometown Shantou :') hmu to chat about any of these!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/zaira-fuentes.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Zaira Fuentes
+        
+        
+          
+            <div class="badge badge-info">she/her/hers</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:zairafuentes@berkeley.edu">zairafuentes@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hello everyone, I am Zaira and this is my second year studying CS. I enjoyed taking this class and I hope I can help you all get through this semester and enjoy the class! In my free time I like hiking, cooking, watching series, and hanging out with friends. Looking forward to working with y’all! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/zee-babar.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Zee Babar
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:zeeman@berkeley.edu">zeeman@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I'm Zee, and I'm a junior transfer majoring in Computer Science(intended) from Davis, CA. CS61A was a challenging course for me, but I learned and developed many skills. I am very excited to share my knowledge and skills with you. Let's have a fun semester. Go Bears!</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+  <div class='row'>
+
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/zekai-wang.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Zekai Wang
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:zekai.wang@berkeley.edu">zekai.wang@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">Hi everyone! I am Zekai (Zach) from Shanghai, China. I took CS 61A during the summer and enjoyed it very much. I am super excited to be an AI this semester. Looking forward to meeting y'all! </li>
+          
+        </ul>
+      </div>
+    </div>
+    
+    <div class="col-sm-6 staffer">
+
+      <div class="col-xs-3 col-sm-12 col-md-3 staffer-img">
+        <img class="img-responsive img-circle center-block" src="https://github.com/Cal-CS-61A-Staff/staff-images/raw/master/fa22/ai/ziqian-luo.jpg">
+      </div>
+      <div class="col-xs-9 col-sm-12 col-md-9">
+        <h3 class="staff-name">
+        
+          Ziqian Luo
+        
+        
+          
+            <div class="badge badge-info">he/him/his</div>
+          
+        
+        </h3>
+        <ul>
+          
+          <li><a href="mailto:ziqian.luo@berkeley.edu">ziqian.luo@berkeley.edu</a></li>
+          
+          
+          <br>
+          <li class="section bio">(: Hi! My name is Ziqian and I'm a junior transfer majoring in Mathematics and Computer Science. It's my first time to serve as an academic intern for CS61A! I hope everyone will have a great semester! :)</li>
+          
+        </ul>
+      </div>
+    </div>
+    
+
+  </div>
+
+
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="weekly.html">Weekly Schedule</a></li>
+            <li><a href="office-hours.html">Office Hours</a></li>
+            <li><a href="staff.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="resources.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="articles/studying.html">Studying Guide</a></li>
+            <li><a href="articles/debugging.html">Debugging Guide</a></li>
+            <li><a href="articles/composition.html">Composition Guide</a></li>
+            <li><a href="articles/pair-programming.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="articles/about.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="articles/about.html#assignments">Assignments</a></li>
+            <li><a href="articles/about.html#exams">Exams</a></li>
+            <li><a href="articles/about.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="assets/js/network_storage.js"></script>
+    <script src="assets/js/storable.js"></script>
+    <script src="assets/js/editor.js"></script>
+    <script src="assets/js/copy-button.js"></script>
+    <script src="assets/js/env-diagram.js"></script>
+    
+  </body>
+</html>
