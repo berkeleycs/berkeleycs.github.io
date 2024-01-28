@@ -1,0 +1,1582 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Project 2&#58; CS61Classify</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <style>
+table {
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    border-collapse:
+    collapse; border-spacing: 0;
+    padding: 10px;
+    align:center;
+}
+
+td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */
+
+th {
+    background: #F3F3F3; /* Light grey background */
+    font-weight: bold; /* Make sure they're bold */
+    padding: 10px;
+}
+
+td {
+    background: #FAFAFA; /* Lighter grey background */
+    text-align: center; /* Center our text */
+    padding: 10px;
+}
+</style>
+
+<h2 id="background">Background</h2>
+<p><strong>Part A Due Thursday, October 1st</strong><br />
+<strong>Part B Due Monday, October 5th</strong></p>
+
+<p>At the end of this project you will have written all RISC-V assembly code
+necessary to run a simple Artificial Neural Network (ANN) on the Venus
+RISC-V simulator.
+In part A you will implement the basic operations such as a vector dot product,
+matrix-matrix multiplication, the argmax and an activation function.
+In part B you will combine these basic functions in order to load a pretrained
+network and execute it to classify handwritten digets from the MNIST benchmark set.</p>
+
+<h3 id="objectives">Objectives</h3>
+
+<ul>
+  <li>TSWBAT (“<strong>T</strong>he <strong>S</strong>tudent <strong>W</strong>ill <strong>B</strong>e <strong>A</strong>ble <strong>T</strong>o”) implement
+numerical computation functions in RISC-V assembly that follow
+calling the convention.</li>
+  <li>TSWBAT call functions in RISC-V assembly.</li>
+  <li>TSWBAT write RISC-V assembly programs that utilize the heap and interact with
+files.</li>
+  <li>TSWBAT write a test suite that covers corner cases and automatically checks
+for the correct operation of the RISC-V functions implemented.</li>
+</ul>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<p>Please follow the directions here to get a repository:
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSe2JEIVWc1HMV-gadLvrL2jM42Zzf3_S3BixjJluRWB2IToBA/viewform?usp=sf_link">https://docs.google.com/forms/d/e/1FAIpQLSe2JEIVWc1HMV-gadLvrL2jM42Zzf3_S3BixjJluRWB2IToBA/viewform?usp=sf_link</a>.</p>
+
+<p>Then, clone your repository locally and add the starter remote</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/61c-student/fa20-proj2-TEAMNAME.git
+<span class="nv">$ </span><span class="nb">cd </span>fa20-proj2-TEAMNAME
+<span class="nv">$ </span>git remote add starter https://github.com/61c-teach/fa20-proj2-starter.git
+</code></pre></div></div>
+
+<p>If you ever want to pull <strong>updated</strong> starter code,
+you’d execute the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull starter master
+</code></pre></div></div>
+
+<h3 id="java-and-python-3-setup">Java and Python 3 Setup</h3>
+
+<p>Your computer needs be able to run some Java and Python 3 scripts for this project.
+Most of your computers should be set up properly from 61A and 61B.
+If not, these <a href="https://cs61a.org/lab/lab00/#install-python-3">CS61A</a> and
+<a href="http://www-inst.eecs.berkeley.edu/~cs61b/fa19/materials/lab/lab1b/lab1b.html">CS61B</a>
+setup instructions should help.
+You are also welcome to work on the hives.</p>
+
+<h2 id="part-a-mathematical-functions">Part A: Mathematical Functions</h2>
+
+<p><strong>Due Thursday, October 1st</strong></p>
+
+<p>In this part, you will implement some of the matrix operations used by neural networks
+These include a <a href="https://en.wikipedia.org/wiki/Dot_product">dot product</a>,
+<a href="https://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a>,
+an element-wise <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">rectifier function (ReLU)</a>,
+and an <a href="https://en.wikipedia.org/wiki/Arg_max">argmax function</a> for vectors.
+But first we will start with a simple <code class="language-plaintext highlighter-rouge">abs</code> function which calculates the
+absolute value of a given integer.</p>
+
+<h3 id="general-advice-and-grading">General Advice and Grading</h3>
+
+<ul>
+  <li>Pay close attention to the function definition in the assembly template.</li>
+  <li>Implement all argument checks required and call <code class="language-plaintext highlighter-rouge">exit2</code> to abort with the
+correct error code.</li>
+  <li>Pay close attention to the <a href="../../../resources/pdf%3Ffile=RISCV_Calling_Convention.pdf.html">calling convention</a>.</li>
+  <li>While the unit tests will run the <a href="http://cs61c.org/resources/venus-reference#calling-convention-checker">calling convention checker</a>
+there are many errors that the automated check might miss.</li>
+  <li>Try to write a unit test for every corner case in the specification that
+you can think of.</li>
+  <li>While the unit tests display how much of your implementation is covered
+by your tests, 100% coverage of your implementation does <strong>not</strong> imply
+that all corner cases of the spec are covered.</li>
+  <li>This semester you will be graded on the quality of your tests,
+for part A, your unit tests should cover 100% of your custom code.</li>
+  <li>For part B, we require 100% coverage for <code class="language-plaintext highlighter-rouge">read_matrix</code> and <code class="language-plaintext highlighter-rouge">write_matrix</code>.</li>
+  <li>The autograder will give you the result of a basic sanity test but will not give you your complete grade.</li>
+  <li>You are responsible for developing any tests you need to make sure that you meet the requirements of the project.</li>
+  <li>Even though we have given you a testing framework which allows for the calling convention feature of Venus
+to run, we still recommend that you write thorough a calling convention test for each function.</li>
+  <li>The autograder is rate limited: each submission consumes a token,
+you will be given 6 tokens; each token will regenerate after twelve hours;
+get started early to limit the number of last-minute resubmissions.</li>
+  <li>If you do not have a token, that submission will not be graded–even after the deadline has passed.</li>
+</ul>
+
+<h3 id="task-0-getting-started-with-the-abs-function">Task 0: Getting Started with the Abs Function</h3>
+
+<p>The <strong>Purpose</strong> of this section is to get you acquainted with the recommended
+workflow using the unit testing framework and the Venus simulator
+to better prepare you to complete this project successfully.
+Follow along with the video linked below or continue reading the written spec.</p>
+
+<p><a href="../../lectures/videos%3Fytvid=Q4E8trPRJHk.html">Task 0: Getting Started with the Abs Function Video</a></p>
+
+<h4 id="running-tests">Running Tests</h4>
+
+<p>We want to start by running all the given sanity tests to verify that they fail since we haven’t
+started implementing anything. In order todo that run the following commands:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>unittests
+python3 <span class="nt">-m</span> unittest unittests.py <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>To see the specific assembly tests that the testing framework has generated <code class="language-plaintext highlighter-rouge">cd assembly</code>
+and view all the different <code class="language-plaintext highlighter-rouge">.s</code> test files directly.</p>
+
+<p>For now let’s remove all the assembly tests and worry just about our tests targeting the <code class="language-plaintext highlighter-rouge">Abs</code> function.
+To remove all tests and rerun just the <code class="language-plaintext highlighter-rouge">Abs</code> function tests run the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> <span class="nt">-rf</span> assembly
+python3 <span class="nt">-m</span> unittest unittests.TestAbs <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p><em>Hint</em>: The command to run the unit tests has two options to keep in mind <code class="language-plaintext highlighter-rouge">unittests.&lt;testName&gt;</code>
+targets a specific suite of tests and <code class="language-plaintext highlighter-rouge">-v</code> triggers verbose output.</p>
+
+<p><em>Note</em>: The unit tests are using the standard <a href="https://docs.python.org/3/library/unittest.html">Python unittest library</a>.</p>
+
+<p>Notice that <code class="language-plaintext highlighter-rouge">test_one</code> fails while <code class="language-plaintext highlighter-rouge">test_zero</code> passes; now let’s debug this function using the Venus Web Interface!</p>
+
+<h4 id="debugging-tests-with-venus-web-interface">Debugging Tests with Venus Web Interface</h4>
+
+<p>Using the Venus web interface, we can step through our assembly code and inspect registers to find out
+why the <code class="language-plaintext highlighter-rouge">test_one</code> for the <code class="language-plaintext highlighter-rouge">Abs</code> function is failing.
+As the first step we must first upload our files to the Venus Web Interface</p>
+
+<h5 id="mounting-repository-to-venus-web-interface">Mounting Repository to Venus Web Interface</h5>
+
+<p>Run the following command from your <strong>local terminal</strong> within the <strong>root</strong> of your project 2 repository</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> tools/venus.jar <span class="nb">.</span> <span class="nt">-dm</span>
+</code></pre></div></div>
+
+<p>When you run it, you should see a Javalin message, launching the server and listening on <code class="language-plaintext highlighter-rouge">http://localhost:6161/</code>
+Then run the following command from your <strong>Venus Web Interface Terminal</strong>.</p>
+
+<p><em>Note</em>: We recommend using the Chrome browser. Other browsers may work but have not been tested.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount <span class="nb">local </span>proj2
+</code></pre></div></div>
+
+<p>This will mount the repository and give you access to all your project files from within the Venus Web Interface to edit,
+run, and debug! Navigate to the Files tab on Venus to see your repositories contents.</p>
+
+<h5 id="alternative-zipping-files-to-upload">(Alternative) Zipping Files to Upload</h5>
+
+<p><em>Use this in case the file mounting does not work on your computer.</em></p>
+
+<p>To see full list of commands supported by Venus you can run <code class="language-plaintext highlighter-rouge">help</code>,
+but we’ve included some of the ones related to zipping below</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">upload</code>: Opens up a window allowing you to pick files from your local machine to upload to Venus</li>
+  <li><code class="language-plaintext highlighter-rouge">unzip &lt;ZIP_FILENAME&gt;</code>: Unzips a <code class="language-plaintext highlighter-rouge">.zip</code> file into the current working directory.</li>
+  <li><code class="language-plaintext highlighter-rouge">zip &lt;ZIP_FILENAME&gt; &lt;FILENAME_1&gt; &lt;FILENAME_2&gt; ... </code>:
+Opens up a window allowing you to download a zip file called <code class="language-plaintext highlighter-rouge">ZIP_FILE_NAME</code>,
+which contains all the specified files and/or folders. Folders are added to the zip file recursively.</li>
+</ul>
+
+<p>When uploading files to the Venus web interface, you’ll want to zip ONLY your <code class="language-plaintext highlighter-rouge">src</code>, <code class="language-plaintext highlighter-rouge">inputs</code>,
+and <code class="language-plaintext highlighter-rouge">unittests/assembly</code> directories locally, use the <code class="language-plaintext highlighter-rouge">upload</code> in the Venus terminal to upload that zip file,
+and then <code class="language-plaintext highlighter-rouge">unzip</code> to retrieve all your project files.</p>
+
+<p>Alternatively, you can upload individual files to work with.
+However, you’ll need to make sure the directory structure is the same as the starter repo,
+or be prepared to edit the relative paths given to you in the starter code for inputs and <code class="language-plaintext highlighter-rouge">.import</code> statements.</p>
+
+<p><strong>Note</strong>: We <strong>HIGHLY</strong> recommend that you regularly copy the changes you’ve made in the Venus web interface
+to your local machine to save them. If you accidentally close the browser window or run <code class="language-plaintext highlighter-rouge">edit</code> before running <code class="language-plaintext highlighter-rouge">save</code>,
+you could lose a large amount of progress if you do not enable ‘Save on Close’.
+This is one of the primary reasons we recommend running with the .jar file for most of your development,
+and only turning to Venus to debug one specific file at a time.**</p>
+
+<p><strong>Note2</strong>: If you do use ‘Save on Close’ (which you all should),
+be aware that there is a limit to the size of its state which it can store (limited by your browsers localStorage).
+This is why we say you should only upload the specified directories.**</p>
+
+<h4 id="debugging-test_one-on-venus-web-interface">Debugging <code class="language-plaintext highlighter-rouge">test_one</code> on Venus Web Interface</h4>
+
+<p>Navigate to the <strong>Files</strong> tab on Venus to see your files, and navigate to the <code class="language-plaintext highlighter-rouge">abs.s</code> file in <code class="language-plaintext highlighter-rouge">proj2/src/abs.s</code>
+and click <strong>edit</strong>.</p>
+
+<p>Then using an <code class="language-plaintext highlighter-rouge">ebreak</code> statement set a breakpoint right <strong>above</strong> the command <code class="language-plaintext highlighter-rouge">mv a0, zero</code></p>
+
+<p><em>Note</em>: This is one out of two ways to set breakpoints in Venus.
+The other way is to click on any instruction (besides <code class="language-plaintext highlighter-rouge">ebreak</code>) in the simulator view.
+If you click on an <code class="language-plaintext highlighter-rouge">ebreak</code> instruction, it will <strong>disable</strong> the breakpoint instead.
+One scenario where this comes in handy is when you added an <code class="language-plaintext highlighter-rouge">ebreak</code> inside a loop
+and - after observing the first few iterations - want to disable it to let the loop finish
+executing.</p>
+
+<p>Now before running <code class="language-plaintext highlighter-rouge">test_one</code>, go back to the <strong>Files</strong> tab and hit <strong>Save</strong> on the <code class="language-plaintext highlighter-rouge">abs.s</code> file.
+After saving, navigate to <code class="language-plaintext highlighter-rouge">unittests/assembly/TestAbs_test_one_test.s</code> and click <strong>VDB</strong>.
+This will launch you into the <strong>Simulator</strong> tab!</p>
+
+<p><em>Note</em>: When the editor tab is active, you can also use <code class="language-plaintext highlighter-rouge">Ctrl + S</code> to save the open file.</p>
+
+<p>Now using your basic Venus knowledge from lab3 you can run and step through the test to see <code class="language-plaintext highlighter-rouge">a0</code>
+being overridden from a <code class="language-plaintext highlighter-rouge">1</code> to a <code class="language-plaintext highlighter-rouge">0</code>.</p>
+
+<h4 id="editing-the-abs-function-to-pass-test_one">Editing the Abs Function to pass <code class="language-plaintext highlighter-rouge">test_one</code></h4>
+
+<p>Let’s <strong>remove</strong> the statement <code class="language-plaintext highlighter-rouge">mv a0, zero</code> from <code class="language-plaintext highlighter-rouge">abs.s</code> and <strong>rerun</strong> <code class="language-plaintext highlighter-rouge">test_one</code>.</p>
+
+<p>Observe that <code class="language-plaintext highlighter-rouge">test_one</code> indeed does pass after removing the one line of code;
+however, the absolute value function is still incorrect!
+This toy example is to show that <strong>your code is only as good as how thorough your test cases are</strong>.</p>
+
+<h4 id="adding-more-tests-for-abs-function">Adding More Tests for Abs Function</h4>
+
+<p>Let’s add another test to check if the function works with negative values.
+To do this <strong>open</strong> the file <code class="language-plaintext highlighter-rouge">unittests/unittest.py</code></p>
+
+<p><strong>Add</strong> this test underneath <code class="language-plaintext highlighter-rouge">class TestAbs(TestCase)</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_minus_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">AssemblyTest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">"abs.s"</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">input_scalar</span><span class="p">(</span><span class="s">"a0"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="s">"abs"</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">check_scalar</span><span class="p">(</span><span class="s">"a0"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">t</span><span class="p">.</span><span class="n">execute</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><em>Note</em>: By modifying just <code class="language-plaintext highlighter-rouge">t.input_scalar</code> and <code class="language-plaintext highlighter-rouge">t.check_scalar</code> we can build a brand new test!</p>
+
+<p>Now <strong>rerun</strong> just the <code class="language-plaintext highlighter-rouge">Abs</code> Function tests to verify that this test now fails while <code class="language-plaintext highlighter-rouge">test_zero</code> and <code class="language-plaintext highlighter-rouge">test_one</code> pass.
+This is an important step in test driven development to make sure that the tests we wrote fail before implementing
+the function:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestAbs <span class="nt">-v</span>
+</code></pre></div></div>
+
+<h4 id="editing-abs-function-to-pass-test_minus_one">Editing Abs Function to pass <code class="language-plaintext highlighter-rouge">test_minus_one</code></h4>
+
+<p><strong>Insert</strong> the following code into <code class="language-plaintext highlighter-rouge">abs.s</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    # branch if positive
+    bge a0, zero, done
+    # invert a if negative
+    sub a0, zero, a0
+</code></pre></div></div>
+
+<p>Now all <code class="language-plaintext highlighter-rouge">Abs</code> Function tests should pass!
+Let this be a warning to write good tests and produce well commented code. Happy coding!</p>
+
+<h3 id="background-knowledge">Background Knowledge</h3>
+<h4 id="matrix-format">Matrix Format</h4>
+<p>In this project, all two-dimensional matrices will be stored as
+one-dimensional arrays in
+<a href="https://en.wikipedia.org/wiki/Row-_and_column-major_order">row-major order</a>.
+Row-major order stores all values in a row of a matrix consecutively
+and concatenates all row vectors into a single 1-D array starting from the
+top-most row.
+The alternative column-major order stores all values in a column of a matrix 
+consecutively and concatenates all columns vectors into a single 1-D array
+starting from the left-most column.
+Our choice of row-major order follows the convention of most C/C++ programs.</p>
+
+<p><img src="row_major.png" alt="" /></p>
+
+<h4 id="array-strides">Array Strides</h4>
+<p>The <a href="https://en.wikipedia.org/wiki/Stride_of_an_array">stride of an array</a>
+is the number of bytes between the beginning of
+consecutive array elements.
+So far all arrays we have worked with had unit stride, meaning that there
+is not gap between consecutive elements and the stride is <code class="language-plaintext highlighter-rouge">sizeof(element)</code>.</p>
+
+<p>In this project, all strides will be given in <em>multiples of the element size</em>
+instead of bytes.
+Thus the unit stride is just <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+<p>We are going to use the stride to define column vectors in our matrix
+(stored in row-major order) without having to copy any elements.
+Since row elements are stored consecutively, a row vector is just an
+array with unit stride.
+However, if we want to get the column vector, we need to skip over the end of
+the current row and the beginning of the next row to get to the next element
+in the column. Thus the stride will be the number of elements in a row.</p>
+
+<p>Here is a practical example: We have the vector <code class="language-plaintext highlighter-rouge">int *a</code> with 3 elements.</p>
+<ul>
+  <li>If the stride is 1, then our vector elements are <code class="language-plaintext highlighter-rouge">*(a)</code>, <code class="language-plaintext highlighter-rouge">*(a + 1)</code>,
+and <code class="language-plaintext highlighter-rouge">*(a + 2)</code>, in other words <code class="language-plaintext highlighter-rouge">a[0]</code>, <code class="language-plaintext highlighter-rouge">a[1]</code>, and <code class="language-plaintext highlighter-rouge">a[2]</code>.</li>
+  <li>However, if our stride is 4, then our elements are at <code class="language-plaintext highlighter-rouge">*(a)</code>, <code class="language-plaintext highlighter-rouge">*(a + 4)</code>,
+and <code class="language-plaintext highlighter-rouge">*(a + 8)</code> or in other words <code class="language-plaintext highlighter-rouge">a[0]</code>, <code class="language-plaintext highlighter-rouge">a[4]</code>, and <code class="language-plaintext highlighter-rouge">a[8]</code>.</li>
+</ul>
+
+<p>To summarize: In C code, to access the <code class="language-plaintext highlighter-rouge">i</code>th element of a vector
+<code class="language-plaintext highlighter-rouge">int *a</code> with stride <code class="language-plaintext highlighter-rouge">s</code>, we use <code class="language-plaintext highlighter-rouge">*(a + i * s)</code>, or <code class="language-plaintext highlighter-rouge">a[i * s]</code>.
+We leave it up to you to translate this memory access pattern into RISC-V
+for the dot product in task 3.</p>
+
+<h3 id="task-1-relu">Task 1: ReLU</h3>
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">relu</code> function in <code class="language-plaintext highlighter-rouge">src/relu.s</code> which takes in a 1D vector and
+applies the <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">rectifier function</a>
+on each element, modifying it in place.
+This is equivalent to setting every negative value in the vector to 0.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">relu.s</code> file.</p>
+
+<p><em>Note</em>: Our <code class="language-plaintext highlighter-rouge">relu</code> function operates on a 1-D vector, not a 2-D matrix.
+Since <code class="language-plaintext highlighter-rouge">relu</code> works on an element by element basis, independent of the
+position of that element in the matrix, we are able to treat our 2-D matrix
+which is stored in row-major format as a 1-D vector.</p>
+
+<p><em>Hint</em>: You can run the unit test that we provide you for this task by
+running the following command in the <code class="language-plaintext highlighter-rouge">unittest</code> directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestRelu <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p><em>Hint</em>: to achieve 100% test coverage you will need to add your own tests to
+cover all the corner cases in the spec. Think carefully about every branch
+in your implementation.</p>
+
+<h3 id="task-2-argmax">Task 2: ArgMax</h3>
+<p>The <a href="http://cs61c.org/fa20/projects/proj2/(https://en.wikipedia.org/wiki/Arg_max)">argmax</a>
+function returns the index of the largest element in a vector.
+It will be used at the end of our neural network to select the most likely
+classification.</p>
+
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">argmax</code> function in <code class="language-plaintext highlighter-rouge">src/argmax.s</code> which takes in a 1D vector
+and returns the index of the largest element.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">argmax.s</code> file.</p>
+
+<p><em>Hint</em>: You can run the unit test that we provide you for this task by
+running the following command in the <code class="language-plaintext highlighter-rouge">unittest</code> directory. Fill in the <code class="language-plaintext highlighter-rouge">TODOs</code> in <code class="language-plaintext highlighter-rouge">unittests.py</code> to make it work:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestArgmax <span class="nt">-v</span>
+</code></pre></div></div>
+
+<h3 id="task-31-dot-product">Task 3.1: Dot Product</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Dot_product">dot product</a>
+of two vectors \(a\) and \(b\) is defined as
+\(dot(a, b) = \sum_{i=0}^{n-1} a_ib_i = a_0 * b_0 + a_1 * b_1 + \cdots +  a_{n-1} * b_{n-1}\),
+where \(a_i\) is the \(i\)th element of \(a\).</p>
+
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">dot</code> function in <code class="language-plaintext highlighter-rouge">src/dot.s</code> which takes in two vectors
+and returns their dot product.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">dot.s</code> file.</p>
+
+<p><em>Note</em>: This function takes in the stride for each vector as an argument.
+Make sure you’re considering this when calculating your memory addresses.
+Consider re-reading the section on <a href="index.html#array-strides">array strides</a> in the
+background materials.</p>
+
+<p><em>Note</em>: We do not expect you to handle overflow when multiplying.
+This means you will not need to use the <code class="language-plaintext highlighter-rouge">mulh</code> instruction.</p>
+
+<p><em>Note</em>: keep in mind that - like in C - there is no way for the function to
+verify that the vector length argument actually matches the size of memory allocated
+for the vector.</p>
+
+<h4 id="testing-dot-product">Testing: Dot Product</h4>
+
+<p>You can run the unit test that we provide you for this task by
+running the following command in the <code class="language-plaintext highlighter-rouge">unittest</code> directory.
+Fill in the <code class="language-plaintext highlighter-rouge">TODOs</code> in <code class="language-plaintext highlighter-rouge">unittests.py</code> to make it work:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestDot <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>A basic test provides the <code class="language-plaintext highlighter-rouge">dot</code> function with two vectors
+<code class="language-plaintext highlighter-rouge">v0</code> and <code class="language-plaintext highlighter-rouge">v1</code> of size <code class="language-plaintext highlighter-rouge">9</code> and unit stride. We thus expect the following
+result:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>v0 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+v1 = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+dot(v0, v1) = 1 * 1 + 2 * 2 + ... + 9 * 9 = 285
+</code></pre></div></div>
+<p>Implement this test using the methods provided by the <code class="language-plaintext highlighter-rouge">AssemblyTest</code> class.</p>
+
+<p>Now fill in the <code class="language-plaintext highlighter-rouge">test_stride</code> function.
+What should happen if you change the length of the vectors to 3 and
+the stride of the second vector <code class="language-plaintext highlighter-rouge">v1</code> to 2,
+without changing the values in static memory?
+Now, the vectors contain the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>v0 = [1, 2, 3]
+v1 = [1, 3, 5]
+dot(v0, v1) = 1 * 1 + 2 * 3 + 3 * 5 = 22
+</code></pre></div></div>
+
+<p><em>Note</em>:  <code class="language-plaintext highlighter-rouge">v1</code> now has stride 2, so we skip over elements in memory
+when calculating the dot product.
+However, the pointer <code class="language-plaintext highlighter-rouge">v1</code> still points to the same place as before:
+the start of the sequence of integers 1 to 9 in memory.</p>
+
+<p><em>Hint</em>: as before, you will need to add multiple test to achieve 100% coverage.</p>
+
+<h3 id="task-32-matrix-multiplication">Task 3.2: Matrix Multiplication</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a>
+of two matrices \(A\) and \(B\) results in the output matrix \(C = AB\),
+where \(C[i][j]\) is equal to the dot product of the \(i\)-th row of \(A\)
+and the \(j\)-ith column of \(B\).</p>
+
+<p><em>Note</em>: If the dimensions of \(A\) are \((n * m)\),
+and the dimensions of \(B\) are \((m * k)\),
+then the dimensions of \(C\) must be \((n * k)\).</p>
+
+<p><em>Note</em>: Unlike integer multiplication, matrix multiplication is not commutative, \(AB \neq BA\).</p>
+
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">matmul</code> function in <code class="language-plaintext highlighter-rouge">src/matmul.s</code> which takes in
+two matrices, <code class="language-plaintext highlighter-rouge">m0</code> and <code class="language-plaintext highlighter-rouge">m1</code> in row-major format and multiplies them,
+storing the resulting matrix <code class="language-plaintext highlighter-rouge">C</code> in pre-allocated memory.
+You must use the <code class="language-plaintext highlighter-rouge">dot</code> function from the previous task to calculate
+each entry of the result matrix.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">matmul.s</code> file.</p>
+
+<p><em>Note</em>: <code class="language-plaintext highlighter-rouge">m0</code> is the left matrix, and <code class="language-plaintext highlighter-rouge">m1</code> is the right matrix.</p>
+
+<p><em>Hint</em>: The stride for row vectors will be different than the stride for
+column vectors when calling the <code class="language-plaintext highlighter-rouge">dot</code> function.
+Consider re-reading the section on <a href="index.html#array-strides">array strides</a> in the
+background materials.</p>
+
+<h4 id="testing-matrix-multiplication">Testing: Matrix Multiplication</h4>
+
+<p>We only provide a skeleton test for matrix multiplication. By now you should
+be familiar with how to use the testing framework.</p>
+
+<p>You can run the unit test by running the following command in the <code class="language-plaintext highlighter-rouge">unittest</code> directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestMatmul <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p><em>Hint</em>: as before, you will need to add multiple test to achieve 100% coverage.</p>
+
+<h3 id="submitting-your-code">Submitting Your Code</h3>
+
+<p>Please submit using Gradescope to Project 2A,
+using the GitHub submission option to ensure that your files are in the right place.</p>
+
+<p><em>Note</em>: you should not add any <code class="language-plaintext highlighter-rouge">.import</code> statements to the starter code.
+For example, when the autograder is importing <code class="language-plaintext highlighter-rouge">matmul.s</code>, it will also import
+<code class="language-plaintext highlighter-rouge">dot.s</code> and <code class="language-plaintext highlighter-rouge">utils.s</code>, so your <code class="language-plaintext highlighter-rouge">matmul.s</code> file itself should never
+contain any <code class="language-plaintext highlighter-rouge">.import</code> statements.</p>
+
+<p><em>Note</em>: also make sure to not have any <code class="language-plaintext highlighter-rouge">ecall</code> instructions in your code.
+Use the functions we provide in <code class="language-plaintext highlighter-rouge">utils.s</code>.</p>
+
+<p><em>Hint</em>: make sure to consult the <a href="index.html#general-advice-and-grading">general advice and grading</a>
+section if you want to improve your submission.</p>
+
+<h2 id="part-b-file-operations-and-main">Part B: File Operations and Main</h2>
+
+<p><strong>Due Monday, October 5th</strong></p>
+
+<p>In this part, you will implement functions to read matrices from and
+write matrices to binary files.
+Then you will combine all individual functions to run a pre-trained MNIST
+digit classifier.</p>
+
+<h3 id="background-knowledge-1">Background Knowledge</h3>
+
+<h3 id="neural-networks">Neural Networks</h3>
+
+<p>At a basic level, a neural networks tries to approximate a (non-linear) function that maps your input into a desired output. A basic neuron consists of a weighted linear combination of the input, followed by a non-linearity – for example, a threshold. Consider the following neuron, which implements the logical <code class="language-plaintext highlighter-rouge">AND</code> operation:</p>
+
+<p><img src="neuron.png" alt="" /></p>
+
+<p>It is easy to see that for \(A=0\), \(B=0\), the linear combination \(0*0.6 + 0*0.6 = 0\), which is less than the threshold of 1 and will result in a 0 output. With an input \(A=0\), \(B=1\) or \(A=1\), \(B=0\) the linear combination will results in \(1*0.6 + 0*0.6 = 0.6\), which is less than 1 and result in a 0 output. Similarly, \(A=1\), \(B=1\) will result in \(1*0.6+1*0.6=1.2\), which is greater than the threshold and will result in a 1 output! What is interesting is that the simple neuron operation can also be described as an inner product between the vector \([A,B]^T\) and the weights vector \([0.6,0.6]^T\) followed by as thresholding, non-linear operation.</p>
+
+<p>More complex functions can not be described by a simple neuron alone. We can extend the system into a network of neurons, in order to approximate the complex functions. For example, the following 2 layer network approximates the logical function <code class="language-plaintext highlighter-rouge">XOR</code>:</p>
+
+<p><img src="XOR.png" alt="" /></p>
+
+<p>The above is a 2 layer network. The network takes 2 inputs, computes 2 intemediate values, and finally computes a single final output.</p>
+
+<p>It can be written as matrix multiplications with matrices <code class="language-plaintext highlighter-rouge">m_0</code> and <code class="language-plaintext highlighter-rouge">m_1</code> with thresholding operations in between as shown below:</p>
+
+<p><img src="mtx.png" alt="" /></p>
+
+<p>Convince yourself that this implements an <code class="language-plaintext highlighter-rouge">XOR</code> for the appropriate inputs!</p>
+
+<p>You are probably wondering how the weights of the network were determined? This is beyond the scope of this project, and we would encourage you to take advanced classes in numerical linear algebra, signal processing, machine learning and optimization. We will only say that the weights can be trained by giving the network pairs of correct inputs and outputs and changing the weights such that the error between the outputs of the network and the correct outputs is minimized. Learning the weights is called: “Training”. Using the weights on inputs is called “Inference”. We will only perform inference, and you will be given weights that were pre-trained by your dedicated TA’s.</p>
+
+<h3 id="handwritten-digit-classification">Handwritten Digit Classification</h3>
+
+<p>In this project we will implement a similar, but slightly more complex network
+which is able to classify handwritten digits.
+As inputs, we will use the <a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> data set,
+which is a dataset of 60,000 28x28 images containing handwritten digits
+ranging from 0-9.
+We will treat these images as “flattened” input vectors of size 784 (<code class="language-plaintext highlighter-rouge">= 28 * 28</code>).
+In a similar way to the example before, we will perform matrix multiplications
+with pre-trained weight matrices <code class="language-plaintext highlighter-rouge">m_0</code> and <code class="language-plaintext highlighter-rouge">m_1</code>.
+Instead of thresholding we will use two different non-linearities:
+The <code class="language-plaintext highlighter-rouge">ReLU</code> and <code class="language-plaintext highlighter-rouge">ArgMax</code> functions. Details will be provided in
+descriptions of the individual tasks.</p>
+
+<p><img src="MNIST.png" alt="" /></p>
+
+<h4 id="matrix-file-format">Matrix File Format</h4>
+
+<p>We will use a custom binary format to store the size and integer values of a matrix.
+We also define a plaintext representation and provide a <code class="language-plaintext highlighter-rouge">convert.py</code> script
+in the <code class="language-plaintext highlighter-rouge">tools</code> directory which allows you to translate between the two formats:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">python3 convert.py file.bin file.txt --to-ascii</code> to go from binary to plaintext</li>
+  <li><code class="language-plaintext highlighter-rouge">python3 convert.py file.txt file.bin --to-binary</code> to go from plaintext to binary</li>
+</ul>
+
+<p><em>Note</em>: the plaintext format is useful for you to get a human readable representation
+of the matrices while the binary format will be used by your RISC-V assembly
+code to load and store matrices.</p>
+
+<h5 id="plaintext-format">Plaintext Format</h5>
+<p>The first line of the plaintext file will contain two integers,
+representing number of rows and columns of the matrix.
+Every line afterwards is a row of the matrix.
+For example, a plaintext file containing a 3x3 matrix would look like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3 3
+1 2 3
+4 5 6
+7 8 9
+
+</code></pre></div></div>
+<p><em>Note</em>: a newline is required after the last row of the matrix.</p>
+
+<h5 id="binary-format">Binary Format</h5>
+<p>The first 8 bytes of the binary file represent two 4 byte integers.
+These integers are the number of rows and columns of the matrix.
+Every 4 following bytes represents an integer that is an element of the matrix,
+in row-major order. There are no gaps between elements.
+The number of elements must always correspond to the product of number of rows
+and number of columns.
+The integers are stores in <em>little-endian</em> format. We elaborate on this
+bellow.</p>
+
+<p><em>Note</em>: The size of a MxN matrix stored in this format is <code class="language-plaintext highlighter-rouge">sizeof(int) * (2 + m*n)</code>.</p>
+
+<h5 id="viewing-binary-files">Viewing Binary Files</h5>
+<p>In order to view arbitrary binary files on the command line we recommend the <code class="language-plaintext highlighter-rouge">xxd</code> command.
+Its default functionality is to output the raw bits of the file in a hex representation.</p>
+
+<p>For example, let’s say the plaintext example in the previous section is stored in
+<code class="language-plaintext highlighter-rouge">file.txt</code> in the main directory.
+We can run <code class="language-plaintext highlighter-rouge">python convert.py file.txt file.bin --to-binary</code>
+to convert it to a binary format, then <code class="language-plaintext highlighter-rouge">xxd file.bin</code>, which should print the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00000000: 0300 0000 0300 0000 0100 0000 0200 0000  ................
+00000010: 0300 0000 0400 0000 0500 0000 0600 0000  ................
+00000020: 0700 0000 0800 0000 0900 0000            ............
+</code></pre></div></div>
+<p>If you interpret this output 4 bytes at a time (equivalent to 8 hex digits)
+in little-endian order (see below), you’ll see that they correspond to
+the values in the plaintext file.
+Don’t forget that the first and second 4 bytes are integers representing the dimensions
+and the rest are integer elements of the matrix.</p>
+
+<p>Please try out the above example by generating the <code class="language-plaintext highlighter-rouge">file.txt</code>,
+running <code class="language-plaintext highlighter-rouge">convert.py</code> and inspecting the result with <code class="language-plaintext highlighter-rouge">xxd</code>.</p>
+
+<p><em>Note</em>: while you can also use the <code class="language-plaintext highlighter-rouge">hexdump</code> program to inspect bytes,
+the ordering/endianness of bytes will be different. In order to keep
+things simple, <code class="language-plaintext highlighter-rouge">xxd</code> will be the only tool supported by TAs in office
+hours and signoffs.</p>
+
+<p><em>Note</em>: the simple <code class="language-plaintext highlighter-rouge">xxd</code> command also works on the Venus web interface shell.</p>
+
+<h5 id="endianness">Endianness</h5>
+<p>It is important to note that the bytes are in <em>little-endian</em> order.
+This means the least significant byte is placed at the lowest memory address.
+For files, the start of the file is considered the “lower address”.
+This relates to how we read files into memory,
+and the fact that the start/first element of an array is usually at the lowest memory address.</p>
+
+<p>RISC-V uses little-endian by default, and our files are all little-endian as well.
+In general you should not have to worry about endianness when writing code.
+But it is important to keep endianess in mind when debugging and inspecting
+bytes in memory or in a file (e.g., using <code class="language-plaintext highlighter-rouge">xxd</code>).</p>
+
+<p>This screenshot from Venus shows how the integer <code class="language-plaintext highlighter-rouge">0x0A0B0C0D</code> is stored in memory:</p>
+
+<p><img src="little_endian.png" alt="" /></p>
+
+<h4 id="ecalls-and-utilss">Ecalls and Utils.s</h4>
+<p>The <code class="language-plaintext highlighter-rouge">ecall</code> instruction is a special command in RISC-V,
+and corresponds to a environment/system call.
+We have created helper functions in <code class="language-plaintext highlighter-rouge">src/utils.s</code> that wrap around
+the various different ecalls for you to use.
+In the project you must <strong>never make ecalls directly</strong> in you own code.
+Always use the helper functions.</p>
+
+<p><strong><em>ecalls are expensive and should be minimally used for efficiency!</em></strong></p>
+
+<p>All helper functions are documented in inline comments in <code class="language-plaintext highlighter-rouge">utils.s</code>,
+alongside their arguments and return values. Take some time to look
+through <code class="language-plaintext highlighter-rouge">utils.s</code> to familizarize yourself with them. <strong>You will need to use
+them in the following tasks.</strong></p>
+
+<h4 id="file-operations">File Operations</h4>
+<p>In this section we are going to provide some more details on the helper
+functions that are used to access files.
+You will need to use them in order to implement the <code class="language-plaintext highlighter-rouge">read_matrix</code>
+and <code class="language-plaintext highlighter-rouge">write_matrix</code> functions.</p>
+
+<h5 id="fopen"><code class="language-plaintext highlighter-rouge">fopen</code></h5>
+<p>Opens a file that we can then read and/or write to, depending on the permission bit we provide.
+Returns a file descriptor, which is a unique integer tied to the file
+Must be called on a file before any other operations can be done on it.</p>
+
+<ul>
+  <li><strong>Arguments:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a1</code> is a pointer to a string containing the filename of the file to open</li>
+      <li><code class="language-plaintext highlighter-rouge">a2</code> is an integer denoting the permissions we open the file with.
+For example, we can open the file with read permissions, which prevents us from writing to it.
+For this project, we only really care about a few basic permission bits: <code class="language-plaintext highlighter-rouge">0</code>,
+which corresponds to <code class="language-plaintext highlighter-rouge">r</code> for read only permission, and <code class="language-plaintext highlighter-rouge">1</code> which corresponds to <code class="language-plaintext highlighter-rouge">w</code> for write only permission.
+<em>Note</em>: <code class="language-plaintext highlighter-rouge">w</code> will overwrite the file if it already exists, and create it if it doesn’t.</li>
+    </ul>
+  </li>
+  <li><strong>Return Values</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a0</code> is a file descriptor, which is a unique integer tied to the file.
+We will call future file-related functions on this file descriptor,
+so we know which opened file we’re reading/writing/closing.
+On failure, <code class="language-plaintext highlighter-rouge">a0</code> is set to <code class="language-plaintext highlighter-rouge">-1</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="fread"><code class="language-plaintext highlighter-rouge">fread</code></h5>
+<p>Reads a given number of bytes from a file into a buffer, which is a preallocated chunk of memory to store the bytes.
+Note that repeated reads will read consecutive bytes from the file.
+For example, two <code class="language-plaintext highlighter-rouge">fread</code>s of 8 bytes on a file will read the first 8 bytes and then the second 8 bytes.
+It will not read the same 8 bytes twice.</p>
+
+<ul>
+  <li><strong>Arguments:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a1</code> is the file descriptor of the file we want to read from, previously returned by <code class="language-plaintext highlighter-rouge">fopen</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">a2</code> is a pointer to the buffer that we’re going to read the bytes from the file into.
+This must be an appropriate amount of memory that was allocated before calling the function,
+and passed in as a pointer.</li>
+      <li><code class="language-plaintext highlighter-rouge">a3</code> is the number of bytes to read from the file.</li>
+    </ul>
+  </li>
+  <li><strong>Return Values</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a0</code> is the number of bytes actually read from the file.
+  If the number of bytes actually read differs from the number of bytes specified in the input,
+  then we either hit the end of the file or there was an error.</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="fwrite"><code class="language-plaintext highlighter-rouge">fwrite</code></h5>
+<p>Writes a given number of elements of a given size.
+Like <code class="language-plaintext highlighter-rouge">fread</code>, subsequent writes to the same file do not overlap, but are rather appended to each other.
+Note that unlike <code class="language-plaintext highlighter-rouge">fread</code>, we don’t pass in the total number of bytes but rather the total number
+of elements and the size of each element in bytes. We can multiply the two to find the total number of bytes written.</p>
+
+<p>Additionally, note that our writes aren’t actually saved until we run <code class="language-plaintext highlighter-rouge">fclose</code> or <code class="language-plaintext highlighter-rouge">fflush</code>.</p>
+<ul>
+  <li><strong>Arguments:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a1</code> is the file descriptor of the file we want to write to, previously returned by <code class="language-plaintext highlighter-rouge">fopen</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">a2</code> is a pointer to a buffer containing what we want to write to the file.</li>
+      <li><code class="language-plaintext highlighter-rouge">a3</code> is the number of elements to write out of the buffer</li>
+      <li><code class="language-plaintext highlighter-rouge">a4</code> is the size of each buffer element in bytes</li>
+    </ul>
+  </li>
+  <li><strong>Return Values</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a0</code> is the number of elements actually written to the file.
+If <code class="language-plaintext highlighter-rouge">a0 != a3</code>, then we either hit the end of the file or there was an error.</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="fclose"><code class="language-plaintext highlighter-rouge">fclose</code></h5>
+<p>Closes the file once we’re done with it, saving any writes we’ve made to it.</p>
+
+<ul>
+  <li><strong>Arguments:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a1</code> is the file descriptor of the file we want to close to, previously returned by <code class="language-plaintext highlighter-rouge">fopen</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Return Values</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">a0</code> is 0 on success, and -1 otherwise.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="task-1-read-matrix">Task 1: Read Matrix</h3>
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">read_matrix</code> function in <code class="language-plaintext highlighter-rouge">src/read_matrix.s</code> which uses the file operations we described above
+to read a binary matrix file into memory.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">read_matrix.s</code> file.
+Pay special attention to returning the correct exit codes if any file operation fails or
+doesn’t return the expected number of bytes.</p>
+
+<p><em>Note</em>: unique exit codes will help you debug your solution by pointing you to where the program exited.</p>
+
+<p><em>Hint</em>: Recall that the first 8 bytes contains the two 4 byte dimensions of the matrix,
+which will tell you how many bytes to read from the rest of the file.
+Additionally, recall that the binary matrix file is already in row-major order.</p>
+
+<p><em>Hint</em>: You’ll need to allocate memory for the matrix in this function as well.
+This will require calls to <code class="language-plaintext highlighter-rouge">malloc</code> , which is in <code class="language-plaintext highlighter-rouge">util.s</code> and also described in the background section above.</p>
+
+<p><em>Note</em>: RISC-V only allows for <code class="language-plaintext highlighter-rouge">a0</code> and <code class="language-plaintext highlighter-rouge">a1</code> to be return registers,
+and our function needs to return three values:
+The pointer to the matrix in memory, the number of rows, and the number of columns.
+We get around this by having two int pointers passed in as arguments.
+We set these integers to the number of rows and columns, and return just the pointer to the matrix.</p>
+
+<h4 id="testing-read-matrix">Testing: Read Matrix</h4>
+<p>We only provide a skeleton test. By now you should be familiar with how to use the testing framework.</p>
+
+<p>You can run the unit test by running the following command in the <code class="language-plaintext highlighter-rouge">unittest</code> directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestReadMatrix <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p><em>Hint</em>: as before, you will need to add multiple test to achieve 100% coverage.</p>
+
+<p><em>Hint</em>: You can use the <code class="language-plaintext highlighter-rouge">fail</code> argument to the <code class="language-plaintext highlighter-rouge">execute</code> method in order to make system functions fail.
+This works for <code class="language-plaintext highlighter-rouge">fopen</code>, <code class="language-plaintext highlighter-rouge">fclose</code>, <code class="language-plaintext highlighter-rouge">fread</code>, <code class="language-plaintext highlighter-rouge">fwrite</code> and <code class="language-plaintext highlighter-rouge">malloc</code>.</p>
+
+<h3 id="task-2-write-matrix">Task 2: Write Matrix</h3>
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">write_matrix</code> function in <code class="language-plaintext highlighter-rouge">src/write_matrix.s</code> which uses the file operations we described above
+to write from memory to a binary matrix file.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">write_matrix.s</code> file.
+Pay special attention to returning the correct exit codes if any file operation fails or
+doesn’t return the expected number of bytes.</p>
+
+<h4 id="testing-write-matrix">Testing: Write Matrix</h4>
+<p>We only provide a skeleton test. By now you should be familiar with how to use the testing framework.</p>
+
+<p>You can run the unit test by running the following command in the <code class="language-plaintext highlighter-rouge">unittest</code> directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> unittest unittests.TestWriteMatrix <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p><em>Hint</em>: as before, you will need to add multiple test to achieve 100% coverage.</p>
+
+<p><em>Hint</em>: You can use the <code class="language-plaintext highlighter-rouge">fail</code> argument to the <code class="language-plaintext highlighter-rouge">execute</code> method in order to make system functions fail.
+This works for <code class="language-plaintext highlighter-rouge">fopen</code>, <code class="language-plaintext highlighter-rouge">fclose</code>, <code class="language-plaintext highlighter-rouge">fread</code>, <code class="language-plaintext highlighter-rouge">fwrite</code> and <code class="language-plaintext highlighter-rouge">malloc</code>.</p>
+
+<h3 id="task-3-putting-it-all-together">Task 3: Putting it all Together</h3>
+<p><strong>Implement</strong> the <code class="language-plaintext highlighter-rouge">classify</code> function in <code class="language-plaintext highlighter-rouge">src/classify.s</code>.
+Be careful to follow the specification in the header comment in the <code class="language-plaintext highlighter-rouge">classify.s</code> file.
+Pay special attention to returning the correct exit codes if any file operation fails or
+doesn’t return the expected number of bytes and the expected printing behavior.</p>
+
+<p>This will bring together everything you’ve written so far,
+and create a basic sequence of functions that will allow you
+to classifiy the preprocessed MNIST inputs using the pretrained matrices we’ve provided.
+You may need to malloc space when reading in matrices and computing the layers of the network,
+but remember to always free all data allocated at the end of this process.
+More information about the <code class="language-plaintext highlighter-rouge">free</code> function is available in <code class="language-plaintext highlighter-rouge">utils.s</code> and the background section above.
+The classify function will be wrapped by the <code class="language-plaintext highlighter-rouge">main.s</code> file meaning you still must follow calling convention!
+The <code class="language-plaintext highlighter-rouge">main.s</code> file, in what we gave you, is a dummy main which will directly call your <code class="language-plaintext highlighter-rouge">classify</code> function
+(and pass in the command line arguments) though it could always do more than that! You should view the <code class="language-plaintext highlighter-rouge">classify</code> function
+as a library function which may be called by a program multiple times to perform classifications on different inputs so
+you should be very careful to adhear to its specification.</p>
+
+<h4 id="command-line-arguments-and-file-paths">Command Line Arguments and File Paths</h4>
+<p>The filepaths for the <code class="language-plaintext highlighter-rouge">input</code>, <code class="language-plaintext highlighter-rouge">m0</code>, <code class="language-plaintext highlighter-rouge">m1</code>, and the <code class="language-plaintext highlighter-rouge">output</code> to write to will all be passed in on the command line.
+RISC-V handles command line arguments in the same way as C,
+at the start of the main function <code class="language-plaintext highlighter-rouge">a0</code> and <code class="language-plaintext highlighter-rouge">a1</code> will be set to <code class="language-plaintext highlighter-rouge">argc</code> and <code class="language-plaintext highlighter-rouge">argv</code> respectively.
+In addition, we have added an arg <code class="language-plaintext highlighter-rouge">a2</code> which will tell you if you should print out the classification value and a new line if it is zero.
+If this is not set to 0, you <strong>MUST NOT</strong> print out anything or you will fail tests!
+This arg can be useful if you want to run multiple classifications in the same script.</p>
+
+<p>We will call <code class="language-plaintext highlighter-rouge">main.s</code> in the following way from the root directory:
+<code class="language-plaintext highlighter-rouge">java -jar tools/venus.jar &lt;venus flags&gt; src/main.s &lt;M0_PATH&gt; &lt;M1_PATH&gt; &lt;INPUT_PATH&gt; &lt;OUTPUT_PATH&gt;</code></p>
+
+<p>If you’re testing from any other directory, make sure your path to <code class="language-plaintext highlighter-rouge">main.s</code> and filepaths correspond to your CWD
+(current working directory).</p>
+
+<p>Note that the pointer for to the string <code class="language-plaintext highlighter-rouge">M0_PATH</code> will be located at index 1 of <code class="language-plaintext highlighter-rouge">argv</code>, <code class="language-plaintext highlighter-rouge">M1_PATH</code> at index 2, and so on.
+<code class="language-plaintext highlighter-rouge">venus flags</code> are not considered in total number of command line arguments.</p>
+
+<p><em>Note</em>: If the number of command line arguments is different from what is expected, exit with the correct exit code.</p>
+
+<p><em>Note</em>: While <code class="language-plaintext highlighter-rouge">classify</code> is its own function, we are acting as if it is the main function.
+Making it a function other than main is useful as we can now chain classifications and
+perform more complex procedures as we can get the result of a classification programmatically and
+perform other operations based off of the result!</p>
+
+<h4 id="the-network">The Network</h4>
+<p>The first thing you’ll need to do (after verifying the number of command line arguments) is load <code class="language-plaintext highlighter-rouge">m0</code>, <code class="language-plaintext highlighter-rouge">m1</code>,
+and the <code class="language-plaintext highlighter-rouge">input</code> matrices into memory by making multiple calls to <code class="language-plaintext highlighter-rouge">read_matrix</code>, using command line arguments.
+Remember you need to pass in two integer pointers as arguments.</p>
+
+<p>Next, you’ll want to use those three matrices to calculate the scores for our input.
+Our network consists of a matrix multiplication with <code class="language-plaintext highlighter-rouge">m0</code>, followed by a relu on the result,
+and then a second matrix multiplication with <code class="language-plaintext highlighter-rouge">m1</code>.
+At the end of this, we will have a matrix of scores for each classification.
+We then pick the index with the highest score, and that index is the classification for our input.</p>
+
+<p>Given two weight matrices <code class="language-plaintext highlighter-rouge">m0</code> and <code class="language-plaintext highlighter-rouge">m1</code>, along with an input matrix <code class="language-plaintext highlighter-rouge">input</code>,
+the pseudocode to generate the scores for each class is as follows:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hidden_layer = matmul(m0, input)
+relu(hidden_layer) # Recall that relu is performed in-place
+scores = matmul(m1, hidden_layer)
+</code></pre></div></div>
+<p>Once you’ve obtained the scores, we expect you to save them to the output file passed in on the command line.
+Then, call <code class="language-plaintext highlighter-rouge">argmax</code>, which will return a single integer representing the classification for your input,
+and print it (if the value of <code class="language-plaintext highlighter-rouge">a2</code> indicates that you should print).</p>
+
+<p><em>Hint</em>: when calling <code class="language-plaintext highlighter-rouge">argmax</code> and <code class="language-plaintext highlighter-rouge">relu</code>, you should treat your inputs as 1D arrays.
+That means the length you pass into the function should be the number of elements in your entire matrix.</p>
+
+<h4 id="testing-classify">Testing <code class="language-plaintext highlighter-rouge">classify</code></h4>
+<p>A simple sanity check can be run like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m unittest unittests.TestMain -v
+</code></pre></div></div>
+
+<p>You should add more test cases to <code class="language-plaintext highlighter-rouge">TestClassify</code> in order to try out some of the corner cases in the spec.</p>
+
+<p><em>Hint</em>: with the testing facilities that we provide to you, you probably will not be able to reach 100% coverage
+for your <code class="language-plaintext highlighter-rouge">classify</code> code. Do you know why?</p>
+
+<h4 id="test-inputs-and-outputs">Test Inputs and Outputs</h4>
+
+<p>All test inputs are contained in <code class="language-plaintext highlighter-rouge">inputs</code>.
+Inside, you’ll find a folder containing inputs for the mnist network,
+as well three other folders containing smaller networks.</p>
+
+<p>Each network folder contains a <code class="language-plaintext highlighter-rouge">bin</code> and <code class="language-plaintext highlighter-rouge">txt</code> subfolder.
+The <code class="language-plaintext highlighter-rouge">bin</code> subfolder contains the binary files that you’ll run <code class="language-plaintext highlighter-rouge">main.s</code> on,
+while the <code class="language-plaintext highlighter-rouge">txt</code> subfolder contains the plaintext versions for debugging and calculating the expected output.</p>
+
+<p>Within the <code class="language-plaintext highlighter-rouge">bin</code> and <code class="language-plaintext highlighter-rouge">txt</code> subfolders, you’ll find files for <code class="language-plaintext highlighter-rouge">m0</code> and <code class="language-plaintext highlighter-rouge">m1</code> which define the network,
+and a folder containing several inputs.</p>
+
+<p>For MNIST, there are two additional folders:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">txt/labels/</code> contains the true labels for each input, which are the actual digits
+that each corresponding input image contains.</li>
+  <li><code class="language-plaintext highlighter-rouge">student_inputs/</code> contains a script to help you run your own input images, as well as an example.</li>
+</ul>
+
+<h5 id="simple">Simple</h5>
+<p>Apart from MNIST, we’ve provided several smaller input networks for you to run your <code class="language-plaintext highlighter-rouge">main</code> function on.
+<code class="language-plaintext highlighter-rouge">simple0</code>, <code class="language-plaintext highlighter-rouge">simple1</code>, and <code class="language-plaintext highlighter-rouge">simple2</code> are all smaller inputs that will be easier to debug.</p>
+
+<p>To test on the first input in <code class="language-plaintext highlighter-rouge">simple0</code> for example, run the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -jar tools/venus.jar src/main.s -ms -1 inputs/simple0/bin/m0.bin inputs/simple0/bin/m1.bin inputs/simple0/bin/inputs/input0.bin  outputs/test_basic_main/student_basic_output.bin
+</code></pre></div></div>
+<p>You can then convert the written file to plaintext, check that it’s values are correct,
+and that the printed integer is indeed the index of the largest element in the output file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python tools/convert.py --to-ascii output.bin output.txt
+</code></pre></div></div>
+
+<p>For verifying that the output file itself is correct, you can run the inputs through
+a matrix multiplication calculator like <a href="https://m.matrix.reshish.com/multCalculation.php">this one</a>,
+which allows you to click “insert” and copy/paste directly from your plaintext matrix file.
+Make sure you manually set values to zero for the ReLU step.</p>
+
+<p><em>Note</em>: the provided files cover a variety of dimensions.
+For example the <code class="language-plaintext highlighter-rouge">simple2</code> inputs have more than one column in them,
+meaning that your “scores” matrix will also have more than one column.
+Your code should still work as expected in this case, writing the matrix of “scores” to a file,
+and printing a single integer that is the row-major index of the largest element of that matrix.</p>
+
+<h5 id="mnist">MNIST</h5>
+<p>All the files for testing the mnist network are contained in <code class="language-plaintext highlighter-rouge">inputs/mnist</code>.
+There are both binary and plaintext versions of <code class="language-plaintext highlighter-rouge">m0</code>, <code class="language-plaintext highlighter-rouge">m1</code>, and 9 input files.</p>
+
+<p>To test on the first input file for example, run the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -jar venus.jar src/main.s -ms -1 inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/bin/inputs/mnist_input0.bin  outputs/test_mnist_main/student_mnist_outputs.bin
+</code></pre></div></div>
+<p>(Note that we run with the <code class="language-plaintext highlighter-rouge">-ms -1</code> flag, as MNIST inputs are large and we need to increase the max instructions
+Venus will run)</p>
+
+<p>This should write a binary matrix file <code class="language-plaintext highlighter-rouge">student_mnist_outputs.bin</code> which contains your scores for each digit,
+and print out the digit with the highest score.
+You can compare the printed digit versus the one in <code class="language-plaintext highlighter-rouge">inputs/mnist/txt/labels/label0.txt</code>.</p>
+
+<p>You can check the printed digit printed by <code class="language-plaintext highlighter-rouge">main</code> against the plaintext labels for each of the input files
+in the <code class="language-plaintext highlighter-rouge">mnist/txt/labels</code> folder.</p>
+
+<p>We’ve also included a script <code class="language-plaintext highlighter-rouge">inputs/mnist/txt/print_mnist.py</code>,
+which will allow you to view the actual image for every mnist input.
+For example, you can run the following command from the directory <code class="language-plaintext highlighter-rouge">inputs/mnist/txt</code>
+to print the actual image for <code class="language-plaintext highlighter-rouge">mnist_input8</code> as ASCII art alongside the true label.
+If you run the command from your root directory, include the full path.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python print_mnist.py 8
+</code></pre></div></div>
+
+<p><em>Hint</em>: not all inputs will classify properly.
+A neural network will practically never have 100% accuracy in its predictions.
+In our test cases specifically, <code class="language-plaintext highlighter-rouge">mnist_input2</code> and <code class="language-plaintext highlighter-rouge">mnist_input7</code> will be misclassified to 9 and 8 respectively.
+All other test cases should classify correctly.</p>
+
+<h5 id="generating-your-own-mnist-inputs">Generating Your Own MNIST Inputs</h5>
+<p>Just for fun, you can also draw your own handwritten digits and pass them to the neural net.
+First, open up any basic drawing program like Microsoft Paint.
+Next, resize the image to 28x28 pixels, draw your digit, and save it as a <code class="language-plaintext highlighter-rouge">.bmp</code> file in
+the directory <code class="language-plaintext highlighter-rouge">inputs/mnist/student_inputs/</code>.</p>
+
+<p>Inside that directory, we’ve provided <code class="language-plaintext highlighter-rouge">bmp_to_bin.py</code> to turn this <code class="language-plaintext highlighter-rouge">.bmp</code> file into
+a <code class="language-plaintext highlighter-rouge">.bin</code> file for the neural net, as well as an <code class="language-plaintext highlighter-rouge">example.bmp</code> file.
+To convert it, run the following from inside the <code class="language-plaintext highlighter-rouge">inputs/mnist/student_inputs</code> directory:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python bmp_to_bin.py example
+</code></pre></div></div>
+<p>This will read in the <code class="language-plaintext highlighter-rouge">example.bmp</code> file, and create an <code class="language-plaintext highlighter-rouge">example.bin</code> file. We can then input it into our neural net,
+alongside the provided <code class="language-plaintext highlighter-rouge">m0</code> and <code class="language-plaintext highlighter-rouge">m1</code> matrices.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -jar venus.jar src/main.s -ms -1 -it inputs/mnist/bin/m0.bin inputs/mnist/bin/m1.bin inputs/mnist/student_inputs/example.bin  outputs/test_mnist_main/student_input_mnist_output.bin
+</code></pre></div></div>
+
+<p>You can convert and run your own <code class="language-plaintext highlighter-rouge">.bmp</code> files in the same way.
+You should be able to achieve a reasonable accuracy with your own input images.</p>
+
+<h3 id="submitting-your-code-1">Submitting Your Code</h3>
+
+<p>Please submit using Gradescope to Project 1B,
+using the GitHub submission option to ensure that your files are in the right place.</p>
+
+<p><em>Note</em>: you should not add any <code class="language-plaintext highlighter-rouge">.import</code> statements to the starter code.
+For example, when the autograder is importing <code class="language-plaintext highlighter-rouge">matmul.s</code>, it will also import
+<code class="language-plaintext highlighter-rouge">dot.s</code> and <code class="language-plaintext highlighter-rouge">utils.s</code>, so your <code class="language-plaintext highlighter-rouge">matmul.s</code> file itself should never
+contain any <code class="language-plaintext highlighter-rouge">.import</code> statements.</p>
+
+<p><em>Note</em>: also make sure to not have any <code class="language-plaintext highlighter-rouge">ecall</code> instructions in your code.
+Use the functions we provide in <code class="language-plaintext highlighter-rouge">utils.s</code>.</p>
+
+<p><em>Hint</em>: make sure to consult the <a href="index.html#general-advice-and-grading">general advice and grading</a>
+section if you want to improve your submission.</p>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+<h3 id="general">General</h3>
+
+<ul>
+  <li>
+    <p><strong>Q G.1</strong>: Which lectures are required for working on project 2?<br />
+<strong>A G.1</strong>: lectures 7, 8, 9 and 10</p>
+  </li>
+  <li>
+    <p><strong>Q G.2</strong>: Are there preformance requirements? 
+<strong>A G.2</strong>: While there are no specific requirements, your program must be reasonably efficient. Each test of the
+autograder gives a timeout much larger than what it takes for the staff solution to run so if your submission times out,
+your solutions is not efficient. Common causes is excessive calls to ecalls. Those should be used spareingly otherwise
+your program will become much less efficient.</p>
+  </li>
+  <li>
+    <p><strong>Q G.3</strong>: If I have a bug in <INSERT FUNCTION="" HERE="">, will I lose credit for other functions which use this function?
+**A G.3**: No! We have designed the autograder to only test a specific function at a time. This means if you fail
+a test, it will not cause you to fail other tests. Note that if there are multiple tests testing the same function
+for different things, you will fail those tests.</INSERT></p>
+  </li>
+</ul>
+
+<h3 id="unit-testing-framework">Unit Testing Framework</h3>
+<ul>
+  <li>
+    <p><strong>Q U.1</strong>: Why am I not able to <code class="language-plaintext highlighter-rouge">git add</code> the generated tests in <code class="language-plaintext highlighter-rouge">unittests/assembly</code>?<br />
+<strong>A U.1</strong>: We added a .gitignore file in unittests, because committing generated files
+is generally considered bad practise.</p>
+  </li>
+  <li>
+    <p><strong>Q U.2</strong>: Why do I get an <code class="language-plaintext highlighter-rouge">unrecognized arguments -k [...]</code> error when trying to run the unittests?<br />
+<strong>A U.2</strong>: The <code class="language-plaintext highlighter-rouge">-k</code> flag was only added in Python 3.7.
+The project spec was updated with commands that should work on older Python versions as well.</p>
+  </li>
+  <li>
+    <p><strong>Q U.3</strong>: How can we check the return code?<br />
+<strong>A U.3</strong>: You can change the optional <code class="language-plaintext highlighter-rouge">code</code> argument to the <code class="language-plaintext highlighter-rouge">execute</code> method of the <code class="language-plaintext highlighter-rouge">AssemblyTest</code> class.
+By default the expected <code class="language-plaintext highlighter-rouge">code</code> is <code class="language-plaintext highlighter-rouge">0</code>, to check a different exit code follow the usage <code class="language-plaintext highlighter-rouge">t.execute(code=78)</code>.</p>
+  </li>
+  <li>
+    <p><strong>Q U.4</strong>: Can we import non-standard libraries like numpy?<br />
+<strong>A U.4</strong>: The autograder will only have access to the Python standard library and an <code class="language-plaintext highlighter-rouge">import numpy</code> will make it fail.
+You can always play around with numpy by making a new unittest file.
+However, these additional tests will not be considered by the autograder.</p>
+  </li>
+  <li>
+    <p><strong>Q U.5</strong>: What exactly do you measure for coverage?<br />
+<strong>A U.5</strong>: We measure the number of times an instruction in your implementation (e.g. in <code class="language-plaintext highlighter-rouge">abs.s</code>) was executed
+across all your tests. So a single test alone does not need to cover all instructions in your code.
+In order to get points for coverage you need to have tests that - together - execute every single instruction
+in your implementation at least once. Simply, cover all branches and different flows of execution through your program.</p>
+  </li>
+  <li>
+    <p><strong>Q U.6</strong>: How can I see the instructions that I am not covering?<br />
+<strong>A U.6</strong>: In the call to <code class="language-plaintext highlighter-rouge">print_coverage</code>, that will be executed after all your tests are run, change <code class="language-plaintext highlighter-rouge">verbose</code> to <code class="language-plaintext highlighter-rouge">True</code>.
+This will print out the coverage for every single instruction in your implementation.</p>
+  </li>
+  <li>
+    <p><strong>Q U.7</strong>: Why am I getting an <code class="language-plaintext highlighter-rouge">argument of type 'WindowsPath' is not iterable</code> error on Windows?<br />
+<strong>A U.7</strong>: On Windows you need Python 3.8 (the latest stable release) to run the unit tests.
+Alternatively you can use WSL which should work with older Python 3 versions.</p>
+  </li>
+  <li>
+    <p><strong>Q U.8</strong>: Can we change the arguments to some of the tests?<br />
+<strong>A U.8</strong>: Feel free to change the code we provide.
+The only thing that needs to stay the same are the names of the TestCase classes.
+The autograder has these hard coded when measuring your coverage.</p>
+  </li>
+  <li>
+    <p><strong>Q U.9</strong>: Why am I getting a <code class="language-plaintext highlighter-rouge">ImportError: Failed to import test module: TestAbs</code> error?<br />
+<strong>A U.9</strong>: You need to run the unit tests from the <code class="language-plaintext highlighter-rouge">unittests</code> directory!</p>
+  </li>
+</ul>
+
+<h3 id="part-a">Part A</h3>
+
+<h4 id="abs">Abs</h4>
+
+<ul>
+  <li>
+    <p><strong>Q A.1</strong>: How thoroughly should we test the <code class="language-plaintext highlighter-rouge">abs</code> function?<br />
+<strong>A A.1</strong>: The <code class="language-plaintext highlighter-rouge">abs</code> function is just an introductory example.
+If you did everything we showed you in the intro video, you should be good to go!</p>
+  </li>
+  <li>
+    <p><strong>Q A.2</strong>: Are we graded on <code class="language-plaintext highlighter-rouge">abs</code>?<br />
+<strong>A A.2</strong>: The autograder checks to make sure that you successfully made the changes that we show you in the video.
+Nothing beyond that.</p>
+  </li>
+</ul>
+
+<h4 id="relu-and-argmax">ReLU and ArgMax</h4>
+
+<ul>
+  <li>
+    <p><strong>Q X.1</strong>: How do I exit (or terminate) the program with an error code?<br />
+<strong>A X.1</strong>: Have a look at the <code class="language-plaintext highlighter-rouge">exit2</code> function that we provide in <code class="language-plaintext highlighter-rouge">utils.s</code></p>
+  </li>
+  <li>
+    <p><strong>Q X.2</strong>: Should we copy over functions from <code class="language-plaintext highlighter-rouge">utils.s</code> to our own code?<br />
+<strong>A X.2</strong>: Please <strong>never</strong> copy a function out of utils.s!
+When you write a unit test, <code class="language-plaintext highlighter-rouge">utils.s</code> will automatically be imported.
+When debugging in venus, make sure that you run your unit test (found in <code class="language-plaintext highlighter-rouge">unittests/assembly</code>)
+instead of trying to run the <code class="language-plaintext highlighter-rouge">relu.s</code> file directly, e.g., <code class="language-plaintext highlighter-rouge">vdb  unittests/assembly/TestRelu_test_simple.s</code>.
+We show you how to do this in the introductory video.</p>
+  </li>
+  <li>
+    <p><strong>Q X.3</strong>: Why do I get a <code class="language-plaintext highlighter-rouge">could not find label exit2</code> or <code class="language-plaintext highlighter-rouge">label exit2 used but not defined</code> error?<br />
+<strong>A X.3</strong>: You should never run your <code class="language-plaintext highlighter-rouge">relu.s</code> file in venus.
+Instead run a unit test, e.g., <code class="language-plaintext highlighter-rouge">vdb  unittests/assembly/TestRelu_test_simple.s</code></p>
+  </li>
+  <li>
+    <p><strong>Q X.4</strong>: What do you mean by a 1-D vector?<br />
+<strong>A X.4</strong>: The relu function will treat the matrix as a contiguous vector,
+e.g. a <code class="language-plaintext highlighter-rouge">3x2</code> matrix would be treated as a vector of size <code class="language-plaintext highlighter-rouge">6</code>.</p>
+  </li>
+  <li>
+    <p><strong>Q X.5</strong>: Do we always need to fill in an epilogue and a prologue?<br />
+<strong>A X.5</strong>: You always need to obey by the calling convention!
+Sometimes no additional code is required for that and the epilogue or the prologue may be left empty in that case.</p>
+  </li>
+</ul>
+
+<h4 id="dot-product">Dot Product</h4>
+<ul>
+  <li>
+    <p><strong>Q D.1</strong>: How can I verify that the vector length argument actually matches the size of the memory allocated for the vector?
+       <em>OR</em> How can I verify that enough memory was allocated for the vector?<br />
+<strong>A D.1</strong>: Like in C, there is no way for the function to verify that the vector length argument
+actually matches the size of memory allocated for the vector.</p>
+  </li>
+  <li>
+    <p><strong>Q D.2</strong>: Are we allowed to add extra labels?<br />
+<strong>A D.2</strong>: Yes, just do not make them global (<code class="language-plaintext highlighter-rouge">.globl</code>).</p>
+  </li>
+  <li>
+    <p><strong>Q D.3</strong>: Can we assume that the autograder might change registers to test calling convention like lab04’s autograder did? <br />
+<strong>A D.3</strong>: The autograder might change some registers when you call a function (but only the ones it is allowed to overwrite).
+Make sure to follow the calling conventions, also when calling your own functions (like <code class="language-plaintext highlighter-rouge">dot</code> from <code class="language-plaintext highlighter-rouge">matmul</code>)!</p>
+  </li>
+</ul>
+
+<h4 id="matmul">Matmul</h4>
+
+<ul>
+  <li>
+    <p><strong>Q M.1</strong>: Can we assume that the memory region pointed to by <code class="language-plaintext highlighter-rouge">a6</code> has enough space to store the result?<br />
+<strong>A M.2</strong>: The region of memory that <code class="language-plaintext highlighter-rouge">a6</code> is pointing to has enough space to fit all values of the result <code class="language-plaintext highlighter-rouge">d</code>.
+The matmul function itself does <strong>not</strong> have to call <code class="language-plaintext highlighter-rouge">malloc</code> to allocate space for the result.</p>
+  </li>
+  <li>
+    <p><strong>Q M.3</strong>: Can we assume that the dimensions that are provided in the argument match the number of elements in the array?
+       If we cannot, how can we check the length of the array?<br />
+<strong>A M.3</strong>: Like in C, there is no way for the function to verify that the matrix size argument actually
+matches the size of memory allocated for the matrix.</p>
+  </li>
+  <li>
+    <p><strong>Q M.4</strong>: Is <code class="language-plaintext highlighter-rouge">matmul</code> only supposed to work on matrices that are square?<br />
+<strong>A M.4</strong>: Matrices don’t need to be square. Checking that the dimensions of m0 and m1 match is one of the three
+error checks you need to perform (see the description in <code class="language-plaintext highlighter-rouge">matmul.s</code> for a list of all the checks you need to perform).</p>
+  </li>
+  <li>
+    <p><strong>Q M.5</strong>: Can we assume that <code class="language-plaintext highlighter-rouge">d</code> is initialized to anything in particular?<br />
+<strong>A M.5</strong>: No. Assume that enough memory for <code class="language-plaintext highlighter-rouge">d</code> is allocated, but the values are uninitialized.</p>
+  </li>
+  <li>
+    <p><strong>Q M.6</strong>: Is it ok to check for invalid arguments before the Prologue?<br />
+<strong>A M.6</strong>: Yes. Just make sure that you do not violate the calling conventions.</p>
+  </li>
+  <li>
+    <p><strong>Q M.7</strong>: Is it ok to save the value of a <code class="language-plaintext highlighter-rouge">t</code> register to the stack and restore it after calling a function?<br />
+<strong>A M.7</strong>: Yes. All the calling convention says is that <code class="language-plaintext highlighter-rouge">t</code> registers could contain arbitrary values after you
+call a function. Just make sure to properly decrement/increment the stack pointer.</p>
+  </li>
+  <li>
+    <p><strong>Q M.8</strong>: What does it mean for the dimensions of <code class="language-plaintext highlighter-rouge">m0</code> and <code class="language-plaintext highlighter-rouge">m1</code> to “make sense”?<br />
+<strong>A M.8</strong>: The number of rows and columns should be greater or equal to 1.</p>
+  </li>
+  <li>
+    <p><strong>Q M.9</strong>: If both the dimensions of <code class="language-plaintext highlighter-rouge">m0</code> and the dimensions of <code class="language-plaintext highlighter-rouge">m1</code> don’t make sense, should we exit with code 72 or 73?<br />
+<strong>A M.9</strong>: You need to check the errors from top to bottom in the order they are listed in the header comment.</p>
+  </li>
+</ul>
+
+<h3 id="part-b">Part B</h3>
+
+<h4 id="read-matrix">Read Matrix</h4>
+
+<ul>
+  <li>
+    <p><strong>Q R.1</strong>: How can we tell if <code class="language-plaintext highlighter-rouge">malloc</code> failed?<br />
+<strong>A R.1</strong>: The returned address will be <code class="language-plaintext highlighter-rouge">0</code>.</p>
+  </li>
+  <li>
+    <p><strong>Q R.2</strong>: How can we tell if <code class="language-plaintext highlighter-rouge">fopen</code> failed?<br />
+<strong>A R.2</strong>: Please read the section on <code class="language-plaintext highlighter-rouge">fopen</code> in the <a href="index.html#file-operations">project spec</a>.</p>
+  </li>
+  <li>
+    <p><strong>Q R.3</strong>: When are we supposed to exit with code <code class="language-plaintext highlighter-rouge">1</code>?<br />
+<strong>A R.3</strong>: Please <strong>never</strong> exit with code <code class="language-plaintext highlighter-rouge">1</code>.
+We had some old instructions that we failed to remove (fixed now).
+This semester, all error codes are two digit numbers (decimal).</p>
+  </li>
+  <li>
+    <p><strong>Q R.4</strong>: Some of my <code class="language-plaintext highlighter-rouge">.data</code> is not aligned to a multiple of four. Why?<br />
+<strong>A R.4</strong>: The venus linker does not align any of the static data sections. Thus a <code class="language-plaintext highlighter-rouge">.word</code> could start at any address.</p>
+  </li>
+  <li>
+    <p><strong>Q R.5</strong>: What error code should we use if the matrix is empty?<br />
+<strong>A R.5</strong>: Since we do not specify an error code for this, you can assume that all matrices
+that are read in will have dimensions that make sense.</p>
+  </li>
+  <li>
+    <p><strong>Q R.6</strong>: How can we test that the output array of <code class="language-plaintext highlighter-rouge">read_matrix</code> is correct?<br />
+<strong>A R.6</strong>: Checkout the <code class="language-plaintext highlighter-rouge">check_array_pointer</code> method of the <code class="language-plaintext highlighter-rouge">AssemblyTest</code> class.</p>
+  </li>
+</ul>
+
+<h4 id="write-matrix">Write Matrix</h4>
+
+<ul>
+  <li>
+    <p><strong>Q W.1</strong>: Are we supposed to call <code class="language-plaintext highlighter-rouge">fflush</code>?<br />
+<strong>A W.1</strong>: There should be no need to call <code class="language-plaintext highlighter-rouge">fflush</code>.</p>
+  </li>
+  <li>
+    <p><strong>Q W.2</strong>: What exit code should I return if <code class="language-plaintext highlighter-rouge">malloc</code> fails?<br />
+<strong>A W.2</strong>: While using <code class="language-plaintext highlighter-rouge">malloc</code> is not required to implement this function,
+you should always return the exit code <code class="language-plaintext highlighter-rouge">88</code> in case malloc fails.</p>
+  </li>
+  <li>
+    <p><strong>Q W.3</strong>: <code class="language-plaintext highlighter-rouge">do_write_matrix</code> always checks the output file, but when I am testing an error case,
+        there will be no file produced. How can I deal with this?<br />
+<strong>A W.3</strong>: You are free to add your own code to <code class="language-plaintext highlighter-rouge">do_write_matrix</code>, e.g., in order to skip the file check when it is unnecessary</p>
+  </li>
+</ul>
+
+<h4 id="classify">Classify</h4>
+
+<ul>
+  <li>
+    <p><strong>Q C.1</strong>: Can we assume that the input matrix is flattened?<br />
+<strong>A C.1</strong>: The inputs to the MNIST and the <code class="language-plaintext highlighter-rouge">simple0</code> networks will be matrices with N rows and a single column.
+You can look at example inputs like this: <code class="language-plaintext highlighter-rouge">cat inputs/simple0/txt/inputs/input0.txt</code>.
+However, the simple2 network actually expects inputs with more than one column.
+Please consult the <a href="index.html#simple">project spec</a> to try and understand how to handle that case.</p>
+  </li>
+  <li>
+    <p><strong>Q C.2</strong>: How long should it take to classify an MNIST input?<br />
+<strong>A C.2</strong>: On a 5-year old laptop with OpenJDK 1.8, the staff solution takes ~33s or ~1.2 million instructions
+to classify <code class="language-plaintext highlighter-rouge">mnist_input0.bin</code>.</p>
+  </li>
+  <li>
+    <p><strong>Q C.3</strong>: Do we have to free previously allocated memory if a call to <code class="language-plaintext highlighter-rouge">malloc</code> fails?<br />
+<strong>A C.3</strong>: No. You do not need to free before exiting.</p>
+  </li>
+  <li>
+    <p><strong>Q C.4</strong>: What is the difference between <code class="language-plaintext highlighter-rouge">TestClassify</code> and <code class="language-plaintext highlighter-rouge">TestMain</code>?<br />
+<strong>A C.4</strong>: <code class="language-plaintext highlighter-rouge">TestMain</code> is very similar to the sanity checks that the autograder runs.
+<code class="language-plaintext highlighter-rouge">TestClassify</code> was meant for you to extend in order to test corner cases.
+For example <code class="language-plaintext highlighter-rouge">TestMain</code> always sets <code class="language-plaintext highlighter-rouge">a0</code> to <code class="language-plaintext highlighter-rouge">0</code>, TestClassify should test the other value for <code class="language-plaintext highlighter-rouge">a2</code>.</p>
+  </li>
+  <li>
+    <p><strong>Q C.5</strong>: How long does the autograder take? 
+<strong>A C.5</strong>: On average it can take 2-5min to run.</p>
+  </li>
+  <li>
+    <p><strong>Q C.6</strong>: Should our code be able to create a folder if a directory in the output path does not exist?<br />
+<strong>A C.6</strong>: No. You can assume that the output directory exists. Only the file needs to be created by <code class="language-plaintext highlighter-rouge">fopen</code>.</p>
+  </li>
+</ul>
+
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>

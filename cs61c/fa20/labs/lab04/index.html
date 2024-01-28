@@ -1,0 +1,493 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 4</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: End of Lab Friday, September 25.</p>
+
+<h2 id="objectives">Objectives</h2>
+<ul>
+  <li>TSWBAT practice debugging RISC-V assembly code.</li>
+  <li>TSWBAT write RISC-V functions that use pointers.</li>
+</ul>
+
+<h2 id="risc-v-simulator">RISC-V Simulator</h2>
+<p>Like last week, we will be using the <strong>Venus RISC-V simulator</strong> (which
+can be found online <a href="https://venus.cs61c.org/">here</a>). Also, please refer to 
+the <a href="../../../resources/venus-reference.html">Venus Guide</a> on our 
+course website when you need a refresher on any of the Venus features.</p>
+
+<h2 id="exercise-1-debugging-megalistmanipss">Exercise 1: Debugging <code class="language-plaintext highlighter-rouge">megalistmanips.s</code></h2>
+<p>In Lab 3, you completed a RISC-V procedure that applied a function to every element
+of a linked list. In this lab, you will be working with a similar (but slightly
+more complex) version of that procedure.</p>
+
+<p>Now, instead of having a linked list of <code class="language-plaintext highlighter-rouge">int</code>’s, our data structure is a linked
+list of <code class="language-plaintext highlighter-rouge">int</code> arrays. Remember that when dealing with arrays in <code class="language-plaintext highlighter-rouge">struct</code>’s, we
+need to explicitly store the size of the array. In C code, here’s what the data
+structure looks like:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">arr</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Also, here’s what the new <code class="language-plaintext highlighter-rouge">map</code> function does: it traverses the linked list and
+for each element in each array of each <code class="language-plaintext highlighter-rouge">node</code>, it applies the passed-in function
+to it, and stores it back into the array.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">map</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">head</span><span class="o">-&gt;</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">map</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>For the purpose of this lab, don’t worry too much about the weird syntax for C function 
+pointers (you are welcome to learn more about them <a href="https://www.geeksforgeeks.org/function-pointer-in-c/">here</a>).
+Basically, you can pass arguments into function pointers just like you do with normal functions.</p>
+
+<h3 id="action-item">Action Item</h3>
+<p>Record your answers to the following questions in a text file. Some of the questions
+will require you to run the RISC-V code using Venus’ simulator tab.</p>
+
+<ol>
+  <li>Find the five mistakes inside the map function in <code class="language-plaintext highlighter-rouge">megalistmanips.s</code>. Read
+all of the commented lines under the <code class="language-plaintext highlighter-rouge">map</code> function in <code class="language-plaintext highlighter-rouge">megalistmanips.s</code>
+(before it returns with jr ra), and <strong>make sure that the lines do what the
+comments say</strong>. Some hints:
+    <ul>
+      <li>Why do we need to save stuff on the stack before we call <code class="language-plaintext highlighter-rouge">jal</code>?</li>
+      <li>What’s the difference between <code class="language-plaintext highlighter-rouge">add t0, s0, x0</code> and <code class="language-plaintext highlighter-rouge">lw t0, 0(s0)</code>?</li>
+      <li>Pay attention to the types of attributes in a <code class="language-plaintext highlighter-rouge">struct node</code>.</li>
+      <li><em>Note</em>: you need only focus on the <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">mapLoop</code>, and <code class="language-plaintext highlighter-rouge">done</code> functions but
+it’s worth understanding the full program.</li>
+    </ul>
+  </li>
+  <li><strong>For this exercise, we are requiring that you don’t use any extra save registers
+in your implementation</strong>. While you normally can use the save registers to
+store values that you want to use after returning from a function (in this
+case, when we’re calling <code class="language-plaintext highlighter-rouge">f</code> in <code class="language-plaintext highlighter-rouge">map</code>), we want you to use temporary registers
+instead and follow their caller/callee conventions. <strong>The provided <code class="language-plaintext highlighter-rouge">map</code>
+implementation only uses the <code class="language-plaintext highlighter-rouge">s0</code> and <code class="language-plaintext highlighter-rouge">s1</code> registers, so we’ll require that you
+don’t use <code class="language-plaintext highlighter-rouge">s2</code>-<code class="language-plaintext highlighter-rouge">s11</code>.</strong></li>
+  <li><strong>Make an ordered list of each of the five mistakes, and the corrections you
+made to fix them</strong>.</li>
+  <li>Save your corrected code in the <code class="language-plaintext highlighter-rouge">megalistmanips.s</code> file. <strong>Use the <code class="language-plaintext highlighter-rouge">-cc</code> flag to run a 
+basic calling convention check on your code locally</strong>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -jar venus.jar megalistmanips.s -cc // Append appropriate path to `venus.jar` 
+</code></pre></div>    </div>
+    <p>The CC checker should report 0 warnings.</p>
+
+    <p>Again, the <a href="../../../resources/venus-reference.html">Venus Guide</a> is a great resource
+if you feel unsure about any of the Venus features.</p>
+
+    <p><em>Note</em>: The CC checker won’t check if you are using registers besides <code class="language-plaintext highlighter-rouge">s0</code> and <code class="language-plaintext highlighter-rouge">s1</code>, but you 
+need to implement this requirement in order to pass the autograder.</p>
+  </li>
+  <li>For reference, running <code class="language-plaintext highlighter-rouge">megalistmanips</code> on the web interface should give the following output:</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Lists before:
+5 2 7 8 1
+1 6 3 8 4
+5 2 7 4 3
+1 2 3 4 7
+5 6 7 8 9
+
+Lists after:
+30 6 56 72 2
+2 42 12 72 20
+30 6 56 20 12
+2 6 12 20 56
+30 42 56 72 90
+</code></pre></div></div>
+
+<h3 id="checkpoint">Checkpoint</h3>
+<p>At this point, make sure that you are comfortable with the following. Note that
+these will not be part of the lab checkoff, but are meant to benchmark how
+comfortable you are with the material in the exercise.</p>
+<ul>
+  <li>You should know how to debug in Venus, including stepping through code and
+inspecting the contents of registers.</li>
+  <li>You should understand how RISC-V interfaces with memory.</li>
+  <li>You should understand CALLER/CALLEE conventions in RISC-V.</li>
+</ul>
+
+<h2 id="exercise-2-write-a-function-without-branches">Exercise 2: Write a function without branches</h2>
+<p>Consider the discrete-valued function <code class="language-plaintext highlighter-rouge">f</code> defined on integers in the set
+<code class="language-plaintext highlighter-rouge">{-3, -2, -1, 0, 1, 2, 3}</code>. Here’s the function definition:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(-3) = 6
+f(-2) = 61
+f(-1) = 17
+f(0) = -38
+f(1) = 19
+f(2) = 42
+f(3) = 5
+</code></pre></div></div>
+
+<h3 id="action-item-1">Action Item</h3>
+<ol>
+  <li>Implement the function in <code class="language-plaintext highlighter-rouge">discrete_fn.s</code> in RISC-V, with the condition that
+your code may <strong>NOT</strong> use any branch and/or jump instructions!</li>
+  <li>Save your corrected code in a file <code class="language-plaintext highlighter-rouge">discrete_fn.s</code>.</li>
+</ol>
+
+<p>Hint: How do you load a word from a dynamic address?</p>
+
+<h2 id="checkoff">Checkoff</h2>
+<p>Please submit to the Lab Autograder assignment (same as last week!).</p>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>

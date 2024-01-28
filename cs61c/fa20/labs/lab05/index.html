@@ -1,0 +1,804 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 5</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: Checkoff between Wednesday, October 7 to Friday, October 9.</p>
+
+<p><strong>IMPORTANT: Do not move staff-provided input and output pins. This will break the testing framework and harness.  If your circuit doesn’t pass the tests and you think it is correct, ensure your circuit fits in the corresponding harness in <code class="language-plaintext highlighter-rouge">testing/circ_files/exX_test.circ</code>.</strong></p>
+
+<h2 id="objectives">Objectives</h2>
+<ul>
+  <li>TSWBAT practice designing and debugging basic digital logic circuits in Logisim</li>
+  <li>TSW gain more experience designing and debugging circuits with both combinational logic and stateful elements</li>
+  <li>TSW gain experience designing FSMs and implementing them as digital logic</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+<p>Pull the Lab 5 files from the lab starter repository with</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull starter master
+</code></pre></div></div>
+
+<p>All the work in this lab will be done from the digital logic simulation program <strong>Logisim Evolution</strong>, which is included in the lab starter files.</p>
+
+<p><strong>IMPORTANT: Please use the .jar file we’ve given you, not the version of Logisim that is downloaded on the lab computers! And a note: Logisim does not save your work as you go along, and it does not automatically create a new .circ file when you open it! Save when you start, and save frequently as you work.</strong></p>
+
+<p>You can open Logism via:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java -jar logisim-evolution.jar
+</code></pre></div></div>
+
+<p><strong>IMPORTANT: Logism is a Java program that requires a GUI, so doing the lab over terminal won’t work (without window forwarding, detailed below). If you wish to work on the lab locally, ensure you have Java installed on your local machine, and pull the latest lab starter files to your local machine. Then, you should open the program as above.</strong> If you wish to run the program over the terminal, you will need to add the <code class="language-plaintext highlighter-rouge">-X</code> flag to your <code class="language-plaintext highlighter-rouge">SSH</code> command to enable window forwarding (for example, <code class="language-plaintext highlighter-rouge">ssh -X <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ceadbdf8ffade3b6b6b68ee0e0e0">[email&#160;protected]</a></code>). On Windows machines, you may need to additionally install Xming. On OSX, you may need to install XQuartz.</p>
+
+<h2 id="introduction-video">Introduction Video</h2>
+<p>For this lab, we created an optional <a href="../../lectures/videos%3Fytvid=yCyKAXPWGE4.html">intro video</a>! This video covers the introduction to logisim features described in exercises 0 to 3, so you can skip some of the introductory text in those sections if you watch it.  You still have to do the action items in exercises 1 to 5 though!</p>
+<h2 id="introduction">Introduction</h2>
+<h3 id="part-0-warm-up">Part 0: Warm Up</h3>
+<p>We’ll begin by creating a very simple circuit just to get the feel for placing gates and wires. Before you start, take note of a useful feature: the zoom function! It’s in the bottom left corner, and will make your life much easier for the next couple weeks.</p>
+
+<p><img src="lab5img/zoom_button.png" width="500" /></p>
+
+<ol>
+  <li>
+    <p><img src="lab5img/and.gif" alt="" /> Start by clicking the <code class="language-plaintext highlighter-rouge">AND</code> gate button. This will cause the shadow of an <code class="language-plaintext highlighter-rouge">AND</code> gate to follow your cursor around. Click once within the main schematic window to place an <code class="language-plaintext highlighter-rouge">AND</code> gate.</p>
+  </li>
+  <li>
+    <p><img src="lab5img/input.gif" alt="" /> Click the <code class="language-plaintext highlighter-rouge">Input Pin</code> button. Now, place two input pins somewhere to the left of your <code class="language-plaintext highlighter-rouge">AND</code> gate.</p>
+  </li>
+  <li>
+    <p><img src="lab5img/output.gif" alt="" /> Click the <code class="language-plaintext highlighter-rouge">Output Pin</code> button. Then place an output pin somewhere to the right of your <code class="language-plaintext highlighter-rouge">AND</code> gate. Your schematic should look something like this at this point:</p>
+
+    <p><img src="lab5img/schematic1.gif" alt="" /></p>
+  </li>
+  <li>
+    <p><img src="lab5img/selection.gif" alt="" /> Click the <code class="language-plaintext highlighter-rouge">Select tool</code> button. Click and drag to connect the input pins to the left side of the <code class="language-plaintext highlighter-rouge">AND</code> gate. This will take several steps, as you can only draw vertical and horizontal wires. Just draw a wire horizontally, release the mouse button, then click and drag starting from the end of the wire to continue vertically. You can attach the wire to any pin on the <code class="language-plaintext highlighter-rouge">AND</code> gate on the left side. Repeat the same procedure to connect the output of the <code class="language-plaintext highlighter-rouge">AND</code> Gate (right side) to the output pin. After completing these steps your schematic should look roughly like this:</p>
+
+    <p><img src="lab5img/schematic2.gif" alt="" /></p>
+  </li>
+  <li>
+    <p><img src="lab5img/poke.gif" alt="" /> Finally, click the <code class="language-plaintext highlighter-rouge">Poke</code> tool and try clicking on the input pins in your schematic. Observe what happens. Does this match with what you think an <code class="language-plaintext highlighter-rouge">AND</code> Gate should do? Note that poking the wires themselves tells you the current value on that wire; this will be very useful later when you build more complex circuits.</p>
+  </li>
+</ol>
+
+<h3 id="part-1-sub-circuits">Part 1: Sub-Circuits</h3>
+
+<p>Just as C programs can contain helper functions, a schematic can contain subcircuits. In this part of the lab, we will create several subcircuits to demonstrate their use.</p>
+
+<p><strong>IMPORTANT NOTE</strong>: Logisim Evolution guidlines say you cannot name a subcircuit after a keyword (e.g. <code class="language-plaintext highlighter-rouge">NAND</code>), also circuit names must start with “A-Za-z”, so no numbers.</p>
+
+<h4 id="action-item">Action Item</h4>
+<p>Follow the steps below and show your final circuit to your TA at checkoff (remember to save!):</p>
+
+<p><strong>Do not move staff-provided input and output pins. This will break the testing framework and harness.  If your circuit doesn’t pass the tests and you think it is correct, ensure your circuit fits in the testing harness in <code class="language-plaintext highlighter-rouge">testing/circ_files/ex1_test.circ</code>.</strong></p>
+
+<ol>
+  <li>
+    <p>Open up the Exercise 1 schematic (<code class="language-plaintext highlighter-rouge">File-&gt;Open-&gt;ex1.circ</code>).</p>
+  </li>
+  <li>
+    <p>Open up the NAND1 empty subcircuit by double clicking on the name <code class="language-plaintext highlighter-rouge">NAND1</code> in the circuit selector in the left menu. (note the <code class="language-plaintext highlighter-rouge">1</code> at the end; because there is a component called <code class="language-plaintext highlighter-rouge">NAND</code>, we cannot call it <code class="language-plaintext highlighter-rouge">NAND</code>).</p>
+  </li>
+</ol>
+
+<!-- (`Project->Add Circuit`). You will be prompted for a name for the subcircuit; call it `NAND1` -->
+
+<ol>
+  <li>In the new schematic window that you see create a simple <code class="language-plaintext highlighter-rouge">NAND</code> circuit with the 2 input pins on the left side and the output pin on the right side. Do this without using the built-in <code class="language-plaintext highlighter-rouge">NAND</code> gate from the Gates folder (i.e. only use the <code class="language-plaintext highlighter-rouge">AND</code>, <code class="language-plaintext highlighter-rouge">OR</code>, and <code class="language-plaintext highlighter-rouge">NOT</code> gates provided next to the selection tool icon). You can change the labels for the inputs and output by selecting the input/output using the select tool and changing the property <code class="language-plaintext highlighter-rouge">Label</code> in the bottom left of the window.</li>
+</ol>
+
+<!-- 4. Go back to your `main` schematic by double-clicking `main` in the circuit selector at the left of the screen. Your original (blank) schematic will now be displayed, but your `NAND1` circuit has been stored.
+
+5. Now, single click the word `NAND1` in the list. This will tell Logisim that you wish to add your `NAND1` circuit into your `main` circuit.
+
+6. Try placing your `NAND1` circuit into the `main` schematic. If you did it correctly, you should see a gate with 2 input pins on the left and one output pin on the right. Try hooking input pins and output pins up to these and see if it works as you expect. -->
+
+<ol>
+  <li>Repeat these steps to create several more subcircuits: <code class="language-plaintext highlighter-rouge">NOR</code>, <code class="language-plaintext highlighter-rouge">XOR</code>, <code class="language-plaintext highlighter-rouge">2-to-1 MUX</code>, and <code class="language-plaintext highlighter-rouge">4-to-1 MUX</code> in the given skeletons. Please do not change the names of the subcircuits or create new ones; do you work in the respectively named circuit or else the autograder will not work properly. Do not use any built-in gates other than <code class="language-plaintext highlighter-rouge">AND</code>, <code class="language-plaintext highlighter-rouge">OR</code>, and <code class="language-plaintext highlighter-rouge">NOT</code>. Once you’ve built a subcircuit, you may (and are encouraged to) use it to build others. You can do this by clicking and placing your created subcircuit like you would any other component. Note: for the <code class="language-plaintext highlighter-rouge">4-to-1 MUX</code>, <code class="language-plaintext highlighter-rouge">Sel0</code> and <code class="language-plaintext highlighter-rouge">Sel1</code> correspond to the 0th and 1st bits of the 2-bit selector, respectively.
+Hint: Try writing a truth table. You might also find the lecture slides useful for a refresher on how to build these. <em>You may want to consider using some of your custom subcircuits when designing the others.</em></li>
+</ol>
+
+<h4 id="checkpoint">Checkpoint</h4>
+<p>At this point, make sure that you are comfortable with the Logisim environment, creating sub-circuits, and re-using such circuits in other circuits.</p>
+
+<h3 id="part-2-storing-state">Part 2: Storing State</h3>
+<p>Let’s implement a circuit that increments a value ad infinitum. The difference between this circuit and the circuits you’ve built for lab so far is that it will <strong>store</strong> this value in the <strong>state</strong> of a <strong>register</strong>.</p>
+
+<h4 id="action-item-1">Action Item</h4>
+<p>The following steps will show you how to add registers to your circuit. Complete the steps and show the final circuit to your TA (remember to save!):</p>
+
+<p><strong>Do not move staff-provided input and output pins. This will break the testing framework and harness.  If your circuit doesn’t pass the tests and you think it is correct, ensure your circuit fits in the testing harness in <code class="language-plaintext highlighter-rouge">testing/circ_files/ex2_test.circ</code>.</strong></p>
+
+<!-- 1. Create a new subcircuit (`Project->Add Circuit`). Name this new subcircuit, `AddMachine`. -->
+
+<ol>
+  <li>
+    <p>Open up the Exercise 2 schematic (<code class="language-plaintext highlighter-rouge">File-&gt;Open-&gt;ex2.circ</code>) and go to the empty AddMachine circuit.</p>
+  </li>
+  <li>
+    <p>Load in the <code class="language-plaintext highlighter-rouge">Arithmetic</code> Library if it is not already loaded (go to <code class="language-plaintext highlighter-rouge">Project-&gt;Load Library-&gt;Built</code> in <code class="language-plaintext highlighter-rouge">Library</code> and select <code class="language-plaintext highlighter-rouge">Arithmetic</code>). This library contains elements that will perform basic mathematical operations. When you load the library, the circuit browser at left will have a new <code class="language-plaintext highlighter-rouge">Arithmetic</code> folder.</p>
+
+    <p><img src="lab5img/arithmetic.png" width="150" /></p>
+  </li>
+  <li>
+    <p>Select the adder subcircuit from the <code class="language-plaintext highlighter-rouge">Arithmetic</code> library and place the adder into your <code class="language-plaintext highlighter-rouge">AddMachine</code> subcircuit.</p>
+  </li>
+  <li>
+    <p>Load in the <code class="language-plaintext highlighter-rouge">Memory</code> Library if it is not already loaded (go to <code class="language-plaintext highlighter-rouge">Project-&gt;Load Library-&gt;Built</code> in <code class="language-plaintext highlighter-rouge">Library</code> and select <code class="language-plaintext highlighter-rouge">Memory</code>). This library contains memory elements used to keep state in a circuit. A new <code class="language-plaintext highlighter-rouge">Memory</code> folder will appear in the circuit browser.</p>
+  </li>
+  <li>
+    <p>Select the register from the <code class="language-plaintext highlighter-rouge">Memory</code> folder and place one register into your subcircuit. Below is an image diagraming the parts of a register.</p>
+
+    <p><img src="lab5img/register.gif" alt="" /></p>
+  </li>
+  <li>
+    <p>Connect a <code class="language-plaintext highlighter-rouge">clock</code> to your register. You can find the clock circuit element in the <code class="language-plaintext highlighter-rouge">Wiring</code> folder in the circuit browser.</p>
+  </li>
+  <li>Connect the output of the adder to the input of the register, and the output of the register to the input of the adder.
+    <ul>
+      <li>You may get a “Incompatible widths” error when you try to connect components. This means that your wire is trying to connect two pins together with different bit widths. If you click on the adder with the <code class="language-plaintext highlighter-rouge">Selection</code> tool, you will notice that there is a <code class="language-plaintext highlighter-rouge">Data Bit Width</code> property in the bottom left field of the window. This value determines the number of bits each input and output the adder has. Change this field to <code class="language-plaintext highlighter-rouge">8</code> and the “Incompatible widths” error should be resolved.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Wire an 8-bit constant <code class="language-plaintext highlighter-rouge">1</code> to the second input of the adder. You can find the <code class="language-plaintext highlighter-rouge">Constant</code> circuit element in the <code class="language-plaintext highlighter-rouge">Wiring</code> library.</p>
+  </li>
+  <li>
+    <p>Connect the two output pins to your circuit so that you may monitor what comes out of the adder and the register. The output of the adder should be connected to <code class="language-plaintext highlighter-rouge">ADD_OUT</code> and the output of the register to <code class="language-plaintext highlighter-rouge">REG_OUT</code>. Thus, by the end, your circuit should look like as follows:</p>
+
+    <p><img src="lab5img/AddMachine.png" alt="" /></p>
+  </li>
+</ol>
+
+<!-- 10. Now let's see if you built your circuit correctly. Go back to the `main` subcircuit by double clicking on `main` in the circuit browser.
+
+11. Single click on your `AddMachine` circuit to select it.
+
+12. Change the `Facing` property to another direction. Any circuit with the `Facing` property can be rotated to accomodate wires as you need them. This will definitely be useful when you do your project.
+
+13. Place your `AddMachine` subcircuit into the `main` subcircuit.
+
+14. Select the `AddMachine` subcircuit you just placed into `main`.
+
+15. Connect output pins to the `AddMachine` subcircuit. Output pins are ordered top to bottom, left to right. Thus, if you followed the schematic above, then the top pin on the right side outputs the value of the adder, and the bottom pin is the output of the register.
+
+16. Right click on your `AddMachine` subcircuit, and select `View AddMachine`. This is the **ONLY** method to preserve state (i.e. keep register values at its current value). Double-clicking on the circuit at the circuit browser at left makes Logisim think you want to edit the circuit instead of just checking what state the circuit has.
+
+17. Initialize the register value to `1`. You can do this by first, clicking on the register value with the poke tool. Then, type the hex value in.
+
+18. To return to the main circuit while preserving state, go to `Simulate->Go Out To State->main`. Alternatively, you can use the keyboard shortcut `Command/Control + Up Arrow` -->
+
+<ol>
+  <li>
+    <p>Now start running your circuit by going to <code class="language-plaintext highlighter-rouge">Simulate-&gt;Ticks Enabled</code> (or <code class="language-plaintext highlighter-rouge">Command/Control + K</code>). Your circuit should now be outputting a counter in binary form.</p>
+  </li>
+  <li>
+    <p>If you want to run your circuit faster, you can change the tick frequency in <code class="language-plaintext highlighter-rouge">Simulate-&gt;Tick Frequency</code>.</p>
+  </li>
+</ol>
+
+<h4 id="checkpoint-1">Checkpoint</h4>
+<p>At this point, make sure that you are comfortable with designing and simulating simple digital logic circuits in Logisim environment that use a mix of <em>combinational logic</em> and <em>state elements</em> (registers).</p>
+
+<h3 id="part-3-fsms-to-digital-logic">Part 3: FSMs to Digital Logic</h3>
+<p>Now we’re ready to do something really cool: translate a FSM into a digital logic circuit.</p>
+
+<p>For those of you who need a reminder, FSM stands for Finite State Machine. FSM’s keep track of inputs given, moves between states based on these inputs, and outputs something everytime something is input.</p>
+
+<p>We use a register to store the state of the FSM we’re currently in, and combinational logic to map FSM input &amp; current register state to FSM output &amp; next register state.</p>
+
+<h4 id="action-item-2">Action Item</h4>
+<p>Load the given starter file <code class="language-plaintext highlighter-rouge">ex3.circ</code> into Logism. Modify this circuit’s subcircuits <code class="language-plaintext highlighter-rouge">StateBitZero</code> and <code class="language-plaintext highlighter-rouge">StateBitOne</code> to implement the following FSM:</p>
+
+<p><strong>If two ones in a row or two zeroes in a row have ever been seen, output zeros forever. Otherwise, output a one.</strong></p>
+
+<p><strong>Do not move staff-provided input and output pins. This will break the testing framework and harness.  If your circuit doesn’t pass the tests and you think it is correct, ensure your circuit fits in the testing harness in <code class="language-plaintext highlighter-rouge">testing/circ_files/ex3_test.circ</code>.</strong></p>
+
+<p>Show this completed circuit to your TA (remember to save!)</p>
+
+<ol>
+  <li>
+    <p>Note that the FSM is implemented by the following diagram (the four state names <code class="language-plaintext highlighter-rouge">00</code>, <code class="language-plaintext highlighter-rouge">01</code>, <code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">11</code> are just names written in binary - they have no direct relationship with the actual zeros and ones of the FSM input/output). Take some time to understand how this diagram implements the FSM:</p>
+
+    <p><img src="lab5img/FSM.png" alt="" /></p>
+  </li>
+  <li>
+    <p>Observe that the following is a truth table for the FSM (convince yourself of this):</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th> st1 </th>
+          <th> st0 </th>
+          <th> input </th>
+          <th> next st1 </th>
+          <th> next st0 </th>
+          <th> output </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>We’ve provided you with a starter Logisim circuit to start out in <code class="language-plaintext highlighter-rouge">ex3.circ</code>.</p>
+  </li>
+  <li>
+    <p>Note that the top level of the circuit looks almost exactly the same as our previous adder circuit, but now there’s a <code class="language-plaintext highlighter-rouge">FSMLogic</code> block instead of an adder block. <code class="language-plaintext highlighter-rouge">FSMLogic</code> is the combinational logic block for this FSM. We have handled the output bit for you, as it’s the most complicated to simplify and implement. You should complete the circuit by completing the <code class="language-plaintext highlighter-rouge">StateBitOne</code> and <code class="language-plaintext highlighter-rouge">StateBitZero</code> subcircuits, which produces the next state bits.</p>
+  </li>
+</ol>
+
+<h4 id="checkpoint-2">Checkpoint</h4>
+<p>At this point, you should have more familiarity with designing and implementing FSMs, and the close relationship between FSMs and digital logic.</p>
+
+<h2 id="advanced-logisim">Advanced Logisim</h2>
+
+<h3 id="setup-1">Setup</h3>
+
+<p>Feel free to do each part as separate sub-circuits in the same Logisim file.</p>
+
+<p>The following parts will introduce you to more advanced techniques/concepts in Logisim.</p>
+
+<h3 id="advanced-features">Advanced Features</h3>
+
+<p>Here are three Logisim features that should both save you a lot of time and make your circuits look much cleaner.</p>
+
+<h4 id="splitters">Splitters</h4>
+
+<p>Splitters allow you to take a multi-bit value and split it up into smaller parts, or (despite the name) combine multiple values that are one or more bits into a single value. Here, we split the 4-bit binary number <code class="language-plaintext highlighter-rouge">1001</code> into <code class="language-plaintext highlighter-rouge">10</code> and <code class="language-plaintext highlighter-rouge">01</code>, then recombine it with <code class="language-plaintext highlighter-rouge">11</code> into the final 5-bit number <code class="language-plaintext highlighter-rouge">111001</code>:</p>
+
+<p><img src="lab5img/splitter_intro.png" width="300" /></p>
+
+<p>Click on a splitter to get its menu in the sidebar. You can use this menu to determine the number of arms on your splitter and how many bits should go on each arm. For the circuit above, the left splitter’s menu looks like this:</p>
+
+<p><img src="lab5img/left_split_menu.png" width="300" /></p>
+
+<p>While the right splitter’s menu looks like this:</p>
+
+<p><img src="lab5img/right_split_menu.png" width="300" /></p>
+
+<p><strong>Notice that there’s an option called</strong> <code class="language-plaintext highlighter-rouge">facing</code>. You can use this to rotate your splitter. Above, see that the splitter on the right is facing West while the splitter on the left is facing East.</p>
+
+<p>If you see an error wire that is orange, this means that your bit width in does not match your bit width out. Make sure that if you’re connecting two components with a wire, you correctly set the bit width in that component’s menu.</p>
+
+<p><img src="lab5img/orange_error.png" alt="" /></p>
+
+<h4 id="tunnels">Tunnels</h4>
+
+<p>A tunnel allows you draw an “invisible wire” to bind two points together. Tunnels are grouped by case-sensitive labels give to a wire. They are used to connect wires like so:</p>
+
+<p><img src="lab5img/tunnels1.png" alt="" /></p>
+
+<p>Which has an effect such as the following:</p>
+
+<p><img src="lab5img/tunnels2.png" alt="" /></p>
+
+<p>Some care should be taken as to which wires are connected with tunnels to which other wires, such as in this case:</p>
+
+<p><img src="lab5img/tunnels3.png" alt="" /></p>
+
+<p>Which in turn has the following effect:</p>
+
+<p><img src="lab5img/tunnels4.png" alt="" /></p>
+
+<p>We <em>strongly</em> recommend you use tunnels with Logisim, because they make your circuits much cleaner looking, and therefore easier to debug.</p>
+
+<h4 id="extenders">Extenders</h4>
+
+<p>When changing the width of a wire, you should use a bit extender for clarity. For example, consider the following implementation of extending an 8-bit wire into a 16-bit wire:</p>
+
+<p><img src="lab5img/extend1.png" alt="" /></p>
+
+<p>Whereas the following is much simpler, easier to read, and less error-prone:</p>
+
+<p><img src="lab5img/extend2.png" alt="" /></p>
+
+<p>Additionally consider the case of throwing out bits. In this example, an 8-bit wire is being converted into a 4-bit wire by throwing out the other bits:</p>
+
+<p><img src="lab5img/extend3.png" alt="" /></p>
+
+<p>Despite the implications of its name, a bit extender can also do this same operation:</p>
+
+<p><img src="lab5img/extend4.png" alt="" /></p>
+
+<h3 id="part-4-practice-with-splitters">Part 4: Practice with Splitters</h3>
+
+<p>We’re going to construct a circuit that manipulates an 8-bit number.</p>
+
+<h4 id="action-item-3">Action Item</h4>
+<p>Complete the following steps to create the splitter circuit, and show this to your TA (remember to save). When you’ve completed the circuit, answer the question in step 11.</p>
+
+<p><strong>Do not move staff-provided input and output pins. This will break the testing framework and harness.  If your circuit doesn’t pass the tests and you think it is correct, ensure your circuit fits in the testing harness in <code class="language-plaintext highlighter-rouge">testing/circ_files/ex4_test.circ</code>.</strong></p>
+
+<!-- 1. Create a new subcircuit and name it `Ex4`. -->
+<ol>
+  <li>Open up the Exercise 4 schematic (<code class="language-plaintext highlighter-rouge">File-&gt;Open-&gt;ex4.circ</code>) and go to the empty Split circuit.</li>
+</ol>
+
+<!-- 2. Add an 8-bit input pin to your circuit and label it `In1`. -->
+
+<!-- 3. Add a 1-bit output pin labeled `Out1` and an 8-bit output pin labeled `Out2` to your circuit. -->
+
+<ol>
+  <li>
+    <p>Go to the <code class="language-plaintext highlighter-rouge">Wiring</code> folder and select the <code class="language-plaintext highlighter-rouge">Splitter</code> circuit. This circuit will take a wire and split it into a set of wires of smaller width. Conversely, it can also take many sets of wires and combine them into one.</p>
+  </li>
+  <li>
+    <p>Change the <code class="language-plaintext highlighter-rouge">Bit Width In</code> property (bus width) to <code class="language-plaintext highlighter-rouge">8</code>, and <code class="language-plaintext highlighter-rouge">Fan Out</code> property (# of branches) to <code class="language-plaintext highlighter-rouge">3</code>. Your splitter should now look as follows:</p>
+
+    <p><img src="lab5img/splitter.gif" alt="" /></p>
+  </li>
+  <li>
+    <p>Now, select which bits to send out to which part of your fan. The least significant bit is bit <code class="language-plaintext highlighter-rouge">0</code> and the most significant bit is bit <code class="language-plaintext highlighter-rouge">7</code>. Bit <code class="language-plaintext highlighter-rouge">0</code> should come out on fan arm <code class="language-plaintext highlighter-rouge">0</code>, bits <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">3</code>, <code class="language-plaintext highlighter-rouge">4</code>, <code class="language-plaintext highlighter-rouge">5</code> and <code class="language-plaintext highlighter-rouge">6</code> should come out on fan arm <code class="language-plaintext highlighter-rouge">1</code>, and bit <code class="language-plaintext highlighter-rouge">7</code> should come out on fan arm <code class="language-plaintext highlighter-rouge">2</code>. FYI: the <code class="language-plaintext highlighter-rouge">None</code> option means that the selected bit will not come out on ANY of the fan arms.</p>
+  </li>
+  <li>
+    <p>Route <code class="language-plaintext highlighter-rouge">In1</code> to the splitter. Attach a 2-input <code class="language-plaintext highlighter-rouge">AND</code> gate to fan arms <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">2</code> and route the output of the <code class="language-plaintext highlighter-rouge">AND</code> gate to <code class="language-plaintext highlighter-rouge">Out1</code>.</p>
+  </li>
+  <li>
+    <p>Now, interpret the input as a “sign and magnitude” number. Place logic gates and other circuits to prepare <code class="language-plaintext highlighter-rouge">Out2</code> to be the negative “sign and magnitude” value of the input. <a href="https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation">Sign and magnitude</a> is an alternate way of representing signed values - like 2’s Complement, but simpler! The combinational logic should be straight-forward.</p>
+  </li>
+  <li>
+    <p>We will need another splitter to recombine the fans into a single 8-bit bus. Place another splitter with the proper properties (Bit Width In: 8, Fan Out: 3, correct fan widths). Play with the <code class="language-plaintext highlighter-rouge">Facing</code> and <code class="language-plaintext highlighter-rouge">Appearance</code> properties to make your final circuit as clean-looking as possible.  At this point, <code class="language-plaintext highlighter-rouge">Out2</code> should be the negation of the input (interpreting the input as a “sign and magnitude” value).</p>
+  </li>
+  <li>
+    <p>Answer the following question:</p>
+    <blockquote>
+      <p>If we decide to take the input and interpret it as a 2’s Complement number, what inputs will produce <code class="language-plaintext highlighter-rouge">Out1 = 1</code>? <em>Hint: What do the first and last bits of a 2’s Complement number being 1 tell you about the number?</em></p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="part-5-rotate-right">Part 5: Rotate Right</h3>
+
+<p>With your knowledge of splitters and your knowledge and experience with multiplexers, you are ready to implement a non-trivial combinational logic block: <code class="language-plaintext highlighter-rouge">rotr</code>, which stands for “Rotate Right”. The idea is that <code class="language-plaintext highlighter-rouge">rotr A,B</code> will “rotate” the bit pattern of input <code class="language-plaintext highlighter-rouge">A</code> to the right by <code class="language-plaintext highlighter-rouge">B</code> bits. So, if <code class="language-plaintext highlighter-rouge">A</code> were <code class="language-plaintext highlighter-rouge">0b1011010101110011</code> and <code class="language-plaintext highlighter-rouge">B</code> were <code class="language-plaintext highlighter-rouge">0b0101</code> (<code class="language-plaintext highlighter-rouge">5</code> in decimal), the output of the block would be <code class="language-plaintext highlighter-rouge">0b1001110110101011</code>. Notice that the rightmost <code class="language-plaintext highlighter-rouge">5</code> bits were rotated off the right end of the value and back onto the left end. In RTL, the operation would be something like <code class="language-plaintext highlighter-rouge">R = A &gt;&gt; B | A &lt;&lt; (16 - B)</code>.</p>
+
+<h4 id="action-item-4">Action Item</h4>
+<p>Implement a subcircuit named <code class="language-plaintext highlighter-rouge">rotr</code> with the following inputs:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">A</code> (16-bit), the 16-bit input to be rotated</li>
+  <li><code class="language-plaintext highlighter-rouge">B</code> (4-bit), the rotation amount (why 4 bits?)
+<!-- Show off your `rotr` subcircuit in the `main` subcircuit.  -->
+You can find the starter subcircuit in <code class="language-plaintext highlighter-rouge">ex5.circ</code>.</li>
+</ul>
+
+<p><strong>Do not move staff-provided input and output pins. This will break the testing framework and harness.  If your circuit doesn’t pass the tests and you think it is correct, ensure your circuit fits in the testing harness in <code class="language-plaintext highlighter-rouge">testing/circ_files/ex5_test.circ</code>.</strong></p>
+
+<p>The output should be <code class="language-plaintext highlighter-rouge">A</code> rotated right by <code class="language-plaintext highlighter-rouge">B</code> bit positions, as outlined above. You are <strong>NOT</strong> allowed to use Logisim shifters in your solution, though all other combinational logic (MUXes, constants, gates, adders, etc.) is allowed. Logisim’s built-in MUXes (find them under the <code class="language-plaintext highlighter-rouge">Plexers</code> menu) might be especialy helpful. Your solution shouldn’t involve a clock or any clocked elements, like registers.</p>
+
+<p><strong>Hint 1</strong>: Before you start wiring, you should think very carefully about how you might decompose this problem into smaller ones and join them together. You should feel very free to use subcircuits when implementing <code class="language-plaintext highlighter-rouge">rotr</code>. If you don’t, expect to regret it.</p>
+
+<p><strong>Hint 2</strong>: Just because we gave you an RTL representation doesn’t mean it’s the best way to look at this problem. Think about the input bits of <code class="language-plaintext highlighter-rouge">B</code> and think about how to effectively use splitters! Can you do something with the binary form? Remember why binary is good for use in computers: a <code class="language-plaintext highlighter-rouge">1</code> is easy to represent as an <code class="language-plaintext highlighter-rouge">ON</code> signal, and a <code class="language-plaintext highlighter-rouge">0</code> is easy to represent as an <code class="language-plaintext highlighter-rouge">OFF</code> signal. Let’s say we want to rotate <code class="language-plaintext highlighter-rouge">9</code> times. <code class="language-plaintext highlighter-rouge">9</code> is <code class="language-plaintext highlighter-rouge">1001</code> in binary, or <code class="language-plaintext highlighter-rouge">1*8 + 0*4 + 0*2 + 1*1</code>. Can you use this to make a cleaner circuit? Making use of the rot* circuits we have provided is a good idea that will keep things clean!</p>
+
+<h2 id="testing">Testing</h2>
+
+<p>To test, run the testing script via:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./test.sh
+</code></pre></div></div>
+
+<p>Since Logisim will be running in one terminal window already, make sure to open up a new window to run the testing script. If it says you don’t have permission, run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x test.sh
+</code></pre></div></div>
+
+<p>This script will copy your circuits into a testing harness, run your circuits on different inputs, and compare your results to ours. Therefore, please do not touch anything in the <code class="language-plaintext highlighter-rouge">testing</code> folder unless a TA instructs you to do so. However, you are more than welcome to check out the circuitry involved in testing your code as you will encounter it again when working on Project 3.</p>
+
+<h2 id="checkoff">Checkoff</h2>
+<p>Please submit to the Lab Autograder assignment (same as last week!).</p>
+
+<p>Show your working <code class="language-plaintext highlighter-rouge">2-to-1 MUX</code>, <code class="language-plaintext highlighter-rouge">4-to-1 MUX</code>, <code class="language-plaintext highlighter-rouge">AddMachine</code>, <code class="language-plaintext highlighter-rouge">StateBitZero</code>, <code class="language-plaintext highlighter-rouge">StateBitOne</code>, <code class="language-plaintext highlighter-rouge">Split</code>, and <code class="language-plaintext highlighter-rouge">rotr</code> circuits to your TA. Be ready to explain how they work.</p>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script data-cfasync="false" src="http://cs61c.org/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>

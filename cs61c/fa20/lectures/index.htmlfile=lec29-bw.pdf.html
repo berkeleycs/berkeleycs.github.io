@@ -1,0 +1,401 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4"></h1>
+
+
+    <noscript>JavaScript must be enabled to view the requested pdf!</noscript>
+<a href="index.html%3Ffile=lec29-bw.pdf.html#back" onclick="window.history.back();event.preventDefault();">← Back</a>
+<div id="load_msg" style="align:center;"></div>
+<iframe id="pdf_viewer" src="index.html%3Ffile=lec29-bw.pdf.html" width="100%" height="750px" style="display:none;" defer></iframe>
+<script>
+var this_base_url = "/fa20/lectures";
+var base_viewer = "/assets/pdf.js/web/viewer.html?file=";
+var base_url = "/fa20/lectures/pdf/";
+var file_param = "file";
+var pptx_src = "https://docs.google.com/gview?embedded=true&url="
+var iframe = document.getElementById('pdf_viewer');
+var msg = document.getElementById('load_msg');
+msg.innerText = "Loading the file...";
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+}
+var file = getUrlParam(file_param);
+if (file == undefined) {
+    file = window.location.pathname.replace(RegExp("^" + this_base_url + "/?"), "");
+}
+if (file == undefined || file == "") {
+    msg.innerText = "Could not find a requested file!";
+} else {
+    $(window).bind("load", function() {
+        msg.innerText = "Checking if we have the file...";
+        file_url = window.location.origin + base_url + file;
+        var request;
+        if(window.XMLHttpRequest) {
+            request = new XMLHttpRequest();
+        } else {
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        function reqListener() {
+            if (this.status === 404) {
+                msg.innerText = "The requested file " + file + " could not be found!";
+            } else {
+                msg.style.display = "none";
+                if (file.endsWith("pptx")) {
+                    iframe.src = pptx_src + base_url + file;
+                } else {
+                    iframe.src = base_viewer + base_url + file;
+                }
+                iframe.style.display = "block";
+            }
+        }
+        request.addEventListener("load", reqListener);
+        request.open('HEAD', file_url);
+        request.send();
+    });
+}
+</script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html%3Ffile=lec29-bw.pdf.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>

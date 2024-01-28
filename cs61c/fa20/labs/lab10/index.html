@@ -1,0 +1,609 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 10</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: End of lab Friday, November 20</p>
+
+<h2 id="objectives">Objectives:</h2>
+<ul>
+  <li>Learn about basic OpenMP directives.</li>
+  <li>Write code to learn two ways of how <code class="language-plaintext highlighter-rouge">#pragma omp for</code> could be implemented. Learn about false sharing.</li>
+  <li>Larn about basic multi-processing programming.</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+<p>Pull the Lab 10 files from the lab starter repository with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull starter master
+</code></pre></div></div>
+
+<h2 id="part-1-multi-threading-programming-using-openmp">Part 1: Multi-threading programming using OpenMP</h2>
+<p>OpenMP stands for Open specification for Multi-Processing. It is a framework that offers a C 
+interface. It is not a built-in part of the language – most OpenMP features are directives 
+to the compiler.</p>
+
+<p>Benefits of multi-threaded programming using OpenMP include:</p>
+<ul>
+  <li>
+    <p>Very simple interface allows a programmer to separate a program into serial regions and parallel regions.</p>
+  </li>
+  <li>
+    <p>Convenient synchronization control (data race bugs in POSIX threads are very hard to trace).</p>
+  </li>
+</ul>
+
+<p>In this lab, we will practice some basic usage of OpenMP. 
+<strong>Feel free to build and use OpenMP on your own machine, but it would be the easiest to work on hive machines 
+as they have OpenMP built and ready for use.</strong></p>
+
+<h3 id="exercise-1---openmp-hello-world">Exercise 1 - OpenMP Hello World</h3>
+<p>Consider the implementation of Hello World (<code class="language-plaintext highlighter-rouge">hello.c</code>):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int main() {
+	#pragma omp parallel
+	{
+		int thread_ID = omp_get_thread_num();
+		printf(" hello world %d\n", thread_ID);
+	}
+}
+</code></pre></div></div>
+
+<p>This program will fork off the default number of threads and each thread will print out “hello world” in addition to which thread number it is. You can change the number of OpenMP threads by setting the environment variable <code class="language-plaintext highlighter-rouge">OMP_NUM_THREADS</code> or by using the <a href="https://gcc.gnu.org/onlinedocs/libgomp/omp_005fset_005fnum_005fthreads.html"><code class="language-plaintext highlighter-rouge">omp_set_num_threads</code></a> function in your program. The <code class="language-plaintext highlighter-rouge">#pragma</code> tells the compiler that the rest of the line is a directive, and in this case it is omp parallel. <code class="language-plaintext highlighter-rouge">omp</code> declares that it is for OpenMP and <code class="language-plaintext highlighter-rouge">parallel</code> says the following code block (what is contained in { }) can be executed in parallel. Give it a try:
+` make hello &amp;&amp; ./hello `</p>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">./hello</code> a couple of times, you should see that the numbers are not always in numerical order and will most likely vary across runs. This is because within the parallel region, OpenMP does the code in parallel and as a result does not enforce an ordering across all the threads. It is also vital to note that the variable <code class="language-plaintext highlighter-rouge">thread_ID</code> is local to a specific thread and not shared across all threads. In general with OpenMP, variables declared inside the parallel block will be private to each thread, but variables declared outside will be global and accessible by all the threads.</p>
+
+<p><strong>You will complete the next two exercises by modifying the functions inside <code class="language-plaintext highlighter-rouge">omp_apps.c</code>.</strong></p>
+
+<h2 id="exercise-2---vector-addition">Exercise 2 - Vector Addition</h2>
+
+<p>Vector addition is a naturally parallel computation, so it makes for a good first exercise. The <code class="language-plaintext highlighter-rouge">v_add</code> functions inside <code class="language-plaintext highlighter-rouge">omp_apps.c</code> will return the array that is the cell-by-cell addition of its inputs x and y. A first attempt at this might look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void v_add(double* x, double* y, double* z) {
+	#pragma omp parallel
+	{
+		for(int i=0; i&lt;ARRAY_SIZE; i++)
+			z[i] = x[i] + y[i];
+	}
+}
+</code></pre></div></div>
+
+<p>You can run this (<code class="language-plaintext highlighter-rouge">make v_add</code> followed by <code class="language-plaintext highlighter-rouge">./v_add</code>) and the testing framework will vary the number of threads and time it. You will see that this actually seems to do worse as we increase the number of threads. The issue is that each thread is executing all of the code within the <code class="language-plaintext highlighter-rouge">omp parallel</code> block, meaning if we have 8 threads, we will actually be adding the vectors 8 times. 
+Rather than have each thread run the entire for loop, we need to split up the for loop across all the threads so each thread does only a portion of the work.</p>
+
+<p>Your task is to optimize <code class="language-plaintext highlighter-rouge">v_add.c</code> (speedup may plateau as the number of threads continues to increase). To aid you in this process, two useful OpenMP functions are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">int omp_get_num_threads();</code></li>
+  <li><code class="language-plaintext highlighter-rouge">int omp_get_thread_num();</code></li>
+</ul>
+
+<p>The function <code class="language-plaintext highlighter-rouge">omp_get_num_threads()</code> will return how many threads there are in a <code class="language-plaintext highlighter-rouge">omp parallel</code> block, and <code class="language-plaintext highlighter-rouge">omp_get_thread_num()</code> will return the thread ID.</p>
+
+<p>Divide up the work for each thread through two different methods (write different code for each of these methods):</p>
+
+<ol>
+  <li>First task, <strong>slicing</strong>: have each thread handle adjacent sums: i.e. Thread 0 will add the elements at indices <code class="language-plaintext highlighter-rouge">i</code> such that <code class="language-plaintext highlighter-rouge">i % omp_get_num_threads()</code> is <code class="language-plaintext highlighter-rouge">0</code>, Thread 1 will add the elements where <code class="language-plaintext highlighter-rouge">i % omp_get_num_threads()</code> is <code class="language-plaintext highlighter-rouge">1</code>, etc.</li>
+  <li>Second task, <strong>chunking</strong>: if there are N threads, break the vectors into N contiguous chunks, and have each thread only add that chunk (like the figure above).</li>
+</ol>
+
+<p>Hints:</p>
+<ul>
+  <li>Use the two functions we listed above somehow in the for loop to choose which elements each thread handles.</li>
+  <li>You may need a special case to prevent going out of bounds for <code class="language-plaintext highlighter-rouge">v_add_optimized_chunks</code>. Don’t be afraid to write one.</li>
+  <li>Thinking about false sharing–read more <a href="https://software.intel.com/en-us/articles/avoiding-and-identifying-false-sharing-among-threads">here</a> and <a href="https://en.wikipedia.org/wiki/False_sharing">here</a>.</li>
+</ul>
+
+<p>For this exercise, we are asking you to manually split the work amongst threads since this is a common pattern used in software optimization. The designers of OpenMP actually made the <code class="language-plaintext highlighter-rouge">#pragma omp for</code> directive to automatically split up independent work. Here is the function rewritten using it. <strong>You may NOT use this directive in your solution to this exercise</strong>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void v_add(double* x, double* y, double* z) {
+	#pragma omp parallel for 
+	for(int i=0; i&lt;ARRAY_SIZE; i++)
+		z[i] = x[i] + y[i];
+}
+</code></pre></div></div>
+
+<p>Test the performance of your code with <code class="language-plaintext highlighter-rouge">make v_add &amp;&amp; ./v_add</code></p>
+
+<h2 id="exercise-3---dot-product">Exercise 3 - Dot Product</h2>
+
+<p>The next task is to compute the dot product of two vectors. At first glance, implementing this might seem not too different from <code class="language-plaintext highlighter-rouge">v_add</code>, but the challenge is how to sum up all of the products into the same variable (reduction). A sloppy handling of reduction may lead to <strong>data races</strong>: all the threads are trying to read and write to the same address simultaneously. One solution is to use a <strong>critical section</strong>. The code in a critical section can only be executed by a single thread at any given time. Thus, having a critical section naturally prevents multiple threads from reading and writing to the same data, a problem that would otherwise lead to data races. One way to avoid data races is to use the <code class="language-plaintext highlighter-rouge">critical</code> primitive provided by OpenMP. An implementation, <code class="language-plaintext highlighter-rouge">dotp_naive</code> in <code class="language-plaintext highlighter-rouge">omp_apps.c</code>, protects the sum with a critical section.</p>
+
+<p>Try out the code (<code class="language-plaintext highlighter-rouge">make dotp &amp;&amp;./dotp</code>). Notice how the performance gets much worse as the number of threads goes up? By putting all of the work of reduction in a critical section, we have flattened the parallelism and made it so only one thread can do useful work at a time (not exactly the idea behind thread-level parallelism). This contention is problematic; each thread is constantly fighting for the critical section and only one is making any progress at any given time. As the number of threads goes up, so does the contention, and the performance pays the price. Can we reduce the number of times that each thread needs to use a critical section?</p>
+
+<p>Tasks:</p>
+<ul>
+  <li>Fix this performance problem <strong>without</strong> using the <code class="language-plaintext highlighter-rouge">reduction</code> keyword in <code class="language-plaintext highlighter-rouge">dotp_manual_optimized</code>. Remember that we want to reduce the number of times each thread enters the <code class="language-plaintext highlighter-rouge">critical</code> section.</li>
+  <li>Next, fix this problem using OpenMP’s built-in <code class="language-plaintext highlighter-rouge">reduction</code> keyword in <code class="language-plaintext highlighter-rouge">dotp_reduction_optimized</code>.(Note that your code should no longer contain <code class="language-plaintext highlighter-rouge">#pragma omp critical</code>.)</li>
+</ul>
+
+<h2 id="part-2-intro-to-multi-processing-programming">Part 2: Intro to multi-processing programming</h2>
+
+<p>OpenMP is a convenient way to do multi-threading computation. Another common task level parallelism approach is multiprocessing. 
+A thread is a single execution sequence that can be managed independently by the operating system. A process is an instance of a computer program that is being executed. It consists of an address space and one or more threads of control. It is the main abstraction for protection provided by the operating system kernel.</p>
+
+<p>The key differences between multi-threading and multiprocessing is that in multi-threading, threads share the same address space, whereas in multiprocessing, each process has its own address space. 
+Performance wise, this difference leads to two observations:</p>
+<ol>
+  <li>Threads have lower overhead (low memory and other resource footprint), and the cost of communication between threads is low as threads can only read/write to memory addresses in the same address space.</li>
+  <li>Sharing memory means we have to be careful about concurrency issues: when multiple threads can read/write to the same memory address, it can be hard to reason about correctness.</li>
+</ol>
+
+<p><img src="assets/process.png" width="50%" />
+<img src="assets/threads.png" width="50%" /></p>
+
+<p>(credit to <a href="https://drawings.jvns.ca/">Julia Evans</a>)</p>
+
+<h3 id="background---http-web-server-and-multi-processing">Background - Http Web Server and Multi-processing</h3>
+
+<p>In the second part of this lab, we will have a very basic but fun practice on writing multi-processing programs.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">fork</code> syscall is used to create a new process by duplicating the calling process. If everything works fine, calling <code class="language-plaintext highlighter-rouge">fork</code> should return the process ID of the child process being created to the calling process, and 0 to the newly created process (which is usually refered to as the child process). A negative value is returned if the creation of a child process failed. <a href="http://man7.org/linux/man-pages/man2/fork.2.html">Read more</a>.</p>
+
+<p>For example, the following code:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+</span><span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="n">pid_t</span> <span class="n">child_pid</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Main process id = %d (parent PID = %d)</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">getpid</span><span class="p">(),</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span>  <span class="n">getppid</span><span class="p">());</span>
+  <span class="n">child_pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">child_pid</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Parent: child's process id = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">child_pid</span><span class="p">);</span>
+  <span class="k">else</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Child:  my process id = %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="n">getpid</span><span class="p">());</span> 
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>may output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Main process id = 9075 (parent PID = 32146)
+Parent: child's process id = 9076
+Child:  my process id = 9076
+</code></pre></div></div>
+
+<p>Calling <code class="language-plaintext highlighter-rouge">fork()</code> creates a child process. <strong>It might come as a surprise to you that this function returns to both the parent and the child process - the parent process gets the process ID of the child process being created, while 0 is returned to the child process. Thus, the parent and child processes diverge at the <code class="language-plaintext highlighter-rouge">if</code> block.</strong></p>
+
+<p>Make sure you understand this code snippet before proceeding.</p>
+
+<p>The program that we want you to parallelize is a basic HTTP web server. A web server creates a listening socket and binds it to a port, then waits for a client to connect to the port. Once a connection reqeust reaches, the server obtains a new connection socket, reads in and parses the HTTP request, then responds to the request by serving the requested file. For simplicity, the server program that we will be working with only reponds to “GET” requests.</p>
+
+<p>A serial version is already implemented for you. To start, run <code class="language-plaintext highlighter-rouge">make server_basic &amp;&amp; ./server_basic</code> from the command line. 
+This server program will run locally using <code class="language-plaintext highlighter-rouge">lab10/files/</code> as the serve file directory, and listen to port 8000 by default (this can be changed using a command line argument, for example, <code class="language-plaintext highlighter-rouge">./server_basic --port 8080</code>). There are two ways to make a request: either open a browser and navigate to <code class="language-plaintext highlighter-rouge">localhost:8000/[request filename]</code> or use the curl program: run <code class="language-plaintext highlighter-rouge">curl localhost:8000/[request filename]</code> from the command line. (Type <code class="language-plaintext highlighter-rouge">man curl</code> for more usage of <code class="language-plaintext highlighter-rouge">curl</code>.)</p>
+
+<p>For our purpose here, the details of the server implementation can largely be ignored, but the function <code class="language-plaintext highlighter-rouge">server_forever</code> defined in <code class="language-plaintext highlighter-rouge">server_utils.c</code> needs your optimization. In this current implementation, the server program operates on a single process. Once the main process gets a request, it will work on serving the request before coming back to greet the next request. Therefore, if serving one request takes more than a blink – best luck on clients who need to be served later.</p>
+
+<p>If the requested filename refers to a directory, the server first looks for the presence of an <strong>index.html</strong> file. If that is found, that webpage will be served. Otherwise it will present links to each file under the requested directory.</p>
+
+<p>This server also offers two twists:</p>
+<ul>
+  <li>If the request is <code class="language-plaintext highlighter-rouge">localhost:8000/report</code>, it will run the <code class="language-plaintext highlighter-rouge">dotp</code> program and serve the result in text. The <code class="language-plaintext highlighter-rouge">ARRAY_SIZE</code> parameter has a default value set in <code class="language-plaintext highlighter-rouge">omp_apps.h</code>, but you can change it from the command line: <code class="language-plaintext highlighter-rouge">./server_basic --dotp-size 10000000</code>.</li>
+  <li>It implements the routing feature. If the request is <code class="language-plaintext highlighter-rouge">/filter/[filename].bmp</code>, it will run a very simple image processing program (specifially, the <a href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm">sobel edge detector</a> on the requested image, and return a html web page that display the original image and the filtered image together. A few sample bmp images are provided under files directory. 
+For example, navigating to <code class="language-plaintext highlighter-rouge">localhost:8000/girl.bmp</code> should get the original picture, but if you navigate to <code class="language-plaintext highlighter-rouge">localhost:8000/filter/girl.bmp</code>, your browser should render the following:</li>
+</ul>
+
+<p><img src="assets/sample_output.jpg" alt="sample" /></p>
+
+<h4 id="notes">Notes</h4>
+<ul>
+  <li>
+    <p>If you do this exercise on a hive machine using ssh and want to make client requests using your local browser (sadly we can’t just go to Soda Hall these days…), say you <code class="language-plaintext highlighter-rouge">ssh</code> to <code class="language-plaintext highlighter-rouge">[login]@hive9.cs.berkeley.edu</code> and start the server using default setup (server listening to 127.0.0.1:8000), you can reqeust from browser using url <code class="language-plaintext highlighter-rouge">http://hive9.cs.berkeley.edu:8000/</code>. And, of course, you can also use <code class="language-plaintext highlighter-rouge">curl</code> from the command line.</p>
+  </li>
+  <li>
+    <p>The bmp library we use here is very basic. It lacks many relatively complicated padding features necessary to work with images of any sizes. 
+In fact, the filter algorithm will only work nicely on bmp images that have dimensions of powers of 2. Don’t be too surprised at seeing funky results if you try other image sources.</p>
+  </li>
+</ul>
+
+<p>Optional:</p>
+<ul>
+  <li>The sobel edge detector is implemented for you. Can you optimize it using OpenMP?</li>
+</ul>
+
+<p>(Feel free to implement other image processing algorithms and play with the server any way you like.)</p>
+
+<p>To simulate a costly computation, the request handler is made to wait 5 seconds after it finishes serving the requested file. You can easily observe this inefficiency by making two consecutive requests – the second one will halt for a while before getting a response.</p>
+
+<p>Can we improve the server with some parallelism?</p>
+
+<h3 id="exercise">Exercise:</h3>
+<p>Instead of serving a request with the main process running the server program, always fork a new child process to do that and let the parent process continue to greet new requests. The <code class="language-plaintext highlighter-rouge">fork</code> mechanics demonstrated in the sample code above should be adequate to help you finish the implementation.</p>
+
+<p>The created child process has its own set of system resources (address space, registers, a stack, open handles to system objects, security context, etc). You need to explicitly clean up and recycle upon finishing the computation task. Take a look at <a href="https://linux.die.net/man/3/exit">the <code class="language-plaintext highlighter-rouge">exit</code> syscall</a>.</p>
+
+<p>To test your optimization, run <code class="language-plaintext highlighter-rouge">make server_process &amp;&amp; ./server_process</code>, then make two consecutive requests to any file, verify that the second request is immediately served. We provide a simple timer script, <code class="language-plaintext highlighter-rouge">timer.sh</code>, to automate this process.</p>
+
+<p>Run the compiled and linked server binary (either <code class="language-plaintext highlighter-rouge">server_basic</code> or <code class="language-plaintext highlighter-rouge">server_process</code> in one terminal. Then, <strong>on another terminal</strong> (<code class="language-plaintext highlighter-rouge">ssh</code> to hive as needed), run <code class="language-plaintext highlighter-rouge">./timer.sh</code>. The script would report the amount of time it takes to serve the requested files.</p>
+
+<p>The performance gain of the forking implementation should be very impressive.</p>
+
+<p>Note: Forked child processes are not guaranteed to be killed when you kill the parent process from command line by hitting Ctrl+C. 
+This may lead to a side effect that the default port 8000 is occupied and you won’t be able to restart your server program listening to the same port. 
+The way to do it properly is out of scope for the purpose of 61C, so we have implemented this for you in the starter code. (You will learn to resolve issues like such in CS162, but you’re encouraged to figure out what the starter code actually does on your own).
+We provide a work around here: If a port you attempt to use is occupied by a zombie process, you can kill it using command <code class="language-plaintext highlighter-rouge">fuser -k [port#]/tcp</code>.</p>
+
+<p>Another work around is to use a different port number by passing in a command line argument,  for example, <code class="language-plaintext highlighter-rouge">./server_process --port 8080</code>.</p>
+
+<p>(FYI: forking a process to respond to a request is probably not the best parallelism approach – the modern solution is to use a thread pool where the overhead is much lower and you have convenient control over server load.)</p>
+
+<h2 id="speedup-requirements">Speedup Requirements</h2>
+<p>The lab autograder tests are slightly modified versions of the tests you have locally. In addition to correctness, it looks for some basic improvements in performance. In particular:</p>
+<ul>
+  <li>A <strong>2x</strong> speedup from the naive benchmark to the fastest adjacent/chunks runtime (out of all different number of threads) for <code class="language-plaintext highlighter-rouge">v_add</code>.</li>
+  <li>A <strong>9x</strong> speedup from the naive benchmark to the fastest manual/reduction runtime (out of all different number of threads) for <code class="language-plaintext highlighter-rouge">dotp</code>.</li>
+  <li>You should make sure your server responds within <strong>100ms</strong> for 3 consecutive requests (on the Hive), although the autograder has a more lenient requirement due to its limited CPU power.</li>
+</ul>
+
+<h2 id="checkoff">Checkoff</h2>
+<p>Please submit your code to the <strong>Lab Autograder</strong> assignment. Below are some questions to consider:</p>
+
+<h3 id="part1">Part1</h3>
+
+<h4 id="exercise-2">Exercise 2:</h4>
+<ul>
+  <li>Which version of your code runs faster, chunks or adjacent? What do you think the reason for this is? Explain to the person checking you off.</li>
+</ul>
+
+<h4 id="exercise-3">Exercise 3:</h4>
+<ul>
+  <li>Explain the difference in performance as the number of threads changes.</li>
+</ul>
+
+<h3 id="part2">Part2</h3>
+<ul>
+  <li>We see the speedup in the time taken to send consecutive requests. However, does our forking scheme increase the actual computation time?</li>
+</ul>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>

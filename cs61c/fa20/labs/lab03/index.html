@@ -1,0 +1,752 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 3</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: Friday, September 18th</p>
+
+<h2 id="before-you-begin">Before you begin</h2>
+<p>This lab is somewhat longer than the previous labs (and longer than most future
+labs as well). This is in order to give everyone a chance to get comfortable
+with writing RISC-V and using the Venus simulator before the release of project
+2, which will require you to write a fair amount of assembly.</p>
+
+<p>To this end, we recommend that you watch this week’s lectures and get started
+on this assignment as early as possible. Good luck! If you have any questions
+or run into any issues, then please feel free to ask in office hours or on Piazza.</p>
+
+<h2 id="goals">Goals</h2>
+<ul>
+  <li>Practice running and debugging RISC-V assembly code.</li>
+  <li>Write RISC-V functions with the correct function calling procedure.</li>
+  <li>Get an idea of how to translate C code to RISC-V.</li>
+  <li>Get familiar with using the Venus simulator</li>
+</ul>
+
+<h2 id="getting-the-files">Getting the files</h2>
+<p>To get the starter files for this lab, run the following command in your <code class="language-plaintext highlighter-rouge">labs</code>
+directory.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull starter master
+</code></pre></div></div>
+
+<p>If you get an error like the following:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: <span class="s1">'starter'</span> does not appear to be a git repository
+fatal: Could not <span class="nb">read </span>from remote repository.
+</code></pre></div></div>
+<p>make sure to set the starter remote as follows:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add starter https://github.com/61c-teach/fa20-lab-starter.git
+</code></pre></div></div>
+<p>and run the original command again.</p>
+
+<h2 id="intro-to-assembly-with-risc-v-simulator">Intro to Assembly with RISC-V Simulator</h2>
+<p>In this course, we have so far dealt mostly with C programs (with the <code class="language-plaintext highlighter-rouge">.c</code>
+file extension), used the <code class="language-plaintext highlighter-rouge">gcc</code> program to compile them to machine code,
+and then executed them directly on your computer or hive machine.
+Now, we’re shifting our focus to the RISC-V assembly language, which is a
+lower-level language much closer to machine code.
+We can’t execute RISC-V code directly because your computer and the hives
+are built to run machine code from other assembly languages - most likely
+x86 or ARM.</p>
+
+<p>In this lab, we will deal with several RISC-V assembly program files,
+each of which have a <code class="language-plaintext highlighter-rouge">.s</code> file extension. To run these, we will need to
+use <strong>Venus</strong>, a RISC-V simulator that you can find <a href="https://venus.cs61c.org/">here</a>.
+There is also a <code class="language-plaintext highlighter-rouge">.jar</code> version of Venus that we have provided in the <code class="language-plaintext highlighter-rouge">tools</code>
+folder under your base lab repository.</p>
+
+<h3 id="assemblyvenus-basics">Assembly/Venus Basics</h3>
+<p>To get started with Venus, please take a look at “The Editor Tab” and “The
+Simulator Tab” in the <a href="http://cs61c.org/resources/venus-reference">Venus reference</a>. We recommend
+that you read this whole page at some point, but these sections should be
+enough to get started.</p>
+
+<p><strong>For the following exercises, please make sure your completed code is saved on
+a file on your local machine. Otherwise, we will have no proof that you completed
+the lab exercises.</strong></p>
+
+<h2 id="exercise-0-connecting-your-files-to-venus">Exercise 0: Connecting your files to Venus</h2>
+<p>In previous iterations of the course, the Venus web editor allows you to write
+assembly code from scratch or to manually upload and download files, but thanks
+to a recent update, you can now “mount” a folder from your local device onto
+Venus’s web frontend! This means that any changes you make in Venus’s editor
+will be reflected in your local files, and vice versa.</p>
+
+<p>This exercise will walk you through the process of connecting your file system
+to Venus, which should save you a lot of trouble copy/pasting files between your
+local drive and the Venus editor.</p>
+
+<p><strong>If for some reason this feature ends up not working for you</strong> (it’s
+relatively new, and there’s a chance there might still be bugs), then for the rest
+of this assignment, wherever it says to open a file in Venus, you should copy/paste
+the contents into the Venus web editor, and manually copy/paste those changes back
+to your local machine.</p>
+
+<p>Here’s what you need to do:</p>
+<ul>
+  <li>In the labs folder on your local machine, run <code class="language-plaintext highlighter-rouge">java -jar tools/venus.jar . -dm</code>.
+This will expose your lab directory to Venus on a network port (6161 by default).
+    <ul>
+      <li>You should see the message
+<code class="language-plaintext highlighter-rouge">To connect, enter `mount http://localhost:6161 vmfs` on Venus.</code>,
+as well as a a big “Javalin” logo.</li>
+      <li>If you see a message along the lines of “port unable to be bound”, then you
+can specify the port number explicitly by appending <code class="language-plaintext highlighter-rouge">--port &lt;port number&gt;</code>
+to the command (for example, <code class="language-plaintext highlighter-rouge">java -jar tools/venus.jar . -dm --port 6162</code>
+will expose the file system on port 6162)</li>
+    </ul>
+  </li>
+  <li>Open https://venus.cs61c.org in your web browser. In the Venus terminal, run
+<code class="language-plaintext highlighter-rouge">mount local vmfs</code> (if you chose a different port, replace “local” with the full
+URL, such as <code class="language-plaintext highlighter-rouge">http://localhost:6162</code>). This connects Venus to your file system.</li>
+  <li>Go to the “Files” tab. You should now be able to see your labs directory under
+the <code class="language-plaintext highlighter-rouge">vmfs</code> folder.</li>
+  <li>Navigate to <code class="language-plaintext highlighter-rouge">lab03</code>, and make sure it works by hitting the <code class="language-plaintext highlighter-rouge">Edit</code> button next
+to <code class="language-plaintext highlighter-rouge">ex1.s</code>. This should open in the <code class="language-plaintext highlighter-rouge">Editor</code> tab.
+    <ul>
+      <li>If you make any changes to the file in the <code class="language-plaintext highlighter-rouge">Editor</code> tab, hitting command-s
+on a Mac and ctrl-s on Windows/Linux will update your local copy of the file.
+To check if the save was successful, open the file on your local machine to see
+if it matches what you have in the web editor (unfortunately no feedback message
+has been implemented yet).</li>
+      <li><strong>Note:</strong> If you make any changes to a file in your local machine, if you
+had the same file open in the Venus editor, you’ll need to reopen it
+from the “Files” menu to get the new changes.</li>
+    </ul>
+  </li>
+  <li>To make it so that the file system will attempt to remount automatically
+whenever you close and reopen Venus, enable “Save on Close” in the Settings pane
+(again in the Venus tab).
+This will make the Venus web client attempt to locate the file system exposed
+by running the Venus jar, and will pop up an error saying that it couldn’t
+connect to the server if it doesn’t see it running. If this happens, just
+follow the above steps to manually remount the file system.</li>
+</ul>
+
+<p>Once you’ve got <code class="language-plaintext highlighter-rouge">ex1.s</code> open, you’re ready to move on to Exercise 1!</p>
+
+<h2 id="exercise-1-familiarizing-yourself-with-venus">Exercise 1: Familiarizing yourself with Venus</h2>
+
+<p>Getting started:</p>
+
+<ol>
+  <li>Open <code class="language-plaintext highlighter-rouge">ex1.s</code> into the Venus editor. If you were unable to mount the filesystem in
+Exercise 0, then you can copy/paste <code class="language-plaintext highlighter-rouge">ex1.s</code> from your local machine into the Venus
+editor directly.</li>
+  <li>Click the “Simulator” tab and click the “Assemble &amp; Simulate from Editor” button.
+This will prepare the code you wrote for execution. If you click back to the
+“Editor” tab, your simulation will be reset.</li>
+  <li>In the simulator, to execute the next instruction, click the “step” button.</li>
+  <li>To undo an instruction, click the “prev” button. Note that undo may or may not
+undo operations performed by <code class="language-plaintext highlighter-rouge">ecall</code>, such as exiting the program or printing
+to console.</li>
+  <li>To run the program to completion, click the “run” button.</li>
+  <li>To reset the program from the start, click the “reset” button.</li>
+  <li>The contents of all 32 registers are on the right-hand side, and the
+console output is at the bottom.</li>
+  <li>To view the contents of memory, click the “Memory” tab on the right.
+You can navigate to different portions of your memory using the
+dropdown menu at the bottom.</li>
+</ol>
+
+<h3 id="action-item">Action Item</h3>
+<p>Open <code class="language-plaintext highlighter-rouge">ex1.s</code> in Venus and record your answers to the following questions.
+Some of the questions will require you to run the RISC-V code using
+Venus’s simulator tab.</p>
+
+<ol>
+  <li>What do the <code class="language-plaintext highlighter-rouge">.data</code>, <code class="language-plaintext highlighter-rouge">.word</code>, <code class="language-plaintext highlighter-rouge">.text</code> directives mean (i.e. what do
+you use them for)? <strong>Hint</strong>: think about the 4 sections of memory.</li>
+  <li>Run the program to completion. What number did the program output?
+What does this number represent?</li>
+  <li>At what address is <code class="language-plaintext highlighter-rouge">n</code> stored in memory? <strong>Hint</strong>: Look at the
+contents of the registers.</li>
+  <li>Without actually editing the code (i.e. without going into the “Editor” tab),
+have the program calculate the 13th fib number (0-indexed) by <em>manually</em>
+modifying the value of a register. You may find it helpful to first step
+through the code. If you prefer to look at decimal values, change the “Display
+Settings” option at the bottom.</li>
+</ol>
+
+<h2 id="exercise-2-translating-from-c-to-risc-v">Exercise 2: Translating from C to RISC-V</h2>
+
+<p>Open the files <code class="language-plaintext highlighter-rouge">ex2.c</code> and <code class="language-plaintext highlighter-rouge">ex2.s</code>. The assembly code provided (.s file) is a
+translation of the given C program into RISC-V.</p>
+
+<p>In addition to opening a file in the “Editor” tab and then running in the “Simulator”
+tab as described above, you can also run <code class="language-plaintext highlighter-rouge">ex2.s</code> directly within the Venus terminal
+by <code class="language-plaintext highlighter-rouge">cd</code>ing into the appropriate folder, then running <code class="language-plaintext highlighter-rouge">run ex2.s</code> or <code class="language-plaintext highlighter-rouge">./ex2.s</code>.
+Typing <code class="language-plaintext highlighter-rouge">vdb ex2.s</code> will also assemble the file and take you to the “Simulator” tab
+directly.</p>
+
+<h3 id="action-item-1">Action Item</h3>
+<p>Find/explain the following components of this assembly file.</p>
+<ul>
+  <li>The register representing the variable <code class="language-plaintext highlighter-rouge">k</code>.</li>
+  <li>The register representing the variable <code class="language-plaintext highlighter-rouge">sum</code>.</li>
+  <li>The registers acting as pointers to the <code class="language-plaintext highlighter-rouge">source</code> and <code class="language-plaintext highlighter-rouge">dest</code> arrays.</li>
+  <li>The assembly code for the loop found in the C code.</li>
+  <li>How the pointers are manipulated in the assembly code.</li>
+</ul>
+
+<h2 id="exercise-3-factorial">Exercise 3: Factorial</h2>
+
+<p>In this exercise, you will be implementing the <code class="language-plaintext highlighter-rouge">factorial</code> function in RISC-V.
+This function takes in a single integer parameter <code class="language-plaintext highlighter-rouge">n</code> and returns <code class="language-plaintext highlighter-rouge">n!</code>. A stub of
+this function can be found in the file <code class="language-plaintext highlighter-rouge">factorial.s</code>.</p>
+
+<p>You will only need to add instructions under the <code class="language-plaintext highlighter-rouge">factorial</code> label, and
+the argument that is passed into the function is configured to be
+located at the label <code class="language-plaintext highlighter-rouge">n</code>. You may solve this problem using either
+recursion or iteration. You may also assume that the <code class="language-plaintext highlighter-rouge">factorial</code> function
+will only be called on positive values with results that won’t overflow a
+32-bit two’s complement integer.</p>
+
+<h3 id="testing">Testing</h3>
+<p>As a sanity check, you should make sure your function properly returns
+that <code class="language-plaintext highlighter-rouge">3! = 6</code>, <code class="language-plaintext highlighter-rouge">7! = 5040</code> and <code class="language-plaintext highlighter-rouge">8! = 40320</code>.</p>
+
+<p>You have the option to test this using the online version of Venus, but we’ve
+provided a <code class="language-plaintext highlighter-rouge">.jar</code> for you to test locally! We’ll be using the <code class="language-plaintext highlighter-rouge">.jar</code> in the
+autograder so make sure to update your <code class="language-plaintext highlighter-rouge">factorial.s</code> file and run the following
+command before you submit to verify that the output is correct. Note that you
+will need to have java installed to run this command.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> tools/venus.jar lab03/factorial.s
+</code></pre></div></div>
+
+<h2 id="exercise-4-calling-convention-checker">Exercise 4: Calling Convention Checker</h2>
+
+<p>In this exercise, we’ll be looking at the code in <code class="language-plaintext highlighter-rouge">cc_test.s</code>. We’ll be using
+a feature that’s only available on the command line version of Venus, so if
+you’re still using the Venus web editor, make sure you hit cmd-s or ctrl-s
+to make sure your changes are reflected in your local files. Likewise, if you
+modify your local files and want to use the Venus web simulator, make sure to
+reopen your file through the simulator to make sure the changes are reflected.</p>
+
+<p>Throughout this course, we will be running automated checks to make sure your
+assembly complies with RISC-V calling conventions, as described in lecture and
+discussion. Here’s a quick recap: all functions that overwrite registers that
+are preserved by convention must have a prologue, which saves those register
+values to the stack at the start of the function, and an epilogue, which restores
+those values for the function’s caller. You can find a more detailed explanation
+along with some concrete examples in <a href="../../../resources/pdf%3Ffile=RISCV_Calling_Convention.pdf.html">these notes</a>.</p>
+
+<p>Bugs due to calling convention violations can often be difficult to find manually,
+so Venus provides a way to automatically report some of these errors at runtime.</p>
+
+<p>Take a look at the contents of the <code class="language-plaintext highlighter-rouge">cc_test.s</code> file, particularly at the <code class="language-plaintext highlighter-rouge">main</code>,
+<code class="language-plaintext highlighter-rouge">simple_fn</code>, <code class="language-plaintext highlighter-rouge">naive_pow</code>, <code class="language-plaintext highlighter-rouge">inc_arr</code>, and <code class="language-plaintext highlighter-rouge">helper_fn</code> functions. Now, run Venus locally with
+the following command:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> tools/venus.jar <span class="nt">-cc</span> lab03/cc_test.s
+</code></pre></div></div>
+
+<p><strong>Note:</strong> The <code class="language-plaintext highlighter-rouge">-cc</code> flag <strong>MUST</strong> go between <code class="language-plaintext highlighter-rouge">tool/venus.jar</code> and the file you’re
+running. If it goes before <code class="language-plaintext highlighter-rouge">venus.jar</code> it will be treated as an argument to the
+<code class="language-plaintext highlighter-rouge">java</code> program; if it goes after the file name it will treated as an argument to
+the <code class="language-plaintext highlighter-rouge">main</code> function of your assembly program.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">-cc</code> flag enables the calling convention checker, and detects some basic
+violations. You should see an output similar to the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[CC Violation]: (PC=0x00000080) Usage of unset register t0! main.S:58 mv a0, t0
+[CC Violation]: (PC=0x0000008C) Setting of a saved register (s0) which has not been saved! main.S:80 li s0, 1
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x00000094) Setting of a saved register (s0) which has not been saved! main.S:83 mul s0, s0, a0
+[CC Violation]: (PC=0x000000A4) Save register s0 not correctly restored before return! Expected 0x00000A3F, Actual 0x00000080. main.S:90 ret
+[CC Violation]: (PC=0x000000B0) Setting of a saved register (s0) which has not been saved! main.S:106 mv s0, a0 # Copy start of array to saved register
+[CC Violation]: (PC=0x000000B4) Setting of a saved register (s1) which has not been saved! main.S:107 mv s1, a1 # Copy length of array to saved register
+[CC Violation]: (PC=0x000000E4) Setting of a saved register (s0) which has not been saved! main.S:142 addi s0, t1, 1
+Venus ran into a simulator error!
+Attempting to access uninitialized memory between the stack and heap. Attempting to access '4' bytes at address '347579389'.
+</code></pre></div></div>
+
+<p>Find the source of each of the errors reported by the CC checker and fix it.
+Even though the output says <code class="language-plaintext highlighter-rouge">main.S</code>, the line number reported should still correspond
+to the correct line in <code class="language-plaintext highlighter-rouge">cc_test.s</code>: this is just an artifact of the way Venus
+works in order to support combining multiple assembly files together. You can find a
+list of CC error messages, as well as their meanings, in the
+<a href="http://cs61c.org/resources/venus-reference#calling-convention-checker">Venus reference</a>.</p>
+
+<p>Once you’ve fixed all the violations reported by the CC checker, the code
+might still fail: this is likely because there’s still some remaining calling convention
+errors that Venus doesn’t report. Since function calls in assembly language are ultimately
+just jumps, Venus can’t report these violations without more information, at risk of
+producing false positives.</p>
+
+<p>The fixes for all of these errors (both the ones reported by the CC checker and the
+ones it can’t find) should be added near the lines marked by the <code class="language-plaintext highlighter-rouge">FIXME</code> comments
+in the starter code.</p>
+
+<p><strong>Note:</strong> Venus’s calling convention checker will not report all calling convention
+bugs; it is intended to be used primarily as a sanity check. Most importantly, it will
+only look for bugs in functions that are exported with the <code class="language-plaintext highlighter-rouge">.globl</code> directive - the
+meaning of <code class="language-plaintext highlighter-rouge">.globl</code> is explained in more detail in the
+<a href="http://cs61c.org/resources/venus-reference#working-with-multiple-files">Venus reference</a>.</p>
+
+<h3 id="action-item-2">Action Item</h3>
+<p>Resolve all the calling convention errors in <code class="language-plaintext highlighter-rouge">cc_test.s</code>, and be able to answer the
+following questions:</p>
+<ul>
+  <li>What caused the errors in <code class="language-plaintext highlighter-rouge">simple_fn</code>, <code class="language-plaintext highlighter-rouge">naive_pow</code>, and <code class="language-plaintext highlighter-rouge">inc_arr</code> that
+were reported by the Venus CC checker?</li>
+  <li>In RISC-V, we call functions by jumping to them and storing the return address in
+the <code class="language-plaintext highlighter-rouge">ra</code> register. Does calling convention apply to the jumps to the <code class="language-plaintext highlighter-rouge">naive_pow_loop</code>
+or <code class="language-plaintext highlighter-rouge">naive_pow_end</code> labels?</li>
+  <li>Why do we need to store <code class="language-plaintext highlighter-rouge">ra</code> in the prologue for <code class="language-plaintext highlighter-rouge">inc_arr</code>, but not in any other function?</li>
+  <li>Why wasn’t the calling convention error in <code class="language-plaintext highlighter-rouge">helper_fn</code> reported by the CC checker?
+(Hint: it’s mentioned above in the exercise instructions.)</li>
+</ul>
+
+<p>Once you have answered these, run Venus with the calling convention checker on
+<code class="language-plaintext highlighter-rouge">factorial.s</code> from the last exercise as well. Make sure to fix any bugs you find.</p>
+
+<h3 id="testing-1">Testing</h3>
+<p>After fixing the errors in <code class="language-plaintext highlighter-rouge">cc_test.s</code>, run Venus locally with the above command to
+make sure the behavior of the functions hasn’t changed and that you’ve remedied all
+calling convention violations.</p>
+
+<p>Once you have fixed everything, running the above Venus command should output the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sanity checks passed! Make sure there are no CC violations.
+Found 0 warnings!
+</code></pre></div></div>
+
+<h2 id="exercise-5-risc-v-function-calling-with-map">Exercise 5: RISC-V function calling with <code class="language-plaintext highlighter-rouge">map</code></h2>
+
+<p>This exercise uses the file <code class="language-plaintext highlighter-rouge">list_map.s</code>.</p>
+
+<p>In this exercise, you will complete an implementation of <a href="https://en.wikipedia.org/wiki/Map_(higher-order_function)"><code class="language-plaintext highlighter-rouge">map</code></a>
+on linked-lists in RISC-V. Our function will be simplified to mutate the
+list in-place, rather than creating and returning a new list with the
+modified values.</p>
+
+<p>You will find it helpful to refer to the <a href="../../../resources/pdf%3Ffile=riscvcard.pdf.html">RISC-V green
+card</a> to
+complete this exercise. If you encounter any instructions or
+pseudo-instructions you are unfamiliar with, use this as a resource.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">map</code> procedure will take two parameters; the first parameter will
+be the address of the head node of a singly-linked list whose values are
+32-bit integers. So, in C, the structure would be defined as:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Our second parameter will be the <strong>address of a function</strong> that takes
+one int as an argument and returns an int. We’ll use the <code class="language-plaintext highlighter-rouge">jalr</code> RISC-V
+instruction to call this function on the list node values.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">map</code> function will recursively go down the list, applying the
+function to each value of the list and storing the value returned in
+that corresponding node. In C, the function would be something like
+this:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">map</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">head</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">map</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you haven’t seen the <code class="language-plaintext highlighter-rouge">int (*f)(int)</code> kind of declaration before,
+don’t worry too much about it. Basically it means that <code class="language-plaintext highlighter-rouge">f</code> is a pointer
+to a function, which, in C, can then be used exactly like any other
+function.</p>
+
+<p>There are exactly nine (9) markers (8 in <code class="language-plaintext highlighter-rouge">map</code> and 1 in <code class="language-plaintext highlighter-rouge">main</code>) in the
+provided code where it says <code class="language-plaintext highlighter-rouge">YOUR CODE HERE</code>.</p>
+
+<h3 id="action-item-3">Action Item</h3>
+<p>Complete the implementation of <code class="language-plaintext highlighter-rouge">map</code> by filling out each of these nine markers
+with the appropriate code. Furthermore, provide a sample call to <code class="language-plaintext highlighter-rouge">map</code> with <code class="language-plaintext highlighter-rouge">square</code>
+as the function argument. There are comments in the code that explain what should
+be accomplished at each marker. When you’ve filled in these instructions, running
+the code should provide you with the following output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9 8 7 6 5 4 3 2 1 0
+81 64 49 36 25 16 9 4 1 0
+</code></pre></div></div>
+<p>The first line is the original list, and the second line is the modified
+list after the map function (in this case square) is applied.</p>
+
+<h3 id="testing-2">Testing</h3>
+<p>To test this in the Venus web simulator, run <code class="language-plaintext highlighter-rouge">list_map.s</code> and examine the output.
+To test this locally, run the following command in your root lab directory (much
+like the one for <code class="language-plaintext highlighter-rouge">factorial.s</code>):</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> tools/venus.jar lab03/list_map.s
+</code></pre></div></div>
+
+<h2 id="transitioning-to-more-complex-risc-v-programs">Transitioning to More Complex RISC-V Programs</h2>
+<p>In the future, we’ll be working with more complex RISC-V programs that require
+multiple files of assembly code. To prepare for this, we recommend looking over
+the following sections of the Venus reference:</p>
+
+<ul>
+  <li><a href="http://cs61c.org/resources/venus-reference#writing-larger-risc-v-programs">Writing Larger RISC-V Programs</a></li>
+  <li><a href="http://cs61c.org/resources/venus-reference#the-venus-tab">Using the Web Terminal</a></li>
+  <li><a href="http://cs61c.org/resources/venus-reference#the-venus-tab">Passing Command Line Arguments</a></li>
+</ul>
+
+<h2 id="checkoff">Checkoff</h2>
+<p>Please submit to the Lab Autograder assignment (same as last week!).</p>
+
+<p>Checkoff questions for lab 3:</p>
+<ul>
+  <li>Make sure you understand and can answer the questions in exercises 1, 2, and 4!</li>
+</ul>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1191 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/fa20">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/calendar" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/staff" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/fa20/policies" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://oh.cs61c.org" >
+        OH Queue
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 0</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: Friday, September 4 (extended by 1 week for lab00 only)</p>
+
+<p>Hello! Welcome to CS61C! We’re excited to have you on board :D <del>Please pay attention as we
+demonstrate the safety features of this aircraft.</del></p>
+
+<p>This lab may be a little long, but please read carefully; it covers many important things that will
+prepare you for the rest of the course!</p>
+
+<h2 id="objectives">Objectives</h2>
+
+<p>Each lab will begin with a few objectives; use them to reflect on your learning and guide your
+thinking! Here are the objectives for this lab:</p>
+
+<ul>
+  <li>The student will be able to describe and adhere to all course policies, including the lab checkoff
+policy.</li>
+  <li>The student will set up accounts for GitHub, Gradescope, Hive machines, Piazza, and other
+course-related services.</li>
+  <li>The student will gain familiarity with Linux and Git commands.</li>
+</ul>
+
+<h2 id="jargon">Jargon</h2>
+
+<p>A quick clarification on some terms:</p>
+
+<ul>
+  <li>TA/GSI/uGSI: Teaching Assistant (sometimes called Graduate/Undergraduate Student Instructor).</li>
+  <li>AI: Academic Intern, also part of course staff. You’ll see them in checkoff, OH, and Piazza.
+    <ul>
+      <li>In this course, AI generally stands for this, and not “artificial intelligence”.</li>
+    </ul>
+  </li>
+  <li>OH: Office Hours, where you can meet course staff in (virtual) meetings and ask 61C-related
+questions. Or occasionally, if it’s not busy, non-61C-related things.</li>
+  <li>Hive/”Hive machines”/”the Hive”: a group of instructional servers. More details later in the lab.</li>
+</ul>
+
+<h2 id="exercise-0-introduce-yourself">Exercise 0: Introduce Yourself</h2>
+
+<p>This semester is going to be one of our largest yet, clocking in at 1200 enrolled (+ 50 on waitlist) as I’m writing this. In order to accomodate all the different situations people are in,
+we need to know a little more about your preferences for the class.</p>
+
+<h3 id="action-items">Action Items</h3>
+
+<ul>
+  <li>Please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSdoAAGDkazsNF-c2rQmky13_WGUiYsjtog8FCv1FrNenLOLEg/viewform" target="_blank" rel="noopener">the
+not-too-long introduction form</a> ASAP (by EOD Friday, August 28). The content of your responses
+will not affect your grade.
+    <ul>
+      <li>This is a Google Form. If you cannot access this form, please refer to the <a href="index.html#accessing-services">Accessing Services
+section</a> below.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="exercise-1-course-policies">Exercise 1: Course Policies</h2>
+
+<p>You can view the course policies on the <a href="../../policies.html" target="_blank" rel="noopener">policies page of the course website</a>. You are responsible for understanding and
+adhering to all policies throughout the course of the semester. Please pay particular attention to
+the <code class="language-plaintext highlighter-rouge">Grading</code>, <code class="language-plaintext highlighter-rouge">Labs</code>, and <code class="language-plaintext highlighter-rouge">Academic Dishonesty and Cheating</code> sections.</p>
+
+<h3 id="action-items-1">Action Items</h3>
+
+<ul>
+  <li>Once you’ve finished reviewing the policies, take the <a href="https://www.gradescope.com/courses/150586/assignments/605180/submissions/new" target="_blank" rel="noopener">Lab 0: Course Policies Quiz</a> on Gradescope.</li>
+</ul>
+
+<h2 id="exercise-2-setup">Exercise 2: Setup</h2>
+
+<p>Unfortunately, assignments in this course do require some (sometimes boring) setup. Let’s get that
+out of the way.</p>
+
+<h3 id="accessing-services">Accessing Services</h3>
+
+<p>CS 61C primarily uses a couple services for distributing assignments, receiving work, and grading.
+There’s a brief overview of the important ones in the sections below.</p>
+
+<p>If you’re unable to access any services or resources due to internet access restrictions, please
+download and use the Berkeley campus VPN at <a href="https://lib.berkeley.edu/using-the-libraries/vpn" target="_blank" rel="noopener">
+https://lib.berkeley.edu/using-the-libraries/vpn</a>. If the campus VPN is inaccessible or doesn’t
+work for you, contact us (Piazza preferrably, or email <code class="language-plaintext highlighter-rouge">cs61c [at] berkeley.edu</code>) and we can try to
+work something out.</p>
+
+<p>Unfortunately, some services and resources may be inaccessible or blocked in certain regions. As I’m
+writing this lab:</p>
+
+<ul>
+  <li>GitHub (AWS + their own infrastructure) is inaccessible in some regions.</li>
+  <li>Google and YouTube are inaccessible in some regions.</li>
+  <li>Gradescope and Piazza are hosted on Amazon Web Services (AWS), which may be partially inaccessible
+in some regions.</li>
+  <li>OH Queue and OkPy are hosted on Google Cloud Platform (GCP), which may be partially inaccessible
+in some regions.</li>
+  <li>The 61C website is hosted by GitHub Pages with Cloudflare in the middle, so it may be partially
+inaccessible in some regions.</li>
+  <li>Hive machines are accessed using the SSH protocol, which may be partially blocked in some
+environments (e.g. <code class="language-plaintext highlighter-rouge">CalVisitor</code> WiFi on campus).</li>
+</ul>
+
+<p>(╯°□°）╯︵ ┻━━━┻</p>
+
+<p>Also, this post ended up on Overheard in summer 2020, but with the VPN bit cropped out. Please don’t
+crop that out, it makes us look evil :(</p>
+
+<h3 id="calnet-id-and-berkeley-google-accounts">CalNet ID (and Berkeley Google accounts)</h3>
+
+<p>Most students should have a CalNet ID (and therefore, email ending in <code class="language-plaintext highlighter-rouge">@berkeley.edu</code>).</p>
+
+<ul>
+  <li>If a service allows CalNet ID login, use that whenever possible.</li>
+  <li>If a service prompts you to sign in with Google, log in using your <code class="language-plaintext highlighter-rouge">@berkeley.edu</code> email if
+possible. This is your “Berkeley Google account” (or bConnected account, but nobody says that).</li>
+</ul>
+
+<p>If you would like to use an existing account on a service, try to add your Berkeley email,
+preferrably as the primary email.</p>
+
+<h3 id="piazza">Piazza</h3>
+
+<p><a href="https://piazza.com/berkeley/fall2020/cs61c" target="_blank" rel="noopener">Piazza</a> is a
+discussion forum that we’ll be using as the main method of communication for this course. All
+announcements will be made here, and almost all questions or comments you may have should be posted
+here (unless we say otherwise).</p>
+
+<p>We’ve already emailed invites to the 61C Piazza course to most enrolled students. If you’ve recently
+enrolled, this may be delayed by several hours while the campus systems process your enrollment.</p>
+
+<p>Please read through the <a href="../../policies.html#discussion-forum" target="_blank" rel="noopener">Discussion Forum section of our policies</a>. Please remember and follow the Piazza
+Etiquette!</p>
+
+<h3 id="instructional-accounts-and-servers-the-hive">Instructional Accounts and Servers (the Hive!)</h3>
+
+<p>The “Hive” is a group of servers maintained by the EECS department. Campus is not exactly open right
+now, but they live in Soda 330 if you ever want to give them a hug! You can intearct with these
+servers remotely through SSH and the command line (more on that later). We’ve already installed most
+of the software we’ll be using on the Hive machines, so you can work on most assignments on the Hive
+if you want! You can find a list of Hive machines at <a href="https://hivemind.eecs.berkeley.edu" target="_blank" rel="noopener">Hivemind</a> (the names starting with <code class="language-plaintext highlighter-rouge">hive</code>). Every Hive machine
+shares the same network mount, so files will be synced across all the machines.</p>
+
+<p>You will need to <a href="https://acropolis.cs.berkeley.edu/~account/webacct/" target="_blank" rel="noopener">sign up for an EECS instructional account</a>, which you’ll use to access the Hive.
+We’ll also be using your instructional account username as your primary ID for checkoff (though you
+can use your <code class="language-plaintext highlighter-rouge">@berkeley.edu</code> email address for some exceptions).</p>
+
+<p>Note: If you can’t create an account for whatever reason, don’t worry! Fill out the form in the
+<a href="index.html#non-standard-enrollment">Non-standard Enrollment section</a>, and continue
+without an account for now.</p>
+
+<h3 id="gradescope">Gradescope</h3>
+
+<p><a href="https://www.gradescope.com" target="_blank" rel="noopener">Gradescope</a> is the platform
+we use for submitting and grading assignments. Programming assignments, homework, and quizzes will
+be submitted here.</p>
+
+<p>We’ve already invited most students to the 61C Gradescope course. To sign in, visit <a href="https://www.gradescope.com" target="_blank" rel="noopener">Gradescope</a>, click <code class="language-plaintext highlighter-rouge">Log In</code>,
+then <code class="language-plaintext highlighter-rouge">School Credentials</code>, then <code class="language-plaintext highlighter-rouge">CalNet ID</code>.</p>
+
+<p><strong>Warning</strong>: Please ensure you set your <code class="language-plaintext highlighter-rouge">@berkeley.edu</code> email as your primary email. If not, we
+might not be able to find your Gradescope account, and you may receive an F in the class!</p>
+
+<h3 id="github">GitHub</h3>
+
+<p><a href="https://github.com" target="_blank" rel="noopener">GitHub</a> is a hosted Git service we
+use for code distribution, along with GitHub Classroom tools.</p>
+
+<p>If you have an existing GitHub account, feel free to use that; repositories created in this course
+are private, and anything you do for this course shouldn’t affect the rest of your GitHub account.</p>
+
+<p>If you don’t have a GitHub account or want to make a new one, <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>.</p>
+
+<h3 id="youtube">YouTube</h3>
+
+<p>Most lectures and other video resources will be uploaded to <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener">YouTube</a>. You will need to be signed into YouTube using your
+Berkeley Google account to view some videos. If you’re unable to view a video, make sure you’re
+using your Berkeley Google account.</p>
+
+<h3 id="zoom">Zoom</h3>
+
+<p>We will be holding meetings (OH, lab checkoff, project parties, lectures, discussions, etc.) over
+<a href="https://berkeley.zoom.us" target="_blank" rel="noopener">Zoom</a>. When signing in, use
+the <code class="language-plaintext highlighter-rouge">Sign in with SSO</code> option, enter <code class="language-plaintext highlighter-rouge">berkeley.zoom.us</code>, and sign in with your CalNet ID.</p>
+
+<p>Regularly scheduled meetings (e.g. OH, discussions) will be held in standing Zoom rooms. The links
+for these can be found in the <a href="https://piazza.com/class/kd0ifacummd56a?cid=45" target="_blank" rel="noopener">Zoom Links Piazza post</a>.</p>
+
+<h3 id="oh-queue">OH Queue</h3>
+
+<p>Office Hours (OH), checkoffs, and project parties will be scheduled and managed through the <a href="https://oh.cs61c.org" target="_blank" rel="noopener">OH Queue</a>. Please use your Berkeley
+Google account when logging in; non-Berkeley Google accounts will not be able to use the OH Queue
+properly.</p>
+
+<p>Please read the blue info box on the OH Queue page.</p>
+
+<p>When your appointment/ticket is picked up by course staff, a large green <code class="language-plaintext highlighter-rouge">Join Call</code> button will
+appear on the appointment/ticket page. Clicking this button will take you to a Zoom call with the
+staff member. If you’re having issues, let staff know using the OH Queue chatbox.</p>
+
+<h3 id="non-standard-enrollment">Non-standard Enrollment</h3>
+
+<p>If you’re enrolled in the course as a Berkeley student, you can ignore this blurb.</p>
+
+<p>If you’re a concurrent enrollment student, or in CS 47C, or otherwise not enrolled in CS 61C, please
+fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScyFVeseZ-zHup1jl95z_3hbBY7HlaFYxu9DJM4R1t-zWROfg/viewform" target="_blank" rel="noopener">this form</a>
+so you can get access to our resources.</p>
+
+<h3 id="action-items-2">Action Items</h3>
+
+<ul>
+  <li>Sign up for and log into all the services described above.</li>
+  <li>If you’re getting tired of reading, try taking a short break (Minesweeper, anyone?)</li>
+</ul>
+
+<h2 id="exercise-3-command-line-essentials">Exercise 3: Command Line Essentials</h2>
+
+<p>If you took CS61A and CS61B, you likely have some experience with a command line interface (CLI) and
+terminal commands, but we’d like to list some less common commands here that may come in handy
+during the course. For a review of the basic UNIX commands, <a href="https://sp19.datastructur.es/materials/lab/lab1setup/lab1setup#b-learn-to-use-the-terminal" target="_blank" rel="noopener">look over the CS61B SP19 guide</a>. Be sure to read and understand
+section B of the guide as well as the commands below, since you’ll need them for Exercise 4.</p>
+
+<p>Example commands will be formatted like:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Hello world"</span>
+</code></pre></div></div>
+
+<p>Typing that (without the <code class="language-plaintext highlighter-rouge">$</code>) in your terminal will run the command. In this case, it just prints
+<code class="language-plaintext highlighter-rouge">"Hello world"</code>.</p>
+
+<p>Flags are commonly used to specify program options or alter behavior. They usually begin with one
+or two dashes, and can optionally take an argument.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">--help</span>
+<span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"Hello</span><span class="se">\n</span><span class="s2">world"</span>
+</code></pre></div></div>
+
+<h3 id="cli-shortcuts">CLI Shortcuts</h3>
+
+<p>As a CLI refresher, when typing commands or file paths:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">&lt;tab&gt;</code> will autocomplete the current term</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;up arrow&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;down arrow&gt;</code> will allow you to refill commands you’ve used previously without
+typing them again.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;ctrl&gt; + a</code> will move the cursor to the beginning of the current line (helpful for fixing
+mistakes)</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;ctrl&gt; + e</code> will move the cursor to the end of the current line (also helpful for fixing
+mistakes)</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;ctrl&gt; + r</code> will let you search through your recently used commands</li>
+</ul>
+
+<h3 id="working-with-files">Working with Files</h3>
+
+<p><code class="language-plaintext highlighter-rouge">touch</code> will create a blank file with the file name you provided.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch </span>example.txt
+</code></pre></div></div>
+
+<p>This will create a file named <code class="language-plaintext highlighter-rouge">example.txt</code> with nothing inside.</p>
+
+<p>If you’d like to create a file with contents already inside, you can use:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"Your contents here, inside double quotes"</span> <span class="o">&gt;</span> example.txt
+</code></pre></div></div>
+
+<p>This will create a file with the name <code class="language-plaintext highlighter-rouge">example.txt</code> in your current directory. If the file already
+exists, it will be overwritten. The file will contain <code class="language-plaintext highlighter-rouge">Your contents here, inside double quotes</code> but
+without the double quotes. The <code class="language-plaintext highlighter-rouge">&gt;</code> symbol takes one argument which redirects where data printed to
+stdout is sent. Here, we are redirecting the output of <code class="language-plaintext highlighter-rouge">echo</code> to a file named <code class="language-plaintext highlighter-rouge">example.txt</code>.</p>
+
+<p>You can also use the <code class="language-plaintext highlighter-rouge">echo</code> command by itself, in which case it will print the string to the
+terminal (without creating a file in the process).</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"yubi yubi~"</span>
+</code></pre></div></div>
+
+<p>You can view the contents of a file with the <code class="language-plaintext highlighter-rouge">cat</code> or <code class="language-plaintext highlighter-rouge">less</code> commands.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>example.txt
+<span class="nv">$ </span>less example.txt
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">cat</code> print the contents of <code class="language-plaintext highlighter-rouge">example.txt</code> to your terminal. <code class="language-plaintext highlighter-rouge">less</code> opens a basic editorYou can provide a relative
+or absolute path to print out non-local files.</p>
+
+<h3 id="man---manual-pages"><code class="language-plaintext highlighter-rouge">man</code> - Manual Pages</h3>
+
+<p>The manual pages (“man pages”) are great UNIX resources that are often underused; while not as
+versatile as Google, they contain documentation on UNIX components from program usage, language
+standards and conventions, and more. They also work offline, so they can be handy if you’re ever
+stuck in a North Alaskan woodland cabin in the middle of a snowstorm basking in the dying glow of a
+ThinkPad which BTW runs Arch Linux.</p>
+
+<p>While your favorite search engine probably also has the answers you’re looking for, in this course,
+we’d still like you to get comfortable with using <code class="language-plaintext highlighter-rouge">man</code>, especially for C and UNIX-related
+questions.</p>
+
+<p>If you want the man page for a single program/command, you can run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>man command_name | less
+</code></pre></div></div>
+
+<p>The man page for a program typically contains information about what the program is used for, what
+certain flags do when you invoke the program with them, and where to go for more information. Since
+we piped the man page into <code class="language-plaintext highlighter-rouge">less</code>, this page is scrollable (use your arrow keys or the space bar).
+Hit <code class="language-plaintext highlighter-rouge">q</code> to exit the man page and get back to your terminal prompt.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>man <span class="nb">echo</span> | less
+</code></pre></div></div>
+
+<p>The above command should bring up the man page for the <code class="language-plaintext highlighter-rouge">echo</code> command.</p>
+
+<p>If you want to search the man pages for a command that pertains to a keyword:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>man <span class="nt">-k</span> single_keyword | less
+</code></pre></div></div>
+
+<p>This command will search the manual pages for a command with the keyword <code class="language-plaintext highlighter-rouge">single_keyword</code>. Forget
+how to open files in Vim? You can search for <code class="language-plaintext highlighter-rouge">editor</code> and get a list of all editor-related commands
+on your system.</p>
+
+<h3 id="ssh---secure-shell"><code class="language-plaintext highlighter-rouge">ssh</code> - “Secure Shell”</h3>
+
+<p>For this class, we’ll expect you to test most of your projects, homeworks, and labs on the Hive
+machines. To access the Hive machines remotely, you’ll be using the SSH protocol and programs.</p>
+
+<p>Note: If you weren’t able to get an instructional account, you can come back here later!</p>
+
+<p>You can find a list of Hive machines at <a href="https://hivemind.eecs.berkeley.edu" target="_blank" rel="noopener">Hivemind</a>. There are 30 of them, named <code class="language-plaintext highlighter-rouge">hive1</code>, <code class="language-plaintext highlighter-rouge">hive2</code>, …, <code class="language-plaintext highlighter-rouge">hive30</code>. If its
+name starts with <code class="language-plaintext highlighter-rouge">hive</code>, it is a Hive machine. If it doesn’t start with <code class="language-plaintext highlighter-rouge">hive</code> (sorry <code class="language-plaintext highlighter-rouge">ashby</code>), it’s
+not a Hive machine.</p>
+
+<p>Sometimes, a Hive machine may be down or overloaded. If you’re getting “<code class="language-plaintext highlighter-rouge">Connection refused</code>” or
+“<code class="language-plaintext highlighter-rouge">Connection timeout</code>” or other connection errors, check Hivemind and pick another machine to use.</p>
+
+<p>Once you have an instructional account, you can SSH into an instructional server with the
+following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c0f1f5a5d0f415353532c04051a09">[email&#160;protected]</a>#.cs.berkeley.edu
+</code></pre></div></div>
+
+<p>Remember to replace <code class="language-plaintext highlighter-rouge">cs61c-???</code> with your instructional account username, and <code class="language-plaintext highlighter-rouge">hive#</code> with a Hive
+machine’s name. The default password is displayed by <a href="https://acropolis.cs.berkeley.edu/~account/webacct/" target="_blank" rel="noopener">WebAccount
+</a> when creating the account, so you might have to reset your password if you forgot it.</p>
+
+<p>Troubleshooting:</p>
+
+<ul>
+  <li>If nothing happens for a long time: check your internet connection. Some network firewalls,
+including <code class="language-plaintext highlighter-rouge">CalVisitor</code> on campus, block SSH. Try another network (<code class="language-plaintext highlighter-rouge">AirBears2</code> or <code class="language-plaintext highlighter-rouge">eduroam</code> if
+you’re on campus).</li>
+  <li><code class="language-plaintext highlighter-rouge">Connection refused</code> or other weird errors: the Hive machine you picked might be down. Try another
+one</li>
+  <li><code class="language-plaintext highlighter-rouge">Reserved for cs61c staff</code>: try another Hive machine :)</li>
+</ul>
+
+<p>When your connection succeeds, you should be able to interact with and run commands on your chosen
+Hive machine! To exit this SSH session, simply run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">exit</span>
+</code></pre></div></div>
+
+<p>Files on the Hive machines are stored on a network drive, so your account will have the same files
+on all 30 machines.</p>
+
+<p><strong>Note</strong>: If you want to change your instructional account password, you can SSH into the update server:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c1a2b2f7f0a2ecfefefe81b4b1a5a0b5a4efa2b2efa3a4b3aaa4ada4b8efa4a5b4">[email&#160;protected]</a>
+</code></pre></div></div>
+
+<h4 id="sanity-check">Sanity Check</h4>
+
+<p>When you’re in a SSH session, your prompt should look similar to this:</p>
+
+<p><img src="inst_prompt.jpg" width="300" /></p>
+
+<p>If it looks very different, try running <code class="language-plaintext highlighter-rouge">fix-dotfiles</code>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>/home/ff/cs61c/bin/fix-dotfiles
+</code></pre></div></div>
+
+<p>If your prompt still looks very different, contact course staff on Piazza.</p>
+
+<h3 id="scp---secure-copy"><code class="language-plaintext highlighter-rouge">scp</code> - “Secure Copy”</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">scp</code> program is used for copying files between computers using the SSH protocol.</p>
+
+<p>Sometimes, you may want to get individual files or entire folders from the Hive machines onto your
+local system, or vice versa. You can do this by using <code class="language-plaintext highlighter-rouge">scp</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>scp &lt;<span class="nb">source</span><span class="o">&gt;</span> &lt;destination&gt;
+</code></pre></div></div>
+
+<p>To specify a remote source or destination, use <code class="language-plaintext highlighter-rouge"><a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8bfef8eef9e5eae6eecbe3e4f8ff">[email&#160;protected]</a>:path</code>. To specify a local destination,
+just use <code class="language-plaintext highlighter-rouge">path</code>. As an example:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>scp <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2645551017450b191919664e4f504315084555084443544d434a435f08434253">[email&#160;protected]</a>:~/some_folder/example.txt ~/Downloads/
+</code></pre></div></div>
+
+<p>Assuming my username is <code class="language-plaintext highlighter-rouge">cs61c-???</code>, the above command would connect to <code class="language-plaintext highlighter-rouge">hive3</code> and copy
+<code class="language-plaintext highlighter-rouge">~/some_folder/example.txt</code> on my instructional account to <code class="language-plaintext highlighter-rouge">~/Downloads/example.txt</code> on my local
+machine.</p>
+
+<p>If I wanted to copy the other direction (from my local machine to a Hive machine) I would use:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>scp ~/Downloads/example.txt <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2645551017450b191919664e4f504311084555084443544d434a435f08434253">[email&#160;protected]</a>:~/some_folder/
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">scp</code> by default only works with files. To copy folders, you need to tell scp to “recursively” copy
+the folder and all its contents, which you can do with the <code class="language-plaintext highlighter-rouge">-r</code> flag:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>scp <span class="nt">-r</span> <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab9a9ecebb9f7e5e5e59ab2b3acbfedf4b9a9f4b8bfa8b1bfb6bfa3f4bfbeaf">[email&#160;protected]</a>:~/some_folder ~/Downloads/
+</code></pre></div></div>
+
+<p><strong>Warning</strong>: Running <code class="language-plaintext highlighter-rouge">scp</code> on the Hive machines (e.g. when you’re in a SSH session) is usually not
+desired behavior. Running <code class="language-plaintext highlighter-rouge">scp example.txt <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b8dbcb8e89db95878787f8d0d1cedd898c96dbcb96daddcad3ddd4ddc196dddccd">[email&#160;protected]</a></code> on a Hive machine will
+copy <code class="language-plaintext highlighter-rouge">example.txt</code> to… the same place. You probably want to run it in a local terminal session!</p>
+
+<h3 id="vim-basics">Vim Basics</h3>
+
+<p><code class="language-plaintext highlighter-rouge">vim</code> is a text editor included on the Hive machines and many UNIX-based distributions.</p>
+
+<p>Note: We’ll be using Vim in most of our examples and documentation, but we have no hard requirement
+on which text editor you use; you’re welcome to pick whatever you’re comfortable with, but you
+should know how to use at least one terminal-based text editor.</p>
+
+<p>To open a file from your current directory, pass the file name to Vim:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vim filename
+</code></pre></div></div>
+
+<p>To open a file from another directory, use a relative or absolute path:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vim ../other_folder/filename
+</code></pre></div></div>
+
+<p>Some useful Vim commands:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Command</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;:q</code></td>
+      <td>Closes (quits) Vim without saving</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;:wq</code></td>
+      <td>Closes Vim after saving</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;:w</code></td>
+      <td>Saves your file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;:q!</code></td>
+      <td>Force-quit Vim (for when you’ve made changes but do not wish to save them)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;i</code></td>
+      <td>Insert mode, allows you to type into the file</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;/cats</code></td>
+      <td>Searches your file for the nearest occurrence of the string “cats”. Press <code class="language-plaintext highlighter-rouge">n</code> to go to the next occurrence or <code class="language-plaintext highlighter-rouge">N</code> to go to the previous</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">&lt;escape&gt;:set nu</code></td>
+      <td>Shows line numbers within your file</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note: these commands are preceded by <code class="language-plaintext highlighter-rouge">&lt;escape&gt;</code> because you’ll need to press the escape key on your
+keyboard to switch you out of your current mode. For example, if I’m inserting (typing) into a file
+and want to save, I’d have to hit <code class="language-plaintext highlighter-rouge">&lt;escape&gt;</code> to get out of insert mode, then type <code class="language-plaintext highlighter-rouge">:w</code> to save my
+file. If you aren’t in a mode (i.e. you’ve just opened your file) you don’t need to hit escape
+first, but it won’t hurt :)</p>
+
+<p>For more on Vim, one of our summer 2020 tutors, Yijie, wrote a great <a href="https://docs.google.com/document/d/1WQF6hQK8CXtlGynSAIX7Rts6q8lykarrqX-zkb9ZDyc/view" target="_blank" rel="noopener">Vim for CS61C guide</a>!</p>
+
+<h3 id="action-items-3">Action Items</h3>
+
+<p>SSH into any Hive machine. Then:</p>
+
+<ul>
+  <li>If there is a prompt asking you to enter some information:
+    <ul>
+      <li>Last name (family name)</li>
+      <li>First name (given name) and any middle name(s)</li>
+      <li>Student ID</li>
+      <li>Email address: please use your Berkeley email</li>
+      <li>Code name: just pick something random. Ignore the “posting grades” bit, we only use Gradescope
+for grades and not this system</li>
+    </ul>
+  </li>
+  <li>If there was a prompt, run <code class="language-plaintext highlighter-rouge">check-register</code>, and verify that your name, email, and
+student ID are correct. If anything is incorrect, run <code class="language-plaintext highlighter-rouge">re-register</code>.
+    <ul>
+      <li>The first email address shown <strong>must</strong> be listed as a primary or secondary email on your
+Gradescope account.</li>
+    </ul>
+  </li>
+  <li>If there wasn’t a prompt, follow the previous bullet point anyway.</li>
+</ul>
+
+<h2 id="exercise-4-fun-with-git">Exercise 4: Fun with Git</h2>
+
+<p>In this exercise, you’ll get your labs Git repository (“repo”), use Vim, and work with a variety of
+Git commands. By the end of it, you should feel comfortable using SSH, editing files,
+pulling/committing/pushing, resolving merge conflicts. If you’d like to review your Git commands
+before beginning, you can check out <a href="https://docs.google.com/document/d/1PlnweZTG9ZxAlbbJSARNsl-Bs-yfPiM37nK98gVR4dA/view" target="_blank" rel="noopener">this guide</a>.</p>
+
+<h3 id="getting-your-lab-repo">Getting Your Lab Repo</h3>
+
+<p>Make sure you’re logged into GitHub. Fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSe9BRMvU5bd-lamc-4a9VVdUlLpr4TL_EhjqCtxADvxrvz-vw/viewform" target="_blank" rel="noopener">Lab Repository Registration Form</a>. Remember to read the form
+carefully, and follow the link in the form to accept our invitation to the GitHub Classroom lab
+assignment. You may need to check your email and confirm the invitation. If you don’t have an
+instructional account right now, enter <code class="language-plaintext highlighter-rouge">zzz</code> in the form. You will be able to edit this later.</p>
+
+<h3 id="configuring-git">Configuring Git</h3>
+
+<p>Before we start, let’s tell Git who you are. This information will be used to sign and log your
+commits. You may not need to do this if you’ve set up Git before, but if you’re on the Hive machines
+it’s likely a step you’ll need to take.</p>
+
+<p>First, run the following commands on your local machine; make sure to change the name and email to
+match your information.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"John Doe"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email <a href="http://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49e9b9c9a909b91b4918c9599849891da979b99">[email&#160;protected]</a>
+</code></pre></div></div>
+
+<p>If you have an instructional account, SSH into a Hive machine, and run the same commands.</p>
+
+<h3 id="cloning-your-repo">Cloning Your Repo</h3>
+
+<p>Git has the concept of “local” and “remote” repositories. A local repo is located wherever your
+terminal session is; if you’re in a SSH session, the local repo is a folder on a Hive machine; if
+your terminal session on your local machine, the local repo is located on your local machine’s
+filesystem. A remote repo (e.g. GitHub repo) is typically hosted on the Internet.</p>
+
+<p>GitHub Classroom created a repository for you on GitHub, but not locally (would be a little worrying
+if it could access your local files). To get a local copy of this repository, you can use
+<code class="language-plaintext highlighter-rouge">git clone</code>, which will create a local repository based on information from a remote repo.</p>
+
+<p>If you have an instructional account, SSH into a Hive machine. On the Hive clone the repository into
+a folder called <code class="language-plaintext highlighter-rouge">labs</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone GITHUB_REPOSITORY_URL labs
+</code></pre></div></div>
+
+<p>If you don’t have an instructional account, that’s fine! Clone the repository into a folder called
+<code class="language-plaintext highlighter-rouge">labs_hive</code>. For the rest of this exercise, any reference to your repository on the Hive is
+referring to this repository.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone GITHUB_REPOSITORY_URL labs_hive
+</code></pre></div></div>
+
+<h3 id="exploring-your-repo">Exploring Your Repo</h3>
+
+<p><code class="language-plaintext highlighter-rouge">cd</code> into this new folder. List all hidden files (<code class="language-plaintext highlighter-rouge">ls -a</code>). Do you see a hidden file/folder?</p>
+
+<p>There is indeed a folder called <code class="language-plaintext highlighter-rouge">.git</code>. Its presence indicates that the current folder (folder
+containing <code class="language-plaintext highlighter-rouge">.git</code>) holds a Git repository.</p>
+
+<p>Take a look at your repo’s current remotes and status:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote <span class="nt">-v</span>
+<span class="nv">$ </span>git status
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">git clone</code> has already worked a bit of magic here; there’s a remote called <code class="language-plaintext highlighter-rouge">origin</code>, and its URL
+points to your labs repo on GitHub! You’re on a local branch called <code class="language-plaintext highlighter-rouge">master</code>, which is “tracking”
+<code class="language-plaintext highlighter-rouge">origin/master</code> (the <code class="language-plaintext highlighter-rouge">master</code> branch on the <code class="language-plaintext highlighter-rouge">origin</code> remote).</p>
+
+<p>Throughout the semester, course staff may make updates to starter code to fix bugs or release new
+labs. To receive these updates, you’ll need to add another remote.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote add starter https://github.com/61c-teach/fa20-lab-starter.git
+</code></pre></div></div>
+
+<p>If you ever want to pull <strong>updated</strong> starter code, you’d execute the following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull starter master
+</code></pre></div></div>
+
+<p>Since GitHub Classroom clones the starter repo when creating your repo, that command shouldn’t do
+anything right now.</p>
+
+<h3 id="finding-commands">Finding Commands</h3>
+
+<p><strong>Warning</strong>: please read carefully. Skipping a step may cause errors that will require you to redo
+the exercise.</p>
+
+<p>The files for this exercise are located in the <code class="language-plaintext highlighter-rouge">lab00</code> folder in your lab repository.</p>
+
+<p>The main goal of this exercise is to get you familiar with manpages, Git, and other programs, but
+not to stress you out over finding commands. If you’re stuck trying to find a command, write your
+best-effort guess, and the autograder will give hints if the command isn’t what we’re expecting.</p>
+
+<ol>
+  <li>
+    <p>Open <code class="language-plaintext highlighter-rouge">first_set.txt</code>. This file contains descriptions of UNIX commands. Use the man pages to
+figure out which command they refer to. <strong>Make sure to include any necessary flags</strong>. Once you’ve
+found them, write the commands, one per line, in the provided <code class="language-plaintext highlighter-rouge">answers.txt</code> file.</p>
+
+    <p><code class="language-plaintext highlighter-rouge">answers.txt</code> should look similar to (including the numbers):</p>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_1</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_3</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_4</code></li>
+    </ol>
+
+    <p>Save, add, and commit your changes with the commit message <code class="language-plaintext highlighter-rouge">"Answered first set"</code>. Push this
+ commit to your GitHub repo.</p>
+  </li>
+  <li>
+    <p>Now, we’ll need to copy the repository to your local computer.</p>
+
+    <ul>
+      <li>If you have an instructional account, exit the SSH session by running <code class="language-plaintext highlighter-rouge">exit</code>. You should be
+back to your local terminal prompt. Use <code class="language-plaintext highlighter-rouge">scp</code> to copy the entire <code class="language-plaintext highlighter-rouge">labs</code> folder from the Hive
+to your local machine (refer to Exercise 3 for a refresher on <code class="language-plaintext highlighter-rouge">scp</code>). Hint: what does the <code class="language-plaintext highlighter-rouge">-r</code>
+flag do?</li>
+      <li>If you don’t have an instructional account, copy the entire <code class="language-plaintext highlighter-rouge">labs_hive</code> folder to a separate
+<code class="language-plaintext highlighter-rouge">labs</code> folder.</li>
+    </ul>
+
+    <p>Once you’ve copied the entire folder, <code class="language-plaintext highlighter-rouge">cd</code> into this folder and open your answers file.</p>
+  </li>
+  <li>
+    <p><strong>Above</strong> your previous answers, add commands (and relevant flags, if needed) that fit this
+second set of descriptions:</p>
+
+    <ul>
+      <li>Move files from one directory to the next</li>
+      <li>Change a file’s permissions</li>
+      <li>Show the directory you’re currently in</li>
+      <li>Check if a host is online</li>
+    </ul>
+
+    <p><code class="language-plaintext highlighter-rouge">answers.txt</code> should look similar to (including the numbers):</p>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">second_set_command_1</code></li>
+      <li><code class="language-plaintext highlighter-rouge">second_set_command_2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">second_set_command_3</code></li>
+      <li><code class="language-plaintext highlighter-rouge">second_set_command_4</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_1</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_3</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_4</code></li>
+    </ol>
+
+    <p>Save your changes, but <strong>do not commit or push them</strong>.</p>
+  </li>
+  <li>
+    <p>Go back to your repo on the Hive. <strong>Above</strong> your previous answers, add the command (and relevant
+flags, if needed) that fits this description:</p>
+
+    <ul>
+      <li>Show file permissions for all files in a directory</li>
+    </ul>
+
+    <p><code class="language-plaintext highlighter-rouge">answers.txt</code> should look similar to (including the numbers):</p>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">third_set_command_1</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_1</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_2</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_3</code></li>
+      <li><code class="language-plaintext highlighter-rouge">first_set_command_4</code></li>
+    </ol>
+
+    <p>Save, add, commit, and push these changes with the commit message <code class="language-plaintext highlighter-rouge">"Answered third set"</code>.</p>
+  </li>
+  <li>
+    <p>Go back to your repo on your local machine. Add, commit, and push your changes with the commit
+message <code class="language-plaintext highlighter-rouge">"Answered second set"</code>.</p>
+
+    <p>You should get an error message from Git. What does this message mean? How do you resolve it?
+ When resolving this issue, avoid using the rebase command or flags.</p>
+
+    <p>After resolving the issue, you should have all your answers in <code class="language-plaintext highlighter-rouge">answers.txt</code> on your local
+ machine. <code class="language-plaintext highlighter-rouge">answers.txt</code> should match the following (including the numbers):</p>
+
+    <ol>
+      <li>Show file permissions for all files in a directory</li>
+      <li>Move files from one directory to the next</li>
+      <li>Change a file’s permissions</li>
+      <li>Show the directory you’re currently in</li>
+      <li>Check if a host is online</li>
+      <li>Which command walks a file hierarchy in search of a keyword?</li>
+      <li>Which command displays information about processes running on your machine?</li>
+      <li>Which command terminates a process?</li>
+      <li>Which command can help you find the difference between two files?</li>
+    </ol>
+
+    <p>Commit and push your changes.</p>
+  </li>
+</ol>
+
+<h2 id="info-lab-submission-and-checkoff">Info: Lab Submission and Checkoff</h2>
+
+<p>Last bit of reading for this lab, I promise.</p>
+
+<h3 id="submission">Submission</h3>
+
+<p>To submit your work, push your work to your lab repository on GitHub.</p>
+
+<p>Many of the labs will have an autograder portion. If a lab has an autograder portion, it will
+specify this in the <code class="language-plaintext highlighter-rouge">Checklist</code> section at the bottom of the page. To submit to the autograder,
+you’ll need to push your work to your lab repository on GitHub. Then go to the <code class="language-plaintext highlighter-rouge">Lab Autograder</code>
+assignment on Gradescope, and submit your lab repository. After a short wait, the page should show
+your autograder score for the current lab (and previous labs). Make sure you passed the autograder
+tests!</p>
+
+<h3 id="checkoff-overview">Checkoff: Overview</h3>
+
+<p>Each labs will require you to complete a checkoff to receieve credit. You will be <strong>required</strong> to
+work on labs in pairs, and both partners are <strong>required</strong> to be present during checkoff. This helps
+us reduce the time we spend on checkoff and allocate that time towards helping students and
+developing course materials. It also helps you by giving you someone to discuss class material with
+and work together with to solve lab problems.</p>
+
+<p>If you have not done so already, please read through the <a href="../../policies.html#labs" target="_blank" rel="noopener">Labs section of our
+policies</a>.</p>
+
+<h3 id="checkoff-requirements">Checkoff: Requirements</h3>
+
+<p>Before your scheduled checkoff, please make sure that:</p>
+
+<ol>
+  <li>You’ve completed the action items for each exercise in the lab.
+    <ul>
+      <li>If the exercise asks any questions, make sure you’ve recorded your answers so you’re prepared
+to answer these quesitons during checkoff.</li>
+      <li>If the exercise asks you to modify code, make sure you’ve modified code as necessary, and that
+you’ve pushed your modifications to your GitHub lab repo.</li>
+    </ul>
+  </li>
+  <li>If the lab has an autograder, you’ve submitted your GitHub repo to the <code class="language-plaintext highlighter-rouge">Lab Autograder</code>
+assignment on Gradescope. Your work should pass the autograder tests, and you should have this
+page open for checkoff.</li>
+  <li>You (and your partner, if you have one) are available for the checkoff slot you’ve selected.</li>
+  <li>You know your email address and instructional account username (<code class="language-plaintext highlighter-rouge">cs61c-???</code>, the one you use to
+log into Hive machines).</li>
+</ol>
+
+<h3 id="checkoff-signing-up">Checkoff: Signing Up</h3>
+
+<p>We will be using an appointment-based system on the OH Queue to schedule checkoffs. Checkoff slots
+for the week will be released on Sunday around 9PM PDT. You (and a partner) may then sign up for a
+13 minute checkoff slot. If you have a partner, you both <strong>must</strong> sign up for the same slot
+(sometimes there are multiple slots at the same time, watch out!). You <strong>must</strong> have completed the
+requirements before your checkoff slot starts.</p>
+
+<p>To sign up for a checkoff slot:</p>
+
+<ul>
+  <li>Visit the <a href="https://oh.cs61c.org/appointments" target="_blank" rel="noopener">OH Queue</a>
+and click the <code class="language-plaintext highlighter-rouge">Appointments</code> link at the top.</li>
+  <li>Find <strong>one</strong> slot that’s suitable for you, then click <code class="language-plaintext highlighter-rouge">Add yourself to the section</code>. Fill out the
+resulting form (Assignment: <code class="language-plaintext highlighter-rouge">Lab ##</code>, Question: <code class="language-plaintext highlighter-rouge">Checkoff</code>, Description:
+<code class="language-plaintext highlighter-rouge">Partner: &lt;PARTNER_NAME&gt;</code>) and submit it. If you have a partner, you both <strong>must</strong> sign up for the
+same appointment (try to sign up at the same time). If you don’t have a partner, you may be paired
+with someone else without one. You may not sign up for more than one appointment per lab.</li>
+  <li>When it’s time for your appointment, go to the OH Queue. Your appointment will show up under
+<code class="language-plaintext highlighter-rouge">Upcoming Appointments</code> on the home page. When the TA is ready, a green <code class="language-plaintext highlighter-rouge">Join Call</code> button will
+appear. Click it to be taken to the Zoom call.</li>
+</ul>
+
+<h3 id="checkoff-receiving-credit">Checkoff: Receiving Credit</h3>
+
+<p>You will receive credit for a lab after completing a checkoff with a TA/AI. Before leaving the
+checkoff call, you <strong>must</strong> verify this by looking at the <code class="language-plaintext highlighter-rouge">Lab## Checkoff</code> assignment on Gradescope, replacing <code class="language-plaintext highlighter-rouge">##</code> with the lab number, and making sure it is <code class="language-plaintext highlighter-rouge">Submitted</code>. It is your responsibility to
+verify that this happens for each lab; we will not be retroactively giving credit for checkoff.</p>
+
+<p>If you completed checkoff in the correct timeslot, but Gradescope displays a
+<code class="language-plaintext highlighter-rouge">Submitted ???? late</code> message, you can ignore this message for now; we’ll update this after the lab
+deadline has passed.</p>
+
+<h2 id="checklist">Checklist</h2>
+
+<p>You made it! That was quite a bit of reading and head-scratching, but you’re now somewhat more
+familiar with the tools you’ll be using for the rest of the semester. Worth it!</p>
+
+<p>This lab has an autograder. After you’ve pushed your work, submit your GitHub lab repo to the
+<code class="language-plaintext highlighter-rouge">Lab Autograder</code> assignment on Gradescope. Make sure the autograder passes!</p>
+
+<p>Please check that you <strong>and</strong> your partner have:</p>
+
+<ul>
+  <li>Filled out the introduction form from Exercise 0.</li>
+  <li>Completed the course policies quiz from Exercise 1.</li>
+  <li>Registered for the services from Exercise 2.</li>
+  <li>Registered and checked your information on the Hive in Exercise 3.</li>
+  <li>Completed Exercise 4 (matching the described at the end).</li>
+  <li>Passed the <code class="language-plaintext highlighter-rouge">Lab Autograder</code> for this lab</li>
+</ul>
+
+<p>After a TA/AI has checked you off, please make sure that the corresponding lab assignment on
+Gradescope (<code class="language-plaintext highlighter-rouge">Lab## Checkoff</code>) is marked as <code class="language-plaintext highlighter-rouge">Submitted</code>.</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<p>These are some tools you may find helpful, but are by no means required for
+this course :)</p>
+
+<h3 id="text-editor-vs-ide">Text Editor vs. IDE</h3>
+
+<p>CS61C doesn’t endorse any particular text editor or IDE. Many people get by in this course using a
+text editor with no frills (think: Vim/Emacs/Nano). We’ll expect you to know how to use at least one
+terminal-based text editor (again, Vim/Emacs/Nano), since you’ll be dealing with the command line
+a lot.</p>
+
+<p>For your own work, you may find it nice to have CLion from JetBrains if you’re used to working in
+IntelliJ from CS61B. Note though that we won’t be providing any course-official support, so setting
+it up and maintaining it are up to you.</p>
+
+<p>The majority of students do their work in a local editor (Sublime, Atom, VSCode) and use Git to copy
+their files from their local machine to the Hive. Some students also set up Cyberduck to make
+copying files over easier. Again, we won’t provide any course-official support, but you’re welcome
+to do what works best for you.</p>
+
+<h3 id="quick-ssh">Quick SSH</h3>
+
+<p>Tired of typing up an entire SSH command and password? Follow the instructions on <a href="https://piazza.com/class/kd0ifacummd56a?cid=11" target="_blank" rel="noopener">this Piazza
+post (<code class="language-plaintext highlighter-rouge">"Useful additional setup information for labs and projects"</code>)</a></p>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script data-cfasync="false" src="http://cs61c.org/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/fa20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/calendar" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/staff" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/fa20/policies" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://oh.cs61c.org" >
+      OH Queue
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>
