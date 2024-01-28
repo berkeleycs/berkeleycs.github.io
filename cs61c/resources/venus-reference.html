@@ -1,0 +1,664 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <link href="../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/bootstrap-toc.min.js"></script>
+    <script src="../assets/moment.min.js"></script>
+    <script src="../assets/fullcalendar.min.js"></script>
+    <script src="../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="../index.html">
+                  <img src = "../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="index.html" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../index.html%3Fredirect=false.html" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Venus Reference</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>This page covers a bunch of stuff on how to use both Venus on both the web and
+CLI interfaces. It’s still a work in progress, and will be updated as the semester
+goes on.</p>
+
+<p>Venus’s code is open source and under active development (mostly by longtime head
+TA Stephan Kaminsky). You can find the code on Github at
+<a href="https://github.com/ThaumicMekanism/venus">this link</a>.</p>
+
+<h2 id="venus-web-interface">Venus Web Interface</h2>
+<p>The web interface for Venus can be accessed at <a href="https://venus.cs61c.org">venus.cs61c.org</a>.</p>
+
+<h3 id="the-editor-tab">The “Editor” Tab</h3>
+<ul>
+  <li>Enter your code in the “Editor” tab</li>
+  <li>Programs start at the first line of assembly code regardless of the label, unless the <code class="language-plaintext highlighter-rouge">main</code>
+function is marked with <code class="language-plaintext highlighter-rouge">.globl</code> (see <a href="venus-reference.html#writing-larger-risc-v-programs">below</a>). That means
+that the <code class="language-plaintext highlighter-rouge">main</code> function must be put first if it is not declared <code class="language-plaintext highlighter-rouge">.globl</code>.
+    <ul>
+      <li>Note: Sometimes, we want to pre-allocate some items in memory before the
+program starts executing. Since this allocation isn’t actual code, we can
+place it before the <code class="language-plaintext highlighter-rouge">main</code> function.</li>
+    </ul>
+  </li>
+  <li>Programs end with an <code class="language-plaintext highlighter-rouge">ecall</code> with argument value 10. This signals for the program to exit.
+The <code class="language-plaintext highlighter-rouge">ecall</code> instructions are analogous to “System Calls” and allow us to do things such as print
+to the console or request chunks of memory from the heap.
+    <ul>
+      <li>The exception to the <code class="language-plaintext highlighter-rouge">ecall</code> exit rule is if your <code class="language-plaintext highlighter-rouge">main</code> is marked global, in which case you
+can either exit with an <code class="language-plaintext highlighter-rouge">ecall</code> or return the program’s exit code in <code class="language-plaintext highlighter-rouge">a0</code> (like the return
+value of the <code class="language-plaintext highlighter-rouge">main</code> function in C).</li>
+    </ul>
+  </li>
+  <li>Labels end with a colon (<code class="language-plaintext highlighter-rouge">:</code>).</li>
+  <li>Comments start with a pound sign (<code class="language-plaintext highlighter-rouge">#</code>).</li>
+  <li>You CANNOT put more than one instruction per line.</li>
+  <li>You can use the save keyboard shortcut (cmd-s or ctrl-s depending on your platform, it will
+save the file). You can check the name of the active file at the bottom of the editor: if it
+is unnamed, it will prompt you to download the file, and if you hit save rapidly, you will
+receive this prompt as well.</li>
+  <li>When you are done editing, click the “Simulator” tab to prepare for execution.</li>
+</ul>
+
+<h3 id="the-simulator-tab">The “Simulator” Tab</h3>
+<ul>
+  <li>When you first reach the “Simulator” tab from the “Editor” tab, you’ll see an “Assemble and
+Simulate from Editor” button that will report errors in your code or reassemble it.</li>
+  <li>Breakpoints can be set by clicking on the desired line of code before you hit “Run”.
+You can also insert an <code class="language-plaintext highlighter-rouge">ebreak</code> instruction in your code to automatically force
+Venus to pause.
+    <ul>
+      <li>You can simulate conditional breakpoints by placing an <code class="language-plaintext highlighter-rouge">ebreak</code> within a branch, like so:
+```</li>
+    </ul>
+    <do some="" code="">
+# Stops execution if a0 == 3
+li t0, 3
+bne a0, t0, after_breakpoint
+ebreak
+after_breakpoint:
+<do some="" more="" code="">
+```
+</do></do>
+  </li>
+  <li>The “Run” button runs your program until you reach a breakpoint, much like GDB’s
+“run” command.</li>
+  <li>The “Step” button will go to the next assembly instruction.</li>
+  <li>The “Prev” button reverts a single assembly instrution.</li>
+  <li>The “Reset” button ends the current run, clears all breakpoints, and returns to the beginning
+of execution.</li>
+  <li>“Dump” gives you a dump of the hexadecimal representation of every instruction in your program.</li>
+  <li>You can see the contents of registers, memory, and caches through the sidebar on the right.
+    <ul>
+      <li>You can manually poke values in registers to affect the execution of your program.</li>
+      <li>In the “Memory” tab, use the “Jump to” or “Address” boxes to quickly navigate to a certain
+address in your program.</li>
+      <li>For all menus, use “Display Settings” at the bottom of the pane to toggle between hex, ASCII,
+two’s complement decimal, and unsigned decimal interpretations of your values.</li>
+    </ul>
+  </li>
+  <li>The “Trace” button will dump values in registers and memory based off a specified format,
+described in more detail in the <a href="venus-reference.html#traces">traces</a> section.</li>
+</ul>
+
+<h3 id="the-chocopy-tab">The “Chocopy” Tab</h3>
+<p>You can ignore this tab. Chocopy is a variant of Python used in CS 164 (Programming Languages
+and Compilers), so it’s not really relevant to this course. The long and short of it is that you
+can actually compile a subset of Python into RISC-V assembly that you can then execute.</p>
+
+<h3 id="the-venus-tab">The “Venus” Tab</h3>
+<p>Most of the basic functionality you need for writing assembly programs exists in the “Editor”
+and “Simulator” tabs. The “Venus” tab exposes a terminal-like interface that lets us work
+with multiple files to build more complex programs.</p>
+
+<h4 id="terminal-commands">Terminal Commands</h4>
+<ul>
+  <li>Typing <code class="language-plaintext highlighter-rouge">help</code> in the terminal will show the list of commands (you may need to scroll the terminal
+to the right to see all of them), and <code class="language-plaintext highlighter-rouge">help &lt;command name&gt;</code> will
+give you information about the command.</li>
+  <li>A few common commands are listed here:
+    <ul>
+      <li>File manipulation:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">ls</code>: Lists the contents of the specified directory (or the current directory if
+no arguments are provided.</li>
+          <li><code class="language-plaintext highlighter-rouge">cd</code>: Changes the directory your terminal is in. Like with a normal terminal, you can
+use <kbd>Tab</kbd> to autocomplete the names of subfolders.</li>
+          <li><code class="language-plaintext highlighter-rouge">touch</code>: Creates a new empty file that we can modify later.</li>
+          <li><code class="language-plaintext highlighter-rouge">xxd</code>: Prints the contents of a file in hexadecimal.</li>
+          <li>Other useful commands (similar to what you’d find in a standard shell): <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">clear</code>,
+<code class="language-plaintext highlighter-rouge">cp</code>, <code class="language-plaintext highlighter-rouge">mkdir</code>, <code class="language-plaintext highlighter-rouge">mv</code>, <code class="language-plaintext highlighter-rouge">rm</code>, <code class="language-plaintext highlighter-rouge">pwd</code>, <code class="language-plaintext highlighter-rouge">zip</code>, <code class="language-plaintext highlighter-rouge">unzip</code></li>
+        </ul>
+      </li>
+      <li>Venus editor and simulator:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">edit</code>: Opens up the specified file in the “Editor” tab (for example, <code class="language-plaintext highlighter-rouge">edit file.s</code>).
+Note that the <kbd>Cmd</kbd> + <kbd>S</kbd> and <kbd>Ctrl</kbd> + <kbd>S</kbd>
+shortcuts will work to save the file in the virtual filesystem if you
+choose to edit a different file later. But, to ensure that your work is
+saved, we recommend that you periodically save local copies of every file.
+If you’ve mounted your local filesystem, then <kbd>Cmd</kbd> + <kbd>S</kbd>/
+<kbd>Ctrl</kbd> + <kbd>S</kbd> will reflect the changes in your local
+filesystem automatically.</li>
+          <li><code class="language-plaintext highlighter-rouge">run</code>: Runs the provided assembly file(s) to completion in the terminal. Output will
+be displayed in the terminal as well.</li>
+          <li><code class="language-plaintext highlighter-rouge">vdb</code>: Links and assembles the provided assembly file(s) and opens the result in the
+“Simulator” tab for debugging.</li>
+        </ul>
+      </li>
+      <li>Connecting to a local file system:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">upload</code>: Opens a prompt to upload files from our local computer to the
+virtual filesystem. You can hold down the <kbd>Ctrl</kbd> or <kbd>Cmd</kbd>
+keys to select multiple files to upload. Once a file is uploaded, we can
+edit it in the Venus editor using the <code class="language-plaintext highlighter-rouge">edit</code> command.</li>
+          <li><code class="language-plaintext highlighter-rouge">download</code>: Downloads the specified files locally. You can specify multiple
+files to download, e.g. <code class="language-plaintext highlighter-rouge">download file1.s file2.s</code>, and each one will have
+a corresponding prompt to ask you where to download the files.</li>
+          <li><code class="language-plaintext highlighter-rouge">mount</code>: “Mounts” your local file system to the Venus virtual file system.
+This command takes in the URL at which the Venus jar webserver is running,
+followed by the name you want to assign to the mounted folder in the virtual
+file system. For example, if you ran the Venus jar with
+<code class="language-plaintext highlighter-rouge">java -jar tools/venus.jar . -dm --port 6162</code> on your <em>local machine</em>,
+and wanted the mounted folder to be accessible at <code class="language-plaintext highlighter-rouge">vmfs</code> in the virtual file
+system, you would run <code class="language-plaintext highlighter-rouge">mount http://localhost:6162 vmfs</code> in the <em>Venus</em> terminal.
+            <ul>
+              <li>If you omit the <code class="language-plaintext highlighter-rouge">--port</code> flag, the port defaults to 6161. Running <code class="language-plaintext highlighter-rouge">mount local</code>
+will default to this port.</li>
+              <li>If you omit the path argument to the <code class="language-plaintext highlighter-rouge">mount</code> command in the Venus terminal,
+it will place it at <code class="language-plaintext highlighter-rouge">drive</code> by default.</li>
+            </ul>
+          </li>
+          <li><code class="language-plaintext highlighter-rouge">umount</code>: “Unmounts” a folder that was monted via the <code class="language-plaintext highlighter-rouge">mount</code> command.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="passing-arguments-to-your-program">Passing arguments to your program</h4>
+<p>Use the “Simulator Default Args” field to set the arguments to your program. These will then
+be reflected when you run your program in the “Simulator” tab: <code class="language-plaintext highlighter-rouge">a0</code> will be initialized to the equivalent of <code class="language-plaintext highlighter-rouge">argc</code> and <code class="language-plaintext highlighter-rouge">a1</code> will be initialized to the equivalent of <code class="language-plaintext highlighter-rouge">argv</code>.</p>
+
+<h3 id="settings">Settings</h3>
+<p>Configuration options for Venus can be found in the “Settings” pane under the “Venus” tab.</p>
+
+<h4 id="general">General</h4>
+<ul>
+  <li>“Simulator Default Args” - passes arguments to your program</li>
+  <li>“Text Start” - identifies the start of the text segment</li>
+  <li>“Max History” - specifies the maximum number of execution steps that can be reverted; leave
+negative for no limit</li>
+  <li>“Aligned Addressing” - if on, forces all memory accesses to be aligned to the size of the data
+type, and will raise a runtime error if a memory access is not</li>
+  <li>“Mutable Text” - if on, allows the text segment (where instructions are stored) to be overwritten
+during the execution of your program</li>
+  <li>“Only Ecall Exit” - if on, requires <code class="language-plaintext highlighter-rouge">main</code> to terminate the program via <code class="language-plaintext highlighter-rouge">ecall</code>, as opposed to
+terminating when the PC exceeds the end of the text section</li>
+  <li>“Default Reg States” - if on, initializes <code class="language-plaintext highlighter-rouge">a0</code> to argc, <code class="language-plaintext highlighter-rouge">a1</code> to argv, <code class="language-plaintext highlighter-rouge">gp</code> to the start of the
+static section of memory, <code class="language-plaintext highlighter-rouge">sp</code> to the top of the stack, and <code class="language-plaintext highlighter-rouge">ra</code> to the return address of the
+<code class="language-plaintext highlighter-rouge">main</code> function if a global <code class="language-plaintext highlighter-rouge">main</code> label is found; if off, all registers are initialized to 0</li>
+  <li>“Allow Access” - if on, allows memory accesses to occur at addresses between the stack and heap</li>
+  <li>“Max number of steps” - sets the limit for the number of steps your program can execute; leave
+negative for no limit</li>
+  <li>“Dark Mode” - activates dark mode</li>
+</ul>
+
+<h4 id="tracer">Tracer</h4>
+<p>Allows register and memory values to be printed during program execution. See <a href="venus-reference.html#traces">traces</a>
+for more details.</p>
+
+<h2 id="the-venus-cli">The Venus CLI</h2>
+<p>The latest version of the Venus CLI can be downloaded at
+<a href="https://venus.cs61c.org/jvm/venus-jvm-latest.jar">https://venus.cs61c.org/jvm/venus-jvm-latest.jar</a>.
+You need to be able to run Java to run it.</p>
+
+<h3 id="passing-arguments-to-your-program-1">Passing arguments to your program</h3>
+<p>Everything passed after the file name will be passed to your program as command line arguments.
+For example, if you wanted to pass arguments <code class="language-plaintext highlighter-rouge">arg1</code>, <code class="language-plaintext highlighter-rouge">arg2</code>, and <code class="language-plaintext highlighter-rouge">arg3</code> to <code class="language-plaintext highlighter-rouge">test.s</code>, you would run
+the following:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> venus.jar test.s arg1 arg2 arg3
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">a0</code> will be initialized to the equivalent of <code class="language-plaintext highlighter-rouge">argv</code> and <code class="language-plaintext highlighter-rouge">a1</code> will be initialized to the equivalent
+of <code class="language-plaintext highlighter-rouge">argc</code>.</p>
+
+<p>To provide simulator or assembler options to Venus, place your flags between the JAR and the name
+of the assembly file. For example, if you wanted to run <code class="language-plaintext highlighter-rouge">test.s</code> with immutable text (<code class="language-plaintext highlighter-rouge">-it</code>) and the
+calling convention checker (<code class="language-plaintext highlighter-rouge">-cc</code>), you would run this command:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> venus.jar <span class="nt">-it</span> <span class="nt">-cc</span> test.s arg1 arg2 arg3
+</code></pre></div></div>
+
+<p><strong>Note:</strong> Flags to configure Venus assembly or simulation behavior can be passed after the name of
+the file. These arguments will be consumed by the simulator and not passed to the program; this
+behavior may change in the future with improvements to Venus’s argument parser.
+If you wish to pass an argument to your program that shares a name with a Venus flag, then add
+<code class="language-plaintext highlighter-rouge">--</code> before your program arguments. For example, to pass the string “-it” as the first argument
+to <code class="language-plaintext highlighter-rouge">test.s</code>, you would run</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> venus.jar test.s <span class="nt">--</span> <span class="nt">-it</span>
+</code></pre></div></div>
+
+<h2 id="common-venus-errors">Common Venus Errors</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Ran for more than max allowed steps!</code>:
+ Venus will automatically terminate if your program runs for too many steps.
+ This is expected for large MNIST sized inputs, and you can workaround it
+ with the <code class="language-plaintext highlighter-rouge">-ms</code> flag.
+ If you’re getting this for small inputs, you might have an infinite loop.</li>
+  <li><code class="language-plaintext highlighter-rouge">Attempting to access uninitialized memory between the stack and heap.</code>:
+ Your code is trying to read or write to a memory address between the
+ stack and heap pointers, which is causing a segmentation fault.
+ Check that you are allocating enough memory,
+ and that you are accessing the correct addresses.</li>
+  <li><code class="language-plaintext highlighter-rouge">The magic value for this malloc node is incorrect! This means you are overriding malloc metadata OR have specified the address of an incorrect malloc node!</code>:
+ Your code is modifying the metadata of a malloc node.
+ This error can come from any of the alloc or free commands as
+ venus implements a linked list form of malloc.
+ The metadata is right below (lower address) the pointer to that location so if
+ you write to the wrong location, you may corrupt that data.
+ Venus has a method to detect some corruptions which is why you get this error.
+ Check that you are correctly indexing any malloced data and
+ that you are not writing out of bounds of what you allocated.</li>
+</ul>
+
+<h2 id="tools">Tools</h2>
+<h3 id="calling-convention-checker">Calling Convention Checker</h3>
+<p>The RISC-V calling convention specifies which registers are saved by the call<em>er</em> of a function,
+and which are saved by the call<em>ee</em>. Bugs resulting from a failure to comply with the calling
+convention checker can be difficult to track down on their own, so the command line version
+of Venus provides the <code class="language-plaintext highlighter-rouge">-cc</code> (or <code class="language-plaintext highlighter-rouge">--callingConvention</code>) flag to automatically detect certain
+kinds of calling conventions (this flag is not currently exposed in the web interface).</p>
+
+<p>Before you use the calling convention checker, you should be aware of two things:</p>
+<ol>
+  <li>Venus cannot detect <em>all</em> calling convention violations - the fact that function calls in
+assembly are essentially just jumps to labels means Venus has to be very conservative in choosing
+what to detect as a function call. The CC checker serves as an excellent sanity check (much like
+Valgrind does for C memory bugs), but there will be some bugs that you ultimately need to figure
+out manually.</li>
+  <li>Related to the above, the CC checker will only reliably examine calling convention violations 
+within the body of functions exported with the <code class="language-plaintext highlighter-rouge">.globl</code> directive. You may sometimes see errors
+reported within functions that aren’t exported, but this is usually because they are being called
+by a function that’s declared <code class="language-plaintext highlighter-rouge">.globl</code>.</li>
+</ol>
+
+<h4 id="violation-messages">Violation Messages</h4>
+<p>There are currently three types of error messages that the CC checker can produce, each explained
+below.</p>
+
+<p>In each example, <code class="language-plaintext highlighter-rouge">func</code> refers to the function where the error message was reported.
+You can run these examples yourself in Venus by modifying the following code snippet:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.globl func
+main:
+    jal func
+    li a0, 10 # Code for exit ecall
+    ecall
+
+func:
+    # Paste the example definition of func
+</code></pre></div></div>
+
+<h5 id="setting-of-a-saved-register-s0-which-has-not-been-saved">“Setting of a saved register (s0) which has not been saved!”</h5>
+<p><code class="language-plaintext highlighter-rouge">func</code> overwrote a callee-saved register (any of s0 through s11).
+To fix this, make sure you <code class="language-plaintext highlighter-rouge">func</code> stores the values of any registers it overwrites by clearing
+space on the stack and storing them in memory in the prologue, and then restoring their values
+and restoring the stack pointer in the epilogue.</p>
+
+<p>Example with error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func:
+    li s0, 100 # === Error reported here ===
+    li s1, 128 # === Error reported here ===
+    ret
+</code></pre></div></div>
+
+<p>Fixed example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func:
+    # BEGIN PROLOGUE
+    # Each clobbered register (4 bytes each) needs to be stored
+    addi sp, sp, -8
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    # END PROLOGUE
+    li s0, 100
+    li s1, 128
+    # BEGIN EPILOGUE
+    lw s1, 4(sp)
+    lw s0, 0(sp)
+    addi sp, sp, 8
+    # END EPILOGUE
+    ret
+</code></pre></div></div>
+
+<h5 id="save-register-s0-not-correctly-restored-before-return-expected-hex-value-actual-hex-value">“Save register s0 not correctly restored before return! Expected &lt;hex value&gt;, Actual &lt;hex value&gt;”</h5>
+<p>The value of <code class="language-plaintext highlighter-rouge">s0</code> in the function that called <code class="language-plaintext highlighter-rouge">func</code> was different before and after <code class="language-plaintext highlighter-rouge">func</code> was
+called. This error message complements the previous one, but will instead be reported on the line
+of the <code class="language-plaintext highlighter-rouge">ret</code> (or <code class="language-plaintext highlighter-rouge">jalr ra</code>) instruction.</p>
+
+<p>Example with error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func:
+    # BEGIN PROLOGUE
+    addi sp, sp, -8
+    sw s0, 0(sp)
+    sw s1, 4(sp)
+    # END PROLOGUE
+    li s0, 100
+    li s1, 128
+    # BEGIN EPILOGUE
+    # Forgot to restore the values of s0 and s1!
+    addi sp, sp, 8
+    # END EPILOGUE
+    ret # === Error reported twice here ===
+</code></pre></div></div>
+
+<p>Fixed example: Same as for the previous error. Just make sure to include both the prologue and
+epilogue.</p>
+
+<h5 id="usage-of-unset-register-t0">“Usage of unset register t0”</h5>
+<p><code class="language-plaintext highlighter-rouge">func</code> attempted to read from a register that wasn’t set by the caller, and wasn’t yet initialized within the body of <code class="language-plaintext highlighter-rouge">func</code>. Even if the function that calls <code class="language-plaintext highlighter-rouge">func</code> set values in a register like <code class="language-plaintext highlighter-rouge">t0</code> or <code class="language-plaintext highlighter-rouge">s0</code>, attempting to use their values within <code class="language-plaintext highlighter-rouge">func</code> would be violating an abstraction barrier:
+<code class="language-plaintext highlighter-rouge">func</code> shouldn’t need to know anything about the values of registers in its caller, with the
+exception of the argument, stack pointer, and return address.</p>
+
+<p>Example with error:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>func:
+    mv a0, t0 # === Error reported here ===
+    ret
+</code></pre></div></div>
+
+<p>Fixed example:</p>
+
+<p>This sort of error usually originates due to a typo (the instruction is reading from the wrong
+register, or the order of arguments to the instruction was flipped accidentally), or a violation of abstraction barriers as described above. Fixes will vary depending on what the function was
+intended to do.</p>
+
+<h3 id="traces">Traces</h3>
+<p>You can set “traces” in both the web and CLI versions of Venus to print values in registers
+and memory during the execution of your program. In the web interface, you can enable traces in
+the “Traces” part of the Settings pain; in the command line you can enable and customize traces
+with the <code class="language-plaintext highlighter-rouge">--trace</code> and <code class="language-plaintext highlighter-rouge">--tracepattern</code> flags.</p>
+
+<p>The trace patterns support a few special symbols, somewhat like a C format string. They are as
+follows:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">\t</code>: tab indent</li>
+  <li><code class="language-plaintext highlighter-rouge">\n</code>: newline</li>
+  <li><code class="language-plaintext highlighter-rouge">%0%</code> through <code class="language-plaintext highlighter-rouge">%31%</code>: the value in the corresponding register</li>
+  <li><code class="language-plaintext highlighter-rouge">%line%</code>: the line number of the code being executed</li>
+  <li><code class="language-plaintext highlighter-rouge">%pc%</code>: the program counter of the current instruciton</li>
+  <li><code class="language-plaintext highlighter-rouge">%inst%</code>: the code of the current instruction</li>
+  <li><code class="language-plaintext highlighter-rouge">%output%</code>: the output of an ecall message</li>
+  <li><code class="language-plaintext highlighter-rouge">%decode%</code>: the decoded machine code of the current instruction</li>
+</ul>
+
+<h2 id="writing-larger-risc-v-programs">Writing larger RISC-V programs</h2>
+<p>Once we begin to write more complex RISC-V programs, it will become necessary
+to split our code into multiple files and debug/test them individually. The “Venus”
+tab of the web editor provides access to a terminal (and corresponding virtual
+filesyste) that lets us edit and test programs built from multiple files.</p>
+
+<p><strong>Note:</strong> To ensure that you don’t lose any of your work, make sure to save local
+copies of your files <em>frequently</em>. To be doubly sure, also save your local work 
+with git, and push those saves frequently!</p>
+
+<h3 id="working-with-multiple-files">Working with Multiple Files</h3>
+<p>The <code class="language-plaintext highlighter-rouge">.globl</code> directive identifies functions that we want to export to other files,
+similar to including a function in a header file in C.</p>
+
+<p>Venus supports the <code class="language-plaintext highlighter-rouge">.import</code> directive (not technically part of the RISC-V spec)
+to access other assembly files, similar to the C <code class="language-plaintext highlighter-rouge">include</code> directive. It will
+only make labels marked <code class="language-plaintext highlighter-rouge">.globl</code> available.</p>
+
+<h2 id="behavior-not-defined-in-the-risc-v-spec">Behavior not defined in the RISC-V spec</h2>
+<h3 id="null-pointers">Null Pointers</h3>
+<p>Unlike most real-world programs (and the RISC-V spec), dereferencing the null pointer
+DOES NOT segfault. This is because by default, the start of the text segment is set to
+<code class="language-plaintext highlighter-rouge">0x0000_0000</code>, whereas a real system would likely set it to something like
+<code class="language-plaintext highlighter-rouge">0x10000_0000</code>. This value can be configured in the settings pane of the web interface.</p>
+
+<h3 id="system-calls">System Calls</h3>
+<p>The <code class="language-plaintext highlighter-rouge">ecall</code> instruction is used to perform system calls or request other privileged
+operations such as accessing the file system or writing output to console.</p>
+
+<p>To perform a syscall, load the appropriate syscall number (listed <a href="venus-reference.html#syscall-table">below</a>) into the
+<code class="language-plaintext highlighter-rouge">a0</code> register, then place the syscall’s arguments in order in the remaining argument
+registers (<code class="language-plaintext highlighter-rouge">a1</code>, <code class="language-plaintext highlighter-rouge">a2</code>, etc.) as needed. For example, the following assembly
+snippet would print the number <code class="language-plaintext highlighter-rouge">1024</code> to stdout:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li a0, 1    # syscall number for printing integer
+li a1, 1024 # the integer we're printing
+ecall       # issue system call
+</code></pre></div></div>
+
+<p>Syscalls that return values will place the value in <code class="language-plaintext highlighter-rouge">a0</code>, as with any other function.</p>
+
+<p><strong>Note:</strong> The calling convention for RISC-V on Linux (described
+<a href="https://man7.org/linux/man-pages/man2/syscall.2.html#architecture-calling-conventions">here</a>
+under “Architecture calling conventions”) actually specifies that the syscall number be
+passed through the <code class="language-plaintext highlighter-rouge">a7</code> register. Venus uses <code class="language-plaintext highlighter-rouge">a0</code> for simplicity, and follows in the
+tradition of the <a href="http://spimsimulator.sourceforge.net/">SPIM simulator</a>.</p>
+
+<h4 id="list-of-system-calls">List of System Calls</h4>
+<p>See the <a href="https://github.com/ThaumicMekanism/venus/wiki/Environmental-Calls">Venus wiki</a> for 
+the full list of available calls.</p>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="../index.html">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="index.html" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../index.html%3Fredirect=false.html" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="venus-reference.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../assets/theme/theme.js"></script>
+  </body>
+</html>

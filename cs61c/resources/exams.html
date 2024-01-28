@@ -1,0 +1,918 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true
+      },
+      "HTML-CSS": { fonts: ["TeX"] }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script> 
+
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='http://cs61c.org/assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="http://cs61c.org/assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cs61c.org/assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="http://cs61c.org/assets/favicon.png">
+    <link href="http://cs61c.org/assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://cs61c.org/assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="http://cs61c.org/assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="http://cs61c.org/assets/bootstrap-toc.min.js"></script>
+    <script src="http://cs61c.org/assets/moment.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar.min.js"></script>
+    <script src="http://cs61c.org/assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="http://cs61c.org/assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="http://cs61c.org/">
+                  <img src = "http://cs61c.org/assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="http://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Exam Resources</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Before Fall 2017, CS 61C was taught using the MIPS ISA. When it comes to problems about assembly language and the datpath, these exams will be less useful. They are available on the HKN and TBP websites.</p>
+
+<h1 id="past-exams-by-year">Past Exams By Year</h1>
+<style>
+td {
+    padding: 10px;
+}
+</style>
+
+<table>
+    <thead>
+        <tr>
+            <th>Semester</th>
+            <th>Midterm 1</th>
+            <th>Midterm 2</th>
+            <th>Final</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            
+            <tr>
+                <td>2020 Fall</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa20_Quest_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa20_Quest_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                </td>
+                
+                <td>
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2020 Summer</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su20_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su20_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su20_MT2_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su20_MT2_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su20_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su20_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2020 Spring</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp20_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp20_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp20_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp20_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+        
+            
+            <tr>
+                <td>2019 Fall</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa19_Quest_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa19_Quest_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa19_MT_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa19_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2019 Summer</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su19_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su19_MT2_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su19_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2019 Spring</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp19_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp19_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp19_MT2_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp19_MT2_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp19_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp19_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+        
+            
+            <tr>
+                <td>2018 Fall</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa18_Quest_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa18_Quest_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa18_MT_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa18_MT_Solutions.pdf.html">Solutions</a>, <a href="https://www.youtube.com/playlist?list=PL_iVbAzfgRWkr83rxlP5wxdW-LxSiy8EZ">Video</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa18_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2018 Summer</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su18_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su18_MT2_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Su18_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2018 Spring</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp18_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp18_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+        
+            
+            <tr>
+                <td>2017 Fall</td>
+                
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa17_MT1_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa17_MT1_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa17_MT2_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa17_MT2_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa17_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+        
+            
+            <tr>
+                <td>2015 Fall</td>
+                
+                
+                <td>
+                    
+                </td>
+                
+                <td>
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Fa15_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td>2015 Spring</td>
+                
+                
+                <td>
+                    
+                </td>
+                
+                <td>
+                    
+                </td>
+                
+                <td>
+                    
+                        
+                        <a href="exam%3Ffile=Sp15_Final_Blank.pdf.html">Blank Exam</a>&nbsp;(<a href="exam%3Ffile=Sp15_Final_Solutions.pdf.html">Solutions</a>)
+                        
+                    
+                </td>
+                
+            </tr>
+            
+        
+    </tbody>
+</table>
+
+<ul>
+  <li><a href="https://drive.google.com/drive/folders/1icpI837E1AFzbV48f_2SQyhFstKd29F0">Additional</a></li>
+  <li><a href="https://tbp.berkeley.edu/courses/cs/61C/">TPB</a></li>
+  <li><a href="https://hkn.eecs.berkeley.edu/exams/course/CS/61C">HKN</a></li>
+</ul>
+
+<h1 id="piazza-questions-about-past-exams">Piazza Questions About Past Exams</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Semester</th>
+            <th>Exam Resources</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            
+            <tr>
+                <td>2020 Summer</td>
+                
+                <td>
+                
+                <a href="exams/piazza/index.html%3Ffile=su20_past_exam_questions_2020.pdf.html">Past Exams 2020 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=su20_past_exam_questions_2019.pdf.html">Past Exams 2019 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=su20_past_exam_questions_2018.pdf.html">Past Exams 2018 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=su20_past_exam_questions_2017.pdf.html">Past Exams 2017 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=su20_past_exam_questions_2016_older.pdf.html">Past Exams 2016 and older Q&amp;A</a><br />
+                
+                </td>
+            </tr>
+            
+            <tr>
+                <td>2020 Spring</td>
+                
+                <td>
+                
+                <a href="exams/piazza/index.html%3Ffile=sp20_past_exam_questions_2019.pdf.html">Past Exams 2019 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=sp20_past_exam_questions_2018.pdf.html">Past Exams 2018 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=sp20_past_exam_questions_2017.pdf.html">Past Exams 2017 Q&amp;A</a><br />
+                
+                <a href="exams/piazza/index.html%3Ffile=sp20_past_exam_questions_2016_older.pdf.html">Past Exams 2016 and older Q&amp;A</a><br />
+                
+                </td>
+            </tr>
+            
+        
+    </tbody>
+</table>
+
+<h1 id="past-exams-by-topic">Past Exams By Topic</h1>
+
+<!-- 
+
+
+## Number Representation
+
+
+
+
+## C Programming
+
+ -->
+
+<h2 id="number-representation">Number Representation</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=11">Fall 2019 Final Q10h</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=3">Fall 2019 Final Q2</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Quest_Blank.pdf.html#page=1">Fall 2019 Quest Q1, Q2, Q3</a> (<a href="exam%3Ffile=Fa19_Quest_Solutions.pdf.html#page=1">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT1_Blank.pdf.html#page=2">Summer 2019 Midterm 1 Q1</a> (<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Quest_Blank.pdf.html#page=1">Fall 2018 Quest Q1</a> (<a href="exam%3Ffile=Fa18_Quest_Solutions.pdf.html#page=1">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT1_Blank.pdf.html#page=3">Summer 2018 Midterm 1 Q1</a> (<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=2">Spring 2018 Final Q1A, Q1B</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html#page=3">Spring 2018 Midterm 1 Q1</a> (<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_MT_Blank.pdf.html#page=2">Fall 2018 Midterm Q1 A-D</a> (<a href="exam%3Ffile=Fa18_MT_Solutions.pdf.html#page=1">solution</a>, videos: <a href="https://youtu.be/F_VErIIlHlM">1A</a> <a href="https://youtu.be/qjfmqVuwfP0">1B</a> <a href="https://youtu.be/SFHKbfzFg2c">1C</a> <a href="https://youtu.be/DQ-AbzaT7gw">1D</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=12">Fall 2015 Final MT2-5</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=12">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=57m53s">video</a>)</li>
+  <li><a href="exam%3Ffile=Sp15_Final_Blank.pdf.html#page=2">Spring 2015 Final M1-1AB</a> (<a href="exam%3Ffile=Sp15_Final_Solutions.pdf.html#page=2">solutions</a>, <a href="https://www.youtube.com/watch?v=hWoVRs17mD0&amp;t=0m0s">video</a>)</li>
+</ul>
+
+<h2 id="c-programming">C Programming</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=4">Fall 2019 Final Q3</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=3">Fall 2019 Final Q2a, Q2d</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=4">Fall 2019 Midterm Q3</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Quest_Blank.pdf.html#page=2">Fall 2019 Quest Q4, Q6</a> (<a href="exam%3Ffile=Fa19_Quest_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_Final_Blank.pdf.html#page=7">Summer 2019 Final Q3</a> (<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT1_Blank.pdf.html#page=6">Summer 2019 Midterm 1 Q3</a> (<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT1_Blank.pdf.html#page=9">Summer 2019 Midterm 1 Q4</a> (<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT1_Blank.pdf.html#page=13">Summer 2019 Midterm 1 Q6</a> (<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html#page=13">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Quest_Blank.pdf.html#page=1">Fall 2018 Quest Q2A, Q2B, Q3B</a> (<a href="exam%3Ffile=Fa18_Quest_Solutions.pdf.html#page=1">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=2">Summer 2018 Final Q1</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT1_Blank.pdf.html#page=8">Summer 2018 Midterm 1 Q4</a> (<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=3">Spring 2018 Final Q1C, Q1D</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=4">Spring 2018 Final Q2</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html#page=4">Spring 2018 Midterm 1 Q2</a> (<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html#page=5">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html#page=8">Spring 2018 Midterm 1 Q4</a> (<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=2">Fall 2017 Final Q1</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=4">Fall 2017 Final Q3</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=3">Fall 2015 Final MT1-2</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=3">solutions</a>, <a href="https://www.youtube.com/watch?v=gjZuTehyYLw&amp;t=6m38s">video</a>)</li>
+  <li><a href="exam%3Ffile=Sp15_Final_Blank.pdf.html#page=3">Spring 2015 Final M1-2</a> (<a href="exam%3Ffile=Sp15_Final_Solutions.pdf.html#page=4">solutions</a>, <a href="https://www.youtube.com/watch?v=hWoVRs17mD0&amp;t=11m46s">video</a>)</li>
+</ul>
+
+<h2 id="c-memory-model">C Memory Model</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Quest_Blank.pdf.html#page=2">Fall 2019 Quest Q5</a> (<a href="exam%3Ffile=Fa19_Quest_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT1_Blank.pdf.html#page=4">Summer 2019 Midterm 1 Q2</a> (<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=4">Fall 2018 Final M2 Part 2</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Quest_Blank.pdf.html#page=2">Fall 2018 Quest Q3A</a> (<a href="exam%3Ffile=Fa18_Quest_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=4">Summer 2018 Final Q2</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT1_Blank.pdf.html#page=4">Summer 2018 Midterm 1 Q2</a> (<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html#page=6">Spring 2018 Midterm 1 Q3</a> (<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=3">Fall 2015 Final MT1-1B</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=3">solutions</a>, <a href="https://www.youtube.com/watch?v=gjZuTehyYLw&amp;t=2m59s">video</a>)</li>
+  <li><a href="exam%3Ffile=Sp15_Final_Blank.pdf.html#page=2">Spring 2015 Final M1-1C</a> (<a href="exam%3Ffile=Sp15_Final_Solutions.pdf.html#page=2">solutions</a>, <a href="https://www.youtube.com/watch?v=hWoVRs17mD0&amp;t=3m20s">video</a>)</li>
+</ul>
+
+<h2 id="floating-point">Floating Point</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=3">Fall 2019 Midterm Q1</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_Final_Blank.pdf.html#page=3">Summer 2019 Final Q1.7-Q1.11</a> (<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT2_Blank.pdf.html#page=2">Summer 2019 Midterm 2 Q1</a> (<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=3">Fall 2018 Final M2 Part 1</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=7">Summer 2018 Final Q4</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT1_Blank.pdf.html#page=3">Summer 2018 Midterm 1 Q1</a> (<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=17">Spring 2018 Final Q9</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=20">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=14">Fall 2017 Final Q9</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=14">solution</a>)</li>
+</ul>
+
+<h2 id="risc-v-programming">RISC-V Programming</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=5">Fall 2019 Final Q4</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=5">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=3">Fall 2019 Final Q2b</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=5">Fall 2019 Midterm Q4</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=5">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_Final_Blank.pdf.html#page=9">Summer 2019 Final Q4</a> (<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT1_Blank.pdf.html#page=12">Summer 2019 Midterm 1 Q5</a> (<a href="exam%3Ffile=Su19_MT1_Solutions.pdf.html#page=12">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=5">Fall 2018 Final M3</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Quest_Blank.pdf.html#page=2">Fall 2018 Quest Q4</a> (<a href="exam%3Ffile=Fa18_Quest_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=6">Summer 2018 Final Q3</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT1_Blank.pdf.html#page=6">Summer 2018 Midterm 1 Q3</a> (<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=6">Spring 2018 Final Q3</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html#page=12">Spring 2018 Midterm 1 Q6</a> (<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html#page=13">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=6">Fall 2017 Final Q4</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_MT_Blank.pdf.html#page=4">Fall 2018 Midterm Q4 C-E</a> (<a href="exam%3Ffile=Fa18_MT_Solutions.pdf.html#page=3">solutions</a>, videos: <a href="https://youtu.be/06EoubncVQM">4C</a> <a href="https://youtu.be/g5kB32z0DT0">4D&amp;E</a>)</li>
+</ul>
+
+<h2 id="risc-v-instruction-formats">RISC-V Instruction Formats</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=11">Fall 2019 Final Q10h</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=5">Fall 2019 Final Q4</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=5">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=3">Fall 2019 Final Q2c</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT2_Blank.pdf.html#page=4">Summer 2019 Midterm 2 Q1</a> (<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT1_Blank.pdf.html#page=10">Summer 2018 Midterm 1 Q5</a> (<a href="exam%3Ffile=Su18_MT1_Solutions.pdf.html#page=10">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=3">Spring 2018 Midterm 2 Q1F-H</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=5">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT1_Blank.pdf.html#page=10">Spring 2018 Midterm 1 Q5</a> (<a href="exam%3Ffile=Sp18_MT1_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_MT_Blank.pdf.html#page=4">Fall 2018 Midterm Q4 A,B</a> (<a href="exam%3Ffile=Fa18_MT_Solutions.pdf.html#page=2">solutions</a>, videos: <a href="https://youtu.be/CI1p8vT1k1Q">4A</a> <a href="https://youtu.be/_cbqOoX-qqY">4B</a>)</li>
+</ul>
+
+<h2 id="call">CALL</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=3">Fall 2019 Final Q1</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=3">Fall 2019 Midterm Q2</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_Final_Blank.pdf.html#page=2">Summer 2019 Final Q1.1-Q1.6</a> (<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT2_Blank.pdf.html#page=5">Summer 2019 Midterm 2 Q2.4-Q2.8</a> (<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html#page=5">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=24">Summer 2018 Final Q14</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=26">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=8">Spring 2018 Final Q4</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=3">Spring 2018 Midterm 2 Q1 A-E</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=3">Fall 2015 Final MT1-1A</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=3">solutions</a>, <a href="https://www.youtube.com/watch?v=gjZuTehyYLw&amp;t=0m35s">video</a>)</li>
+</ul>
+
+<h2 id="sds">SDS</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=6">Fall 2019 Final Q5a Q5b</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=7">Fall 2019 Midterm Q5c</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_Final_Blank.pdf.html#page=24">Summer 2019 Final Q10</a> (<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html#page=25">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT2_Blank.pdf.html#page=9">Summer 2019 Midterm 2 Q3</a> (<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=7">Fall 2018 Final F2C</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=12">Summer 2018 Final Q7 Part 1</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=14">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT2_Blank.pdf.html#page=3">Summer 2018 Midterm 2 Q2</a> (<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=10">Spring 2018 Final Q5</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=12">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=5">Spring 2018 Midterm 2 Q2B-D</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=8">Fall 2017 Final Q5</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=8">Fall 2015 Final MT2-1C</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=8">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=10m44s">video</a>)</li>
+</ul>
+
+<h2 id="boolean-algebra">Boolean Algebra</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=6">Fall 2019 Final Q5d</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=7">Fall 2019 Midterm Q5b</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT2_Blank.pdf.html#page=7">Summer 2019 Midterm 2 Q3</a> (<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=7">Fall 2018 Final F2A</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT2_Blank.pdf.html#page=3">Summer 2018 Midterm 2 Q2</a> (<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=5">Spring 2018 Midterm 2 Q2A</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=7">Fall 2015 Final MT2-1A</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=6">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=0m28s">video</a>)</li>
+</ul>
+
+<h2 id="fsms">FSMs</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=6">Fall 2019 Final Q5c</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=6">Fall 2019 Midterm Q5a</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=6">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_Final_Blank.pdf.html#page=6">Summer 2019 Final Q2</a> (<a href="exam%3Ffile=Su19_Final_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=7">Fall 2018 Final F2B</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=14">Summer 2018 Final Q7 Part 2</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=16">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT2_Blank.pdf.html#page=2">Summer 2018 Midterm 2 Q1</a> (<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html#page=2">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=6">Spring 2018 Midterm 2 Q2E</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=7">Fall 2015 Final MT2-1B</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=7">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=2m52s">video</a>)</li>
+</ul>
+
+<h2 id="single-cycle-datapath--control">Single-Cycle Datapath &amp; Control</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=7">Fall 2019 Final Q6</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=7">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_MT_Blank.pdf.html#page=8">Fall 2019 Midterm Q6</a> (<a href="exam%3Ffile=Fa19_MT_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su19_MT2_Blank.pdf.html#page=12">Summer 2019 Midterm 2 Q4 (up to p.16)</a> (<a href="exam%3Ffile=Su19_MT2_Solutions.pdf.html#page=12">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_Final_Blank.pdf.html#page=8">Fall 2018 Final F3A+F3B</a> (<a href="exam%3Ffile=Fa18_Final_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT2_Blank.pdf.html#page=4">Summer 2018 Midterm 2 Q3</a> (<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html#page=4">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=16">Spring 2018 Final Q8</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=19">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=7">Spring 2018 Midterm 2 Q3</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=10">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=10">Fall 2017 Final Q6</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=10">solution</a>)</li>
+</ul>
+
+<h2 id="pipelining--hazards">Pipelining &amp; Hazards</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=8">Fall 2019 Final Q7</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=8">Summer 2018 Final Q5</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT2_Blank.pdf.html#page=6">Summer 2018 Midterm 2 Q4</a> (<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html#page=6">solutions</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=11">Spring 2018 Midterm 2 Q4</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=17">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_MT2_Blank.pdf.html#page=8">Fall 2017 Midterm 2 Q4</a> (<a href="exam%3Ffile=Fa17_MT2_Solutions.pdf.html#page=8">solutions</a>)</li>
+</ul>
+
+<h2 id="caches">Caches</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=9">Fall 2019 Final Q8</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=9">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_MT_Blank.pdf.html#page=3">Fall 2018 Midterm Q3</a> (<a href="exam%3Ffile=Fa18_MT_Solutions.pdf.html#page=2">solutions</a>, videos: <a href="https://youtu.be/fkoRQhHG7Ko">3A</a> <a href="https://youtu.be/UAH_m2u9obk">3B</a> <a href="https://youtu.be/f6Uz35p4KCg">3C</a> <a href="https://youtu.be/eygAxIPpTGs">3D</a> <a href="https://youtu.be/-pBR0fbBz7A">3E</a> <a href="https://youtu.be/tP0LT_wjGSE">3F</a> <a href="https://youtu.be/BeLOvaHyYWc">3G</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=8">Summer 2018 Final Q1</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=8">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=15">Summer 2018 Final Q6</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=10">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=8">Summer 2018 Final Q8</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=17">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_MT2_Blank.pdf.html#page=9">Summer 2018 Midterm 2 Q5</a> (<a href="exam%3Ffile=Su18_MT2_Solutions.pdf.html#page=9">solutions</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_MT2_Blank.pdf.html#page=16">Spring 2018 Midterm 2 Q5</a> (<a href="exam%3Ffile=Sp18_MT2_Solutions.pdf.html#page=25">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_MT2_Blank.pdf.html#page=10">Fall 2017 Midterm 2 Q5</a> (<a href="exam%3Ffile=Fa17_MT2_Solutions.pdf.html#page=11">solutions</a>)</li>
+  <li><a href="exam%3Ffile=Su15_MT2_Blank.pdf.html#page=7">Summer 2015 MT2 Q5</a> (<a href="exam%3Ffile=Su15_MT2_Solutions.pdf.html#page=8">solutions</a>, <a href="https://www.youtube.com/watch?v=q61XpFsfX6U">video</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=10">Fall 2015 Final MT2-4</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=11">solutions</a>, <a href="https://www.youtube.com/watch?v=pezYrJPeKcA&amp;t=40m55s">video</a>)</li>
+</ul>
+
+<h2 id="parallelism">Parallelism</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=11">Fall 2019 Final Q10a, Q10b, Q10c</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=18">Summer 2018 Final Q9</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=18">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=8">Summer 2018 Final Q10</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=20">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=24">Summer 2018 Final Q13</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=25">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=18">Spring 2018 Final Q10</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=21">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=21">Spring 2018 Final Q11</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=26">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa18_MT_Blank.pdf.html#page=4">Fall 2018 Midterm Q5 A,B,E</a> (<a href="exam%3Ffile=Fa18_MT_Solutions.pdf.html#page=3">solutions</a>, videos: <a href="https://youtu.be/f8ZnHz448iM">5A</a> <a href="https://youtu.be/JEn8ZjbR6AE">5B</a> <a href="https://youtu.be/JiFP8-J9TKU">5E</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=3">Fall 2017 Final Q2</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=3">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=15">Fall 2017 Final Q10</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=15">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=14">Fall 2015 Final F2</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=15">solutions</a>, <a href="https://www.youtube.com/watch?v=kj7gj83W4gs&amp;t=6m40s">video</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=16">Fall 2015 Final F3</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=18">solutions</a>, <a href="https://www.youtube.com/watch?v=kj7gj83W4gs&amp;t=16m28s">video</a>)</li>
+  <li><a href="exam%3Ffile=Sp15_Final_Blank.pdf.html#page=11">Spring 2015 Final F2</a> (<a href="exam%3Ffile=Sp15_Final_Solutions.pdf.html#page=15">solutions</a>, <a href="https://www.youtube.com/watch?v=ein76hKkEwA&amp;t=9m40s">video</a>)</li>
+</ul>
+
+<h2 id="virtual-memory">Virtual Memory</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=11">Fall 2019 Final Q10d</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=10">Fall 2019 Final Q9</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=10">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=20">Summer 2018 Final Q11</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=22">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=22">Spring 2018 Final Q12</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=26">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=19">Fall 2017 Final Q12</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=18">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa15_Final_Blank.pdf.html#page=13">Fall 2015 Final F1</a> (<a href="exam%3Ffile=Fa15_Final_Solutions.pdf.html#page=13">solutions</a>, <a href="https://www.youtube.com/watch?v=kj7gj83W4gs&amp;t=0m10s">video</a>)</li>
+  <li>Adapted Question from Spring 2007 Final (<a href="https://www.youtube.com/watch?v=TwijhlsMSYc">video</a>)</li>
+  <li><a href="exam%3Ffile=Sp15_Final_Blank.pdf.html#page=10">Spring 2015 Final F1</a> (<a href="exam%3Ffile=Sp15_Final_Solutions.pdf.html#page=13">solutions</a>, <a href="https://www.youtube.com/watch?v=ein76hKkEwA&amp;t=0m0s">video</a>)</li>
+  <li>Fall 2014 Final F2 (<a href="exam%3Ffile=Fa14_Final_Solutions.pdf.html#page=6">solutions</a>, <a href="https://www.youtube.com/watch?v=6Y4ed4kQjNA">video</a>)</li>
+</ul>
+
+<h2 id="other">Other</h2>
+
+<ul>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=11">Fall 2019 Final Q10h</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa19_Final_Blank.pdf.html#page=11">Fall 2019 Final Q10e, Q10f, Q10g</a> (<a href="exam%3Ffile=Fa19_Final_Solutions.pdf.html#page=11">solution</a>)</li>
+  <li><a href="exam%3Ffile=Su18_Final_Blank.pdf.html#page=23">Summer 2018 Final Q12 - Hamming Codes</a> (<a href="exam%3Ffile=Su18_Final_Solutions.pdf.html#page=25">solution</a>)</li>
+  <li><a href="exam%3Ffile=Sp18_Final_Blank.pdf.html#page=25">Spring 2018 Final Q13 - Potourri</a> (<a href="exam%3Ffile=Sp18_Final_Solutions_Rev1.pdf.html#page=29">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=18">Fall 2017 Final Q11 - Atomic Instructions</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=17">solution</a>)</li>
+  <li><a href="exam%3Ffile=Fa17_Final_Blank.pdf.html#page=21">Fall 2017 Final Q13 - Hamming Codes</a> (<a href="exam%3Ffile=Fa17_Final_Solutions.pdf.html#page=20">solution</a>)</li>
+</ul>
+
+<h1 id="mock-exams">Mock Exams</h1>
+<ul>
+  <li><a href="exam%3Ffile=Mock_MT_Blank_v2.pdf.html">Mock Midterm 1</a> (<a href="exam%3Ffile=Mock_MT_Solution_v3.pdf.html">solutions</a>)(<a href="exam%3Ffile=Mock_MT_Notes.pdf.html">with TA’s notes</a>)</li>
+</ul>
+
+<h1 id="study-guide">Study Guide</h1>
+
+<p>For the midterm, we put together <a href="https://docs.google.com/document/d/1GLFLUhXmnQW9Q4GzS9-wAUZ75I3GkY94gsjXYReq5_0/edit?usp=sharing">a study guide</a> with questions you should know the answer to for the exam.</p>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="http://cs61c.org/">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="http://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="exams.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="http://cs61c.org/assets/theme/theme.js"></script>
+  </body>
+</html>
