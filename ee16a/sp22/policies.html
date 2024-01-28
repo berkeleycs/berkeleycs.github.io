@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174929475-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-174929475-2');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="http://eecs.berkeley.edu/favicon.ico" type="image/x-icon">
+    <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <title>EECS16A: Designing Information Devices and Systems I, Spring 2022</title>
+  </head>
+
+  <body data-spy="scroll" data-target="#navscroll" onload="getCurrFont()">
+
+    <div id="navscroll">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html" style="color: #000;"><strong>EECS16A</strong> | Spring 2022</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse" >
+              <ul class="nav navbar-nav pull-right">
+                <li><a id="na1" href="index.html#schedule">Schedule</a></li>
+                <li><a id="na1" href="index.html#notes">Notes</a></li>
+                <li><a id="na1" href="index.html#google-calendar">Calendar</a></li>
+                <li><a id="na1" href="index.html#colored-calendar">Discussions</a></li>
+                <li><a id="na5" href="index.html#resources">Resources</a></li>
+                <li><a id="na5" href="index.html#exams">Past Exams</a></li>
+                <!-- <li><a id="na5" href="index.html#sims">Past Demos</a></li> -->
+                <li><a id="na5" href="index.html#practiceSets">Practice Sets</a></li>
+<!--                <li><a id="na5" href="index.html#csm">CSM</a></li>-->
+                <li><a id="na4" href="index.html#staff">Staff</a></li>
+                <li class="dropdown">
+                  <a href="policies.html" class="dropbtn">Policies</a>
+                  <div class="dropdown-content">
+                    <a href="policies.html#courseInfo">Course Info</a>
+                    <a href="policies.html#gradeBreak">Grade Breakdown</a>
+                    <a href="policies.html#gradeScale">Grading Scale</a>
+                    <a href="policies.html#secondChance">Exam Clobber Policy</a>
+                    <a href="policies.html#hwPartyOH">Homework Party and OH</a>
+                    <a href="policies.html#hwSubmission">Homework Submission</a>
+                    <a href="policies.html#hwSelfgrade">Homework Grading - Self-Grading</a>
+                    <a href="policies.html#sgWalkthrough">Self-Grading Walkthrough Video</a>
+                    <a href="policies.html#hwResubmission">Homework Resubmission</a>
+                    <a href="policies.html#hwEffort">Homework Effort</a>
+                    <a href="policies.html#participation">Participation in Discussion</a>
+                    <a href="policies.html#labDiscussion">Lab and Discussion Policies</a>
+                    <a href="policies.html#exampolicy">Exam Policies</a>
+                    <a href="policies.html#proctoring">Exam Proctoring</a>
+                    <a href="policies.html#exceptions">Exceptions and Exam Accomodation</a>
+                    <a href="policies.html#communication">Course Communication</a>
+                    <a href="policies.html#collaboration">Collaboration</a>
+                    <a href="policies.html#studyGroups">16A Study Groups</a>
+                    <a href="policies.html#help">Asking for Help</a>
+                    <a href="policies.html#inclusion">Inclusion</a>
+                    <a href="policies.html#honor">Honor</a>
+                    <a href="policies.html#otherresources">Resources</a>
+                    <a href="policies.html#advice">Advice</a>
+                  </div>
+                </li>
+                <li><a id="na6" href="index.html#about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  <div class="parallax-window" data-parallax="scroll" data-image-src="img/background2.jpg" data-speed="0.1">
+    <div class='container'>
+      <div class="main-container">
+
+<script>
+function getCurrFont() {
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.getItem('fontFamily')) {
+      document.body.style.fontFamily = localStorage.getItem("fontFamily");
+    }
+    else {
+      localStorage.setItem("fontFamily", "Roboto");
+      document.body.style.fontFamily = localStorage.getItem("fontFamily")
+    }
+  }
+}
+</script><!-- Maintained by Berkeley's ee16a staff-->
+
+<div class='row'>
+  <h1><b>EECS16A</b>, Designing Information Devices and Systems I</h1>
+  <h3>Spring 2022</h3>
+</div>
+
+<div class='row'>
+  <a class="anchor" id="policies"></a>
+
+  <h2>Policies</h2>
+<!--
+  <h3>Course Info</h3>
+  <a class="anchor" id="courseInfo"></a>
+    <p>
+      The EECS 16AB series (Designing Information Devices and Systems) is a pair of introductory-level courses introducing students to EECS. The courses have a particular emphasis on how to build and understand systems interacting with the world from an informational point of view. Mathematical modeling is an important theme throughout these courses, and students will learn many conceptual tools along the way. These concepts are rooted in specific application domains. Students should understand why they are learning something.
+    </p>
+    <p>
+      An important part of being a successful engineer is being able to identify the important and relevant structure in a complex problem while ignoring minor issues. EECS 16A focuses on modeling as abstraction: how can we see the relevant underlying structure in a problem? It introduces the basics of linear modeling, largely from a "static" and deterministic point of view. EECS 16B deepens the understanding of linear modeling and introduces dynamics and control, along with additional applications. Finally, EECS 70, (which can be thought of as the third course in this sequence --- except without any labs), introduces additional discrete structures for modeling problems, and brings in probability.
+    </p>
+    <p>
+      In EECS 16A in particular, we will use the application domains of imaging and tomography, smartphones and touchscreens, and GPS and localization to motivate and inspire. Along the way, we will learn the basics of linear algebra and, more importantly, the linear-algebraic way of looking at the world. The emphasis will be on modeling and using linear structures to solve problems; the class is not just focused on how to do computations. We will learn about linear circuits, not merely as a powerful and creative way to help connect the physical world to what we can process computationally, but also as an exemplar of linearity and as a vehicle for learning how to do design. Circuits also provide a concrete setting in which to learn the key concept of "equivalence" --- an important aspect of abstraction. Our hope is that the concepts you learn in EECS 16A will help you as you tackle more advanced courses and will help form a solid conceptual framework that will help you learn throughout your career.
+    </p> -->
+
+  <h3>Grade Breakdown</h3>
+  <a class="anchor" id="gradeBreak"></a>
+    <p>
+      Our objective is to help you become the best engineer you can be, and grades are not everything. The various components of the class -- homework, labs and exams -- are designed explicitly with this in mind. Every challenge is a growth opportunity. You will have the opportunity to gain points in the course through completing your homework and attending labs as well as through the exams.
+    </p>
+    <p>
+      This course is not graded on a curve. We will set absolute thresholds for performance that will map to grade boundaries. We encourage you to discuss the course material with each other and teach each other new ideas and concepts that you learn. Here is the breakdown for grading for this class:
+    </p>
+
+    <div class="row">
+      <div class="col-sm-5">
+      <div class="table-responsive">
+      <table border="3" class="table table-bordered table-striped table-hover table-condensed" style="width:90%;">
+        <thead>
+          <tr>
+            <th style="background: #91c8d9" scope="col" class='col-md-1 center'>Category</th>
+            <th style="background: #91c8d9" scope="col" class='col-md-2 center'>Points (out of 300)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="center">Participation</td>
+            <td class="center">10 points</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="center">Homework</td>
+            <td class="center">45 points</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="center">Labs</td>
+            <td class="center">45 points</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="center">Quest</td>
+            <td class="center">15 points</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="center">Midterm 1</td>
+            <td class="center">45 points</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="center">Midterm 2</td>
+            <td class="center">45 points</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td class="center">Final</td>
+            <td class="center">95 points</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      </div>
+      <div id="canvasParent" class='col-sm-7' style="position: relative">
+        <div id="gradebreakdown" style="height: 400px;"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Category', 'Points'],
+          ['Participation', 10],
+          ['Homework', 45],
+          ['Labs', 45],
+          ['Quest', 15],
+          ['Midterm 1', 45],
+          ['Midterm 2', 45],
+          ['Final', 95]
+        ]);
+
+        var options = {
+          'title': 'EECS 16A Grade Breakdown',
+          'width': 550,
+          'height': 400,
+          'chartArea': {'width': '90%', 'height': '90%'},
+          'legend': {'position': 'bottom'},
+          'backgroundColor': { fill:'transparent' }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('gradebreakdown'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <p>
+      Notice that you can get many points by being regular with your homework and the labs. Our goal is to help you learn the material as best as possible!
+    </p>
+
+  <h3>Grading Scale</h3>
+  <a class="anchor" id="gradeScale"></a>
+    <p>
+      This course is not curved. We define the following grading scale (in percentages):
+      <table class="table table-bordered table-striped" style="width: 30%">
+        <tbody>
+          <tr>
+            <td></td> <td></td> <td style="background: #c4cef2">A</td> <td>[93+)</td> <td style="background: #c4cef2">A-</td> <td>[90+)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td style="background: #c4cef2" >B+</td> <td>[84+)</td> <td style="background: #c4cef2">B</td> <td>[75+)</td> <td style="background: #c4cef2">B-</td> <td>[68+)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td style="background: #c4cef2" >C+</td> <td>[65+)</td> <td style="background: #c4cef2">C</td> <td>[62+)</td> <td style="background: #c4cef2">C-</td> <td>[58+)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td style="background: #c4cef2" >D+</td> <td>[57+)</td> <td style="background: #c4cef2">D</td> <td>[55+)</td> <td style="background: #c4cef2">D-</td> <td>[53+)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td style="background: #c4cef2">F</td> <td>[0-, 53)</td> <td></td> <td></td> <td></td> <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+
+  <h3>Exam Clobber Policy</h3>
+  <a class="anchor" id="secondChance"></a>
+    <p>
+      This course spans a fairly broad set of ideas and concepts within a short period of time, and hence sustained and consistent effort and investment are critical to your success in this class.
+    </p>
+    <p>
+      To give students a ‘second chance’, we will provide the opportunity to clobber a midterm to students who complete an optional midterm redo.
+    </p>
+    <p>
+      For each midterm, if you complete the midterm redo, we will replace your corresponding midterm score with your scaled score on the final exam if it would help your grade.
+    </p>
+  <p>
+    We will also provide the opportunity to clobber your quest score with the score from the first midterm if you complete an optional quest redo. If you complete the quest redo, we will replace your quest score with your scaled score on Midterm 1, if it would help your grade. If you clobber both the quest and Midterm 1, we will use your clobbered Midterm 1 score to clobber the quest (essentially allowing you to clobber the quest with the final).
+  </p>
+
+  <h3>Homework (HW) Party and Office Hours (OH)</h3>
+  <a class="anchor" id="hwPartyOH"></a>
+    <!-- <p> <p> <font color="purple"> <b> 9/30/2020: </b> </font> <b> As OH becomes more popular, we will be implementing a policy where TAs will spend about 10 minutes with each student, and move down the queue after this time (this applies when other students are on the queue). This is to ensure that everyone has a better chance to ask their questions. We are actively observing OH utilization are various time slots and making changes to TA allocations to best accomodate everyone's timing preferences as well. </b> </p>
+    <p> <p> <font color="purple"> <b> 9/2/2020: </b> </font> <b> The information below might be slightly out of date as we work on developing the best all-around solution for your learning; for the most recent information concerning OH and (especially) HW Party, including detailed information about how to join and what steps to take, please see <a href="https://piazza.com/class/ke3aj8z75apb0?cid=131">this Piazza Post</a>. </b> </p> -->
+    <p>
+      Homework parties are your chance to meet and interact with other students, while also having the chance to get help from GSIs, tutors, and faculty. We expect students to treat each other with respect during homework parties as well as during all other parts of the class, including interactions on <a href="http://piazza.com/berkeley/spring2022/eecs16a" target="_blank">Piazza</a>, discussion, and office hours. Remember that each of you is coming into a class with different experiences and backgrounds -- use this as an opportunity to learn from one another.
+    </p>
+    <p>
+      <b>Thursdays 2-4PM, HW Party will be held in Wozniak Lounge (430-438 Soda Hall). Attending homework party is highly encouraged and is a great way to find a study group!</b> Students are expected to help each other out, and if desired, form ad-hoc "pickup" homework groups in the style of a pickup basketball game.<!-- ; please see <a href="https://piazza.com/class/ke3aj8z75apb0?cid=131">this Piazza Post</a> for details. -->
+    </p>
+    <p>
+     Office Hours will be held almost every day, as annotated on the course Google calendar. You can come to office hours with your study groups, or by yourself -- there will be one or more TAs there to help you work through the concepts or the homework!
+    </p>
+  <p>
+    All homework parties and office hours will be held in-person, unless otherwise specified on Piazza.
+  </p>
+
+  <h3>Homework Submission</h3>
+  <a class="anchor" id="hwSubmission"></a>
+  <p>
+    <b>Homeworks are due on Friday night at 11:59 PM Pacific Time (PT).</b> You need to turn in a .pdf file consisting of your written-up solutions that also includes an attached pdf "printout" of your .ipynb code on Gradescope. In addition, Gradescope has an option to associate pages of your work to each homework problem. You must select the relevant pages for every problem.<b> Any homework submissions that are turned in without the code “printout” (or screenshot) attached will receive a zero on the coded ipython notebook portions of the homework. Any problems without pages selected will receive zero credit.</b> If you have any questions about the format of a homework submission, please go to office hours or homework party. Additionally, we will provide HW accommodations for students who have letters of accommodations from DSP services and will be handled on a case-by-case basis.
+  </p>
+
+  <h3>Homework Grading – Self-Grading</h3>
+  <a class="anchor" id="hwSelfgrade"></a>
+    <p>
+    The point of homework in this class is for you to learn the material. To help you in doing this, you will both grade your own homework and be graded by 16A readers. After the HW deadline, official solutions will be posted online. You are required to read them and grade your submitted work accordingly for every part of every problem in the homework on a simple coarse scale.
+    </p>
+    <div class="table-responsive">
+      <table border="3" class="table table-bordered table-striped table-hover table-condensed" style="width: 40%;">
+        <thead>
+          <tr>
+            <th style="background: #91c8d9" scope="col" class='col-md-1 center'><b>Score</b></th>
+            <th style="background: #91c8d9" scope="col" class='col-md-3'><b>Reason</b></th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <td class = "center">0</td>
+              <td>Didn't attempt or very wrong</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td class = "center">2</td>
+              <td>Got started and made some progress, but went off in the wrong direction or with no clear direction</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td class = "center">5</td>
+              <td>Right direction and got half-way there</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td class = "center">8</td>
+              <td>Mostly right but a minor thing missing or wrong</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td class = "center">10</td>
+              <td>100% correct</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+    <p>
+     Note: You must justify self-grades of 2, 5 or 8 with a comment. Grades of 0 and 10 do not need to be justified. If you are really confused about how to grade a particular problem, you should post on Piazza. This is not supposed to be a stressful process.
+    </p>
+    <!-- <p> <b> We will hold extra office hours that will do HW run-throughs after the HW solutions have been released. These will be held on Monday, and we encourage you to attend them to ask questions about grading and clarify your understanding of the HW and solutions. </b> </p> -->
+    <p>
+      In order to receive credit for your self-grades, you must (1) enter your self-grades into the posted self-grade form for that homework, which will generate a .txt file, and (2) upload that .txt file to the appropriate self-grade assignment on Gradescope.
+    </p>
+<!--    <p> To help keep track of these deadlines, we have released a self-guided <a href="index.html#progressTracker">Progress Tracker</a> that you can optionally use. </p>-->
+    <p> <b>Your self-grades will be due on the Monday following the homework deadline at 11:59 PM sharp. (For example: Homework 0 is due on Friday 1/21 at 11:59 PM. The following Monday, 1/24, at 11:59 PM, your Homework 0 self-grades will be due.) We will accept late self-grades up to a week after the original homework deadline for 75% credit on the associated homework assignment.</b> If you don't enter a proper grade by this deadline, you are giving yourself a zero on that assignment. Merely doing the homework is not enough: you must do the homework, turn it in on time, read the solutions, do the self-grade, and turn it in on time. <b> Unless all of these steps are done, you will get a zero for that assignment.</b> </p>
+    <p>
+      <b>We will automatically drop the lowest homework score from your final grade calculation.</b> This drop is meant for emergencies. If you use this drop half-way into the semester, and request another, we cannot help you. EECS47D students will not have their lowest homework score dropped.
+    </p>
+    <p>
+      Just like we encourage you to use a study group for doing your homework, we strongly encourage you to have others help you in grading your assignments while you help grade theirs.
+    </p>
+    <p>
+     Course readers are going to be grading and sending you occasional comments. Any consistent discrepancy between your self-assigned grades and the reader grades will be flagged and checked for academic dishonesty, so please grade yourself appropriately without attempting to inflate your grades. Your own scores will be used in computing your final grade for the course, adjusted by taking into account reader scores so that everyone is fairly graded effectively on the same scale. For example, if we notice that you tend to give yourself 5s on questions where readers looking at your homeworks tend to give you 8s, we will apply an upward correction to adjust.
+    </p>
+    <p>
+      Reader grades will be released on Gradescope about one week after the homework deadline. Readers grade questions either on a “coarse” or “fine” scale for each homework part. Coarsely graded question parts are graded based on effort. Finely graded question parts are worth a total of 10 points and are graded using the same self-grading rubric above. Homework regrade requests are typically due on Gradescope within 72 hours of reader grades being released. If a regrade request is submitted for a part of a question on the homework, the grader reserves the right to regrade the entire homework and could potentially take points off.
+    </p>
+    <p>
+      If you have any questions, please ask on Piazza.
+    </p>
+    <p>If you are curious as to how your homework scores are calculated, please look at the formula below.</p>
+    <img src="img/selfgrade_formula.PNG" width="700" style="margin-right:auto;margin-left:auto;">
+
+  <h3>Self-Grade Walkthrough</h3>
+  <a class="anchor" id="sgWalkthrough"></a>
+  <p style="text-align:center">
+  <iframe width="853" height="480" src="https://www.youtube.com/embed/J-NDFBjoPWc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </p>
+
+  <h3>Homework Resubmission</h3>
+  <a class="anchor" id="hwResubmission"></a>
+    <p>
+      Again, the point of homework in this class is to help you learn. We understand that sometimes work from other classes, midterms or your personal life can come in the way of making a homework deadline. For this reason we will allow you to resubmit your homework for 70% credit. <b> Homework resubmissions (apart from iPython code) must be HANDWRITTEN. Homework resubmissions will be due along with the self-grades, so they will be due by 11:59pm Monday night. If you choose to resubmit your homework, you must submit two sets of self-grades, one for the first submission and one for the second submission. For the second submission, do self-grades as normal. We will apply the 70% correction. </b>
+    </p>
+    <p>
+      What does 70% credit mean? Let us say you only were able to get halfway through a problem during the first submission. You submitted your homework on Friday, and while going through the solutions you figured out how to do the whole problem. Your self-grade for your first submission would be a 5/10. However, you can resubmit the homework problem with a fully correct solution and receive 70% of the remaining points as extra points, i.e. (10-5) * 70/100 = 3.5 extra points, and so your score for the problem would go from 5 points to 8.5 points.
+    </p>
+
+  <h3>Homework Effort Policy</h3>
+  <a class="anchor" id="hwEffort"></a>
+    <p>
+     Because the point of homework in this class is to help you learn, not to punish you for making small mistakes, if your final score (after resubmission and any other corrections are applied) on any homework is above 8/10, your grade will automatically be bumped up to 100% (10/10). If your final score is less than 8/10, it will be scaled accordingly so that a 6/10 will result in 75% (7.5/10).
+    </p>
+
+  <h3>Participation in Discussion</h3>
+  <a class="anchor" id="participation"></a>
+  <p>
+    Discussion is a key component to learning the material in this class, and to keep you motivated and on track, you can earn points towards your grade by attending discussion. Every week, discussion will be held on Monday and Wednesday. Different material will be covered on Monday and Wednesday, so you are encouraged to attend on both days. You may choose to attend any discussion section on a given day, and are encouraged to try out several different TAs’ discussion sections to find which one works best for you. This semester, except as specified otherwise on Piazza, discussion sections will take place in-person.
+  </p>
+  <p>
+    Participation is worth a maximum of 10 points. This is measured by discussion attendance. For each discussion section that you attend, you will fill out an attendance form to count your participation. You must attend 16 discussion sections to get full participation points. Please note that this number is the minimum required for full credit, but you are highly encouraged to attend more discussions.
+  </p>
+  <p>
+    If you do not get full credit, your grade will be calculated by the number of discussion checkoffs you complete; e.g., if you attend (watch) 14 discussions or complete 14 checkoffs, you will have  14/16 * 10 = 8.7 points in this category.
+  </p>
+
+
+  <h3>Lab Policies</h3>
+  <a class="anchor" id="labDiscussion"></a>
+    <p>
+      Labs this semester will be held in-person, except where otherwise stated on Piazza. Labs for this class are not open section, <b>you must go to your assigned lab section</b>.
+    </p>
+    <p>
+      Credit for each lab is based on completion and checkoff with a member of lab staff during your assigned lab section. In a checkoff, you will demonstrate your work from portions of the lab and answer conceptual questions related to the lab. You should aim to get checked off by the end of your lab section. If (and only if) you attend your lab section for the whole duration but do not finish in time, you may get checked off at the beginning of your next lab section before starting the following lab. We have the following grading policy for labs: If you complete all the labs, you will receive full lab credit. If you fail to complete one lab, you will receive almost full 44/45 lab credit. If you miss two labs, you will receive 42/45. If you miss three labs, you will receive 23/45 (half credit). If you miss four or more labs, you will get an F in the class.
+      </b>
+    </p>
+
+    <div class="table-responsive">
+      <table border="3" class="table table-bordered table-striped table-hover table-condensed" style="width: 45%;">
+        <thead>
+          <tr>
+            <th style="background: #91c8d9" scope="col" class='col-md-1 center'><b>Number of Missed Labs</b></th>
+            <th style="background: #91c8d9" scope="col" class='col-md-2'><b>What Happens?</b></th>
+          </tr>
+        </thead>
+        <tbody><tr>
+          <td class = "center">0</td>
+          <td>You get full lab credit - 45/45</td>
+        </tr></tbody>
+        <tbody><tr>
+          <td class = "center">1</td>
+          <td>You get almost full lab credit - 44/45</td>
+        </tr></tbody>
+        <tbody><tr>
+          <td class = "center">2</td>
+          <td>You get most lab credit - 42/45</td>
+        </tr></tbody>
+        <tbody><tr>
+          <td class = "center">3</td>
+          <td>You get half lab credit - 23/45</td>
+        </tr></tbody>
+        <tbody><tr>
+          <td class = "center">4 or more</td>
+          <td><font color="red">You <b>Fail</b> the class - final letter grade: F</font></td>
+        </tr></tbody>
+      </table>
+    </div>
+    <p>
+      <b>Some lab sections are “buffer labs”.</b> These are held during a week-long period at the end of each lab module in which no new labs begin.
+    </p>
+    <p>
+      You may get checked off for <b> only one missed lab per lab module</b> by attending a buffer lab for that module. No other labs can be checked off. If you have already completed all labs for a particular lab module, you do not need to attend a buffer lab for that module.
+    </p>
+    <p>
+      Students must sign up for a buffer lab before attending. Please note that not all regularly scheduled lab sections will be run as buffer lab sections. Further details will be shared duly on Piazza.
+    </p>
+    <p>
+      <b>Wires on lab breadboards must be planar.</b> All students will receive a lab kit to use during lab sections. Lab staff will ask students to redo their circuits before debugging them if the wires are non-planar. The definition of planar wires on a breadboard is shown below:
+    </p>
+    <div class="table-responsive">
+      <table>
+        <tr>
+          <td class="center txt"><b>Planar</b></td>
+          <td class="center txt"><b>Non-planar</b></td>
+        </tr>
+        <tr>
+          <td><img src="img/neatbb.png" height="300" width="350"></td>
+          <td><img src="img/messybb.png" height="300" width="350"></td>
+        </tr>
+      </table>
+    </div>
+    <br/>
+
+  <h3>Exam Policies</h3>
+  <a class="anchor" id="exampolicy"></a>
+    <p> <b> There is one quest, two midterms and one final. All exams, including the quest, will be held in-person. The quest will be held Tuesday, February 8th during lecture. The midterms will be held Tuesday, March 1st from 7:00pm to 9:00pm and Monday, April 11th from 7:00pm to 9:00pm. The final will be held on Wednesday, May 11th from 11:30am to 2:30pm. </b> </p>
+    <p> <b>Makeup exams will not be scheduled. Please contact us privately if you have any concerns.</b></p>
+    <p>
+      In case of an emergency on exam day, please email the Head GSI at <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a> as soon as possible and provide details of the issue as well as a contact phone number. Emergency exam conflicts will be handled on a case-by-case basis. Exam conflicts originating from a lecture conflict will not be accommodated.
+    </p>
+    <p>
+      Regrade requests are typically soon after exam scores are released. Late regrade requests will not be considered. If a regrade request is submitted for a part of a question on the exam, the grader reserves the right to regrade the entire exam and could potentially take points off.
+    </p>
+    <p>
+      Exams will be completely open-note and open-book – you are allowed to bring any hard-copy resources with you to help you on the exam. However, while you can bring other materials with you to the exam, you are strongly encouraged to make a condensed cheat sheet of only one or two pages ahead of the exam, as the process of creating a cheat sheet can be a great way to study for an exam.
+    </p>
+
+  <h3>Academic Honesty</h3>
+  <p>
+    We treat all our students with utmost trust and respect, and expect students to return the same trust and respect. In EECS16A we will have <u>zero-tolerance</u> for academic dishonesty. There will be <u>dire consequences</u> for students that violate that trust and the Berkeley code of conduct. Both professors Arias and Lustig are committed to enforcing academic honesty, and <u>dishonesty cases will be punished in their fullest -- no excuses or special circumstances will be considered</u>. Always seek help, never cheat.
+  </p>
+
+  <h3>Exceptions and Exam Accommodations</h3>
+  <a class="anchor" id="exceptions"></a>
+    <p>
+      <b>Any requests for exceptions should be emailed to the Head GSI at <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a>.</b> Email the exception request as soon as possible, as retroactive exceptions will likely not be approved. Exceptions will be handled on a case-by-case basis. Since there is one homework drop, missing homework is rarely excused. Examples of situations that merit an exception are medical emergencies and family emergencies. It will be easier for us to grant an exception if you have a doctor’s note or other documentation. No exceptions will be granted after final exam scores have been released.
+    </p>
+    <p>
+      Accommodations will be provided to students who have letters of accommodations from DSP services and students facing hardships. Student hardships may include family/medical emergencies (please provide documentation for your records).
+    </p>
+<!--     <p>
+      If you can foresee unstable or limited WiFi access to an upcoming exam, contact <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a> to determine a procedure that will support you. Additionally, if your WiFi access is disrupted or fails during the exam, contact <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a> as soon as possible for an alternative arrangement.
+    </p> -->
+
+  <h3>Course Communication</h3>
+  <a class="anchor" id="communication"></a>
+    <p>
+      <b>The instructors and TAs will post announcements, clarifications, hints, etc. on Piazza.</b> So, you must check the EECS16A Piazza page frequently throughout the term. (You should already have access to the EECS16A Spring 2022 <a href="http://piazza.com/berkeley/spring2022/eecs16a" target="_blank">Piazza</a>. If you do not, please let us know.)
+    </p>
+    <p>
+      If you have a question, your best option is to post a message on Piazza. The staff (instructors and TAs) will check Piazza regularly, and if you use Piazza, other students will be able to help you too. When using Piazza, please avoid off-topic discussions, and please do not post answers to homework questions before the homework is due. Also, always look for a convenient category to post the question to (for example, each homework will have its own category, so please post there). That will ensure you get the answer faster.
+    </p>
+    <p>
+      If your question is personal or not of interest to other students, you may mark your question as private on Piazza, so only the instructors will see it. If you wish to talk with one of us individually, you are welcome to come to our office hours. Please reserve email for the questions you can't get answered in office hours, in discussion sections, or through Piazza.
+    </p>
+    <p>
+      <b>For any exceptions that are of a personal nature</b>, please contact the head GSI at <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a>. Technical and homework questions are best resolved in homework party and during office hours.
+    </p>
+    <p>
+      It can be challenging for the instructors to gauge how smoothly the class is going. We always welcome any feedback on what we could be doing better.
+    </p>
+
+  <h3>Collaboration</h3>
+  <a class="anchor" id="collaboration"></a>
+    <p>
+      We encourage you to work on homework problems in study groups; however, you must always write up the solutions on your own. Similarly, you may use books or online resources to help solve homework problems, but you must always credit all such sources in your write up, and you must never copy material verbatim. <b>Using previous EECS 16A homework, exam, and lab solutions is strictly prohibited, and will be considered academic dishonesty. This is not how you want to start your career as an engineer.</b>
+    </p>
+    <p>
+      We expect that most students can distinguish between helping other students and cheating. Explaining the meaning of a question, discussing a way of approaching a solution, or collaboratively exploring how to solve a problem within your group is an interaction that we strongly encourage. But you should write your homework solution strictly by yourself, and you are not allowed to give your homework to other students to copy. You should never possess a copy (written or digital) of another student’s work. You should acknowledge everyone whom you have worked with, or who has given you any significant ideas about the homework. <b>This is good scholarly conduct.</b>
+    </p>
+    <p>
+      Collaboration during exams or other designated assessments is strictly forbidden, subject to the <a href="https://teaching.berkeley.edu/berkeley-honor-code" target="_blank">Berkeley Honor Code</a>, <a href="https://sa.berkeley.edu/conduct/faculty-staff/violations" target="_blank">Code of Conduct</a>, and the parameters of the specific assessment.
+    </p>
+
+  <h3>16A Study Group Formation</h3>
+  <a class="anchor" id="studyGroups"></a>
+  <p>
+    To help encourage collaboration and make it easier to meet new people in the class, we have designed a system for study-group formation where you can request study partners just by submitting a simple Google preference survey. This survey is part of the first homework, and while optional, we highly encourage you to fill it out, because having people to brainstorm with on homework can be very helpful and improve your learning.
+  </p>
+
+  <h3>Don't Be Afraid to Ask for Help</h3>
+  <a class="anchor" id="help"></a>
+    <p>
+      Are you struggling? Please come talk with us! The earlier we learn about your struggles, the more likely it is that we can help you. Waiting until right before an exam or the last few weeks of the semester to let us know about your problems is not an effective strategy - the later it is, the less we will be able to help you.
+    </p>
+    <p>
+     Even if you are convinced that you are the only person in the class who is struggling, please overcome any feelings of embarrassment or guilt, and come ask for help as soon as you need it -- we can almost guarantee you're not the only person who feels this way. Don't hesitate to ask us for help -- we really do care that you thrive! You can email <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a>, or email / talk to any TA at any time -- we’re happy to help.
+    </p>
+
+  <h3>Health</h3>
+  <a class="anchor" id="health"></a>
+    <p>
+      If you have COVID symptoms, please do not attend in-person activities.  Instead, keep up with the class by watching the lecture recordings. We will post PDFs of each discussion worksheet on the course website, and post detailed solutions the next day, so you can follow along with discussion asynchronously. Because you only need to attend 16/25 discussions in-person to receive full credit, you will still be able to receive full participation points even if you are working remotely for a week or two. If you miss a lab section, you should try to make up the lab during buffer week. However, if you would miss multiple labs or miss the buffer section due to illness, please email eecs16a.lab@berkeley.edu, and we will do our best to accommodate you.
+    </p>
+    <p>
+      If you have a medical emergency that would prevent you from keeping up with the class asynchronously or would prevent you from attending class in-person for a longer duration, please email eecs16a@berkeley.edu
+    </p>
+
+  <h3>Inclusion</h3>
+  <a class="anchor" id="inclusion"></a>
+    <p>
+      We are committed to creating an environment welcoming of all students where everyone can fulfill their potential for learning. To do so, we intend to support a diversity of perspectives and experiences and respect each others’ identities and backgrounds (including race/ethnicity, nationality, gender identity, socioeconomic class, sexual orientation, language, religion, ability, etc.). To help accomplish this:
+      <ul>
+        <li>
+          If you feel like your performance in the class is being impacted by a lack of inclusion, please contact the instructors, an academic advisor, or the departmental Faculty Equity Advisor (https://engineering.berkeley.edu/about/equity-and-inclusion/faculty-equity-advisers/).
+        </li>
+        <li>
+          An anonymous feedback form is also available at <a href="https://engineering.berkeley.edu/about/equity-and-inclusion/feedback/" target="_blank">https://engineering.berkeley.edu/about/equity-and-inclusion/feedback/</a>.
+        </li>
+        <li>
+          If you feel like your performance in the class is being impacted by your experiences outside of class (e.g., family matters, current events), please don’t hesitate to come and talk with the instructor(s) or academic advisors in Engineering Student Services.  We want to be a resource for you.
+        </li>
+        <li>
+          There is no tolerance for sexual harassment or violence. If your behavior harms another person in this class, you may be removed from the class or the University either temporarily or permanently.
+        </li>
+        <li>
+          If you have a name and/or pronouns that differ from your legal name, designate a preferred name for use in the classroom at: <a href="https://registrar.berkeley.edu/academic-records/your-name-records-rosters" target="_blank">https://registrar.berkeley.edu/academic-records/your-name-records-rosters</a>.
+        </li>
+        <li>
+          As a participant in this class, recognize that you can be proactive about making other students feel included and respected.
+        </li>
+</ul>
+    </p>
+
+  <h3>Berkeley Honor Code</h3>
+  <a class="anchor" id="honor"></a>
+    <p>
+      Everyone in this class is expected to adhere to this code: “As a member of the UC Berkeley community, I act with honesty, integrity, and respect for others.”
+    </p>
+
+  <h3>Accommodation policy</h3>
+  <a class="anchor" id="accomodation"></a>
+    <p> We honor and respect the different learning needs of our students, and are committed to ensuring you have the resources you need to succeed in our class.  If you need religious or disability-related accommodations, if you have emergency medical information you wish to share with us, please share this information with us as needed. You may write to the course email address <a rel="noopener noreferrer" target="_blank" href="mailto:eecs16a@berkeley.edu">eecs16a@berkeley.edu</a> and please also see DSP and CAPS under “Resources”.
+    </p>
+
+  <h3>Policy on Course Content</h3>
+  <a class ="anchor" id="content-distribution"></a>
+  <p> You are free and encouraged to use course materials for personal use (in collaborations with other students, in your research, etc.). <b>You may NOT post HW/Exams/Solutions anywhere on the web</b> because this could encourage cheating down the road. You are expressly prohibited from uploading course materials to websites such as coursehero.com or chegg.com, which distribute and monetize content without compensation to the University. Course material, including all video, is copyrighted and reposting to third party sites or any other form of redistribution is prohibited.
+    </p>
+
+  <h3>Resources</h3>
+  <a class="anchor" id="otherresources"></a>
+    <h3>For academic performance:</h3>
+    <p>
+     <a href="https://engineering.berkeley.edu/student-services/academic-support" target="_blank">The Center for Access to Engineering Excellence or CAEE</a> (227 Bechtel Engineering Center) is an inclusive center that offers study spaces, nutritious snacks, and tutoring in >50 courses for Berkeley engineers and other majors across campus.  The Center also offers a wide range of professional development, leadership, and wellness programs, and loans iclickers, laptops, and professional attire for interviews.
+    </p>
+    <h3>For disability accommodations:</h3>
+    <p>
+      <a href="http://dsp.berkeley.edu" target="_blank">The Disabled Student’s Program</a> (DSP 260 César Chávez Student Center #4250; 510-642-0518) serves students with disabilities of all kinds, including temporary disabilities. Services are individually designed and based on the specific needs of each student as identified by DSP's Specialists. If you have already been approved for accommodations through DSP, please know that DSP is ready to quickly adjust your accommodations if your situation changes.
+    </p>
+    <h3>For mental wellbeing:</h3>
+    <p>
+      <a href="http://uhs.berkeley.edu/caps" target="_blank">Counseling and Psychological Services (CAPS)</a>
+      Counseling and Psychological Services is available as part of University Health Services (the Tang Center). Services are offered at many locations, including <a href="https://engineering.berkeley.edu/students/advising-counseling/counseling/">on-site in the College of Engineering</a>. CAPS services are available to all students, regardless of insurance, and initial visits do not cost anything.  CAPS has expanded allowing students to receive help immediately with same-day counseling (510-642-9494), online resources, and a 24/7 counseling line at (855) 817-5667.  Short-term help is also available from the Alameda County Crisis hotline: 800-309-2131.  If you, or someone you know, is experiencing an emergency that puts their health at risk, please call 911.
+    </p>
+    <h3>For recovery from sexual harassment or sexual assault:</h3>
+    <p>
+      <a href="https://care.berkeley.edu/care-line/">The Care Line (PATH to Care Center)</a> (510-643-2005) is a 24/7, confidential, free, campus-based resource for urgent support around sexual assault, sexual harassment, interpersonal violence, stalking, and invasion of sexual privacy. The Care Line will connect you with a confidential advocate for trauma-informed crisis support including time-sensitive information, securing urgent safety resources, and accompaniment to medical care or reporting.
+    </p>
+    <h3>For solving a dispute:</h3>
+    <p>
+      <a href="http://students.berkeley.edu/Ombuds" target="_blank">The Ombudsperson for Students</a> (102 Sproul Hall; 642-5754) provides a confidential service for students involved in a University-related problem (academic or administrative), acting as a neutral complaint resolver and not as an advocate for any of the parties involved in a dispute. The Ombudsman can provide information on policies and procedures affecting students, facilitate students' contact with services able to assist in resolving the problem, and assist students in complaints concerning improper application of University policies or procedures. All matters referred to this office are held in strict confidence.
+    </p>
+    <h3>For basic needs (food, shelter, etc):</h3>
+    <p>
+      <a href="https://basicneeds.berkeley.edu/" target="_blank">The Basic Needs Center</a> provides housing, food, transportation support, among other support needed to thrive at UC Berkeley. Specifically, the <a href="https://pantry.berkeley.edu">UC Berkeley Food Pantry</a> (#68 Martin Luther King Student Union) aims to reduce food insecurity among students, especially the lack of nutritious food. Students can visit the pantry as many times as they need and take as much as they need while being mindful that it is a shared resource. The pantry operates on a self-assessed need basis; there are no eligibility requirements.  The pantry is not for students and staff who need supplemental snacking food, but rather, core food support.
+    </p>
+
+  <h3>Advice</h3>
+  <a class="anchor" id="advice"></a>
+    <p>
+      The following tips are offered based on our experience.
+    </p>
+    <p>
+      <b>Do the homeworks!</b> The homework is explicitly designed to help you to learn the material as you go along. There is usually a strong correlation between homework scores and final grades in the class.
+    </p>
+    <p>
+      <b>Keep up with lectures!</b> Discussion sections, labs and homeworks all touch on portions of what we discuss in lecture. <b>Students do much better if they stay on track with the course.</b> That will also help you keep the pace with your homework and study group.
+    </p>
+    <p>
+     <b>Take part in discussion sections!</b> Discussion sections are not auxiliary lectures. They are an opportunity for interactive learning. The success of a discussion section depends largely on the willingness of students to participate actively in it. As with office hours, the better prepared you are for the discussion, the more you are likely to benefit from it.
+    </p>
+    <p>
+      <b>Please come to office hours!</b> We love to talk to you and do a deep dive to help you understand the material better.
+    </p>
+    <p>
+     <b>Form study groups!</b> As stated above, you are encouraged to form small groups (two to four people) to work together on homeworks and on understanding the class material on a regular basis. In addition to being fun, this can save you a lot of time by generating ideas quickly and preventing you from getting hung up on some point or other. Of course, it is your responsibility to ensure that you contribute actively to the group; passive listening will likely not help you much. And recall the caveat above that you must write up your solutions on your own. We strongly advise you to spend some time on your own thinking about each problem before you meet with your study partners; this way, you will be in a position to compare ideas with your partners, and it will get you in practice for the exams. Make sure you work through all problems yourself, and that your final write-up is your own. Some groups try to split up the problems ("you do Problem 1, I'll do Problem 2, then we'll swap notes"); not only is this a punishable violation of our collaboration policies, it also ensures you will learn a lot less from this course.
+    </p>
+</div>    </div>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/parallax.min.js"></script>
+
+  </body>
+</html>
