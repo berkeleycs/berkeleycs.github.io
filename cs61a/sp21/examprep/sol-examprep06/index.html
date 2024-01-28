@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Exam Prep 6 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Exam Prep 6: Object-Oriented Programming, Trees, Linked Lists
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">examprep06.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+
+<p>Students from past semesters wanted more content and structured time to prepare for exams. Exam Prep sections are a way to solidify your understanding of the week's materials. The problems are typically designed to be a bridge between discussion/lab/homework difficulty and exam difficulty.</p>
+
+<p><strong>Reminder:</strong> There is nothing to turn in and there is no credit given for attending Exam Prep Sections.</p>
+
+<p>
+    We try to make these problems <strong>exam level</strong> , so you are not expected to be able to solve them coming straight from lecture without additional practice.
+    To get the most out of Exam Prep, we recommend you <strong>try these problems first on your own</strong>  before coming to the Exam Prep section, where we will explain how to solve these problems while giving tips and advice for the exam. Do not worry if you struggle with these problems, <strong>it is okay to struggle while learning</strong>.
+</p>
+<p>
+    You can work with anyone you want, including sharing solutions. We just ask you don't spoil the problems for anyone else in the class. Thanks!
+</p>
+<p>
+    You may only put code where there are underscores for the codewriting questions.
+</p>
+<p>
+    You can test your functions on their doctests by clicking the red test tube in the top right corner after clicking Run in 61A Code.
+    Passing the doctests is not necessarily enough to get the problem fully correct. You must fully solve the stated problem.
+</p>
+
+
+
+    
+
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q1">Q1: Iterator Tree Link Tree Iterator</h3>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p><strong>Part A:</strong> Fill out the function <code>funcs</code>, which is a generator that takes in a linked list <code>link</code> and yields functions.</p>
+
+<p>The linked list <code>link</code> defines a path from the root of the tree to one of its nodes, with each element of link specifying which branch to take by index. Applying all functions sequentially to a Tree instance will evaluate to the label of the node at the end of the specified path.</p>
+
+<p>For example, using the Tree <code>t</code> defined in the code, <code>funcs(Link(2))</code> yields 2 functions. The first gets the third branch from t -- the branch at index 2 -- and the second function gets the label of this branch.</p>
+
+<pre><code>&gt;&gt;&gt; func_generator = funcs(Link(2)) # get label of third branch
+&gt;&gt;&gt; f1 = next(func_generator)
+&gt;&gt;&gt; f2 = next(func_generator)
+&gt;&gt;&gt; f2(f1(t))
+4</code></pre>
+
+
+
+<p><strong>Part B:</strong> Using <code>funcs</code> from above, fill out the definition for <code>apply</code>, which applies <code>g</code> to the element in <code>t</code> who's position is at the end of the path defined by <code>link</code>.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="iterator_tree_link-input" style="height:1404px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-iterator_tree_link-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-iterator_tree_link-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-iterator_tree_link-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def funcs(link):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; t = Tree(1, [Tree(2,\n    ...                   [Tree(5),\n    ...                    Tree(6, [Tree(8)])]),\n    ...               Tree(3),\n    ...               Tree(4, [Tree(7)])])\n    &gt;&gt;&gt; print_tree(t)\n    1\n      2\n        5\n        6\n          8\n      3\n      4\n        7\n    &gt;&gt;&gt; func_generator = funcs(Link.empty) # get root label\n    &gt;&gt;&gt; f1 = next(func_generator) \n    &gt;&gt;&gt; f1(t)\n    1\n    &gt;&gt;&gt; func_generator = funcs(Link(2)) # get label of third branch\n    &gt;&gt;&gt; f1 = next(func_generator)\n    &gt;&gt;&gt; f2 = next(func_generator)\n    &gt;&gt;&gt; f2(f1(t))\n    4\n    &gt;&gt;&gt; # This just puts the 4 values from the iterable into f1, f2, f3, f4\n    &gt;&gt;&gt; f1, f2, f3, f4 = funcs(Link(0, Link(1, Link(0))))\n    &gt;&gt;&gt; f4(f3(f2(f1(t))))\n    8\n    &quot;&quot;&quot;\n    if ______________________________________:\n        yield ______________________________________\n    else:\n        yield ______________________________________\n        yield ______________________________________\n\ndef apply(g, t, link):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; t = Tree(1, [Tree(2,\n    ...                   [Tree(5),\n    ...                    Tree(6, [Tree(8)])]),\n    ...               Tree(3),\n    ...               Tree(4, [Tree(7)])])\n    &gt;&gt;&gt; print_tree(t)\n    1\n      2\n        5\n        6\n          8\n      3\n      4\n        7\n    &gt;&gt;&gt; apply(lambda x: x, t, Link.empty) # root label\n    1\n    &gt;&gt;&gt; apply(lambda x: x, t, Link(0))    # label at first branch\n    2\n    &gt;&gt;&gt; apply(lambda x: x * x, t, Link(0, Link(1, Link(0))))\n    64\n    &quot;&quot;&quot;\n    ______________________________________\n        t = f(t)\n    return ______________________________________\n\nt = Tree(1, [Tree(2,\n                [Tree(5),\n                 Tree(6, [Tree(8)])]),\n             Tree(3),\n             Tree(4, [Tree(7)])])\n\ndef print_tree(t, indent=0):\n    &quot;&quot;&quot;Print a representation of this tree in which each node is\n    indented by two spaces times its depth from the root.\n    &quot;&quot;&quot;\n    print(&#x27;  &#x27; * indent + str(t.label))\n    for b in t.branches:\n        print_tree(b, indent + 1)\n', "scheme", "iterator_tree_link-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def funcs(link):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; t = Tree(1, [Tree(2,
+    ...                   [Tree(5),
+    ...                    Tree(6, [Tree(8)])]),
+    ...               Tree(3),
+    ...               Tree(4, [Tree(7)])])
+    &gt;&gt;&gt; print_tree(t)
+    1
+      2
+        5
+        6
+          8
+      3
+      4
+        7
+    &gt;&gt;&gt; func_generator = funcs(Link.empty) # get root label
+    &gt;&gt;&gt; f1 = next(func_generator) 
+    &gt;&gt;&gt; f1(t)
+    1
+    &gt;&gt;&gt; func_generator = funcs(Link(2)) # get label of third branch
+    &gt;&gt;&gt; f1 = next(func_generator)
+    &gt;&gt;&gt; f2 = next(func_generator)
+    &gt;&gt;&gt; f2(f1(t))
+    4
+    &gt;&gt;&gt; # This just puts the 4 values from the iterable into f1, f2, f3, f4
+    &gt;&gt;&gt; f1, f2, f3, f4 = funcs(Link(0, Link(1, Link(0))))
+    &gt;&gt;&gt; f4(f3(f2(f1(t))))
+    8
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if link is Link.empty:</div><div class="sol-highlight">        yield lambda t: t.label</div>    else:
+<div class="sol-highlight">        yield lambda t: t.branches[link.first]</div><div class="sol-highlight">        yield from funcs(link.rest)</div>
+def apply(g, t, link):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; t = Tree(1, [Tree(2,
+    ...                   [Tree(5),
+    ...                    Tree(6, [Tree(8)])]),
+    ...               Tree(3),
+    ...               Tree(4, [Tree(7)])])
+    &gt;&gt;&gt; print_tree(t)
+    1
+      2
+        5
+        6
+          8
+      3
+      4
+        7
+    &gt;&gt;&gt; apply(lambda x: x, t, Link.empty) # root label
+    1
+    &gt;&gt;&gt; apply(lambda x: x, t, Link(0))    # label at first branch
+    2
+    &gt;&gt;&gt; apply(lambda x: x * x, t, Link(0, Link(1, Link(0))))
+    64
+    &quot;&quot;&quot;
+<div class="sol-highlight">    for f in funcs(link):</div>        t = f(t)
+<div class="sol-highlight">    return g(t)</div>
+t = Tree(1, [Tree(2,
+                [Tree(5),
+                 Tree(6, [Tree(8)])]),
+             Tree(3),
+             Tree(4, [Tree(7)])])
+
+def print_tree(t, indent=0):
+    &quot;&quot;&quot;Print a representation of this tree in which each node is
+    indented by two spaces times its depth from the root.
+    &quot;&quot;&quot;
+    print(&#x27;  &#x27; * indent + str(t.label))
+    for b in t.branches:
+        print_tree(b, indent + 1)</code></pre>
+
+            </div>
+        
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q2">Q2: Cucumber - Fall 2015 Final Q7</h3>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p>Cucumber is a card game. Cards are positive integers (no suits). Players are numbered from 0 up to <code>players</code>
+(0, 1, 2, 3 in a 4-player game).</p>
+
+<p>In each <code>Round</code>, the players each <code>play</code> one card, starting with the <code>starter</code> and
+in ascending order (player 0 follows player 3 in a 4-player game). If the <code>card</code> played is as high or higher than
+the <code>highest</code> card played so far, that player takes control. The winner is the last player who took control
+after every player has played once.</p>
+
+<p>Implement <code>Round</code> so that <code>Game</code> behaves as described in the doctests below.</p>
+
+<p><strong>EDIT:</strong> 
+The first two lines in the play function should be:</p>
+
+<pre><code>assert _______________________________, f&#x27;The round is over, player {who}&#x27;
+assert ______________________________, f&#x27;It is not your turn, player {who}&#x27;</code></pre>
+
+
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="cucumber-input" style="height:1008px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-cucumber-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-cucumber-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-cucumber-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('class Game:\n    &quot;&quot;&quot;Play a round and return all winners so far. Cards is a list of pairs.\n    Each (who, card) pair in cards indicates who plays and what card they play.\n    &gt;&gt;&gt; g = Game()\n    &gt;&gt;&gt; g.play_round(3, [(3, 4), (0, 8), (1, 8), (2, 5)])\n    &gt;&gt;&gt; g.winners\n    [1]\n    &gt;&gt;&gt; g.play_round(1, [(3, 5), (1, 4), (2, 5), (0, 8), (3, 7), (0, 6), (1, 7)])\n    It is not your turn, player 3\n    It is not your turn, player 0\n    The round is over, player 1\n    &gt;&gt;&gt; g.winners\n    [1, 3]\n    &gt;&gt;&gt; g.play_round(3, [(3, 7), (2, 5), (0, 9)]) # Round is never completed\n    It is not your turn, player 2\n    &gt;&gt;&gt; g.winners\n    [1, 3]\n    &quot;&quot;&quot;\n    def __init__(self):\n        self.winners = []\n\n    def play_round(self, starter, cards):\n        r = Round(starter)\n        for who, card in cards:\n            try:\n                r.play(who, card)\n            except AssertionError as e:\n                print(e)\n        if r.winner != None:\n            self.winners.append(r.winner)\n\nclass Round:\n    players = 4\n\n    def __init__(self, starter):\n        self.starter = starter\n        self.next_player = starter\n        self.highest = &#x2d;1\n        self.winner = None\n\n    def play(self, who, card):\n        assert _______________________________, f&#x27;The round is over, player {who}&#x27;\n        assert ______________________________, f&#x27;It is not your turn, player {who}&#x27;\n        self.next_player = ______________________________________\n        if card &gt;= self.highest:\n            ______________________________________\n            ______________________________________\n        if ______________________________________:\n            ______________________________________\n\n    def is_complete(self):\n        &quot;&quot;&quot; Checks if a game could end. &quot;&quot;&quot;\n        return ______________________________________\n\n', "scheme", "cucumber-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>class Game:
+    &quot;&quot;&quot;Play a round and return all winners so far. Cards is a list of pairs.
+    Each (who, card) pair in cards indicates who plays and what card they play.
+    &gt;&gt;&gt; g = Game()
+    &gt;&gt;&gt; g.play_round(3, [(3, 4), (0, 8), (1, 8), (2, 5)])
+    &gt;&gt;&gt; g.winners
+    [1]
+    &gt;&gt;&gt; g.play_round(1, [(3, 5), (1, 4), (2, 5), (0, 8), (3, 7), (0, 6), (1, 7)])
+    It is not your turn, player 3
+    It is not your turn, player 0
+    The round is over, player 1
+    &gt;&gt;&gt; g.winners
+    [1, 3]
+    &gt;&gt;&gt; g.play_round(3, [(3, 7), (2, 5), (0, 9)]) # Round is never completed
+    It is not your turn, player 2
+    &gt;&gt;&gt; g.winners
+    [1, 3]
+    &quot;&quot;&quot;
+    def __init__(self):
+        self.winners = []
+
+    def play_round(self, starter, cards):
+        r = Round(starter)
+        for who, card in cards:
+            try:
+                r.play(who, card)
+            except AssertionError as e:
+                print(e)
+        if r.winner != None:
+            self.winners.append(r.winner)
+
+class Round:
+    players = 4
+
+    def __init__(self, starter):
+        self.starter = starter
+        self.next_player = starter
+        self.highest = &#x2d;1
+        self.winner = None
+
+    def play(self, who, card):
+<div class="sol-highlight">        assert not self.is_complete(), f&#x27;The round is over, player {who}&#x27;</div><div class="sol-highlight">        assert who == self.next_player, f&#x27;It is not your turn, player {who}&#x27;</div><div class="sol-highlight">        self.next_player = (who + 1) % Round.players</div>        if card &gt;= self.highest:
+<div class="sol-highlight">            self.highest = card</div><div class="sol-highlight">            self.control = who</div><div class="sol-highlight">        if self.is_complete():</div><div class="sol-highlight">            self.winner = self.control</div>
+    def is_complete(self):
+        &quot;&quot;&quot; Checks if a game could end. &quot;&quot;&quot;
+<div class="sol-highlight">        return self.next_player == self.starter and self.highest &gt; &#x2d;1</div></code></pre>
+
+            </div>
+        
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q3">Q3: Count Coins Tree</h3>
+
+<p><strong>IMPORTANT</strong>: For this problem, you will be given time during the Exam Prep section to solve on your own before we go over it.</p>
+
+<p><strong>Difficulty: ⭐⭐⭐</strong></p>
+
+<p>You want to help your friend learn tree recursion. They don't quite understand all the recursive calls and how they work, so you decide to make a tree of recursive calls to showcase the tree in tree in tree recursion. You pick the <code>count_coins</code> problem.</p>
+
+<p>Implement <code>count_coins_tree</code>, which takes in a non-negative integer n and returns a tree representing the recursive calls of count change.</p>
+
+<p>Since you don't want your trees to get too big, you decide to only include the recursive calls that eventually lead to a valid way of making change.</p>
+
+<p>See the code for an implementation of <code>count_coins</code>.</p>
+
+<p>For the times when either recursive call returns <code>None</code>, you don't want to include that in your branches when making the tree. If both recursive calls return <code>None</code>, then you want to return <code>None</code>.</p>
+
+<p>Each leaf for the <code>count_coins_tree(15, [1, 5, 10, 25])</code> tree is one of these groupings.</p>
+
+<ul>
+  <li>15 1-cent coins</li>
+  <li>10 1-cent, 1 5-cent coins</li>
+  <li>5 1-cent, 2 5-cent coins</li>
+  <li>5 1-cent, 1 10-cent coins</li>
+  <li>3 5-cent coins</li>
+  <li>1 5-cent, 1 10-cent coin</li>
+</ul>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="count_coins_tree-input" style="height:1566px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-count_coins_tree-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-count_coins_tree-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-count_coins_tree-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def count_coins_tree(change, denominations):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; count_coins_tree(1, []) # Return None since no ways to make change wuth no denominations\n    &gt;&gt;&gt; t = count_coins_tree(3, [1, 2]) \n    &gt;&gt;&gt; print_tree(t) # 2 ways to make change for 3 cents\n    3, [1, 2]\n      2, [1, 2]\n        2, [2]\n          1\n        1, [1, 2]\n          1\n    &gt;&gt;&gt; # The tree that shows the recursive calls that result\n    &gt;&gt;&gt; # in the 6 ways to make change for 15 cents\n    &gt;&gt;&gt; t = count_coins_tree(15, [1, 5, 10, 25]) \n    &gt;&gt;&gt; print_tree(t)\n    15, [1, 5, 10, 25]\n      15, [5, 10, 25]\n        10, [5, 10, 25]\n          10, [10, 25]\n            1\n          5, [5, 10, 25]\n            1\n      14, [1, 5, 10, 25]\n        13, [1, 5, 10, 25]\n          12, [1, 5, 10, 25]\n            11, [1, 5, 10, 25]\n              10, [1, 5, 10, 25]\n                10, [5, 10, 25]\n                  10, [10, 25]\n                    1\n                  5, [5, 10, 25]\n                    1\n                9, [1, 5, 10, 25]\n                  8, [1, 5, 10, 25]\n                    7, [1, 5, 10, 25]\n                      6, [1, 5, 10, 25]\n                        5, [1, 5, 10, 25]\n                          5, [5, 10, 25]\n                            1\n                          4, [1, 5, 10, 25]\n                            3, [1, 5, 10, 25]\n                              2, [1, 5, 10, 25]\n                                1, [1, 5, 10, 25]\n                                  1\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\ndef count_coins(change, denominations):\n    &quot;&quot;&quot;\n    Given a positive integer change, and a list of integers denominations,\n    a group of coins makes change for change if the sum of the values of \n    the coins is change and each coin is an element in denominations.\n    count_coins returns the number of such groups. \n    &quot;&quot;&quot;\n    if change == 0:\n        return 1\n    if change &lt; 0:\n        return 0\n    if len(denominations) == 0:\n        return 0\n    without_current = count_coins(change, denominations[1:])\n    with_current = count_coins(change &#x2d; denominations[0], denominations)\n    return without_current + with_current\n\ndef print_tree(t, indent=0):\n    &quot;&quot;&quot;Print a representation of this tree in which each node is\n    indented by two spaces times its depth from the root.\n    &quot;&quot;&quot;\n    print(&#x27;  &#x27; * indent + str(t.label))\n    for b in t.branches:\n        print_tree(b, indent + 1)\n', "scheme", "count_coins_tree-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def count_coins_tree(change, denominations):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; count_coins_tree(1, []) # Return None since no ways to make change wuth no denominations
+    &gt;&gt;&gt; t = count_coins_tree(3, [1, 2]) 
+    &gt;&gt;&gt; print_tree(t) # 2 ways to make change for 3 cents
+    3, [1, 2]
+      2, [1, 2]
+        2, [2]
+          1
+        1, [1, 2]
+          1
+    &gt;&gt;&gt; # The tree that shows the recursive calls that result
+    &gt;&gt;&gt; # in the 6 ways to make change for 15 cents
+    &gt;&gt;&gt; t = count_coins_tree(15, [1, 5, 10, 25]) 
+    &gt;&gt;&gt; print_tree(t)
+    15, [1, 5, 10, 25]
+      15, [5, 10, 25]
+        10, [5, 10, 25]
+          10, [10, 25]
+            1
+          5, [5, 10, 25]
+            1
+      14, [1, 5, 10, 25]
+        13, [1, 5, 10, 25]
+          12, [1, 5, 10, 25]
+            11, [1, 5, 10, 25]
+              10, [1, 5, 10, 25]
+                10, [5, 10, 25]
+                  10, [10, 25]
+                    1
+                  5, [5, 10, 25]
+                    1
+                9, [1, 5, 10, 25]
+                  8, [1, 5, 10, 25]
+                    7, [1, 5, 10, 25]
+                      6, [1, 5, 10, 25]
+                        5, [1, 5, 10, 25]
+                          5, [5, 10, 25]
+                            1
+                          4, [1, 5, 10, 25]
+                            3, [1, 5, 10, 25]
+                              2, [1, 5, 10, 25]
+                                1, [1, 5, 10, 25]
+                                  1
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if change == 0:
+        return Tree(1)
+    if change &lt; 0:
+        return None
+    if len(denominations) == 0:
+        return None
+    branches = []
+    without_current = count_coins_tree(change, denominations[1:])
+    with_current = count_coins_tree(change &#x2d; denominations[0], denominations)
+    if without_current:
+        branches.append(without_current)
+    if with_current:
+        branches.append(with_current)
+    if branches:
+        return Tree(f&#x27;{change}, {denominations}&#x27;, branches)</div>
+def count_coins(change, denominations):
+    &quot;&quot;&quot;
+    Given a positive integer change, and a list of integers denominations,
+    a group of coins makes change for change if the sum of the values of 
+    the coins is change and each coin is an element in denominations.
+    count_coins returns the number of such groups. 
+    &quot;&quot;&quot;
+    if change == 0:
+        return 1
+    if change &lt; 0:
+        return 0
+    if len(denominations) == 0:
+        return 0
+    without_current = count_coins(change, denominations[1:])
+    with_current = count_coins(change &#x2d; denominations[0], denominations)
+    return without_current + with_current
+
+def print_tree(t, indent=0):
+    &quot;&quot;&quot;Print a representation of this tree in which each node is
+    indented by two spaces times its depth from the root.
+    &quot;&quot;&quot;
+    print(&#x27;  &#x27; * indent + str(t.label))
+    for b in t.branches:
+        print_tree(b, indent + 1)</code></pre>
+
+            </div>
+        
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q4">Q4: Extra Practice</h3>
+
+<p><strong>Difficulty: >⭐⭐⭐</strong></p>
+
+<p><a href="https://drive.google.com/file/d/1FYHQVESZ_jBiHCubKp4O-mrim3x3eFEP/view?usp=sharing">Fall 2020 Midterm 2 Review Exam Prep</a></p>
+
+<div class="sol-highlight">
+
+<p><a href="https://drive.google.com/file/d/1Xoez4bqDTSSi3hjzY3KCA-P1x7s9jX_M/view?usp=sharing">Fall 2020 Midterm 2 Review Exam Prep Solutions</a></p>
+
+</div>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#q1">Q1: Iterator Tree Link Tree Iterator</a></li>
+  <li><a href="index.html#q2">Q2: Cucumber - Fall 2015 Final Q7</a></li>
+  <li><a href="index.html#q3">Q3: Count Coins Tree</a></li>
+  <li><a href="index.html#q4">Q4: Extra Practice</a></li>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

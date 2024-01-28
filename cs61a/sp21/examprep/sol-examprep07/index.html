@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Exam Prep 7 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Exam Prep 7: Scheme
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">examprep07.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+
+<p>Students from past semesters wanted more content and structured time to prepare for exams. Exam Prep sections are a way to solidify your understanding of the week's materials. The problems are typically designed to be a bridge between discussion/lab/homework difficulty and exam difficulty.</p>
+
+<p><strong>Reminder:</strong> There is nothing to turn in and there is no credit given for attending Exam Prep Sections.</p>
+
+<p>
+    We try to make these problems <strong>exam level</strong> , so you are not expected to be able to solve them coming straight from lecture without additional practice.
+    To get the most out of Exam Prep, we recommend you <strong>try these problems first on your own</strong>  before coming to the Exam Prep section, where we will explain how to solve these problems while giving tips and advice for the exam. Do not worry if you struggle with these problems, <strong>it is okay to struggle while learning</strong>.
+</p>
+<p>
+    You can work with anyone you want, including sharing solutions. We just ask you don't spoil the problems for anyone else in the class. Thanks!
+</p>
+<p>
+    You may only put code where there are underscores for the codewriting questions.
+</p>
+<p>
+    You can test your functions on their doctests by clicking the red test tube in the top right corner after clicking Run in 61A Code.
+    Passing the doctests is not necessarily enough to get the problem fully correct. You must fully solve the stated problem.
+</p>
+
+
+
+    
+
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q1">Q1: Slice It!</h3>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p>Implement the <code>get&#x2d;slicer</code> procedure, which takes integers <code>a</code> and <code>b</code> and returns an <em>a-b slicing function</em>. An <code>a&#x2d;b</code> slicing function takes in a list as input and outputs a new list with the values of the original list from index <code>a</code> (inclusive) to index <code>b</code> (exclusive).</p>
+
+<p>Your implementation should behave like Python slicing, but should assume a step size of one with no negative slicing indices. Indices start at zero.</p>
+
+<p><strong>Note:</strong> the skeleton code is just a suggestion. Feel free to use your own structure if you prefer.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="get-slicer-input" style="height:414px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-get-slicer-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-get-slicer-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-get-slicer-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('(define (get&#x2d;slicer a b)\n  (define (slicer lst)\n    (define (slicer&#x2d;helper c i j)\n      (cond \n        ((or ___________________ ______________________) nil)\n        ((= i 0) ______________________________________)\n        (else ____________________________________________)))\n    (slicer&#x2d;helper lst a b))\n  slicer)\n\n; DOCTESTS (No need to modify)\n(define a &#x27;(0 1 2 3 4 5 6))\n(define one&#x2d;two&#x2d;three (get&#x2d;slicer 1 4))\n(define one&#x2d;end (get&#x2d;slicer 1 10))\n(define zero (get&#x2d;slicer 0 1))\n(define empty (get&#x2d;slicer 4 4))\n\n(expect (one&#x2d;two&#x2d;three a) (1 2 3))\n(expect (one&#x2d;end a) (1 2 3 4 5 6))\n(expect (zero a) (0))\n(expect (empty a) ())\n', "scheme", "get-slicer-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>(define (get&#x2d;slicer a b)
+  (define (slicer lst)
+    (define (slicer&#x2d;helper c i j)
+      (cond 
+<div class="sol-highlight">        ((or (null? c) (&lt;= j i)) nil)</div><div class="sol-highlight">        ((= i 0) (cons (car c) (slicer&#x2d;helper (cdr c) i (&#x2d; j 1))))</div><div class="sol-highlight">        (else (slicer&#x2d;helper (cdr c) (&#x2d; i 1) (&#x2d; j 1)))))</div>    (slicer&#x2d;helper lst a b))
+  slicer)
+
+; DOCTESTS (No need to modify)
+(define a &#x27;(0 1 2 3 4 5 6))
+(define one&#x2d;two&#x2d;three (get&#x2d;slicer 1 4))
+(define one&#x2d;end (get&#x2d;slicer 1 10))
+(define zero (get&#x2d;slicer 0 1))
+(define empty (get&#x2d;slicer 4 4))
+
+(expect (one&#x2d;two&#x2d;three a) (1 2 3))
+(expect (one&#x2d;end a) (1 2 3 4 5 6))
+(expect (zero a) (0))
+(expect (empty a) ())</code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q2">Q2: Partition Options</h3>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p>First, write the procedure <code>combine</code>, which takes in lists <code>lst1</code> and <code>lst2</code>, as well as a value <code>x</code>, and outputs a new list with <code>x</code> before each item of <code>lst1</code>, and then all elements of <code>lst2</code> unmodified. For examples, see the doctests.</p>
+
+<p>Then write the procedure <code>partition&#x2d;options</code>, which takes in positive integers <code>total</code> and <code>biggest</code> and outputs a list of lists, in which each inner list contains numbers no larger than <code>biggest</code> that sum to <code>total</code>.</p>
+
+<p><strong>Note:</strong> The skeleton code is just a suggestion; feel free to use your own structure if you prefer.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="partition-options-input" style="height:414px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-partition-options-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-partition-options-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-partition-options-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('; helper function\n(define (combine lst1 lst2 x)\n  (if _____________________________________________________\n    lst2\n    ________________________________________________________))\n\n(expect (combine &#x27;((1)) &#x27;((3) (4 5)) 0) ((0 1) (3) (4 5)))\n(expect (combine &#x27;((1) (2 3) (3)) &#x27;((4 5) (6)) &#x27;a) ((a 1) (a 2 3) (a 3) (4 5) (6)))\n\n(define (partition&#x2d;options total biggest)\n  (cond\n    ((_________________________) _____________________________)\n    ((_________________________) _____________________________)\n    (else (let \n      ((w __________________________________________________)\n      (wo __________________________________________________))\n      (combine w wo _______________________________________________))))))\n\n(expect (partition&#x2d;options 2 2) ((2) (1 1)))\n(expect (partition&#x2d;options 3 3) ((3) (2 1) (1 1 1)))\n(expect (partition&#x2d;options 4 3) ((3 1) (2 2) (2 1 1) (1 1 1 1)))\n', "scheme", "partition-options-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>; helper function
+(define (combine lst1 lst2 x)
+<div class="sol-highlight">  (if (null? lst1)</div>    lst2
+<div class="sol-highlight">    (cons (cons x (car lst1)) (combine (cdr lst1) lst2 x))))</div>
+(expect (combine &#x27;((1)) &#x27;((3) (4 5)) 0) ((0 1) (3) (4 5)))
+(expect (combine &#x27;((1) (2 3) (3)) &#x27;((4 5) (6)) &#x27;a) ((a 1) (a 2 3) (a 3) (4 5) (6)))
+
+(define (partition&#x2d;options total biggest)
+  (cond
+<div class="sol-highlight">    ((= 0 total) &#x27;(()))</div><div class="sol-highlight">    ((or (&lt; total 0) (= 0 biggest)) &#x27;())</div>    (else (let 
+<div class="sol-highlight">      ((with (partition&#x2d;options (&#x2d; total biggest) biggest))</div><div class="sol-highlight">       (without (partition&#x2d;options total (&#x2d; biggest 1))))</div><div class="sol-highlight">      (combine with without biggest)))))</div>
+(expect (partition&#x2d;options 2 2) ((2) (1 1)))
+(expect (partition&#x2d;options 3 3) ((3) (2 1) (1 1 1)))
+(expect (partition&#x2d;options 4 3) ((3 1) (2 2) (2 1 1) (1 1 1 1)))</code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q3">Q3: Find It!</h3>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p>Implement the <code>find&#x2d;in&#x2d;tree</code> procedure, which takes a Scheme tree <code>t</code>, a target value <code>goal</code> and returns a list containing the node values on a path from the root of <code>t</code> to a node containing <code>goal</code>. If no such path exists, <code>find&#x2d;in&#x2d;tree</code> returns an empty list.</p>
+
+<p>Complete <code>find&#x2d;in&#x2d;branches</code> for ease of implementation. <code>find&#x2d;in&#x2d;branches</code> takes a list of branches <code>bs</code> and a value <code>goal</code> and returns a list containing the node values on a path from any branch to a node containing <code>goal</code>. If no such path exists, <code>find&#x2d;in&#x2d;branches</code> returns an empty list.</p>
+
+<p>The Scheme tree ADT is specified at the top of the skeleton code.</p>
+
+<p><strong>Note:</strong> The skeleton code is just a suggestion; feel free to use your own structure if you prefer.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="find-in-tree-input" style="height:702px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-find-in-tree-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-find-in-tree-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-find-in-tree-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('(define (tree label branches) (cons label branches))\n(define (label t) (car t))\n(define (branches t) (cdr t))\n(define (is&#x2d;leaf t) (null? (branches t)))\n\n(define (find&#x2d;in&#x2d;tree t goal)\n  (if ____________________________________________\n    _____________________________\n    (let ((path (find&#x2d;in&#x2d;branches (branches t) goal)))\n      (if _____________________________________\n        ______________________________________\n        ______________________________________\n\n(define (find&#x2d;in&#x2d;branches bs goal)\n  (if _________________________________________\n    nil\n    (let ((path _________________________________________))\n      (if _______________________________________________\n        __________________________________________________\n        path))))\n\n; DOCTESTS (no need to modify)\n(define t1 (tree 1\n  (list\n    (tree 2\n      (list\n        (tree 5 nil)\n          (tree 6 (list\n            (tree 8 nil)))))\n    (tree 3 nil)\n    (tree 4\n      (list\n        (tree 7 nil))))))\n\n(expect (find&#x2d;in&#x2d;tree t1 7) (1 4 7))\n(expect (find&#x2d;in&#x2d;tree t1 1) (1))\n(expect (find&#x2d;in&#x2d;tree t1 12) ())\n', "scheme", "find-in-tree-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>(define (tree label branches) (cons label branches))
+(define (label t) (car t))
+(define (branches t) (cdr t))
+(define (is&#x2d;leaf t) (null? (branches t)))
+
+(define (find&#x2d;in&#x2d;tree t goal)
+<div class="sol-highlight">  (if (eq? (label t) goal)</div><div class="sol-highlight">    (list goal)</div>    (let ((path (find&#x2d;in&#x2d;branches (branches t) goal)))
+<div class="sol-highlight">      (if (null? path)</div><div class="sol-highlight">        nil</div><div class="sol-highlight">        (cons (label t) path)))))</div>
+(define (find&#x2d;in&#x2d;branches bs goal)
+<div class="sol-highlight">  (if (null? bs)</div>    nil
+<div class="sol-highlight">    (let ((path (find&#x2d;in&#x2d;tree (car bs) goal)))</div><div class="sol-highlight">      (if (null? path)</div><div class="sol-highlight">        (find&#x2d;in&#x2d;branches (cdr bs) goal)</div>        path))))
+
+; DOCTESTS (no need to modify)
+(define t1 (tree 1
+  (list
+    (tree 2
+      (list
+        (tree 5 nil)
+          (tree 6 (list
+            (tree 8 nil)))))
+    (tree 3 nil)
+    (tree 4
+      (list
+        (tree 7 nil))))))
+
+(expect (find&#x2d;in&#x2d;tree t1 7) (1 4 7))
+(expect (find&#x2d;in&#x2d;tree t1 1) (1))
+(expect (find&#x2d;in&#x2d;tree t1 12) ())</code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#q1">Q1: Slice It!</a></li>
+  <li><a href="index.html#q2">Q2: Partition Options</a></li>
+  <li><a href="index.html#q3">Q3: Find It!</a></li>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Discussion 10 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Discussion 10: Scheme, Scheme Lists
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">disc10.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+This is an online worksheet that you can work on during discussions and tutorials.
+Your work is not graded and you do not need to submit anything.
+
+    
+
+
+
+<h1 id="discussion-10-vitamin">Discussion 10 Vitamin</h1>
+
+<p>To encourage everyone to watch or attend discussion orientation, we have created small discussion vitamins. If you complete 5 of the 6 vitamins, you can earn one point of extra credit added to your final grade in the course. Please answer all of the questions in <a href="https://links.cs61a.org/vitamin-for-disc10">this form</a> by <strong>Thursday at 11:59 PM</strong>.</p>
+
+
+<h1 id="introduction">Introduction</h1>
+
+
+<p>In the next part of the course, we will be working with the <strong>Scheme</strong>
+programming language. In addition to learning how to write Scheme programs, we
+will eventually write a Scheme interpreter in Project 4!</p>
+
+<p>Scheme is a famous functional programming language from the 1970s.  It is a
+dialect of Lisp (which stands for LISt Processing).  The first observation most
+people make is the unique syntax, which uses a prefix notation and (often many)
+nested parentheses (see <a href="http://xkcd.com/297/">http://xkcd.com/297/</a>).  Scheme
+features first-class functions and optimized tail-recursion, which were
+relatively new features at the time.</p>
+
+
+<h1 id="primitives-and-defining-variables">Primitives and Defining Variables</h1>
+
+
+<p>Scheme has a set of <strong>atomic</strong> primitive expressions. Atomic means
+that these expressions cannot be divided up.</p>
+
+<pre><code class="scheme">scm&gt; 123
+123
+scm&gt; #t
+True
+scm&gt; #f
+False</code></pre>
+
+
+
+<p>Unlike in Python, the only primitive in Scheme that is a false value is
+<code>#f</code> and its equivalents, <code>false</code> and <code>False</code>. <strong>This means that 0 is not false.</strong></p>
+
+<p>The <code>define</code> special form defines variables and procedures by binding a
+value to a variable, just like the assignment statement in Python. When a
+variable is defined, the <code>define</code> special form returns a symbol of its
+name. A procedure is what we call a function in Scheme.</p>
+
+<p>The syntax to define a variable and procedure are:</p>
+
+<ul>
+  <li><code>(define &lt;variable name&gt; &lt;value&gt;)</code></li>
+  <li><code>(define (&lt;function name&gt; &lt;parameters&gt;) &lt;function body&gt;))</code></li>
+</ul>
+
+<p>Special forms are types of expressions with unique evaluation rules that
+can do a variety of things. Often times, speical forms are analagous to
+statements in Python, such as assignment statements, <code>if</code> statements,
+and <code>def</code> statements. However, all special forms in Scheme evaluate to a value.
+We'll learn more about special forms later in the discussion.</p>
+
+<div class="page-break"></div>
+
+
+<h2 id="questions">Questions</h2>
+
+
+<pre><code class="scheme">scm&gt; (define a 1)</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-primitives-1-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-primitives-1-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; a</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-primitives-2-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-primitives-2-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; (define b a)</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-primitives-3-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-primitives-3-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; b</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-primitives-4-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-primitives-4-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; (define c &#x27;a)</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-primitives-5-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-primitives-5-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; c</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-primitives-6-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-primitives-6-input" type="text">
+            <div class="storable-status"></div>
+        
+</p>
+
+
+<h1 id="call-expressions">Call Expressions</h1>
+
+
+<p>Call expressions apply a procedure to some arguments.</p>
+
+<pre><code class="scheme">(&lt;operator&gt; &lt;operand1&gt; &lt;operand2&gt; ...)</code></pre>
+
+
+
+<p>Call expressions in Scheme work exactly like they do in Python. To evaluate
+them:</p>
+
+<ol>
+  <li>Evaluate the operator to get a procedure.</li>
+  <li>Evaluate each of the operands from left to right.</li>
+  <li>Apply the value of the operator to the evaluated operands.</li>
+</ol>
+
+<p>For example, consider the call expression <code>(+ 1 2)</code>. First, we evaluate
+the symbol <code>+</code> to get the built-in addition procedure. Then we evaluate
+the two operands <code>1</code> and <code>2</code> to get their corresponding atomic
+values. Finally, we apply the addition procedure to the values <code>1</code> and
+<code>2</code> to get the return value <code>3</code>.</p>
+
+<p>Operators may be symbols, such as <code>+</code> and <code>*</code>, or more
+complex expressions, as long as they evaluate to procedure values.</p>
+
+<pre><code class="scheme">scm&gt; (&#x2d; 1 1)                 ; 1 &#x2d; 1
+0
+scm&gt; (/ 8 4 2)               ; 8 / 4 / 2
+1
+scm&gt; (* (+ 1 2) (+ 1 2))     ; (1 + 2) * (1 + 2)
+9</code></pre>
+
+
+
+<p>Some important built-in functions you'll want to know are:</p>
+
+<ul>
+  <li><code>+</code>, <code>&#x2d;</code>, <code>*</code>, <code>/</code></li>
+  <li><code>=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code></li>
+  <li><code>quotient</code>, <code>modulo</code>, <code>even?</code>, <code>odd?</code>, <code>null?</code></li>
+</ul>
+
+
+<h2 id="questions-2">Questions</h2>
+
+
+<p>What would Scheme display? As a reminder, the built-in <code>quotient</code> function performs floor division.</p>
+
+
+
+<pre><code class="scheme">scm&gt; (define a (+ 1 2))</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-callexprs-1-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-callexprs-1-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; a</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-callexprs-2-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-callexprs-2-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; (define b (&#x2d; (+ (* 3 3) 2) 1))</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-callexprs-3-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-callexprs-3-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; (+ a b)</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-callexprs-4-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-callexprs-4-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; (= (modulo b a) (quotient 5 3))</code></pre>
+
+
+
+
+            <label class="sr-only" for="scheme-callexprs-5-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-callexprs-5-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+
+<h1 id="special-forms">Special Forms</h1>
+
+
+<p>Special form expressions contain a <strong>special form</strong> as the operator.
+Special form expressions <em>do not</em> follow the same rules of evaluation as
+call expressions.  Each special form has its own rules of evaluation -- that's
+what makes them special!</p>
+
+
+<h2 id="if-expression">If Expression</h2>
+
+
+<p>An <code>if</code> expression looks like this:</p>
+
+<p><code>(if &lt;predicate&gt; &lt;if&#x2d;true&gt; [if&#x2d;false])</code></p>
+
+<p><code>&lt;predicate&gt;</code> and <code>&lt;if&#x2d;true&gt;</code> are required expressions and
+<code>[if&#x2d;false]</code> is optional.</p>
+
+<p>The rules for evaluation are as follows:</p>
+
+<ol>
+  <li>Evaluate <code>&lt;predicate&gt;</code>.</li>
+  <li>If <code>&lt;predicate&gt;</code> evaluates to a truth-y value, evaluate <code>&lt;if&#x2d;true&gt;</code>
+  and return its value. Otherwise, evaluate <code>[if&#x2d;false]</code> if
+  provided and return its value.</li>
+</ol>
+
+<p>This is a special form because not all operands will be evaluated! Only one of
+the second and third operands is evaluated, depending on the value of the first
+operand.</p>
+
+<p>Remember that only <code>#f</code> is a false-y value in Scheme; everything else
+is truth-y.</p>
+
+<pre><code class="scheme">scm&gt; (if (&lt; 4 5) 1 2)
+1
+scm&gt; (if #f (/ 1 0) 42)
+42</code></pre>
+
+
+
+
+<h2 id="boolean-operators">Boolean operators</h2>
+
+
+<p>Like Python, Scheme also has the boolean operators <code>and</code>,
+<code>or</code>, and <code>not</code>.  <code>and</code> and <code>or</code> are
+special forms because they are short-circuiting operators.</p>
+
+<ul>
+  <li><code>and</code> takes in any amount of operands and evaluates these operands
+  from left to right until one evaluates to a false-y value. It returns
+  that first false-y value. If there are no false-y values, it returns the value
+  of the last expression (or <code>#t</code> if there are no operands)</li>
+  <li><code>or</code> also evaluates any number of operands from left to right
+  until one evaluates to a truth-y value. It returns that first truth-y
+  value. If there are no truth-y values, it returns the value of the last expression
+  (or <code>#f</code> if there are no operands)</li>
+  <li><code>not</code> takes in a single operand, evaluates it, and returns its
+  opposite truthiness value. Note that <code>not</code> is a regular procedure
+  and not a special form.</li>
+</ul>
+
+<p><em>Important note: the only false-y value in scheme is <code>#f</code>. In particular, 0 is truth-y!</em></p>
+
+<pre><code class="scheme">scm&gt; (and 25 32)
+32
+scm&gt; (or 1 (/ 1 0))    ; Short&#x2d;circuits
+1
+scm&gt; (not (odd? 10))
+#t</code></pre>
+
+
+
+
+<h2 id="questions-3">Questions</h2>
+
+
+<p>What would Scheme display?</p>
+
+
+
+<pre><code class="scheme">scm&gt; (if (or #t (/ 1 0)) 1 (/ 1 0))</code></pre>
+
+
+
+            <label class="sr-only" for="scheme-ifexprs-1-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-ifexprs-1-input" type="text">
+            <div class="storable-status"></div>
+        
+
+
+<pre><code class="scheme">scm&gt; ((if (&lt; 4 3) + &#x2d;) 4 100)</code></pre>
+
+
+
+            <label class="sr-only" for="scheme-ifexprs-2-input">Your Answer:</label>
+            <input class="form-control storable" id="scheme-ifexprs-2-input" type="text">
+            <div class="storable-status"></div>
+        
+</p>
+
+
+<h1 id="lambdas-and-defining-functions">Lambdas and Defining Functions</h1>
+
+
+<p>All Scheme procedures are lambda procedures. One way to create a procedure is
+to use the <code>lambda</code> special form.</p>
+
+<p><code>(lambda (&lt;param1&gt; &lt;param2&gt; ...) &lt;body&gt;)</code></p>
+
+<p>This expression creates a lambda function with the given parameters and body,
+but does not evaluate the body. Just like in Python, the body is not
+evaluated until the function is called and applied to some argument
+values. The fact that neither operand is evaluated is what makes
+<code>lambda</code> a special form.</p>
+
+<p>Another similarity to Python is that lambda expressions do not assign the
+returned function to any name. We can assign the value of an expression to a
+name with a <code>define</code> special form.</p>
+
+<p>For example, <code>(define square (lambda (x) (* x x)))</code> creates a lambda
+procedure that squares its argument and assigns that procedure to the name
+<code>square</code>.</p>
+
+<p>The second version of the <code>define</code> special form is a shorthand for this
+function definition:</p>
+
+<p><code>(define (&lt;name&gt; &lt;param1&gt; &lt;param2 ...&gt;) &lt;body&gt;)</code></p>
+
+<p>This expression creates a function with the given parameters and body
+<em>and</em> binds it to the given name.</p>
+
+<pre><code class="scheme">scm&gt; (define square (lambda (x) (* x x))) ; Bind the lambda function to the name square
+square
+scm&gt; (define (square x) (* x x))          ; Equivalent to the line above
+square
+scm&gt; square
+(lambda (x) (* x x))
+scm&gt; (square 4)
+16</code></pre>
+
+
+
+
+<h2 id="questions-4">Questions</h2>
+
+
+<h3 class="question" id="q1">Q1: Factorial</h3>
+
+<p>Write a function that returns the factorial of a number.</p>
+
+
+
+
+            <div class="monaco-storable" id="scheme-factorial-input" style="height:90px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-scheme-factorial-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-scheme-factorial-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-scheme-factorial-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor("(define (factorial x)\n  'YOUR-CODE-HERE\n\n", "scheme", "scheme-factorial-input"));
+            </script>
+        
+
+<p><a href="https://youtu.be/DlA7f9KTs5o?list=PLx38hZJ5RLZfBXJRWlsQyOg3lrHzfvWu0&t=1059">Walkthrough video</a></p>
+
+</solution>
+<h3 class="question" id="q2">Q2: (Tutorial) Fibonacci</h3>
+
+<p>Write a function that returns the <code>n</code>-th Fibonacci number.</p>
+
+
+
+
+            <div class="monaco-storable" id="scheme-fibonacci-input" style="height:90px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-scheme-fibonacci-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-scheme-fibonacci-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-scheme-fibonacci-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor("(define (fib n)\n    'YOUR-CODE-HERE\n)\n", "scheme", "scheme-fibonacci-input"));
+            </script>
+        
+
+<pre><code class="scheme">scm&gt; (fib 0)
+0
+scm&gt; (fib 1)
+1
+scm&gt; (fib 10)
+55</code></pre>
+
+
+
+
+
+<div class="page-break"></div>
+
+
+<h1 id="pairs-and-lists">Pairs and Lists</h1>
+
+
+<p>All lists in Scheme are linked lists. Scheme lists are composed of two element pairs.
+We define a list as being either</p>
+
+<ul>
+  <li>the empty list, <code>nil</code></li>
+  <li>a pair whose second element is a list</li>
+</ul>
+
+<p>As in Python, linked lists are recursive data structures. The base case is the empty list.</p>
+
+<p>We use the following procedures to construct and select from lists:</p>
+
+<ul>
+  <li><code>(cons first rest)</code> constructs a list with the given first element
+  and rest of the list. For now, if <code>rest</code> is not a pair or <code>nil</code> it will error.</li>
+  <li><code>(car lst)</code> gets the first item of the list</li>
+  <li><code>(cdr lst)</code> gets the rest of the list</li>
+</ul>
+
+<pre><code class="scheme">scm&gt; nil
+()
+scm&gt; (define lst (cons 1 (cons 2 (cons 3 nil))))
+lst
+scm&gt; lst
+(1 2 3)
+scm&gt; (car lst)
+1
+scm&gt; (cdr lst)
+(2 3)
+scm&gt; (car (cdr lst))
+2
+scm&gt; (cdr (cdr (cdr lst)))
+()</code></pre>
+
+
+
+<p>The rule for displaying lists is very similar to that for the <code>Link</code> class from earlier in the class's <code>__str__</code> method. It prints out the elements in the linked list as if the list has no nested structure. The only difference is that <code>Link.__str__</code> uses angle brackets <code>&lt;&gt;</code> and scheme uses parentheses <code>()</code>.</p>
+
+<pre><code class="scheme">scm&gt; (cons 1 (cons 2 (cons 3 nil)))
+(1 2 3)
+scm&gt; (cons 1 (cons (cons 2 (cons 3 nil)) nil))
+(1 (2 3))</code></pre>
+
+
+
+<p>Two other common ways of creating lists is using the built-in <code>list</code>
+procedure or the <code>quote</code> special form:</p>
+
+<ul>
+  <li>The <code>list</code> procedure takes in an arbitrary amount of arguments.
+  Because it is a procedure, all operands are evaluated when <code>list</code> is
+  called. A list is constructed with the values of these operands and is
+  returned.</li>
+  <li>The <code>quote</code> special form takes in a single operand. It returns
+  this operand exactly as is, without evaluating it. Note that this special form
+  can be used to return any value, not just a list.
+  <!-- * Similarly, a <code>quasiquote</code>, denoted with a backtick symbol, returns an expression
+  without evaluating it. However, parts of that expression can be unquoted, denoted
+  using a comma, and those unquoted parts are evaluated.
+  \end{itemize}--></li>
+</ul>
+
+<pre><code class="scheme">scm&gt; (define x 2)
+scm&gt; (define y 3)
+scm&gt; (list 1 x 3)
+(1 2 3)
+scm&gt; (quote (1 x 3))
+(1 x 3)
+scm&gt; &#x27;(1 x 3)   ; Equivalent to the previous quote expression
+(1 x 3)
+scm&gt; &#x27;(+ x y)
+(+ x y)</code></pre>
+
+
+
+<!--
+
+<pre><code class="scheme">scm&gt; `(+ x y)   ; Quasiquotation
+%(+ x y)
+%scm&gt; `(+ ,x y)  ; Unquoted with a comma
+%(+ 2 y)
+%scm&gt; `(+ ,x ,y)
+%(+ 2 3)
+%scm&gt; (eval `(+ ,x ,y))   ; The eval function evaluates the operands</code></pre>
+
+
+-->
+
+
+<h2 id="eqv-equal">=, eqv?, equal?</h2>
+
+
+<ul>
+  <li><code>=</code> can only be used for comparing numbers.</li>
+  <li><code>eqv?</code> behaves like <code>==</code> in Python for comparing two non-pairs (numbers, booleans, etc.).
+  Otherwise, <code>eqv?</code> behaves like the Python <code>is</code> operator.</li>
+  <li><code>equal?</code> compares pairs by determining if their <code>car</code>s
+  are <code>equal?</code> and their <code>cdr</code>s are <code>equal?</code> (that is, they
+  have the same contents). Otherwise, <code>equal?</code> behaves like <code>eqv?</code>.</li>
+</ul>
+
+<pre><code class="scheme">scm&gt; (define a &#x27;(1 2 3))
+a
+scm&gt; (= a a)
+Error
+scm&gt; (equal? a &#x27;(1 2 3))
+#t
+scm&gt; (eqv? a &#x27;(1 2 3))
+#f
+scm&gt; (define b a)
+b
+scm&gt; (eqv? a b)
+#t</code></pre>
+
+
+
+
+<h2 id="questions-5">Questions</h2>
+
+
+<h3 class="question" id="q3">Q3: List Concatenation</h3>
+
+<p>Write a function which takes two lists and concatenates them.</p>
+
+
+
+<p>Notice that simply calling <code>(cons a b)</code>  would not work because it will
+create a deep list. Do not call the builtin procedure <code>append</code>, since it
+does the same thing as <code>list&#x2d;concat</code> should do.</p>
+
+
+            <div class="monaco-storable" id="scheme-list-concatenate-input" style="height:90px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-scheme-list-concatenate-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-scheme-list-concatenate-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-scheme-list-concatenate-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor("(define (list&#x2d;concat a b)\n    'YOUR-CODE-HERE\n)\n", "scheme", "scheme-list-concatenate-input"));
+            </script>
+        
+
+<pre><code class="scheme">scm&gt; (list&#x2d;concat &#x27;(1 2 3) &#x27;(2 3 4))
+(1 2 3 2 3 4)</code></pre>
+
+
+
+
+<h3 class="question" id="q4">Q4: (Tutorial) Warm-up</h3>
+
+<p>These short questions are meant to help refresh your memory of
+topics covered in lecture and lab this week before tackling more challenging problems.</p>
+
+<p>Describe the difference between the following two Scheme expressions.
+Hint: which defines a new procedure?</p>
+
+<p>Expression A:</p>
+
+<pre><code class="scheme">(define x (+ 1 2 3))</code></pre>
+
+
+
+<p>Expression B:</p>
+
+<pre><code class="scheme">(define (x) (+ 1 2 3))</code></pre>
+
+
+
+
+
+<p>Write an expression that selects the value 3 from the list below.</p>
+
+<pre><code class="scheme">(define s &#x27;(5 4 (1 2) 3 7))</code></pre>
+
+
+
+
+
+<h3 class="question" id="q5">Q5: (Tutorial) List Duplicator</h3>
+
+<p>Write a Scheme function that, when given a list, such as <code>(1 2 3 4)</code>,
+duplicates every element in the list (i.e. <code>(1 1 2 2 3 3 4 4)</code>).</p>
+
+
+            <div class="monaco-storable" id="scheme-list-duplicate-input" style="height:90px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-scheme-list-duplicate-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-scheme-list-duplicate-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-scheme-list-duplicate-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor("(define (duplicate lst)\n    'YOUR-CODE-HERE\n)\n", "scheme", "scheme-list-duplicate-input"));
+            </script>
+        
+<h3 class="question" id="q6">Q6: (Tutorial) List Insert</h3>
+
+<p>Write a Scheme function that, when given an element, a list, and an
+index, inserts the element into the list at that index. You can assume that the index is in bounds for the list.</p>
+
+
+            <div class="monaco-storable" id="scheme-list-insert-input" style="height:90px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-scheme-list-insert-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-scheme-list-insert-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-scheme-list-insert-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor("(define (insert element lst index)\n   'YOUR-CODE-HERE\n)\n", "scheme", "scheme-list-insert-input"));
+            </script>
+        
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#discussion-10-vitamin">Discussion 10 Vitamin</a></li>
+  <li><a href="index.html#introduction">Introduction</a></li>
+  <li><a href="index.html#primitives-and-defining-variables">Primitives and Defining Variables</a></li>
+  <ul>
+    <li><a href="index.html#questions">Questions</a></li>
+  </ul>
+  <li><a href="index.html#call-expressions">Call Expressions</a></li>
+  <ul>
+    <li><a href="index.html#questions-2">Questions</a></li>
+  </ul>
+  <li><a href="index.html#special-forms">Special Forms</a></li>
+  <ul>
+    <li><a href="index.html#if-expression">If Expression</a></li>
+    <li><a href="index.html#boolean-operators">Boolean operators</a></li>
+    <li><a href="index.html#questions-3">Questions</a></li>
+  </ul>
+  <li><a href="index.html#lambdas-and-defining-functions">Lambdas and Defining Functions</a></li>
+  <ul>
+    <li><a href="index.html#questions-4">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: Factorial</a></li>
+      <li><a href="index.html#q2">Q2: (Tutorial) Fibonacci</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#pairs-and-lists">Pairs and Lists</a></li>
+  <ul>
+    <li><a href="index.html#eqv-equal">=, eqv?, equal?</a></li>
+    <li><a href="index.html#questions-5">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q3">Q3: List Concatenation</a></li>
+      <li><a href="index.html#q4">Q4: (Tutorial) Warm-up</a></li>
+      <li><a href="index.html#q5">Q5: (Tutorial) List Duplicator</a></li>
+      <li><a href="index.html#q6">Q6: (Tutorial) List Insert</a></li>
+    </ul>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

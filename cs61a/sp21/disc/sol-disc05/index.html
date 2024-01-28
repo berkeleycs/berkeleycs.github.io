@@ -1,0 +1,959 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Discussion 5 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Discussion 5: Python Lists, Trees, Mutability
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">disc05.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+This is an online worksheet that you can work on during discussions and tutorials.
+Your work is not graded and you do not need to submit anything.
+
+    
+
+
+
+<h1 id="lists">Lists</h1>
+
+
+<p>A <em>sequence</em> is an ordered collection of values. It has two
+fundamental properties: length and element selection. In this
+discussion, we'll explore one of Python's data types,
+the <em>list</em>, which implements this abstraction.</p>
+
+<p>In Python, we can have lists of whatever values we want, be it
+numbers, strings, functions, or even other lists!  Furthermore, the
+types of the list's contents need not be the same. In other words, the
+list need not be homogenous.</p>
+
+<p>Lists can be created using square braces. Their elements can be
+accessed (or <em>indexed</em>) with square braces. Lists are
+zero-indexed: to access the first element, we must index at 0; to access
+the <code>i</code>th element, we must index at <code>i &#x2d; 1</code>.</p>
+
+<p>We can also index with negative numbers. These begin indexing at the
+end of the list, so the index <code>&#x2d;1</code> is equivalent to the index
+<code>len(list) &#x2d; 1</code> and index <code>&#x2d;2</code> is the same as <code>len(list) &#x2d; 2</code>.</p>
+
+<p>Let’s try out some indexing:</p>
+
+<pre><code>&gt;&gt;&gt; fantasy_team = [&#x27;aaron rodgers&#x27;, &#x27;desean jackson&#x27;]
+&gt;&gt;&gt; print(fantasy_team)
+[&#x27;aaron rodgers&#x27;, &#x27;desean jackson&#x27;]
+&gt;&gt;&gt; fantasy_team[0]
+&#x27;aaron rodgers&#x27;
+&gt;&gt;&gt; fantasy_team[len(fantasy_team) &#x2d; 1]
+&#x27;desean jackson&#x27;
+&gt;&gt;&gt; fantasy_team[&#x2d;1]
+&#x27;desean jackson&#x27;</code></pre>
+
+
+<h2 id="list-slicing">List slicing</h2>
+
+
+<p>If we want to access more than one element of a list at a time, we can use a
+<em>slice</em>. Slicing a sequence is very similar to indexing. We specify a
+starting index and an ending index, separated by a colon. Python creates a new
+list with the elements from the starting index up to (but not including) the
+ending index.</p>
+
+<p>We can also specify a step size, which tells Python how to collect values for
+us. For example, if we set step size to 2, the returned list will include every
+<strong>other</strong> value, from the starting index until the ending index. A negative
+step size indicates that we are stepping backwards through a list when collecting
+values.</p>
+
+<p>You can also choose not to specify any/all of the slice arguments. Python will
+perform some default behaviour if this is the case:</p>
+
+<ul>
+  <li>If the step size is left out, the default step size is 1.</li>
+  <li>If the start index is left out, the default start index is the beginning of the list.</li>
+  <li>If the end index is left out, the default end index is the end of the list.</li>
+  <li>If the step size is negative, the default start index becomes the end
+  of the list, and the default end index becomes the beginning of the list.</li>
+</ul>
+
+<p>Thus, <code>lst[:]</code> creates a list that is identical to <code>lst</code> (a copy
+of <code>lst</code>). <code>lst[::&#x2d;1]</code> creates a list that has the same elements
+of <code>lst</code>, but reversed. Those rules still apply if more than just the
+step size is specified e.g. <code>lst[3::&#x2d;1]</code>.</p>
+
+<pre><code>&gt;&gt;&gt; directors = [&#x27;jenkins&#x27;, &#x27;spielberg&#x27;, &#x27;bigelow&#x27;, &#x27;kubrick&#x27;]
+&gt;&gt;&gt; directors[:2]
+[&#x27;jenkins&#x27;, &#x27;spielberg&#x27;]
+&gt;&gt;&gt; directors[1:3]
+[&#x27;spielberg&#x27;, &#x27;bigelow&#x27;]
+&gt;&gt;&gt; directors[1:]
+[&#x27;spielberg&#x27;, &#x27;bigelow&#x27;, &#x27;kubrick&#x27;]
+&gt;&gt;&gt; directors[0:4:2]
+[&#x27;jenkins&#x27;, &#x27;bigelow&#x27;]
+&gt;&gt;&gt; directors[::&#x2d;1]
+[&#x27;kubrick&#x27;, &#x27;bigelow&#x27;, &#x27;spielberg&#x27;, &#x27;jenkins&#x27;]</code></pre>
+
+
+<h2 id="list-comprehensions">List comprehensions</h2>
+
+
+<p>A <strong>list comprehension</strong> is a compact way to create a list whose elements
+are the results of applying a fixed expression to elements in another sequence.</p>
+
+<pre><code>[&lt;map exp&gt; for &lt;name&gt; in &lt;iter exp&gt; if &lt;filter exp&gt;]</code></pre>
+
+<p>It might be helpful to note that we can rewrite a list comprehension as an
+equivalent for statement. See the example to the right.</p>
+
+<p>Let's break down an example:</p>
+
+<pre><code>[x * x &#x2d; 3 for x in [1, 2, 3, 4, 5] if x % 2 == 1]</code></pre>
+
+<p>In this list comprehension, we are creating a new list after performing a
+series of operations to our initial sequence <code>[1, 2, 3, 4, 5]</code>. We only
+keep the elements that satisfy the filter expression <code>x \% 2 == 1</code>
+(<code>1</code>, <code>3</code>, and <code>5</code>). For each retained element, we apply
+the map expression <code>x*x &#x2d; 3</code> before adding it to the new list that we are
+creating, resulting in the output <code>[&#x2d;2, 6, 22]</code>.</p>
+
+<blockquote><p>Note: The <code>if</code> clause in a list comprehension is optional.</p></blockquote>
+
+
+<h2 id="questions">Questions</h2>
+
+
+<h3 class="question" id="q1">Q1: Closest Number</h3>
+
+<p>Write a function that takes in a list of numbers <code>nums</code> and a target number <code>target</code> and returns the number in <code>nums</code> that is the closest to <code>target</code>. If there's a tie, return the number that shows up earlier in the list. You should do this in one line.</p>
+
+<p><strong>Hint:</strong> To find how close two numbers are, you can use <code>abs(x &#x2d; y)</code>
+<strong>Hint 2:</strong> Use the <code>min</code> function and pass in a <code>key</code> function.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="closest-number-input" style="height:234px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-closest-number-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-closest-number-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-closest-number-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def closest_number(nums, target):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; closest_number([1, 4, 5, 6, 7], 2)\n    1\n    &gt;&gt;&gt; closest_number([3, 1, 5, 6, 13], 4) #  choose the earlier number since there&#x27;s a tie\n    3\n    &gt;&gt;&gt; closest_number([34, 102, 8, 5, 23], 25)\n    23\n    &quot;&quot;&quot;\n\n', "scheme", "closest-number-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def closest_number(nums, target):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; closest_number([1, 4, 5, 6, 7], 2)
+    1
+    &gt;&gt;&gt; closest_number([3, 1, 5, 6, 13], 4) #  choose the earlier number since there&#x27;s a tie
+    3
+    &gt;&gt;&gt; closest_number([34, 102, 8, 5, 23], 25)
+    23
+    &quot;&quot;&quot;
+<div class="sol-highlight">    return min(nums, key=lambda x: abs(target &#x2d; x))</div></code></pre>
+
+            </div>
+        
+
+
+<h3 class="question" id="q2">Q2: (Tutorial) Max Product</h3>
+
+<p>Write a function that takes in a list and returns the maximum product that
+can be formed using nonconsecutive elements of the list. The input list
+will contain only numbers greater than or equal to 1.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="max-product-input" style="height:360px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-max-product-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-max-product-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-max-product-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def max_product(s):\n    &quot;&quot;&quot;Return the maximum product that can be formed using non&#x2d;consecutive\n    elements of s.\n\n    &gt;&gt;&gt; max_product([10,3,1,9,2]) # 10 * 9\n    90\n    &gt;&gt;&gt; max_product([5,10,5,10,5]) # 5 * 5 * 5\n    125\n    &gt;&gt;&gt; max_product([])\n    1\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "max-product-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def max_product(s):
+    &quot;&quot;&quot;Return the maximum product that can be formed using non&#x2d;consecutive
+    elements of s.
+
+    &gt;&gt;&gt; max_product([10,3,1,9,2]) # 10 * 9
+    90
+    &gt;&gt;&gt; max_product([5,10,5,10,5]) # 5 * 5 * 5
+    125
+    &gt;&gt;&gt; max_product([])
+    1
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if s == []:
+        return 1
+    elif len(s) == 1: # Base case optional
+        return s[0]
+    else:
+        return max(max_product(s[1:]), s[0] * max_product(s[2:]))</div></code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight">
+At each step, we choose if we want to include the current number in our product
+or not:
+
+<ul>
+  <li>If we include the current number, we cannot use the adjacent number.</li>
+  <li>If we don't use the current number, we try the adjacent number (and
+  obviously ignore the current number).</li>
+</ul>
+
+<p>The recursive calls represent these two alternate realities. Finally, we pick
+the one that gives us the largest product.</p>
+
+<p><a href="https://www.youtube.com/watch?v=Am6m8YgAnYY&list=PLx38hZJ5RLZdJgRCgpaTbmRXKAHOUmomO&index=4&t=3m0s">See video walkthrough</a></p>
+
+</div>
+
+
+<h1 id="mutability">Mutability</h1>
+
+
+</p>
+
+<p>Let's imagine you order a mushroom and cheese pizza from La Val's, and that
+they represent your order as a list:</p>
+
+<pre><code>&gt;&gt;&gt; pizza = [&#x27;cheese&#x27;, &#x27;mushrooms&#x27;]</code></pre>
+
+
+
+<p>A couple minutes later, you realize that you really want onions on the pizza.
+Based on what we know so far, La Val's would have to build an entirely new list
+to add onions:</p>
+
+<pre><code>&gt;&gt;&gt; pizza = [&#x27;cheese&#x27;, mushrooms&#x27;]
+&gt;&gt;&gt; new_pizza = pizza + [&#x27;onions&#x27;] # creates a new python list
+&gt;&gt;&gt; new_pizza
+[&#x27;cheese&#x27;, mushrooms&#x27;, &#x27;onions&#x27;]
+&gt;&gt;&gt; pizza # the original list is unmodified
+[&#x27;cheese&#x27;, &#x27;mushrooms&#x27;]</code></pre>
+
+
+
+<p>This is silly, considering that all La Val's had to do was add onions on top of
+<code>pizza</code> instead of making an entirely new pizza.</p>
+
+<p>We can fix this issue with <strong>list mutation</strong>. In Python, some objects,
+such as lists and dictionaries, are <strong>mutable</strong>, meaning that their
+contents or state can be changed over the course of program execution. Other objects, such as
+numeric types, tuples, and strings, are <em>immutable</em>, meaning they cannot be
+changed once they are created.</p>
+
+<p>Therefore, instead of building a new pizza, we can just mutate <code>pizza</code>
+to add some onions!</p>
+
+<pre><code>&gt;&gt;&gt; pizza.append(&#x27;onions&#x27;)
+&gt;&gt;&gt; pizza
+[&#x27;cheese&#x27;, &#x27;mushrooms&#x27;, &#x27;onions&#x27;]</code></pre>
+
+
+
+<p><code>append</code> is what's known as a method, or a function that belongs to an
+object, so we have to call it using dot notation. We'll talk more about methods
+later in the course, but for now, here's a list of useful list mutation methods:</p>
+
+<ul>
+  <li><code>append(el)</code>: Adds <code>el</code> to the end of the list, and returns <code>None</code></li>
+  <li><code>extend(lst)</code>: Extends the list by concatenating it with <code>lst</code>, and returns <code>None</code></li>
+  <li><code>insert(i, el)</code>: Insert <code>el</code> at index <code>i</code> (does not replaceelement but adds a new one), and returns <code>None</code></li>
+  <li><code>remove(el)</code>: Removes the first occurrence of <code>el</code> in list,
+  otherwise errors, and returns <code>None</code></li>
+  <li><code>pop(i)</code>: Removes and returns the element at index <code>i</code></li>
+</ul>
+
+<p>We can also use the familiar indexing operator with an assignment statement to
+change an existing element in a list. For example, we can change the element at index 1
+and to <code>&#x27;tomatoes&#x27;</code> like so:</p>
+
+<pre><code>&gt;&gt;&gt; pizza[1] = &#x27;tomatoes&#x27;
+&gt;&gt;&gt; pizza
+[&#x27;cheese&#x27;, &#x27;tomatoes&#x27;, &#x27;onions&#x27;]</code></pre>
+
+
+
+
+<h2 id="questions-2">Questions</h2>
+
+
+<h3 class="question" id="q3">Q3: WWPD</h3>
+What would Python display? In addition to giving the output, draw the box and pointer diagrams for each list to the right.
+
+<pre><code>&gt;&gt;&gt; s1 = [1, 2, 3]
+&gt;&gt;&gt; s2 = s1
+&gt;&gt;&gt; s1 is s2</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-1-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-1-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> True </div>
+
+<pre><code>&gt;&gt;&gt; s2.extend([5, 6])
+&gt;&gt;&gt; s1[4]</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-2-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-2-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> 6 </div>
+
+<pre><code>&gt;&gt;&gt; s1.append([&#x2d;1, 0, 1])
+&gt;&gt;&gt; s2[5]</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-3-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-3-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> [-1, 0, 1] </div>
+
+<pre><code>&gt;&gt;&gt; s3 = s2[:]
+&gt;&gt;&gt; s3.insert(3, s2.pop(3))
+&gt;&gt;&gt; len(s1)</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-4-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-4-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> 5 </div>
+
+<pre><code>&gt;&gt;&gt; s1[4] is s3[6]</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-5-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-5-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> True </div>
+
+<pre><code>&gt;&gt;&gt; s3[s2[4][1]]</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-6-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-6-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> 1 </div>
+
+<pre><code>&gt;&gt;&gt; s1[:3] is s2[:3]</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-7-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-7-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> False </div>
+
+<pre><code>&gt;&gt;&gt; s1[:3] == s2[:3]</code></pre>
+
+
+
+            <label class="sr-only" for="list-wwpd-8-input">Your Answer:</label>
+            <input class="form-control storable" id="list-wwpd-8-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight"> True </div>
+<h3 class="question" id="q4">Q4: (Optional) Mystery Reverse Environment Diagram</h3>
+
+<p>Fill in the lines below so that the variables in the <strong>global frame</strong> are bound to the values below. Note that the image does not contain a full environment diagram. <strong>You may only use brackets, commas, colons,</strong> <code>p</code> <strong>and</strong>  <code>q</code> <strong>in your answer.</strong></p>
+
+<p><img class="img-responsive center-block" src="assets/mystery.png" alt="envdiagram"></p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="mystery-input" style="height:180px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-mystery-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-mystery-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-mystery-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def mystery(p, q):\n    p[1].extend(___________________________)\n    ___________________________.append(____________________[1:]_)\n\np = [2, 3]\nq = [4, [p]]\nmystery(_________________, ________________________)\n\n', "python", "mystery-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def mystery(p, q):
+<div class="sol-highlight">    p[1].extend(q)</div><div class="sol-highlight">    q.append(p[1:])</div>
+p = [2, 3]
+q = [4, [p]]
+<div class="sol-highlight">mystery(q, p)</div></code></pre>
+
+            </div>
+        
+<h3 class="question" id="q5">Q5: (Tutorial) Add This Many</h3>
+
+<p>Write a function that takes in a value<code>x</code>, a value <code>el</code>, and a list <code>s</code> and adds as many <code>el</code>'s to the end of the
+list as there are <code>x</code>'s. <strong>Make sure to modify the original list using list mutation techniques.</strong></p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="add-this-many-input" style="height:378px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-add-this-many-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-add-this-many-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-add-this-many-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def add_this_many(x, el, s):\n    &quot;&quot;&quot; Adds el to the end of s the number of times x occurs\n    in s.\n    &gt;&gt;&gt; s = [1, 2, 4, 2, 1]\n    &gt;&gt;&gt; add_this_many(1, 5, s)\n    &gt;&gt;&gt; s\n    [1, 2, 4, 2, 1, 5, 5]\n    &gt;&gt;&gt; add_this_many(2, 2, s)\n    &gt;&gt;&gt; s\n    [1, 2, 4, 2, 1, 5, 5, 2, 2]\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "add-this-many-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def add_this_many(x, el, s):
+    &quot;&quot;&quot; Adds el to the end of s the number of times x occurs
+    in s.
+    &gt;&gt;&gt; s = [1, 2, 4, 2, 1]
+    &gt;&gt;&gt; add_this_many(1, 5, s)
+    &gt;&gt;&gt; s
+    [1, 2, 4, 2, 1, 5, 5]
+    &gt;&gt;&gt; add_this_many(2, 2, s)
+    &gt;&gt;&gt; s
+    [1, 2, 4, 2, 1, 5, 5, 2, 2]
+    &quot;&quot;&quot;
+<div class="sol-highlight">    count = 0
+    for element in s:
+        if element == x:
+            count += 1
+    while count &gt; 0:
+        s.append(el)
+        count &#x2d;= 1</div></code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight">
+Two alternate solutions involve iterating over the list indices and iterating over a copy of the list:
+
+<pre><code>def add_this_many_alt1(x, el, s):
+    for i in range(len(s)):
+        if s[i] == x:
+	    s.append(el)</code></pre>
+
+
+
+<pre><code>def add_this_many_alt2(x, el, s):
+    for element in list(s):
+        if element == x:
+	    s.append(el)</code></pre>
+
+
+</div>
+</p>
+
+
+<h1 id="trees">Trees</h1>
+
+</p>
+
+<p>In computer science, <strong>trees</strong> are recursive data structures that are widely
+used in various settings. The diagram to the right is an example of a tree.</p>
+
+<p>Notice that the tree branches downward. In computer science, the
+<strong>root</strong> of a tree starts at the top, and the <strong>leaves</strong> are at the
+bottom.</p>
+
+<p>Some terminology regarding trees:</p>
+
+<ul>
+  <li><strong>Parent Node</strong>: A node that has branches. Parent nodes can have
+  multiple branches.</li>
+  <li><strong>Child Node</strong>: A node that has a parent. A child node can only
+  belong to one parent.</li>
+  <li><strong>Root</strong>: The top node of the tree. In our example, the node that
+  contains 7 is the root.</li>
+  <li><strong>Label</strong>: The value at a node. In our example, all of the integers
+  are values.</li>
+  <li><strong>Leaf</strong>: A node that has no branches. In our example, the nodes that
+  contain -4, 0, 6, 17, and 20 are leaves.</li>
+  <li><strong>Branch</strong>: A subtree of the root. Note that trees have branches, which are trees themselves: this is why trees are <em>recursive</em> data structures.</li>
+  <li><strong>Depth</strong>: How far away a node is from the root. In other
+  words, the number of edges between the root of the tree to the
+  node. In the diagram, the node containing 19 has depth 1; the node
+  containing 3 has depth 2. Since there are no edges between the
+  root of the tree and itself, the depth of the root is 0.</li>
+  <li><strong>Height</strong>: The depth of the lowest leaf. In the diagram, the nodes
+  containing -4, 0, 6, and 17 are all the lowest leaves, and they
+  have depth 4. Thus, the entire tree has height 4.</li>
+</ul>
+
+<p>In computer science, there are many different types of trees. Some vary in
+the number of branches each node has; others vary in the structure of the
+tree.</p>
+
+
+<h2 id="trees-implementation">Trees Implementation</h2>
+
+
+<p>A tree has both a value for the root node and a sequence of branches,
+which are also trees. In our implementation, we represent the branches as
+a list of trees. Since a tree is an abstract data type, our choice to use
+lists is just an implementation detail.</p>
+
+<ul>
+  <li>The arguments to the constructor <code>tree</code> are the value for the root node and an optional list of branches. <em>If no branches parameter is provided, the default value <code>[]</code> is used.</em></li>
+  <li>The selectors for these are <code>label</code> and <code>branches</code>.</li>
+</ul>
+
+<p>Remember <code>branches</code> returns a list of trees and not a tree directly. It's important to distinguish between working with a tree and working with a <strong>list of</strong> trees.</p>
+
+<p>We have also provided a convenience function, <code>is_leaf</code>.</p>
+
+<p>Let's try to create the tree below.</p>
+
+<p><img class="img-responsive center-block" src="assets/example_tree_construction.png" alt="Example Tree"></p>
+
+<pre><code># Example tree construction
+t = tree(1,
+      [tree(3,
+          [tree(4),
+           tree(5),
+           tree(6)]),
+      tree(2)])</code></pre>
+
+
+
+<h2 id="questions-3">Questions</h2>
+
+<h3 class="question" id="q6">Q6: (Warmup) Height</h3>
+Write a function that returns the height of a tree.
+Recall that the height of a tree is the length of the longest path from the root to a leaf.
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="height-input" style="height:288px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-height-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-height-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-height-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def height(t):\n    &quot;&quot;&quot;Return the height of a tree.\n\n    &gt;&gt;&gt; t = tree(3, [tree(5, [tree(1)]), tree(2)])\n    &gt;&gt;&gt; height(t)\n    2\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "height-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def height(t):
+    &quot;&quot;&quot;Return the height of a tree.
+
+    &gt;&gt;&gt; t = tree(3, [tree(5, [tree(1)]), tree(2)])
+    &gt;&gt;&gt; height(t)
+    2
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if is_leaf(t):
+        return 0
+    return 1 + max([height(branch) for branch in branches(t)])
+
+    # alternate solution
+    return 1 + max([&#x2d;1] + [height(branch) for branch in branches(t)])</div></code></pre>
+
+            </div>
+        
+
+
+<div class="sol-highlight">
+<a href="https://www.youtube.com/watch?v=Am6m8YgAnYY&list=PLx38hZJ5RLZdJgRCgpaTbmRXKAHOUmomO&index=4">See video walkthrough</a>
+
+</div>
+<h3 class="question" id="q7">Q7: Maximum Path Sum</h3>
+
+<p>Write a function that takes in a tree and returns the maximum sum of the values along any path in the tree. Recall that a path is from the tree's root to any leaf.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="max-path-sum-input" style="height:252px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-max-path-sum-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-max-path-sum-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-max-path-sum-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def max_path_sum(t):\n    &quot;&quot;&quot;Return the maximum path sum of the tree.\n\n    &gt;&gt;&gt; t = tree(1, [tree(5, [tree(1), tree(3)]), tree(10)])\n    &gt;&gt;&gt; max_path_sum(t)\n    11\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "max-path-sum-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def max_path_sum(t):
+    &quot;&quot;&quot;Return the maximum path sum of the tree.
+
+    &gt;&gt;&gt; t = tree(1, [tree(5, [tree(1), tree(3)]), tree(10)])
+    &gt;&gt;&gt; max_path_sum(t)
+    11
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if is_leaf(t):
+      return label(t)
+    else:
+      return label(t) + max([max_path_sum(b) for b in branches(t)])</div></code></pre>
+
+            </div>
+        
+<h3 class="question" id="q8">Q8: (Tutorial) Find Path</h3>
+
+<p>Write a function that takes in a tree and a value <code>x</code> and returns a list containing the nodes along the path required to get from the root of
+the tree to a node containing <code>x</code>.</p>
+
+<p>If <code>x</code> is not present in the tree, return <code>None</code>. Assume that the entries of the tree are unique.</p>
+
+<p>For the following tree, <code>find_path(t, 5)</code> should return <code>[2, 7, 6, 5]</code></p>
+
+<p><img class="img-responsive center-block" src="assets/find_path.png" alt="treepic"></p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="find_path-input" style="height:288px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-find_path-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-find_path-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-find_path-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def find_path(tree, x):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; t = tree(2, [tree(7, [tree(3), tree(6, [tree(5), tree(11)])] ), tree(15)])\n    &gt;&gt;&gt; find_path(t, 5)\n    [2, 7, 6, 5]\n    &gt;&gt;&gt; find_path(t, 10)  # returns None\n    &quot;&quot;&quot;\n    if _____________________________:\n        return _____________________________\n    _____________________________:\n        path = ______________________:\n        if _____________________________:\n            return _____________________________\n\n', "scheme", "find_path-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def find_path(tree, x):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; t = tree(2, [tree(7, [tree(3), tree(6, [tree(5), tree(11)])] ), tree(15)])
+    &gt;&gt;&gt; find_path(t, 5)
+    [2, 7, 6, 5]
+    &gt;&gt;&gt; find_path(t, 10)  # returns None
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if label(tree) == x:</div><div class="sol-highlight">        return [label(tree)]</div><div class="sol-highlight">    for b in branches(tree):</div><div class="sol-highlight">        path = find_path(b, x)</div><div class="sol-highlight">        if path:</div><div class="sol-highlight">            return [label(tree)] + path</div></code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight">
+<a href="https://www.youtube.com/watch?v=OnLa_VUrWiA&list=PLx38hZJ5RLZcgrSJp16YmzNwn9hL5JD8q&index=3&t=0m11s">See video walkthrough</a>
+</div>
+
+
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#lists">Lists</a></li>
+  <ul>
+    <li><a href="index.html#list-slicing">List slicing</a></li>
+    <li><a href="index.html#list-comprehensions">List comprehensions</a></li>
+    <li><a href="index.html#questions">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: Closest Number</a></li>
+      <li><a href="index.html#q2">Q2: (Tutorial) Max Product</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#mutability">Mutability</a></li>
+  <ul>
+    <li><a href="index.html#questions-2">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q3">Q3: WWPD</a></li>
+      <li><a href="index.html#q4">Q4: (Optional) Mystery Reverse Environment Diagram</a></li>
+      <li><a href="index.html#q5">Q5: (Tutorial) Add This Many</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#trees">Trees</a></li>
+  <ul>
+    <li><a href="index.html#trees-implementation">Trees Implementation</a></li>
+    <li><a href="index.html#questions-3">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q6">Q6: (Warmup) Height</a></li>
+      <li><a href="index.html#q7">Q7: Maximum Path Sum</a></li>
+      <li><a href="index.html#q8">Q8: (Tutorial) Find Path</a></li>
+    </ul>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,669 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/lab.css">
+
+
+    <title>
+Lab 13 Solutions | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Lab 13 Solutions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="lab13.zip" class="label label-outline">lab13.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+<h2>Solution Files</h2>
+
+
+    
+<h1 id="topics">Topics</h1>
+
+
+<p>Consult this section if you need a refresher on the material for this lab. It's
+okay to skip directly to <a href="index.html#required-questions">the questions</a> and refer back
+here should you get stuck.</p>
+
+
+        <button id='toggle-1' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        BNF<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-1">
+
+<h2 id="bnf">BNF</h2>
+
+
+<p>Backus-Naur Form (BNF) is a syntax for describing a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a>. It was invented for describing the syntax of programming languages, and is still commonly used in documentation and language parsers. EBNF is a dialect of BNF which contains some convenient shorthands.</p>
+
+<p>An EBNF grammar contains symbols and a set of recursive production rules. In 61A, we are using the Python Lark library to write EBNF grammars, which has a few specific rules for grammar writing.</p>
+
+<p>There are two types of symbols:
+Non-terminal symbols can expand into non-terminals (including themselves) or terminals. In the Python Lark library, non-terminal symbols are always lowercase.
+Terminal symbols can be strings or regular expressions. In Lark, terminals are always uppercase.</p>
+
+<p>Consider these two production rules:</p>
+
+<pre><code>numbers: INTEGER | numbers &quot;,&quot; INTEGER
+INTEGER: /&#x2d;?\d+/</code></pre>
+
+
+
+<p>The symbol <code>numbers</code> is  a non-terminal with a recursive production rule. It corresponds to either an <code>INTEGER</code> terminal or to the <code>numbers</code> symbol (itself) plus a comma plus an <code>INTEGER</code> terminal. The <code>INTEGER</code> terminal is defined using a regular expression which matches any number of digits with an optional - sign in front.</p>
+
+<p>This grammar can describe strings like:</p>
+
+<pre><code>10
+10,&#x2d;11
+10,&#x2d;11,12</code></pre>
+
+
+
+<p>And so on, with any number of integers in front.</p>
+
+<p>A grammar should also specify a start symbol, which corresponds to the whole expression being parsed (or the whole sentence, for a spoken language).</p>
+
+<p>For the simple example of comma-separated numbers, the start symbol could just be the numbers terminal itself:</p>
+
+<pre><code>?start: numbers
+numbers: numbers &quot;,&quot; INTEGER | INTEGER
+INTEGER: /&#x2d;?\d+/</code></pre>
+
+
+
+<p>EBNF grammars can use these shorthand notations for specifying how many symbols to match:</p>
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>EBNF Notation</th>
+    <th>Meaning</th>
+    <th>Pure BNF Equivalent</th>
+  </tr>
+  <tr>
+    <td>item*</td>
+    <td>Zero or more items</td>
+    <td>items: &#124; items item</td>
+  </tr>
+  <tr>
+    <td>item+</td>
+    <td>One or more items</td>
+    <td>items: item &#124; items item</td>
+  </tr>
+  <tr>
+    <td>[item] item?</td>
+    <td>Optional item</td>
+    <td>optitem: &#124; item</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+<p>Lark also includes a few handy features:</p>
+
+<ul>
+  <li>You can specify tokens to complete ignore by using the ignore directive at the bottom of a grammar. For example, %ignore /\s+/ ignores all whitespace (tabs/spaces/new lines).</li>
+  <li>You can import pre-defined terminals for common types of data to match. For example, %import common.NUMBER imports a terminal that matches any integer or decimal number.</li>
+</ul>
+
+<p>Using all of that, here's an EBNF grammar that corresponds to the Calculator language:</p>
+
+<pre><code>start: calc_expr?
+calc_expr: NUMBER | calc_op
+calc_op: &quot;(&quot; OPERATOR calc_expr* &quot;)&quot;
+OPERATOR: &quot;+&quot; | &quot;&#x2d;&quot; | &quot;*&quot; | &quot;/&quot;
+
+%ignore /\s+/
+%import common.NUMBER</code></pre>
+
+
+
+<p>You can paste that into code.cs61a.org and then input Calculator expressions in the interpreter to see their parse trees. Try it!
+</div></p>
+
+<br>
+
+
+        <button id='toggle-2' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Regular Expressions<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-2">
+
+<h2 id="regular-expressions">Regular Expressions</h2>
+
+
+<p>Regular expressions are a way to describe sets of strings that meet certain criteria, and are incredibly useful for pattern matching.</p>
+
+<p>The simplest regular expression is one that matches a sequence of characters, like <code>aardvark</code> to match any "aardvark" substrings in a string.</p>
+
+<p>However, you typically want to look for more interesting patterns. We recommend using an online tool like <a href="https://regexr.com/">regexr.com</a> for trying out patterns, since you'll get instant feedback on the match results.</p>
+
+
+<h3 id="character-classes">Character classes</h3>
+
+
+<p>A character class makes it possible to search for any one of a set of characters. You can specify the set or use pre-defined sets.</p>
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>Class</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>[abc]</code></td>
+    <td>Matches a, b, or c</td>
+  </tr>
+  <tr>
+    <td><code>[a&#x2d;z]</code></td>
+    <td>Matches any character between a and z</td>
+  </tr>
+  <tr>
+    <td><code>[^A&#x2d;Z]</code></td>
+    <td>Matches any character that is not between A and Z.</td>
+  </tr>
+  <tr>
+    <td><code>\w</code></td>
+    <td>Matches any "word" character. Equivalent to <code>[A&#x2d;Za&#x2d;z0&#x2d;9_]</code></td>
+  </tr>
+  <tr>
+    <td><code>\d</code></td>
+    <td>Matches any digit. Equivalent to <code>[0&#x2d;9]</code>.</td>
+  </tr>
+  <tr>
+    <td><code>\s</code></td>
+    <td>Matches any whitespace character (spaces, tabs, line breaks).</td>
+  </tr>
+  <tr>
+    <td><code>.</code></td>
+    <td>Matches any character besides new line.</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+<p>Character classes can be combined, like in <code>[a&#x2d;zA&#x2d;Z0&#x2d;9]</code>.</p>
+
+
+<h3 id="combining-patterns">Combining patterns</h3>
+
+
+<p>There are multiple ways to combine patterns together in regular expressions.</p>
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>Combination</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>AB</code></td>
+    <td>A match for A followed immediately by one for B.  Example: <code>x[.,]y</code> matches "x.y" or "x,y"</td>
+  </tr>
+  <tr>
+    <td><code>A⎮B</code></td>
+    <td>Matches either A or B.  Example: <code>\d+⎮Inf</code> matches either a decimal numeral or "Inf"</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+<p>A pattern can be followed by one of these quantifiers to specify how many instances of the pattern can occur.</p>
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>Quantifier</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>*</code></td>
+    <td>0 or more occurrences of the preceding pattern.  Example: <code>[a&#x2d;z]*</code> matches any sequence of lower-case letters or the empty string.</td>
+  </tr>
+  <tr>
+    <td><code>+</code></td>
+    <td>1 or more occurrences of the preceding pattern.  Example: <code>\d+</code> matches any non-empty sequence of digits.</td>
+  </tr>
+  <tr>
+    <td><code>?</code></td>
+    <td>0 or 1 occurrences of the preceding pattern.  Example: <code>[&#x2d;+]?</code> matches an optional sign.</td>
+  </tr>
+  <tr>
+    <td><code>{1,3}</code></td>
+    <td>Matches the specified quantity of the preceding pattern. {1,3} will match from 1 to 3 instances. {3} will match exactly 3 instances. {3,} will match 3 or more instances.   Example: <code>\d{5,6}</code> matches either 5 or 6 digit numbers.</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+
+<h3 id="groups">Groups</h3>
+
+
+<p>Parentheses are used similarly as in arithmetic expressions, to create groups. For example, <code>(Mahna)+</code> matches strings with 1 or more "Mahna", like "MahnaMahna". Without the parentheses, <code>Mahna+</code> would match strings with "Mahn" followed by 1 or more "a" characters, like "Mahnaaaa".</p>
+
+
+<h3 id="anchors">Anchors</h3>
+
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>Anchor</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><code>^</code></td>
+    <td>Matches the beginning of a string.  Example: <code>^(I⎮You)</code> matches I or You at the start of a string.</td>
+  </tr>
+  <tr>
+    <td><code>$</code></td>
+    <td>Normally matches the empty string at the end of a string or just before a newline at the end of a string.  Example: `(.edu</td>
+    <td>.org</td>
+    <td>.com)$` matches .edu, .org, or .com at the end of a string.</td>
+  </tr>
+  <tr>
+    <td><code>\b</code></td>
+    <td>Matches a "word boundary", the beginning or end of a word.  Example: <code>s\b</code> matches s characters at the end of words.</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+
+<h3 id="special-characters">Special characters</h3>
+
+
+<p>The following special characters are used above to denote types of patterns:</p>
+
+<p><code>\ ( ) [ ] { } + * ? | $ ^ .</code></p>
+
+<p>That means if you actually want to match one of those characters, you have to <em>escape</em> it using a backslash. For example, <code>\(1\+3\)</code> matches "(1 + 3)".</p>
+
+
+<h3 id="using-regular-expressions-in-python">Using regular expressions in Python</h3>
+
+
+<p>Many programming languages have built-in functions for matching strings to regular expressions. We'll use the [Python re module] in 61A, but you can also use similar functionality in SQL, JavaScript, Excel, shell scripting, etc.</p>
+
+<p>The search method searches for a pattern anywhere in a string:</p>
+
+<p><code>re.search(r&quot;(Mahna)+&quot;, &quot;Mahna Mahna Ba Dee Bedebe&quot;)</code></p>
+
+<p>That method returns back a match object, which is considered truth-y in Python and can be inspected to find the matching strings.</p>
+
+<p>For more details, please consult the <a href="https://docs.python.org/3/library/re.html">re module documentation</a> or the <a href="https://docs.python.org/3/howto/regex.html">re tutorial</a>
+</div></p>
+
+
+<h1 id="bnf-2">BNF</h1>
+
+<h3 class="question" id="q1">Q1: EBNF Grammar</h3>
+
+<p>Consider this EBNF grammar for the Calculator language:</p>
+
+<pre><code>start: calc_expr
+
+?calc_expr: NUMBER | calc_op
+
+calc_op: &quot;(&quot; OPERATOR calc_expr* &quot;)&quot;
+
+OPERATOR: &quot;+&quot; | &quot;&#x2d;&quot; | &quot;*&quot; | &quot;/&quot;
+
+%ignore /\s+/
+%import common.NUMBER</code></pre>
+
+
+
+<p>Let's understand and modify the functionality of this BNF with a few questions.</p>
+
+<blockquote><p>Use Ok to test your knowledge by choosing the best answer for each of the following questions:</p>
+
+<pre><code>python3 ok &#x2d;q ebnf&#x2d;grammar&#x2d;wwpd &#x2d;u</code></pre></blockquote>
+
+</question>
+
+
+<h1 id="regular-expressions-2">Regular Expressions</h1>
+
+<h3 class="question" id="q2">Q2: Roman Numerals</h3>
+
+<p>Write a regular expression that finds any string of letters that resemble a Roman numeral
+and aren't part of another word. A Roman numeral is made up of the letters I, V, X, L, C, D, M
+and is at least one letter long.</p>
+
+<solution>
+
+<pre><code>import re
+
+def roman_numerals(text):
+    &quot;&quot;&quot;
+    Finds any string of letters that could be a Roman numeral
+    (made up of the letters I, V, X, L, C, D, M).
+
+    &gt;&gt;&gt; roman_numerals(&quot;Sir Richard IIV, can you tell Richard VI that Richard IV is on the phone?&quot;)
+    [&#x27;IIV&#x27;, &#x27;VI&#x27;, &#x27;IV&#x27;]
+    &gt;&gt;&gt; roman_numerals(&quot;My TODOs: I. Groceries II. Learn how to count in Roman IV. Profit&quot;)
+    [&#x27;I&#x27;, &#x27;II&#x27;, &#x27;IV&#x27;]
+    &gt;&gt;&gt; roman_numerals(&quot;I. Act 1 II. Act 2 III. Act 3 IV. Act 4 V. Act 5&quot;)
+    [&#x27;I&#x27;, &#x27;II&#x27;, &#x27;III&#x27;, &#x27;IV&#x27;, &#x27;V&#x27;]
+    &gt;&gt;&gt; roman_numerals(&quot;Let&#x27;s play Civ VII&quot;)
+    [&#x27;VII&#x27;]
+    &gt;&gt;&gt; roman_numerals(&quot;i love vi so much more than emacs.&quot;)
+    []
+    &gt;&gt;&gt; roman_numerals(&quot;she loves ALL editors equally.&quot;)
+    []
+    &quot;&quot;&quot;
+<div class="sol-highlight">    return re.findall(r&quot;\b([IVXLCDM]+)\b&quot;, text)</div></code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q roman_numerals</code></pre>
+
+<h3 class="question" id="q3">Q3: Calculator Ops</h3>
+
+<p>Write a regular expression that parses strings written
+in the 61A Calculator language and returns any expressions
+which have two numeric operands, leaving out the parentheses around them.</p>
+
+<solution>
+
+<pre><code>import re
+
+def calculator_ops(calc_str):
+    &quot;&quot;&quot;
+    Finds expressions from the Calculator language that have two
+    numeric operands and returns the expression without the parentheses.
+
+    &gt;&gt;&gt; calculator_ops(&quot;(* 2 4)&quot;)
+    [&#x27;* 2 4&#x27;]
+    &gt;&gt;&gt; calculator_ops(&quot;(+ (* 3 (+ (* 2 4) (+ 3 5))) (+ (&#x2d; 10 7) 6))&quot;)
+    [&#x27;* 2 4&#x27;, &#x27;+ 3 5&#x27;, &#x27;&#x2d; 10 7&#x27;]
+    &gt;&gt;&gt; calculator_ops(&quot;(* 2)&quot;)
+    []
+    &quot;&quot;&quot;
+<div class="sol-highlight">    # Since hyphen is a special character inside [], it must be escaped
+    return re.findall(r&quot;\(([+\&#x2d;/*]\s+\d+\s+\d+)\)&quot;, calc_str)
+
+    # Alternate solution: hyphen must be at either beginning or end inside []
+    return re.findall(r&quot;\(([&#x2d;+*/]\s+\d+\s+\d+)\)&quot;, calc_str)</div></code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q calculator_ops</code></pre>
+
+<h3 class="question" id="q4">Q4: CS Classes</h3>
+
+<p>On reddit.com, there is an /r/berkeley subreddit for discussions about everything UC Berkeley.
+However, there is such a large amount of CS-related posts that those posts are auto-tagged
+so that readers can choose to ignore them or read only them.</p>
+
+<p>Write a regular expression that finds strings that resemble a CS class-
+starting with "CS", followed by a number, and then optionally followed by "A", "B", or "C".
+Your search should be case insensitive, so both "CS61A" and "cs61a" would match.</p>
+
+<solution>
+
+<pre><code>import re
+
+def cs_classes(post):
+    &quot;&quot;&quot;
+    Returns strings that look like a Berkeley CS class,
+    starting with &quot;CS&quot;, followed by a number, optionally ending with A, B, or C.
+    Case insensitive.
+
+    &gt;&gt;&gt; cs_classes(&quot;Is it unreasonable to take CS61A, CS61B, CS70, and EE16A in the summer?&quot;)
+    True
+    &gt;&gt;&gt; cs_classes(&quot;how do I become a TA for cs61a? that job sounds so fun&quot;)
+    True
+    &gt;&gt;&gt; cs_classes(&quot;Can I take ECON101 as a CS major?&quot;)
+    False
+    &gt;&gt;&gt; cs_classes(&quot;Should I do the lab lites or regular labs in EE16A?&quot;)
+    False
+    &quot;&quot;&quot;
+<div class="sol-highlight">    return bool(re.search(r&quot;(cs|CS)\d+[a&#x2d;cA&#x2d;C]?&quot;, post))</div></code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q cs_classes</code></pre>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#topics">Topics</a></li>
+  <ul>
+    <li><a href="index.html#bnf">BNF</a></li>
+    <li><a href="index.html#regular-expressions">Regular Expressions</a></li>
+    <ul>
+      <li><a href="index.html#character-classes">Character classes</a></li>
+      <li><a href="index.html#combining-patterns">Combining patterns</a></li>
+      <li><a href="index.html#groups">Groups</a></li>
+      <li><a href="index.html#anchors">Anchors</a></li>
+      <li><a href="index.html#special-characters">Special characters</a></li>
+      <li><a href="index.html#using-regular-expressions-in-python">Using regular expressions in Python</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#bnf-2">BNF</a></li>
+  <ul>
+    <li><a href="index.html#q1">Q1: EBNF Grammar</a></li>
+  </ul>
+  <li><a href="index.html#regular-expressions-2">Regular Expressions</a></li>
+  <ul>
+    <li><a href="index.html#q2">Q2: Roman Numerals</a></li>
+    <li><a href="index.html#q3">Q3: Calculator Ops</a></li>
+    <li><a href="index.html#q4">Q4: CS Classes</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

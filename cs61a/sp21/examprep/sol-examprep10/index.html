@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Exam Prep 10 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Exam Prep 10: Regular Expressions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">examprep10.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+
+<p>Students from past semesters wanted more content and structured time to prepare for exams. Exam Prep sections are a way to solidify your understanding of the week's materials. The problems are typically designed to be a bridge between discussion/lab/homework difficulty and exam difficulty.</p>
+
+<p><strong>Reminder:</strong> There is nothing to turn in and there is no credit given for attending Exam Prep Sections.</p>
+
+<p>
+    We try to make these problems <strong>exam level</strong> , so you are not expected to be able to solve them coming straight from lecture without additional practice.
+    To get the most out of Exam Prep, we recommend you <strong>try these problems first on your own</strong>  before coming to the Exam Prep section, where we will explain how to solve these problems while giving tips and advice for the exam. Do not worry if you struggle with these problems, <strong>it is okay to struggle while learning</strong>.
+</p>
+<p>
+    You can work with anyone you want, including sharing solutions. We just ask you don't spoil the problems for anyone else in the class. Thanks!
+</p>
+<p>
+    You may only put code where there are underscores for the codewriting questions.
+</p>
+<p>
+    You can test your functions on their doctests by clicking the red test tube in the top right corner after clicking Run in 61A Code.
+    Passing the doctests is not necessarily enough to get the problem fully correct. You must fully solve the stated problem.
+</p>
+
+
+
+    
+
+
+<p>A good reference for these problems is <a href="../../lab/lab13/index.html#regular-expressions">lab 13 regex review</a></p>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q1">Q1: Phone Number Validator</h3>
+
+<b>Difficulty:</b> ⭐⭐
+
+<p>Create a regular expression that matches phone numbers that are 11, 10, or 7 numbers long.</p>
+
+<p>Phone numbers 7 numbers long have a group of 3 numbers followed by a group of 4 numbers, either separated by a space, a dash, or nothing.</p>
+
+<p>Examples: <code>123&#x2d;4567</code>, <code>1234567</code>, <code>123 4567</code></p>
+
+<p>Phone numbers 10 numbers long have a group of 3 numbers followed by a group of 3 numbers followed by a group of 4 numbers, either separated by a space, a dash, or nothing.</p>
+
+<p>Examples: <code>123&#x2d;456&#x2d;7890</code>, <code>1234567890</code>, <code>123 456 7890</code></p>
+
+<p>Phone numbers 11 numbers long have a group of 1 number followed by a group 3 numbers followed by a group of 3 numbers followed by a group of 4 numbers, either separated by a space, a dash, or nothing.</p>
+
+<p>Examples: <code>1&#x2d;123&#x2d;456&#x2d;7890</code>, <code>11234567890</code>, <code>1 123 456 7890</code></p>
+
+<p>It is fine if spacing/dashes/no space mix! So <code>123 456&#x2d;7890</code> is fine.</p>
+
+<p><strong>Note:</strong> The skeleton code is just a suggestion; feel free to use your own structure if you prefer.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="phone_number-input" style="height:504px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-phone_number-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-phone_number-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-phone_number-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('import re\ndef phone_number(string):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; phone_number(&quot;Song by Logic: 1&#x2d;800&#x2d;273&#x2d;8255&quot;)\n    True\n    &gt;&gt;&gt; phone_number(&quot;123 456 7890&quot;)\n    True\n    &gt;&gt;&gt; phone_number(&quot;1&quot; * 11) and phone_number(&quot;1&quot; * 10) and phone_number(&quot;1&quot; * 7)\n    True\n    &gt;&gt;&gt; phone_number(&quot;The secret numbers are 4, 8, 15, 16, 23 and 42 (from the TV show Lost)&quot;)\n    False\n    &gt;&gt;&gt; phone_number(&quot;Belphegor&#x27;s Prime is 1000000000000066600000000000001&quot;)\n    False\n    &gt;&gt;&gt; phone_number(&quot; 1122334455 &quot;)\n    True\n    &gt;&gt;&gt; phone_number(&quot; 11 22 33 44 55 &quot;)\n    False\n    &gt;&gt;&gt; phone_number(&quot;Tommy Tutone&#x27;s &#x27;80s hit 867&#x2d;5309 /Jenny&quot;)\n    True\n    &gt;&gt;&gt; phone_number(&quot;11111111&quot;) # 8 digits isn&#x27;t valid, has to be 11, 10, or 7\n    False\n    &quot;&quot;&quot;\n    return bool(re.search(_____________________________________________________))\n\n', "python", "phone_number-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>import re
+def phone_number(string):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; phone_number(&quot;Song by Logic: 1&#x2d;800&#x2d;273&#x2d;8255&quot;)
+    True
+    &gt;&gt;&gt; phone_number(&quot;123 456 7890&quot;)
+    True
+    &gt;&gt;&gt; phone_number(&quot;1&quot; * 11) and phone_number(&quot;1&quot; * 10) and phone_number(&quot;1&quot; * 7)
+    True
+    &gt;&gt;&gt; phone_number(&quot;The secret numbers are 4, 8, 15, 16, 23 and 42 (from the TV show Lost)&quot;)
+    False
+    &gt;&gt;&gt; phone_number(&quot;Belphegor&#x27;s Prime is 1000000000000066600000000000001&quot;)
+    False
+    &gt;&gt;&gt; phone_number(&quot; 1122334455 &quot;)
+    True
+    &gt;&gt;&gt; phone_number(&quot; 11 22 33 44 55 &quot;)
+    False
+    &gt;&gt;&gt; phone_number(&quot;Tommy Tutone&#x27;s &#x27;80s hit 867&#x2d;5309 /Jenny&quot;)
+    True
+    &gt;&gt;&gt; phone_number(&quot;11111111&quot;) # 8 digits isn&#x27;t valid, has to be 11, 10, or 7
+    False
+    &quot;&quot;&quot;
+<div class="sol-highlight">    return bool(re.search(r&quot;\b(\d[ &#x2d;]?(\d{3})|(\d{3})?)[ &#x2d;]?\d{3}[ &#x2d;]?\d{4}\b&quot;, string))
+    return bool(re.search(r&quot;\b(((\d[ &#x2d;]?)(\d{3}[ &#x2d;]?))?|(\d{3}[ &#x2d;]?))?(\d{3}[ &#x2d;]?)(\d{4})\b&quot;, string))    
+    return bool(re.search(r&quot;\b((\d[&#x2d; ]?)?\d{3}[&#x2d; ]?)?\d{3}[&#x2d; ]?\d{4}\b&quot;, string))</div></code></pre>
+
+            </div>
+        
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q2">Q2: Email Domain Validator</h3>
+
+<p><strong>Difficulty</strong>: ⭐⭐</p>
+
+<p>Create a regular expression that makes sure a given string <code>email</code> is a valid email address and that its domain name is in the provided list of <code>domains</code>.</p>
+
+<p>An email address is valid if it contains letters, number, or underscores, followed by an @ symbol, then a domain.</p>
+
+<p>All domains will have a 3 letter extension following the period.</p>
+
+<p><strong>Hint</strong>: For this problem, you will have to make a regex pattern based on the inputs <code>domains</code>. A for loop can help with that.</p>
+
+<p><strong>Extra</strong>: There is a particularly elegant solution that utilizes <a href="https://python-reference.readthedocs.io/en/latest/docs/str/join.html">join</a> and <a href="https://python-reference.readthedocs.io/en/latest/docs/str/replace.html">replace</a></p>
+
+<p><strong>Note:</strong> The skeleton code is just a suggestion; feel free to use your own structure if you prefer.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="regex-email-input" style="height:558px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-regex-email-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-regex-email-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-regex-email-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('import re\ndef email_validator(email, domains):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; email_validator(&quot;oski@berkeley.edu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])\n    True\n    &gt;&gt;&gt; email_validator(&quot;oski@gmail.com&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])\n    True\n    &gt;&gt;&gt; email_validator(&quot;oski@berkeley.com&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])\n    False\n    &gt;&gt;&gt; email_validator(&quot;oski@berkeley.edu&quot;, [&quot;yahoo.com&quot;])\n    False\n    &gt;&gt;&gt; email_validator(&quot;xX123_iii_OSKI_iii_123Xx@berkeley.edu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])\n    True\n    &gt;&gt;&gt; email_validator(&quot;oski@oski@berkeley.edu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])\n    False\n    &gt;&gt;&gt; email_validator(&quot;oski@berkeleysedu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])\n    False\n    &quot;&quot;&quot;\n    pattern = _____________________\n    for _____________________:\n        &#x27;Use as many lines as necessary&#x27;\n    return bool(re.search(pattern, email))\n\n', "python", "regex-email-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>import re
+def email_validator(email, domains):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; email_validator(&quot;oski@berkeley.edu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])
+    True
+    &gt;&gt;&gt; email_validator(&quot;oski@gmail.com&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])
+    True
+    &gt;&gt;&gt; email_validator(&quot;oski@berkeley.com&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])
+    False
+    &gt;&gt;&gt; email_validator(&quot;oski@berkeley.edu&quot;, [&quot;yahoo.com&quot;])
+    False
+    &gt;&gt;&gt; email_validator(&quot;xX123_iii_OSKI_iii_123Xx@berkeley.edu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])
+    True
+    &gt;&gt;&gt; email_validator(&quot;oski@oski@berkeley.edu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])
+    False
+    &gt;&gt;&gt; email_validator(&quot;oski@berkeleysedu&quot;, [&quot;berkeley.edu&quot;, &quot;gmail.com&quot;])
+    False
+    &quot;&quot;&quot;
+<div class="sol-highlight">    pattern = r&quot;^\w+@(&quot;</div><div class="sol-highlight">    for domain in domains:</div><div class="sol-highlight">        if domain == domains[&#x2d;1]:
+            pattern += domain[:&#x2d;4] + r&quot;\.&quot; + domain[&#x2d;3:] + r&quot;)$&quot;
+        else:
+            pattern += domain[:&#x2d;4] + r&quot;\.&quot; + domain[&#x2d;3:] + &quot;|&quot;</div>    return bool(re.search(pattern, email))
+<div class="sol-highlight">    # Alternate, elegant solution
+    domains_list = &quot;|&quot;.join([domain.replace(&quot;.&quot;, &quot;\.&quot;) for domain in domains])
+    return bool(re.search(rf&quot;^\w+@({domains_list})$&quot;, email))</div></code></pre>
+
+            </div>
+        
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q3">Q3: Reg Extreme</h3>
+
+<b>Difficulty:</b> ⭐⭐⭐
+
+<p>Regex is too tricky! Create a function <code>reg_extreme</code> that solves regex by receiving strings that should match and shouldn't match and a valid regex pattern.</p>
+
+<p>First, create the generator <code>all_patterns</code> which generates all regex patterns of length 0 to <code>n</code>.</p>
+
+<p>For efficiency sake, don't generate patterns that have explicit letters, but do generate patterns that have numbers and all special symbols. Make sure to include <code>\d</code>, <code>\w</code>, <code>\b</code>, and <code>\s</code>, as well as escaped special symbols like <code>\\</code>, <code>\.</code>, etc. These are all considered 1 symbol, so <code>\d\d\d\d\d</code> is length 5.</p>
+
+<p>You would need to generate <code>12345</code> as a length 5 pattern, but not <code>abcde</code>, since this problem doesn't ask for explicit letters in the generated patterns.</p>
+
+<p>Then complete <code>reg_extreme</code> which returns a pattern that matches all strings in <code>matches</code>, but none of the strings in <code>no_matches</code>.</p>
+
+<p><strong>Hint:</strong> Think about how to generate all patterns of length <code>n</code> given all patterns of length <code>n&#x2d;1</code></p>
+
+<p><strong>Hint:</strong> How can a try/except block help?</p>
+
+<p><strong>Note:</strong> In case the red test tube icon causes tests to time out, use the interpreter to test with <code>test(all_patterns)</code> and <code>test(reg_extreme)</code>. Doing things locally is more efficient, and I was able to find patterns length 5/6 as opposed to only 2/3 on code.cs61a.org.</p>
+
+<p><strong>Note:</strong> The skeleton code is just a suggestion; feel free to use your own structure if you prefer.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="regextreme-input" style="height:846px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-regextreme-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-regextreme-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-regextreme-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('import re\ndef all_patterns(n):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; &quot;12&quot; in all_patterns(2)\n    True\n    &gt;&gt;&gt; r&quot;\\d\\d&quot; in all_patterns(2)\n    True\n    &gt;&gt;&gt; &quot;1.&quot; in all_patterns(2)\n    True\n    &gt;&gt;&gt; &quot;1.&quot; in all_patterns(1)\n    False\n    &gt;&gt;&gt; &quot;a&quot; in all_patterns(1)\n    False\n    &gt;&gt;&gt; &quot;.*&quot; in all_patterns(3)\n    True\n    &quot;&quot;&quot;\n    numbers = list(&quot;0123456789&quot;)\n    special = list(r&quot;\\()[]{}+*?|$^.&quot;)\n    rest = _________________________\n    everything = [&quot;&quot;] + numbers + special + rest\n    if _________________________:\n        _________________________\n    else:\n        &#x27;Use as many lines as necessary&#x27;\n\ndef reg_extreme(matches, no_matches, n=3):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; pattern = reg_extreme([&quot;11&quot;, &quot;12&quot;, &quot;13&quot;], [&quot;1&quot;, &quot;a&quot;])\n    &gt;&gt;&gt; bool(re.search(pattern, &quot;11&quot;))\n    True\n    &gt;&gt;&gt; bool(re.search(pattern, &quot;12&quot;))\n    True\n    &gt;&gt;&gt; bool(re.search(pattern, &quot;a&quot;))\n    False\n    &quot;&quot;&quot;\n    for _____________________:\n        &#x27;Use as many lines as necessary&#x27;\n\n', "python", "regextreme-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>import re
+def all_patterns(n):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; &quot;12&quot; in all_patterns(2)
+    True
+    &gt;&gt;&gt; r&quot;\d\d&quot; in all_patterns(2)
+    True
+    &gt;&gt;&gt; &quot;1.&quot; in all_patterns(2)
+    True
+    &gt;&gt;&gt; &quot;1.&quot; in all_patterns(1)
+    False
+    &gt;&gt;&gt; &quot;a&quot; in all_patterns(1)
+    False
+    &gt;&gt;&gt; &quot;.*&quot; in all_patterns(3)
+    True
+    &quot;&quot;&quot;
+    numbers = list(&quot;0123456789&quot;)
+    special = list(r&quot;\()[]{}+*?|$^.&quot;)
+<div class="sol-highlight">    rest = [r&quot;\b&quot;, r&quot;\d&quot;, r&quot;\w&quot;, r&quot;\s&quot;] + [&quot;\\&quot; + s for s in special]</div>    everything = [&quot;&quot;] + numbers + special + rest
+<div class="sol-highlight">    if n == 1:</div><div class="sol-highlight">        yield from everything</div>    else:
+<div class="sol-highlight">        for pattern in all_patterns(n&#x2d;1):
+            for char in everything:
+                yield char + pattern</div>
+def reg_extreme(matches, no_matches, n=3):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; pattern = reg_extreme([&quot;11&quot;, &quot;12&quot;, &quot;13&quot;], [&quot;1&quot;, &quot;a&quot;])
+    &gt;&gt;&gt; bool(re.search(pattern, &quot;11&quot;))
+    True
+    &gt;&gt;&gt; bool(re.search(pattern, &quot;12&quot;))
+    True
+    &gt;&gt;&gt; bool(re.search(pattern, &quot;a&quot;))
+    False
+    &quot;&quot;&quot;
+<div class="sol-highlight">    for pattern in all_patterns(n):</div><div class="sol-highlight">        try:
+            check = all([re.search(pattern, match) for match in matches]) and not any([re.search(pattern, no_match) for no_match in no_matches])
+            if check:
+                return pattern
+        except:
+            pass</div></code></pre>
+
+            </div>
+        
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#q1">Q1: Phone Number Validator</a></li>
+  <li><a href="index.html#q2">Q2: Email Domain Validator</a></li>
+  <li><a href="index.html#q3">Q3: Reg Extreme</a></li>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

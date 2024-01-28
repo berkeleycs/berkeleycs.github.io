@@ -1,0 +1,1026 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Object Oriented Design Principles</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reset.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/theme/simple.css" id="theme">
+		<link rel="stylesheet" href="../css/mono-blue.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+		<style>
+			.reveal {
+				font-family: "Work Sans", sans-serif;
+			}
+
+			.reveal .slides section {
+				text-align: left;
+				font-size: smaller;
+			}
+
+			.reveal pre {
+				background-color: #f5f5f5;
+				width: 100%;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-shadow: none;
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+				font-family: "Roboto", sans-serif;
+				color: #0072c1;
+			}
+
+			.reveal section.heading-only {
+				text-align:center;
+				padding-top:20%;
+			}
+
+            .column .no-code-badge .code-badge {
+                display: none;
+            }
+
+            .code-badge-language {
+                display: none;
+            }
+
+			.python-tutor-link {
+				font-size: smaller;
+			}
+
+			.python-tutor-link:before {
+				content: "";
+				display: block;
+				background: url("http://pythontutor.com/favicon.ico") no-repeat;
+				width: 48px;
+				height: 48px;
+				float: left;
+				margin: 0 6px 0 0;
+			}
+
+			.reveal h3 {
+				margin-bottom: 40px;
+			}
+
+            .smaller {
+                font-size: smaller;
+            }
+
+            code {
+                padding: 2px 4px;
+                font-size: 90%;
+                color: #0072c1;
+                background-color: #f9f2f4;
+                border-radius: 4px;
+            }
+
+            p.padded {
+                margin-top: 32px;
+            }
+
+            section .row {
+                display: flex;
+            }
+
+            section .column {
+                flex: 48%;
+                margin: 10px;
+            }
+
+			@media print
+			{
+				.no-print, .no-print *
+				{
+					display: none !important;
+				}
+			}
+
+
+            .regex-input {
+                border:1px solid rgb(204, 204, 204);
+                background: rgb(245, 245, 245);
+                padding: 8px;
+            }
+
+            .regex-input input {
+                font-size: inherit;
+            }
+
+            .regex-input input[type=text]:invalid {
+                background-color: pink;
+            }
+
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section class="heading-only" style="padding-top:5%">
+                    <h1>Object-Oriented Programming</h1>
+                    <h2>Review and Design</h2>
+
+					<div class="no-print" style="text-align: left; margin-top: 100px; font-size: 70%;">
+						Tips for navigating the slides:
+						<ul>
+							<li>Press O or Escape for overview mode.</li>
+							<li>Visit <a href="37-OOP_Review_+_Design.html%3Fprint-pdf.html" target="_blank">this link</a> for a nice printable version</li>
+							<li>Press the copy icon on the upper right of code blocks to copy the code</li>
+						</ul>
+					</div>
+				</section>
+
+
+
+
+                <section>
+                    <h3>Object-Oriented Programming</h3>
+
+                    <ul style="font-size:1.0em;">
+                        <li><strong>Encapsulation</strong>:<br> Classes bundle together related data and functions.
+                        <li><strong>Composition</strong>:<br> Objects may contain other objects.
+                        <li><strong>Inheritance</strong>:<br> Objects may inherit behavior from ancestor classes.
+                        <li><strong>Polymorphism</strong>:<br> A function can run on objects of different classes.
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>Encapsulation</h3>
+
+                    <p>Bundling together related data and behavior:</p>
+
+                    <pre style="font-size:0.4em"><code data-trim data-noescape class="python">
+                    class Tree:
+                        """A tree."""
+                        def __init__(self, label, branches=[]):
+                            self.label = label
+                            self.branches = list(branches)
+
+                        def __repr__(self):
+                            if self.branches:
+                                branch_str = ', ' + repr(self.branches)
+                            else:
+                                branch_str = ''
+                            return 'Tree({0}{1})'.format(self.label, branch_str)
+
+                        def __str__(self):
+                            return '\n'.join(self.indented())
+
+                        def indented(self):
+                            lines = []
+                            for b in self.branches:
+                                for line in b.indented():
+                                    lines.append('  ' + line)
+                            return [str(self.label)] + lines
+
+                        def is_leaf(self):
+                            return not self.branches
+                    </code></pre>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    tree = Tree(1, [Tree(1), Tree(2, [Tree(1, [Tree(1)])])])
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Composition</h3>
+
+                    <p>Objects may contain other objects.</p>
+
+                    <p class="smaller">Definitely true for recursive objects:</p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    tree = Tree(1, [Tree(1), Tree(2, [Tree(1, [Tree(1)])])])
+                    print(tree.label)
+                    for subtree in tree.branches:
+                        print(subtree.label)
+                    </code></pre>
+
+                    <p class="smaller">But also true for other objects:</p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    class EmissionsTracker:
+                        def __init__(self, sources=None):
+                            self.sources = sources or []
+
+                        def add_sources(self, sources):
+                            self.sources.extend(sources_to_add)
+
+                    tracker = EmissionsTracker()
+                    pp1 = EmissionSource("Anthracite Coal", 2602, 276, 40)
+                    pp2 = EmissionSource("Lignite Coal", 1389, 156, 23)
+                    tracker.add_sources([pp1, pp2])
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Inheritance</h3>
+
+                    <p>Objects inherit behavior from ancestor classes.</p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    class Assignment:
+                        def __init__(self, title, deadline):
+                            self.title = title
+                            self.deadline = deadline
+
+                        def __str__(self):
+                            return f"{self.title} due {self.deadline}"
+
+                    class Project(Assignment):
+                        def __init__(self, title, deadline, checkpoints):
+                            super().__init__(title, deadline)
+                            self.checkpoints = checkpoints
+
+                        def __str__(self):
+                            return f"{super().__str__()} with checkpoints on {', '.join(self.checkpoints)}"
+                    </code></pre>
+
+                    <pre style="font-size:0.7em"><code data-trim data-noescape class="python">
+                    lab13 = Assignment("Lab 13", "Apr 27")
+                    scheme = Project("Scheme", "Apr 20", ["Apr 13", "Apr 16"])
+                    print(lab13)
+                    print(scheme)
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Polymorphism #1</h3>
+
+                    <p>A function can run on objects of different classes.</p>
+
+                    <br>
+                    <p class="smaller">Easy way: the function runs on any objects that inherit from a particular base class.</p>
+                    <pre style="font-size:0.55em"><code data-trim data-noescape class="python">
+                    class Place:
+                        def add_insect(self, insect):
+                            insect.add_to(self)
+
+                    class Insect:
+                        def add_to(self, place):
+                            self.place = place
+
+                    class Bee(Insect):
+                        pass
+
+                    class ThrowerAnt(Insect):
+                        pass
+
+                    place = Place()
+                    place.add_insect(Bee())
+                    place.add_insect(ThrowerAnt())
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Polymorphism #2 (🐤 Duck typing)</h3>
+
+                    <p>More flexible: a generic function runs on any object that
+                        behaves in a particular way.</p>
+
+                    <p class="smaller">e.g. functions that run on any iterable (objects with <code>__iter__</code>)</p>
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    def print_list(iterable):
+                        item_num = 1
+                        for value in iterable:
+                            print(f"{item_num}. {value}")
+                            item_num += 1
+
+                    print_list(["A", "B", "C"])
+                    print_list([x * 3 for x in range(0, 5)])
+                    </code></pre>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    class ShoppingList:
+                        def __init__(self, store, items):
+                            self.store = store
+                            self.items = items
+
+                        def __iter__(self):
+                            for item in self.items:
+                                yield item
+
+                    shopping_list = ShoppingList("ZeroGrocery", ["Apples", "Tortillas"])
+                    print_list(shopping_list)
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Polymorphism #3 (Type coercion)</h3>
+
+                    <p class="smaller">More work: a function converts arguments to the necessary type.</p>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    def int_smash(num1, num2):
+                        """Smashes together positive numbers NUM1 and NUM2, creating
+                        a number with digits of NUM1 followed by digits of NUM2.
+                        Non-integers will be converted to integers.
+                        >>> int_smash(51, 34)
+                        5134
+                        >>> int_smash(51.56, 34.72)
+                        5134
+                        """
+                        int1 = int(num1)
+                        int2 = int(num2)
+                        num_digits = count_digits(int2)
+                        while int1 > 0:
+                            int2 += ( (int1 % 10) * pow(10, num_digits) )
+                            num_digits += 1
+                            int1 = int1 // 10
+                        return int2
+                    </code></pre>
+
+                    <pre style="font-size:0.5em;"><code data-trim data-noescape class="python">
+                    def count_digits(num):
+                        num_digits = 0
+                        while num > 0:
+                            num_digits += 1
+                            num = num // 10
+                        return num_digits
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Polymorphism #3 (Type coercion)</h3>
+
+                    <p class="smaller">Another approach to <code>int_smash</code>,
+                    with even more type coercion:</p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    def int_smash(num1, num2):
+                        """Smashes together positive numbers NUM1 and NUM2, creating
+                        a number with digits of NUM1 followed by digits of NUM2.
+                        Non-integers will be converted to integers.
+                        >>> int_smash(51, 34)
+                        5134
+                        >>> int_smash(51.56, 34.72)
+                        5134
+                        >>> int_smash('51', '34')
+                        5134
+                        >>> int_smash(0x33, 0x22)
+                        5134
+                        >>> int_smash(0b110011, 0b100010)
+                        5134
+                        """
+                        return int(num1) * 10 ** len(str(int(num2))) + int(num2)
+                    </code></pre>
+                </section>
+
+
+                <section>
+                    <h3>Polymorphism #4 (Type dispatching)</h3>
+
+                    <p class="smaller">More complexity: the function inspects the argument type to select the appropriate behavior.</p>
+                    <pre style="font-size:0.6em;"><code data-trim data-noescape class="python">
+                    def print_obj(obj):
+                        if hasattr(obj, "__iter__"):
+                            for item in obj:
+                                print(item)
+                        else:
+                            print(obj)
+
+                    print_obj([1, 2, 3])
+                    print_obj(123)
+                    </code></pre>
+
+                    <pre style="font-size:0.6em;"><code data-trim data-noescape class="python">
+                    def display_first(data):
+                        if isinstance(data, Link):
+                            print(data.first)
+                        elif isinstance(data, Tree):
+                            print(data.label)
+                        else:
+                            raise Error("Unsupported data type!")
+
+                    display_first(Link(1, Link(2, Link(3))))
+                    display_first(Tree("A", [Tree("B"), Tree("C")]))
+                    </code></pre>
+
+                </section>
+
+                <section class="heading-only">
+                    <h2>Design Principles</h2>
+                </section>
+
+                <section>
+                    <h2>⚠️ Warning ⚠️</h2>
+
+                    <p>The following slides are not 100% objective!</p>
+
+                    <p>My own design choices may not be your design choices,
+                        or the design choices of your colleagues.</p>
+
+                    <img src="https://i.imgur.com/5uqpTz1.png" alt="Twitter poll, Is programming more Art/Math/Science/Architecture? Architecture is top result, then Art, then Science, then Math.">
+
+                </section>
+
+                <section class="heading-only">
+                    <h2>Easy Construction</h2>
+                </section>
+
+                <section>
+                    <h2>Easy Construction</h2>
+
+                    <br>
+                    <pre style="font-size:1em"><code data-trim data-noescape class="python">
+                    lnk = Link(1, Link(2, Link(3, Link(4))))
+                    </code></pre>
+
+                    vs.
+
+                    <pre style="font-size:1em"><code data-trim data-noescape class="python">
+                    lnk = LinkedList([1, 2, 3, 4])
+                    </code></pre>
+
+                    <br>
+                    <p>🤷🏽‍♀️  Which do you prefer? 1️⃣ or 2️⃣ ?</p>
+
+                </section>
+
+
+                <section>
+                    <h2>A LinkedList class</h2>
+
+                    <pre style="font-size:0.65em"><code data-trim data-noescape class="python">
+                    class LinkedList:
+
+                        def __init__(self, values):
+                            self.head = link = Link(None)
+                            for value in values:
+                                link.rest = Link(value)
+                                link = link.rest
+
+                        def __iter__(self):
+                            link = self.head.rest
+                            while link is not Link.empty:
+                                yield link
+                                link = link.rest
+                    </code></pre>
+
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="python">
+                    linked_list = LinkedList([1, 2, 3, 4])
+                    for link in linked_list:
+                        print(link.first)
+                    </code></pre>
+
+                </section>
+
+                <section class="heading-only">
+                    <h2>Set boundaries</h2>
+                </section>
+
+                <section>
+                    <h3>Without boundaries 😿</h3>
+
+                    <pre style="font-size:0.55em"><code data-trim data-noescape class="python">
+                    class Insect:
+                        def __init__(self):
+                            self.health = 100
+                            self.perished = False
+
+                        def reduce_health(self, amount):
+                            self.health -= amount
+                            if self.health <= 0:
+                                print("Ohno! I have perished.")
+                                self.perished = True
+
+                    class Ant(Insect):
+                        pass
+
+                    class BumbleBee(Insect):
+                        def avenge_bee_deaths(self, ant):
+                            ant.health -= 1000
+                    </code></pre>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    bee = BumbleBee()
+                    ant = Ant()
+                    bee.avenge_bee_deaths(ant)
+                    </code></pre>
+
+                    <p class="smaller">🙊  Oops! Did we just break the game?!</p>
+
+                </section>
+
+
+                <section>
+                    <h3>With boundaries 😺</h3>
+
+                    <pre style="font-size:0.55em"><code data-trim data-noescape class="python">
+                    class Insect:
+                        def __init__(self):
+                            self.__health = 100
+                            self.__perished = False
+
+                        def reduce_health(self, amount):
+                            self.__health -= amount
+                            if self.__health <= 0:
+                                print("Ohno! I have perished.")
+                                self.__perished = True
+
+                    class Ant(Insect):
+                        pass
+
+                    class BumbleBee(Insect):
+                        def avenge_bee_deaths(self, ant):
+                            # ant.__health -= 1000 # 🚫 Error!
+                            ant.reduce_health(1000)
+                    </code></pre>
+
+                    <p class="smaller">Double underscores prevent accidental access
+                        but they can't prevent any access at all,
+                        since the attribute is still available at
+                        <code>_classname__attrname</code>.
+                    </p>
+
+                </section>
+
+                <section class="heading-only">
+                    <h2>Check your assumptions</h2>
+                </section>
+
+                <section>
+                    <h3>A Person class</h3>
+
+                    <pre style="font-size:0.65em"><code data-trim data-noescape class="python">
+                    class Person:
+
+                        def __init__(self, first_name, middle_name, last_name):
+                            self.first_name = first_name
+                            self.middle_name = middle_name
+                            self.last_name = last_name
+
+                        def __str__(self):
+                            return f"{self.last_name}, {self.first_name} {self.middle_name[0]}."
+                    </code></pre>
+
+                    <p>🤔  What assumptions does this class make about names? What are examples of names that won't work?</p>
+
+                </section>
+
+
+                <section>
+                    <h3>Check assumptions about names</h3>
+
+                    <pre style="font-size:0.7em"><code data-trim data-noescape class="python">
+                    p = Person("Ugo", "Tiago Marcondes", "Leal Chaves")
+                    print(p) # Leal Chaves, Ugo T.
+                    p = Person("Vincent", "van", "Gogh")
+                    print(p) # Gogh, Vincent v.
+                    p = Person("Jerome", "K", "Jerome")
+                    print(p) # Jerome, Jerome K.
+                    p = Person("Stephie", "", "Cha")
+                    print(p) # 🚫 Error!
+                    p = Person("Suharto", "", "")
+                    print(p) # 🚫 Error!
+                    p = Person("鄭", "", "根")
+                    print(p) # 🚫 Error!
+                    </code></pre>
+
+                    <p class="smaller">Some names can't be written on a computer at all. Only a fraction of Chinese logograms
+                        are represented in the Unicode code points.</p>
+
+                    <p class="smaller"><a href="https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/" target="_blank">
+                        Falsehoods Programmers Believe About Names</a></p>
+
+                </section>
+
+                <section>
+                    <h3>After: Person</h3>
+
+                    <p class="smaller">Here's just one way to refactor. However, this refactor
+                        needs to be compatible with how the system gets the data
+                        about each person, so a UI change may also be needed.</p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    class Person:
+
+                        def __init__(self, family_name, given_name, family_first=True):
+                            self.family_name = family_name
+                            self.given_name = given_name
+                            self.family_first = family_first
+
+                        def __str__(self):
+                            if self.family_first:
+                                return f"{self.family_name}, {self.given_name}"
+                            else:
+                                return f"{self.given_name} {self.family_name}"
+                    </code></pre>
+
+                    <ul class="smaller">
+                        <li><a href="https://shinesolutions.com/2018/01/08/falsehoods-programmers-believe-about-names-with-examples/" target="_blank">
+                        Falsehoods Programmers Believe About Names</a></li>
+                        <li>
+                            <a href="https://www.w3.org/International/questions/qa-personal-names">W3C: Personal Names Around the World</a>
+                        </li>
+                        <li><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3833658">There is No Such Thing as a "Legal Name": A Strange, Shared Delusion</a></li>
+                    </p>
+
+                </section>
+
+
+                <section>
+                    <h3>Student/Parent classes</h3>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    class Student(Person):
+
+                        def __init__(self, family_name, given_name, mother, father):
+                            super().__init__(self)
+                            self.mother = mother
+                            self.father = father
+                            self.address = mother.address or father.address
+
+                        def __str__(self):
+                            return f"{super()} (child of {self.mother} and {self.father}"
+
+                    class Parent(Person):
+
+                        def __init__(self, family_name, given_name, address):
+                            self.address = address
+                    </code></pre>
+
+                    <p>🤔  What assumptions does this class make about parent/child relations? What are examples of IRL situations that won't work?</p>
+
+                </section>
+
+
+                <section>
+                    <h3>Check assumptions about families</h3>
+
+                    <ul>
+                        <li>What if they have two mums or two dads?
+                        <li>What if they have less than 2 parents or more than 2 parents?
+                        <li>What if the student lives with the other parent?
+                        <li>What if the student doesn't live with either parent?
+                        <li>What if the student has an additional guardian that isn't a parent?
+                    </ul>
+
+                    <p><a href="https://shkspr.mobi/blog/2017/03/falsehoods-programmers-believe-about-families/" target="_blank">
+                        Falsehoods Programmers Believe About Families</a></p>
+
+                </section>
+
+                <section>
+                    <h3>After: Student/Parent</h3>
+
+                    <p>Here's one refactor that is certainly not perfect.</p>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                        class Student(Person):
+
+                            def __init__(self, family_name, given_name, guardians, address):
+                                super().__init__(self)
+                                self.guardians = guardians
+                                self.address = address
+                                # What could go wrong below?
+                                self.lives_with_guardian = False
+                                for guardian in guardians:
+                                    if guardian.address == address:
+                                        self.lives_with_guardian = True
+
+                            def __str__(self):
+                                return f"{super()} (in care of {"".join(self.guardians)}"
+
+                        class Guardian(Person):
+
+                            def __init__(self, family_name, given_name, address):
+                                self.address = address
+                        </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Address class</h3>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    class Address:
+
+                        def __init__(self, street_num, street, apt_or_suite, city, state, zip, country):
+                            assert street_num > 0
+                            self.street_num = street_num
+                            self.street = street
+                            self.apt_or_suite = apt_or_suite
+                            self.city = city
+                            self.zip = zip
+                            self.country = country
+
+                        def __str__(self):
+                            return f"{self.street_num} {self.street}, {self.apt_or_suite}, \
+                                {self.city}, {self.state}, {self.country} {self.zip}"
+                    </code></pre>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    a = Address(1074, "Live Oaks Blvd", "Apt 1", "Pasadena", "CA", "13078", "US")
+                    print(a)
+                    a = Address(98, "Shirley Street", "", "Pimpama", "QLD", "4209", "Australia")
+                    print(a)
+                    </code></pre>
+
+                    <p class="smaller">🤔  What assumptions does this class make about address formats? What are examples of addresses that won't work?</p>
+
+                </section>
+
+
+                <section>
+                    <h3>Check assumptions about addresses</h3>
+
+                    <pre style="font-size:0.65em"><code data-trim data-noescape class="python">
+                    # No state, city is same as country
+                    a = Address(35, "Mandalay Road", "# 13–37 Mandalay Towers",]
+                        "Singapore", "", "308215", "Singapore")
+                    print(a)
+
+                    # No state or postcode
+                    a = Address(150, "Kennedy Road", "Flat 25, 12/F, Acacia Building",
+                        "Wan Chai", "", "", "Hong Kong Island")
+                    print(a)
+
+                    # Should actually be written as "101-3485, rue de la Montagne"
+                    a = Address(3485, "rue de la Montagne", "101",
+                        "Montréal", "Québec", "H3G 2A6", "Canada")
+                    print(a)
+                    </code></pre>
+
+                    <p class="smaller">There are also some addresses we can't construct at all!</p>
+
+                    <p><a href="https://www.mjt.me.uk/posts/falsehoods-programmers-believe-about-addresses/" target="_blank">
+                        Falsehoods Programmers Believe About Addresses</a></p>
+
+                </section>
+
+
+                <section>
+                    <h3>After: Address</h3>
+
+                    <p>Still imperfect, but it's a start.</p>
+
+                    <pre style="font-size:0.55em"><code data-trim data-noescape class="python">
+                        class Address:
+
+                        def __init__(self, line1, line2, line3, city_or_town,
+                                     state_or_region, zip_or_postcode, country):
+                            self.line1 = line1
+                            self.line2 = line2
+                            self.line3 = line3
+                            self.country = country
+                            self.state_or_region = state_or_region
+                            self.city_or_town = city_or_town
+                            self.zip_or_postcode = zip_or_postcode
+
+                        def __str__(self):
+                            lines = [line for line in [self.line1, self.line2, self.line3] if line]
+                            newline = '\n'
+                            return (f"{newline.join(lines)}\n"
+                                f"{', '.join([self.city_or_town, self.state_or_region])}\n"
+                                f"{', '.join([self.country, self.zip_or_postcode])}")
+                    </code></pre>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    a = Address("101-3485, rue de la Montagne", None, None,
+                        "Montréal", "Québec", "H3G 2A6", "Canada")
+                    print(a)
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>More ways to check assumptions</h3>
+
+                    <p><a href="https://github.com/kdeldycke/awesome-falsehood" target="_blank">All the falsehoods programmers believe in!</a></p>
+
+                    <p>General rule: The less your program has to assume about the real world, the better!</p>
+
+                </section>
+
+                <section class="heading-only">
+                    <h2>Design for Reuse</h2>
+                </section>
+
+                <section>
+                    <h3>Before: UCBMFET</h3>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    class UCBMFET:
+                        num_members = 0
+
+                        def __init__(self, name):
+                            self.name = name
+                            self.posts = []
+                            self.members = []
+
+                        def add_member(self, name):
+                            self.members.append(name)
+                            UCBMFET.num_members += 1
+
+                        def post_in_UCBMFET(self, title_of_post):
+                            self.posts.append(title_of_post)
+                    </code></pre>
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    page = UCBMFET("UCB Memes For Edgy Teens")
+                    page.add_member("Annie")
+                    page.add_member("Grinnell")
+                    page.post_in_UCBMFET("Prepping for 61A Final Be Like...")
+                    </code></pre>
+
+                    <p class="smaller">🤔  What would it mean to create another instance of this class? What would that represent?
+                        What feels amiss about this design?
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>After Refactor: MemePage</h3>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    class MemePage:
+
+                        def __init__(self, name, organization):
+                            self.name = name
+                            self.organization = organization
+                            self.posts = []
+                            self.members = []
+
+                        def add_member(self, name):
+                            self.members.append(name)
+
+                        def add_post(self, title_of_post):
+                            self.posts.append(title_of_post)
+
+                        @property
+                        def num_members(self):
+                            return len(self.members)
+                    </code></pre>
+
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="python">
+                    page1 = MemePage("UCB Memes For Edgy Teens", "UC Berkeley")
+                    page1.add_member("Annie")
+                    page1.add_member("Grinnell")
+                    page1.add_post("Just Chilling On The Glade")
+
+                    page2 = MemePage("Wholesome Memes for Tweens", "King Middle School")
+                    page1.add_member("Poppy")
+                    page1.add_member("Sequoia")
+                    page1.add_member("Redwood")
+                    page2.add_post("DEFYING GRAVITY!")
+                    </code></pre>
+
+                </section>
+
+                <section data-visibility="hidden">
+                    <h3>Before: Cucumber Game</h3>
+
+                    <p style="font-size:0.6em;">In each round, the players each play one card, starting with the
+                        <code>starter</code>.
+                        If the card played is as high or higher than the highest card played so far,
+                        that player takes control. The winner is the last player who took control
+                        after every player has played once.
+                    </p>
+
+                    <pre style="font-size:0.4em"><code data-trim data-noescape class="python">
+                    def play_round(starter, cards):
+                        """Play a round and return all winners so far. Cards is a list of pairs.
+                        Each (who, card) pair in cards indicates who plays and what card they play.
+                        >>> play_round(3, [(3, 4), (0, 8), (1, 8), (2, 5)])
+                        [1]
+                        >>> play_round(1, [(3, 5), (1, 4), (2, 5), (0, 8)])
+                        [1, 3]
+                        """
+                        r = Round(starter)
+                        for who, card in cards:
+                            try:
+                                r.play(who, card)
+                            except AssertionError as e:
+                                print(e)
+                        return Round.winners
+                    </code></pre>
+
+                    <pre style="font-size:0.4em"><code data-trim data-noescape class="python">
+                    class Round:
+                        players, winners = 4, []
+                        def __init__(self, starter):
+                            self.starter, self.player, self.highest = starter, starter, -1
+
+                        def play(self, who, card):
+                            self.player = (who + 1) % Round.players
+                            if card >= self.highest:
+                                self.highest, self.control = card, who
+                            if self.complete():
+                                Round.winners.append(self.control)
+
+                        def complete(self):
+                            return self.player == self.starter and self.highest > -1
+                    </code></pre>
+
+                </section>
+
+
+                <section data-visibility="hidden">
+                    <h3>After Refactor: Cucumber Game</h3>
+
+                    <pre style="font-size:0.35em"><code data-trim data-noescape class="python">
+                    class Game:
+                        """
+                        >>> g = Game()
+                        >>> g.play_round(3, [(3, 4), (0, 8), (1, 8), (2, 5)])
+                        >>> g.winners
+                        [1]
+                        >>> g.play_round(1, [(3, 5), (1, 4), (2, 5), (0, 8)])
+                        >>> g.winners
+                        [1, 3]
+                        """
+                        def __init__(self):
+                            self.winners = []
+
+                        def play_round(self, starter, cards):
+                            r = Round(starter)
+                            for who, card in cards:
+                                try:
+                                    r.play(who, card)
+                                except AssertionError as e:
+                                    print(e)
+                            if r.winner:
+                                self.winners.append(r.winner)
+                    </code></pre>
+
+                    <pre style="font-size:0.35em"><code data-trim data-noescape class="python">
+                    class Round:
+                        num_players = 4
+
+                        def __init__(self, starter):
+                            self.starter = starter
+                            self.next_player = starter
+                            self.highest = -1
+                            self.winner = None
+
+                        def play(self, who, card):
+                            if card >= self.highest:
+                                self.highest = card
+                                self.control = who
+                            self.next_player = (who + 1) % Round.num_players
+                            if self.is_complete():
+                                self.winner = self.control
+
+                        def is_complete(self):
+                            return self.next_player == self.starter and self.highest > -1
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Designing reusable classes</h3>
+
+                    <p>The Reuse Test:
+                        <br>🤔 Is it possible to create multiple instances
+                        of the class, where each instance stores
+                        its own relevant state?</p>
+
+                    <p>👉🏽 Use instance variables to store any state
+                        that's specific to an instance.
+                    </p>
+
+                    <p>👉🏽 Use class variables only for constants
+                        or for state that's shared across all instances.</p>
+                </section>
+
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/highlightjs-badge@0.1.9/highlightjs-badge.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+		<script>
+			const srcUrlPrefix = "https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/";
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				slideNumber: true,
+				showNotes: false,
+				margin: 0.1,
+				preloadIframes: true,
+				plugins: [ RevealHighlight ],
+				pdfSeparateFragments: true
+			});
+
+            // add HighlightJS-badge (options are optional)
+            var options = {
+                copyIconContent: "📄",
+                checkIconContent: "✅"
+            };
+            window.highlightJsBadge(options);
+
+            if (window.location.search == "?print-pdf") {
+                var uncounted = document.querySelectorAll("[data-visibility='uncounted']");
+                uncounted.forEach(node => {
+                    node.parentNode.classList.add("no-print")
+                })
+            }
+		</script>
+	</body>
+</html>

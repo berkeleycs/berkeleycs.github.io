@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Exam Prep 1 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Exam Prep 1: Control, Higher-Order Functions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">examprep01.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+
+<p>Students from past semesters wanted more content and structured time to prepare for exams. Exam Prep sections are a way to solidify your understanding of the week's materials. The problems are typically designed to be a bridge between discussion/lab/homework difficulty and exam difficulty.</p>
+
+<p><strong>Reminder:</strong> There is nothing to turn in and there is no credit given for attending Exam Prep Sections.</p>
+
+<p>
+    We try to make these problems <strong>exam level</strong> , so you are not expected to be able to solve them coming straight from lecture without additional practice.
+    To get the most out of Exam Prep, we recommend you <strong>try these problems first on your own</strong>  before coming to the Exam Prep section, where we will explain how to solve these problems while giving tips and advice for the exam. Do not worry if you struggle with these problems, <strong>it is okay to struggle while learning</strong>.
+</p>
+<p>
+    You can work with anyone you want, including sharing solutions. We just ask you don't spoil the problems for anyone else in the class. Thanks!
+</p>
+<p>
+    You may only put code where there are underscores for the codewriting questions.
+</p>
+<p>
+    You can test your functions on their doctests by clicking the red test tube in the top right corner after clicking Run in 61A Code.
+    Passing the doctests is not necessarily enough to get the problem fully correct. You must fully solve the stated problem.
+</p>
+
+
+
+    
+
+
+<p>We recommending reading sections 1.1-1.6 from the textbook for these problems.</p>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q1">Q1: Run, K, Run</h3>
+
+<p>An <em>increasing run</em> of an integer is a sequence of consecutive digits in which each digit is larger than the
+last. For example, the number 123444345 has four increasing runs: 1234, 4, 4 and 345. Each run can be
+indexed <strong>from the end</strong> of the number, starting with index 0. In the previous example, the 0th run is 345,
+the first run is 4, the second run is 4 and the third run is 1234.</p>
+
+<p>Implement <code>get_k_run_starter</code>, which takes in integers n and k and returns the 0th digit of the kth
+increasing run within n. The 0th digit is the leftmost number in the run. You may assume that there are
+at least k+1 increasing runs in n.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="get_k_run_starter-input" style="height:540px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-get_k_run_starter-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-get_k_run_starter-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-get_k_run_starter-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def get_k_run_starter(n, k):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; get_k_run_starter(123444345, 0) # example from description\n    3\n    &gt;&gt;&gt; get_k_run_starter(123444345, 1)\n    4\n    &gt;&gt;&gt; get_k_run_starter(123444345, 2)\n    4\n    &gt;&gt;&gt; get_k_run_starter(123444345, 3)\n    1\n    &gt;&gt;&gt; get_k_run_starter(123412341234, 1)\n    1\n    &gt;&gt;&gt; get_k_run_starter(1234234534564567, 0)\n    4\n    &gt;&gt;&gt; get_k_run_starter(1234234534564567, 1)\n    3\n    &gt;&gt;&gt; get_k_run_starter(1234234534564567, 2)\n    2\n    &quot;&quot;&quot;\n    i = 0\n    final = None\n    while ____________________________:\n        while ____________________________:\n            ____________________________\n        final = ____________________________\n        i = ____________________________\n        n = ____________________________\n    return final\n', "scheme", "get_k_run_starter-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def get_k_run_starter(n, k):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; get_k_run_starter(123444345, 0) # example from description
+    3
+    &gt;&gt;&gt; get_k_run_starter(123444345, 1)
+    4
+    &gt;&gt;&gt; get_k_run_starter(123444345, 2)
+    4
+    &gt;&gt;&gt; get_k_run_starter(123444345, 3)
+    1
+    &gt;&gt;&gt; get_k_run_starter(123412341234, 1)
+    1
+    &gt;&gt;&gt; get_k_run_starter(1234234534564567, 0)
+    4
+    &gt;&gt;&gt; get_k_run_starter(1234234534564567, 1)
+    3
+    &gt;&gt;&gt; get_k_run_starter(1234234534564567, 2)
+    2
+    &quot;&quot;&quot;
+    i = 0
+    final = None
+<div class="sol-highlight">    while i &lt;= k:</div><div class="sol-highlight">        while n &gt; 10 and (n % 10 &gt; (n // 10) % 10):</div><div class="sol-highlight">            n = n // 10</div><div class="sol-highlight">        final = n % 10</div><div class="sol-highlight">        i = i + 1</div><div class="sol-highlight">        n = n // 10</div>    return final</code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q2">Q2: High Score</h3>
+
+<p>For the purposes of this problem, a <em>score function</em> is a pure function which takes a single number <code>s</code> as input and outputs another number, referred to as the <em>score</em> of <code>s</code>. Complete the <code>best_k_segmenter</code> function, which takes in a positive integer <code>k</code> and a score function <code>score</code>.</p>
+
+<p><code>best_k_segmenter</code> returns a function that takes in a single number <code>n</code> as input and returns the <em>best k-segment</em> of <code>n</code>, where a <em>k-segment</em> is a set of consecutive digits obtained by segmenting <code>n</code> into pieces of size <code>k</code> and the best segment is the segment with the highest score as determined by <code>score</code>. The segmentation is <strong>right to left</strong>.</p>
+
+<p>For example, consider <code>1234567</code>. Its 2-segments are <code>1</code>, <code>23</code>, <code>45</code> and <code>67</code> (a segment may be shorter than <code>k</code> if <code>k</code> does not divide the length of the number; in this case, <code>1</code> is the leftover, since the segmenation is right to left). Given the score function <code>lambda x: &#x2d;x</code>, the best 2-segment is <code>1</code>. With <code>lambda x: x</code>, the best segment is <code>67</code>.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="best_k_segmenter-input" style="height:522px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-best_k_segmenter-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-best_k_segmenter-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-best_k_segmenter-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def best_k_segmenter(k, score):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; largest_digit_getter = best_k_segmenter(1, lambda x: x)\n    &gt;&gt;&gt; largest_digit_getter(12345)\n    5\n    &gt;&gt;&gt; largest_digit_getter(245351)\n    5\n    &gt;&gt;&gt; largest_pair_getter = best_k_segmenter(2, lambda x: x)\n    &gt;&gt;&gt; largest_pair_getter(12345)\n    45\n    &gt;&gt;&gt; largest_pair_getter(245351)\n    53\n    &gt;&gt;&gt; best_k_segmenter(1, lambda x: &#x2d;x)(12345)\n    1\n    &gt;&gt;&gt; best_k_segmenter(3, lambda x: (x // 10) % 10)(192837465)\n    192\n    &quot;&quot;&quot;\n    partitioner = lambda x: (________________, ________________)\n    def best_getter(n):\n        assert n &gt; 0\n        best_seg = None\n        while __________________:\n            n, seg = partitioner(n)\n            if __________________:\n                best_seg = seg\n        return best_seg\n    return best_getter\n', "scheme", "best_k_segmenter-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def best_k_segmenter(k, score):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; largest_digit_getter = best_k_segmenter(1, lambda x: x)
+    &gt;&gt;&gt; largest_digit_getter(12345)
+    5
+    &gt;&gt;&gt; largest_digit_getter(245351)
+    5
+    &gt;&gt;&gt; largest_pair_getter = best_k_segmenter(2, lambda x: x)
+    &gt;&gt;&gt; largest_pair_getter(12345)
+    45
+    &gt;&gt;&gt; largest_pair_getter(245351)
+    53
+    &gt;&gt;&gt; best_k_segmenter(1, lambda x: &#x2d;x)(12345)
+    1
+    &gt;&gt;&gt; best_k_segmenter(3, lambda x: (x // 10) % 10)(192837465)
+    192
+    &quot;&quot;&quot;
+<div class="sol-highlight">    partitioner = lambda x: (x // (10**k), x % (10**k))</div>    def best_getter(n):
+        assert n &gt; 0
+        best_seg = None
+<div class="sol-highlight">        while n:</div>            n, seg = partitioner(n)
+<div class="sol-highlight">            if best_seg == None or score(seg) &gt; score(best_seg):</div>                best_seg = seg
+        return best_seg
+    return best_getter</code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q3">Q3: It's Always a Good Prime</h3>
+
+<p>Implement <code>div_by_primes_under</code>, which takes in an integer <code>n</code> and returns an n-divisibility checker. An
+<em>n-divisibility-checker</em> is a function that takes in an integer k and returns whether <code>k</code> is divisible by any
+integers between 2 and <code>n</code>, inclusive. Equivalently, it returns whether <code>k</code> is divisible by any primes less than
+or equal to <code>n</code>.</p>
+
+<p>Review the Disc 01 <code>is_prime</code> problem for a reminder about prime numbers.</p>
+
+<p>You can also choose to do the no lambda version, which is the same problem, just with defining functions with def instead of lambda.</p>
+
+<p><strong>Hint:</strong> If struggling, here is a partially filled out line for after the if statement. <code>checker = (lambda f, i: lambda x: __________)(checker, i)</code></p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="div_by_primes_under-input" style="height:810px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-div_by_primes_under-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-div_by_primes_under-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-div_by_primes_under-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def div_by_primes_under(n):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; div_by_primes_under(10)(11)\n    False\n    &gt;&gt;&gt; div_by_primes_under(10)(121)\n    False\n    &gt;&gt;&gt; div_by_primes_under(10)(12)\n    True\n    &gt;&gt;&gt; div_by_primes_under(5)(1)\n    False\n    &quot;&quot;&quot;\n    checker = lambda x: False\n    i = ____________________________\n    while ____________________________:\n        if not checker(i):\n            checker = ____________________________\n        i = ____________________________\n    return ____________________________\n\ndef div_by_primes_under_no_lambda(n):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; div_by_primes_under_no_lambda(10)(11)\n    False\n    &gt;&gt;&gt; div_by_primes_under_no_lambda(10)(121)\n    False\n    &gt;&gt;&gt; div_by_primes_under_no_lambda(10)(12)\n    True\n    &gt;&gt;&gt; div_by_primes_under_no_lambda(5)(1)\n    False\n    &quot;&quot;&quot;\n    def checker(x):\n        return False\n    i = ____________________________\n    while ____________________________:\n        if not checker(i):\n            def outer(____________________________):\n                def inner(____________________________):\n                    return ____________________________\n                return ____________________________\n            checker = ____________________________\n        i = ____________________________\n    return ____________________________\n\n', "scheme", "div_by_primes_under-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def div_by_primes_under(n):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; div_by_primes_under(10)(11)
+    False
+    &gt;&gt;&gt; div_by_primes_under(10)(121)
+    False
+    &gt;&gt;&gt; div_by_primes_under(10)(12)
+    True
+    &gt;&gt;&gt; div_by_primes_under(5)(1)
+    False
+    &quot;&quot;&quot;
+    checker = lambda x: False
+<div class="sol-highlight">    i = 2</div><div class="sol-highlight">    while i &lt;= n:</div>        if not checker(i):
+<div class="sol-highlight">            checker = (lambda f, i: lambda x: x % i == 0 or f(x))(checker, i)</div><div class="sol-highlight">        i = i + 1</div><div class="sol-highlight">    return checker</div>
+def div_by_primes_under_no_lambda(n):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; div_by_primes_under_no_lambda(10)(11)
+    False
+    &gt;&gt;&gt; div_by_primes_under_no_lambda(10)(121)
+    False
+    &gt;&gt;&gt; div_by_primes_under_no_lambda(10)(12)
+    True
+    &gt;&gt;&gt; div_by_primes_under_no_lambda(5)(1)
+    False
+    &quot;&quot;&quot;
+    def checker(x):
+        return False
+<div class="sol-highlight">    i = 2</div><div class="sol-highlight">    while i &lt;= n:</div>        if not checker(i):
+<div class="sol-highlight">            def outer(f, i):</div><div class="sol-highlight">                def inner(x):</div><div class="sol-highlight">                    return x % i == 0 or f(x)</div><div class="sol-highlight">                return inner</div><div class="sol-highlight">            checker = outer(checker, i)</div><div class="sol-highlight">        i = i + 1</div><div class="sol-highlight">    return checker</div></code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q4">Q4: My Last Three Brain Cells</h3>
+
+<p>A <code>k</code>-<em>memory function</em> takes in a single input, prints whether that input was seen exactly <code>k</code> function calls
+ago, and returns a new <code>k</code>-memory function. For example, a 2-memory function will display “Found" if its
+input was seen exactly two function calls ago, and otherwise will display “Not found".</p>
+
+<p>Implement <code>three_memory</code>, which is a three-memory function. You may assume that the value None is
+never given as an input to your function, and that in the first two function calls the function will display
+“Not found" for any valid inputs given.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="three_memory-input" style="height:522px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-three_memory-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-three_memory-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-three_memory-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def three_memory(n):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; f = three_memory(&#x27;first&#x27;)\n    &gt;&gt;&gt; f = f(&#x27;first&#x27;)\n    Not found\n    &gt;&gt;&gt; f = f(&#x27;second&#x27;)\n    Not found\n    &gt;&gt;&gt; f = f(&#x27;third&#x27;)\n    Not found\n    &gt;&gt;&gt; f = f(&#x27;second&#x27;) # &#x27;second&#x27; was not input three calls ago\n    Not found\n    &gt;&gt;&gt; f = f(&#x27;second&#x27;) # &#x27;second&#x27; was input three calls ago\n    Found\n    &gt;&gt;&gt; f = f(&#x27;third&#x27;) # &#x27;third&#x27; was input three calls ago\n    Found\n    &gt;&gt;&gt; f = f(&#x27;third&#x27;) # &#x27;third&#x27; was not input three calls ago\n    Not found\n    &quot;&quot;&quot;\n    def f(x, y, z):\n        def g(i):\n            if ____________________________:\n                ____________________________\n            else:\n                ____________________________\n            return ____________________________\n        return ____________________________\n    return f(None, None, n)\n', "scheme", "three_memory-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def three_memory(n):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; f = three_memory(&#x27;first&#x27;)
+    &gt;&gt;&gt; f = f(&#x27;first&#x27;)
+    Not found
+    &gt;&gt;&gt; f = f(&#x27;second&#x27;)
+    Not found
+    &gt;&gt;&gt; f = f(&#x27;third&#x27;)
+    Not found
+    &gt;&gt;&gt; f = f(&#x27;second&#x27;) # &#x27;second&#x27; was not input three calls ago
+    Not found
+    &gt;&gt;&gt; f = f(&#x27;second&#x27;) # &#x27;second&#x27; was input three calls ago
+    Found
+    &gt;&gt;&gt; f = f(&#x27;third&#x27;) # &#x27;third&#x27; was input three calls ago
+    Found
+    &gt;&gt;&gt; f = f(&#x27;third&#x27;) # &#x27;third&#x27; was not input three calls ago
+    Not found
+    &quot;&quot;&quot;
+    def f(x, y, z):
+        def g(i):
+<div class="sol-highlight">            if i == x:</div><div class="sol-highlight">                print(&#x27;Found&#x27;)</div>            else:
+<div class="sol-highlight">                print(&#x27;Not found&#x27;)</div><div class="sol-highlight">            return f(y, z, i)</div><div class="sol-highlight">        return g</div>    return f(None, None, n)</code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight"></div>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#q1">Q1: Run, K, Run</a></li>
+  <li><a href="index.html#q2">Q2: High Score</a></li>
+  <li><a href="index.html#q3">Q3: It's Always a Good Prime</a></li>
+  <li><a href="index.html#q4">Q4: My Last Three Brain Cells</a></li>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

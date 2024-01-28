@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/lab.css">
+
+
+    <title>
+Lab 6 Solutions | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Lab 6 Solutions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="lab06.zip" class="label label-outline">lab06.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+<h2>Solution Files</h2>
+
+
+    
+<h1 id="topics">Topics</h1>
+
+
+<p>Consult this section if you need a refresher on the material for this lab. It's okay to skip directly to the questions and refer back here should you get stuck.</p>
+
+
+        <button id='toggle-1' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Nonlocal<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-1">
+
+
+<h2 id="nonlocal">Nonlocal</h2>
+
+
+<p>We say that a variable defined in a frame is <em>local</em> to that frame. A variable
+is <strong>nonlocal</strong> to a frame if it is defined in the environment that the frame
+belongs to but not the frame itself, i.e. in its parent or ancestor frame.</p>
+
+<p>So far, we know that we can access variables in parent frames:</p>
+
+<pre><code>def make_adder(x):
+    &quot;&quot;&quot;
+    Returns a function which takes in one argument y, and returns x + y.
+
+    &gt;&gt;&gt; add_three = make_adder(3)
+    &gt;&gt;&gt; add_three(2)
+    5
+    &quot;&quot;&quot;
+    def adder(y):
+        return x + y
+    return adder</code></pre>
+
+<p>Here, when we call <code>make_adder</code>, we create a function <code>adder</code> that is able to
+look up the name <code>x</code> in <code>make_adder</code>'s frame and use its value.</p>
+
+<p>However, we haven't been able to <em>modify</em> variables defined in parent frames.  Consider
+the following function:</p>
+
+<pre><code>def make_adder_cumulative(x):
+    &quot;&quot;&quot;
+    Returns a function which takes in one argument y and returns y + x + the sum of all previous y&#x27;s.
+    It also updates x to this new total.
+
+    &gt;&gt;&gt; add_all = make_adder_cumulative(3)
+    &gt;&gt;&gt; add_all(2) # 3 + 2
+    5
+    &gt;&gt;&gt; add_all(5) # 3 + 2 + 5
+    10
+    &quot;&quot;&quot;
+    def adder(y):
+        total = x + y
+        x = total
+        return total
+    return adder</code></pre>
+
+<p>Here, when we call <code>make_adder_cumulative</code>, we create a function <code>adder</code> that is able to
+look up the name <code>x</code> in <code>make_adder_cumulative</code>'s frame and use its value. However, <code>adder</code> also attempts to update the variable <code>x</code> 
+in its parent frame.  Running this function's doctests, we 
+find that it causes the following error:</p>
+
+<pre><code>UnboundLocalError: local variable &#x27;x&#x27; referenced before assignment</code></pre>
+
+<p>Why does this happen? When we execute an assignment statement, we
+are either creating a new binding in our current frame or we are updating an
+old one in the current frame. For example, the line <code>x = x + y</code> in <code>adder</code>,
+is creating the local variable <code>x</code> inside <code>adder</code>'s frame. This
+assignment statement tells Python to expect a variable called <code>x</code> inside
+<code>adder</code>'s frame, so Python will not look in parent frames for this variable.
+However, notice that we tried to compute <code>x + y</code> before the local variable
+was created! That's why we get the <code>UnboundLocalError</code>.</p>
+
+<p>To avoid this problem, we introduce the <code>nonlocal</code> keyword. It allows us to
+update a variable in a parent frame!
+The only exception is the global frame. You cannot update a variable in the 
+global frame using <code>nonlocal</code>.</p>
+
+<p>Consider this example:</p>
+
+<pre><code>def make_adder_cumulative(x):
+    &quot;&quot;&quot;
+    Returns a function which takes in one argument y and returns y + x + the sum of all previous y&#x27;s.
+    It also updates x to this new total.
+
+    &gt;&gt;&gt; add_all = make_adder_cumulative(3)
+    &gt;&gt;&gt; add_all(2) # 3 + 2
+    5
+    &gt;&gt;&gt; add_all(5) # 3 + 2 + 5
+    10
+    &quot;&quot;&quot;
+    def adder(y):
+        nonlocal x
+        total = x + y
+        x = total
+        return total
+    return adder</code></pre>
+
+<p>The line <code>nonlocal x</code> tells Python that <code>x</code> will not be local to this frame, so it will look for it in parent frames. Now we can update <code>x</code> without running into problems.</p>
+
+</div>
+
+<br>
+
+
+        <button id='toggle-2' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Mutability<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-2">
+
+
+<h2 id="mutability">Mutability</h2>
+
+
+<p>We say that an object is <strong>mutable</strong> if its state can change as code is executed.
+The process of changing an object's state is called <strong>mutation</strong>. Examples of
+mutable objects include lists and dictionaries.  Examples of objects that are
+<em>not</em> mutable include tuples and functions.</p>
+
+<p>We have seen how to use the <code>==</code> operator to check if two expressions evaluate
+to <em>equal</em> values. We now introduce a new comparison operator, <code>is</code>, that
+checks whether two expressions evaluate to the <em>same</em> values.</p>
+
+<p>Wait, what's the difference? For primitive values, there is none:</p>
+
+<pre><code>&gt;&gt;&gt; 2 + 2 == 3 + 1
+True
+&gt;&gt;&gt; 2 + 2 is 3 + 1
+True</code></pre>
+
+<p>This is because all primitives have the same <em>identity</em> under the hood.
+However, with non-primitive values, such as lists, each object has its own
+identity. That means you can construct two objects that may look exactly the
+same but have different identities.</p>
+
+<pre><code>&gt;&gt;&gt; lst1 = [1, 2, 3, 4]
+&gt;&gt;&gt; lst2 = [1, 2, 3, 4]
+&gt;&gt;&gt; lst1 == lst2
+True
+&gt;&gt;&gt; lst1 is lst2
+False</code></pre>
+
+<p>Here, although the lists referred to by <code>lst1</code> and <code>lst2</code> have <em>equal</em>
+contents, they are not the <em>same</em> object. In other words, they are the same in
+terms of equality, but not in terms of identity.</p>
+
+<p>This is important in our discussion of mutability because when we mutate an
+object, we simply change its state, <em>not</em> its identity.</p>
+
+<pre><code>&gt;&gt;&gt; lst1 = [1, 2, 3, 4]
+&gt;&gt;&gt; lst2 = lst1
+&gt;&gt;&gt; lst1.append(5)
+&gt;&gt;&gt; lst2
+[1, 2, 3, 4, 5]
+&gt;&gt;&gt; lst1 is lst2
+True</code></pre>
+
+</div>
+
+<br>
+
+
+        <button id='toggle-3' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Iterators<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-3">
+
+
+<h2 id="iterators">Iterators</h2>
+
+
+<!-- In lecture, we studied several Python object interfaces, or _protocols_. In this
+lab, we will study a new protocol, the _iterator protocol_. Implementing this
+protocol allows us to use our objects in for loops! Remember the <code>for</code> loop?
+(We really hope so!) -->
+
+<p>An iterable is any object that can be iterated through, or gone through one
+element at a time. One construct that we've used to iterate through an
+iterable is a for loop:</p>
+
+<pre><code>for elem in iterable:
+    # do something</code></pre>
+
+<p><code>for</code> loops work on any object that is <em>iterable</em>. We previously described it
+as working with any sequence -- all sequences are iterable, but there are other
+objects that are also iterable! We define an <strong>iterable</strong> as an object on which
+calling the built-in function <code>iter</code> function returns an <em>iterator</em>. An
+iterator is another type of object that allows us to iterate through an
+iterable by keeping track of which element is next in the sequence.</p>
+
+<p>To illustrate this, consider the following block of code, which does the exact
+same thing as a the for statement above:</p>
+
+<pre><code>iterator = iter(iterable)
+try:
+    while True:
+        elem = next(iterator)
+        # do something
+except StopIteration:
+    pass</code></pre>
+
+<p>Here's a breakdown of what's happening:</p>
+
+<ul>
+  <li>First, the built-in <code>iter</code> function is called on the iterable to create a
+  corresponding <em>iterator</em>.</li>
+  <li>To get the next element in the sequence, the built-in <code>next</code> function is
+  called on this iterator.</li>
+  <li>When <code>next</code> is called but there are no elements left in the iterator, a
+  <code>StopIteration</code> error is raised. In the for loop construct, this exception is
+  caught and execution can continue.</li>
+</ul>
+
+<p>Calling <code>iter</code> on an iterable multiple times returns a new iterator each time
+with distinct states (otherwise, you'd never be able to iterate through a
+iterable more than once). You can also call <code>iter</code> on the iterator itself, which
+will just return the same iterator without changing its state. However, note
+that you cannot call <code>next</code> directly on an iterable.</p>
+
+<p>Let's see the <code>iter</code> and <code>next</code> functions in action with an iterable we're
+already familiar with -- a list.</p>
+
+<pre><code>&gt;&gt;&gt; lst = [1, 2, 3, 4]
+&gt;&gt;&gt; next(lst)             # Calling next on an iterable
+TypeError: &#x27;list&#x27; object is not an iterator
+&gt;&gt;&gt; list_iter = iter(lst) # Creates an iterator for the list
+&gt;&gt;&gt; list_iter
+&lt;list_iterator object ...&gt;
+&gt;&gt;&gt; next(list_iter)       # Calling next on an iterator
+1
+&gt;&gt;&gt; next(list_iter)       # Calling next on the same iterator
+2
+&gt;&gt;&gt; next(iter(list_iter)) # Calling iter on an iterator returns itself
+3
+&gt;&gt;&gt; list_iter2 = iter(lst)
+&gt;&gt;&gt; next(list_iter2)      # Second iterator has new state
+1
+&gt;&gt;&gt; next(list_iter)       # First iterator is unaffected by second iterator
+4
+&gt;&gt;&gt; next(list_iter)       # No elements left!
+StopIteration
+&gt;&gt;&gt; lst                   # Original iterable is unaffected
+[1, 2, 3, 4]</code></pre>
+
+<p>Since you can call <code>iter</code> on iterators, this tells us that that they are also
+iterables! Note that while all iterators are iterables, the converse is not
+true - that is, not all iterables are iterators. You can use iterators wherever
+you can use iterables, but note that since iterators keep their state, they're
+only good to iterate through an iterable once:</p>
+
+<pre><code>&gt;&gt;&gt; list_iter = iter([4, 3, 2, 1])
+&gt;&gt;&gt; for e in list_iter:
+...     print(e)
+4
+3
+2
+1
+&gt;&gt;&gt; for e in list_iter:
+...     print(e)</code></pre>
+
+<blockquote><p><strong>Analogy</strong>: An iterable is like a book (one can flip through the
+pages) and an iterator for a book would be a bookmark (saves the position and
+can locate the next page).  Calling <code>iter</code> on a book gives you a new bookmark
+independent of other bookmarks, but calling <code>iter</code> on a bookmark gives you the
+bookmark itself, without changing its position at all. Calling <code>next</code> on the
+bookmark moves it to the next page, but does not change the pages in the book.
+Calling <code>next</code> on the book wouldn't make sense semantically. We can also have
+multiple bookmarks, all independent of each other.</p></blockquote>
+
+
+<h3 id="iterable-uses">Iterable Uses</h3>
+
+
+<p>We know that lists are one type of built-in iterable objects. You may have also
+encountered the <code>range(start, end)</code> function, which creates an iterable of
+ascending integers from start (inclusive) to end (exclusive).</p>
+
+<pre><code>&gt;&gt;&gt; for x in range(2, 6):
+...     print(x)
+...
+2
+3
+4
+5</code></pre>
+
+<p>Ranges are useful for many things, including performing some operations for a
+particular number of iterations or iterating through the indices of a list.</p>
+
+<p>There are also some built-in functions that take in iterables and return useful
+results:</p>
+
+<ul>
+  <li><code>map(f, iterable)</code> - Creates an iterable over <code>f(x)</code> for <code>x</code> in <code>iterable</code>. In some cases, computing a list of the values in this iterable will give us the same result as 
+  [<code>func(x)</code> for <code>x</code> in <code>iterable</code>]. However, it's important to keep in mind that iterators can potentially have infinite values because they are evaluated lazily, while lists cannot have infinite elements.</li>
+  <li><code>filter(f, iterable)</code> - Creates iterator over <code>x</code> for each <code>x</code> in <code>iterable</code>
+  if <code>f(x)</code></li>
+  <li><code>zip(iterables*)</code> - Creates an iterable over co-indexed tuples with elements from each of the <code>iterables</code></li>
+  <li><code>reversed(iterable)</code> - Creates iterator over all the elements in the input
+  iterable in reverse order</li>
+  <li><code>list(iterable)</code> - Creates a list containing all the elements in the input <code>iterable</code></li>
+  <li><code>tuple(iterable)</code> - Creates a tuple containing all the elements in the input <code>iterable</code></li>
+  <li><code>sorted(iterable)</code> - Creates a sorted list containing all the elements in the
+  input <code>iterable</code></li>
+</ul>
+
+<!--
+How does <code>iter</code> work? It just calls the <code>__iter__</code> magic method on its argument,
+so <code>iter(something_iterable)</code> is equivalent to <code>something_iterable.__iter__()</code>.
+So, any object is iterable if it implements this magic method, and this method
+must return an iterator.
+
+How does <code>next</code> work? It just calls the <code>__next__</code> magic method on its argument,
+so <code>next(the_iterator)</code> is equivalent to <code>the_iterator.__next__()</code>. So, to
+implement the iterator protocol, we must implement this method. This method
+eithers returns the next element in our iteration (so it's usually non-pure!),
+or raises <code>StopIteration</code> when there are no elements left.-->
+
+<!--
+Here is a table summarizing the required methods on iterables and iterators.
+Python also has more
+<a href="https://docs.python.org/3/library/stdtypes.html#typeiter">documentation</a> about
+<a href="https://docs.python.org/3/glossary.html#term-iterable">iterable</a> and
+<a href="https://docs.python.org/3/glossary.html#term-iterator">iterator</a> types.
+
+<div class = "table-responsive">
+  <table class='table table-bordered'>
+    <tr>
+      <th>Iterable</th>
+      <th>Iterator</th>
+    </tr>
+    <tr>
+      <td><code>__iter__</code>: returns an iterator</td>
+      <td><code>__iter__</code>: returns an iterator, which is generally itself</td>
+    <tr>
+      <td><code>__next__</code>: (optional) need not be defined </td>
+      <td><code>__next__</code>: returns the next element, or raises
+      <code>StopIteration</code> if no more values left to produce</td>
+    </tr>
+  </table>
+</div>
+
+-->
+
+<!--
+Normally, when implementing a protocol, we create objects that are *both*
+iterable and an iterator, so it will have both the <code>__iter__</code> and <code>__next__</code>
+methods implemented. This is more convenient than creating two separate objects,
+so it is good to do this whenever possible. Here is an example of a class
+definition for an object that implements both the iterable and iterator
+interfaces:
+
+<pre><code>class Skipper:
+    def __init__(self, seq):
+        self.seq = seq
+        self.step = 1
+        self.current = 0
+
+    def __next__(self):
+        if self.current &gt;= len(self.seq):
+            raise StopIteration
+        val = self.seq[self.current]
+        self.current += self.step
+        self.step += 1
+        return val
+
+    def __iter__(self):
+        return self</code></pre>
+
+Let's go ahead and try out our new toy.
+
+<pre><code>&gt;&gt;&gt; for num in Skipper([3, 4, 5, 6, 7, 8, 9, 10]):
+...     print(num)
+3
+4
+6
+9</code></pre>
+
+That is, we skip through the elements of some sequence in ever-larger steps.
+-->
+
+<!--
+We can also use <code>Skipper</code> to create a new kind of iterable list:
+
+<pre><code>class SkippingList(list):
+
+    def __iter__(self):
+        return Skipper(self)</code></pre>
+
+and now we can write:
+
+<pre><code>&gt;&gt;&gt; aList = SkippingList([3, 4, 5, 6, 7, 8, 9, 10])
+&gt;&gt;&gt; for num in aList:
+...     print(num)
+3
+4
+6
+9</code></pre>
+
+-->
+
+</div>
+
+<br>
+
+
+        <button id='toggle-4' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Generators<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-4">
+
+<h2 id="generators">Generators</h2>
+
+
+<p>We can create our own custom iterators by writing a <em>generator function</em>, which
+returns a special type of iterator called a <strong>generator</strong>.  Generator functions
+have <code>yield</code> statements within the body of the function instead of <code>return</code>
+statements.  Calling a generator function will return a generator object and
+will <em>not</em> execute the body of the function.</p>
+
+<p>For example, let's consider the following generator function:</p>
+
+<pre><code>def countdown(n):
+    print(&quot;Beginning countdown!&quot;)
+    while n &gt;= 0:
+        yield n
+        n &#x2d;= 1
+    print(&quot;Blastoff!&quot;)</code></pre>
+
+<p>Calling <code>countdown(k)</code> will return a generator object that counts down from <code>k</code>
+to 0.  Since generators are iterators, we can call <code>iter</code> on the resulting
+object, which will simply return the same object.  Note that the body is not
+executed at this point; nothing is printed and no numbers are output.</p>
+
+<pre><code>&gt;&gt;&gt; c = countdown(5)
+&gt;&gt;&gt; c
+&lt;generator object countdown ...&gt;
+&gt;&gt;&gt; c is iter(c)
+True</code></pre>
+
+<p>So how is the counting done? Again, since generators are iterators, we call
+<code>next</code> on them to get the next element!  The first time <code>next</code> is called,
+execution begins at the first line of the function body and continues until the
+<code>yield</code> statement is reached. The result of evaluating the expression in the
+<code>yield</code> statement is returned.  The following interactive session continues
+from the one above.</p>
+
+<pre><code>&gt;&gt;&gt; next(c)
+Beginning countdown!
+5</code></pre>
+
+<p>Unlike functions we've seen before in this course, generator functions can
+remember their state. On any consecutive calls to <code>next</code>, execution picks up
+from the line after the <code>yield</code> statement that was previously executed. Like
+the first call to <code>next</code>, execution will continue until the next <code>yield</code>
+statement is reached. Note that because of this, <code>Beginning countdown!</code> doesn't
+get printed again.</p>
+
+<pre><code>&gt;&gt;&gt; next(c)
+4
+&gt;&gt;&gt; next(c)
+3</code></pre>
+
+<p>The next 3 calls to <code>next</code> will continue to yield consecutive descending
+integers until 0.  On the following call, a <code>StopIteration</code> error will be
+raised because there are no more values to yield (i.e. the end of the function
+body was reached before hitting a <code>yield</code> statement).</p>
+
+<pre><code>&gt;&gt;&gt; next(c)
+2
+&gt;&gt;&gt; next(c)
+1
+&gt;&gt;&gt; next(c)
+0
+&gt;&gt;&gt; next(c)
+Blastoff!
+StopIteration</code></pre>
+
+<p>Separate calls to <code>countdown</code> will create distinct generator objects with their
+own state. Usually, generators shouldn't restart. If you'd like to reset the
+sequence, create another generator object by calling the generator function
+again.</p>
+
+<pre><code>&gt;&gt;&gt; c1, c2 = countdown(5), countdown(5)
+&gt;&gt;&gt; c1 is c2
+False
+&gt;&gt;&gt; next(c1)
+5
+&gt;&gt;&gt; next(c2)
+5</code></pre>
+
+<p>Here is a summary of the above:</p>
+
+<ul>
+  <li>A <em>generator function</em> has a <code>yield</code> statement and returns a <em>generator object</em>.</li>
+  <li>Calling the <code>iter</code> function on a generator object returns the same object
+  without modifying its current state.</li>
+  <li>The body of a generator function is not evaluated until <code>next</code> is called on
+  a resulting generator object. Calling the <code>next</code> function on a generator
+  object computes and returns the next object in its sequence. If the sequence
+  is exhausted, <code>StopIteration</code> is raised.</li>
+  <li><p>A generator "remembers" its state for the next <code>next</code> call. Therefore,</p>
+
+  <ul>
+    <li><p>the first <code>next</code> call works like this:</p>
+
+    <ol>
+      <li>Enter the function and run until the line with <code>yield</code>.</li>
+      <li>Return the value in the <code>yield</code> statement, but remember the state of the
+      function for future <code>next</code> calls.</li>
+    </ol></li>
+    <li><p>And subsequent <code>next</code> calls work like this:</p>
+
+    <ol>
+      <li>Re-enter the function, start at <strong>the line after the <code>yield</code> statement that
+      was previously executed</strong>, and run until the next <code>yield</code> statement.</li>
+      <li>Return the value in the <code>yield</code> statement, but remember the state of the
+      function for future <code>next</code> calls.</li>
+    </ol></li>
+  </ul></li>
+  <li>Calling a generator function returns a brand new generator object (like
+  calling <code>iter</code> on an iterable object).</li>
+  <li>A generator should not restart unless it's defined that way. To start over
+  from the first element in a generator, just call the generator function again
+  to create a new generator.</li>
+</ul>
+
+<p>Another useful tool for generators is the <code>yield from</code> statement (introduced in
+Python 3.3). <code>yield from</code> will yield all values from an iterator or iterable.</p>
+
+<pre><code>&gt;&gt;&gt; def gen_list(lst):
+...     yield from lst
+...
+&gt;&gt;&gt; g = gen_list([1, 2, 3, 4])
+&gt;&gt;&gt; next(g)
+1
+&gt;&gt;&gt; next(g)
+2
+&gt;&gt;&gt; next(g)
+3
+&gt;&gt;&gt; next(g)
+4
+&gt;&gt;&gt; next(g)
+StopIteration</code></pre>
+
+</div>
+
+<br>
+
+
+<h1 id="required-questions">Required Questions</h1>
+
+
+
+<h2 id="nonlocal-wwpd">Nonlocal WWPD</h2>
+
+
+<h3 class="question" id="q1">Q1: WWPD: Nonlocal Quiz</h3>
+
+<blockquote><p>Use Ok to test your knowledge with the following "What Would Python Display?"
+questions:</p>
+
+<pre><code>python3 ok &#x2d;q nonlocal_quiz &#x2d;u</code></pre>
+
+<p><strong>Relevant Topics: <a href="https://youtu.be/vSGCNKnbxnc">Nonlocal</a></strong></p></blockquote>
+
+<pre><code>&gt;&gt;&gt; def ba(by):
+...     def yo(da):
+...         by += 2
+...         return by
+...     return yo(2)
+...
+&gt;&gt;&gt; ba(3)</code></pre>
+        <button id='prompt-1' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+<pre><code>&gt;&gt;&gt; def ba(by):
+...     def yo(da):
+...         nonlocal by
+...         by += 2
+...         return by
+...     return yo(3)
+...
+&gt;&gt;&gt; ba(3)</code></pre>
+        <button id='prompt-2' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+<pre><code>&gt;&gt;&gt; def ba(by):
+...     def yo(da):
+...         by.append(da)
+...         return by
+...     return yo(5)
+...
+&gt;&gt;&gt; ba([1, 2, 3])</code></pre>
+        <button id='prompt-3' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+<pre><code>&gt;&gt;&gt; def ba(by):
+...     def yo(da):
+...         yoda = by + da
+...         return yoda
+...     return yo(5)
+...
+&gt;&gt;&gt; ba(5)</code></pre>
+        <button id='prompt-4' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+
+<h2 id="mutability-2">Mutability</h2>
+
+
+<h3 class="question" id="q2">Q2: List-Mutation</h3>
+
+<blockquote><p>Test your understanding of list mutation with the following questions. What would Python display? Type it in the interpreter if you're stuck!</p>
+
+<pre><code>python3 ok &#x2d;q list&#x2d;mutation &#x2d;u</code></pre>
+
+<p>Note: if nothing would be output by Python, type <code>Nothing</code>. If the code would error, type <code>Error</code>.</p>
+
+<p><strong>Relevant Topics: <a href="https://youtu.be/VJ7rKCHgVqE">Mutability</a></strong></p></blockquote>
+
+<pre><code>&gt;&gt;&gt; lst = [5, 6, 7, 8]
+&gt;&gt;&gt; lst.append(6)
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x4e;&#x6f;&#x6e;&#x65;</div>
+&gt;&gt;&gt; lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x5b;&#x35;&#x2c;&#x20;&#x36;&#x2c;&#x20;&#x37;&#x2c;&#x20;&#x38;&#x2c;&#x20;&#x36;&#x5d;</div>
+&gt;&gt;&gt; lst.insert(0, 9)
+&gt;&gt;&gt; lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x5b;&#x39;&#x2c;&#x20;&#x35;&#x2c;&#x20;&#x36;&#x2c;&#x20;&#x37;&#x2c;&#x20;&#x38;&#x2c;&#x20;&#x36;&#x5d;</div>
+&gt;&gt;&gt; x = lst.pop(2)
+&gt;&gt;&gt; lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x5b;&#x39;&#x2c;&#x20;&#x35;&#x2c;&#x20;&#x37;&#x2c;&#x20;&#x38;&#x2c;&#x20;&#x36;&#x5d;</div>
+&gt;&gt;&gt; lst.remove(x)
+&gt;&gt;&gt; lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x5b;&#x39;&#x2c;&#x20;&#x35;&#x2c;&#x20;&#x37;&#x2c;&#x20;&#x38;&#x5d;</div>
+&gt;&gt;&gt; a, b = lst, lst[:]
+&gt;&gt;&gt; a is lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x54;&#x72;&#x75;&#x65;</div>
+&gt;&gt;&gt; b == lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x54;&#x72;&#x75;&#x65;</div>
+&gt;&gt;&gt; b is lst
+<div class="alt prompt-5">______</div><div class="solution prompt-5">&#x46;&#x61;&#x6c;&#x73;&#x65;</div></code></pre>
+        <button id='prompt-5' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+<h3 class="question" id="q3">Q3: Insert Items</h3>
+
+<p>Write a function which takes in a list <code>lst</code>, an argument <code>entry</code>, and another argument <code>elem</code>. This function will check through each item in <code>lst</code> to see if it is equal to <code>entry</code>. Upon finding an item equivalent to <code>entry</code>, the function should modify the list by placing <code>elem</code> into <code>lst</code> right after the item. At the end of the function, the modified list should be returned.</p>
+
+<p>See the doctests for examples on how this function is utilized. Use list mutation to modify the original list, no new lists should be created or returned.</p>
+
+<p><strong>Be careful in situations where the values passed into <code>entry</code> and <code>elem</code> are equivalent, so as not to create an infinitely long list while iterating through it.</strong> If you find that your code is taking more than a few seconds to run, it is most likely that the function is in a loop of inserting new values.</p>
+
+<solution>
+
+<pre><code>def insert_items(lst, entry, elem):
+    &quot;&quot;&quot;Inserts elem into lst after each occurence of entry and then returns lst.
+
+    &gt;&gt;&gt; test_lst = [1, 5, 8, 5, 2, 3]
+    &gt;&gt;&gt; new_lst = insert_items(test_lst, 5, 7)
+    &gt;&gt;&gt; new_lst
+    [1, 5, 7, 8, 5, 7, 2, 3]
+    &gt;&gt;&gt; large_lst = [1, 4, 8]
+    &gt;&gt;&gt; large_lst2 = insert_items(large_lst, 4, 4)
+    &gt;&gt;&gt; large_lst2
+    [1, 4, 4, 8]
+    &gt;&gt;&gt; large_lst3 = insert_items(large_lst2, 4, 6)
+    &gt;&gt;&gt; large_lst3
+    [1, 4, 6, 4, 6, 8]
+    &gt;&gt;&gt; large_lst3 is large_lst
+    True
+    &quot;&quot;&quot;
+<div class="sol-highlight">    index = 0
+    while index &lt; len(lst):
+        if lst[index] == entry:
+            lst.insert(index + 1, elem)
+            if entry == elem:
+                index += 1
+        index += 1
+    return lst</div></code></pre>
+
+</solution>
+
+<div class="sol-highlight">
+Video Walkthrough:
+<p>
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/duHrRpS4TYo"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+</div>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q insert_items</code></pre>
+
+
+<h2 id="iterators-and-generators">Iterators and Generators</h2>
+
+
+<p>Generators also allow us to represent infinite sequences, such as the sequence of
+natural numbers (1, 2, ...) shown in the function below!</p>
+
+<blockquote><p><strong>Relevant Topics: <a href="https://youtu.be/jc39Fx-PgJ8">Iterators and Generators</a></strong></p></blockquote>
+
+<pre><code>def naturals():
+    &quot;&quot;&quot;A generator function that yields the infinite sequence of natural
+    numbers, starting at 1.
+
+    &gt;&gt;&gt; m = naturals()
+    &gt;&gt;&gt; type(m)
+    &lt;class &#x27;generator&#x27;&gt;
+    &gt;&gt;&gt; [next(m) for _ in range(10)]
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    &quot;&quot;&quot;
+    i = 1
+    while True:
+        yield i
+        i += 1</code></pre>
+
+<h3 class="question" id="q4">Q4: Scale</h3>
+
+<p>Write a generator function <code>scale(it, multiplier)</code> which yields the elements of the
+iterable <code>it</code>, multiplied by <code>multiplier</code>.</p>
+
+<p>As an extra challenge, try writing this function using a <code>yield from</code> statement! 
+A <code>yield from</code> statement yields the values from an iterator one at a time.</p>
+
+<solution>
+
+<pre><code>def scale(it, multiplier):
+    &quot;&quot;&quot;Yield elements of the iterable it multiplied by a number multiplier.
+
+    &gt;&gt;&gt; m = scale([1, 5, 2], 5)
+    &gt;&gt;&gt; type(m)
+    &lt;class &#x27;generator&#x27;&gt;
+    &gt;&gt;&gt; list(m)
+    [5, 25, 10]
+
+    &gt;&gt;&gt; m = scale(naturals(), 2)
+    &gt;&gt;&gt; [next(m) for _ in range(5)]
+    [2, 4, 6, 8, 10]
+    &quot;&quot;&quot;
+<div class="sol-highlight">    for elem in it:
+        yield elem * multiplier
+
+# Alternate solution
+def scale_alt(it, multiplier):
+    yield from map(lambda x: x*multiplier, it)</div></code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q scale</code></pre>
+
+<h3 class="question" id="q5">Q5: Hailstone</h3>
+
+<p>Write a generator function that outputs the hailstone sequence starting at number <code>n</code>.</p>
+
+<p>Here's a quick reminder of how the hailstone sequence is defined:</p>
+
+<ol>
+  <li>Pick a positive integer <code>n</code> as the start.</li>
+  <li>If <code>n</code> is even, divide it by 2.</li>
+  <li>If <code>n</code> is odd, multiply it by 3 and add 1.</li>
+  <li>Continue this process until <code>n</code> is 1.</li>
+</ol>
+
+<p><strong>Note:</strong> It is highly encouraged (though not required) to try writing a solution using recursion for some extra practice. Since
+<code>hailstone</code> returns a generator, you can <code>yield from</code> a call to <code>hailstone</code>!</p>
+
+<solution>
+
+<pre><code>def hailstone(n):
+    &quot;&quot;&quot;Yields the elements of the hailstone sequence starting at n.
+
+    &gt;&gt;&gt; for num in hailstone(10):
+    ...     print(num)
+    ...
+    10
+    5
+    16
+    8
+    4
+    2
+    1
+    &quot;&quot;&quot;
+<div class="sol-highlight">    while n &gt; 1:
+        yield n
+        if n % 2 == 0:
+            n //= 2
+        else:
+            n = n * 3 + 1
+    yield n
+
+# Alternate Solution
+
+def hailstone_alt(n):
+    yield n
+    if n &gt; 1:
+        if n % 2 == 0:
+            yield from hailstone_alt(n // 2)
+        else:
+            yield from hailstone_alt(n * 3 + 1)
+</div></code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q hailstone</code></pre>
+
+<div class="sol-highlight">
+Walkthrough
+<p>
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/fQlIJa2_yqw?t=1h18m52s"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+</div>
+
+
+<h2 id="submit">Submit</h2>
+
+
+<p><strong>Please fill out the following survey about lab orientation: <a href="http://links.cs61a.org/lab-orientation-feedback">Survey</a></strong></p>
+
+<p>Make sure to submit this assignment by running:</p>
+
+<pre><code>python3 ok &#x2d;&#x2d;submit</code></pre>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#topics">Topics</a></li>
+  <ul>
+    <li><a href="index.html#nonlocal">Nonlocal</a></li>
+    <li><a href="index.html#mutability">Mutability</a></li>
+    <li><a href="index.html#iterators">Iterators</a></li>
+    <ul>
+      <li><a href="index.html#iterable-uses">Iterable Uses</a></li>
+    </ul>
+    <li><a href="index.html#generators">Generators</a></li>
+  </ul>
+  <li><a href="index.html#required-questions">Required Questions</a></li>
+  <ul>
+    <li><a href="index.html#nonlocal-wwpd">Nonlocal WWPD</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: WWPD: Nonlocal Quiz</a></li>
+    </ul>
+    <li><a href="index.html#mutability-2">Mutability</a></li>
+    <ul>
+      <li><a href="index.html#q2">Q2: List-Mutation</a></li>
+      <li><a href="index.html#q3">Q3: Insert Items</a></li>
+    </ul>
+    <li><a href="index.html#iterators-and-generators">Iterators and Generators</a></li>
+    <ul>
+      <li><a href="index.html#q4">Q4: Scale</a></li>
+      <li><a href="index.html#q5">Q5: Hailstone</a></li>
+    </ul>
+    <li><a href="index.html#submit">Submit</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

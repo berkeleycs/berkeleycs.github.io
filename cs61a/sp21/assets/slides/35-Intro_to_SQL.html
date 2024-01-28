@@ -1,0 +1,613 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Intro to SQL</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reset.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/theme/simple.css" id="theme">
+		<link rel="stylesheet" href="../css/mono-blue.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+		<style>
+			.reveal {
+				font-family: "Work Sans", sans-serif;
+			}
+
+			.reveal .slides section {
+				text-align: left;
+				font-size: smaller;
+			}
+
+			.reveal pre {
+				background-color: #f5f5f5;
+				width: 100%;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-shadow: none;
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+				font-family: "Roboto", sans-serif;
+				color: #0072c1;
+			}
+
+			.reveal section.heading-only {
+				text-align:center;
+				padding-top:20%;
+			}
+
+            .column .no-code-badge .code-badge {
+                display: none;
+            }
+
+            .code-badge-language {
+                display: none;
+            }
+
+			.python-tutor-link {
+				font-size: smaller;
+			}
+
+			.python-tutor-link:before {
+				content: "";
+				display: block;
+				background: url("http://pythontutor.com/favicon.ico") no-repeat;
+				width: 48px;
+				height: 48px;
+				float: left;
+				margin: 0 6px 0 0;
+			}
+
+			.reveal h3 {
+				margin-bottom: 40px;
+			}
+
+            .smaller {
+                font-size: smaller;
+            }
+
+            code {
+                padding: 2px 4px;
+                font-size: 90%;
+                color: #0072c1;
+                background-color: #f9f2f4;
+                border-radius: 4px;
+            }
+
+            p.padded {
+                margin-top: 32px;
+            }
+
+            section .row {
+                display: flex;
+            }
+
+            section .column {
+                flex: 48%;
+                margin: 10px;
+            }
+
+			@media print
+			{
+				.no-print, .no-print *
+				{
+					display: none !important;
+				}
+			}
+
+
+            .regex-input {
+                border:1px solid rgb(204, 204, 204);
+                background: rgb(245, 245, 245);
+                padding: 8px;
+            }
+
+            .regex-input input {
+                font-size: inherit;
+            }
+
+            .regex-input input[type=text]:invalid {
+                background-color: pink;
+            }
+
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="heading-only">
+                    <h1 class="smaller">Intro to SQL</h1>
+
+					<div class="no-print" style="text-align: left; margin-top: 100px; font-size: 70%;">
+						Tips for navigating the slides:
+						<ul>
+							<li>Press O or Escape for overview mode.</li>
+							<li>Visit <a href="35-Intro_to_SQL.html%3Fprint-pdf.html" target="_blank">this link</a> for a nice printable version</li>
+							<li>Press the copy icon on the upper right of code blocks to copy the code</li>
+						</ul>
+					</div>
+				</section>
+
+
+                <section class="heading-only">
+                    <h2>Databases</h2>
+                </section>
+
+                <section>
+                    <h3>Databases</h3>
+
+                    <p>Data can be stored in a database,
+                    a program that knows how to store, modify, and retrieve data.
+                    </p>
+
+                    <p>A <strong>relational</strong> database
+                        stores each kind of data in a table.
+                        Each table has columns and rows.
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Column 1
+                                <th>Column 2
+                                <th>Column 3
+                        <tbody>
+                            <tr>
+                                <td>Row 1
+                                <td>...
+                                <td>...
+                            <tr>
+                                <td>Row 2
+                                <td>...
+                                <td>...
+                            <tr>
+                                <td>Row 3
+                                <td>...
+                                <td>...
+                        </tbody>
+                    </table>
+
+                </section>
+
+                <section>
+                    <h3>Example tables</h3>
+
+                    <div style="text-align: left;">
+                    users:
+                    <table style="margin:0;">
+                        <thead>
+                            <tr>
+                                <th>id
+                                <th>nickname
+                                <th>location
+                        <tbody>
+                            <tr>
+                                <td>1
+                                <td>Sal
+                                <td>California
+                            <tr>
+                                <td>2
+                                <td>John
+                                <td>New York
+                            <tr>
+                                <td>3
+                                <td>MayLi
+                                <td>Washington
+                        </tbody>
+                    </table>
+                    <br>
+                    badges:
+                    <table style="margin:0;">
+                        <thead>
+                            <tr>
+                                <th>id
+                                <th>name
+                                <th>points
+                        <tbody>
+                            <tr>
+                                <td>1
+                                <td>Guru
+                                <td>1000
+                            <tr>
+                                <td>2
+                                <td>Oracle
+                                <td>2000
+                            <tr>
+                                <td>3
+                                <td>Wizard
+                                <td>500
+                        </tbody>
+                    </table>
+                    </div>
+
+                </section>
+
+                <section>
+                    <h3>Relating Tables</h3>
+
+                    <div class="row">
+                        <div class="column">
+                        users:
+                        <table style="margin:0;">
+                            <thead>
+                                <tr>
+                                    <th>id
+                                    <th>nickname
+                                    <th>location
+                            <tbody>
+                                <tr>
+                                    <td>1
+                                    <td>Sal
+                                    <td>California
+                                <tr>
+                                    <td>2
+                                    <td>John
+                                    <td>New York
+                                <tr>
+                                    <td>3
+                                    <td>MayLi
+                                    <td>Washington
+                            </tbody>
+                        </table>
+                        <br>
+                        badges:
+                        <table style="margin:0;">
+                            <thead>
+                                <tr>
+                                    <th>id
+                                    <th>name
+                                    <th>points
+                            <tbody>
+                                <tr>
+                                    <td>1
+                                    <td>Guru
+                                    <td>1000
+                                <tr>
+                                    <td>2
+                                    <td>Oracle
+                                    <td>2000
+                                <tr>
+                                    <td>3
+                                    <td>Wizard
+                                    <td>500
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="column">
+                            user_badges:
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>user_id
+                                    <th>badge_id
+                            <tbody>
+                                <tr>
+                                    <td>1
+                                    <td>1
+                                <tr>
+                                    <td>1
+                                    <td>2
+                                <tr>
+                                    <td>2
+                                    <td>3
+                                <tr>
+                                    <td>3
+                                    <td>3
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <section class="heading-only">
+                    <h2>SQL</h2>
+                </section>
+
+                <section>
+                    <h3>Structured Query Language</h3>
+
+                    <p>Originally called SEQUEL!<br>
+                    (Structured English QUEry Language)</p>
+
+                    <p>The most popular language for interacting with relational databases. Commands like...</p>
+
+                    <ul>
+                        <li><code>CREATE TABLE ...</code>
+                        <li><code>INSERT INTO ...</code>
+                        <li><code>UPDATE ...</code>
+                        <li><code>SELECT * FROM ...</code>
+                    </ul>
+
+                </section>
+
+                <section>
+                    <h3>CREATE & INSERT</h3>
+
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="sql">
+                    CREATE TABLE users (id INTEGER PRIMARY KEY,
+                        nickname TEXT, location TEXT);
+
+                    INSERT INTO users VALUES (1, "Sal", "California");
+                    INSERT INTO users VALUES (2, "John", "New York");
+                    INSERT INTO users VALUES (3, "MayLi", "Indonesia");
+
+                    SELECT * FROM users;
+                    </code></pre>
+
+                    <p>Try it on <a href="http://code.cs61a.org" target="_blank">code.cs61a.org</a>
+                        or <a href="https://www.khanacademy.org/cs/new/sql" target="_blank">khanacademy.org</a>
+                    </p>
+                    <br>
+                    <p>Documentation:
+                        <a href="https://sqlite.org/lang_createtable.html" target="_blank">SQLite.org: CREATE TABLE</a>,
+                        <a href="https://www.sqlite.org/lang_insert.html" target="_blank">SQLite.org: INSERT</a>,
+                        <a href="https://www.khanacademy.org/computer-programming/sql-create-table-with-multiple-data-types/5945065256124416" target="_blank">KA: CREATE TABLE</a>,
+                        <a href="https://www.khanacademy.org/computer-programming/sql-inserting-values-in-tables/5382515271532544" target="_blank">KA: INSERT</a>
+                    </p>
+                </section>
+
+
+
+                <section>
+                    <h3>UPDATE</h3>
+
+                    <p>Update column values of existing rows</p>
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="sql">
+                    CREATE TABLE users (id INTEGER PRIMARY KEY,
+                        nickname TEXT, location TEXT);
+
+                    INSERT INTO users VALUES (1, "Sal", "California");
+                    INSERT INTO users VALUES (2, "John", "New York");
+                    INSERT INTO users VALUES (3, "MayLi", "Indonesia");
+
+                    UPDATE users SET nickname = "Joan" WHERE id = 2;
+                    </code></pre>
+
+                    <br>
+                    <p>Documentation:
+                        <a href="https://www.khanacademy.org/computer-programming/sql-update-and-delete/5559819222253568" target="_blank">KA: UPDATE</a>
+                    </p>
+                </section>
+
+
+                <section>
+                    <h3>DELETE</h3>
+
+                    <p>Delete entire rows that match criteria</p>
+
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="sql">
+                    CREATE TABLE users (id INTEGER PRIMARY KEY,
+                        nickname TEXT, location TEXT);
+
+                    INSERT INTO users VALUES (1, "Sal", "California");
+                    INSERT INTO users VALUES (2, "John", "New York");
+                    INSERT INTO users VALUES (3, "MayLi", "Indonesia");
+
+                    DELETE FROM users WHERE id = 3;
+                    </code></pre>
+
+                    <br>
+                    <p>Documentation:
+                        <a href="https://www.khanacademy.org/computer-programming/sql-update-and-delete/5559819222253568" target="_blank">KA: DELETE</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>SELECT</h3>
+
+                    <p class="smaller">Most of the complexity and power of SQL is in the <code>SELECT</code> statement.</p>
+
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="sql">
+                    SELECT nickname FROM users;
+
+                    SELECT nickname, location FROM users;
+
+                    SELECT nickname, location FROM users ORDER BY nickname;
+
+                    SELECT nickname FROM users WHERE location = "California";
+                    </code></pre>
+                    <br>
+                    <p>Documentation:
+                        <a href="https://www.sqlite.org/lang_select.html" target="_blank">SQLite.org: SELECT</a>,<br>
+                        <a href="https://www.khanacademy.org/computer-programming/sql-selecting-rows/5163767537205248" target="_blank">KA: SELECT</a>,
+                        <a href="https://www.khanacademy.org/computer-programming/sql-selecting-with-where-conditions/6216095996444672" target="_blank">KA: SELECT WHERE</a>,
+                        <a href="https://www.khanacademy.org/computer-programming/sql-select-with-order-by/6218182226477056" target="_blank">KA: ORDER BY</a>,
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Aggregate functions</h3>
+
+                    <p>Aggregates column values in some way:<br>
+                      <code>MAX</code>/<code>MIN</code>, <code>SUM</code>, <code>AVG</code>, <code>COUNT</code></p>
+
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="sql">
+                    CREATE TABLE groceries (id INTEGER PRIMARY KEY,
+                        name TEXT, quantity INTEGER, aisle INTEGER);
+                    INSERT INTO groceries VALUES (1, "Bananas", 56, 7);
+                    INSERT INTO groceries VALUES(2, "Peanut Butter", 1, 2);
+                    INSERT INTO groceries VALUES(3, "Dark Chocolate Bars", 2, 2);
+                    INSERT INTO groceries VALUES(4, "Ice cream", 1, 12);
+                    INSERT INTO groceries VALUES(5, "Cherries", 6, 2);
+                    INSERT INTO groceries VALUES(6, "Chocolate syrup", 1, 4);
+
+                    SELECT MAX(quantity) FROM groceries;
+                    </code></pre>
+                    <br>
+                    <p>Documentation:
+                        <a href="https://www.sqlite.org/lang_aggfunc.html" target="_blank">SQLite.org: Aggregate functions</a>,<br>
+                        <a href="https://www.khanacademy.org/computer-programming/sql-select-with-aggregate-functions/4797964233080832" target="_blank">KA: SELECT with aggregate</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>GROUP BY</h3>
+
+                    <p>Groups rows that share the same column value</p>
+
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="sql">
+                    CREATE TABLE groceries (id INTEGER PRIMARY KEY,
+                        name TEXT, quantity INTEGER, aisle INTEGER);
+                    INSERT INTO groceries VALUES (1, "Bananas", 56, 7);
+                    INSERT INTO groceries VALUES(2, "Peanut Butter", 1, 2);
+                    INSERT INTO groceries VALUES(3, "Dark Chocolate Bars", 2, 2);
+                    INSERT INTO groceries VALUES(4, "Ice cream", 1, 12);
+                    INSERT INTO groceries VALUES(5, "Cherries", 6, 2);
+                    INSERT INTO groceries VALUES(6, "Chocolate syrup", 1, 4);
+
+                    SELECT aisle, SUM(quantity) FROM groceries GROUP BY aisle;
+                    </code></pre>
+                    <br>
+                    <p>Documentation:
+                        <a href="https://www.sqlite.org/lang_select.html#resultset" target="_blank">SQLite.org: Generating results</a>,<br>
+                        <a href="https://www.khanacademy.org/computer-programming/sql-grouping-select-results-with-group-by/5520132919132160" target="_blank">KA: SELECT with GROUP BY</a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>JOIN</h3>
+
+                    <p class="smaller">Generates results from two related tables that share a column.</p>
+                    <pre style="font-size:0.5em"><code data-trim data-noescape class="sql">
+                    CREATE TABLE students (id INTEGER PRIMARY KEY, first_name TEXT,
+                        last_name TEXT, email TEXT, phone TEXT, birthdate TEXT);
+
+                    INSERT INTO students (first_name, last_name, email, phone, birthdate)
+                        VALUES ("Peter", "Rabbit", "peter@rabbit.com", "555-6666", "2002-06-24");
+                    INSERT INTO students (first_name, last_name, email, phone, birthdate)
+                        VALUES ("Alice", "Wonderland", "alice@wonderland.com", "555-4444", "2002-07-04");
+
+                    CREATE TABLE student_projects (id INTEGER PRIMARY KEY,
+                        student_id INTEGER, title TEXT);
+
+                    INSERT INTO student_projects (student_id, title) VALUES (1, "Carrotapault");
+
+                    SELECT students.first_name, students.last_name, student_projects.title
+                        FROM students
+                        JOIN student_projects
+                        ON students.id = student_projects.student_id;
+                    </code></pre>
+
+                    <br>
+                    <p>Documentation:
+                        <a href="https://www.khanacademy.org/computer-programming/sql-join-on-tables/5409956539006976" target="_blank">KA: JOIN</a>
+                    </p>
+                </section>
+
+
+                <section>
+                    <h3>Where is SQL used?</h3>
+
+                    <p>1) Application data storage and 2) data analysis</p>
+                    <img src="https://i.imgur.com/saWrqSL.png" alt="Diagram of SQL usage in web application">
+
+                </section>
+
+
+                <section>
+                    <h3>Demo App: Native or Not?</h3>
+
+                    <p>
+                        <a href="https://flask-db-example.pamelafox2.repl.co/" target="_blank">flask-db-example.pamelafox2.repl.co</a>
+                    </p>
+
+                    <p>
+                        View the code by clicking the "Code" tab at
+                        <A href="https://replit.com/@PamelaFox2/flask-db-example" target="_blank">https://replit.com/@PamelaFox2/flask-db-example</a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>Demo App: 61A Merch</h3>
+
+                    <p>
+                        <a href="https://flask-db-example-1.pamelafox2.repl.co/" target="_blank">flask-db-example-1.pamelafox2.repl.co/</a>
+                    </p>
+
+                    <p>
+                        View the code by clicking the "Code" tab at
+                        <A href="https://replit.com/@PamelaFox2/61AMerchWithTransactions" target="_blank">https://replit.com/@PamelaFox2/61AMerchWithTransactions</a>
+                    </p>
+
+                    <p>Includes a transaction:</p>
+
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="sql">
+                    BEGIN;
+
+                    UPDATE products SET quantity = quantity - 1
+                        WHERE id = 1;
+
+                    INSERT INTO orders (customer, product_id)
+                        VALUES ("Animesh", 1);
+
+                    COMMIT;
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Further learning</h3>
+
+                    <p>There's lots we didn't cover today! <code>IN</code>, <code>HAVING</code>, <code>CASE</code>,  <code>ALTER TABLE</code>, more <code>JOIN</code>s,
+                        transactions, security, etc.
+                    </p>
+
+                    <p>Online learning:
+                        <ul>
+                            <li><a href="https://www.khanacademy.org/computing/computer-programming/sql" target="_blank">Khan Academy SQL course</a>
+                            <li><a href="https://www.kaggle.com/learn/intro-to-sql" target="_blank">Kaggle: Intro to SQL</a>
+                            <li><a href="https://cs.stanford.edu/people/widom/" target="_blank">Stanford's Database courses</a>
+                            <li><a href="https://www.coursera.org/learn/gcp-exploring-preparing-data-bigquery" target="_blank">Coursera: Exploring data with BigQuery</a>
+                        </ul>
+                    </p>
+
+                    <p>Berkeley classes:
+                        <ul>
+                            <li><a href="https://www2.eecs.berkeley.edu/Courses/CS186/" target="_blank">CS 186: Intro to Database Systems</a>
+                            <li><a href="https://ds100.org/" target="_blank">Data 100: Principles and Techniques of Data Science</a>
+                            <li><a href="https://cal-data-eng.github.io/" target="_blank">CS194/INFO290: Data Engineering</a>
+                    </p>
+                </section>
+
+
+
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/highlightjs-badge@0.1.9/highlightjs-badge.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+		<script>
+			const srcUrlPrefix = "https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/";
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				slideNumber: true,
+				showNotes: false,
+				margin: 0.1,
+				preloadIframes: true,
+				plugins: [ RevealHighlight ],
+				pdfSeparateFragments: true
+			});
+
+            // add HighlightJS-badge (options are optional)
+            var options = {
+                copyIconContent: "📄",
+                checkIconContent: "✅"
+            };
+            window.highlightJsBadge(options);
+
+            if (window.location.search == "?print-pdf") {
+                var uncounted = document.querySelectorAll("[data-visibility='uncounted']");
+                uncounted.forEach(node => {
+                    node.parentNode.classList.add("no-print")
+                })
+            }
+		</script>
+	</body>
+</html>

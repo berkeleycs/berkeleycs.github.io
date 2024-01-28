@@ -1,0 +1,982 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/hw.css">
+
+
+    <title>
+Homework 3 Solutions | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Homework 3 Solutions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="hw03.zip" class="label label-outline">hw03.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+<h2>Solution Files</h2>
+<p>You can find solutions for all questions in <a href="hw03.py">hw03.py</a>.</p>
+
+    
+<h1 id="required-questions">Required questions</h1>
+
+
+<h3 class="question" id="q1">Q1: Num eights</h3>
+
+<p>Write a recursive function <code>num_eights</code> that takes a positive integer <code>x</code> and
+returns the number of times the digit 8 appears in <code>x</code>.
+<em>Use recursion - the tests will fail if you use any assignment statements.</em></p>
+
+<solution>
+
+<pre><code>def num_eights(x):
+    &quot;&quot;&quot;Returns the number of times 8 appears as a digit of x.
+
+    &gt;&gt;&gt; num_eights(3)
+    0
+    &gt;&gt;&gt; num_eights(8)
+    1
+    &gt;&gt;&gt; num_eights(88888888)
+    8
+    &gt;&gt;&gt; num_eights(2638)
+    1
+    &gt;&gt;&gt; num_eights(86380)
+    2
+    &gt;&gt;&gt; num_eights(12345)
+    0
+    &gt;&gt;&gt; from construct_check import check
+    &gt;&gt;&gt; # ban all assignment statements
+    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;num_eights&#x27;,
+    ...       [&#x27;Assign&#x27;, &#x27;AugAssign&#x27;])
+    True
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if x % 10 == 8:
+        return 1 + num_eights(x // 10)
+    elif x &lt; 10:
+        return 0
+    else:
+        return num_eights(x // 10)</div></code></pre>
+
+</solution>
+
+<br />
+
+<p>Watch the hints video below for somewhere to start:
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/j34yCDO1ASQ"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></p>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q num_eights</code></pre>
+
+<div class="sol-highlight">
+
+<p>The equivalent iterative version of this problem might look something like
+this:</p>
+
+<pre><code>total = 0
+while x &gt; 0:
+    if x % 10 == 8:
+        total = total + 1
+    x = x // 10
+return total</code></pre>
+
+<p>The main idea is that we check each digit for a eight. The recursive
+solution is similar, except that you depend on the recursive call to count the occurences
+of eight in the rest of the number. Then, you add that to the number of eights you see
+in the current digit.</p>
+
+</div>
+
+<h3 class="question" id="q2">Q2: Ping-pong</h3>
+
+<p>The ping-pong sequence counts up starting from 1 and is always either counting
+up or counting down.  At element <code>k</code>, the direction switches if <code>k</code> is a
+multiple of 8 or contains the digit 8.  The first 30 elements of the ping-pong
+sequence are listed below, with direction swaps marked using brackets at the
+8th, 16th, 18th, 24th, and 28th elements:</p>
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>Index</th>
+    <th>1</th>
+    <th>2</th>
+    <th>3</th>
+    <th>4</th>
+    <th>5</th>
+    <th>6</th>
+    <th>7</th>
+    <th>[8]</th>
+    <th>9</th>
+    <th>10</th>
+    <th>11</th>
+    <th>12</th>
+    <th>13</th>
+    <th>14</th>
+    <th>15</th>
+    <th>[16]</th>
+    <th>17</th>
+    <th>[18]</th>
+    <th>19</th>
+    <th>20</th>
+    <th>21</th>
+    <th>22</th>
+    <th>23</th>
+  </tr>
+  <tr>
+    <td>PingPong Value</td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <td>[8]</td>
+    <td>7</td>
+    <td>6</td>
+    <td>5</td>
+    <td>4</td>
+    <td>3</td>
+    <td>2</td>
+    <td>1</td>
+    <td>[0]</td>
+    <td>1</td>
+    <td>[2]</td>
+    <td>1</td>
+    <td>0</td>
+    <td>-1</td>
+    <td>-2</td>
+    <td>-3</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>Index (cont.)</th>
+    <th>[24]</th>
+    <th>25</th>
+    <th>26</th>
+    <th>27</th>
+    <th>[28]</th>
+    <th>29</th>
+    <th>30</th>
+  </tr>
+  <tr>
+    <td>PingPong Value</td>
+    <td>[-4]</td>
+    <td>-3</td>
+    <td>-2</td>
+    <td>-1</td>
+    <td>[0]</td>
+    <td>-1</td>
+    <td>-2</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+<p>Implement a function <code>pingpong</code> that returns the nth element of the ping-pong
+sequence <em>without using any assignment statements</em>.</p>
+
+<p>You may use the function <code>num_eights</code>, which you defined in the previous question.</p>
+
+<p><em>Use recursion - the tests will fail if you use any assignment statements.</em></p>
+
+<blockquote><p><em>Hint</em>: If you're stuck, first try implementing <code>pingpong</code> using assignment
+statements and a <code>while</code> statement. Then, to convert this into a recursive
+solution, write a helper function that has a parameter for each variable that
+changes values in the body of the while loop.</p></blockquote>
+
+<solution>
+
+<pre><code>def pingpong(n):
+    &quot;&quot;&quot;Return the nth element of the ping&#x2d;pong sequence.
+
+    &gt;&gt;&gt; pingpong(8)
+    8
+    &gt;&gt;&gt; pingpong(10)
+    6
+    &gt;&gt;&gt; pingpong(15)
+    1
+    &gt;&gt;&gt; pingpong(21)
+    &#x2d;1
+    &gt;&gt;&gt; pingpong(22)
+    &#x2d;2
+    &gt;&gt;&gt; pingpong(30)
+    &#x2d;2
+    &gt;&gt;&gt; pingpong(68)
+    0
+    &gt;&gt;&gt; pingpong(69)
+    &#x2d;1
+    &gt;&gt;&gt; pingpong(80)
+    0
+    &gt;&gt;&gt; pingpong(81)
+    1
+    &gt;&gt;&gt; pingpong(82)
+    0
+    &gt;&gt;&gt; pingpong(100)
+    &#x2d;6
+    &gt;&gt;&gt; from construct_check import check
+    &gt;&gt;&gt; # ban assignment statements
+    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;pingpong&#x27;, [&#x27;Assign&#x27;, &#x27;AugAssign&#x27;])
+    True
+    &quot;&quot;&quot;
+<div class="sol-highlight">    def helper(result, i, step):
+        if i == n:
+            return result
+        elif i % 8 == 0 or num_eights(i) &gt; 0:
+            return helper(result &#x2d; step, i + 1, &#x2d;step)
+        else:
+            return helper(result + step, i + 1, step)
+    return helper(1, 1, 1)
+
+# Alternate solution 1
+def pingpong_next(x, i, step):
+    if i == n:
+        return x
+    return pingpong_next(x + step, i + 1, next_dir(step, i+1))
+
+def next_dir(step, i):
+    if i % 8 == 0 or num_eights(i) &gt; 0:
+        return &#x2d;step
+    return step
+
+# Alternate solution 2
+def pingpong_alt(n):
+    if n &lt;= 8:
+        return n
+    return direction(n) + pingpong_alt(n&#x2d;1)
+
+def direction(n):
+    if n &lt; 8:
+        return 1
+    if (n&#x2d;1) % 8 == 0 or num_eights(n&#x2d;1) &gt; 0:
+        return &#x2d;1 * direction(n&#x2d;1)
+    return direction(n&#x2d;1)</div></code></pre>
+
+</solution>
+
+<br />
+
+<p>Watch the hints video below for somewhere to start:
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/5PAfXcB_EoU"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></p>
+
+<br />
+
+<!--
+
+<pre><code>def has_eight(k):
+    &quot;&quot;&quot;Returns True if at least one of the digits of k is a 8, False otherwise.
+
+    &gt;&gt;&gt; has_eight(3)
+    False
+    &gt;&gt;&gt; has_eight(8)
+    True
+    &gt;&gt;&gt; has_eight(2834)
+    True
+    &gt;&gt;&gt; has_eight(2634)
+    False
+    &gt;&gt;&gt; has_eight(834)
+    True
+    &gt;&gt;&gt; has_eight(8888)
+    True
+    &quot;&quot;&quot;
+    if k % 10 == 8:
+        return True
+    elif k &lt; 10:
+        return False
+    else:
+        return has_eight(k // 10)</code></pre>
+
+-->
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q pingpong</code></pre>
+
+<div class="sol-highlight">
+
+<p>This is a fairly involved recursion problem, which we will first solve
+through iteration and then convert to a recursive solution.</p>
+
+<p>Note that at any given point in the sequence, we need to keep track of the
+current <em>value</em> of the sequence (this is the value that might be output)
+as well as the current <em>index</em> of the sequence (how many items we have
+seen so far, not actually output).</p>
+
+<p>For example, 14th element has <em>value</em> 0, but it's the 14th <em>index</em> in
+the sequence. We will refer to the value as <code>x</code> and the index as <code>i</code>. An
+iterative solution may look something like this:</p>
+
+<pre><code>def pingpong(n):
+    i = 1
+    x = 1
+    while i &lt; n:
+        x += 1
+        i += 1
+    return x</code></pre>
+
+<p>Hopefully, it is clear to you that this has a big problem. This doesn't
+account for changes in directions at all! It will work for the first eight
+values of the sequence, but then fail after that. To fix this, we can add
+in a check for direction, and then also keep track of the current
+direction to make our lives a bit easier (it's possible to compute the
+direction from scratch at each step, see the <code>direction</code> function in the
+alternate solution).</p>
+
+<pre><code>def pingpong(n):
+    i = 1
+    x = 1
+    is_up = True
+    while i &lt; n:
+        is_up = next_dir(...)
+        if is_up:
+            x += 1
+        else:
+            x &#x2d;= 1
+        i += 1
+    return x</code></pre>
+
+<p>All that's left to do is to write the <code>next_dir</code> function, which will take
+in the <em>current direction</em> and <em>index</em> and then tell us what direction to
+go in next (which could be the same direction):</p>
+
+<pre><code>def next_dir(is_up, i):
+    if i % 8 == 0 or num_eights(i) &gt; 0:
+        return not is_up
+    return is_up</code></pre>
+
+<p>There's a tiny optimization we can make here. Instead of calculating an
+increment based on the value of <code>is_up</code>, we can make it directly store the
+direction of change into the variable (<code>next_dir</code> is also updated, see the
+solution for the new version):</p>
+
+<pre><code>def pingpong(n):
+    i = 1
+    x = 1
+    step = 1
+    while i &lt; n:
+        step = next_dir(step, i)
+        x += step
+        i += 1
+    return x</code></pre>
+
+<p>This will work, but it uses assignment. To convert it to an equivalent
+recursive version without assignment, make each local variable into a
+parameter of a new helper function, and then add an appropriate base case.
+Lastly, we seed the helper function with appropriate starting values by
+calling it with the values we had in the iterative version.</p>
+
+<p>You should be able to convince yourself that the version of <code>pingpong</code> in
+the solutions has the same logic as the iterative version of <code>pingpong</code>
+above.</p>
+
+<p>Video walkthrough: <a href='https://youtu.be/74gwPjgrN_k'> https://youtu.be/74gwPjgrN_k </a></p>
+
+</div>
+
+<h3 class="question" id="q3">Q3: Missing Digits</h3>
+
+<p>Write the recursive function <code>missing_digits</code> that takes a number <code>n</code> that is sorted in increasing order (for example, <code>12289</code> is valid but <code>15362</code> and <code>98764</code> are not). It returns the number of missing digits in <code>n</code>. A missing digit is a number between the first and last digit of <code>n</code> of a that is not in <code>n</code>.
+<em>Use recursion - the tests will fail if you use while or for loops.</em></p>
+
+<solution>
+
+<pre><code>def missing_digits(n):
+    &quot;&quot;&quot;Given a number a that is in sorted, increasing order,
+    return the number of missing digits in n. A missing digit is
+    a number between the first and last digit of a that is not in n.
+    &gt;&gt;&gt; missing_digits(1248) # 3, 5, 6, 7
+    4
+    &gt;&gt;&gt; missing_digits(19) # 2, 3, 4, 5, 6, 7, 8
+    7
+    &gt;&gt;&gt; missing_digits(1122) # No missing numbers
+    0
+    &gt;&gt;&gt; missing_digits(123456) # No missing numbers
+    0
+    &gt;&gt;&gt; missing_digits(3558) # 4, 6, 7
+    3
+    &gt;&gt;&gt; missing_digits(35578) # 4, 6
+    2
+    &gt;&gt;&gt; missing_digits(12456) # 3
+    1
+    &gt;&gt;&gt; missing_digits(16789) # 2, 3, 4, 5
+    4
+
+    &gt;&gt;&gt; missing_digits(4) # No missing numbers between 4 and 4
+    0
+    &gt;&gt;&gt; from construct_check import check
+    &gt;&gt;&gt; # ban while or for loops
+    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;missing_digits&#x27;, [&#x27;While&#x27;, &#x27;For&#x27;])
+    True
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if n &lt; 10:
+        return 0
+    last, rest = n % 10, n // 10
+    return max(last &#x2d; rest % 10 &#x2d; 1, 0) + missing_digits(rest)
+# Alternate solution
+def missing_digits_alt(n):
+    def helper(n, digit):
+        if n == 0:
+            return 0
+        last, rest = n % 10, n // 10
+        if last == digit or last + 1 == digit:
+            return helper(rest, last)
+        return 1 + helper(n, digit &#x2d; 1)
+    return helper(n // 10, n % 10)</div></code></pre>
+
+</solution>
+
+<br />
+
+<p>Watch the hints video below for somewhere to start:
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/xcd2jTROLSs"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></p>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q missing_digits</code></pre>
+
+<div class="sol-highlight">
+The equivalent iterative version of this problem might look something like this:
+
+<p>missing = 0
+	while n > 10:
+		last, rest = n % 10, n // 10
+		missing += max(last - rest % 10 - 1, 0)
+		n //= 10
+	return missing</p>
+
+<p>A tricky case for this problem was handling adjacent numbers that are the same - that's why we wrap the digit difference each recursive call with a max comparison call to 0.</p>
+
+</div>
+
+<h3 class="question" id="q4">Q4: Count coins</h3>
+
+<p>Given a positive integer <code>change</code>, a set of coins makes change for <code>change</code> if
+the sum of the values of the coins is <code>change</code>. Here we will use standard US Coin values: 1, 5, 10, 25 For example, the following
+sets make change for <code>15</code>:</p>
+
+<ul>
+  <li>15 1-cent coins</li>
+  <li>10 1-cent, 1 5-cent coins</li>
+  <li>5 1-cent, 2 5-cent coins</li>
+  <li>5 1-cent, 1 10-cent coins</li>
+  <li>3 5-cent coins</li>
+  <li>1 5-cent, 1 10-cent coin</li>
+</ul>
+
+<p>Thus, there are 6 ways to make change for <code>15</code>.  Write a <strong>recursive</strong> function
+<code>count_coins</code> that takes a positive integer <code>change</code> and returns the number of
+ways to make change for <code>change</code> using coins. Use the <code>get_next_coin</code> function given to you to calculate the next largest coin denomination given your current coin. I.e. <code>get_next_coin(5)</code> = <code>10</code>.</p>
+
+<blockquote><p><em>Hint:</em> Refer the <a href="http://composingprograms.com/pages/17-recursive-functions.html#example-partitions">implementation</a> of <code>count_partitions</code> for an
+example of how to count the ways to sum up to a final value with smaller parts.
+If you need to keep track of more than one value across recursive calls,
+consider writing a helper function.</p></blockquote>
+
+<solution>
+
+<pre><code>def get_next_coin(coin):
+    &quot;&quot;&quot;Return the next coin. 
+    &gt;&gt;&gt; get_next_coin(1)
+    5
+    &gt;&gt;&gt; get_next_coin(5)
+    10
+    &gt;&gt;&gt; get_next_coin(10)
+    25
+    &gt;&gt;&gt; get_next_coin(2) # Other values return None
+    &quot;&quot;&quot;
+    if coin == 1:
+        return 5
+    elif coin == 5:
+        return 10
+    elif coin == 10:
+        return 25
+
+def count_coins(change):
+    &quot;&quot;&quot;Return the number of ways to make change using coins of value of 1, 5, 10, 25.
+    &gt;&gt;&gt; count_coins(15)
+    6
+    &gt;&gt;&gt; count_coins(10)
+    4
+    &gt;&gt;&gt; count_coins(20)
+    9
+    &gt;&gt;&gt; count_coins(100) # How many ways to make change for a dollar?
+    242
+    &gt;&gt;&gt; from construct_check import check
+    &gt;&gt;&gt; # ban iteration
+    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;count_coins&#x27;, [&#x27;While&#x27;, &#x27;For&#x27;])                                          
+    True
+    &quot;&quot;&quot;
+<div class="sol-highlight">    def constrained_count(change, smallest_coin):
+        if change == 0:
+            return 1
+        if change &lt; 0:
+            return 0
+        if smallest_coin == None:
+            return 0
+        without_coin = constrained_count(change, get_next_coin(smallest_coin))
+        with_coin = constrained_count(change &#x2d; smallest_coin, smallest_coin)
+        return without_coin + with_coin
+    return constrained_count(change, 1)</div></code></pre>
+
+</solution>
+
+<br />
+
+<p>Watch the hints video below for somewhere to start:
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/0LovlsasgoI"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></p>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q count_coins</code></pre>
+
+<div class="sol-highlight">
+
+<p>This is remarkably similar to the <code>count_partitions</code> problem, with a
+few minor differences:</p>
+
+<ul>
+  <li>A maximum partition size is not given, so we need to create a helper
+  function that takes in two arguments and also create another helper function
+  to find the max coin.</li>
+  <li>Partition size is not linear. To get the next
+  partition you need to call <code>get_next_coin</code></li>
+</ul>
+
+</div>
+
+
+<h2 id="submit">Submit</h2>
+
+
+<p>Make sure to submit this assignment by running:</p>
+
+<pre><code>python3 ok &#x2d;&#x2d;submit</code></pre>
+
+<!-- # Optional List Question -->
+
+<!-- <include topics/lists/immutable/medium/flatten.md> -->
+
+
+<h1 id="just-for-fun-questions">Just for Fun Questions</h1>
+
+
+<h3 class="question" id="q5">Q5: Anonymous factorial</h3>
+
+<blockquote><p>This question demonstrates that it's possible to write recursive functions without assigning them a name in the global frame.</p></blockquote>
+
+<p>The recursive factorial function can be written as a single expression
+by using a <a href="http://docs.python.org/py3k/reference/expressions.html#conditional-expressions">conditional expression</a>.</p>
+
+<pre><code>&gt;&gt;&gt; fact = lambda n: 1 if n == 1 else mul(n, fact(sub(n, 1)))
+&gt;&gt;&gt; fact(5)
+120</code></pre>
+
+<p>However, this implementation relies on the fact (no pun intended) that
+<code>fact</code> has a name, to which we refer in the body of <code>fact</code>.  To write a
+recursive function, we have always given it a name using a <code>def</code> or
+assignment statement so that we can refer to the function within its
+own body.  In this question, your job is to define fact recursively
+without giving it a name!</p>
+
+<p>Write an expression that computes <code>n</code> factorial using only call
+expressions, conditional expressions, and lambda expressions (no
+assignment or def statements).  <em>Note in particular that you are not
+allowed to use <code>make_anonymous_factorial</code> in your return expression.</em>
+The <code>sub</code> and <code>mul</code> functions from the <code>operator</code> module are the only
+built-in functions required to solve this problem:</p>
+
+<solution>
+
+<pre><code>from operator import sub, mul
+
+def make_anonymous_factorial():
+    &quot;&quot;&quot;Return the value of an expression that computes factorial.
+
+    &gt;&gt;&gt; make_anonymous_factorial()(5)
+    120
+    &gt;&gt;&gt; from construct_check import check
+    &gt;&gt;&gt; # ban any assignments or recursion
+    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;make_anonymous_factorial&#x27;, [&#x27;Assign&#x27;, &#x27;AugAssign&#x27;, &#x27;FunctionDef&#x27;, &#x27;Recursion&#x27;])
+    True
+    &quot;&quot;&quot;
+<div class="sol-highlight">    return (lambda f: lambda k: f(f, k))(lambda f, k: k if k == 1 else mul(k, f(f, sub(k, 1))))
+    # Alternate solution:
+    #   return (lambda f: f(f))(lambda f: lambda x: 1 if x == 0 else x * f(f)(x &#x2d; 1))</div></code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q make_anonymous_factorial</code></pre>
+
+<h3 class="question" id="q6">Q6: Towers of Hanoi</h3>
+
+<blockquote><p>This problem was covered in lecture, but feel free to 
+use this question to test your understanding and re-implement the problem.</p></blockquote>
+
+<p>A classic puzzle called the Towers of Hanoi is a game that consists of three
+rods, and a number of disks of different sizes which can slide onto any rod.
+The puzzle starts with <code>n</code> disks in a neat stack in ascending order of size on
+a <code>start</code> rod, the smallest at the top, forming a conical shape.</p>
+
+<p><img class="img-responsive center-block" src="https://upload.wikimedia.org/wikipedia/commons/0/07/Tower_of_Hanoi.jpeg" alt="Towers of Hanoi"></p>
+
+<p>The objective of the puzzle is to move the entire stack to an <code>end</code> rod,
+obeying the following rules:</p>
+
+<ul>
+  <li>Only one disk may be moved at a time.</li>
+  <li>Each move consists of taking the top (smallest) disk from one of the rods and
+  sliding it onto another rod, on top of the other disks that may already be
+  present on that rod.</li>
+  <li>No disk may be placed on top of a smaller disk.</li>
+</ul>
+
+<p>Complete the definition of <code>move_stack</code>, which prints out the steps required to
+move <code>n</code> disks from the <code>start</code> rod to the <code>end</code> rod without violating the
+rules. The provided <code>print_move</code> function will print out the step to move a
+single disk from the given <code>origin</code> to the given <code>destination</code>.</p>
+
+<blockquote><p><em>Hint:</em> Draw out a few games with various <code>n</code> on a piece of paper and try to
+find a pattern of disk movements that applies to any <code>n</code>. In your solution,
+take the recursive leap of faith whenever you need to move any amount of
+disks less than <code>n</code> from one rod to another. If you need more help, see
+the following hints.</p></blockquote>
+
+
+        <button id='toggle-1' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Hint 1<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-1">
+See the following animation of the Towers of Hanoi, found on <a href="https://commons.wikimedia.org/wiki/File:Iterative_algorithm_solving_a_6_disks_Tower_of_Hanoi.gif">Wikimedia</a> by user <a href="https://commons.wikimedia.org/wiki/User:Trixx">Trixx</a>
+
+<img class="img-responsive center-block" src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Iterative_algorithm_solving_a_6_disks_Tower_of_Hanoi.gif"/>
+</div>
+<br>
+
+        <button id='toggle-2' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Hint 2<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-2">
+The strategy used in Towers of Hanoi is to move all but the bottom disc to the second peg, then moving the bottom disc to the third peg, then moving all but the second disc from the second to the third peg.
+</div>
+<br>
+
+        <button id='toggle-3' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Hint 3<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-3">
+One thing you don't need to worry about is collecting all the steps. <code>print</code> effectively "collects" all the results in the terminal as long as you make sure that the moves are printed in order.
+</div>
+
+<solution>
+
+<pre><code>def print_move(origin, destination):
+    &quot;&quot;&quot;Print instructions to move a disk.&quot;&quot;&quot;
+    print(&quot;Move the top disk from rod&quot;, origin, &quot;to rod&quot;, destination)
+
+def move_stack(n, start, end):
+    &quot;&quot;&quot;Print the moves required to move n disks on the start pole to the end
+    pole without violating the rules of Towers of Hanoi.
+
+    n &#x2d;&#x2d; number of disks
+    start &#x2d;&#x2d; a pole position, either 1, 2, or 3
+    end &#x2d;&#x2d; a pole position, either 1, 2, or 3
+
+    There are exactly three poles, and start and end must be different. Assume
+    that the start pole has at least n disks of increasing size, and the end
+    pole is either empty or has a top disk larger than the top n start disks.
+
+    &gt;&gt;&gt; move_stack(1, 1, 3)
+    Move the top disk from rod 1 to rod 3
+    &gt;&gt;&gt; move_stack(2, 1, 3)
+    Move the top disk from rod 1 to rod 2
+    Move the top disk from rod 1 to rod 3
+    Move the top disk from rod 2 to rod 3
+    &gt;&gt;&gt; move_stack(3, 1, 3)
+    Move the top disk from rod 1 to rod 3
+    Move the top disk from rod 1 to rod 2
+    Move the top disk from rod 3 to rod 2
+    Move the top disk from rod 1 to rod 3
+    Move the top disk from rod 2 to rod 1
+    Move the top disk from rod 2 to rod 3
+    Move the top disk from rod 1 to rod 3
+    &quot;&quot;&quot;
+    assert 1 &lt;= start &lt;= 3 and 1 &lt;= end &lt;= 3 and start != end, &quot;Bad start/end&quot;
+<div class="sol-highlight">    if n == 1:
+        print_move(start, end)
+    else:
+        other = 6 &#x2d; start &#x2d; end
+        move_stack(n&#x2d;1, start, other)
+        print_move(start, end)
+        move_stack(n&#x2d;1, other, end)</div></code></pre>
+
+</solution>
+
+<br />
+
+<p>Watch the hints video below for somewhere to start:
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/PPmFbYAOxyY"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe></p>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q move_stack</code></pre>
+
+<div class="sol-highlight">
+
+<p>To solve the Towers of Hanoi problem for <code>n</code> disks, we need to do three
+steps:</p>
+
+<ol>
+  <li>Move everything but the last disk (<code>n&#x2d;1</code> disks) to someplace in the
+  middle (not the start nor the end rod).</li>
+  <li>Move the last disk (a single disk) to the end rod. This must occur
+  after step 1 (we have to move everything above it away first)!</li>
+  <li>Move everything but the last disk (the disks from step 1) from the
+  middle on top of the end rod.</li>
+</ol>
+
+<p>We take advantage of the fact that the recursive function <code>move_stack</code> is
+guaranteed to move <code>n</code> disks from <code>start</code> to <code>end</code> while obeying the rules
+of Towers of Hanoi. The only thing that remains is to make sure that we
+have set up the playing board to make that possible.</p>
+
+<p>Since we move a disk to end rod, we run the risk of <code>move_stack</code> doing an
+improper move (big disk on top of small disk). But since we're moving the
+biggest disk possible, nothing in the <code>n&#x2d;1</code> disks above that is bigger.
+Therefore, even though we do not explicitly state the Towers of Hanoi
+constraints, we can still carry out the correct steps.</p>
+
+<p>Video walkthrough: <a href='https://youtu.be/VwynGQiCTFM'> https://youtu.be/VwynGQiCTFM </a></p>
+
+</div>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#required-questions">Required questions</a></li>
+  <ul>
+    <li><a href="index.html#q1">Q1: Num eights</a></li>
+    <li><a href="index.html#q2">Q2: Ping-pong</a></li>
+    <li><a href="index.html#q3">Q3: Missing Digits</a></li>
+    <li><a href="index.html#q4">Q4: Count coins</a></li>
+  </ul>
+  <ul>
+    <li><a href="index.html#submit">Submit</a></li>
+  </ul>
+  <li><a href="index.html#just-for-fun-questions">Just for Fun Questions</a></li>
+  <ul>
+    <li><a href="index.html#q5">Q5: Anonymous factorial</a></li>
+    <li><a href="index.html#q6">Q6: Towers of Hanoi</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,829 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>List methods, Identity, and Nonlocal</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reset.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/theme/simple.css" id="theme">
+		<link rel="stylesheet" href="../css/mono-blue.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+		<style>
+			.reveal {
+				font-family: "Work Sans", sans-serif;
+			}
+
+			.reveal .slides section {
+				text-align: left;
+				font-size: smaller;
+			}
+
+			.reveal pre {
+				background-color: #f5f5f5;
+				width: 100%;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-shadow: none;
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+				font-family: "Roboto", sans-serif;
+				color: #0072c1;
+			}
+
+			.reveal section.heading-only {
+				text-align:center;
+				padding-top:20%;
+			}
+
+            .code-badge-language {
+                display: none;
+            }
+
+			.python-tutor-link {
+				font-size: smaller;
+			}
+
+			.python-tutor-link:before {
+				content: "";
+				display: block;
+				background: url("http://pythontutor.com/favicon.ico") no-repeat;
+				width: 48px;
+				height: 48px;
+				float: left;
+				margin: 0 6px 0 0;
+			}
+
+			.reveal h3 {
+				margin-bottom: 40px;
+			}
+
+            .smaller {
+                font-size: smaller;
+            }
+
+			@media print
+			{
+				.no-print, .no-print *
+				{
+					display: none !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="heading-only">
+					<h2>List Mutation, Identity, and Nonlocal</h2>
+
+					<div class="no-print" style="text-align: left; margin-top: 200px; font-size: 70%;">
+						Tips for navigating the slides:
+						<ul>
+							<li>Press O or Escape for overview mode.</li>
+							<li>Visit <a href="14-List_mutation_+_Identity_+_Nonlocal.html%3Fprint-pdf.html" target="_blank">this link</a> for a nice printable version</li>
+							<li>Press the copy icon on the upper right of code blocks to copy the code</li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="heading-only">
+					<h3>Lists</h3>
+				</section>
+
+				<section>
+					<h3>List creation</h3>
+
+                    <p>Creating a list from scratch:</p>
+					<pre><code data-trim data-noescape>
+                    a = []
+                    b = [1, 2, 3, 4, 5]
+                    </pre></code>
+
+                    <p>Creating a list from existing lists:</p>
+                    <pre><code data-trim data-noescape>
+                    c = b + [20, 30]
+                    d = c[:]
+                    e = list(c)
+                    </pre></code>
+
+                    <p class="smaller">Non-destructive or destructive? <br>
+                    <span class="fragment">The operations above are <strong>non-destructive.</strong></span>
+                    </p>
+
+                    <p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=a%20%3D%20%5B%5D%0Ab%20%3D%20%5B1,%202,%203,%204,%205%5D%0A%0Ac%20%3D%20b%20%2B%20%5B20,%2030%5D%0Ad%20%3D%20c%5B%3A%5D%0Ae%20%3D%20list%28c%29%0Ae2%20%3D%20e&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor.
+						</a>
+                    </p>
+                    <br>
+
+
+                    <aside class="notes">
+                        e2 = e<br>
+                        I like to say that the value of a variable like x in x = [1, 2, 3] is the arrow from x to the list object, as opposed to the list object itself.  Thus y = x copies an arrow, not an object.  x itself is then the box holding the arrow; it can be changed without changing the object at the end of the arrow.  Likewise x[0] is the first box in the list that is at the end of the arrow in x.  We confuse the issue by suggesting that x is the list object, whereas in fact it contains a reference to the list object.
+                    </aside>
+                </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>List mutation</h3>
+
+                    <pre><code data-trim data-noescape>
+					L[2] = 6
+
+					L[1:3] = [9, 8]
+
+					L[2:4] = []            # Deleting elements
+
+					L[1:1] = [2, 3, 4, 5]  # Inserting elements
+
+					L[len(L):] = [10, 11]  # Appending
+
+					L[0:0] = range(-3, 0)  # Prepending
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=L%20%3D%20%5B1,%202,%203,%204,%205%5D%0A%0AL%5B2%5D%20%3D%206%0A%0AL%5B1%3A3%5D%20%3D%20%5B9,%208%5D%0A%0AL%5B2%3A4%5D%20%3D%20%5B%5D%20%20%20%20%20%20%20%20%20%20%20%20%23%20Deleting%20elements%0A%0AL%5B1%3A1%5D%20%3D%20%5B2,%203,%204,%205%5D%20%20%23%20Inserting%20elements%0A%0AL%5Blen%28L%29%3A%5D%20%3D%20%5B10,%2011%5D%20%20%23%20Appending%0A%0AL%20%3D%20L%20%2B%20%5B20,%2030%5D%0A%0AL%5B0%3A0%5D%20%3D%20range%28-3,%200%29%20%20%23%20Prepending&cumulative=true&curInstr=8&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor.
+						</a>
+                    </p>
+
+                    <p class="smaller">Non-destructive or destructive? <br>
+                        <span class="fragment">All of the operations above are <strong>destructive.</strong></span>
+                    </p>
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>List methods</h3>
+
+					<p><code>append()</code> adds a single element to a list:</p>
+
+					<pre><code data-trim data-noescape>
+					s = [2, 3]
+					t = [5, 6]
+					s.append(4)
+					s.append(t)
+					t = 0
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=s%20%3D%20%5B2,%203%5D%0At%20%3D%20%5B5,%206%5D%0As.append%284%29%0As.append%28t%29%0At%20%3D%200&cumulative=true&curInstr=5&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor.
+						</a>
+					</p>
+
+					<p style="margin-top:32px;"><code>extend()</code> adds all the elements in one list to a list:</p>
+
+					<pre><code data-trim data-noescape>
+					s = [2, 3]
+					t = [5, 6]
+					s.extend(4) <span class="fragment" data-fragment-index="1"># 🚫 Error: 4 is not an iterable!</span>
+					s.extend(t)
+					t = 0
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=s%20%3D%20%5B2,%203%5D%0At%20%3D%20%5B5,%206%5D%0As.extend%28t%29%0At%20%3D%200&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor. <span class="fragment" data-fragment-index="1">(After deleting the bad line)</span>
+						</a>
+					</p>
+
+                    <p class="smaller">Non-destructive or destructive? <br>
+                        <span class="fragment"><code>append()</code> and <code>extend()</code> are <strong>destructive.</strong></span>
+                    </p>
+
+					<aside class="notes">
+					</aside>
+				</section>
+
+				<section>
+					<h3>List methods</h3>
+
+					<p><code>pop()</code> removes and returns the last element:</p>
+
+					<pre><code data-trim data-noescape>
+					s = [2, 3]
+					t = [5, 6]
+					t = s.pop()
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=s%20%3D%20%5B2,%203%5D%0At%20%3D%20%5B5,%206%5D%0At%20%3D%20s.pop%28%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor.
+						</a>
+					</p>
+
+					<p style="margin-top:32px;"><code>remove()</code> removes the first element equal to the argument:</p>
+
+					<pre><code data-trim data-noescape>
+					s = [6, 2, 4, 8, 4]
+					s.remove(4)
+					s.remove(9)
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=s%20%3D%20%5B6,%202,%204,%208,%204%5D%0As.remove%284%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor.
+						</a>
+                    </p>
+
+                    <p class="smaller">Non-destructive or destructive? <br>
+                        <span class="fragment"><code>pop()</code> and <code>remove()</code> are <strong>destructive.</strong></span>
+                    </p>
+
+					<aside class="notes">
+						Try removing a list, too!
+					</aside>
+				</section>
+
+                <section class="heading-only">
+					<h3>Equality and Identity</h3>
+                </section>
+
+				<section>
+					<h3>Equality of contents vs. Identity of objects</h3>
+
+					<p><strong>Identity</strong>: <code>exp0 is exp1</code><br>
+						<span style="font-size:smaller;">evaluates to <code>True</code>
+						if both <code>exp0</code> and <code>exp1</code> evaluate to the same object</span></p>
+
+					<p style="margin-top:32px;"><strong>Equality</strong>: <code>exp0 == exp1</code><br>
+						<span style="font-size:smaller;">evaluates to <code>True</code>
+						if both <code>exp0</code> and <code>exp1</code> evaluate to objects containing equal values</span></p>
+
+					<pre  style="margin-top:32px;"><code data-trim data-noescape  class="python">
+					list1 = [1,2,3]
+					list2 = [1,2,3]
+					are_equal = list1 == list2
+					identical = list1 is list2
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=list1%20%3D%20%5B1,2,3%5D%0Alist2%20%3D%20%5B1,2,3%5D%0A%0Aare_equal%20%3D%20list1%20%3D%3D%20list2%0Aidentical%20%3D%20list1%20is%20list2%0A&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+						Try in PythonTutor.
+						</a>
+					</p>
+
+					<p style="margin-top:32px;">Identical objects always have equal values.</p>
+
+					<aside class="notes">
+
+						https://inst.eecs.berkeley.edu/~cs61a/sp17/assets/slides/11_1pp.pdf
+						When dealing with immutable objects, we generally ignore identity;only equality of contents ever matters, and once equal always equal.
+						Allowsreferential transparency: ifS[0] ==3, andSas a whole isnot re-assigned, can substitute 3 forS[0]anywhere
+						When dealing with mutable structures, identity matters, andwedon’t have referential transparency.
+						 last slide
+					</aside>
+                </section>
+
+                <section>
+					<h3>Equality of contents vs. Identity of objects</h3>
+
+					<pre><code data-trim data-noescape class="python">
+                    a = ["apples", "bananas"]
+                    b = ["apples", "bananas"]
+                    c = a
+
+                    if a == b == c:
+                        print("All equal!")
+
+                    a[1] = "oranges"
+
+                    if a is c and a == c:
+                        print("A and C are equal AND identical!")
+
+                    if a == b:
+                        print("A and B are equal!") <span class="fragment" data-fragment-index="1"># Nope!</span>
+
+                    if b == c:
+                        print("B and C are equal!") <span class="fragment" data-fragment-index="1"># Nope!</span>
+					</code></pre>
+
+					<p>
+						<a class="python-tutor-link" target="_blank" href="http://pythontutor.com/visualize.html#code=a%20%3D%20%5B%22apples%22,%20%22bananas%22%5D%0Ab%20%3D%20%5B%22apples%22,%20%22bananas%22%5D%0Ac%20%3D%20a%0A%0Aif%20a%20%3D%3D%20b%20%3D%3D%20c%3A%0A%20%20%20%20print%28%22All%20equal!%22%29%0A%0Aa%5B1%5D%20%3D%20%22oranges%22%0A%0Aif%20a%20is%20c%20and%20a%20%3D%3D%20c%3A%0A%20%20%20%20print%28%22A%20and%20C%20are%20equal%20AND%20identical!%22%29%0A%0Aif%20a%20%3D%3D%20b%3A%0A%20%20%20%20print%28%22A%20and%20B%20are%20equal!%22%29%0A%0Aif%20b%20%3D%3D%20c%3A%0A%20%20%20%20print%28%22B%20and%20C%20are%20equal!%22%29%0A%20%20%20%20&cumulative=true&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false">
+						Try in PythonTutor.
+						</a>
+                    </p>
+
+                    <aside class="notes">
+                        Can also show: <code>if a is c == a:</code>
+                    </aside>
+                </section>
+
+
+                <section>
+					<h3>Identity and immutables</h3>
+
+                    <p class="smaller">Try this in your local friendly Python interpreter:</p>
+
+					<pre><code data-trim data-noescape class="python">
+                    a = "orange"
+                    b = "orange"
+                    c = "o" + "range"
+                    print(a is b)
+                    print(a is c)
+
+                    a = 100
+                    b = 100
+                    print(a is b)
+                    print(a is 10 * 10)
+                    print(a == 10 * 10)
+
+                    a = 100000000000000000
+                    b = 100000000000000000
+                    print(a is b)
+                    print(100000000000000000 is 100000000000000000)
+                    </code></pre>
+
+                    <p class="smaller">Beware: <code>is</code> may not act like you expect for strings/numbers!</p>
+
+                </section>
+
+                <section class="heading-only">
+					<h3>Scopes</h3>
+                </section>
+
+                <section>
+                    <h3>Names inside local scopes</h3>
+
+                    <p>Does this work? <span class="fragment" data-fragment-index="1">😊 Yes!</span></p>
+                    <pre><code data-trim data-noescape class="python">
+                    attendees = []
+
+                    def mark_attendance(name):
+                        attendees.append(name)
+                        print("In attendance:", attendees)
+
+                    mark_attendance("Emily")
+                    mark_attendance("Cristiano")
+                    mark_attendance("Samantha")
+                    </code></pre>
+
+                    <p style="margin-top:32px;">Does this work? <span class="fragment" data-fragment-index="2">😿 No!</span></p>
+
+                    <pre><code data-trim data-noescape  class="python">
+                    current = 0
+
+                    def count():
+                        current = current + 1
+                        print("Count:", current)
+
+                    count()
+                    count()
+                    </code></pre>
+                    <p class="fragment" style="color:maroon; font-size:60%" data-fragment-index="2">UnboundLocalError: local variable 'current' referenced before assignment </p>
+
+                </section>
+
+                <section>
+                    <h3>Scope rules</h3>
+
+                    <table class="smaller">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Global code</th>
+                                <th>Local code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Access names that are bound in the global scope?</td>
+                                <td>✅ Yes</td>
+                                <td>✅ Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Re-assign names that are bound in the global scope?</td>
+                                <td>🚫 No (unless declared <code>global</code>)</td>
+                                <td>🚫 No (unless declared <code>global</code>)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <pre><code data-trim data-noescape  class="python">
+                    current = 0
+
+                    def count():
+                        current = current + 1     # 🚫  Error!
+                        print("Count:", current)
+
+                    count()
+                    count()
+                    </code></pre>
+
+                    <p>
+                        <a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=current%20%3D%200%0A%0Adef%20count%28%29%3A%0A%20%20%20%20current%20%3D%20current%20%2B%201%20%20%20%20%20%23%20%F0%9F%9A%AB%20%20Error!%0A%20%20%20%20print%28%22Count%3A%22,%20current%29%20%20%23%20%E2%9C%85%20%20This%20is%20fine.%0A%0Acount%28%29%0Acount%28%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                        Try in PythonTutor
+                        </a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Re-assigning globals</h3>
+
+                    <pre><code data-trim data-noescape  class="python">
+                    current = 0
+
+                    def count():
+                        <span class="fragment">global current</span>
+                        current = current + 1
+                        print("Count:", current)
+
+                    count()
+                    count()
+                    </code></pre>
+
+                    <p>
+                        <a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=current%20%3D%200%0A%0Adef%20count%28%29%3A%0A%20%20%20%20global%20current%0A%20%20%20%20current%20%3D%20current%20%2B%201%20%20%20%20%20%23%20%F0%9F%9A%AB%20%20Error!%0A%20%20%20%20print%28%22Count%3A%22,%20current%29%20%20%23%20%E2%9C%85%20%20This%20is%20fine.%0A%0Acount%28%29%0Acount%28%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                        Try in PythonTutor
+                        </a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>Avoiding <code>global</code></h3>
+
+                    <p style="font-style:italic;">"Just because you can do something in a language, it doesn't mean you should." - Prof Fox</p>
+
+                    <p>Re-assigning global variables inside functions can lead to more brittle and unpredictable code.</p>
+
+                    <p>How about...</p>
+                    <div class="data-fragment">
+                    <pre><code data-trim data-noescape  class="python">
+                    current = 0
+
+                    def count(current):
+                        current = current + 1
+                        print("Count:", current)
+                        return current
+
+                    current = count(current)
+                    current = count(current)
+                    </code></pre>
+
+                    <p>✨❤️🥰🌼💖✨</p>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Names inside nested scopes</h3>
+
+                    <p>Does this work? <span class="fragment" data-fragment-index="1">😊 Yes!</span></p>
+                    <pre><code data-trim data-noescape class="python">
+                    def make_tracker(class_name):
+                        attendees = []
+
+                        def track_attendance(name):
+                            attendees.append(name)
+                            print(class_name, ": ", attendees)
+
+                        return track_attendance
+
+                    tracker = make_tracker("CS61A")
+                    tracker("Emily")
+                    tracker("Cristiano")
+                    tracker("Julian")
+                    </code></pre>
+
+                </section>
+
+
+                <section>
+                    <h3>Names inside nested scopes</h3>
+
+                    <p style="margin-top:32px;">Does this work? <span class="fragment" data-fragment-index="1">😿 No!</span></p>
+
+                    <pre><code data-trim data-noescape  class="python">
+                    def make_counter(start):
+                        current = start
+
+                        def count():
+                            current = current + 1
+                            print("Count:", current)
+
+                        return count
+
+                    counter = make_counter(30)
+                    counter()
+                    counter()
+                    counter()
+                    </code></pre>
+
+                    <p class="fragment" style="color:maroon; font-size:60%" data-fragment-index="1">UnboundLocalError: local variable 'current' referenced before assignment</p>
+
+                </section>
+
+                <section>
+                    <h3>Scope rules</h3>
+
+                    <table class="smaller">
+                        <thead>
+                            <tr>
+                                <th>Can code inside functions...</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Access names that are bound in the enclosing function?</td>
+                                <td>✅ Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Re-assign names that are bound in the enclosing function?</td>
+                                <td>🚫 No (unless declared <code>nonlocal</code>)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <pre><code data-trim data-noescape  class="python">
+                    def make_counter(start):
+                        current = start
+
+                        def count():
+                            current = current + 1     # 🚫  Error!
+                            print("Count:", current)
+
+                        return count
+
+                    counter = make_counter(30)
+                    counter()
+                    counter()
+                    counter()
+                    </code></pre>
+
+                    <p>
+                        <a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=current%20%3D%200%0A%0Adef%20count%28%29%3A%0A%20%20%20%20current%20%3D%20current%20%2B%201%20%20%20%20%20%23%20%F0%9F%9A%AB%20%20Error!%0A%20%20%20%20print%28%22Count%3A%22,%20current%29%20%20%23%20%E2%9C%85%20%20This%20is%20fine.%0A%0Acount%28%29%0Acount%28%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                        Try in PythonTutor
+                        </a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Re-assigning names in parent scope</h3>
+
+                    <p class="fragment" data-fragment-index="1">The <code>nonlocal</code> declaration tells Python to look in the parent frame
+                    for the name lookup.
+                    </p>
+
+                    <pre><code data-trim data-noescape class="python">
+                    def make_counter(start):
+                        current = start
+
+                        def count():
+                            <span class="fragment" data-fragment-index="1">nonlocal current</span>
+                            current = current + 1
+                            print("Count:", current)
+
+                        return count
+
+                    counter = make_counter(30)
+                    counter()
+                    counter()
+                    counter()
+                    </code></pre>
+
+                    <p>
+                        <a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=def%20make_counter%28start%29%3A%0A%20%20%20%20current%20%3D%20start%0A%0A%20%20%20%20def%20count%28%29%3A%0A%20%20%20%20%20%20%20%20nonlocal%20current%0A%20%20%20%20%20%20%20%20current%20%3D%20current%20%2B%201%0A%20%20%20%20%20%20%20%20print%28%22Count%3A%22,%20current%29%0A%0A%20%20%20%20return%20count%0A%0Acounter%20%3D%20make_counter%2830%29%0Acounter%28%29%0Acounter%28%29%0Acounter%28%29&cumulative=true&curInstr=1&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                        Try in PythonTutor
+                        </a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>Avoiding <code>nonlocal</code></h3>
+
+                    <p>The <code>nonlocal</code> keyword was only added to Python 3,
+                    so most code that might use it can be done in more Pythonic ways.</p>
+
+                    <p class="smaller">For the example, the counter can be done with a generator:</p>
+
+                    <pre><code data-trim data-noescape class="python">
+                    def make_counter(start):
+                        current = start
+                        while True:
+                            current = current + 1
+                            print("Count:", current)
+                            yield
+
+                    counter = make_counter(30)
+                    next(counter)
+                    next(counter)
+                    </code></pre>
+
+                    <p class="smaller">⚠️ But we haven't learned about generators yet! Stay tuned! ⚠️</p>
+
+                </section>
+
+
+                <section>
+                    <h3>Avoiding <code>nonlocal</code></h3>
+
+                    <p>We could also use a mutable value like a list or dict:</p>
+
+                    <pre><code data-trim data-noescape class="python">
+                    def make_counter(start):
+                        current = [0]
+
+                        def count():
+                            current[0] = 1
+                            print("Count:", current[0])
+
+                        return count
+
+                    counter = make_counter(30)
+                    counter()
+                    counter()
+                    counter()
+                    </code></pre>
+
+                    <p>
+                        <a class="python-tutor-link" target="_blank" href="http://pythontutor.com/composingprograms.html#code=def%20make_counter%28start%29%3A%0A%20%20%20%20current%20%3D%20%5B0%5D%0A%0A%20%20%20%20def%20count%28%29%3A%0A%20%20%20%20%20%20%20%20current%5B0%5D%20%3D%201%0A%20%20%20%20%20%20%20%20print%28%22Count%3A%22,%20current%5B0%5D%29%0A%0A%20%20%20%20return%20count%0A%0Acounter%20%3D%20make_counter%2830%29%0Acounter%28%29%0Acounter%28%29%0Acounter%28%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                        Try in PythonTutor
+                        </a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>Another use of <code>nonlocal</code></h3>
+
+                    <p>We saw it earlier when making a pair data abstraction:</p>
+
+                    <pre><code data-trim data-noescape class="python">
+                    def pair(a, b):
+                        def pair_func(which, v=None):
+                            nonlocal a, b
+                            if which == 0:
+                                return a
+                            elif which == 1:
+                                return b
+                            elif which == 2:
+                                a = v
+                            else:
+                                b = v
+                        return pair_func
+
+                    def left(p):
+                        return p(0)
+
+                    def right(p):
+                        return p(1)
+
+                    def set_left(p, v):
+                        p(2, v)
+
+                    def set_right(p, v):
+                        p(3, v)
+
+                    aPair = pair(3, 2)
+                    set_left(aPair, 5)
+                    print(left(aPair))
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Avoiding <code>nonlocal</code></h3>
+
+                    <p>But then we learned about tuples, lists, and dicts...</p>
+
+                    <pre><code data-trim data-noescape class="python">
+                    def pair(a, b):
+                        return [a, b]
+
+                    def left(p):
+                        return p[0]
+
+                    def right(p):
+                        return p[1)
+
+                    def set_left(p, v):
+                        p[0] = v
+
+                    def set_right(p, v):
+                        p[1] = v
+
+                    aPair = pair(3, 2)
+                    set_left(aPair, 5)
+                    print(left(aPair))
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Avoiding <code>nonlocal</code></h3>
+
+                    <p>And we'll soon be learning how to use classes!</p>
+
+                    <pre><code data-trim data-noescape class="python">
+                    class Pair:
+
+                        def __init__(left, right):
+                            self.left = left
+                            self.right = right
+
+                        def set_left(left):
+                            self.left = left
+
+                        def set_right(right):
+                            self.right = right
+
+                    aPair = Pair(3, 2)
+                    aPair.set_left(5)
+                    print(aPair.left)
+                    </code></pre>
+
+                    <p class="smaller">⚠️ You don't need to understand that code yet! Stay tuned! ⚠️</p>
+
+
+                </section>
+
+                <section>
+                    <h3>When to use <code>nonlocal</code> or <code>global</code></h3>
+
+                    <p>Rarely! Once you finish this class, you will have many tools in your toolbox,
+                        and you will often find a way to write your code
+                        that doesn't need to re-assign names in parent scopes.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Scope rules</h3>
+
+                    <table class="smaller">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Global code</th>
+                                <th>Local code</th>
+                                <th>Nested function code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Access names that are bound in the global scope?</td>
+                                <td>✅ Yes</td>
+                                <td>✅ Yes</td>
+                                <td>✅ Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Re-assign names that are bound in the global scope?</td>
+                                <td>✅ Yes</td>
+                                <td>🚫 No (unless declared <code>global</code>)</td>
+                                <td>🚫 No (unless declared <code>global</code>)</td>
+                            </tr>
+                            <tr>
+                                <td>Access names in enclosing function?</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>✅ Yes
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Re-assign names in enclosing function?</td>
+                                <td>N/A</td>
+                                <td>N/A</td>
+                                <td>🚫 No (unless declared <code>nonlocal</code>)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </section>
+
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/highlightjs-badge@0.1.9/highlightjs-badge.min.js"></script>
+		<script>
+			const srcUrlPrefix = "https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/";
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				slideNumber: true,
+				showNotes: false,
+				margin: 0.1,
+				preloadIframes: true,
+				plugins: [ RevealHighlight ],
+				pdfSeparateFragments: true
+			});
+
+            // add HighlightJS-badge (options are optional)
+            var options = {
+                copyIconContent: "📄",
+                checkIconContent: "✅"
+            };
+            window.highlightJsBadge(options);
+		</script>
+	</body>
+</html>

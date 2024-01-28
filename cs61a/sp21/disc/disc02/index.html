@@ -1,0 +1,1222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Discussion 2 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Discussion 2: Higher-Order Functions, Self Reference, Lambda Expressions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">disc02.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+This is an online worksheet that you can work on during discussions and tutorials.
+Your work is not graded and you do not need to submit anything.
+
+    
+
+
+
+<h1 id="higher-order-functions">Higher Order Functions</h1>
+
+
+<p>A <strong>higher order function</strong> (HOF) is a function that manipulates other functions by taking in functions as arguments, returning a function, or both. For example, the function <code>compose1</code> below takes in two functions as arguments and returns a function that is the composition of the two arguments.</p>
+
+<pre><code>def compose1(f, g):
+    def h(x):
+        return f(g(x))
+    return h</code></pre>
+
+<p>HOFs are powerful abstraction tools that allow us to express certain general patterns as named concepts in our programs.</p>
+
+
+<h2 id="a-note-on-lambda-expressions">A Note on Lambda Expressions</h2>
+
+
+<p>A lambda expression evaluates to a function, called a lambda function. For example, <code>lambda y: x + y</code> is a lambda expression, and can be read as “a function that takes in one parameter <code>y</code> and returns <code>x + y</code>.”</p>
+
+<p>A lambda expression by itself evaluates to a function but does not bind it to a name. Also note that the return expression of this function is not evaluated until the lambda is called. This is similar to how defining a new function using a def statement does not execute the function’s body until it is later called.</p>
+
+<pre><code>&gt;&gt;&gt; what = lambda x : x + 5
+&gt;&gt;&gt; what
+&lt;function &lt;lambda&gt; at 0xf3f490&gt;</code></pre>
+
+<p>Unlike <code>def</code> statements, lambda expressions can be used as an operator or an operand to a call expression. This is because they are simply one-line expressions that evaluate to functions. In the example below, <code>(lambda y: y + 5)</code> is the operator and <code>4</code> is the operand.</p>
+
+<pre><code>&gt;&gt;&gt; (lambda y: y + 5)(4)
+9
+&gt;&gt;&gt; (lambda f, x: f(x))(lambda y: y + 1, 10)
+11</code></pre>
+
+
+<h2 id="currying">Currying</h2>
+
+
+<p>One important application of HOFs is converting a function that takes multiple arguments into a chain of functions that each take a single argument. This is known as <strong>currying</strong>. For example, the function below converts the <code>pow</code> function into its curried form:</p>
+
+<pre><code>&gt;&gt;&gt; def curried_pow(x):
+        def h(y):
+            return pow(x, y)
+        return h
+
+&gt;&gt;&gt; curried_pow(2)(3)
+8</code></pre>
+
+<h3 class="question" id="q1">Q1: Keep Ints</h3>
+
+<p>Write a function that takes in a function <code>cond</code> and a number <code>n</code> and prints numbers from 1 to <code>n</code> where calling <code>cond</code> on that number returns <code>True</code>.</p>
+
+
+            <div class="monaco-storable" id="keep-ints-input" style="height:234px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-keep-ints-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-keep-ints-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-keep-ints-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def keep_ints(cond, n):\n    &quot;&quot;&quot;Print out all integers 1..i..n where cond(i) is true\n    &gt;&gt;&gt; def is_even(x):\n    ...     # Even numbers have remainder 0 when divided by 2.\n    ...     return x % 2 == 0\n    &gt;&gt;&gt; keep_ints(is_even, 5)\n    2\n    4\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "keep-ints-input"));
+            </script>
+        
+
+
+
+<h3 class="question" id="q2">Q2: (Tutorial) Make Keeper</h3>
+
+<p>Write a function similar to <code>keep_ints</code> like in Question 1 #<section-title>, but now it takes in a number <code>n</code> and returns a function that has one parameter <code>cond</code>. The returned function prints out numbers from 1 to <code>n</code> where calling <code>cond</code> on that number returns <code>True</code>.</p>
+
+
+            <div class="monaco-storable" id="make-keeper-input" style="height:234px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-make-keeper-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-make-keeper-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-make-keeper-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def make_keeper(n):\n    &quot;&quot;&quot;Returns a function which takes one parameter cond and prints out all integers 1..i..n where calling cond(i) returns True.\n        &gt;&gt;&gt; def is_even(x):\n        ...     # Even numbers have remainder 0 when divided by 2.\n        ...     return x % 2 == 0\n        &gt;&gt;&gt; make_keeper(5)(is_even)\n        2\n        4\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "make-keeper-input"));
+            </script>
+        
+
+
+
+
+<h2 id="hofs-in-environment-diagrams">HOFs in Environment Diagrams</h2>
+
+
+<p>Recall that an <strong>environment diagram</strong> keeps track of all the variables that have been defined and the values they are bound to. However, values are not necessarily only integers and strings. Environment diagrams can model more complex programs that utilize higher order functions.</p>
+
+
+            <iframe
+                width="800"
+                height="380"
+                frameborder="0"
+                src="../../pytutor/index.html#code=x+%3D+4%0Adef+add_num%28x%29%3A%0A++++return+lambda+y%3A+x+%2B+y%0A%0Aadd_two+%3D+add_num%282%29%0Aadd_two%283%29%0A&codeDivHeight=380&codeDivWidth=350&cumulative=true&curInstr=1&heapPrimitives=nevernest&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false">
+            </iframe>
+        
+
+<p>Lambdas are represented similarly to functions in environment diagrams, but since they lack instrinsic names, the lambda symbol (λ) is used instead.</p>
+
+<p>The parent of any function (including lambdas) is always the frame in which the function is defined. It is useful to include the parent in environment diagrams in order to find variables that are not defined in the current frame. In the previous example, when we call <code>add_two</code> (which is really the lambda function), we need to know what <code>x</code> is in order to compute <code>x + y</code>. Since <code>x</code> is not in the frame <code>f2</code>, we look at the frame’s parent, which is <code>f1</code>. There, we find <code>x</code> is bound to 2.</p>
+
+<p>As illustrated above, higher order functions that return a function have their return value represented with a pointer to the function object.</p>
+
+<h3 class="question" id="q3">Q3: Curry2 Diagram</h3>
+
+<p>Draw the environment diagram that results from executing the code below.</p>
+
+
+<pre><code>def curry2(h):
+    def f(x):
+        def g(y):
+            return h(x, y)
+        return g
+    return f
+
+make_adder = curry2(lambda x, y: x + y)
+add_three = make_adder(3)
+add_four = make_adder(4)
+five = add_three(2)</code></pre>
+
+        <div class="env-diagram" id=env-diagram-curry2-diagram>
+          <div class="env-diagram-objects">
+            <div>Objects</div>
+            <ul><li>
+            <button class="env-diagram-connector" id="env-diagram-curry2-diagram-object0-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-curry2-diagram-object0-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-curry2-diagram-object1-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-curry2-diagram-object1-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-curry2-diagram-object2-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-curry2-diagram-object2-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-curry2-diagram-object3-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-curry2-diagram-object3-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-curry2-diagram-object4-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-curry2-diagram-object4-value" type="text">
+            </li>
+            <li><button class="env-diagram-trash" title="Click here to remove a binding">🗑️</button></li>
+            </ul>
+        </div>
+          <div class="env-diagram-frame">
+                <div>Global frame</div>
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame0-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame0-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding2-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding2-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame0-binding2-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding3-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding3-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame0-binding3-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding4-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame0-binding4-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame0-binding4-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f1: <input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame1-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame1-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame1-return">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame1-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f2: <input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame2-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame2-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame2-return">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame2-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f3: <input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame3-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame3-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame3-return">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame3-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f4: <input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame4-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame4-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame4-return">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame4-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f5: <input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame5-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame5-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-curry2-diagram-frame5-return">
+                <button class="env-diagram-connector" id="env-diagram-curry2-diagram-frame5-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="storable-status"></div>
+        
+
+
+
+<h3 class="question" id="q4">Q4: Curry2 Lambda</h3>
+
+<p>Write <code>curry2</code> as a lambda function.</p>
+
+
+            <div class="monaco-storable" id="disc02-q3-input" style="height:72px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-disc02-q3-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-disc02-q3-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-disc02-q3-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('"*** YOUR CODE HERE ***"\n\n', "python", "disc02-q3-input"));
+            </script>
+        
+
+<h3 class="question" id="q5">Q5: (Tutorial) HOF Diagram Practice</h3>
+
+<p>Draw the environment diagram that results from executing the code below.</p>
+
+
+<pre><code>n = 7
+
+def f(x):
+    n = 8
+    return x + 1
+
+def g(x):
+    n = 9
+    def h():
+        return x + 1
+    return h
+
+def f(f, x):
+    return f(x + n)
+
+f = f(g, n)
+g = (lambda y: y())(f)</code></pre>
+
+        <div class="env-diagram" id=env-diagram-hof-practice-diagram>
+          <div class="env-diagram-objects">
+            <div>Objects</div>
+            <ul><li>
+            <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-object0-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-hof-practice-diagram-object0-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-object1-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-hof-practice-diagram-object1-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-object2-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-hof-practice-diagram-object2-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-object3-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-hof-practice-diagram-object3-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-object4-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-hof-practice-diagram-object4-value" type="text">
+            </li>
+            <li><button class="env-diagram-trash" title="Click here to remove a binding">🗑️</button></li>
+            </ul>
+        </div>
+          <div class="env-diagram-frame">
+                <div>Global frame</div>
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame0-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame0-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame0-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame0-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame0-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame0-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame0-binding2-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame0-binding2-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame0-binding2-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f1: <input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame1-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame1-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-binding2-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-binding2-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame1-binding2-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame1-return">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame1-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f2: <input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame2-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame2-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-binding2-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-binding2-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame2-binding2-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame2-return">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame2-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f3: <input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame3-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame3-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame3-return">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame3-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f4: <input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame4-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame4-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-hof-practice-diagram-frame4-return">
+                <button class="env-diagram-connector" id="env-diagram-hof-practice-diagram-frame4-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="storable-status"></div>
+        
+
+
+
+<h3 class="question" id="q6">Q6: YY Diagram</h3>
+
+<p><em>The following question is more challenging than the previous ones. Nonetheless, it’s a fun problem to try.</em></p>
+
+<p>Draw the environment diagram that results from executing the code below.</p>
+
+<blockquote><p>Tip: Using the <code>+</code> operator with two strings results in the second string being appended to the first. For example <code>&quot;C&quot;</code> + <code>&quot;S&quot;</code> concatenates the two strings into one string <code>&quot;CS&quot;</code>.</p></blockquote>
+
+
+<pre><code>y = &quot;y&quot;
+h = y
+def y(y):
+    h = &quot;h&quot;
+    if y == h:
+        return y + &quot;i&quot;
+    y = lambda y: y(h)
+    return lambda h: y(h)
+y = y(y)(y)</code></pre>
+
+        <div class="env-diagram" id=env-diagram-yy-diagram>
+          <div class="env-diagram-objects">
+            <div>Objects</div>
+            <ul><li>
+            <button class="env-diagram-connector" id="env-diagram-yy-diagram-object0-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-yy-diagram-object0-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-yy-diagram-object1-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-yy-diagram-object1-value" type="text">
+            </li><li>
+            <button class="env-diagram-connector" id="env-diagram-yy-diagram-object2-connector">▶</button>
+            <input class="env-text-storable" id="env-diagram-yy-diagram-object2-value" type="text">
+            </li>
+            <li><button class="env-diagram-trash" title="Click here to remove a binding">🗑️</button></li>
+            </ul>
+        </div>
+          <div class="env-diagram-frame">
+                <div>Global frame</div>
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame0-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame0-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame0-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame0-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame0-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame0-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f1: <input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame1-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame1-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame1-return">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame1-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f2: <input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame2-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame2-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame2-return">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame2-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f3: <input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame3-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame3-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame3-return">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame3-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div><div class="env-diagram-frame">
+                
+                <div>
+                f4: <input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-funcname">
+                [parent=<input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-parent">]
+                </div>
+            
+                <table class="table">
+                    <tbody>
+                    
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-binding0-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-binding0-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame4-binding0-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                <tr>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-binding1-name"></td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-binding1-value">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame4-binding1-connector">⬤
+                </button>
+            </td>
+                </tr>
+            
+                    
+                <tr>
+                    <td>Return value</td>
+                    <td><input type="text" class="env-text-storable" id="env-diagram-yy-diagram-frame4-return">
+                <button class="env-diagram-connector" id="env-diagram-yy-diagram-frame4-return-connector">⬤
+                </button>
+            </td>
+                </tr>
+                
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="storable-status"></div>
+        
+
+<p><a href="https://www.youtube.com/watch?v=MlRfJaGBeAY&feature=youtu.be">Video walkthrough</a></p>
+
+<div class="page-break"></div>
+
+
+<h1 id="self-reference">Self Reference</h1>
+
+
+<p>Self-reference refers to a particular design of HOF, where a function eventually returns itself. In particular, a self-referencing function will not return a function <strong>call</strong>, but rather the function object itself. As an example, take a look at the <code>print_all</code> function:</p>
+
+<pre><code>def print_all(x):
+    print(x)
+    return print_all</code></pre>
+
+<p>Self-referencing functions will oftentimes employ helper functions that reference the outer function, such as the example below, <code>print_sums</code>.</p>
+
+<pre><code>def print_sums(n):
+    print(n)
+    def next_sum(k):
+        return print_sums(n + k)
+    return next_sum</code></pre>
+
+<p>A call to <code>print_sums</code> returns <code>next_sum</code>. A call to <code>next_sum</code> will return the result of calling <code>print_sums</code> which will, in turn, return another function <code>next_sum</code>. This type of pattern is common in self-referencing functions.</p>
+
+<blockquote><p>A Note on Recursion: This differs from recursion because typically each new call returns a new function rather than a function call. We have not yet covered recursion so don’t worry too much about what this means!</p></blockquote>
+
+<h3 class="question" id="q7">Q7: (Tutorial) Warm Up: Make Keeper Redux</h3>
+
+<p>These exercises are meant to help refresh your memory of topics covered in lecture and/or lab this week before tackling more challenging problems.</p>
+
+<p>In this question, we will explore the execution of a self-reference function, <code>make_keeper_redux</code>, based off <a href="index.html#q2">Question 2</a>, <code>make_keeper</code>. The function <code>make_keeper_redux</code> is similar to <code>make_keeper</code>, but now the returned function also returns <strong>another function</strong> with the same behavior. Feel free to paste and modify your code for <code>make_keeper</code> below.</p>
+
+<p>(Hint: you only need to add one line to your <code>make_keeper</code> solution. What is currently missing from <code>make_keeper_redux</code>?)</p>
+
+
+            <div class="monaco-storable" id="make_keeper_redux-input" style="height:396px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-make_keeper_redux-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-make_keeper_redux-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-make_keeper_redux-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def make_keeper_redux(n):\n    &quot;&quot;&quot;Returns a function. This function takes one parameter &lt;cond&gt; and prints out\n       all integers 1..i..n where calling cond(i) returns True. The returned\n       function returns another function with the exact same behavior.\n\n        &gt;&gt;&gt; def multiple_of_4(x):\n        ...     return x % 4 == 0\n        &gt;&gt;&gt; def ends_with_1(x):\n        ...     return x % 10 == 1\n        &gt;&gt;&gt; k = make_keeper_redux(11)(multiple_of_4)\n        4\n        8\n        &gt;&gt;&gt; k = k(ends_with_1)\n        1\n        11\n        &gt;&gt;&gt; k\n        &lt;function do_keep&gt;\n    &quot;&quot;&quot;\n    # Paste your code for make_keeper here!\n\n', "scheme", "make_keeper_redux-input"));
+            </script>
+        
+
+
+
+<h3 class="question" id="q8">Q8: Print Delayed</h3>
+
+<p>Write a function <code>print_delayed</code> that delays printing its argument until the next function call. <code>print_delayed</code> takes in an argument <code>x</code> and returns a new function <code>delay_print</code>. When <code>delay_print</code> is called, it prints out <code>x</code> and returns another <code>delay_print</code>.</p>
+
+
+            <div class="monaco-storable" id="print-delayed-input" style="height:360px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-print-delayed-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-print-delayed-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-print-delayed-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def print_delayed(x):\n    &quot;&quot;&quot;Return a new function. This new function, when called, will print out x and return another function with the same behavior.\n    &gt;&gt;&gt; f = print_delayed(1)\n    &gt;&gt;&gt; f = f(2)\n    1\n    &gt;&gt;&gt; f = f(3)\n    2\n    &gt;&gt;&gt; f = f(4)(5)\n    3\n    4\n    &gt;&gt;&gt; f(&quot;hi&quot;) # a function is returned\n    5\n    &lt;function delay_print&gt;\n    &quot;&quot;&quot;\n    def delay_print(y):\n        ___________________________\n        return ____________________\n    return delay_print\n', "scheme", "print-delayed-input"));
+            </script>
+        
+
+<h3 class="question" id="q9">Q9: (Tutorial) Print N</h3>
+
+<p>Write a function <code>print_n</code> that can take in an integer <code>n</code> and returns a repeatable print function that can print the next <code>n</code> parameters. After the nth parameter, it just prints "done".</p>
+
+
+            <div class="monaco-storable" id="print-n-input" style="height:468px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-print-n-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-print-n-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-print-n-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def print_n(n):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; f = print_n(2)\n    &gt;&gt;&gt; f = f(&quot;hi&quot;)\n    hi\n    &gt;&gt;&gt; f = f(&quot;hello&quot;)\n    hello\n    &gt;&gt;&gt; f = f(&quot;bye&quot;)\n    done\n    &gt;&gt;&gt; g = print_n(1)\n    &gt;&gt;&gt; g(&quot;first&quot;)(&quot;second&quot;)(&quot;third&quot;)\n    first\n    done\n    done\n    &lt;function inner_print&gt;\n    &quot;&quot;&quot;\n    def inner_print(x):\n        if ________________________\n            print(&quot;done&quot;)\n        else:\n            print(x)\n        return ____________________\n    return ________________________\n\n', "scheme", "print-n-input"));
+            </script>
+        
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#higher-order-functions">Higher Order Functions</a></li>
+  <ul>
+    <li><a href="index.html#a-note-on-lambda-expressions">A Note on Lambda Expressions</a></li>
+    <li><a href="index.html#currying">Currying</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: Keep Ints</a></li>
+      <li><a href="index.html#q2">Q2: (Tutorial) Make Keeper</a></li>
+    </ul>
+    <li><a href="index.html#hofs-in-environment-diagrams">HOFs in Environment Diagrams</a></li>
+    <ul>
+      <li><a href="index.html#q3">Q3: Curry2 Diagram</a></li>
+      <li><a href="index.html#q4">Q4: Curry2 Lambda</a></li>
+      <li><a href="index.html#q5">Q5: (Tutorial) HOF Diagram Practice</a></li>
+      <li><a href="index.html#q6">Q6: YY Diagram</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#self-reference">Self Reference</a></li>
+  <ul>
+    <li><a href="index.html#q7">Q7: (Tutorial) Warm Up: Make Keeper Redux</a></li>
+    <li><a href="index.html#q8">Q8: Print Delayed</a></li>
+    <li><a href="index.html#q9">Q9: (Tutorial) Print N</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

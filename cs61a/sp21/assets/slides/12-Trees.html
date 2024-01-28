@@ -1,0 +1,793 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Dictionaries, Matrices, and Trees</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reset.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/theme/simple.css" id="theme">
+		<link rel="stylesheet" href="../css/mono-blue.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+		<style>
+			.reveal {
+				font-family: "Work Sans", sans-serif;
+			}
+
+			.reveal .slides section {
+				text-align: left;
+				font-size: smaller;
+			}
+
+			.reveal pre {
+				background-color: #f5f5f5;
+				width: 100%;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-shadow: none;
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+				font-family: "Roboto", sans-serif;
+				color: #0072c1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section style="text-align: center;">
+					<h2>Dictionaries, Matrices, and Trees</h2>
+				</section>
+
+				<section style="text-align: center;">
+					<h2>Today will cover...</h2>
+					<ul>
+						<li>Announcements</li>
+						<li>Dictionary type</li>
+						<li>Matrix abstraction</li>
+						<li>Tree abstraction</li>
+						<li>Tree processing</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Review: Layers of abstraction</h3>
+					<table>
+						<tr>
+							<td style="font-weight:bold;">Primitive Representation</td>
+							<td><code>1 2 3</code> <code>True False</code><br></code><code>(..,..)</code> <code>[..,..]</code></td>
+						</tr>
+						<tr">
+							<td  style="font-weight:bold;" rowspan="2">Data abstraction</td>
+							<td style="border-bottom: 1px dashed;"><code>make_rat()</code> <code>numer()</code> <code>denom()</code></code></td>
+						</tr>
+						<tr>
+							<td><code>add_rat()</code> <code>mul_rat()</code> <code>print_rat()</code> <code>equal_rat()</code></td>
+						</tr>
+						<tr>
+							<td style="font-weight:bold;">User program</td>
+							<td><code>exact_harmonic_number()</code></td>
+						</tr>
+					</table>
+					<p>
+						Each layer only uses the layer above it.
+					</p>
+				</section>
+
+				<section>
+					<h3>Review: Python types</h3>
+					<table class="r-stretch">
+						<tr>
+							<th>Type</th>
+							<th>Examples</th>
+						</tr>
+						<tr>
+							<td>Integers</td>
+							<td><code>0 -1 0xFF 0b1101</code></td>
+						</tr>
+						<tr>
+							<td>Booleans</td>
+							<td><code>True False</code></td>
+						</tr>
+						<tr>
+							<td>Functions</td>
+							<td><code>def f(x)...</code>
+								<code>lambda x: ...</code>
+							</td>
+						</tr>
+						<tr>
+							<td>Strings</td>
+							<td><code>"pear"</code><code>"I say, \"hello!\""</code></td>
+						</tr>
+						<tr>
+							<td>Tuples</td>
+							<td><code>(1, 10) ("Oh", "hi", 11)</code></td>
+						</tr>
+						<tr>
+							<td>Ranges</td>
+							<td><code>range(11) range(1, 6)</code></td>
+						</tr>
+						<tr>
+							<td>Lists</td>
+							<td><code>[] ["apples", "bananas"]</code><br>
+								<code>[x**3 for x in range(2)]</code>
+							</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h3>Dictionaries</h3>
+					<p>A <code>dict</code> is a mutable mapping of key-value pairs</p>
+					<pre><code data-trim data-noescape>
+					states = {
+						"CA": "California",
+						"DE": "Delaware",
+						"NY": "New York",
+						"TX": "Texas",
+						"WY": "Wyoming"
+					}
+					</code></pre>
+					<p>Queries:</p>
+					<pre><code data-trim data-noescape>
+					>>> len(states)
+					<span class="fragment">5</span>
+					</code></pre>
+					<pre><code data-trim data-noescape>
+					>>> "CA" in states
+					<span class="fragment">True</span>
+					</code></pre>
+					<pre><code data-trim data-noescape>
+					>>> "ZZ" in states
+					<span class="fragment">False</span>
+					</code></pre>
+					<aside class="notes">
+					How many keys do you count?
+					How many values?
+					</aside>
+				</section>
+				<section>
+					<h3>Dictionary selection</h3>
+					<pre><code data-trim data-noescape>
+					words = {
+						"más": "more",
+						"otro": "other",
+						"agua": "water"
+					}
+					</code></pre>
+					<p>Select a value:</p>
+					<pre><code data-trim data-noescape>
+					>>> words["otro"]
+					<span class="fragment">'other'</span>
+					</code></pre>
+					<pre><code data-trim data-noescape>
+					>>> first_word = "agua"
+					>>> words[first_word]
+					<span class="fragment">'water'</span>
+					</code></pre>
+					<pre><code data-trim data-noescape>
+					>>> words["pavo"]
+					<span class="fragment">KeyError: pavo</span>
+					</code></pre>
+					<pre><code data-trim data-noescape>
+					>>> words.get("pavo", "🤔")
+					<span class="fragment">'🤔'</span>
+					</code></pre>
+				</section>
+				<section>
+					<h3>Dictionary mutation</h3>
+					<p>Create an empty dict:</p>
+					<pre><code data-trim data-noescape>
+					users = {}
+					</code></pre>
+					<p>Add values:</p>
+					<pre><code data-trim data-noescape>
+					users["profpamela"] = "b3stp@ssEvErDontHackMe"
+					</code></pre>
+					<p>Change values:</p>
+					<pre><code data-trim data-noescape>
+					users["profpamela"] += "itsLongerSoItsMoreSecure!!"
+					</code></pre>
+					<pre><code data-trim data-noescape>
+					>>> users["profpamela"]
+					<span class="fragment">'b3stp@ssEvErDontHackMeitsLongerSoItsMoreSecure!!'</span>
+					</code></pre>
+				</section>
+				<section>
+					<h3>Dictionary rules</h3>
+					<ul>
+						<li>A key <strong>cannot</strong> be a list or dictionary (or any mutable type)</li>
+						<li>All keys in a dictionary are distinct (there can only be one value per key)</li>
+						<li>The values can be any type, however!</li>
+					</ul>
+					<pre><code data-trim data-noescape>
+					spiders = {
+					  "smeringopus": {
+						  "name": "Pale Daddy Long-leg",
+						  "length": 7
+					  },
+					  "holocnemus pluchei": {
+						  "name": "Marbled cellar spider",
+						  "length": (5, 7)
+					  }
+					}
+					</code></pre>
+					<aside class="notes">
+						Show what happens if a dictionary has two keys that are the same
+
+						Access way inside the dictionary!
+						Its all mutable, so we can mutate all of it!
+					</aside>
+				</section>
+				<section>
+					<h3>Dictionary iteration</h3>
+					<pre><code data-trim data-noescape>
+					insects = {"spiders": 8, "centipedes": 100, "bees": 6}
+					for name in insects:
+					    print(insects[name])
+					</code></pre>
+					<p style="font-size:smaller;">...is the same as:</p>
+					<pre><code data-trim data-noescape>
+					for name in list(insects):
+					    print(insects[name])
+					</code></pre>
+					<p style="font-size:smaller;">What will be the order of items?</p>
+					<pre class="fragment" data-fragment-index="1"><code data-trim data-noescape>
+					8 100 6
+					</code></pre>
+					<p class="fragment" data-fragment-index="1"  style="font-size:smaller;">Keys are iterated over in the order they are first added.</p>
+					<aside class="notes">
+						<ul>
+						<li>Python 2: The iteration could go in any order. Dictionaries were unordered.</li>
+						<li>Python 3.0: The iteration would go in order of key insertion, but that is not to be relied upon.</li>
+						<li>Python 3.7+: The insertion sort order is considered a part of the language, so dictionaries are ordered.</li>
+						</ul>
+						<p>Show example like:
+						d[3] = 3; d[1] = 2; print(d); d[3] = 4; print(d)
+					</p>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Nested data</h3>
+					<table style="font-size:smaller;">
+						<tr>
+							<td style="font-weight:bold;">Lists of lists</td>
+							<td><code>[ [1, 2], [3, 4] ]</code></td>
+						</tr>
+						<tr>
+							<td style="font-weight:bold;">Lists of tuples</td>
+							<td><code>[ (1, 2), (3, 4) ]</code></td>
+						</tr>
+						<tr>
+							<td style="font-weight:bold;">Tuples of tuples</td>
+							<td><code>( (1, 2), (3, 4) )</code></td>
+						</tr>
+						<tr>
+							<td style="font-weight:bold;">Dicts of tuples</td>
+							<td><code>{"x": (1, 2), "y": (3, 4)}</code></td>
+						</tr>
+						<tr>
+							<td style="font-weight:bold;">Dicts of lists</td>
+							<td><code>{"heights": [89, 97], "ages": [6, 8]}</code></td>
+						</tr>
+					</table>
+					<p>...what else?! <span class="fragment">Dicts of dicts, Lists of dicts, etc.</span></p>
+				</section>
+
+				<section>
+					<h3>Next up: more abstractions</h3>
+				</section>
+
+				<section>
+					<h3>Matrices</h3>
+					<p>Consider a matrix (two-dimensional table) like this:</p>
+					<table>
+						<tr><td>1</td><td>2</td><td>0</td><td>4</td></tr>
+						<tr><td>0</td><td>1</td><td>3</td><td>-1</td></tr>
+						<tr><td>0</td><td>0</td><td>1</td><td>8</td></tr>
+					</table>
+					<p>That matrix has three <strong>rows</strong> and four <strong>columns</strong>, with integer values in each location.</p>
+				</section>
+
+				<section>
+					<h3>Matrices: Data abstraction</h3>
+					<p>We want this constructor, selector, and mutator:</p>
+					<table style="font-size:smaller;">
+						<tr>
+							<td style="font-size:smaller;"><code>matrix(rows, cols)</code></td>
+							<td>Returns a ROWS x COLS matrix with all values set to 0</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>value(matrix, row, col)</code></td>
+							<td>Returns value of MATRIX at (ROW, COL)</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>set_value(matrix, row, col, val)</code></td>
+							<td>Sets value of MATRIX at (ROW, COL) to VAL</td>
+						</tr>
+					</table>
+					<p>How could we implement? <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdqK7tE3ker0p_mADI45lZqBHnigg7n4FI3X3Nn3pg5J_n1Tg/viewform">Answer the poll!</a>
+					</p>
+				</section>
+
+				<section>
+					<h3>Matrices: Implementation A</h3>
+
+					<p>A list of lists, row-major order:</p>
+					<code>[ [1,2,0,4], [0,1,3,-1], [0,0,1,8] ]</code>
+
+					<pre><code data-trim data-noescape>
+					def matrix(rows, cols):
+						return [ [0 for col in range(cols)] for row in range(rows) ]
+
+					def value(matrix, row, col):
+						return matrix[row][col]
+
+					def set_value(matrix, row, col, val):
+						matrix[row][col] = val
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					m = matrix(3, 4)
+					set_value(m, 0, 0, 1)
+					set_value(m, 0, 1, 2)
+					set_value(m, 0, 3, 4)
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Matrices: Implementation B</h3>
+
+					<p>A list of lists, column-major order:</p>
+					<code>[ [1,0,0],  [2,1,0], [0,3,1], [4,-1,8] ]</code>
+
+					<pre><code data-trim data-noescape>
+					def matrix(rows, cols):
+						return [ [0 for row in range(rows)] for col in range(cols) ]
+
+					def value(matrix, row, col):
+						return matrix[col][row]
+
+					def set_value(matrix, row, col, val):
+						matrix[col][row] = val
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					m = matrix(3, 4)
+					set_value(m, 0, 0, 1)
+					set_value(m, 0, 1, 2)
+					set_value(m, 0, 3, 4)
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Matrices: Implementation C</h3>
+
+					<p>A tuple of lists, row-major order:</p>
+					<code>( [1,0,0],  [2,1,0], [0,3,1], [4, -1,8] )</code>
+
+					<pre><code data-trim data-noescape>
+					def matrix(rows, cols):
+						return tuple( [0 for col in range(cols)] for row in range(rows) )
+
+					def value(matrix, row, col):
+						return matrix[row][col]
+
+					def set_value(matrix, row, col, val):
+						matrix[row][col] = val
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					m = matrix(3, 4)
+					set_value(m, 0, 0, 1)
+					set_value(m, 0, 1, 2)
+					set_value(m, 0, 3, 4)
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Matrices: Implementation D <span class="fragment" data-fragment-index="1">❌</span></h3>
+
+					<p>A list of tuples?</p>
+					<code>[ (1,2,0,4), (0,1,3,-1), (0,0,1,8) ]</code>
+
+					<pre><code data-trim data-noescape>
+					def matrix(rows, cols):
+					    return [ tuple(0 for col in range(cols))
+					        for row in range(rows) ]
+
+					def value(matrix, row, col):
+					    return matrix[row][col]
+
+					def set_value(matrix, row, col, val):
+					    matrix[row][col] = val
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					m = matrix(3, 4)
+					set_value(m, 0, 0, 1) <span class="fragment" data-fragment-index="1">❌</span>
+					set_value(m, 0, 1, 2) <span class="fragment" data-fragment-index="1">❌</span>
+					set_value(m, 0, 3, 4) <span class="fragment" data-fragment-index="1">❌</span>
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Matrices: Implementation D2</h3>
+
+					<p>A list of tuples?</p>
+					<code>[ (1,2,0,4), (0,1,3,-1), (0,0,1,8) ]</code>
+
+					<pre><code data-trim data-noescape>
+					def matrix(rows, cols):
+					    return [ tuple(0 for col in range(cols))
+					        for row in range(rows) ]
+
+					def value(matrix, row, col):
+					    return matrix[row][col]
+
+					<strong>def set_value(matrix, row, col, val):
+					    matrix[row] = matrix[row][:col] + (val,) + matrix[row][col+1:]</strong>
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					m = matrix(3, 4)
+					set_value(m, 0, 0, 1)
+					set_value(m, 0, 1, 2)
+					set_value(m, 0, 3, 4)
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Designing an implementation</h3>
+
+					<p>Which implementation was your favorite? <br>
+						<a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSc-rcEaZI1jCzqc4fILlRS0vxt_7HYcwY2ktI1Fj9f6MdOTcA/viewform">Answer the poll!</a>
+					</p>
+
+					<p>When might you use a tuple?</p>
+
+					<p>When might you use a list?</p>
+
+					<p>When might you use a dict?</p>
+				</section>
+
+				<section>
+					<h3>Trees</h3>
+					<img class="r-stretch" src="https://i.imgur.com/cruE1N2.png" alt="Diagram of tree">
+					<ul>
+						<li>Each oval is a <strong>node</strong></li>
+						<li>Top node is the <strong>root</strong></li>
+						<li>Each node is itself the root of another tree (called a <strong>subtree</strong>);
+							the nodes immediately below are its <strong>children</strong></li>
+						<li>Nodes without children are <strong>leaves</strong>; others are <strong>inner nodes</strong></li>
+						<li>Each node generally has a <strong>label</strong></li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Trees: Data abstraction</h3>
+
+					<p>We want this constructor and selectors:</p>
+
+					<table style="font-size:smaller;">
+						<tr>
+							<td style="font-size:smaller;"><code>tree(label, children)</code></td>
+							<td>Returns a tree with given LABEL at its root, whose children are CHILDREN</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>label(tree)</code></td>
+							<td>Returns the label of root node of TREE</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>children(tree)</code></td>
+							<td>Returns the children of TREE (each a tree).</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>is_leaf(tree)</code></td>
+							<td>Returns true if TREE is a leaf node.</td>
+						</tr>
+					</table>
+					<p>How could we implement?
+					   <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSeCtz3eetqEb8WGerIs2afz5hjwnzUy6ZS5N1uDobYqsn5pzQ/viewform">Answer the poll!</a>
+					</p>
+				</section>
+
+				<section>
+					<h3>Trees: Implementation A</h3>
+
+					<p>A list of label + list for each tree/subtree:</p>
+					<code style="font-size:smaller;">[20,[12,[9,[7],[2]],[3]],[8,[4],[4]]]</code>
+
+					<pre><code data-trim data-noescape>
+					def tree(label, children=[]):
+						return [label] + children
+
+					def label(tree):
+						return tree[0]
+
+					def children(tree):
+						return tree[1:]
+
+					def is_leaf(tree):
+						return len(children(tree)) == 0
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					t = tree(20, [tree(12,
+					               [tree(9,
+					                  [tree(7), tree(2)]),
+					                tree(3)]),
+					              tree(8,
+					                [tree(4), tree(4)])])
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Trees: Implementation B</h3>
+
+					<p>A number-list tuple for each tree/subtree:</p>
+					<code style="font-size:smaller;">(20,[(12,[(9,[(7,[]),(2, [])]),(3, [])]),(8,[(4,[]),(4,[])])])</code>
+
+					<pre><code data-trim data-noescape>
+					def tree(label, children=[]):
+					  return (label, children)
+
+					def label(tree):
+					  return tree[0]
+
+					def children(tree):
+					  return tree[1]
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					t = tree(20, [tree(12,
+					               [tree(9,
+					                 [tree(7), tree(2)]),
+					                tree(3)]),
+					              tree(8,
+					               [tree(4), tree(4)])])
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Trees: Implementation C</h3>
+
+					<p>A dictionary for each tree/subtree:</p>
+					<code style="font-size:50%; line-height: 1.2em">{'l':20,'c':[{'l':12,'c':[{'l':9,'c':[{'l':7,'c': []},{'l':2,'c':[]}]},{'l':3,'c':[]}]},{'l':8,'c':[{'l':4,'c':[]},{'l':4,'c':[]}]}]}</code>
+
+					<pre><code data-trim data-noescape>
+					def tree(label, children=[]):
+					    return {"l": label, "c": children}
+
+					def label(tree):
+					    return tree["l"]
+
+					def children(tree):
+				        return tree["c"]
+					</code></pre>
+
+					<pre><code data-trim data-noescape>
+					t = tree(20, [tree(12,
+					               [tree(9,
+					                 [tree(7), tree(2)]),
+					                tree(3)]),
+					              tree(8,
+					                [tree(4), tree(4)])])
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Tree processing</h3>
+
+					<p>A tree is a recursive structure.</p>
+
+					<p>Each tree has:</p>
+					<ul>
+						<li>A label</li>
+						<li>0 or more children, each a tree</li>
+					</ul>
+
+					<p>Recursive structure implies recursive algorithm!</p>
+				</section>
+
+				<section>
+					<h3>Tree processing: Counting leaves</h3>
+
+					<img class="r-stretch" src="https://i.imgur.com/cruE1N2.png" alt="Diagram of tree">
+
+					<pre><code data-trim data-noescape>
+					def count_leaves(t):
+					    """Returns the number of leaf nodes in T."""
+					    if <span class="fragment">is_leaf(t):</span>
+					        <span class="fragment">return 1</span>
+					    else:
+					        <span class="fragment">children_leaves = 0
+					        for c in children(t):
+					            children_leaves += count_leaves(c)
+					        return children_leaves</span>
+					</code></pre>
+
+					<p>What's the base case? What's the recursive call?</p>
+
+				</section>
+
+				<section>
+					<h3>Tree processing: Counting leaves</h3>
+
+					<p>The <a target="_blank" href="https://docs.python.org/3/library/functions.html#sum"><code>sum()</code></a>
+						function sums up the items of an iterable.</p>
+
+					<pre><code data-trim data-noescape>
+					>>> sum([1, 1, 1, 1])
+					4
+					</code></pre>
+
+					<div class="fragment">
+					<p>That leads to this shorter function:</p>
+					<pre><code data-trim data-noescape>
+					def count_leaves(t):
+					    """Returns the number of leaf nodes in T."""
+					    if is_leaf(t):
+					        return 1
+					    else:
+					        return sum([count_leaves(c) for c in children(t)])
+					</code></pre>
+					</div>
+
+				</section>
+
+				<section>
+					<h3>Creating trees</h3>
+
+					<p>A function that creates a tree from another tree is also often recursive.</p>
+
+					<img class="r-stretch" src="https://i.imgur.com/eVpV2gv.png">
+				</section>
+
+
+				<section>
+					<h3>Creating trees: Doubling labels</h3>
+
+					<img class="r-stretch" src="https://i.imgur.com/cruE1N2.png" alt="Diagram of tree">
+
+					<pre><code data-trim data-noescape>
+					def double(t):
+					    """Returns a tree identical to T, but with all labels doubled."""
+					    if <span class="fragment">is_leaf(t):</span>
+					        <span class="fragment">return tree(label(t) * 2)</span>
+					    else:
+					        <span class="fragment">return tree(label(t) * 2,
+					            [double(c) for c in children(t)])</span>
+					</code></pre>
+
+					<p>What's the base case? What's the recursive call?</p>
+
+				</section>
+
+				<section>
+					<h3>Creating trees: Doubling labels</h3>
+
+					<p>Longer...</p>
+					<pre><code data-trim data-noescape>
+					def double(t):
+						"""Returns a tree identical to T, but with all labels doubled."""
+					    if is_leaf(t):
+					        return tree(label(t) * 2)
+					    else:
+					        doubled_children = []
+					        for c in children(t):
+					            doubled_children.append(double(c))
+					        return tree(label(t) * 2, doubled_children)
+					</code></pre>
+
+					<p>Shorter!</p>
+					<pre><code data-trim data-noescape>
+					def double(t):
+					    """Returns the number of leaf nodes in T."""
+					    return tree(label(t) * 2,
+					            [double(c) for c in children(t)])</span>
+					</code></pre>
+
+				</section>
+
+				<section>
+					<h3>Challenge: List of leaves</h3>
+
+					<p>Try this on your own:</p>
+
+					<pre><code data-trim data-noescape>
+					def list_of_leaves(t):
+					    """Return a list containing the leaf labels of T.
+
+					    >>> leaves(t) # Using the t from the slides
+					    [7, 2, 3, 4, 4]
+					    """
+					    if ______:
+					        return ______
+					    else:
+					        ______
+					        return ______
+					</code></pre>
+
+					<p style="font-size:smaller;">Hint: If you sum a list of lists, you get a list containing the elements of those lists.
+					The sum function takes a second argument, the starting value of the sum.
+					</p>
+				</section>
+
+				<section>
+					<h3>Tree: Layers of abstraction</h3>
+					<table>
+						<tr>
+							<td style="font-weight:bold;">Primitive Representation</td>
+							<td><code>1 2 3</code> <code>True False</code><br></code><code>(..,..)</code> <code>[..,..]</code> <code>{...}</code></td>
+						</tr>
+						<tr>
+							<td  style="font-weight:bold;" rowspan="2">Data abstraction</td>
+							<td style="border-bottom: 1px dashed;"><code>tree()</code> <code>children()</code> <code>label()</code></code></td>
+						</tr>
+						<tr>
+							<td><code>is_leaf()</code></td>
+						</tr>
+						<tr>
+							<td style="font-weight:bold;">User program</td>
+							<td><code>double(t)</code> <code>count_leaves(t)</code></td>
+						</tr>
+					</table>
+					<p>
+						Each layer only uses the layer above it.
+					</p>
+				</section>
+
+				<section>
+					<h3>Trees, trees, everywhere!</h3>
+
+				</section>
+
+				<section>
+					<h3>Directory structures</h3>
+
+					<img class="r-stretch" src="../../lab/lab05/assets/cs61a-tree.png" alt="Tree for a directory structure">
+				</section>
+
+				<section>
+					<h3>Parse trees</h3>
+
+					<p>For natural languages...</p>
+
+					<img class="r-stretch" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Amouse.svg/1000px-Amouse.svg.png" alt="Parse tree for English sentence: A mouse eats a cat">
+					<p style="font-size:smaller">Key: S = Sentence, NP = Noun phrase, D = Determiner, N = Noun, V = Verb, VP = Verb Phrase</p>
+				</section>
+
+				<section>
+					<h3>Parse trees</h3>
+
+					<p>For programming languages, too...</p>
+
+					<img class="r-stretch" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Parse_Tree_Derivations_ETF.svg/800px-Parse_Tree_Derivations_ETF.svg.png" alt="Parse tree for an arithmetic expression">
+
+					<p style="font-size:smaller">Key: E = expression</p>
+				</section>
+
+
+
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/plugin/highlight/highlight.js"></script>
+		<script>
+			const srcUrlPrefix = "https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/";
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				slideNumber: true,
+				showNotes: false,
+				margin: 0.1,
+				preloadIframes: true,
+				plugins: [ RevealHighlight ],
+				pdfSeparateFragments: true
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/hw.css">
+
+
+    <title>
+Homework 1 Solutions | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Homework 1 Solutions
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="hw01.zip" class="label label-outline">hw01.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+<h2>Solution Files</h2>
+<p>You can find the solutions in <a href="hw01.py">hw01.py</a>.</p>
+
+    
+<h1 id="required-questions">Required Questions</h1>
+
+
+
+        <button id='toggle-1' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Getting Started Video<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-1">
+
+<h3 id="assignment-getting-started-video">Assignment Getting Started Video</h3>
+
+<p>This video provides some helpful direction for tackling the problems on this assignment.
+<br>
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/P2xr4KjO0vw"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+<br>
+</div></p>
+
+<h3 class="question" id="q1">Q1: Syllabus Quiz</h3> Please fill out our <a href="https://forms.gle/5oreebaCXj8nUDVh9">Syllabus Quiz</a> based off of our policies found on our <a href="../../articles/about/index.html">syllabus page</a>.
+
+<h3 class="question" id="q2">Q2: A Plus Abs B</h3>
+
+<p>Fill in the blanks in the following function for adding <code>a</code> to the
+absolute value of <code>b</code>, without calling <code>abs</code>. You may <strong>not</strong> modify any
+of the provided code other than the two blanks.</p>
+
+<pre><code>from operator import add, sub
+
+def a_plus_abs_b(a, b):
+    &quot;&quot;&quot;Return a+abs(b), but without calling abs.
+
+    &gt;&gt;&gt; a_plus_abs_b(2, 3)
+    5
+    &gt;&gt;&gt; a_plus_abs_b(2, &#x2d;3)
+    5
+    &gt;&gt;&gt; # a check that you didn&#x27;t change the return statement!
+    &gt;&gt;&gt; import inspect, re
+    &gt;&gt;&gt; re.findall(r&#x27;^\s*(return .*)&#x27;, inspect.getsource(a_plus_abs_b), re.M)
+    [&#x27;return f(a, b)&#x27;]
+    &quot;&quot;&quot;
+    if b &lt; 0:
+<div class="sol-highlight">        f = sub</div>    else:
+<div class="sol-highlight">        f = add</div>    return f(a, b)</code></pre>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q a_plus_abs_b</code></pre>
+
+<div class="sol-highlight">
+
+<p>If <code>b</code> is positive, we add the numbers together. If <code>b</code> is negative, we
+subtract the numbers. Therefore, we choose the operator <code>add</code> or <code>sub</code>
+based on the sign of <code>b</code>.</p>
+
+<p>Video walkthrough: <a href='https://youtu.be/o9eUNrWTr3I'> https://youtu.be/o9eUNrWTr3I </a></p>
+
+</div>
+
+<h3 class="question" id="q3">Q3: Two of Three</h3>
+
+<p>Write a function that takes three <em>positive</em> numbers as arguments and returns the sum
+of the squares of the two smallest numbers. <strong>Use only a single line for
+the body of the function.</strong></p>
+
+<pre><code>def two_of_three(x, y, z):
+    &quot;&quot;&quot;Return a*a + b*b, where a and b are the two smallest members of the
+    positive numbers x, y, and z.
+
+    &gt;&gt;&gt; two_of_three(1, 2, 3)
+    5
+    &gt;&gt;&gt; two_of_three(5, 3, 1)
+    10
+    &gt;&gt;&gt; two_of_three(10, 2, 8)
+    68
+    &gt;&gt;&gt; two_of_three(5, 5, 5)
+    50
+    &gt;&gt;&gt; # check that your code consists of nothing but an expression (this docstring)
+    &gt;&gt;&gt; # a return statement
+    &gt;&gt;&gt; import inspect, ast
+    &gt;&gt;&gt; [type(x).__name__ for x in ast.parse(inspect.getsource(two_of_three)).body[0].body]
+    [&#x27;Expr&#x27;, &#x27;Return&#x27;]
+    &quot;&quot;&quot;
+<div class="sol-highlight">    return min(x*x+y*y, x*x+z*z, y*y+z*z)
+    # Alternate solution
+def two_of_three_alternate(x, y, z):
+    return x**2 + y**2 + z**2 &#x2d; max(x, y, z)**2</div></code></pre>
+
+<blockquote><p><strong>Hint:</strong> Consider using the <code>max</code> or <code>min</code> function:</p>
+
+<pre><code>&gt;&gt;&gt; max(1, 2, 3)
+3
+&gt;&gt;&gt; min(&#x2d;1, &#x2d;2, &#x2d;3)
+&#x2d;3</code></pre></blockquote>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q two_of_three</code></pre>
+
+<div class="sol-highlight">
+
+<p>We use the fact that if <code>x&gt;y</code> and <code>y&gt;0</code>, then <code>square(x)&gt;square(y)</code>.
+So, we can take the <code>min</code> of the sum of squares of all pairs. The
+<code>min</code> function can take an arbitrary number of arguments.</p>
+
+<p>Alternatively, we can do the sum of squares of all the numbers. Then we
+pick the largest value, and subtract the square of that.</p>
+
+<p>Video walkthrough: <a href='https://youtu.be/oPN3OCGGb4M'> https://youtu.be/oPN3OCGGb4M </a></p>
+
+</div>
+
+<h3 class="question" id="q4">Q4: Largest Factor</h3>
+
+<p>Write a function that takes an integer <code>n</code> that is <strong>greater than 1</strong> and
+returns the largest integer that is smaller than <code>n</code> and evenly divides <code>n</code>.</p>
+
+<pre><code>def largest_factor(n):
+    &quot;&quot;&quot;Return the largest factor of n that is smaller than n.
+
+    &gt;&gt;&gt; largest_factor(15) # factors are 1, 3, 5
+    5
+    &gt;&gt;&gt; largest_factor(80) # factors are 1, 2, 4, 5, 8, 10, 16, 20, 40
+    40
+    &gt;&gt;&gt; largest_factor(13) # factor is 1 since 13 is prime
+    1
+    &quot;&quot;&quot;
+<div class="sol-highlight">    factor = n &#x2d; 1
+    while factor &gt; 0:
+        if n % factor == 0:
+            return factor
+        factor &#x2d;= 1</div></code></pre>
+
+<blockquote><p><strong>Hint:</strong> To check if <code>b</code> evenly divides <code>a</code>,
+you can use the expression <code>a % b == 0</code>, which can be read as,
+"the remainder of dividing <code>a</code> by <code>b</code> is 0."</p></blockquote>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q largest_factor</code></pre>
+
+<div class="sol-highlight">
+
+<p>Iterating from <code>n&#x2d;1</code> to 1, we return the first integer that evenly divides
+<code>n</code>. This is guaranteed to be the largest factor of <code>n</code>.</p>
+
+<p>Video walkthrough: <a href='https://youtu.be/pVgxbeL4DHQ'> https://youtu.be/pVgxbeL4DHQ </a></p>
+
+</div>
+
+<h3 class="question" id="q5">Q5: If Function vs Statement</h3>
+
+<p>Let's try to write a function that does the same thing as an <code>if</code>
+statement.</p>
+
+<pre><code>def if_function(condition, true_result, false_result):
+    &quot;&quot;&quot;Return true_result if condition is a true value, and
+    false_result otherwise.
+
+    &gt;&gt;&gt; if_function(True, 2, 3)
+    2
+    &gt;&gt;&gt; if_function(False, 2, 3)
+    3
+    &gt;&gt;&gt; if_function(3==2, &#x27;equal&#x27;, &#x27;not equal&#x27;)
+    &#x27;not equal&#x27;
+    &gt;&gt;&gt; if_function(3&gt;2, &#x27;bigger&#x27;, &#x27;smaller&#x27;)
+    &#x27;bigger&#x27;
+    &quot;&quot;&quot;
+    if condition:
+        return true_result
+    else:
+        return false_result</code></pre>
+
+<p>Despite the doctests above, this function actually does <em>not</em> do the
+same thing as an <code>if</code> statement in all cases.  To prove this fact,
+write functions <code>cond</code>, <code>true_func</code>, and <code>false_func</code> such that <code>with_if_statement</code>
+prints <code>61A</code>, but <code>with_if_function</code> prints both <code>Welcome to</code> and <code>61A</code> on separate lines.</p>
+
+<pre><code>def with_if_statement():
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; result = with_if_statement()
+    61A
+    &gt;&gt;&gt; print(result)
+    None
+    &quot;&quot;&quot;
+    if cond():
+        return true_func()
+    else:
+        return false_func()
+
+def with_if_function():
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; result = with_if_function()
+    Welcome to
+    61A
+    &gt;&gt;&gt; print(result)
+    None
+    &quot;&quot;&quot;
+    return if_function(cond(), true_func(), false_func())
+
+def cond():
+<div class="sol-highlight">    return False</div>
+def true_func():
+<div class="sol-highlight">    print(&quot;Welcome to&quot;)</div>
+def false_func():
+<div class="sol-highlight">    print(&quot;61A&quot;)</div></code></pre>
+
+<blockquote><p><strong>Hint</strong>: If you are having a hard time identifying how an <code>if</code> statement and
+<code>if_function</code> differ, consider the <a href="http://composingprograms.com/pages/15-control.html#conditional-statements">rules of evaluation for <code>if</code> statements</a>
+and <a href="http://composingprograms.com/pages/12-elements-of-programming.html#call-expressions">call expressions</a>.</p></blockquote>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q with_if_statement
+python3 ok -q with_if_function</code></pre>
+<div class="sol-highlight">
+
+<p>The function <code>with_if_function</code> uses a call expression, which
+guarantees that all of its operand subexpressions will be evaluated
+before <code>if_function</code> is applied to the resulting arguments.</p>
+
+<p>Therefore, even if <code>cond</code> returns <code>False</code>, the function <code>true_func</code> will be called. When
+we call <code>true_func</code>, we print out <code>Welcome to</code>. Then, when we call <code>false_func</code>, we will also print <code>61A</code>.</p>
+
+<p>By contrast, <code>with_if_statement</code> will never call <code>true_func</code> if <code>cond</code> returns
+<code>False</code>. Thus, we will only call <code>false_func</code>, printing <code>61A</code>.</p>
+
+</div>
+
+<h3 class="question" id="q6">Q6: Hailstone</h3>
+
+<p>Douglas Hofstadter's Pulitzer-prize-winning book, <em>Gödel, Escher, Bach</em>, poses
+the following mathematical puzzle.</p>
+
+<ol>
+  <li>Pick a positive integer <code>n</code> as the start.</li>
+  <li>If <code>n</code> is even, divide it by 2.</li>
+  <li>If <code>n</code> is odd, multiply it by 3 and add 1.</li>
+  <li>Continue this process until <code>n</code> is 1.</li>
+</ol>
+
+<p>The number <code>n</code> will travel up and down but eventually end at 1 (at least for
+all numbers that have ever been tried -- nobody has ever proved that the
+sequence will terminate). Analogously, a hailstone travels up and down in the
+atmosphere before eventually landing on earth.</p>
+
+<p>This sequence of values of <code>n</code> is often called a Hailstone sequence. Write a
+function that takes a single argument with formal parameter name <code>n</code>, prints
+out the hailstone sequence starting at <code>n</code>, and returns the number of steps in
+the sequence:</p>
+
+<pre><code>def hailstone(n):
+    &quot;&quot;&quot;Print the hailstone sequence starting at n and return its
+    length.
+
+    &gt;&gt;&gt; a = hailstone(10)
+    10
+    5
+    16
+    8
+    4
+    2
+    1
+    &gt;&gt;&gt; a
+    7
+    &quot;&quot;&quot;
+<div class="sol-highlight">    length = 1
+    while n != 1:
+        print(n)
+        if n % 2 == 0:
+            n = n // 2      # Integer division prevents &quot;1.0&quot; output
+        else:
+            n = 3 * n + 1
+        length = length + 1
+    print(n)                # n is now 1
+    return length</div></code></pre>
+
+<p>Hailstone sequences can get quite long! Try 27. What's the longest you can
+find?</p>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q hailstone</code></pre>
+
+<p><strong>Curious about hailstones/hailstone sequences? Take a look at these articles:</strong></p>
+
+<ul>
+  <li>Check out <a href="https://www.nationalgeographic.org/encyclopedia/hail/">this article</a> to learn more about how hailstones work!</li>
+  <li>In 2019, there was a major <a href="https://www.quantamagazine.org/mathematician-terence-tao-and-the-collatz-conjecture-20191211/">development</a> in understanding how the hailstone conjecture works for most numbers!</li>
+</ul>
+
+<div class="sol-highlight">
+
+<p>We keep track of the current length of the hailstone sequence and the current
+value of the hailstone sequence. From there, we loop until we hit the end of
+the sequence, updating the length in each step.</p>
+
+<blockquote><p>Note: we need to do floor division <code>//</code> to remove decimals.</p></blockquote>
+
+</div>
+
+
+<h2 id="submit">Submit</h2>
+
+
+<p>Make sure to submit this assignment by running:</p>
+
+<pre><code>python3 ok &#x2d;&#x2d;submit</code></pre>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#required-questions">Required Questions</a></li>
+  <ul>
+    <li><a href="index.html#assignment-getting-started-video">Assignment Getting Started Video</a></li>
+    <li><a href="index.html#q1">Q1: Syllabus Quiz</a></li>
+    <li><a href="index.html#q2">Q2: A Plus Abs B</a></li>
+    <li><a href="index.html#q3">Q3: Two of Three</a></li>
+    <li><a href="index.html#q4">Q4: Largest Factor</a></li>
+    <li><a href="index.html#q5">Q5: If Function vs Statement</a></li>
+    <li><a href="index.html#q6">Q6: Hailstone</a></li>
+  </ul>
+  <ul>
+    <li><a href="index.html#submit">Submit</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

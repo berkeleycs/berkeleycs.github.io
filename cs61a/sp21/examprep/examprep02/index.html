@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Exam Prep 2 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Exam Prep 2: Higher-Order Functions, Self Reference
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">examprep02.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+
+<p>Students from past semesters wanted more content and structured time to prepare for exams. Exam Prep sections are a way to solidify your understanding of the week's materials. The problems are typically designed to be a bridge between discussion/lab/homework difficulty and exam difficulty.</p>
+
+<p><strong>Reminder:</strong> There is nothing to turn in and there is no credit given for attending Exam Prep Sections.</p>
+
+<p>
+    We try to make these problems <strong>exam level</strong> , so you are not expected to be able to solve them coming straight from lecture without additional practice.
+    To get the most out of Exam Prep, we recommend you <strong>try these problems first on your own</strong>  before coming to the Exam Prep section, where we will explain how to solve these problems while giving tips and advice for the exam. Do not worry if you struggle with these problems, <strong>it is okay to struggle while learning</strong>.
+</p>
+<p>
+    You can work with anyone you want, including sharing solutions. We just ask you don't spoil the problems for anyone else in the class. Thanks!
+</p>
+<p>
+    You may only put code where there are underscores for the codewriting questions.
+</p>
+<p>
+    You can test your functions on their doctests by clicking the red test tube in the top right corner after clicking Run in 61A Code.
+    Passing the doctests is not necessarily enough to get the problem fully correct. You must fully solve the stated problem.
+</p>
+
+
+
+    
+
+
+<p>We recommending reading sections 1.1-1.6 from the textbook for these problems. We also recommend reviewing Hog project <code>announce_lead_changes</code> and <code>announce_highest</code> for question 2 and 3.</p>
+
+<p>Test your work! For example, for <code>match_k</code>, you can type <code>test(match_k)</code> in the python interpreter you get once you click Run in 61A Code to verify if you pass the doctests or not.</p>
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q1">Q1: Match Maker</h3>
+
+<p><strong>Difficulty: ⭐</strong></p>
+
+<p>Implement <code>match_k</code>, which takes in an integer <code>k</code> and returns a function that takes in a variable <code>x</code> and returns True if all the digits in <code>x</code> that are <code>k</code> apart are the same.</p>
+
+<p>For example, <code>match_k(2)</code> returns a one argument function that takes in <code>x</code> and checks if digits that are 2 away in <code>x</code> are the same.</p>
+
+<p><code>match_k(2)(1010)</code> has the value of <code>x = 1010</code> and digits 1, 0, 1, 0 going from left to right. <code>1 == 1</code> and <code>0 == 0</code>, so the <code>match_k(2)(1010)</code> results in <code>True</code>.</p>
+
+<p><code>match_k(2)(2010)</code> has the value of <code>x = 2010</code> and digits 2, 0, 1, 0 going from left to right. <code>2 != 1</code> and <code>0 == 0</code>, so the <code>match_k(2)(2010)</code> results in <code>False</code>.</p>
+
+<p><strong>RESTRICTION:</strong> You may not use strings or indexing for this problem.</p>
+
+<p><strong>IMPORTANT:</strong> You do not have to use all the lines, one staff solution does not use the line directly above the while loop.</p>
+
+<p><strong>HINT:</strong> Floor dividing by powers of 10 gets rid of the rightmost digits.</p>
+
+
+            <div class="monaco-storable" id="match_k-input" style="height:540px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-match_k-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-match_k-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-match_k-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def match_k(k):\n    &quot;&quot;&quot; Return a function that checks if digits k apart match\n\n    &gt;&gt;&gt; match_k(2)(1010)\n    True\n    &gt;&gt;&gt; match_k(2)(2010)\n    False\n    &gt;&gt;&gt; match_k(1)(1010)\n    False\n    &gt;&gt;&gt; match_k(1)(1)\n    True\n    &gt;&gt;&gt; match_k(1)(2111111111111111)\n    False\n    &gt;&gt;&gt; match_k(3)(123123)\n    True\n    &gt;&gt;&gt; match_k(2)(123123)\n    False\n    &quot;&quot;&quot;\n    ____________________________\n        ____________________________\n        while ____________________________:\n            if ____________________________:\n                return ____________________________\n            ____________________________\n        ____________________________\n    ____________________________\n\n\n', "scheme", "match_k-input"));
+            </script>
+        
+
+
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q2">Q2: Natural Chainz</h3>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p>For this problem, a <code>chain_function</code> is a higher order function that repeatedly accepts natural numbers (positive integers).
+The first number that is passed into the function that <code>chain_function</code> returns initializes a natural chain,
+which we define as a consecutive sequence of increasing natural numbers (i.e., 1, 2, 3). A natural chain
+breaks when the next input differs from the expected value of the sequence. For example, the sequence
+(1, 2, 3, 5) is broken because it is missing a 4.</p>
+
+<p>Implement the <code>chain_function</code> so that it prints out the
+value of the expected number at each chain break as well as the number of chain breaks seen so far,
+including the current chain break. Each time the chain breaks, the chain restarts at the most recently input number.</p>
+
+<p>For example, the
+sequence (1, 2, 3, 5, 6) would only print 4 and 1. We print 4 because there is a missing 4, and we print
+1 because the 4 is the first number to break the chain. The 5 broke the chain and restarted the chain, so
+from here on out we expect to see numbers increasingly linearly from 5. See the doctests for more examples.
+You may assume that the higher-order function is never given numbers ≤ 0.</p>
+
+<p><strong>IMPORTANT:</strong> For this problem, the starter code template is just a suggestion. You are welcome to add/delete/modify the starter code template, or even write your own solution that doesn’t use the starter code at all.</p>
+
+
+            <div class="monaco-storable" id="chain_function-input" style="height:558px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-chain_function-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-chain_function-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-chain_function-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def chain_function():\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; tester = chain_function()\n    &gt;&gt;&gt; x = tester(1)(2)(4)(5) # Expected 3 but got 4, so print 3. 1st chain break, so print 1 too.\n    3 1\n    &gt;&gt;&gt; x = x(2) # 6 should&#x27;ve followed 5 from above, so print 6. 2nd chain break, so print 2\n    6 2\n    &gt;&gt;&gt; x = x(8) # The chain restarted at 2 from the previous line, but we got 8. 3rd chain break.\n    3 3\n    &gt;&gt;&gt; x = x(3)(4)(5) # Chain restarted at 8 in the previous line, but we got 3 instead. 4th break\n    9 4\n    &gt;&gt;&gt; x = x(9) # Similar logic to the above line\n    6 5\n    &gt;&gt;&gt; x = x(10) # Nothing is printed because 10 follows 9.\n    &gt;&gt;&gt; y = tester(4)(5)(8) # New chain, starting at 4, break at 6, first chain break\n    6 1\n    &gt;&gt;&gt; y = y(2)(3)(10) # Chain expected 9 next, and 4 after 10. Break 2 and 3.\n    9 2\n    4 3\n    &quot;&quot;&quot;\n    def g(x, y):\n        def h(n):\n            if ____________________________:\n                return ____________________________\n            else:\n                ____________________________\n        return ____________________________\n    return ____________________________\n\n', "scheme", "chain_function-input"));
+            </script>
+        
+
+
+
+<div class="page-break"></div>
+
+<h3 class="question" id="q3">Q3: CS61 - NAY</h3>
+
+<p><strong>Difficulty: ⭐⭐⭐</strong></p>
+
+<p><strong>Part A:</strong> Implement <code>cs61nay</code>, which takes a two argument function <code>combiner</code> and positive integer <code>n</code> and returns a function.</p>
+
+<p>The returned function then takes <code>n</code> arguments, one at a time, and computes 
+<code>combiner(...(combiner(combiner(arg1, arg2), arg3)...), arg_n)</code>. Notice combiner takes in two integers and returns one integer.</p>
+
+<p>For example, the first doctest has the returned function <code>f = cs61nay(lambda x, y: x * y, 3)</code>. Now when <code>f</code> is applied to three arguments, like <code>f(2)(3)(4)</code>, it multiplies them together, <code>2*3*4</code> to get 24.</p>
+
+<p><strong>IMPORTANT:</strong> For this problem, the starter code template is just a suggestion. You are welcome to add/delete/modify the starter code template, or even write your own solution that doesn’t use the starter code at all.</p>
+
+<p><strong>HINT:</strong> For the <code>n = 1</code> case, the returned function doesn't use <code>combiner</code>.</p>
+
+
+            <div class="monaco-storable" id="cs61nay-input" style="height:450px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-cs61nay-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-cs61nay-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-cs61nay-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def cs61nay(combiner, n):\n    &quot;&quot;&quot; Return a function that takes n arguments,\n    one at a time, and combines them using combiner.\n\n    &gt;&gt;&gt; f = cs61nay(lambda x, y: x * y, 3)\n    &gt;&gt;&gt; f(2)(3)(4) # 2 * 3 * 4\n    24\n    &gt;&gt;&gt; f(&#x2d;1)(2)(3) # &#x2d;1 * 2 * 3\n    &#x2d;6\n    &gt;&gt;&gt; f = cs61nay(lambda x, y: x &#x2d; y, 4)\n    &gt;&gt;&gt; f(1)(2)(&#x2d;2)(&#x2d;1) # 1 &#x2d; 2 &#x2d; &#x2d;2 &#x2d; &#x2d;1\n    2\n    &gt;&gt;&gt; f = cs61nay(lambda x, y: x + y, 1)\n    &gt;&gt;&gt; f(61)\n    61\n    &gt;&gt;&gt; f(2021)\n    2021\n    &quot;&quot;&quot;\n    if ____________________________:\n        return ____________________________\n    else:\n        return ____________________________\n\n', "scheme", "cs61nay-input"));
+            </script>
+        
+
+<p><strong>Difficulty: ⭐⭐⭐</strong></p>
+
+<p><strong>Part B:</strong> Somebody who writes very complicated code has given you a challenge! You would hopefully never see something so hard to comprehend in the real world.</p>
+
+<p>Complete the expression below by writing one integer in each blank so that the whole expression evaluates to 2021. Assume <code>cs61nay</code> is implemented correctly.</p>
+
+<p><strong>HINTS:</strong></p>
+
+<ul>
+  <li>You can fill the blanks and test your code with a python interpreter</li>
+  <li>Try to understand what all the subparts and smaller calls do</li>
+  <li>You can split this up into multiple lines to make it more readable</li>
+  <li>You can add spaces/indentation to make it easier to read</li>
+</ul>
+
+
+            <div class="monaco-storable" id="cs61nay-compose-input" style="height:162px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-cs61nay-compose-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-cs61nay-compose-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-cs61nay-compose-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('from operator import sub, add, mul\n\ncompose = lambda f, g: lambda x: f(g(x))\n\nprint(compose(cs61nay(sub, ____), compose(cs61nay(mul, ____)(2),\n      cs61nay(pow, 2)(10))(3))(____)(____))\n\n', "python", "cs61nay-compose-input"));
+            </script>
+        
+
+
+
+<div class="page-break"></div>
+
+<p><strong>Difficulty: ⭐⭐</strong></p>
+
+<p><strong>Part C:</strong> All those lines of code are unnecessary! Solve <code>cs61NAY</code> but only using one line.</p>
+
+<p><strong>RESTRICTION:</strong> You may not use the python ternary operator (the one line if/else statment).</p>
+
+<p><strong>HINT:</strong> Use short circuiting and boolean operators to your advantage</p>
+
+
+            <div class="monaco-storable" id="cs61nay-one-line-input" style="height:450px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-cs61nay-one-line-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-cs61nay-one-line-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-cs61nay-one-line-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('cs61NAY = ____________________________\n\n# This syntax adds a doctest to a lambda, which can be run using `test(cs61NAY)`\n# after clicking Run in 61A Code or `python3 &#x2d;m doctest &#x2d;v examprep02.py`\n# if you save the questions to a .py file\ncs61NAY.__name__ = &quot;cs61NAY&quot;\ncs61NAY.__doc__ = &quot;&quot;&quot; Return a function that takes n arguments,\n    one at a time, and combines them using combiner.\n\n    &gt;&gt;&gt; f = cs61NAY(lambda x, y: x * y, 3)\n    &gt;&gt;&gt; f(2)(3)(4) # 2 * 3 * 4\n    24\n    &gt;&gt;&gt; f(&#x2d;1)(2)(3) # &#x2d;1 * 2 * 3\n    &#x2d;6\n    &gt;&gt;&gt; f = cs61NAY(lambda x, y: x &#x2d; y, 4)\n    &gt;&gt;&gt; f(1)(2)(&#x2d;2)(&#x2d;1) # 1 &#x2d; 2 &#x2d; &#x2d;2 &#x2d; &#x2d;1\n    2\n    &gt;&gt;&gt; f = cs61NAY(lambda x, y: x + y, 1)\n    &gt;&gt;&gt; f(61)\n    61\n    &gt;&gt;&gt; f(2021)\n    2021\n    &quot;&quot;&quot;\n', "scheme", "cs61nay-one-line-input"));
+            </script>
+        
+
+
+
+<div class="page-break"></div>
+
+
+<h2 id="just-for-fun">Just for Fun</h2>
+
+
+<strong>This is a challenge problem and not reflective of exam difficulty.</strong> We will not be going over this problem in examprep section, but we will be releasing solutions.
+
+<h3 class="question" id="q4">Q4: Abusing the Call Stack</h3>
+
+<p>(a) Implement the following higher order functions so that we can simulate <code>append</code> and <code>get</code> behavior. As the
+name suggests, the <code>get</code> function should get the <code>ith</code> element that was appended (the first element that
+was appended is element 0). For example, if I append 2, append 30, and then append 4, then <code>get(0)</code> is
+2 (the first element appended), <code>get(1)</code> is 30 (the second element appended), and <code>get(2)</code> is 4 (the third
+element appended). If I append more items, <code>get(0)</code> through <code>get(2)</code> should not be affected. Assume all get
+calls ask for non-negative indices (i.e., you’d never do <code>get(&#x2d;1)</code>). If the argument to get would go out of
+bounds otherwise, the call should return the string <code>&quot;Error: out of bounds!&quot;</code>.</p>
+
+<strong>RESTRICTION</strong>: you are not allowed to use any lists / sets / dictionaries / iterators, or any other data structures. 
+
+
+            <div class="monaco-storable" id="stacklist-input" style="height:522px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-stacklist-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-stacklist-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-stacklist-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def stacklist():\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; append, get = stacklist()\n    &gt;&gt;&gt; get, y = append(2)\n    &gt;&gt;&gt; get, y = append(3, get, y)\n    &gt;&gt;&gt; get, y = append(4, get, y)\n    &gt;&gt;&gt; get(0)\n    2\n    &gt;&gt;&gt; get(1)\n    3\n    &gt;&gt;&gt; get(2)\n    4\n    &gt;&gt;&gt; get, y = append(8, get, y)\n    &gt;&gt;&gt; get(1)\n    3\n    &gt;&gt;&gt; get(3)\n    8\n    &quot;&quot;&quot;\n    g = lambda i: &quot;Error: out of bounds!&quot;\n    def f(value, g=g, y=____________________________):\n        ____________________________\n        def g(i):\n            if ____________________________:\n                return ____________________________\n            return ____________________________\n        return ____________________________\n    return f, g\n', "scheme", "stacklist-input"));
+            </script>
+        
+
+<div class="page-break"></div>
+
+<p>(b) Build on your solution to the previous question to implement <code>insert</code> functionality! As the name suggests,
+the <code>insert</code> function inserts a value into an existing sequence of numbers. The function takes an insertion
+index, the value to insert into that index, as well as two other arguments whose purpose is left for you
+to determine. When the value is inserted into the provided index, all numbers from that index and to
+the right are shifted one element right. For example, if my current sequence is 5, 9, 14, 3 and I specify
+an insertion index of 1 with value 100, then my updated sequence should be 5, 100, 9, 14, 3. The 100 is
+inserted at index 1, and all numbers from the original index 1 to the end are shifted to the right by one
+position. You can always assume that the provided insertion index will be within bounds.</p>
+
+<p>You don’t actually have to represent the sequence as a contiguous block of numbers that need to shift
+around though. As long as the <code>get(i)</code> call returns the correct value, that’ll do.</p>
+
+<strong>RESTRICTION</strong>: You are not
+allowed to use any lists / dictionaries / iterators, or any other data structures. 
+
+
+            <div class="monaco-storable" id="stackedlist-input" style="height:558px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-stackedlist-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-stackedlist-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-stackedlist-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def stacklisted():\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; append, get, insert = stacklisted()\n    &gt;&gt;&gt; get, idx = append(2)\n    &gt;&gt;&gt; get, idx = append(13, get, idx)\n    &gt;&gt;&gt; get, idx = append(4, get, idx)\n    &gt;&gt;&gt; get, idx = insert(1, 19, get, idx)\n    &gt;&gt;&gt; get(0)\n    2\n    &gt;&gt;&gt; get(1)\n    19\n    &gt;&gt;&gt; get(2)\n    13\n    &gt;&gt;&gt; get(3)\n    4\n    &quot;&quot;&quot;\n    # Assume f and g are defined correctly from the previous question\n    def h(y, value, g, n):\n        e = ____________________________\n        def g(i):\n            if ____________________________:\n                return ____________________________\n            return ____________________________\n        k =____________________________\n        while k &lt; ____________________________:\n            g, ret = f(______,_______________________,______)\n            k += 1\n        return g, ret\n    return f, g, h\n', "scheme", "stackedlist-input"));
+            </script>
+        
+
+
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#q1">Q1: Match Maker</a></li>
+  <li><a href="index.html#q2">Q2: Natural Chainz</a></li>
+  <li><a href="index.html#q3">Q3: CS61 - NAY</a></li>
+  <li><a href="index.html#just-for-fun">Just for Fun</a></li>
+  <ul>
+    <li><a href="index.html#q4">Q4: Abusing the Call Stack</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

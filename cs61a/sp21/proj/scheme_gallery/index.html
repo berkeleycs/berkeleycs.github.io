@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link href="../../assets/css/project.css" rel="stylesheet" type="text/css">
+<style>
+  img {
+    max-height:500px;
+  }
+</style>
+
+
+    <title>
+Scheme Art Gallery | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Scheme Art Gallery
+
+        
+        
+        
+      </h1>
+    </header>
+    
+<div class="haiku">
+  <blockquote><cite>
+The output is art,<br>
+But what about its source code?<br>
+It's just as abstract.
+
+</cite></blockquote>
+</div>
+
+    
+<p>Please vote for your favorite entry in this semester's CS 61A Scheme Art
+Contest. The winner should exemplify the principles of elegance, beauty, and
+abstraction that are prized in the Berkeley computer science curriculum. As an
+academic community, we should strive to recognize and reward merit and
+achievement (in other words, please don't just vote for your friends).</p>
+
+<p><a href="https://links.cs61a.org/scheme-voting">Cast your vote by submitting this form</a>. Voting is due <strong>11:59 PM
+on Thursday, 5/6</strong>.</p>
+
+
+<h1 id="featherweight-division">Featherweight Division</h1>
+
+
+
+<h2 id="pale-blue-dot">Pale Blue Dot</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/0e3df832/artwork.png">
+  <blockquote>"Look again at that dot.<br>That's here.<br>That's home." - Carl Sagan</blockquote>
+  <p>Tokens: 44</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/0e3df832/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="a-brilliant-diamond">A Brilliant Diamond</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/173e1c86/artwork.png">
+  <blockquote>In it's purest form,<br>Here's a brilliant diamond.<br>Simplicity rules.</blockquote>
+  <p>Tokens: 320</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/173e1c86/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="minecraft-world-generator-circa-1975">Minecraft World Generator (circa 1975)</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/180f22f9/artwork.png">
+  <blockquote>an island at sea <br> help me, where did I go wrong <br> what's baked century</blockquote>
+  <p>Tokens: 511</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/180f22f9/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="baked-fractals">Baked Fractals</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/379edd1f/artwork.png">
+  <blockquote>All these leaps of faith <br> Are way more fun with color <br> Hallucinating</blockquote>
+  <p>Tokens: 503</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/379edd1f/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="abstract-snail">Abstract Snail</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/3b83d533/artwork.png">
+  <blockquote>This year has gone by <br> at the pace of a slow snail, <br> but coding is fun!</blockquote>
+  <p>Tokens: 494</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/3b83d533/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="impostor-honeycomb">Impostor honeycomb</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/439da1de/artwork.png">
+  <blockquote></blockquote>
+  <p>Tokens: 149</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/439da1de/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="what-is-hilfinger-hiding">What is Hilfinger hiding?</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/46ec2f80/artwork.png">
+  <blockquote>The enigma that is Hilfinger's lecture background</blockquote>
+  <p>Tokens: 282</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/46ec2f80/contest.scm", target="__blank">View Code</a>
+
+
+<h2>:)</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/50585be4/artwork.png">
+  <blockquote>"Put this in the chat <br> if you feel comfortable <br> with where we are :)</blockquote>
+  <p>Tokens: 108</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/50585be4/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="i-took-my-bumblebee-for-a-random-walk">I took my bumblebee for a random walk</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/71e614f4/artwork.png">
+  <blockquote>I took my bumble<br>bee out for a little walk.<br>He was so random.</blockquote>
+  <p>Tokens: 195</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/71e614f4/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="black-holes-white-hole">Black holes, white hole</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/736b7fe0/artwork.png">
+  <blockquote>They seem to be sayin' <br> "don't worry, just suck it up" <br> How inspirational.</blockquote>
+  <p>Tokens: 491</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/736b7fe0/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="preschool-tings">Preschool Tings</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/799d40a3/artwork.png">
+  <blockquote>art or something idk I'm not an art major</blockquote>
+  <p>Tokens: 196</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/799d40a3/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="saassssukkeee">SAASSSSUKKEEE</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/7b6e8133/artwork.png">
+  <blockquote>Watching Naruto.<br>Sasuke left Naruto<br>Naruto is sad.</blockquote>
+  <p>Tokens: 340</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/7b6e8133/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="oskcheme">oSkCHEME</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/7ba196d5/artwork.png">
+  <blockquote>lambdas go baa a<br>oski says go bears! boo trees<br>python3 ok --submit</blockquote>
+  <p>Tokens: 509</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/7ba196d5/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="bubbles-of-blue">Bubbles of Blue</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/a673a5b7/artwork.png">
+  <blockquote>Bubbles fly so high. <br> In the sky, they shine blue hues. <br> Soon, their flight will end. </blockquote>
+  <p>Tokens: 402</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/a673a5b7/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="foggy-night">Foggy Night</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/a9d05a9b/artwork.png">
+  <blockquote>Campanile at night<br>wonder if van Gogh would have<br>liked making scheme art</blockquote>
+  <p>Tokens: 455</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/a9d05a9b/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="blues">Blues</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/aca2a3c0/artwork.png">
+  <blockquote>Three roses for you<br>A pixilated bouquet<br>If i get an A..</blockquote>
+  <p>Tokens: 489</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/aca2a3c0/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="gob-ears">gob ears</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/c439e209/artwork.png">
+  <blockquote>a sad bear<br>round and incomplete<br>go bears:)</blockquote>
+  <p>Tokens: 316</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/c439e209/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="james-bond-but-it-s-actually-oski">James Bond but it's actually Oski</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/c5584e44/artwork.png">
+  <blockquote>James Bond is Poggers <br> But do you know who's more pog? <br> My good pal Oski</blockquote>
+  <p>Tokens: 377</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/c5584e44/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="truffula-trees">Truffula Trees</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/cd80cbe5/artwork.png">
+  <blockquote>Unless someone like you cares a whole lot<br>nothing is going to get better<br>It's not</blockquote>
+  <p>Tokens: 341</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/cd80cbe5/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="starcrossed-lovers-lt-3">Starcrossed Lovers &lt;3</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/dc95719a/artwork.png">
+  <blockquote>O' Pacman, Pacman <br> Oi! Wherefore art thou Pacman? <br> Waka Waka Wa-</blockquote>
+  <p>Tokens: 468</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/dc95719a/contest.scm", target="__blank">View Code</a>
+
+
+<h1 id="heavyweight-division">Heavyweight Division</h1>
+
+
+
+<h2 id="baked-century-i">Baked Century (I)</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/02d5bd3b/artwork.png">
+  <blockquote>The solution was<br>so hard that no one would know<br>Why Baked Century</blockquote>
+  <p>Tokens: 1483</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/02d5bd3b/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="a-recursive-leap-of-faith-when-will-i-know-i-m-ready">A (Recursive) Leap of Faith: When Will I Know I'm Ready?</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/152e923c/artwork.png">
+  <blockquote>You won't. It is a<br>leap of faith. That's all it is,<br>Miles. A leap of faith.</blockquote>
+  <p>Tokens: 2112</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/152e923c/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="color-scheme-of-cs61a">Color 'Scheme' of CS61a</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/18bd2fcd/artwork.png">
+  <blockquote>Natural, varied light of different colors between computers</blockquote>
+  <p>Tokens: 2266</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/18bd2fcd/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="lap-is-too-hard-to-write-so-i-put-l1">Lap is too Hard to Write so I put L1</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/1c42f427/artwork.png">
+  <blockquote>Deja Vu, I've just been in this place before<br>Higher on the street<br>and I know it's my time to goooooooooo</blockquote>
+  <p>Tokens: 525</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/1c42f427/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="my-favorite-nachos-on-campus">My Favorite Nachos on Campus</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/8647c5c3/artwork.png">
+  <blockquote>What is there at Croads? <br> Never mind, I don't want to know. <br> Let's just get La Burrita.</blockquote>
+  <p>Tokens: 2594</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/8647c5c3/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="recursive-bloom">Recursive Bloom</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/9594aa11/artwork.png">
+  <blockquote>Orchids blossoming<br>From the seeds of binary<br>Lush and alluring</blockquote>
+  <p>Tokens: 695</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/9594aa11/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="one-eternity-later">One Eternity Later</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/98a8420b/artwork.png">
+  <blockquote>Alas, a student <br> Seeker of greater knowledge <br> But what did it cost?</blockquote>
+  <p>Tokens: 2893</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/98a8420b/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="the-inner-machinations-of-my-mind-are-an-enigma-patrick-star">“The Inner Machinations Of My Mind Are An Enigma” – Patrick star</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/a1bc5d2e/artwork.png">
+  <blockquote>Homies I need help. <br> Vote for this art por favor. <br> Need extra credit. </blockquote>
+  <p>Tokens: 544</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/a1bc5d2e/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="baked-century-ii">Baked Century (II)</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/a9165466/artwork.png">
+  <blockquote>A mass confusion<br> Result of two silly words<br> Some would say high ranks</blockquote>
+  <p>Tokens: 851</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/a9165466/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="y-all-rockin-with-extra-credit">y'all rockin' with extra credit!?</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/b8acddd4/artwork.png">
+  <blockquote>tests too hard <br> call that elon philanthropy <br> VITAMINS TO THE MOON 🚀🚀🚀</blockquote>
+  <p>Tokens: 1205</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/b8acddd4/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="painrentheses">Painrentheses</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/bfbb0f14/artwork.png">
+  <blockquote>(null? pain)<br>#f<br>heavyweight for heavy pain</blockquote>
+  <p>Tokens: 514</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/bfbb0f14/contest.scm", target="__blank">View Code</a>
+
+
+<h2 id="blue-collapsible">Blue collapsible</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/d7521eac/artwork.png">
+  <blockquote>Blue collapsible – <br> More reliable than a <br> virtual background</blockquote>
+  <p>Tokens: 1531</p>
+</div>
+
+<a class="btn" href="https://code.cs61a.org/proj/scheme_gallery/entries/d7521eac/contest.scm", target="__blank">View Code</a>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#featherweight-division">Featherweight Division</a></li>
+  <ul>
+    <li><a href="index.html#pale-blue-dot">Pale Blue Dot</a></li>
+    <li><a href="index.html#a-brilliant-diamond">A Brilliant Diamond</a></li>
+    <li><a href="index.html#minecraft-world-generator-circa-1975">Minecraft World Generator (circa 1975)</a></li>
+    <li><a href="index.html#baked-fractals">Baked Fractals</a></li>
+    <li><a href="index.html#abstract-snail">Abstract Snail</a></li>
+    <li><a href="index.html#impostor-honeycomb">Impostor honeycomb</a></li>
+    <li><a href="index.html#what-is-hilfinger-hiding">What is Hilfinger hiding?</a></li>
+    <li>:)</li>
+    <li><a href="index.html#i-took-my-bumblebee-for-a-random-walk">I took my bumblebee for a random walk</a></li>
+    <li><a href="index.html#black-holes-white-hole">Black holes, white hole</a></li>
+    <li><a href="index.html#preschool-tings">Preschool Tings</a></li>
+    <li><a href="index.html#saassssukkeee">SAASSSSUKKEEE</a></li>
+    <li><a href="index.html#oskcheme">oSkCHEME</a></li>
+    <li><a href="index.html#bubbles-of-blue">Bubbles of Blue</a></li>
+    <li><a href="index.html#foggy-night">Foggy Night</a></li>
+    <li><a href="index.html#blues">Blues</a></li>
+    <li><a href="index.html#gob-ears">gob ears</a></li>
+    <li><a href="index.html#james-bond-but-it-s-actually-oski">James Bond but it's actually Oski</a></li>
+    <li><a href="index.html#truffula-trees">Truffula Trees</a></li>
+    <li><a href="index.html#starcrossed-lovers-lt-3">Starcrossed Lovers &lt;3</a></li>
+  </ul>
+  <li><a href="index.html#heavyweight-division">Heavyweight Division</a></li>
+  <ul>
+    <li><a href="index.html#baked-century-i">Baked Century (I)</a></li>
+    <li><a href="index.html#a-recursive-leap-of-faith-when-will-i-know-i-m-ready">A (Recursive) Leap of Faith: When Will I Know I'm Ready?</a></li>
+    <li><a href="index.html#color-scheme-of-cs61a">Color 'Scheme' of CS61a</a></li>
+    <li><a href="index.html#lap-is-too-hard-to-write-so-i-put-l1">Lap is too Hard to Write so I put L1</a></li>
+    <li><a href="index.html#my-favorite-nachos-on-campus">My Favorite Nachos on Campus</a></li>
+    <li><a href="index.html#recursive-bloom">Recursive Bloom</a></li>
+    <li><a href="index.html#one-eternity-later">One Eternity Later</a></li>
+    <li><a href="index.html#the-inner-machinations-of-my-mind-are-an-enigma-patrick-star">“The Inner Machinations Of My Mind Are An Enigma” – Patrick star</a></li>
+    <li><a href="index.html#baked-century-ii">Baked Century (II)</a></li>
+    <li><a href="index.html#y-all-rockin-with-extra-credit">y'all rockin' with extra credit!?</a></li>
+    <li><a href="index.html#painrentheses">Painrentheses</a></li>
+    <li><a href="index.html#blue-collapsible">Blue collapsible</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

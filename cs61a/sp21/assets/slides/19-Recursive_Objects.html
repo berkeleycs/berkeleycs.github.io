@@ -1,0 +1,1094 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Recursive Objects: Tree + LinkedList</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reset.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/theme/simple.css" id="theme">
+		<link rel="stylesheet" href="../css/mono-blue.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+		<style>
+			.reveal {
+				font-family: "Work Sans", sans-serif;
+			}
+
+			.reveal .slides section {
+				text-align: left;
+				font-size: smaller;
+			}
+
+			.reveal pre {
+				background-color: #f5f5f5;
+				width: 100%;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				box-shadow: none;
+			}
+
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+				font-family: "Roboto", sans-serif;
+				color: #0072c1;
+			}
+
+			.reveal section.heading-only {
+				text-align:center;
+				padding-top:20%;
+			}
+
+            .column .no-code-badge .code-badge {
+                display: none;
+            }
+
+            .code-badge-language {
+                display: none;
+            }
+
+			.python-tutor-link {
+				font-size: smaller;
+			}
+
+			.python-tutor-link:before {
+				content: "";
+				display: block;
+				background: url("http://pythontutor.com/favicon.ico") no-repeat;
+				width: 48px;
+				height: 48px;
+				float: left;
+				margin: 0 6px 0 0;
+			}
+
+			.reveal h3 {
+				margin-bottom: 40px;
+			}
+
+            .smaller {
+                font-size: smaller;
+            }
+
+            code {
+                padding: 2px 4px;
+                font-size: 90%;
+                color: #0072c1;
+                background-color: #f9f2f4;
+                border-radius: 4px;
+            }
+
+            p.padded {
+                margin-top: 32px;
+            }
+
+            section .row {
+                display: flex;
+            }
+
+            section .column {
+                flex: 48%;
+                margin: 10px;
+            }
+
+            #insertion-demo {
+                height: 200px;
+            }
+            .array-address, .array-index, .array-value {
+                background: #ffffc6;
+                text-align: center;
+                border: 1px solid #888;
+                position: absolute;
+                width: 100px;
+                height: 50px;
+                transition: 1s;
+            }
+
+            .array-address {
+                background: #c6f2ff;
+            }
+
+            .array-addresses, .array-indices, .array-values {
+                margin-bottom: 8px;
+            }
+
+            .array-insert-form input, .array-insert-form button, .linkedlist-insert-form input, .linkedlist-insert-form button {
+                font-size: 32px;
+                width: 120px;
+            }
+
+            .linkedlist-visualization {
+                height: 120px;
+                position: relative;
+            }
+
+            .linkedlist-link {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width:80px;
+                border: 1px solid #888;
+                font-size: 0.5em;
+                text-align: center;
+            }
+            .linkedlist-parts {
+                background-color: #ffffc6;
+                display: flex;
+            }
+            .linkedlist-value {
+                display:inline-block;
+                width: 40px;
+                border-right: 1px solid #888;
+            }
+            .linkedlist-pointer {
+                display:inline-block;
+                width: 40px;
+            }
+            .linkedlist-address {
+                width:100%;
+                background: #c6f2ff;
+                border-top: 1px solid #888;
+            }
+
+			@media print
+			{
+				.no-print, .no-print *
+				{
+					display: none !important;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="heading-only">
+                    <h1 class="smaller">Recursive Objects</h1>
+
+					<div class="no-print" style="text-align: left; margin-top: 100px; font-size: 70%;">
+						Tips for navigating the slides:
+						<ul>
+							<li>Press O or Escape for overview mode.</li>
+							<li>Visit <a href="19-Recursive_Objects.html%3Fprint-pdf.html" target="_blank">this link</a> for a nice printable version</li>
+							<li>Press the copy icon on the upper right of code blocks to copy the code</li>
+						</ul>
+					</div>
+				</section>
+
+                <section class="heading-only">
+                    <h2>(Revisit)<br>Lecture Quiz</h2>
+                </section>
+
+                <section>
+                    <h3>__str__ and objects</h3>
+
+                    <p class="smaller">Consider the following variable assignments. Which of the created variables can we call <code>__str__</code> on?</p>
+
+                    <pre style="font-size:0.45em"><code data-trim data-noescape class="python">
+                    class Lamb:
+                        species_name = "Lamb"
+                        scientific_name = "Ovis aries"
+
+                        def __init__(self, name):
+                            self.name = name
+
+                    lamb = Lamb("Fleecey")                      # 80%
+                    <span class="fragment" data-fragment-index="1">print(Lamb.__str__(lamb))</span>
+                    grade = 79.5                                # 80%
+                    <span class="fragment" data-fragment-index="1">print(float.__str__(grade))</span>
+                    colors = ["red", "orange", "yellow"]        # 72%
+                    <span class="fragment" data-fragment-index="1">print(list.__str__(colors))</span>
+                    translations = {"one": "uno", "two": "dos"} # 65%
+                    <span class="fragment" data-fragment-index="1">print(dict.__str__(translations))</span>
+                    is_fluffy = True                            # 60%
+                    <span class="fragment" data-fragment-index="1">print(bool.__str__(is_fluffy))</span>
+                    </code></pre>
+
+                    <p class="fragment smaller" data-fragment-index="1">All of them! All of them inherit from <code>object</code> and thus have a <code>__str__</code> method defined.
+                        Run <code>type(var).__str__(var)</code> to prove it to yourself.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Attribute access</h3>
+
+                    <p class="smaller">Imagine we have a class <code>Book</code> with a class variable <code>available_formats</code>,
+                        and an instance of that class named <code>bookywook</code>.
+                    </p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    class Book:
+                        available_formats = ["Kindle", "paperback"]
+
+                        def __init__(self, title):
+                            self.title = title
+
+                    bookywook = Book("Where's Boo?")
+                    </code></pre>
+
+                    <p class="smaller">Which line of code would retrieve the value of that attribute?</p>
+
+                    <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                    Book.__getattribute__(bookywook, "available_formats")  # 61%
+
+                    getattr(bookywook, "available_formats")                # 60%
+
+                    bookywook.available_formats                            # 51%
+
+                    Book.available_formats                                 # 20%
+
+                    getattr(Book, "available_formats")                     # 19%
+                    </code></pre>
+
+                    <p class="fragment smaller">All of them retrieve the value!</p>
+                </section>
+
+                <section class="heading-only">
+                    <h2>Trees</h2>
+                </section>
+
+                <section>
+                    <h3>Tree concepts</h3>
+
+                    <img class="r-stretch" src="https://i.imgur.com/cruE1N2.png" alt="Diagram of tree" style="height: 265px; width: 706.667px;">
+
+                    <ul>
+						<li>A tree has a <strong>root label</strong> and a list of <strong>branches</strong></li>
+						<li>Each <strong>branch</strong> is itself a <strong>tree</strong></li>
+						<li>A tree with <strong>zero branches</strong> is called a <strong>leaf</strong></li>
+                    </ul>
+
+                </section>
+
+				<section>
+					<h3>Trees: Data abstraction</h3>
+
+
+					<p>This is what we've been using:</p>
+
+					<table style="font-size:smaller;">
+						<tr>
+							<td style="font-size:smaller;"><code>tree(label, branches)</code></td>
+							<td>Returns a tree with given LABEL at its root, whose branches are BRANCHES</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>label(tree)</code></td>
+							<td>Returns the label of root node of TREE</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>branches(tree)</code></td>
+							<td>Returns the branches of TREE (each a tree).</td>
+						</tr>
+						<tr>
+							<td style="font-size:smaller;"><code>is_leaf(tree)</code></td>
+							<td>Returns true if TREE is a leaf node.</td>
+						</tr>
+					</table>
+                </section>
+
+
+				<section>
+					<h3>Trees: Data abstraction</h3>
+
+					<p>Using an implementation like this:</p>
+
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="python">
+                    def tree(label, branches=[]):
+                        return [label] + list(branches)
+
+                    def label(tree):
+                        return tree[0]
+
+                    def branches(tree):
+                        return tree[1:]
+
+                    def is_leaf(tree):
+                        return not branches(tree)
+                    </code></pre>
+
+                    <p>🤔 How could we represent trees as a Python class?</p>
+
+				</section>
+
+                <section>
+					<h3>A Tree class</h3>
+
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="python">
+                    class Tree:
+                        def __init__(self, label, branches=[]):
+                            self.label = label
+                            self.branches = list(branches)
+
+                        def is_leaf(self):
+                            return not self.branches
+                    </code></pre>
+
+                    <p>🤔 What's different? What's the same?</p>
+
+                </section>
+
+                <section>
+                    <h3>tree versus Tree</h3>
+
+                    <table class="smaller">
+                        <thead>
+                            <tr><th>tree
+                                <th>Tree
+                        </thead>
+                        <tbody>
+                            <tr><td><code>t = tree(label, branches=[])</code>
+                                <td><code>t = Tree(label, branches=[])</code>
+                            </tr>
+                            <tr>
+                                <td><code>branches(t)</code>
+                                <td><code>t.branches</code>
+                            <tr>
+                                <td><code>label(t)</code>
+                                <td><code>t.label</code>
+                            <tr>
+                                <td><code>is_leaf(t)</code></td>
+                                <td><code>t.is_leaf()</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div class="row">
+                        <div class="column">
+                            <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                            def fib_tree(n):
+                                if n == 0 or n == 1:
+                                    return tree(n)
+                                else:
+                                    left = fib_tree(n - 2)
+                                    right = fib_tree(n - 1)
+                                    fib_n = label(left) + label(right)
+                                    return tree(fib_n, [left, right])
+                            </code></pre>
+                        </div>
+                        <div class="column">
+                            <pre style="font-size:0.6em"><code data-trim data-noescape class="python">
+                            def fib_tree(n):
+                                if n == 0 or n == 1:
+                                    return Tree(n)
+                                else:
+                                    left = fib_tree(n - 2)
+                                    right = fib_tree(n - 1)
+                                    fib_n = left.label + right.label
+                                    return Tree(fib_n, [left, right])
+                            </code></pre>
+                        </div>
+                    </div>
+
+                </section>
+
+
+				<section>
+					<h3>Doubling a Tree</h3>
+
+                    <img src="https://i.imgur.com/oGLyaQD.png" alt="Doubling trees diagram" height="150">
+
+					<pre><code data-trim data-noescape class="python">
+                    def double(t):
+                        """Doubles every label in T, mutating T.
+                        >>> t = Tree(1, [Tree(3, [Tree(5)]), Tree(7)])
+                        >>> double(t)
+                        >>> t
+                        Tree(2, [Tree(6, [Tree(10)]), Tree(14)])
+                        """
+                        t.label = t.label * 2
+                        for b in t.branches:
+                            double(b)
+					</code></pre>
+
+                    <p class="smaller">Is the <code>Tree</code> object mutable or immutable? <span class="fragment">Mutable!</span>
+                        <br>
+                       Is <code>double(t)</code> destructive or non-destructive? <span class="fragment">Destructive!</span>
+                    </p>
+
+					<aside class="notes">
+						Notice no return statement, no explicit base case.
+						Whats the base case?
+					</aside>
+                </section>
+
+                <section>
+                    <h3>A fancier Tree</h3>
+
+                    <p>This is what assignments actually use:</p>
+                    <pre style="font-size:0.35em"><code data-trim data-noescape class="python">
+                    class Tree:
+
+                        def __init__(self, label, branches=[]):
+                            self.label = label
+                            for branch in branches:
+                                assert isinstance(branch, Tree)
+                            self.branches = list(branches)
+
+                        def is_leaf(self):
+                            return not self.branches
+
+                        def __repr__(self):
+                            if self.branches:
+                                branch_str = ', ' + repr(self.branches)
+                            else:
+                                branch_str = ''
+                            return 'Tree({0}{1})'.format(self.label, branch_str)
+
+                        def __str__(self):
+                            return '\n'.join(self.indented())
+
+                        def indented(self):
+                            lines = []
+                            for b in self.branches:
+                                for line in b.indented():
+                                    lines.append('  ' + line)
+                            return [str(self.label)] + lines
+                    </code></pre>
+
+                    <p>It's built in to code.cs61a.org, and remember, you can <code>draw()</code> any tree/Tree.</p>
+
+                </section>
+
+
+                <section class="heading-only">
+                    <h2>Linked lists</h2>
+                </section>
+
+                <section>
+                    <h3>Why do we need a new list?</h3>
+
+                    <p>Python lists are implemented as a "dynamic array",
+                        which isn't optimal for all use cases.</p>
+
+                    <p class="smaller">😭 Inserting an element is slow, especially near front of list:</p>
+
+                    <div style="position:relative;" id="insertion-demo">
+                    </div>
+
+                    <form class="array-insert-form smaller">
+                        <p>What should we insert?</p>
+                        <label>value:</label> <input name="newValue" type="text" value="Z">
+                        <label>@ index:</label> <input name="newIndex" type="number" min="0" value="3">
+                        <button class="btn" type="button" id="insert-button">Insert</button>
+                    </form>
+
+                    <p class="smaller fragment">😭 Plus inserting too many elements can require
+                        re-creating the entire list in memory,
+                        if it exceeds the pre-allocated memory.</p>
+
+
+                </section>
+
+                <section>
+                    <h3>Linked lists</h3>
+
+                    <p>A linked list is a chain of objects where each object
+                        holds a <strong>value</strong> and a <strong>reference to the next link</strong>.
+                        The list ends when the final reference is empty.
+                    </p>
+
+                    <div id="linkedlist-demo1">
+                        <div class="linkedlist-visualization">
+                        </div>
+
+                        <form class="linkedlist-insert-form smaller">
+                            <p>What should we insert?</p>
+                            <label>value:</label> <input name="newValue" type="text" value="Z">
+                            <label>@ index:</label> <input name="newIndex" type="number" min="0" value="5">
+                            <button class="btn" type="button">Insert</button>
+                        </form>
+                    </div>
+
+                    <p class="smaller padded fragment">Linked lists require more space but provide faster insertion.</p>
+
+                </section>
+
+                <section>
+                    <h3>A Link class</h3>
+
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="python">
+                    class Link:
+                        empty = ()
+
+                        def __init__(self, first, rest=empty):
+                            self.first = first
+                            self.rest = rest
+                    </code></pre>
+
+                    <p>How would we use that?</p>
+
+                    <div class="fragment">
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="python">
+                    ll = Link("A", Link("B", Link("C")))
+                    </code></pre>
+
+                    <p class="python-tutor-link">
+                        <a target="_blank" href="http://pythontutor.com/composingprograms.html#code=class%20Link%3A%0A%20%20%20%20empty%20%3D%20%28%29%0A%0A%20%20%20%20def%20__init__%28self,%20first,%20rest%3Dempty%29%3A%0A%20%20%20%20%20%20%20%20self.first%20%3D%20first%0A%20%20%20%20%20%20%20%20self.rest%20%3D%20rest%0A%20%20%20%20%20%20%20%20%0All%20%3D%20Link%28%22A%22,%20Link%28%22B%22,%20Link%28%22C%22%29%29%29&cumulative=false&curInstr=14&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                        Try in PythonTutor
+                        </a>
+                    </p>
+
+                    </div>
+                </section>
+
+                <section>
+                    <h3>A fancier LinkedList</h3>
+
+                    <pre style="font-size:0.4em"><code data-trim data-noescape class="python">
+                    class Link:
+                        """A linked list."""
+                        empty = ()
+
+                        def __init__(self, first, rest=empty):
+                            assert rest is Link.empty or isinstance(rest, Link)
+                            self.first = first
+                            self.rest = rest
+
+                        def __repr__(self):
+                            if self.rest:
+                                rest_repr = ', ' + repr(self.rest)
+                            else:
+                                rest_repr = ''
+                            return 'Link(' + repr(self.first) + rest_repr + ')'
+
+                        def __str__(self):
+                            string = '<'
+                            while self.rest is not Link.empty:
+                                string += str(self.first) + ' '
+                                self = self.rest
+                            return string + str(self.first) + '>'
+                    </code></pre>
+
+                    <p class="smaller">It's built-in to code.cs61a.org and you can <code>draw()</code> any Link.</p>
+                </section>
+
+                <section class="heading-only">
+                    <h3>Creating linked lists</h3>
+                </section>
+
+                <section>
+                    <h3>Creating a range</h3>
+
+                    <p>Similar to <code>[x for x in range(3, 6)]</code></p>
+
+                    <pre style="font-size:0.9em"><code data-trim data-noescape class="python">
+                    def range_link(start, end):
+                        """Return a Link containing consecutive integers
+                        from START to END, not including END.
+                        >>> range_link(3, 6)
+                        Link(3, Link(4, Link(5)))
+                        """<span class="fragment">
+                        if start >= end:
+                            return Link.empty
+                        return Link(start, range_link(start + 1, end))</span>
+                    </code></pre>
+
+                    <p class="python-tutor-link">
+                        <a target="_blank" href="http://pythontutor.com/composingprograms.html#code=class%20Link%3A%0A%20%20%20%20%22%22%22A%20linked%20list.%22%22%22%0A%20%20%20%20empty%20%3D%20%28%29%0A%0A%20%20%20%20def%20__init__%28self,%20first,%20rest%3Dempty%29%3A%0A%20%20%20%20%20%20%20%20assert%20rest%20is%20Link.empty%20or%20isinstance%28rest,%20Link%29%0A%20%20%20%20%20%20%20%20self.first%20%3D%20first%0A%20%20%20%20%20%20%20%20self.rest%20%3D%20rest%0A%0A%20%20%20%20def%20__repr__%28self%29%3A%0A%20%20%20%20%20%20%20%20if%20self.rest%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20',%20'%20%2B%20repr%28self.rest%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20''%0A%20%20%20%20%20%20%20%20return%20'Link%28'%20%2B%20repr%28self.first%29%20%2B%20rest_repr%20%2B%20'%29'%0A%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20string%20%3D%20'%3C'%0A%20%20%20%20%20%20%20%20while%20self.rest%20is%20not%20Link.empty%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20string%20%2B%3D%20str%28self.first%29%20%2B%20'%20'%0A%20%20%20%20%20%20%20%20%20%20%20%20self%20%3D%20self.rest%0A%20%20%20%20%20%20%20%20return%20string%20%2B%20str%28self.first%29%20%2B%20'%3E'%0A%20%20%20%20%20%20%20%20%0Adef%20range_link%28start,%20end%29%3A%0A%20%20%20%20%22%22%22Return%20a%20Link%20containing%20consecutive%20integers%0A%20%20%20%20from%20START%20to%20END,%20not%20including%20END.%0A%20%20%20%20%3E%3E%3E%20range_link%283,%206%29%0A%20%20%20%20Link%283,%20Link%284,%20Link%285%29%29%29%0A%20%20%20%20%22%22%22%0A%20%20%20%20if%20start%20%3E%3D%20end%3A%0A%20%20%20%20%20%20%20%20return%20Link.empty%0A%20%20%20%20return%20Link%28start,%20range_link%28start%20%2B%201,%20end%29%29%0A%20%20%20%20%0All%20%3D%20range_link%283,%206%29&cumulative=false&curInstr=34&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                            Try in PythonTutor
+                        </a>
+                    </p>
+                </section>
+
+                <section>
+                    <h3>Mapping a linked list</h3>
+
+                    <p>Similar to <code>[f(x) for x in lst]</code></p>
+
+                    <pre style="font-size:0.7em"><code data-trim data-noescape class="python">
+                    def map_link(f, ll):
+                        """Return a Link that contains f(x) for each x in Link LL.
+                        >>> square = lambda x: x * x
+                        >>> map_link(square, range_link(3, 6))
+                        Link(9, Link(16, Link(25)))
+                        """<span class="fragment">
+                        if ll is Link.empty:
+                            return Link.empty
+                        return Link(f(ll.first), map_link(f, ll.rest))</span>
+                    </code></pre>
+
+                    <p class="python-tutor-link">
+                        <a target="_blank" href="http://pythontutor.com/composingprograms.html#code=class%20Link%3A%0A%20%20%20%20%22%22%22A%20linked%20list.%22%22%22%0A%20%20%20%20empty%20%3D%20%28%29%0A%0A%20%20%20%20def%20__init__%28self,%20first,%20rest%3Dempty%29%3A%0A%20%20%20%20%20%20%20%20assert%20rest%20is%20Link.empty%20or%20isinstance%28rest,%20Link%29%0A%20%20%20%20%20%20%20%20self.first%20%3D%20first%0A%20%20%20%20%20%20%20%20self.rest%20%3D%20rest%0A%0A%20%20%20%20def%20__repr__%28self%29%3A%0A%20%20%20%20%20%20%20%20if%20self.rest%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20',%20'%20%2B%20repr%28self.rest%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20''%0A%20%20%20%20%20%20%20%20return%20'Link%28'%20%2B%20repr%28self.first%29%20%2B%20rest_repr%20%2B%20'%29'%0A%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20string%20%3D%20'%3C'%0A%20%20%20%20%20%20%20%20while%20self.rest%20is%20not%20Link.empty%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20string%20%2B%3D%20str%28self.first%29%20%2B%20'%20'%0A%20%20%20%20%20%20%20%20%20%20%20%20self%20%3D%20self.rest%0A%20%20%20%20%20%20%20%20return%20string%20%2B%20str%28self.first%29%20%2B%20'%3E'%0A%0Adef%20range_link%28start,%20end%29%3A%0A%20%20%20%20%22%22%22Return%20a%20Link%20containing%20consecutive%20integers%0A%20%20%20%20from%20START%20to%20END,%20not%20including%20END.%0A%20%20%20%20%3E%3E%3E%20range_link%283,%206%29%0A%20%20%20%20Link%283,%20Link%284,%20Link%285%29%29%29%0A%20%20%20%20%22%22%22%0A%20%20%20%20if%20start%20%3E%3D%20end%3A%0A%20%20%20%20%20%20%20%20return%20Link.empty%0A%20%20%20%20return%20Link%28start,%20range_link%28start%20%2B%201,%20end%29%29%0A%20%20%20%20%0Adef%20map_link%28f,%20ll%29%3A%0A%20%20%20%20%22%22%22Return%20a%20Link%20that%20contains%20f%28x%29%20for%20each%20x%20in%20Link%20LL.%0A%20%20%20%20%3E%3E%3E%20square%20%3Dlambda%20x%3A%20x%20*%20x%0A%20%20%20%20%3E%3E%3E%20map_link%28square,%20range_link%283,%206%29%29%0A%20%20%20%20Link%289,%20Link%2816,%20Link%2825%29%29%29%0A%20%20%20%20%22%22%22%0A%20%20%20%20if%20ll%20is%20Link.empty%3A%0A%20%20%20%20%20%20%20%20return%20Link.empty%0A%20%20%20%20return%20Link%28f%28ll.first%29,%20map_link%28f,%20ll.rest%29%29%0A%0Asquare%20%3D%20lambda%20x%3A%20x%20*%20x%0All%20%3D%20map_link%28square,%20range_link%283,%206%29%29&cumulative=false&curInstr=76&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                            Try in PythonTutor
+                        </a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>Filtering a linked list</h3>
+
+                    <p>Similar to <code>[x for x in lst if f(x)]</code></p>
+
+                    <pre style="font-size:0.7em"><code data-trim data-noescape class="python">
+                    def filter_link(f, ll):
+                        """Return a Link that contains only the elements x of Link LL
+                        for which f(x) is a true value.
+                        >>> is_odd = lambda x: x % 2 == 1
+                        >>> filter_link(is_odd, range_link(3, 6))
+                        Link(3, Link(5))
+                        """<span class="fragment">
+                        if ll is Link.empty:
+                            return Link.empty
+                        elif f(ll.first):
+                            return Link(ll.first, filter_link(f, ll.rest))
+                        return filter_link(f, ll.rest)</span>
+                    </code></pre>
+
+                    <p class="python-tutor-link">
+                        <a target="_blank" href="http://pythontutor.com/composingprograms.html#code=class%20Link%3A%0A%20%20%20%20%22%22%22A%20linked%20list.%22%22%22%0A%20%20%20%20empty%20%3D%20%28%29%0A%0A%20%20%20%20def%20__init__%28self,%20first,%20rest%3Dempty%29%3A%0A%20%20%20%20%20%20%20%20assert%20rest%20is%20Link.empty%20or%20isinstance%28rest,%20Link%29%0A%20%20%20%20%20%20%20%20self.first%20%3D%20first%0A%20%20%20%20%20%20%20%20self.rest%20%3D%20rest%0A%0A%20%20%20%20def%20__repr__%28self%29%3A%0A%20%20%20%20%20%20%20%20if%20self.rest%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20',%20'%20%2B%20repr%28self.rest%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20''%0A%20%20%20%20%20%20%20%20return%20'Link%28'%20%2B%20repr%28self.first%29%20%2B%20rest_repr%20%2B%20'%29'%0A%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20string%20%3D%20'%3C'%0A%20%20%20%20%20%20%20%20while%20self.rest%20is%20not%20Link.empty%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20string%20%2B%3D%20str%28self.first%29%20%2B%20'%20'%0A%20%20%20%20%20%20%20%20%20%20%20%20self%20%3D%20self.rest%0A%20%20%20%20%20%20%20%20return%20string%20%2B%20str%28self.first%29%20%2B%20'%3E'%0A%0Adef%20range_link%28start,%20end%29%3A%0A%20%20%20%20%22%22%22Return%20a%20Link%20containing%20consecutive%20integers%0A%20%20%20%20from%20START%20to%20END,%20not%20including%20END.%0A%20%20%20%20%3E%3E%3E%20range_link%283,%206%29%0A%20%20%20%20Link%283,%20Link%284,%20Link%285%29%29%29%0A%20%20%20%20%22%22%22%0A%20%20%20%20if%20start%20%3E%3D%20end%3A%0A%20%20%20%20%20%20%20%20return%20Link.empty%0A%20%20%20%20return%20Link%28start,%20range_link%28start%20%2B%201,%20end%29%29%0A%20%20%20%20%0Adef%20filter_link%28f,%20ll%29%3A%0A%20%20%20%20%22%22%22Return%20a%20Link%20that%20contains%20only%20the%20elements%20x%20of%20Link%20LL%0A%20%20%20%20for%20which%20f%28x%29%20is%20a%20true%20value.%0A%20%20%20%20%3E%3E%3E%20is_odd%20%3D%20lambda%20x%3A%20x%20%25%202%20%3D%3D%201%0A%20%20%20%20%3E%3E%3E%20filter_link%28odd,%20range_link%283,%206%29%29%0A%20%20%20%20Link%283,%20Link%285%29%29%0A%20%20%20%20%22%22%22%0A%20%20%20%20if%20ll%20is%20Link.empty%3A%0A%20%20%20%20%20%20%20%20return%20Link.empty%0A%20%20%20%20elif%20f%28ll.first%29%3A%0A%20%20%20%20%20%20%20%20return%20Link%28ll.first,%20filter_link%28f,%20ll.rest%29%29%0A%20%20%20%20return%20filter_link%28f,%20ll.rest%29%0A%0Ais_odd%20%3D%20lambda%20x%3A%20x%20%25%202%20%3D%3D%201%0All%20%3D%20filter_link%28is_odd,%20range_link%283,%206%29%29&cumulative=false&curInstr=74&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                            Try in PythonTutor
+                        </a>
+                    </p>
+
+                </section>
+
+                <section class="heading-only">
+                    <h2>Mutating linked lists</h2>
+                </section>
+
+                <section>
+                    <h3>Linked lists can change</h3>
+
+                    <p>Attribute assignments can change <code>first</code> and <code>rest</code> attributes of a <code>Link</code>.</p>
+
+                    <pre style="font-size:1em"><code data-trim data-noescape class="python">
+                    s = Link("A", Link("B", Link("C")))
+                    s.first = "Hi"
+                    s.rest.first = "Hola"
+                    s.rest.rest.first = "Oi"
+                    </code></pre>
+
+                    <p class="python-tutor-link">
+                        <a target="_blank" href="http://pythontutor.com/composingprograms.html#code=class%20Link%3A%0A%20%20%20%20%22%22%22A%20linked%20list.%22%22%22%0A%20%20%20%20empty%20%3D%20%28%29%0A%0A%20%20%20%20def%20__init__%28self,%20first,%20rest%3Dempty%29%3A%0A%20%20%20%20%20%20%20%20assert%20rest%20is%20Link.empty%20or%20isinstance%28rest,%20Link%29%0A%20%20%20%20%20%20%20%20self.first%20%3D%20first%0A%20%20%20%20%20%20%20%20self.rest%20%3D%20rest%0A%0A%20%20%20%20def%20__repr__%28self%29%3A%0A%20%20%20%20%20%20%20%20if%20self.rest%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20',%20'%20%2B%20repr%28self.rest%29%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20rest_repr%20%3D%20''%0A%20%20%20%20%20%20%20%20return%20'Link%28'%20%2B%20repr%28self.first%29%20%2B%20rest_repr%20%2B%20'%29'%0A%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20string%20%3D%20'%3C'%0A%20%20%20%20%20%20%20%20while%20self.rest%20is%20not%20Link.empty%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20string%20%2B%3D%20str%28self.first%29%20%2B%20'%20'%0A%20%20%20%20%20%20%20%20%20%20%20%20self%20%3D%20self.rest%0A%20%20%20%20%20%20%20%20return%20string%20%2B%20str%28self.first%29%20%2B%20'%3E'%0A%0As%20%3D%20Link%28%22A%22,%20Link%28%22B%22,%20Link%28%22C%22%29%29%29%0As.first%20%3D%20%22Hi%22%0As.rest.first%20%3D%20%22Hola%22%0As.rest.rest.first%20%3D%20%22Oi%22&cumulative=false&curInstr=17&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">
+                            Try in PythonTutor
+                        </a>
+                    </p>
+
+                </section>
+
+                <section>
+                    <h3>Beware infinite lists</h3>
+
+                    <p>The rest of a linked list can contain the linked list as a sub-list.</p>
+
+                    <pre style="font-size:1em"><code data-trim data-noescape class="python">
+                    s = Link("A", Link("B", Link("C")))
+                    t = s.rest
+                    t.rest = s
+
+                    s.first
+                    s.rest.rest.rest.rest.rest.first
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h3>Adding to front of linked list</h3>
+
+                    <div id="linkedlist-demo2">
+                        <div class="linkedlist-visualization">
+                        </div>
+
+                        <form class="linkedlist-insert-form smaller">
+                            <button class="btn" type="button">Insert</button>
+                        </form>
+                    </div>
+
+                    <pre style="font-size:0.8em"><code data-trim data-noescape class="python">
+                    def insert_front(linked_list, new_val):
+                        """Inserts NEW_VAL in front of LINKED_LIST,
+                        returning new linked list.
+
+                        >>> ll = Link(1, Link(3, Link(5)))
+                        >>> insert_front(ll, 0)
+                        Link(0, Link(1, Link(3, Link(5))))
+                        """
+                        <span class="fragment">return Link(new_val, linked_list)</span>
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Adding to an ordered linked list</h3>
+
+                    <div id="linkedlist-demo3">
+                        <div class="linkedlist-visualization">
+                        </div>
+                        <form class="linkedlist-insert-form smaller">
+                            Insert <label>value:</label> <input name="newValue" type="text" value="0">
+                            <label>@ index:</label> <input name="newIndex" type="number" min="0" value="0">
+                            <button class="btn" type="button">Insert</button>
+                        </form>
+                    </div>
+
+                    <pre style="font-size:0.45em"><code data-trim data-noescape class="python">
+                    def add(ordered_list, new_val):
+                        """Add NEW_VAL to ORDERED_LIST, returning modified ORDERED_LIST.
+                        >>> s = Link(1, Link(3, Link(5)))
+                        >>> add(s, 0)
+                        Link(0, Link(1, Link(3, Link(5))))
+                        >>> add(s, 3)
+                        Link(0, Link(1, Link(3, Link(5))))
+                        >>> add(s, 4)
+                        Link(0, Link(1, Link(3, Link(4, Link(5)))))
+                        >>> add(s, 6)
+                        Link(0, Link(1, Link(3, Link(4, Link(5, Link(6))))))
+                        """
+                        if new_val < ordered_list.first:
+                            <span class="fragment" data-fragment-index="1">original_first = ordered_list.first</span>
+                            <span class="fragment" data-fragment-index="1">ordered_list.first = new_val</span>
+                            <span class="fragment" data-fragment-index="1">ordered_list.rest = Link(original_first, ordered_list.rest)</span>
+                        elif new_val > ordered_list.first and ordered_list.rest is Link.empty:
+                            <span class="fragment" data-fragment-index="2">ordered_list.rest = Link(new_val)</span>
+                        elif new_val > ordered_list.first:
+                            <span class="fragment" data-fragment-index="3">add(ordered_list.rest, new_val)</span>
+                        return ordered_list
+                    </code></pre>
+
+                </section>
+
+                <section>
+                    <h3>Showdown: Python list vs. Link</h3>
+
+                    <p>The challenge:</p>
+                    <ul>
+                        <li>Store all the half-a-million words
+                        in "War and Peace"</li>
+                        <li>Insert a word
+                        at the beginning.</li>
+                    </ul>
+
+                    <br><br>
+
+                    <table>
+                        <thead>
+                            <th>Version</th>
+                            <th>10,000 runs</th>
+                            <th>100,000 runs</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Python list</td>
+                                <td><span class="fragment" data-fragment-index="1">2.6 seconds</span></td>
+                                <td><span class="fragment" data-fragment-index="1">37 seconds</span></td>
+                            </tr>
+                            <tr>
+                                <td>Link</td>
+                                <td><span class="fragment" data-fragment-index="2">0.01 seconds</span></td>
+                                <td><span class="fragment" data-fragment-index="2">0.1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Try it yourself on your local machine (Legit Python!): <a target="_blank" href="https://gist.github.com/pamelafox/2f884f2e2b7b3dd44a6212476180c87b">warandpeace.py</a></p>
+
+                </section>
+
+                <section>
+                    <h3>Recursive objects</h3>
+
+                    <p>Why are <code>Tree</code> and <code>Link</code> considered recursive objects?</p>
+
+                    <div class="fragment smaller">
+                    <p>
+                    Each type of object contains references to the same type of object.
+                    </p>
+                    <ul>
+                    <li>An instance of <code>Tree</code> can contain additional instances of <code>Tree</code>, in the <code>branches</code> variable.
+                    <li>An instance of <code>Link</code> can contain an additional instance of <code>Link</code>, in the <code>rest</code> variable.
+                    </ul>
+
+
+                    <p>
+                    Both classes lend themselves to recursive algorithms. Generally:
+                    </p>
+                    <ul>
+                    <li>For <code>Tree</code>: The base case is when <code>is_leaf()</code> is true;<br> the recursive call is on the <code>branches</code>.
+                    <li>For <code>Link</code>: The base case is when the rest is <code>empty</code>;<br> the recursive call is on the <code>rest</code>.
+                    </ul>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/highlightjs-badge@0.1.9/highlightjs-badge.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+		<script>
+			const srcUrlPrefix = "https://cdn.jsdelivr.net/npm/reveal.js@4.1.0/";
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				slideNumber: true,
+				showNotes: false,
+				margin: 0.1,
+				preloadIframes: true,
+				plugins: [ RevealHighlight ],
+				pdfSeparateFragments: true
+			});
+
+            // add HighlightJS-badge (options are optional)
+            var options = {
+                copyIconContent: "📄",
+                checkIconContent: "✅"
+            };
+            window.highlightJsBadge(options);
+
+            if (window.location.search == "?print-pdf") {
+                var uncounted = document.querySelectorAll("[data-visibility='uncounted']");
+                uncounted.forEach(node => {
+                    node.parentNode.classList.add("no-print")
+                })
+            }
+
+
+
+            var demoDiv = document.getElementById("insertion-demo");
+
+            var divHeight = 50;
+            var newDiv = document.createElement("div");
+            newDiv.style.top = 0;
+            newDiv.style.left = 0;
+            newDiv.style.position = "absolute";
+            demoDiv.appendChild(newDiv);
+            var arrowDiv = document.createElement("div");
+            arrowDiv.style.top = "0px";
+            arrowDiv.style.position = "absolute";
+            newDiv.appendChild(arrowDiv);
+
+            var valuesDiv = document.createElement("div");
+            valuesDiv.style.top = (divHeight * 1) + "px";
+            valuesDiv.style.left = 0;
+            valuesDiv.style.position = "absolute";
+            valuesDiv.className = "array-values";
+            demoDiv.appendChild(valuesDiv);
+
+            var indicesDiv = document.createElement("div");
+            indicesDiv.style.top = (divHeight * 2) + "px";
+            indicesDiv.style.left = 0;
+            indicesDiv.style.position = "absolute";
+            demoDiv.appendChild(indicesDiv);
+
+            var addressesDiv = document.createElement("div");
+            addressesDiv.style.top = (divHeight * 3) + "px";
+            addressesDiv.style.left = 0;
+            addressesDiv.style.position = "absolute";
+            demoDiv.appendChild(addressesDiv);
+
+            var arrayValues = ["A", "B", "C", "D", "E", "F"];
+            var leftPos = 0;
+            var divWidth = 100;
+            var lastAddress, lastIndex;
+
+            var createValue = function(value, index, left) {
+                var valueDiv = document.createElement("div");
+                if (Number.isInteger(value)) {
+                    valueDiv.innerHTML = value;
+                } else {
+                    valueDiv.innerHTML = "&quot;" + value + "&quot;";
+                }
+
+                valueDiv.className = "array-value";
+                valueDiv.style.left = left + "px";
+                valueDiv.setAttribute("data-index", index);
+                valuesDiv.appendChild(valueDiv);
+                return value;
+            };
+
+            var createIndex = function(index, left) {
+                var indexDiv = document.createElement("div");
+                indexDiv.innerText = index;
+                indexDiv.className = "array-index";
+                indexDiv.style.left = leftPos + "px";
+                indicesDiv.appendChild(indexDiv);
+                return index;
+            };
+
+            var createAddress = function(address, left) {
+                var addressDiv = document.createElement("div");
+                addressDiv.innerText = address;
+                addressDiv.className = "array-address";
+                addressDiv.style.left = leftPos + "px";
+                addressesDiv.appendChild(addressDiv);
+                return address;
+            }
+
+            arrayValues.forEach(function(arrayVal, index) {
+                createValue(arrayVal, index, leftPos);
+                lastIndex = createIndex(index, leftPos);
+                lastAddress = createAddress(3300 + index, leftPos)
+                leftPos += divWidth;
+            });
+
+            var moveDiv = function(div, newIndex, leftAmount) {
+                var oldLeft = parseInt(div.style.left, 10);
+                div.style.left = (oldLeft + leftAmount) + "px";
+                div.setAttribute("data-index", newIndex);
+            };
+
+            document.getElementById("insert-button").addEventListener("click", function(evt) {
+                evt.preventDefault();
+                var form = evt.target.form;
+
+                var newValue = form[0].value;
+                var newIndex = parseInt(form[1].value, 10);
+                lastAddress += 1;
+                lastIndex += 1;
+
+                // Point at new target location
+                arrowDiv.innerText = "⬇";
+                arrowDiv.style.visibility = "visible";
+                arrowDiv.style.left = ((newIndex * divWidth) + divWidth/3) + "px";
+
+
+                // Make the new memory location
+                createAddress(lastAddress, leftPos);
+                createIndex(lastIndex, leftPos);
+
+                leftPos += divWidth;
+
+                // Move over each and then add new value
+
+                var addNewValue = () => {
+                    createValue(newValue, newIndex, (newIndex * divWidth));
+                };
+
+                var moveNextDiv = function(index) {
+                    return function() {
+                        if (index < newIndex) {
+                            window.setTimeout(addNewValue, 1000);
+                            return;
+                        }
+                        var valueDiv = document.querySelector("[data-index='" + index + "']");
+
+                        moveDiv(valueDiv, index + 1, divWidth);
+                        window.setTimeout(moveNextDiv(index - 1), 600);
+                    };
+                }
+
+                window.setTimeout(moveNextDiv(document.querySelectorAll(".array-value").length - 1), 300);
+            });
+
+
+            var linkedListViz = (function(demoDivId, values) {
+                var createLink = function(index, value, address, nextAddress, leftPos, topPos) {
+                    var linkDiv = document.createElement("div");
+                    linkDiv.className = "linkedlist-link";
+                    linkDiv.setAttribute("data-index", index);
+                    linkDiv.style.left = leftPos + "px";
+                    if (topPos) {
+                        linkDiv.style.top = topPos + "px";
+                    }
+
+                    var partsDiv = document.createElement("div");
+                    partsDiv.className = "linkedlist-parts";
+                    var valueDiv = document.createElement("div");
+                    valueDiv.className = "linkedlist-value";
+                    if (parseInt(value, 10) >= 0) {
+                        valueDiv.innerHTML = value;
+                    } else {
+                        valueDiv.innerHTML = "&quot;" + value + "&quot;";
+                    }
+
+                    var pointerDiv = document.createElement("div");
+                    pointerDiv.innerText = nextAddress;
+                    pointerDiv.className = "linkedlist-pointer";
+                    pointerDiv.setAttribute("data-pointing-at", nextAddress);
+                    partsDiv.appendChild(valueDiv);
+                    partsDiv.appendChild(pointerDiv);
+
+                    var addressDiv = document.createElement("div");
+                    addressDiv.className = "linkedlist-address";
+                    addressDiv.innerText = address;
+                    addressDiv.setAttribute("data-address", address);
+
+                    linkDiv.appendChild(partsDiv);
+                    linkDiv.appendChild(addressDiv);
+                    vizDiv.appendChild(linkDiv);
+
+                };
+
+                var demoDiv = document.getElementById(demoDivId);
+                var vizDiv = demoDiv.querySelector(".linkedlist-visualization");
+                var leftPos = 100;
+                var offset = 180;
+                var arrayValues = values || ["A", "B", "C", "D", "E", "F"];
+                var plumber = jsPlumb.getInstance();
+                plumber.setContainer(vizDiv);
+                arrayValues.forEach(function(arrayVal, index) {
+                    var nextAddress = 300 + ((index + 1) * (10));
+                    if (index == arrayValues.length - 1) {
+                        nextAddress = "";
+                    }
+                    createLink(index, arrayVal, 300 + (index * (10)), nextAddress, leftPos);
+                    leftPos += offset;
+                });
+
+                var redoConnections = function() {
+                    var connections = plumber.getConnections();
+                    connections.forEach(plumber.deleteConnection);
+
+                    var pointers = vizDiv.querySelectorAll(".linkedlist-pointer");
+                    pointers.forEach(function(node) {
+                        var address = node.getAttribute("data-pointing-at");
+                        var addressNode = vizDiv.querySelector("[data-address='" + address + "']");
+                        if (!addressNode) return;
+
+                        plumber.connect({
+                            source: node, target: addressNode,
+                            anchor: ["Right", "Left"], endpoint: "Blank", connector: "Straight",
+                            overlays: [ ["Arrow", {location: 1.0, width: 10, length: 10}] ]
+                        });
+                    });
+                };
+
+                jsPlumb.ready(() => redoConnections());
+
+                var newAddress = 400;
+
+                demoDiv.querySelector("button").addEventListener("click", function(evt) {
+                    evt.preventDefault();
+                    var form = evt.target.form;
+
+                    var newValue = (form[0] && form[0].value) || "Z";
+                    var newIndex = (form[1] && parseInt(form[1].value, 10)) || 0;
+
+                    newAddress += 10;
+
+                    var nextLink = vizDiv.querySelector(".linkedlist-link[data-index='" + newIndex + "']");
+                    var nextAddress = parseInt(nextLink.querySelector(".linkedlist-address").getAttribute("data-address"), 10)
+                    var newLeft = parseInt(nextLink.style.left) - 90;
+
+                    // Update index attributes, backwards
+                    var currIndex = (vizDiv.querySelectorAll(".linkedlist-link").length - 1);
+                    var currLink = vizDiv.querySelector(".linkedlist-link[data-index='" + currIndex + "']");
+                    while (currIndex >= newIndex) {
+                        currLink.setAttribute("data-index", currIndex + 1);
+                        currIndex--;
+                        currLink = vizDiv.querySelector(".linkedlist-link[data-index='" + currIndex + "']");
+                    }
+
+                    createLink(newIndex, newValue, newAddress, nextAddress, newLeft, 60);
+
+                    // Update previous link
+                    var prevLink = vizDiv.querySelector(".linkedlist-link[data-index='" + (newIndex - 1) + "']");
+                    if (prevLink) {
+                        var prevPointer = prevLink.querySelector(".linkedlist-pointer");
+                        prevPointer.setAttribute("data-pointing-at", newAddress);
+                        prevPointer.innerText = newAddress;
+                    }
+
+                    // Update indices
+
+
+                    redoConnections();
+
+                    if (!form[0].value) {
+                        evt.target.setAttribute("disabled", "disabled")
+                    }
+                });
+
+            });
+            linkedListViz("linkedlist-demo1");
+            linkedListViz("linkedlist-demo2");
+            linkedListViz("linkedlist-demo3", [1, 3, 5]);
+		</script>
+	</body>
+</html>

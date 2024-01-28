@@ -1,0 +1,1110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Pamela Fox, Paul Hilfinger" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link rel="stylesheet" type="text/css" href="../../assets/css/disc.css">
+
+
+    <title>
+Discussion 7 | CS 61A Spring 2021
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor/index.html">Instructors</a></li>
+                <li><a href="../../TAs/index.html">TAs</a></li>
+                <li><a href="../../tutors/index.html">Tutors</a></li>
+                <li><a href="../../academic-interns/index.html">Academic Interns</a></li>
+              </ul>
+            </li>
+            <li><a href="../../resources/index.html">Resources</a></li>
+            <li><a href="../../articles/about/index.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/spring2021/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">PyTutor</a></li>
+            <li><a href="../../contact/index.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Discussion 7: String Representation, Efficiency, Linked Lists, Mutable Trees
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="javascript:window.print()" class="label label-outline">disc07.pdf</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<div class="alert storable-login-status"></div>
+
+This is an online worksheet that you can work on during discussions and tutorials.
+Your work is not graded and you do not need to submit anything.
+
+    
+
+
+
+<h1 id="discussion-7-vitamin">Discussion 7 Vitamin</h1>
+
+<p>To encourage everyone to watch or attend discussion orientation, we have created small discussion vitamins. If you complete 5 of the next 6 vitamins, you can earn one point of extra credit added to your final grade in the course. Please answer all of the questions in <a href="https://links.cs61a.org/vitamin-for-disc7">this form</a> by <strong>Thursday at 11:59 PM</strong>.</p>
+
+
+<h1 id="representation---repr-and-str">Representation - Repr and Str</h1>
+
+
+
+<p>There are two main ways to produce the "string" of an object in Python:
+<code>str()</code> and <code>repr()</code>. While the two are similar, they are
+used for different purposes. <code>str()</code> is used to describe
+the object to the end user in a "Human-readable" form, while <code>repr()</code> can be thought of as
+a "Computer-readable" form mainly used for debugging and development.</p>
+
+<p>When we define a class in Python, <code>str()</code> and <code>repr()</code> are
+both built-in methods for the class. We can call an object's <code>str()</code> and
+<code>repr()</code> by using their respective methods. These methods can be invoked by calling <code>repr(obj)</code> or <code>str(obj)</code> rather than the dot notation format <code>obj.__repr__()</code> or <code>obj.__str__()</code>. In addition, the <code>print()</code> function calls the <code>str()</code> method of the object,
+while simply calling the object in interactive mode calls the <code>repr()</code>
+method.</p>
+
+<p>Here's an example:</p>
+
+<pre><code>class Rational:
+    def __init__(self, numerator, denominator):
+        self.numerator = numerator
+        self.denominator = denominator
+    def __str__(self):
+        return f&#x27;{self.numerator}/{self.denominator}&#x27;
+    def __repr__(self):
+        return f&#x27;Rational({self.numerator},{self.denominator})&#x27;
+
+&gt;&gt;&gt; a = Rational(1, 2)
+&gt;&gt;&gt; str(a)
+&#x27;1/2&#x27;
+&gt;&gt;&gt; repr(a)
+&#x27;Rational(1,2)&#x27;
+&gt;&gt;&gt; print(a)
+1/2
+&gt;&gt;&gt; a
+Rational(1,2)</code></pre>
+
+
+
+<div class="page-break"></div>
+
+<h2 id="questions">Questions</h2>
+
+<h3 class="question" id="q1">Q1: Repr-esentation WWPD</h3> What would Python display?
+
+
+
+<pre><code>class A:
+    def __init__(self, x):
+        self.x = x
+    def __repr__(self):
+         return self.x
+    def __str__(self):
+         return self.x * 2
+
+class B:
+    def __init__(self):
+         print(&#x27;boo!&#x27;)
+         self.a = []
+    def add_a(self, a):
+         self.a.append(a)
+    def __repr__(self):
+         print(len(self.a))
+         ret = &#x27;&#x27;
+         for a in self.a:
+             ret += str(a)
+         return ret</code></pre>
+
+
+
+<pre><code>&gt;&gt;&gt; A(&#x27;one&#x27;)</code></pre>
+
+
+
+            <label class="sr-only" for="repr-wwpd-1-input">Your Answer:</label>
+            <input class="form-control storable" id="repr-wwpd-1-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+one
+</div>
+
+<pre><code>&gt;&gt;&gt; print(A(&#x27;one&#x27;))</code></pre>
+
+
+
+            <label class="sr-only" for="repr-wwpd 2-input">Your Answer:</label>
+            <input class="form-control storable" id="repr-wwpd 2-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+oneone
+</div>
+
+<pre><code>&gt;&gt;&gt; repr(A(&#x27;two&#x27;))</code></pre>
+
+
+
+            <label class="sr-only" for="repr-wwpd 3-input">Your Answer:</label>
+            <input class="form-control storable" id="repr-wwpd 3-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+'two'
+</div>
+
+<pre><code>&gt;&gt;&gt; b = B()</code></pre>
+
+
+
+            <label class="sr-only" for="repr-wwpd 4-input">Your Answer:</label>
+            <input class="form-control storable" id="repr-wwpd 4-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+boo!
+</div>
+
+<pre><code>&gt;&gt;&gt; b.add_a(A(&#x27;a&#x27;))
+&gt;&gt;&gt; b.add_a(A(&#x27;b&#x27;))
+&gt;&gt;&gt; b</code></pre>
+
+
+
+            <label class="sr-only" for="repr-wwpd 5-input">Your Answer:</label>
+            <input class="form-control storable" id="repr-wwpd 5-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+2
+</div>
+
+            <label class="sr-only" for="repr-wwpd 6-input">Your Answer:</label>
+            <input class="form-control storable" id="repr-wwpd 6-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+aabb
+</div>
+
+<div class="page-break"></div>
+
+<h1 id="linked-lists">Linked Lists</h1>
+
+<p>There are many different implementations of sequences in Python. Today, we'll
+explore the linked list implementation.</p>
+
+<p>A linked list is either an empty linked list, or a Link object containing a
+<code>first</code> value and the <code>rest</code> of the linked list.</p>
+
+<p>To check if a linked list is an empty linked list, compare it against the class
+attribute <code>Link.empty</code>:</p>
+
+<pre><code>if link is Link.empty:
+    print(&#x27;This linked list is empty!&#x27;)
+else:
+    print(&#x27;This linked list is not empty!&#x27;)</code></pre>
+
+
+
+<p>Check out the implementation of the <code>Link</code> class below:</p>
+
+<pre><code>class Link:
+    empty = ()
+    def __init__(self, first, rest=empty):
+        assert rest is Link.empty or isinstance(rest, Link)
+        self.first = first
+        self.rest = rest
+
+    def __repr__(self):
+        if self.rest:
+            rest_str = &#x27;, &#x27; + repr(self.rest)
+        else:
+            rest_str = &#x27;&#x27;
+        return &#x27;Link({0}{1})&#x27;.format(repr(self.first), rest_str)
+
+    def __str__(self):
+        string = &#x27;&lt;&#x27;
+        while self.rest is not Link.empty:
+            string += str(self.first) + &#x27; &#x27;
+            self = self.rest
+        return string + str(self.first) + &#x27;&gt;&#x27;</code></pre>
+
+
+
+
+
+<div class="page-break"></div>
+
+<h2 id="questions-2">Questions</h2>
+
+<h3 class="question" id="q2">Q2: Sum Nums</h3>
+
+<p>Write a function that takes in a a linked list and returns the sum of all
+its elements. You may assume all elements in <code>s</code> are integers. Try to implement this recursively!</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="sum-nums-input" style="height:216px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-sum-nums-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-sum-nums-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-sum-nums-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def sum_nums(s):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; a = Link(1, Link(6, Link(7)))\n    &gt;&gt;&gt; sum_nums(a)\n    14\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "sum-nums-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def sum_nums(s):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; a = Link(1, Link(6, Link(7)))
+    &gt;&gt;&gt; sum_nums(a)
+    14
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if s == Link.empty:
+        return 0
+    return s.first + sum_nums(s.rest)</div></code></pre>
+
+            </div>
+        
+
+
+<div class="page-break"></div>
+<h3 class="question" id="q3">Q3: (Tutorial) Inheritance Review: That's a Constructor, __init__?</h3></p>
+
+<p>Let's say we want to create a class <code>Monarch</code> that inherits from another class, <code>Butterfly</code>. We've partially written an <code>__init__</code> method for <code>Monarch</code>. For each of the following options, state whether it would correctly complete the method so that every instance of <code>Monarch</code> has all of the instance attributes of a <code>Butterfly</code> instance? You may assume that a monarch butterfly has the default value of 2 wings.</p>
+
+<pre><code>class Butterfly():
+    def __init__(self, wings=2):
+        self.wings = wings
+
+class Monarch(Butterfly):
+    def __init__(self):
+        _________________________________________
+        self.colors = [&#x27;orange&#x27;, &#x27;black&#x27;, &#x27;white&#x27;]</code></pre>
+
+
+
+<pre><code>super.__init__()</code></pre>
+
+
+
+            <label class="sr-only" for="butterfly-1-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-1-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+No, because the <code>super</code> function must be called with parentheses.
+</div>
+
+<pre><code>super().__init__()</code></pre>
+
+
+
+            <label class="sr-only" for="butterfly-2-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-2-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+Yes.
+</div>
+
+<pre><code>Butterfly.__init__()</code></pre>
+
+
+
+            <label class="sr-only" for="butterfly-3-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-3-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+No, because we must explicitly pass in <code>self</code> as an argument.
+</div>
+
+<pre><code>Butterfly.__init__(self)</code></pre>
+
+
+
+            <label class="sr-only" for="butterfly-4-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-4-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+Yes.
+</div>
+
+
+
+<p>Some butterflies like the <a href="https://en.wikipedia.org/wiki/Owl_butterfly">Owl Butterfly</a> have adaptations that allow them to mimic other animals with their wing patterns. Let's write a class for these <code>MimicButterflies</code>. In addition to all of the instance variables of a regular <code>Butterfly</code> instance, these should also have an instance variable <code>mimic_animal</code> describing the name of the animal they mimic. Fill in the blanks in the lines below to create this class.</p>
+
+<pre><code>class MimicButterfly(______________):
+    def __init__(self, mimic_animal):
+        _______________.__init__()
+        ______________ = mimic_animal</code></pre>
+
+
+
+<p>What expression completes the first blank?
+
+            <label class="sr-only" for="butterfly-5-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-5-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+<code>Butterfly</code>
+</div></p>
+
+<p>What expression completes the second blank?
+
+            <label class="sr-only" for="butterfly-6-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-6-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+<code>super()</code>
+</div></p>
+
+<p>What expression completes the third blank?
+
+            <label class="sr-only" for="butterfly-7s-input">Your Answer:</label>
+            <input class="form-control storable" id="butterfly-7s-input" type="text">
+            <div class="storable-status"></div>
+        
+<div class="sol-highlight">
+<code>self.mimic_animal</code>
+</div>
+<div class="page-break"></div>
+<h3 class="question" id="q4">Q4: (Tutorial) Warmup: The Hy-rules of Linked Lists</h3></p>
+
+<p>In this question, we are given the following Linked List:</p>
+
+<pre><code>ganondorf = Link(&#x27;zelda&#x27;, Link(&#x27;young link&#x27;, Link(&#x27;sheik&#x27;, Link.empty)))</code></pre>
+
+
+
+<p>What expression would give us the value 'sheik' from this Linked List?</p>
+
+
+            <label class="sr-only" for="hyrule-1-input">Your Answer:</label>
+            <input class="form-control storable" id="hyrule-1-input" type="text">
+            <div class="storable-status"></div>
+        
+
+<div class="sol-highlight">
+<code>ganondorf.rest.rest.first</code>
+</div>
+
+<p>What is the value of <code>ganondorf.rest.first</code>?</p>
+
+
+            <label class="sr-only" for="hyrule-2-input">Your Answer:</label>
+            <input class="form-control storable" id="hyrule-2-input" type="text">
+            <div class="storable-status"></div>
+        
+
+<div class="sol-highlight">
+'young link'
+</div>
+<div class="page-break"></div>
+<h3 class="question" id="q5">Q5: (Tutorial) Multiply Lnks</h3>
+
+<p>Write a function that takes in a Python list of linked lists and
+multiplies them element-wise. It should return a new linked list.</p>
+
+<p>If not all of the <code>Link</code> objects are of equal length, return a
+linked list whose length is that of the shortest linked list given. You
+may assume the <code>Link</code> objects are shallow linked lists, and that
+<code>lst_of_lnks</code> contains at least one linked list.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="multiply-lnks-input" style="height:774px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-multiply-lnks-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-multiply-lnks-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-multiply-lnks-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def multiply_lnks(lst_of_lnks):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; a = Link(2, Link(3, Link(5)))\n    &gt;&gt;&gt; b = Link(6, Link(4, Link(2)))\n    &gt;&gt;&gt; c = Link(4, Link(1, Link(0, Link(2))))\n    &gt;&gt;&gt; p = multiply_lnks([a, b, c])\n    &gt;&gt;&gt; p.first\n    48\n    &gt;&gt;&gt; p.rest.first\n    12\n    &gt;&gt;&gt; p.rest.rest.rest is Link.empty\n    True\n    &quot;&quot;&quot;\n    # Implementation Note: you might not need all lines in this skeleton code\n    ___________________ = ___________\n    for _______________________________________:\n        if __________________________________________:\n            _________________________________\n        ___________________\n\t________________________________________________________\n    ________________________________________________________\n    # For an extra challenge, try writing out an iterative approach as well below!\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "multiply-lnks-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def multiply_lnks(lst_of_lnks):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; a = Link(2, Link(3, Link(5)))
+    &gt;&gt;&gt; b = Link(6, Link(4, Link(2)))
+    &gt;&gt;&gt; c = Link(4, Link(1, Link(0, Link(2))))
+    &gt;&gt;&gt; p = multiply_lnks([a, b, c])
+    &gt;&gt;&gt; p.first
+    48
+    &gt;&gt;&gt; p.rest.first
+    12
+    &gt;&gt;&gt; p.rest.rest.rest is Link.empty
+    True
+    &quot;&quot;&quot;
+    # Implementation Note: you might not need all lines in this skeleton code
+<div class="sol-highlight">    product = 1</div><div class="sol-highlight">    for lnk in lst_of_lnks:</div><div class="sol-highlight">        if lnk is Link.empty:</div><div class="sol-highlight">            return Link.empty</div><div class="sol-highlight">        product *= lnk.first</div><div class="sol-highlight">    lst_of_lnks_rests = [lnk.rest for lnk in lst_of_lnks]</div><div class="sol-highlight">    return Link(product, multiply_lnks(lst_of_lnks_rests))</div>    # For an extra challenge, try writing out an iterative approach as well below!
+<div class="sol-highlight">    # Alternate iterative approach
+    import operator
+    from functools import reduce
+    def prod(factors):
+         return reduce(operator.mul, factors, 1)
+
+    head = Link.empty
+    tail = head
+    while Link.empty not in lst_of_lnks:
+        all_prod = prod([l.first for l in lst_of_lnks])
+        if head is Link.empty:
+            head = Link(all_prod)
+            tail = head
+        else:
+            tail.rest = Link(all_prod)
+            tail = tail.rest
+        lst_of_lnks = [l.rest for l in lst_of_lnks]
+    return head</div></code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight">
+For our base case, if we detect that any of the lists in the list of
+<code>Link</code>s is empty, we can return the empty linked list as we're not going
+to multiply anything.
+
+<p>Otherwise, we compute the product of all the firsts in our list of
+<code>Link</code>s. Then, the subproblem we use here is the rest of all the linked
+lists in our list of Links. Remember that the result of calling
+<code>multiply_lnks</code> will be a linked list! We'll use the product we've
+built so far as the first item in the returned <code>Link</code>, and then the
+result of the recursive call as the rest of that <code>Link</code>.</p>
+
+<p>The iterative solution is a bit more involved than the recursive solution.
+Instead of building the list <strong>backwards</strong> as in the recursive solution (because of the order that the recursive calls result in, the last item in our list will be finished first), we'll build the resulting linked list as we go along.</p>
+
+<p>We use<code>head</code> and <code>tail</code> to track the front and end of the new
+linked list we're creating. Our stopping condition for the loop is if any of the
+<code>Link</code>s in our list of <code>Link</code>s runs out of items.</p>
+
+<p>Finally, there's some special handling for the first item. We need to update
+both head and tail in that case. Otherwise, we just append to the end of our
+list using tail, and update tail.
+</div>
+<div class="page-break"></div>
+<h3 class="question" id="q6">Q6: (Tutorial) Flip Two</h3>
+Write a recursive function <code>flip_two</code> that takes as input a
+linked list <code>s</code> and mutates <code>s</code> so that every pair
+is flipped.</p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="flip-two-input" style="height:486px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-flip-two-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-flip-two-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-flip-two-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def flip_two(s):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; one_lnk = Link(1)\n    &gt;&gt;&gt; flip_two(one_lnk)\n    &gt;&gt;&gt; one_lnk\n    Link(1)\n    &gt;&gt;&gt; lnk = Link(1, Link(2, Link(3, Link(4, Link(5)))))\n    &gt;&gt;&gt; flip_two(lnk)\n    &gt;&gt;&gt; lnk\n    Link(2, Link(1, Link(4, Link(3, Link(5)))))\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n    # For an extra challenge, try writing out an iterative approach as well below!\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "flip-two-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def flip_two(s):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; one_lnk = Link(1)
+    &gt;&gt;&gt; flip_two(one_lnk)
+    &gt;&gt;&gt; one_lnk
+    Link(1)
+    &gt;&gt;&gt; lnk = Link(1, Link(2, Link(3, Link(4, Link(5)))))
+    &gt;&gt;&gt; flip_two(lnk)
+    &gt;&gt;&gt; lnk
+    Link(2, Link(1, Link(4, Link(3, Link(5)))))
+    &quot;&quot;&quot;
+<div class="sol-highlight">    # Recursive solution:
+    if s is Link.empty or s.rest is Link.empty:
+        return
+    s.first, s.rest.first = s.rest.first, s.first
+    flip_two(s.rest.rest)</div>
+    # For an extra challenge, try writing out an iterative approach as well below!
+<div class="sol-highlight">    return # separating recursive and iterative implementations
+
+    # Iterative approach
+    while s is not Link.empty and s.rest is not Link.empty:
+        s.first, s.rest.first = s.rest.first, s.first
+        s = s.rest.rest</div></code></pre>
+
+            </div>
+        
+
+<div class="sol-highlight">
+If there's only a single item (or no item) to flip, then we're done.
+
+<p>Otherwise, we swap the contents of the first and second items in the list. Since
+we've handled the first two items, we then need to recurse on</p>
+
+<p>Although the question explicitly asks for a recursive solution, there is also a
+fairly similar iterative solution (see python solution).</p>
+
+<p>We will advance <code>s</code> until we see there are no more items or there is
+only one more Link object to process. Processing each <code>Link</code> involves
+swapping the contents of the first and second items in the list (same as the
+recursive solution).
+</div></p>
+
+<div class="page-break"></div>
+
+<h1 id="trees">Trees</h1>
+
+<p>Recall the tree abstract data type: a tree is defined as having a label and
+some branches. Previously, we implemented the tree abstraction using Python
+lists.  Let's look at another implementation using objects instead:</p>
+
+<pre><code>class Tree:
+    def __init__(self, label, branches=[]):
+        for b in branches:
+            assert isinstance(b, Tree)
+        self.label = label
+        self.branches = branches
+
+    def is_leaf(self):
+        return not self.branches</code></pre>
+
+
+
+<p>With this implementation, we can mutate a tree using attribute
+assignment, which wasn't possible in the previous implementation using lists. That's why we sometimes call these objects "mutable trees."</p>
+
+<pre><code>&gt;&gt;&gt; t = Tree(3, [Tree(4), Tree(5)])
+&gt;&gt;&gt; t.label = 5
+&gt;&gt;&gt; t.label
+5</code></pre>
+
+
+
+<div class="page-break"></div>
+
+<h2 id="questions-3">Questions</h2>
+
+<h3 class="question" id="q7">Q7: Make Even</h3>
+Define a function <code>make_even</code> which takes in a tree
+<code>t</code> whose values are integers, and mutates the tree such that all the
+odd integers are increased by 1 and all the even integers remain the same.
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="make-even-input" style="height:414px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-make-even-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-make-even-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-make-even-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def make_even(t):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; t = Tree(1, [Tree(2, [Tree(3)]), Tree(4), Tree(5)])\n    &gt;&gt;&gt; make_even(t)\n    &gt;&gt;&gt; t.label\n    2\n    &gt;&gt;&gt; t.branches[0].branches[0].label\n    4\n    &quot;&quot;&quot;\n    "*** YOUR CODE HERE ***"\n\n', "scheme", "make-even-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def make_even(t):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; t = Tree(1, [Tree(2, [Tree(3)]), Tree(4), Tree(5)])
+    &gt;&gt;&gt; make_even(t)
+    &gt;&gt;&gt; t.label
+    2
+    &gt;&gt;&gt; t.branches[0].branches[0].label
+    4
+    &quot;&quot;&quot;
+<div class="sol-highlight">    if t.label % 2 != 0:
+        t.label += 1
+    for branch in t.branches:
+        make_even(branch)
+    return
+    # Alternate Solution
+
+    t.label += t.label % 2
+    for branch in t.branches:
+        make_even(branch)
+    return</div></code></pre>
+
+            </div>
+        
+<div class="page-break"></div>
+<h3 class="question" id="q8">Q8: (Tutorial) Find Paths</h3>
+<strong>Hint</strong>: This question is similar to <code>find_paths</code> on Discussion 05.
+
+<p>Define the procedure <code>find_paths</code> that, given a Tree <code>t</code> and an <code>entry</code>, returns a list of lists containing the nodes along each path from the root of <code>t</code> to <code>entry</code>. You may return the paths in any order.</p>
+
+<p>For instance, for the following tree <code>tree_ex</code>, <code>find_paths</code> should behave as specified in the function doctests.
+<img class="img-responsive center-block" src="assets/tree_ex.png" alt="Example Tree"></p>
+
+
+            
+            <b>Your Answer</b>
+            
+            <div class="monaco-storable" id="find-paths-input" style="height:342px;"></div>
+            <a href="index.html#" data-toggle="modal" data-target="#modal-find-paths-input">Run in 61A Code</a>
+            <div class="modal fade" id="modal-find-paths-input" tabindex="-1" role="dialog">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" style="padding-bottom: -5px">
+                    <iframe
+                        id="code-iframe-find-paths-input"
+                        width="100%"
+                        height="700px"
+                        style="border: none; display:block;"
+                    ></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="storable-status"></div>
+            <script>
+                $(() => activateEditor('def find_paths(t, entry):\n    &quot;&quot;&quot;\n    &gt;&gt;&gt; tree_ex = Tree(2, [Tree(7, [Tree(3), Tree(6, [Tree(5), Tree(11)])]), Tree(1, [Tree(5)])])\n    &gt;&gt;&gt; find_paths(tree_ex, 5)\n    [[2, 7, 6, 5], [2, 1, 5]]\n    &gt;&gt;&gt; find_paths(tree_ex, 12)\n    []\n    &quot;&quot;&quot;\n\n    paths = []\n    if _____________________________:\n        _________________________________\n    for __________________________________:\n        _________________________:\n            ___________________________________________\n    ______________________\n\n', "scheme", "find-paths-input"));
+            </script>
+        
+            <div class="sol-highlight">
+                <b>Solution</b>
+                
+<pre><code>def find_paths(t, entry):
+    &quot;&quot;&quot;
+    &gt;&gt;&gt; tree_ex = Tree(2, [Tree(7, [Tree(3), Tree(6, [Tree(5), Tree(11)])]), Tree(1, [Tree(5)])])
+    &gt;&gt;&gt; find_paths(tree_ex, 5)
+    [[2, 7, 6, 5], [2, 1, 5]]
+    &gt;&gt;&gt; find_paths(tree_ex, 12)
+    []
+    &quot;&quot;&quot;
+
+    paths = []
+<div class="sol-highlight">    if t.label == entry:</div><div class="sol-highlight">        paths.append([t.label])</div><div class="sol-highlight">    for b in t.branches:</div><div class="sol-highlight">        for path in find_paths(b, entry):</div><div class="sol-highlight">            paths.append([t.label] + path)</div><div class="sol-highlight">    return paths</div></code></pre>
+
+            </div>
+        
+
+<div class="page-break"></div>
+
+<h1 id="efficiency">Efficiency</h1>
+
+
+</p>
+
+<p>When we talk about the efficiency of a function, we are often interested in the
+following: as the size of the input grows, how does the runtime of the function
+change? And what do we mean by <strong>runtime</strong>?</p>
+
+<ul>
+  <li><code>square(1)</code> requires one primitive operation: multiplication. <code>square(100)</code> also requires one. No matter what input <code>n</code> we pass into <code>square</code>, it always takes a <strong>constant</strong> number of operations (1). In other words, this function has a runtime complexity of Θ(1).
+  Check out the table below:</li>
+</ul>
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>input</th>
+    <th>function call</th>
+    <th>return value</th>
+    <th>operations</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><code>square(1)</code></td>
+    <td>1*1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><code>square(2)</code></td>
+    <td>2*2</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>100</td>
+    <td><code>square(100)</code></td>
+    <td>100*100</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>n</td>
+    <td><code>square(n)</code></td>
+    <td>n*n</td>
+    <td>1</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+<ul>
+  <li><code>factorial(1)</code> requires one multiplication, but <code>factorial(100)</code> requires 100 multiplications. As we increase the input size of n, the runtime (number of operations) increases <strong>linearly</strong> proportional to the input. In other words, this function has a runtime complexity of Θ(<code>n</code>).
+  Check out the table below:</li>
+</ul>
+
+
+
+
+        <div class="table-responsive">
+          <table class="table table-bordered">
+          
+  <tr>
+    <th>input</th>
+    <th>function call</th>
+    <th>return value</th>
+    <th>operations</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td><code>factorial(1)</code></td>
+    <td>1*1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td><code>factorial(2)</code></td>
+    <td>2*1*1</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>100</td>
+    <td><code>factorial(100)</code></td>
+    <td>100*99*...*1*1</td>
+    <td>100</td>
+  </tr>
+  <tr>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+    <td>...</td>
+  </tr>
+  <tr>
+    <td>n</td>
+    <td><code>factorial(n)</code></td>
+    <td>n*(n-1)*...*1*1</td>
+    <td>n</td>
+  </tr>
+
+          </table>
+        </div>
+        
+
+
+
+<div class="page-break"></div>
+
+<h2 id="questions-4">Questions</h2>
+
+<h3 class="question" id="q9">Q9: The First Order...of Growth</h3>
+
+<p>What is the efficiency of <code>rey</code>?</p>
+
+<pre><code>def rey(finn):
+    poe = 0
+    while finn &gt;= 2:
+        poe += finn
+        finn = finn / 2
+    return</code></pre>
+
+
+
+
+            <label class="sr-only" for="wwpd-growth-1-input">Your Answer:</label>
+            <input class="form-control storable" id="wwpd-growth-1-input" type="text">
+            <div class="storable-status"></div>
+        
+
+<div class="sol-highlight">
+  Logarithmic, because our while loop iterates at most log(<code>finn</code>) times,
+  due to <code>finn</code> being halved in every iteration. This is commonly known as Θ(log(<code>finn</code>)) runtime. Another way of looking at this if you
+  duplicate the input, we only add a single iteration to the time, which also indicates logarithmic.
+</div>
+
+
+
+<p>What is the efficiency of <code>mod_7</code>?</p>
+
+<pre><code>def mod_7(n):
+    if n % 7 == 0:
+        return 0
+    else:
+        return 1 + mod_7(n &#x2d; 1)</code></pre>
+
+
+
+            <label class="sr-only" for="wwpd-growth-2-input">Your Answer:</label>
+            <input class="form-control storable" id="wwpd-growth-2-input" type="text">
+            <div class="storable-status"></div>
+        
+
+<div class="sol-highlight">
+Constant, since at worst it will require 6 recursive calls to reach the base case. This is commonly known as a Θ(1) runtime.
+</div>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#discussion-7-vitamin">Discussion 7 Vitamin</a></li>
+  <li><a href="index.html#representation---repr-and-str">Representation - Repr and Str</a></li>
+  <ul>
+    <li><a href="index.html#questions">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: Repr-esentation WWPD</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#linked-lists">Linked Lists</a></li>
+  <ul>
+    <li><a href="index.html#questions-2">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q2">Q2: Sum Nums</a></li>
+      <li><a href="index.html#q3">Q3: (Tutorial) Inheritance Review: That's a Constructor, __init__?</a></li>
+      <li><a href="index.html#q4">Q4: (Tutorial) Warmup: The Hy-rules of Linked Lists</a></li>
+      <li><a href="index.html#q5">Q5: (Tutorial) Multiply Lnks</a></li>
+      <li><a href="index.html#q6">Q6: (Tutorial) Flip Two</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#trees">Trees</a></li>
+  <ul>
+    <li><a href="index.html#questions-3">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q7">Q7: Make Even</a></li>
+      <li><a href="index.html#q8">Q8: (Tutorial) Find Paths</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#efficiency">Efficiency</a></li>
+  <ul>
+    <li><a href="index.html#questions-4">Questions</a></li>
+    <ul>
+      <li><a href="index.html#q9">Q9: The First Order...of Growth</a></li>
+    </ul>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly/index.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours/index.html">Office Hours</a></li>
+            <li><a href="../../staff/index.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources/index.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying/index.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging/index.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition/index.html">Composition Guide</a></li>
+            <li><a href="../../articles/pair-programming/index.html">Pair Programming</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about/index.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about/index.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about/index.html#exams">Exams</a></li>
+            <li><a href="../../articles/about/index.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+  <script>
+      require.config({ paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs' }});
+      window.MonacoEnvironment = { getWorkerUrl: () => URL.createObjectURL(new Blob([`
+      self.MonacoEnvironment = {
+          baseUrl: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min'
+      };
+      importScripts('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/base/worker/workerMain.min.js');
+  `], { type: 'text/javascript' }))
+  };
+  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.5/js/jsplumb.min.js"></script>
+    <script src="../../assets/js/network_storage.js"></script>
+    <script src="../../assets/js/storable.js"></script>
+    <script src="../../assets/js/editor.js"></script>
+    <script src="../../assets/js/env-diagram.js"></script>
+    
+<script src="../../assets/js/sketchy.js"></script>
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>
