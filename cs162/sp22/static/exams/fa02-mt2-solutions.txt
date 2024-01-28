@@ -1,0 +1,375 @@
+CS162 Fall 2002 Midterm 2:
+
+
+********************************************************************
+Problem 1 (Abraham Shaw) --exactly the same as Midterm One!
+********************************************************************
+NOTE: I tried to be more generous than last time, if that's possible!
+
+What are the tradeoffs  between semaphores
+and  monitors as process synchronization mechanisms? (15 points)
+
+Solution (+3 points for each of the ideas below):
+
+--Semaphores are lower level constructs than monitors or Monitors 
+are higher level constructs than semaphores
+
+--Semaphores appear scattered throughout the program versus  
+monitors which has synchronization code compactly located.
+
+--Monitors are safer and easier to use.
+
+--Monitors are easier to debug.
+
+--Semaphores  can   be  implemented from simpler synchronization
+mechanisms provided  by the  hardware whereas  monitors are language 
+constructs that require compiler support
+
+--Very similar because they can each be used to implement the other
+
+Solution (+1 point for each of the ideas below):
+
+--Mutual Exclusion
+
+--Monitors can encompass many procedures
+
+--Semaphores are independent of machine platform
+
+--Sleep/Block issues
+
+Grading Comments:
+
+   The  question  asked for  tradeoffs,  many students  just  listed
+   what  monitors were  and  what  semaphores were.  I  was  looking
+   for  TRADEOFFS.   Even  though   I  tried to maximize   points, I
+   could  only  do  so  much,  since  many  students told  me about
+   condition variables and how  both are used for mutual  exclusion,
+   etc when  the question  asks for   tradeoffs  as  synchronization
+   constructs.  Very few students got more than half the points,  so
+   this  question  was definitely  hard.  From  the solution  above,
+   I've   come up  with a  possible  22  points.  I  didn't  expect
+   students  to  list everything;   only  a handful   of  the points
+   above would suffice a  good grade on the  problem.  Nevertheless,
+   remember  when  you  see   a  15-point  question,  two   or three
+   sentences generally will not get you much credit.
+
+
+********************************************************************
+Problem 2 (David Marin)
+********************************************************************
+
+a) 10% of the time, there is a TLB miss (mem. ref. takes 110 ns).
+   So 90% of the time, there isn't (mem. ref. takes 10 ns). 
+   
+   10% * 110 ns + 90% * 10 ns = 11 ns + 9 ns = 20 ns
+
+b) On the average, P will go 100,000 mem. refs before a page fault
+
+   100,000 memrefs * 20 ns/memref (from part a) = 2 ms
+
+   (Some people interpreted "before" as not including the page fault, so
+   they used 99,999 mem refs. instead of 100,000. I apologize, to be 
+   clear, what I should have said was "between". To deal with this, I gave
+   full credit for answers within 1% of mine.)
+
+c) Since we're dealing with averages here, we can base our answer
+   on an "average" set of 100,000 memory references, including one
+   page fault
+
+   From (b) we know that 100,000 memory references take 2 ms, not
+   counting page faults. The page fault takes 20 ms to service.
+
+   2 ms + 20 ms = 22 ms. Averaged over 100,000 memory refences, we get:
+   
+   22 ms/100,000 memrefs = 220 ns/memref
+
+d) Again, since we're dealing with averages here, we can look at an
+   "average" set of 100,000 memory references.
+
+   What does a copy of P do in 100,000 memory references?
+
+   It ties up the CPU for 2 ms doing memory references (from part b)
+   It ties up the disk for 20 ms, to service the page fault
+   It causes the OS to tie up the CPU for 1 ms, to handle the page fault
+
+   Total CPU usage: 2 ms + 1 ms = 3 ms
+   Total disk usage: 20 ms
+
+   From these numbers, we can see that the CPU is being used much more than
+   the disk, so we can say the system is disk-bound.
+
+   But what's actually happening? Recall that when one copy of P page
+   faults, we can run another copy on the CPU. So it might seem that 
+   we can keep both the disk and the CPU occupied. The problem is,
+   there isn't nearly enough CPU work to do. Whether we have 10 processes
+   or 1000, they will all eventually page fault, and the disk will be
+   tied up 100% of the time, servicing page faults.
+
+   On the average, the CPU is used only 3 ms for every 20 ms of disk
+   so it's used 3 ms/20 ms = 15% of the time.
+
+   Thus, the CPU is idle 100% - 15% = 85% of the time.
+
+e) Same answer as d (see above).
+
+Scoring:
+a, b, and c: 
+1 point for right answer,
+2 points for work
+
+d and e:
+1 point for right choice of disk-bound/CPU-bound
+1 point for right idle percentage,
+2 points for work 
+
+Answers within 1% of the right answer were considered correct. You had 
+to write an actual number to get credit for the right answer, not just
+the equation.
+
+Remarks:
+
+Overall, this was a tougher question than expected. People did okay
+on parts a through c, but almost everybody had a hard time on parts
+d and e.
+
+When I wrote this problem, it ended part d, with 100 processes, and a hint 
+pointing out that it didn't really matter how many processes we had, 
+as long as it was a lot. Smith apparently thought this was too easy!
+
+The tough thing about a problem like this is that there's a lot
+of information to sift through before you can start doing the problem.
+What can be really helpful with a problem like this is to "take notes";
+write down all the important information as you read through the
+question.
+
+Note also that the "meat" of the problem is in the first three paragraphs;
+the rest is just hints and assumptions to make your calculations simpler.
+Many people were confused by the first assumption ("Once the page fault
+completes..."). It's important to understand the meat of the question,
+but if a hint confuses you, ignore it. You might be on the right track anyway.
+
+Many (maybe even most) people had trouble doing the calculations for this
+problem. This came as a surprise; by the time you're in upper division,
+you're pretty much expected to be able to do this stuff.
+
+If you have trouble doing math with very large (or very small) numbers,
+there are a couple of things that help:
+
+- Convert everything to scientific notation, to deal with all the zeros. For 
+  instance, write 100,000 memory references as 1 * 10^5.
+- Bring a calculator to the test, and use it.
+
+Also, a few people apparently didn't know what a nanosecond is. For reference,
+"nano" means a billionth (10^-9). The prefixes go:
+
+milli (10^-3)
+micro (10^-6)
+nano  (10^-9)
+pico  (10^-12)
+
+
+********************************************************************
+Problem 3 (Rodrigo Fonseca)
+********************************************************************
+(a) Solution (number of page faults):
+
+16+14+13+12+11+..+1 = 121
+
+This part was worth 9 points. I took off points depending on the 
+mistakes that people made. The two most common mistakes were:
+
+*not realizing that the limit of the j loop varies
+*not realizing that we actually share a page fault from one 
+iteration of the inner loop to the next
+
+There were several other mistakes, not too common to generalize, though.
+
+(b)For part b, I was looking for the solution that prof. Smith had 
+talked about in class.
+
+To transpose this matrix, we can rearrange it so that each submatrix 
+of 4X4 integers occupies a page. We first transpose the four submatrices 
+that form the diagonal within themselves, for 4 page faults. Then, we get 
+the remaining submatrices, two at a time, such that submatrix 2,1 is in 
+memory at the same time as submatrix 1,2, and so on. Transpose within 
+each submatrix and exchange the two. This leads to 16 page-faults, one 
+for each submatrix.
+
+The basic idea, however, is just to have the matrix arranged such that 
+you can get two of the pages in memory and exchange their elements. 
+Other solutions, for example, included having the elements of the 
+counter-diagonals in the same pages.
+
+Solutions that got partial credit included some fuzzy ones that said 
+you should read both columns and rows as into pages, and others that 
+demanded that you stored the matrix essentially twice, in its normal 
+and transposed form. This is not a good design. You were also not 
+supposed to change the hardware.
+
+
+********************************************************************
+Problem 4 (Abraham Shaw)
+********************************************************************
+Since this question is more open ended, I tried to give out partial 
+credit for things that were relevent.  Nevertheless one thing students 
+need to remember on an exam, is to ANSWER THE QUESTION.  I found many 
+exams that, while had some good thoughts, didn't address all parts of 
+the questions presented.
+
+- What are the differences between the file migration and paging
+  algorithm problems? (5pts)
+
+     ANS: The main difference is that files are variable sized
+          where as pages are fixed sized.  Another difference
+          is that the cost for page faults has now increased
+          tremendously, this directly plays into user satisfaction
+          since the user is very aware of a file fault versus
+          a page fault.  Also, pages belong to a particular
+          process whereas files can be used by all processes.
+
+- How the differences affect your choice of algorithm? (7pts)
+  (Some people included this portion when describing their
+   algorithm, instead having an explicit section which is okay).
+
+     ANS: It matters what size file we have in our system; files
+          are variable sized versus pages which are fixed sized.
+          Thus, we want to maximize the number of files in our
+          disk to ensure the maximum number of "hits."  Based on
+          this principle, it is more advantageous to keep lots
+          of small files and replace large files first.  Remember
+          that reading in files takes a long time, especially
+          if you have to do seeking on the tertiary device. Thus,
+          to minimize file faults we keep around as many small
+          files as possible based on locality, i.e. if we had
+          to choose between to equal files (in terms of size)
+          to replace we'd kick out the file that's been around
+          longer.
+
+    NOTE:For some strange reason, many student just threw around
+          the term 'spatial locality.'  Unless you were clear about
+          what was spatially local, i.e. files on tape should be
+          spatially local and those files should be fetched to
+          sequential locations on disk, then you recieved no credit
+          for that statement.  In fact, many students stated that
+          files on disk exhibit spatial locality, which is not
+          correct unless there is some explicit placing algorithm
+          (generally not the case).  Besides the question doesn't
+          refer to how files are stored on disk, rather it refers
+          to the problem of file faults and fetching files from a
+          tertiary device onto disk. Remember that files are stored
+          in various blocks on the disk, and that you want to bring
+          in one file  at a time, there's nothing saying that the
+          file next to it on disk is related.  There was some
+          credit given for students who mentioned that files are
+          spatially local in terms of the directory structure and
+          thus prefetched other files in the directory, but it is
+          much more useful to prefetch based on an analysis of
+          reference pattern instead.
+
+- How would you evaluate a file migration algorithm? (3pts)
+
+     ANS: We can evaluate a file migration algorithm much like
+          we evaluate a paging algorithm, by graphing the number
+          faults versus space.  On this type of graph the
+          lower the curve the better the algorithm.
+
+          	faults vs. space
+          	| *
+		|  *
+		|   *
+		|    *
+		|      *
+		|        *
+		|            *   *   *
+		|_____________________
+
+
+- Design one or two file migration algorithms that you expect to perform
+  well, explain why you expect them to perform well. (5 pts)
+
+ANS: Rather than give an example, I'll give some characteristics of file 
+migration algorithms that I expect to perform well.  For file replacement 
+the first attribute, i.e. the one that got you full credit for, is that 
+the algorithm prefers to keep small files on disk and kick out large files 
+to the tertiary device. I gave credit to people with other algorithms, 
+but simply listing a paging algorithm and not explaining adequately 
+gave no points.
+
+An expected solution would be something like space-time working set
+- i.e. replace files with the largest values of
+(time since last reference) * (file size).
+
+Also, regarding file fetching algorithms, demand fetching is good, 
+since it's hard to predict what files will be needed Nevertheless, 
+if you've run the system for a while and have some data on most 
+likely to be used files, then prefecthing them is a good idea.  
+Many students used spatial locality as justification for prefetching, 
+which didn't recieve much credit.  Many students also neglected to 
+mention anything about file fetching, most only wrote about file 
+replacement on disk.
+
+POINT distribution:
+   Many students did well, some didnt do too well, and some left it
+   blank, although most attempted it.  In general if you saw the that
+   the algorithm should prefer small sized files to keep inside disk
+   and kick out large files to the tertiary device you probably got
+   almost full credit.  On the otherhand, I gave credit to anything
+   that was right and relevent. One thing that prevented the students
+   who did well from getting perfect scores was not answering the
+   question fully.  I know that it's easy to forget to answer a section
+   when time pressured in the exam, but I want to stress for the future
+   to double check that you've answered the entire question.
+
+
+********************************************************************
+Problem 5 (David Marin)
+********************************************************************
+The answers:
+
+	3	4
+-------------------
+LRU	10	 8
+FIFO	 9	10
+OPT	 7	 6
+
+Scoring was 3 points per right answer, no partial credit allowed.
+
+People made mistakes, but most people looked like they at least
+knew how to do the problem, so I'm not going to type out my own
+tables. Also note that this is the same page reference string we
+did in class; only the names of pages are different.
+
+A couple important things to remember about page replacement algorithms:
+
+- LRU and OPT are "stack" algorithms, so giving them more memory should 
+never make them perform worse.
+- Nothing should ever beat OPT if it uses the same amount of space.
+
+
+********************************************************************
+Problem 6 (David Marin)
+********************************************************************
+  i) 10 ms
+ ii) 10 Gb/si 	 
+iii) 100 Kbit/sq. in.
+ iv) 50 MB/sec
+  v) 650 MB
+ vi) .004
+
+Scoring was 2 points per right answer (no partial credit)
+
+Most of these were just memorization, but (vi) probabaly required some 
+calculation. Here's how to do it:
+
+A typical advertised mean time before failure is 300,000 hours (you
+had to memorize this).
+
+The chance of one disk failing on a given day is:
+
+1 failure/300,000 hours * 24 hours/day = 0.00008 failures/day
+
+But there are 50 disks, so the probability of at least one failing
+is about 50 times as much, so
+
+0.00008 * 50 = 0.004
+

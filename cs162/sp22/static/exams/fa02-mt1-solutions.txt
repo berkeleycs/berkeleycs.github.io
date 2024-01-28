@@ -1,0 +1,502 @@
+CS162 Fall 2002, Midterm One Solutions:
+mean:  61.71
+Standard Deviation:11.76
+
+
+	******************************************************************** 
+	Problem 1 (David Marin): 
+	******************************************************************** 
+
+	- One of the biggest pitfalls was to confuse what is important about 
+	a job being "short" or "long". To minimize flow time, we want to run 
+	jobs that we can kick out of the system quickly; i.e. jobs with  the 
+	smallest  _remaining_ processing  time; we  don't care  about their 
+	_total_ running time. SET only works because in most real systems, 
+	elapsed time is a good way of predicting remaining processing time. 
+	 
+	-  A  "realizable" algorithm means  an algorithm  you  can actually 
+	implement (i.e.  make real).  SRPT and SJF, for instance, are not 
+	realizable  unless you  know the  total running  time of  a job  in 
+	advance. Several people apparently missed or didn't understand this 
+	word.  If you  ever don't  understand a  word on  the test,  and it 
+	appears to be important  ("realizable" appears 8 times!)  please ask 
+	one of the TAs. 
+	 
+	- This was the first problem on the test, and Professor Smith didn't 
+	announce  until  about  halfway through  that  he  only cared  about 
+	minimizing average flow time (though from class, you should remember 
+	that average flow time is the most important metric of a  scheduling 
+	algorithm). So I was willing to give partial or even full credit to 
+	solutions that (correctly) discussed the tradeoffs (e.g. lower  flow 
+	time, but less variance) rather than just giving a ranking. 
+	 
+	- Smith also announced "no overhead" during the test. I didn't 
+	ever take off  points for mentioning  overhead, but I  wouldn't give 
+	full credit for solutions that arrived at a different answer because 
+	of overhead (you can't make  this judgment without knowing how  much 
+	overhead there is). 
+	 
+	 
+	part a: 
+	 
+	Solution: 
+	 
+	>From best to worst, the algorithms are: SRPT, FCFS, RR, SET 
+	 
+	SRPT _always_ has the smallest average flow time. RR and SET will be 
+	alternating through all the jobs; since all jobs are about the  same 
+	length, it will take a long  time before any job leaves the  system. 
+	FCFS will at least stick with the current job, and kick _it_ out, so 
+	it beats RR and SET. 
+	 
+	Why is  RR better  than SET?  RR puts  new jobs  in the  back of the 
+	queue, so currently running jobs at least get a little bit more of a 
+	chance to  complete. SET  will constantly  be interrupting currently 
+	running jobs (that may have almost finished) with new jobs. 
+	 
+	Scoring: 
+	 
+	- 4 points for  correct answer (-1 for  each algorithm in the  wrong 
+	place in the ranking) 
+	 
+	-  3 points  for explanation  (anything coherent  and correct  would 
+	usually get all 3 points) 
+	 
+	(2 points total for blank) 
+	 
+	Some people didn't rank RR and SET (they just said, SRPT good,  FCFS 
+	average, RR&SET bad). You could do  this and still get all 7  points 
+	(they both suck, and for pretty much the same reason). Ranking  them 
+	_wrong_ would lose a point. 
+	 
+	If you didn't write anything at all about RR, you could get at  most 
+	5 points. 
+	 
+	 
+	part b: 
+	 
+	Solution: 
+	 
+	SRPT isn't  realizable (can't  predict the  future) so  from part a, 
+	that leaves FCFS as the best algorithm. 
+	 
+	One  person  came  up  with a  different  solution:  to  predict the 
+	remaining running time, take the amount of time that the job has run 
+	already  (X), and  subtract it  from 10.  If X  > 10,  take 12  - X 
+	instead. Then always run the job with the shortest predicted running 
+	time. 
+	 
+	If you think about what this algorithm would do, you'll notice it _is_ FCFS_; 
+	it runs the exact same jobs that FCFS would. However, it shows a good 
+	approach to a scheduling problem. To design (or pick) a  scheduling algorithm 
+	with low average flow time, ask, what would SRPT do? This approach also gives 
+	us a natural solution for part c.
+
+	 
+	Scoring: 
+	 
+	- 7 points total for FCFS or the algorithm above 
+	 
+	- 6 points  for RR with  a quantum of  10 seconds. This  isn't quite 
+	right (if a job  only has a second  or two left, why  run some other 
+	job  for 10  seconds?), but  it performs  pretty darn  well on  this 
+	distribution because 70% of the jobs run 10 seconds or less. 
+	 
+	- 5 points for something on the right track or something that wasn't 
+	really an algorithm  (something like: do  A, but also  do B --  if I 
+	have  a choice,  how do  I pick?),  or for  a really  comprehensive 
+	comparison of algorithms (with variance, etc.) 
+	 
+	- 4 points for SET (SET  runs short jobs, but it's not  a meaningful 
+	kind of "short", see above) 
+	 
+	- 3 points for SRPT (not realizable) 
+	 
+	(2 points for blank) 
+	 
+	I would occasionally take off a point if your explanation was too short,  
+	incoherent, or wrong. 
+	 
+	 
+	part c: 
+	 
+	Solution: 
+	 
+	LET (Longest  Elapsed Time):  Since jobs  run for  an average  of 10 
+	seconds, and no longer  than 12 seconds, we  know that the longer  a 
+	job has run, the _less_ time it probably has left. So always run the 
+	job with the highest X(i). 
+	 
+	Things to notice about this problem: 
+	 
+	- your algorithm has to be realizable (can't do SRPT) 
+	- you only get to schedule the second stage of the system 
+	- you know X(i) for each job 
+	- you _don't_ know the distribution of X. The first stage could  run 
+	all jobs for 8 seconds, all for 0 seconds, or anything in between. 
+	 
+	Scoring: 
+	 
+	- 7 points for LET (or the predictive algorithm from part b) 
+	- 5/6 points for miscellaneous decent algorithms, such as: 
+	  - RR, with a quantum of 10-X(i), and then a quantum of 1 
+	  - Priority queues, that give priority to jobs that have run longer 
+	  - Things on the right track that weren't quite algorithms 
+	- 3/4 for SRPT (not realizable) or SET. To get 4 points, you usually 
+	had to at least notice that you can use X(i) for something. 
+	 
+	(2 points for blank) 
+	 
+	Again, you had to give at least a decent explanation. 
+	 
+	 
+	******************************************************************** 
+	Problem 2 (David Marin): 
+	******************************************************************** 
+	 
+	The Banker's algorithm problem.  Almost everybody did fine  on this, 
+	or at least appeared to know  what they were doing (and just  made a 
+	mistake), so I'm not going to  write out solutions (ask a friend  or 
+	ask me in office hours!). 
+	 
+	Scoring: 
+	- For each half: 
+	  - 3 points for correct answer 
+	  - 3 points for correct work 
+	 
+	(3 points total for blank) 
+	 
+	Ways to save time on a problem like this: 
+	 
+	-  You only  have to  show one  sequence (that  either completes  or 
+	deadlocks) to know whether the initial state is safe. 
+	 
+	- If you  remove resources from  a system in  an unsafe state,  it's 
+	still going to be unsafe. 
+	 
+	In general, I don't take off points for overly long explanations (as 
+	long as  they aren't  wrong or  irrelevant), but  it's better not to 
+	waste your time writing long explanations when short ones will work. 
+	 
+	 
+	******************************************************************** 
+	Problem 3 (Abraham Shaw) Interrupts, Traps, Exceptions: 
+	******************************************************************** 
+	 
+	a.)What are traps?  Give at least 2 examples and explain why they 
+	are traps.  Why are traps necessary?  
+	 
+	(6 points) 
+	 
+	Solution: 
+	 
+	  *"Traps are synchronous events in the machine."   
+	 
+	  *Examples   of traps   are:  page   fault, divide   by zero, SVC, 
+	  physical memory    error, out    of bounds    addressing, hardware 
+	  error, illegal instruction, trace trap,   syscall, etc.  You also 
+	  needed  to tell  why a  particular trap  is classified as a trap. 
+	 
+	  *Traps are necessary because it transfers control from the user 
+	  process  to   the  OS   at  predefined   times  (i.e.   caused  by 
+	  instruction execution, vs.  interrupts which are  asynchronous and 
+	  can  happen  at any  time).  This allows the OS to come in and 
+	  hopefully fix the problem so  the process can continue running  if 
+	  possible. 
+	 
+	Points (max = 6):  
+	 
+	-- points were given if you knew what a trap is, synchronous is  the 
+	key word here. [I gave 0.5  for students who hinted that traps  were 
+	synchronous since they are internal events.] 
+	 
+	-- point for each type of trap (max = 2) 
+	 
+	-- point for why the trap examples are traps (max = 2).  [Here  many 
+	students gave me  a general statement  of why things  are traps, but 
+	hardly any were very thorough in stating that it was a trap  because 
+	it was synchronous (doesn't happen  at any random time), allows  the 
+	OS to have control, and hopefully  the OS can deal with the  problem 
+	so the process can continue executing.  Thus, there were a lot of  1 
+	points or 0.5 points given.]  
+	 
+	-- point for  why traps are  necessary.  [A lot  of 0.5 points  were 
+	given  for  answers  that  made sense  but  didn't  capture  all the 
+	elements listed above.] 
+	 
+	b.)What are interrupts? Give at least two examples and  explain 
+	why they are interrupts.  Why are interrupts useful? (6 points) 
+	 
+	Solution: 
+	 
+	--"Interrupts are asynchronous events." Note: if you mentioned
+	something about interrupts not having to be dealt with immediately
+	versus traps which abort the current instruction and must be handled
+	immediately, you got some partial credit.
+	 
+	--Examples of interrupts are: I/O interrupts, timer. 
+	 
+	--Interrupts are useful because they  allow the OS to regain  control 
+	of  the CPU  (timer interrupt).   Also, by  not having  to poll  I/O 
+	devices though use  of interrupts, it  helps to make  more effective 
+	use of the CPU. 
+	 
+	Points (max = 6):  
+	 
+	-- points were given if you knew what an interrupt is,  asynchronous 
+	is the key word here. 
+	 
+	-- point for each type of interrupt (max = 2). 
+	 
+	-- point for why the interrupt  examples are traps (max = 2).  [Same 
+	problem as above, students didn't really explain WHY interrupts  are 
+	classified as an interrupt, many just told me what happened.  Ex.  A 
+	I/O interrupt is classified as an interrupt because it can occur  at 
+	any random time, i.e. asynchronously and allows for the OS to regain 
+	control of the CPU.] 
+	 
+	-- point for why interrupts are useful [Once again, in my efforts to 
+	give partial credit, there  were a lot of  0.5 points given out  for 
+	something intelligent.]       
+	 
+	c.)What are exceptions? 
+	 
+	Solution: 
+	 
+	"The term exception  refers to both  interrupts and traps."  [I gave 
+	out a lot of 1 point  partial credit to students who didn't  get the 
+	right answer, but weren't entirely wrong.] 
+	 
+	******************************************************************** 
+	Problem 4 (Abraham Shaw) 
+	******************************************************************** 
+	 
+	What are the tradeoffs  between semaphores 
+	and  monitors as process synchronization mechanisms? (15 points) 
+	        
+	Solution (+3 points for each of the ideas below): 
+	 
+	--Semaphores are lower level constructs than monitors or Monitors are 
+	higher level constructs than semaphores 
+	 
+	--Semaphores appear scattered throughout the program versus  monitors 
+	which has synchronization code compactly located. 
+	 
+	--Monitors are safer and easier to use. 
+	 
+	--Monitors are easier to debug. 
+	 
+	--Semaphores  can   be  implemented   from  simpler   synchronization 
+	mechanisms provided  by the  hardware whereas  monitors are language 
+	constructs that require compiler support 
+	 
+	--Very similar because they can each be used to implement the other 
+	 
+	Solution (+1 point for each of the ideas below): 
+	 
+	--Mutual Exclusion 
+	 
+	--Monitors can encompass many procedures 
+	 
+	--Semaphores are independent of machine platform 
+	 
+	--Sleep/Block issues 
+	 
+	Grading Comments: 
+	 
+	   The  question  asked for  tradeoffs,  many students  just  listed 
+	   what  monitors were  and  what  semaphores were.  I  was  looking 
+	   for  TRADEOFFS.   Even  though   I  tried to maximize   points, I 
+	   could  only  do  so  much,  since  many  students told  me about 
+	   condition variables and how  both are used for mutual  exclusion, 
+	   etc when  the question  asks for   tradeoffs  as  synchronization 
+	   constructs.  Very few students got more than half the points,  so 
+	   this  question  was definitely  hard.  From  the solution  above, 
+	   I've   come up  with a  possible  22  points.  I  didn't  expect 
+	   students  to  list everything;   only  a handful   of  the points 
+	   above would suffice a  good grade on the  problem.  Nevertheless, 
+	   remember  when  you  see   a  15-point  question,  two   or three 
+	   sentences generally will not get you much credit. 
+	 
+	********************************************************************  
+	Problem 5.)  (Abraham Shaw) 
+	******************************************************************** 
+	 
+	We define  "test and  set" and  "swap" instructions as mechanisms to 
+	help implement synchronization.  Define each, and show how each  can 
+	be used  to implement  a critical  section.  Why  is  "test and set" 
+	preferred to "swap?" (12 points) Solution: 
+	 
+	--Definition of Swap: "interchanges values of two variables. Lock  is 
+	locked if it is 'true.'"  
+	 
+		Swap (local(i), lock) { 
+			Temp = local(i); 
+			local(i)=3Dlock;  
+			lock=3Dtemp; 
+		} 
+	 
+	[I was looking for two things, a definition and some  implementation 
+	details.  Many students  just stated swap  two values, or  something 
+	similar which although not wrong only got half of the 2 points.] 
+	 
+	--Definition of Tset: "Set value  to true, but return OLD  value. Use 
+	ordinary write to set back to false. Lock is locked if it is set  to 
+	'true.'" 
+	 
+		Tset(local(i), lock) { 
+			local(i)= lock; 
+			lock = true; 
+		} //from lecture notes 
+	 
+		Tset(local(i), lock) { 
+			Lock:	t&s 	register, location	/*register is the lock, 
+								and location is = local(i)*/ 
+				bnz 	lock			/*if not 0 keep looping*/ 
+				ret				/*go back to caller*/	 
+			unlock:	st 	location, #0		/*write 0 to location*/ 
+				ret				/*return to caller*/ 
+	 
+	[Again, I was looking for a definition and some implementation,  but 
+	I was satisfied if you got the implementation correct.  Even  though 
+	the  notes  don't  have  the  last  return  line,  according  to the 
+	definition Tset returns  the old value.   Also many students  didn't 
+	define when  the lock  was locked.   The second  is my  solution, or 
+	rather something I would have given.  Nevertheless, if you gave  the 
+	one from lecture notes I didn't penalize you.] 
+	 
+	--	Critical Section using Swap: 
+		Init: lock=false, local(i) = true 
+		Repeat swap(local(i), lock) until local(i) =3Dfalse; 
+		Critical section 
+		Lock=3Dfalse; //or swap(local(i), lock) 
+	 
+	--	Critical Section using Tset: 
+		Init: lock=false; 
+		Repeat Tset(local(i), lock) until local(i) = false; 
+		Critical Section 
+		Lock=3Dfalse; 
+	  
+	 [Each implementation is worth 2points.  Some students were able  to 
+	 describe  this  with  words,  which  I  gave  credit  for.  General 
+	 statements about implementation of the critical section were  worth 
+	 1  point.  Most  students either  got full  or very  close to  full 
+	 credit on these two parts.] 
+	 
+	--Why Tset is preferred to Swap: 
+	 
+	[Basically  anyone who  said Tset  is easier  or more  efficient to 
+	implement in hardware got 4  points.  Many students were unclear  in 
+	their answer saying  Tset was easier  (easier in what  way?).  Those 
+	got 3 points in general, since I gave everyone the benefit of doubt. 
+	Unless  you were  completely off  you got  at least  1 point.   Most 
+	students got full credit on this section] 
+	 
+	Grading Comments: 
+	 
+	   In  general  students did  really,  really, really  well  on this 
+	   section compared to questions 3 and 4.  Good Job everyone! 
+	 
+	******************************************************************** 
+	Problem 6 (Rodrigo Fonseca): 
+	******************************************************************** 
+	(4 points) Part a:  The resource request graph  can be defined in  a 
+	number  of  equivalent  ways.  We  accepted  either  of  3   general 
+	definitions: 
+	 
+	1. a directed graph in which the nodes are the PROCESSES, and  there 
+	is an edge going  from process 1 to  process 2 if process  2 holds a 
+	RESOURCE that process 1 needs 
+	 
+	2. a directed graph in which the nodes are the RESOURCES, and  there 
+	is an edge  going from a  resource A to  a resource B  if there is a 
+	process that holds resource A and wants resource B. This edge can be 
+	labelled with the process identifier. 
+	 
+	3. a directed (bipartite) graph  with two kinds of nodes:  RESOURCES 
+	and PROCESSES. Bipartite just means that there are no edges  between 
+	two resouces nor  among two processes.  There is an  edge going from 
+	resource A to process 1 if 1 currently holds resource A. There is an 
+	edge going from process B to resource 1 if process B is waiting  for 
+	resource 1. 
+	 
+	It is easy to see that a  cycle in one of these graphs will  imply a 
+	cycle on the others, and that they are equivalent. 
+	 
+	In particular, we were looking for  graph defined as a set of  nodes 
+	and   edges   connecting   these nodes.   Plots  showing  regions of 
+	deadlock were not considered right. I gave full credit to those that 
+	specified how the graph is constructed, meaning what the nodes  are, 
+	and what is the meaning of the edges. Just saying that it is a graph 
+	that  shows  processes  and resources,  for  example,  only received 
+	partial credit. 
+	 
+	(8 points) Part b: Part B asks how the existence of a cycle  implies 
+	the other conditions for deadlock. These other conditions are:  
+	 
+	(i) the presence of at least two unshareable resources (a.k.a mutual 
+	exclusion requirement),  (ii) non-preemptable  resources, and  (iii) 
+	hold and wait. 
+	 
+	The explanations vary a bit from one definition of the graph to  the 
+	other, but are similar to the following. 
+	 
+	A cycle on the graph implies that at least two processes are waiting 
+	for one resource while holding another resource. If not, some  edges 
+	would not  be present  in the  graph, and  there would  be no cycle. 
+	Thus, (cycle => hold and wait). 
+	 
+	Also, a cycle on the graph implies that resources are non-shareable. 
+	If this were not the case, there would be no waiting for  resources, 
+	and  again  arrows  would be  removed,  breaking  the cycles.  Thus, 
+	(cycle=>mutual-exclusion). 
+	 
+	Finally, if the resources  were preemptable, some process  would not 
+	have  to wait,  and the  cycle would  be broken.  Thus, (cycle=>non 
+	preemptable resources). 
+	 
+	Points were  given for  the mentioning  of the  conditions, and   to 
+	the extent that the explanations were satisfactory. 
+	 
+	(3 points)Part c: In part c, two things had to be demonstrated: that 
+	a cycle is a NECESSARY condition  for deadlock, and that it is  also 
+	SUFFICIENT. These are different, and correspond to the two sides  of 
+	the implication (<= and =>). 
+	 
+	The cycle in  the resource request  graph is necessary  for deadlock 
+	because even if the other  three conditions are satisfied, if  there 
+	are no  cycles in  the graph  there will  be no  deadlock, for  some 
+	process will be able to proceed. 
+	 
+	The cycle is a sufficient condition, on the other hand, because,  as 
+	explained in item (b), it implies all of the other conditions. 
+	 
+	******************************************************************** 
+	Problem 7 (Rodrigo Fonseca): Page table entries 
+	******************************************************************** 
+	 
+	The entries in the page table,  and what they are used for,  are the 
+	following.  
+	 
+	(3 points)Physical Page   Number (or  Physical  Address):  indicates 
+	the base address in physical memory for this virtual page number, if 
+	there is such a mapping. 
+	 
+	(3  points)Valid  Bit: this   indicates  that the   mapping  in this 
+	position of the  table is valid.  A situation in  which it could  be 
+	invalid is  when the  table is  first initalized,  or when  the page 
+	moves out to disk. 
+	 
+	(1.5 points)Protection  bits: indicate  whether the  current process 
+	has read, write or execute permissions for this page 
+	 
+	(1.5 points)Dirty bit:  used to   indicate that  the page  has  been 
+	modified since it  was last read  from  disk, and  thus needs to  be 
+	flushed, or written  back,  in  case it  needs  to  be replaced.  If 
+	it  is not modified, the page can be just discarded, since the  copy 
+	on disk  is still consistent. 
+	 
+	(1  points)  Reference  bit:  it was  just  required  that  this was 
+	mentioned.  If finds  uses in page  replacement algorithms, when  it 
+	can, for example, be used as an indicative of the recency of  access 
+	to this page. 

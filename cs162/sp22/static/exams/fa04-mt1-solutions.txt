@@ -1,0 +1,267 @@
+CS162 Fall 2004 Midterm 1 Solutions
+===================================
+
+1. (Yitao)
+
+An inverted page table is a hash table for address translation.  Besides the
+information found in a regular page table entry (physical page number,
+protection bit, etc.), each element also contains the ID of the process that
+occupies this element (if the table is system-wide) and the virtual page
+number.  The system can be designed with one inverted page table for all the
+processes in the sytstem or one per process, but the former is more efficient.
+
+Given a virtual page number, the system hashes it to obtain an index into the
+table. The pid of the current process and the virtual page number are compared
+with what are stored in the elements in the linked list. If a match is found,
+the physical page number contained in that element is used to construct the
+physcal address. (8)
+
+To be efficient, the number of entries in the inverted page table should be
+significantly larger than the number of physical page frames in the system -
+e.g. 2X. (2) The size of the
+virtual address space is independent of the size of the physical address
+space. (2) And the number of entries in the inverted page table is also
+independent of the size of the virtual address space.  But since the inverted
+page table needs to store virtual page numbers whose size (number of bits) if
+proportional to log(virtual address space size), the size of the inverted page
+table in terms of total number of bytes is also proportional to log(virtual
+address space). (2)
+
+----------------------------------------------------------------------
+
+2. (Yitao)
+
+(1) Relocation (7)
+(2) Protection (7)
+
+----------------------------------------------------------------------
+
+3. (Karl)
+
+      +------------+--------------+
+vaddr | segment #  |   offset     |---------------------\
+      +------------+--------------+                     |
+        |                                               |
+        |       +----+                                  |
+        |       |STBR|                                  |
+        |       +----+                                  |
+        |         |                                     |
+        |         |                                     |
+        |         v                                     |
+        |    +----------------------------------+       |
+        |    |                                  |       |
+        |    |                                  |       |
+        |    |                                  |       |
+        |    |                                  |       |
+        |    |                                  |       |
+        |    +--------------+-----------+-+-+-+-+       |
+        \--->| frame #      |  bounds   |P|V|D|R|       |
+             +--+-----------+------+----+-+-+-+-+       |
+             |  |                  |            |       |
+             |  |                  |            |       |
+             |  |                  |            |       |
+             |  |                  |            |       |
+             |  |                  |            |       |
+             +--+------------------+------------+       |
+                |                  |                    |
+                |            trap-(<)-------------------+
+                |                                       |
+                \------>(+)<----------------------------/
+                         |
+                         |
+                         v
+            +------------+--------------+
+            | frame#     |   offset     |
+            +------------+--------------+
+
+The segment table is a table of where each entry consists of a frame number,
+bound, and Permission, Valid, Dirty, Reference bits.
+
+The Segment Table Base Register points to the current process's segment table.
+
+To translate a virtual address, follow the STBR and look up the segment table
+entry.  (Some people also correctly noted that this involves an adder, but I
+did not check for this.)  Add the frame number to the offset (from the V.A.)
+to get the physical address.  Compare the offset to the bound and trap
+(segfault) if invalid.
+
+The protection and valid bits also need to be tested, and there needs
+to be a trap if the reference is invalid or illegal.
+
+
+Scoring: 
+    - (2 points) STBR
+    - (4 points) Segment table, with base and bounds
+    - (4 points) Permission bits
+    - (4 points) Adder and comparator
+
+Many people forgot the STBR, and the table entry fields.
+
+----------------------------------------------------------------------
+
+4. (Karl)
+
+(a).  Complete safe sequence: ACDB, or ADCB.  
+
+Scoring: (6 points)
+
+(b).  Unsafe.
+
+Either show that ACD or ADC leads to not enough Y left for B, or notice that
+there isn't enough Y for B in the first place (it needs 220 but there is only
+215 total).
+
+Scoring: (6 points)
+
+
+Almost everyone got #4 correct.
+
+----------------------------------------------------------------------
+
+5. (Yitao)
+
+Method 1
+--------
+Proof by contradiction: Assume that there is some schedule for N jobs that is
+not SJF.  Show formula for average flow time.  Show that interchanging jobs,
+so that a short job moves forward and a long job moves backward, decreases
+average flow time.  So assumption is contradicted.  So there is no such
+schedule, and the optimal schedule must be SJF.
+
+Method 2
+--------
+Let Job_i be the ith job to run, i = 1, 2, ... N. Let T_i be Job_i's
+service time. The flow time for Job_i is
+
+     f_i = sum_{j = 1}^{i} T_j
+
+Mean flow time is f_0 = sum_{i = 1}^{N} f_i/N. Since N is constant we only
+need to minimize the sum.
+
+With SJF, each term f_i in the sum is minimized. This is because using SJF,
+f_i is the sum of i shortest service times and this is the shortest flow time
+ith job can possibly have.
+
+==> SJF achieves minimal mean flow time*.
+
+* Note: the key in this proof is to number the jobs by the order they are run,
+not some labels that move with the jobs. You can think of the scheduling as N
+bins numbered 1 through N and you try to find a permutation of the jobs that
+fill each bin with each job. You compute the mean flow time by summing the
+flow time of each bin.
+
+Scoring: half credit for heuristic/intuition or comparison.
+
+Note that a "proof" is not the same as a heuristic argument.
+(What was given in class was the latter.)
+ 
+
+----------------------------------------------------------------------
+
+6. (Karl)
+
+(a) Shortest Job First.
+
+You know the size of the job after it is submitted, before you start printing.
+(You can either assume you can tell the number of pages, or use the file
+size.)
+
+Scoring: (8 points)
+    - partial credit for saying "SJF is optimal except for the fact that we
+      have no knowledge of the future"
+
+(b) I accepted two answers for full credit:
+
+    (1) Supermarket express lane: reserve one printer for short jobs,
+        e.g. jobs less than 5 pages.  Short jobs can still use the long-job
+        printer.  This improves wait time for short jobs, and it is fair for
+        longer jobs to wait longer.
+
+    (2) SJF, FCFS: have a single queue; the two printers take jobs SJF and
+        FCFS respectively.  I.e., one printer takes the shortest job in the
+        queue, and the other printer takes the earliest submitted job in the
+        queue.  This prevents long jobs from being starved by short jobs, and
+        is fair to both kinds of jobs.
+
+    A common answer that received partial credit:
+
+    SJF, LJF: have a single queue; the two printers take jobs SJF and "Longest
+    Job First".  This is not fair for medium-sized jobs.  In fact, this is
+    probably a bad idea.
+
+Note that the goal of a scheduling algorithm is to keep the customers happy.
+SJF will not keep customers happy when, late at night, both printers are
+running very long jobs, and someone submits a short print job.
+
+Scoring: (8 points)
+
+----------------------------------------------------------------------
+
+7. (Karl)
+
+If there are only 2 processes concurrently contending for the critical
+section, this code works OK.  It starts to fail as the number of processes
+increases.  If there are many (e.g. 5 or more) then it does not.  If there are
+7 processes, then the counter "A" will be floating around 6-7.  All 7
+processes have to simultaneously decrement A for the next process to increment
+sees that it was previously 0 (now it is 1).  This is probabilistically
+unlikely as the number of processes increases.
+
+This code does not allow multiple processes into the critical section (i.e.,
+it does not violate mutual exclusion).  It does not suffer from starvation or
+deadlock due to processes having different priority.  It is a certain kind of
+race condition, but when there are many processes, it will almost always fail
+(whereas in a typical race-condition bug, the program runs fine normally and
+fails once in a blue moon).  The problem it has is "indefinite postponement."
+
+One of the biggest problems students had was understanding the code.  The
+lines::
+
+    {increment A in memory, load A}
+    if A != 1 ...
+
+mean that A is incremented, and the value tested is the value just after
+incrementing, EVEN IF ANOTHER PROCESS INCREMENTS "A" IN BETWEEN THE TWO
+STATEMENTS.
+
+Perhaps this pseudo-C code will clarify::
+     
+    Init:
+        int *A = new int; /* shared among all processes */
+     
+     
+    Mutex code:
+        while (true) {
+            int localA; /* local to this process */
+            atomic { localA = ++ (*A); }
+            if (localA == 1) break;
+            atomic { -- (*A); }
+        }
+     
+        /* critical section */
+     
+        atomic { -- (*A); }
+
+Or this Java code::
+
+    class CriticalSection {
+        private int A; /* shared among all processes */
+
+        public void enterCriticalSection() {
+            while (true) {
+                int localA; /* local to this process */
+                atomic { localA = ++A; }
+                if (localA == 1) break;
+                atomic { --A; }
+            }
+        }
+
+        public void leaveCriticalSection() {
+            --A;
+        }
+    }
+
+
+Scoring: (13 points)
+    - partial credit for remembering that there is some kind of infinite loop
+      or no progress, but wrong explanation.
