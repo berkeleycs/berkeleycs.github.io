@@ -1,0 +1,84 @@
+#,Question,Answer ,Answer 0,Answer 1,Answer 2,Answer 3,Answer 4
+1,Could you please enable so that all questoins asked are shown?,It should be fixed!,Thank you!
+2,what is rc,resistance * capacitance,"R times C, where R is the resistance and C is the capacitance"
+3,Why cosine of omega * t?,Should be solved by now.
+4,Where is the cos(wt) coming from again?,Should be solved by now.
+5,what’s that equation vin(t)=vinCos(???),This is a possible input signal,what is written?,omega * t,what’s omega?,like what it represent?
+6,Will we go over again how exacrly we got the x(t) for Vout = Vin*cost(wt)? Last time it was glossed over
+7,Do we have inputs that are more complex than sinusoidal? Why would inputs be this way?,What do you mean by more complex?,"Inputs that have a different function, like some combination of trig/exponential functions?"
+8,"I am still a little confused, why do we guess again?","Because the input is sinusoidal, we expect the output voltage to be also sinusoidal",Because we know that derivatives of cosine and sine just give also cosine and sine functions so we have a good chance to guessing correctly
+9,Why did we guess that particular Vout?,"Because the input is sinusoidal, we expect the output voltage to be also sinusoidal (and since none of the circuit element is changing the frequency, we keep omega the same, but the sinusoid might be shifted)"
+10,what is the intuition behind adding in a theta?,"Cosine and sine can be thought of as phase shifted versions of each other, which can be achieved with the theta"
+11,is this the solution to that circuit on top?,yes with a cosine input.,thank you so much! makes a lot more sense now,why are we choosing to input cos but not sine? Or how would we decide?
+12,Where did the sin come from?,the derivative of cos is -sin,^
+13,"I get the first expression we got the Acos(wt + theta), but where did the Vin thing come from?",it’s the input. it’s given.,thank you
+14,which trig identity are we using?,Are you referring to we get cos(alpha) and sin(alpha) from the fractions?,How we go from the first line to the line with the square roots?,nvm got that part!,"do you mind explaining it to me, I'm still a bit confused on that part","For that part, we’re factoring out a square root, and not specifically using a trig indentity (if you multiply it back in you get the previous step)","ohh okay that makes so much more sense, thank you!"
+15,How did we go from Vout(t) = Acos(wt + theta) to the first line in this page?
+16,how did we get from that first step to the trig thing?
+17,Why did we factor out the A and square root?
+18,is there a way to set up zoom such that it's possible to view all the pages at any time during lecture? or at least the previous page? I wasn't finished taking notes. (something like a read only link to the pages as they are written),'+1,I think you just have to wait for the notes to be released,"yeah, but i wish i could see them now to ask questions"
+19,"Are we supposed to know all of these trig identities? If not, are we responsible for every identity prof introduced?",I would suggest to keep these in mind. Some of them are quite common
+20,Which part is cos(alpha) is it just the 1/sqrt(1+(wrc)^2),Yes
+21,what trig id are we using?
+22,What is tan alpha,tan = sin/cos. Lmk if that’s your question,"No, sorry. What is alpha?","alpha is just some angle, such that the fractions above are the sin and cos of it"
+23,where’d we get alpha from and why is it -theta?,We are definining cosine alpha to be that certain term 1/sqrt(1 + (wrc)^2)
+24,Should we be able to do all this or is it ok if we just know what vout(t) is
+25,What are we solving for in this equation?
+26,how did line 2 become line 4 (cos - sin replaced with a single cos)
+27,"When we go from the first line to second, why are we multiplying omega by RC?"
+28,could you write it out? the steps with trig id,'+1
+29,how did you know to factor out the square root of (1 + wrc^2?
+30,Why is theta = - alpha? Is this just for convenience?
+31,it would be easier to follow along if large steps (like trig identities) are written out instead of talked over,^
+32,are we given omega?,"Yes, omega is usually given in the questions (the frequency of the input)"
+33,would the theta for low frequencies be approximately 0 since wRC << 1 or is that assumption unallowed?
+34,is this related with AC vs DC or is the vin just like oscillations in the sensor (picking up signal),"This is related to AC, if it’s DC then Vin won’t be a sinusoid"
+35,What happens when omega is neither much greater nor much less than 1/RC?,You can’t simplify the expression in that case easily
+36,for w >> 1/RC……. v_out = v_in*cos(wt+ theta) or - theta?
+37,What is an attenuated signal? Why is this limit of omega << 1/RC possible?,Addressed by Professor
+38,is this part of note 2?,"No, probably in a later note that’s not released yet"
+39,"since A = V_in/sqrt(1+(wRC)^2), and we multiply A by sqrt(1 + (wRC)^2), shouldn't they cancel out? Why is there still that radical present in the final equation?"
+40,"Looking at the bigger picture, why did we do this and/or what did we solve for?",From this we know how the circuit components are changing the input signal. This could be useful for example in the color organ lab
+41,what note covers this process? Want to read through it to fully grasp it.,"I don’t think it’s released yet, but we should have this covered"
+42,why is the op amp necessary in this low pass filter?,I believe you can do the same analysis without the op-amp here,right so why is it present here?,"probably to isolate the input from the output, so there isn't any loading"
+43,why is theta = -alpha?
+44,is this just another way to solve the same problem from last lecture where we used integrals?,"no, this is a second order (coupled) equation — we have not sovled these yet."
+45,how does the filter differetiate between differet signals? woulding the curves add up to only one input,"This input at the end is still composed of signals of different frequencies, and filters are supposed to filter out some particular range of frequencies"
+46,Which Note is this lecture material covered in?,I think he was talking ahead about notes 4 and 5,solving the systems of equations is in Note 3
+47,Did the professor skip steps to this?,yeah he was doing some rearranging and dividing,from the eq he got from nva,"The equations were rearranged, nothing skipped."
+48,is vin a continuous function of t?,"In this case it’s a sinusoid in terms of t, so yes"
+49,why do we split up [v1 v2] and [vin]? why not have a 2x3 matrix instead of a 2x2 and a 2x1?,"Because v1 and v2 are variables, but not Vin","V1 and V2 are variables, Vin is an input/known"
+50,where did -5 come from,This is an example,from the first row of the matrix
+51,Did we just make this random that u1 = v_2 and u2 = V_1 + 2V_2,"No, there’s a procedure to find out the useful change of variables which we will talk about later",yeah this was his magic idea that we could use this change of variables to make our work easier,oh i guess the magic will be revealed
+52,Do we not include Vin?,^,live answered
+53,what happened to the Vin in dV1/dt,live answered
+54,Why is v1(0) and v2(0) = 1?,Due to the assumed initial condition that Vin = 1V before t=0
+55,why is Vin == 0? what's the point of the circuit then?,That’s the problem setting in this case. Vin = 1V before t=0,It swtiched from being 1V to 0V at time t = 0. So you are interested in the transient behaviour.
+56,"If Vin = 1v, why are v1(0) and v2(0) = 1? Don’t the resistors have an effect?",I would suggest you to solve the circuit in the usual way to see what happened in the long run. But here the capacitors will be charged to 1V
+57,Can you use integration methods in exams instead of guessing?,*can we,I believe you can use any method you are comfortable with in solving differential equations. The method here we introduced is probably more convenient for the systems in this course
+58,Why is s=-1 and lambda=-6 ?,live answered
+59,is this like a change of basis?,Yes :-)!
+60,Where did the 6 in front of the second e come from??,live answered
+61,what’s the intuition behind the “magic”?,Fundamentally we are relying on the idea of change of basis — we will talk more about this soon and also in discussion.
+62,So we are just trying to solve the time that it takes for the circuit to discharge when the input switches to 0V?,"Not just the time, but the transient behavior — how do the voltages change once the input switches. But this is the key idea as you said."
+63,How do we know a constant in front of the u(t) = e^(st) is okay?,"Constants typically don’t bother us since they easily move in and out of derivatives and integrals, so we can adjust to allow fro them."
+64,How can we come up with u1 and u2? If we didn’t know,Good question. This uses change of basis and eigenvectors and we will talk about this soon and also in discussion.
+65,why do we have a -2? where did the negative sign come from?,This matrix is the inverse of B. If you multiply them you should get the identity matrix,"We have two matrices, B and B^-1. The inverse matrix has distinct entries, one happens to be -2."
+66,How do you select the values for u1 and u2?,See above
+67,shouldn't it be [3 0]?!,"No, it is multiplied by B"
+68,Why are students not allowed to speak up and ask questions?,im guessing we're in webinar mode because there's like 1000+ people in the class and regular zoom setup might crash with all the video and audio capabilities idk though,EE16A last semester prob had more people but I think we were able to ask questions live,They can use the raise hand feature and panelists can unmute them,It’s technologicially and logistically complicated. We tried it last semester in 16A and didn’t quite work — we lost a lot of time in technical difficulties and answering questions on chat was just much faster and more efficient.
+69,What does it mean to peel-back?,Just Gaussian Elimination.
+70,Sorry how do we use upper-triangular to feedback? I missed what he said,to “peel-back” — i.e. use Gaussian Elimination.
+71,Why couldn’t we do Gaussian Elimination directly in the first equation (in terms V1 and V2)?
+72,why do we convert to some upper-triangular as opposed to diagonalizing or finding JCF?,Many matrices are diagonliazable but not all are. But all can be converted into an upper triangular matrix.
+73,"so the ""magic"" is that we choose a B such that BAB^-1 is in upper triangular form?","Yes, since then you can work from bottom to top and decouple all the equations"
+74,"vector in front of vin is 0,3?",Yes
+75,"Why is [3, 0] flipped to [0, 3]?",multiplied by the matrix B,It is multiplied by B,Gotcha thank you!
+76,Why does the derivative work in the same way for change of basis?,"derivatives and matrix multiplication are linear operators, they can be interchanged"
+77,"Since these transformations are linear, does the order matter?",derivatives can be interchanged with matrix multiplication since they are linear operators,What do you mean by the order? Ex. you can’t switch the order of matrix multiplcation since it doesn’t commute.. here you can pull out the matrix from the derivative due to linearity,"Yeah I was referring to the matrix multiplication and derivative operator being switched around, thank you!"
+78,what does the tilda mean again?,The “nice” coordinates
+79,Is there going to be a lecture/session on change of basis and diagonalization since it wasn't covered last semester 16A?,This will be discussed in lecture and discussion.
+80,"so when we call these equations ""linear"" we mean that their derivative can be represented as a linear combination of the original equation?"
+81,what about solving for x(t)?
+82,"Why didn’t we say V^-1 * ( A * x(t) + x(o) ) ?
+On the second to last line?"

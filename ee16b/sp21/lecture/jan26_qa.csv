@@ -1,0 +1,100 @@
+#,Question,Answer ,Answer 0
+1,When are review sessions?,I’ll do a 16A review session on Monday evening at 5 pm,5pm next Monday Feb 1: 16A review by Prof Ranade
+2,Will they be recorded?,Yes
+3,Can you label the PMOS and NMOS please?,"if there's a bubble on the gate, it is pmos. Else it is nmos"
+4,"could you swap the pmos and nmos transistors in a not gate to make a simple buffer/""is""-gate?",live answered
+5,where is Vthresh set?,it depends on device physics like properties of the silicon
+6,how is the gate connected to the source/drain node?,prof answered this live
+7,Is the logic gate model the same thing as the inverter model? Or do they just process signal the same way?,"here inverter is the logic gate. There are other logic gates like nand, nor, etc"
+8,Why is VOut 0V at the end?,"there are 2 inverters cascaded. Vin = 0, so Vx = Vdd, so Vout = 0"
+9,for this example is Vthresh somewhere between Vdd and 0 but it doesnt matter?,Vthresh is always between Vdd and 0 - refer to previous lectures
+10,what does that circle mean in his drawing?,"pmos gate has the bubble, nmos gate does not"
+11,how is 0 < -|v_thresh|? or is V_gsp different and if so what is it?,"For pmos, Vg = Vin, and Vs = Vdd. So Vgs = Vg - Vs = Vin - Vdd. When Vin = 0, Vgs = -Vdd < - |V_th|"
+12,at the gate of the transistor
+13,What is the difference between Vgs and Vin?,"Vin is input voltage, Vgs is gate-source voltage, here Vgs = Vin"
+14,does the input voltage physically connnected to the rest of the transistor (in the diagram they appear separate) or can the transistor be separated into the 2 parts.,"Prof is explaining it now, but basically Vin is applied to gate"
+15,Is Vgs = Vin usually the case?,"for the nmos, the source is at ground, so Vs = 0, and Vin is applied to gate, so Vg = Vin, so Vgs = Vg - Vs = Vin - 0 = Vin. It's different for pmos"
+16,Why can we the pmos be on the bottom again? going off from Vgs would it be 0v-Vout?,That was in response to a question — in general it will not be on the bottom side.
+17,why is the illegal pmos model illegal?,Prof is explaining right now
+18,"So, just to clarify, the left model is NMOS and the right model is PMOS?",inverter has both pmos and nmos: pmos on top and nmos on bottom
+19,"When the input is 0, why is V_in < - abs(V_th)?","For pmos, Vg = Vin, Vs = Vdd (since source is connected to Vdd), so Vgs = Vg - Vs = Vin - Vdd. When Vin = 0, Vgs = -Vdd < -abs(V_th)"
+20,Is the first inverter a PMOS or NMOS?,inverter has both pmos and nmos: pmos on top and nmos on bottom. Prof is explaining why it cannot be the other way
+21,Is this elaborated on in the notes?,mostly yes,Note 1 should have some relevant details
+22,Why is there a switch in the second transistor?,transistor is always modeled as a switch in series with a resistor,The figure to a right is a model of the transistor using an R and C. The swtich (open or closed) depends on V_GS
+23,Is there any case where you can connect transistors and more than one voltage fllows to the drain? if so how do you determine the actual output? do you sum the voltages going into the drain? I haven't encoutered this kind of situation but I suppose it occasionally happens.,it becomes a voltage divider with the R_on of all the transistors that are 'on'
+24,"Just to clarify, when we say that Vgs >= Vthr, is Vdd the same as Vthr or is Vthr something else?","Vth is threshold voltage of a transistor. In last thursday's lecture, it was mentioned that 0 < Vth < Vdd"
+25,"sorry, can someone give an overview of what the prof is explaining right now?","review of RC model of the transistors in the cascaded inverters, which is also in HW2"
+26,is there a loading effect between the 2 inverters?,yes the second inverter loads the first one
+27,Do we assume that no current flows from the gate to the source through the Cgn?,"Yes, in steady state, DC current cannot flow through capacitors."
+28,in the first inverter wouldn,maybe you didn't complete the question? :)
+29,"When NMOS is on, would current all flow to ground? Because it has no resistance?","Remember ground is just a reference — labeled as 0. For current to flow anywhere, it has to have a closed circuit. The Vout will be set to 0 if the NMOS is on."
+30,"Can you explain how Vout = 0V? For the second NMOS, isn’t the source = 0 and gate = Vdd, so Vgs = Vdd?","Correct, so then the NMOS is on, and Vout is connected to ground, hence it is  0"
+31,why do we have the capacitors and resisters there?,This is a model for how the internals of CMOS and NMOS work using Rs and Cs
+32,What did Professor Stojanovic say was -Vdd (smaller than Vth)? I think i misheard and thought he said     Vx=-Vdd,Vgsp = Vg - Vs = 0 - Vdd = -Vdd
+33,"in the first inverter wouldn't all of the voltage of Vdd be eaten up by Ron,P so Vx would be 0V?","There is no current flow as DC doesn't flow through capacitors. So there's no current flow through Ron,p, so voltage drop across it is 0, hence Vx = Vdd"
+34,"Just a little confused, do the switches act like resistors?",transistor is modeled as switch in series with 'on' resistor
+35,Does a mosfet switch instantaneously from off to on when the voltage threshold is reached? or is there a relationship between Vgp and resistance?,"there is a complicated relationship, but for this class you can assume it is instantaneous"
+36,Can current flow from the gate to the source (of a single inverter) when the gate voltage is flipped (before capacitors reach steady state)? It doesn't seem like we account for this in the diff. eq. derivations. We only have the capacitors of the next inverter in the diagrams.,"DC cannot flow through capacitors, so there is no current flow from gate to source"
+37,How is it -Vdd ?,"for pmos, Vgs = Vg - Vs = Vin - Vdd. When Vin = 0, Vgs = - Vdd"
+38,"For the first case, wouldn’t Vx = vdd - V_ron,p? Since there would be current flowing through Ron, p?","there is no current flow, because there is no path for the current to go to. Remember DC doesn't flow through capacitors"
+39,if there is no current flow then how can we have a measured voltage?,"we aren't 'measuring' it in the lab, we are saying there is no current flow, so there is no voltage drop, so the voltages on both sides of the resistor are the same. You are right that if we really measure in lab, there has to be some current flow"
+40,"Why do we use capacitors, resistors and switches instead of just PMOS and NMOS?","we are modelling pmos and nmos with cap, res, and switch to study the delay"
+41,Will the nmos always be on the bottom and the pmos always on the top?,"yes, Prof explained just 15 min ago why pmos cannot be on bottom"
+42,how do computers account for this lag in computation time? is this where clock speeds come in? would the lag depend on the number of cascaded components?,yes this is related to clock speed. Yes lag depends on number of cascaded components
+43,"When the prof models this as an RC circuit/how we’ve been doing these problems, how come we only worry about the relevant resistor in the first inverter and not the resistors in the second inverter?","because they are on the Vout node, we are just studying the middle Vx node. Same thing happens at Vout"
+44,Why is the Vout1 (Vx(t) changing at all? Shouldn't it be outputting Vdd?,Prof is answering this right now
+45,Why doesn’t DC flow through capacitors?,Prof just answered this
+46,if we added a capacitor to the vx node would it take longer for it to charge and discharge?,yes
+47,how did you derive that equation?,refer to Note 1
+48,what is the difference between homogenous and non-homogenous diff. equations?,"there is a constant term in non-homogeneous. Like Prof said, you can change the variable to transfer it back to homogeneous"
+49,At what margin of error do we consider the voltage as approximately steady state?,Great question! If you actually plug in values you will see that settling happens in the order of nano seconds. I think some questions in HW2 cover this. In HW3 you will also see some simulations to further clarify this.
+50,why do we add the capacitance of Cgn and Cgp?,you can go through the derivation in previous lectures and note 1
+51,"If the capacitors of the second inverter have a loading effect on the output of the first inverter, why don't the capacitors of the first inverter also have a loading effect on the output, because they are connected when the switch closes?",caps of first inverter load anything that comes before the first inverter. They are not connected to output
+52,So tao is always RC?,"for RC circuits, yes"
+53,"How do you apply change of variables to the term t, like in the homework? since we are changing the input to a function, doesn't that change the derivative?",yes. You can refer to Note 1 or previous lectures to review the derivation
+54,why does it take time for the Vx to go to Vdd. like with the V(inf)=Vdd,that is the RC delay that we are talking about
+55,"in his dvx/dt equation, should it be Ron,n instead of Ron,p?","no we are looking at Vx charging up to Vdd though the pmos, so it is Ron,p"
+56,"I’m still a bit confused as to how the RC circuit and buffer “filters” unwanted signals.
+Also, would using least squares also “filter” unwanted signals?",live answered
+57,"The differential equation the prof wrote now with the changing input, is there a specific name for it? it seems important",There's no 'name' - it's just diff eq with input
+58,how to derive this solution,we will cover this in details in Dis 3A next Monday.
+59,so we are assuming that the initial diff eq is homogenous at the first interval?,we will do full derivation in Dis 3A next Monday
+60,why is the integral in terms of dtheta?,it's just another variable. You will see the full derivation in Dis 3A next Monday
+61,How did we derive the differential equation again?,we will do full derivation in Dis 3A next Monday
+62,What does a function have to formally do in order to be a filter,You can usually tell by looking at the frequency response but that is not covered in this lecture,Actually Prof is explaining parts of it right now
+63,"the output at the previous interval becomes the input to the next, and we differentiate that to get the new output?","we will do full derivation in Dis 3A next Monday, but you are thinking in the right track"
+64,if we aproach the delta to zero wouldn’t we get cut off before the output signal becomes steady like what we saw the other day? the shark teeth graph kind of thing.,"we will do full derivation in Dis 3A next Monday, so maybe then your question will get clarified"
+65,What about analog audio signals? Are they sinusoidal too?,any periodic signal can be represented as sum of various sinusoids
+66,what does lambda and u(t) represent in this equation?,"lambda is a constant, u(t) is the input"
+67,Is V_in supposed to be the target signal plus the noise?,"in the current analysis, we don't have the noise term. But in general, yes"
+68,"in the notes there's a lambda before the u, but why is that omitted in this case?",you can put a constant before u(t). Here the constant is 1
+69,why is the coefficient of cos(wt) RC?,Prof just picked an input signal and is showing how system responds to that
+70,how does charging/discharging happen through PMOS or NMOS? Like what does the PMOS and NMOS do to cause the cap to charge or discharge,Please refer to previous lectures and Note 1
+71,how did we get this equation?,we will do full derivation in Dis 3A next Monday
+72,does lambda represent -1/(RC) ?,"it's a constant, which is -1/RC for RC circuits"
+73,do we need to memorize this integral or will it be provided for tests?,This would be a good thing to put on a cheat sheet.
+74,why does the RCsin(wt) disappear?,live answered
+75,how did we find the value of theta = -tan(rc)?,"Using a trig identity, I don’t recall off the top of my head, but you can look it up."
+76,What does omega represent in the equation?,the frequency of the input signal
+77,why did w*sin(wt) go to RC*RC*sin(wt) when we multiplied by (RC)^2?,"There was a typo there that got corrected, the w persists"
+78,"I thought RCsin(wt) would ""disappear"" because t = 0, so that whole value would be 0. So from what the professor said, is this not the case?","no, like Prof said, it's in the theta phase term"
+79,how did we figure out the value of theta?,it's a trigonometry trick for combining A cos wt + B sin wt into C cos (wt + theta)
+80,where did lambda come from in the second term,Does the profs comment now answer this?
+81,how was the equation with the integral arrived at? (to begin with),we will do the derivation in Dis 3A next Monday
+82,in the numerator
+83,Why does theta = -tan^-1 (RC) ?,"Like Prof said, it's a trigonometry trick to change A cos wt + B sin wt into C cos (wt + theta)"
+84,Where did the theta = tan-1(RC) come from,"Like Prof said, it's a trigonometry trick to change A cos wt + B sin wt into C cos (wt + theta)"
+85,so why are we using this equation?  what exactly is it showing us,it's the solution to the diff eq with input
+86,should we know the derivation of how the RCsin(wt) turns into a phase shift for the cos or is it ok to just accept it as an axiom?,"Like Prof said, it's an useful trigonometry trick to change A cos wt + B sin wt into C cos (wt + theta) that will show up in other places too"
+87,How did you get the second piece of x(t)? And why isn’t e^(-lambda*theta) / (lamda^2 + omega^2) multiplied to the third piece of x(t)?,you can review the derivation in Dis 3A next Monday
+88,where did the lambda in front of the red circle 2 function come from again?,you can review the derivation in Dis 3A next Monday
+89,what does theta mean?  how do we just magically get a theta in the axiom thing,"Like Prof said, it's a trigonometry trick to change A cos wt + B sin wt into C cos (wt + theta)"
+90,does this mean that the form d/dt x = lambda x + u is always a low-pass filter?,yes
+91,no
+92,What does it mean to “pass frequencies lower than 1/RC”?,"It means that if the frequency of the cosine (given by w) is smaller that 1/RC then it shows up in the output, otherwise the output is close to 0"
+93,"Im sorry, Zoom kicked me out before I was able to hear /see an answer to my question.
+When the professor was able to find x(t) from the non-homogeneous equation, and got three pieces, how did he get the second piece (lambda*e^(lambda*t) / lamda^2 + omega^2), and why wasn’t e^(-lambda*theta) / lamda^2 + omega^2 multiplied to the third piece of the equation?","some of the derivation will be reviewed in Dis 3A, and then you can work out the complete algebra to get the result"
+94,How did he get Vout = V1- I2R2,"It's just Ohm's law for R2: (V1 - V2) = I2R2, and Vout = V2"
+95,How did we get to this last part?,he skipped the intermediate algebra steps - you can work it out yourself
+96,is it a 2nd order diff eq because there are two RC circuits?,yes
+97,could office hours be recorded?

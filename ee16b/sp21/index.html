@@ -1,0 +1,2863 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VL949KBR71"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VL949KBR71');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="http://eecs.berkeley.edu/favicon.ico" type="image/x-icon">
+    <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <title>EECS16B: Designing Information Devices and Systems II, Spring 2021</title>
+  </head>
+
+  <body data-spy="scroll" data-target="#navscroll" onload="getCurrFont()">
+
+    <div id="navscroll">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html" style="color: #000;"><strong>EECS16B</strong> | Spring 2021</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse" >
+              <ul class="nav navbar-nav pull-right">
+                <li><a id="na1" href="index.html#schedule">Schedule</a></li>
+                <li><a id="na1" href="index.html#notes">Notes</a></li>
+                <li><a id="na1" href="index.html#google-calendar">Calendar</a></li>
+                <li><a id="na1" href="index.html#colored-calendar">Discussions</a></li>
+                <li><a id="na4" href="hw-practice/index.html%3F.html">Practice</a></li>
+                <li><a id="na5" href="index.html#resources">Resources</a></li>
+                <li><a id="na5" href="index.html#exams">Past Exams</a></li>
+                <li><a id="na4" href="index.html#staff">Staff</a></li>
+                <li class="dropdown">
+                  <a href="policies.html" class="dropbtn">Policies</a>
+                  <div class="dropdown-content">
+                    <a href="policies.html#courseInfo">Course Info</a>
+                    <a href="policies.html#gradeBreak">Grade Breakdown</a>
+                    <a href="policies.html#gradeScale">Grading Scale</a>
+                    <a href="policies.html#secondChance">Exam Clobber Policy</a>
+                    <a href="policies.html#hwPartyOH">Homework Party and OH</a>
+                    <a href="policies.html#hwSubmission">Homework Submission</a>
+                    <a href="policies.html#hwSelfgrade">Homework Grading - Self-Grading</a>
+                    <a href="policies.html#hwResubmission">Homework Resubmission</a>
+                    <a href="policies.html#hwEffort">Homework Effort</a>
+                    <a href="policies.html#discPolicies">Discussion Policies</a>
+                    <a href="policies.html#labPolicies">Lab Policies</a>
+                    <a href="policies.html#exampolicy">Exam Policies</a>
+                    <a href="policies.html#proctoring">Exam Proctoring</a>
+                    <a href="policies.html#exceptions">Exceptions and Exam Accomodation</a>
+                    <a href="policies.html#communication">Course Communication</a>
+                    <a href="policies.html#collaboration">Collaboration</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  <div class="parallax-window" data-parallax="scroll" data-image-src="img/background2.jpg" data-speed="0.1">
+    <div class='container'>
+      <div class="main-container">
+
+<script>
+function getCurrFont() {
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.getItem('fontFamily')) {
+      document.body.style.fontFamily = localStorage.getItem("fontFamily");
+    }
+    else {
+      localStorage.setItem("fontFamily", "Raleway");
+      document.body.style.fontFamily = localStorage.getItem("fontFamily")
+    }
+  }
+}
+</script>
+<!-- Maintained by Berkeley's ee16b staff-->
+
+<div class='row'>
+  <h1><b>EECS16B</b>, Designing Information Devices and Systems II</h1>
+  <h3>Spring 2021</h3>
+</div>
+
+<h2>Progress Tracker</h2>
+<a class="anchor" id="progressTracker"></a>
+<p> To help you stay on track in this course, one of your fellow students, Dana Sanchez, has created <b> an optional 16B Progress Tracker </b> just as you may have used in 16A. This document maps out all the semester's required course assignments. It is completely self-guided, and we hope it helps you keep track of your progress in 16B! Please note the disclaimer at the top of the linked spreadsheet! <b> To make a personal copy of the Spring 2021 16B Progress Tracker, click <a rel="noopener noreferrer" target="_blank" href="https://docs.google.com/spreadsheets/d/1ZWdVmGfNGbhkCcDnrkNvgZGiK7QXaC2CR6l8qyhM-1w/copy">here</a>.</b></p><style>
+div.indentlarge {
+  text-indent: 270px;
+}
+div.indentsmall {
+  text-indent: 25px;
+}
+#snackbar1, #snackbar2 {
+  visibility: hidden;
+  min-width: 150px;
+  margin-left: -125px;
+  background-color: #046f7d;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 8px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 14px;
+}
+
+#snackbar1.show, #snackbar2.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+</style>
+<h2>Scheduling Updates</h2>
+<a class="anchor" id="updates"></a>
+
+<p> <b> If there are any special events to note, or deviations from the schedule as listed below, they'll be noted here! </b> </p>
+
+<p>
+  <font color="purple"> <b> 3/10/2020: </b> </font>
+    <b> Warning about Practice Sets </b>
+    When using the online practice sets to study, <i> PLEASE be careful </i> and note that some conventions have changed from previous semesters (such as regarding the definition of Phasors.) The practice sets are not updated semesterly, so the reliable source of truth for this semester's content comes from lecture, course notes, HW, and discussions. If you have any questions about this, please post on Piazza!
+</p>
+
+<p>
+  <font color="purple"> <b> 2/7/2020: </b> </font>
+    <b> Discussion Schedule Update! </b>
+    Certain group sections (12-1 PM, 5-6 PM) have been cancelled for the remainder of the semester; please see the <a href="index.html#colored-calendar">Discussion Schedule</a> below, and <a href="https://piazza.com/class/kj9duntmc4w7ib?cid=622" target="_blank">this Piazza post</a> for details.
+</p>
+
+<p>
+  <font color="purple"> <b> 1/19/2020: </b> </font>
+    <b> Lab Comprehensive Info Post! </b>
+    See <a href="https://piazza.com/class/kj9duntmc4w7ib?cid=230" target="_blank">this Piazza post</a> for a comprehensive update on Lab details.
+</p>
+
+<p>
+  <font color="purple"> <b> 1/19/2020: </b> </font>
+    <b> Password information (Recording): </b>
+    To access Zoom Recordings <b>(not YouTube)</b>, you must use the password <b><span style="display:inline" id="p2">eecs16b!</span></b> <input type="button" style="background-color: #dceef5; border-radius:20px" value="copy recording password!" onclick = "copyToClipboard('#p2')">.
+</p>
+<p>
+  <font color="purple"> <b> 1/18/2020: </b> </font>
+    <b> Password information (Live): </b>
+    To access Zoom Calls live, you must use the following password <b><span style="display:inline" id="p1">16bsp21</span></b> <input type="button" style="background-color: #dceef5; border-radius:20px" value="copy meeting password!" onclick = "copyToClipboard('#p1')">.
+</p>
+
+<p> <font color="purple"> <b> 1/18/2020: </b> </font> <b> Lecture information: </b> Lecture will be held through a Zoom livestream. This will be recorded and linked below as soon as possible each Tuesday and Thursday. The password for lecture (and other) meeting links is TBD and will be placed here when finalized. </p>
+
+<div class="indentsmall">
+  <p> Lectures: T/Th 11:00 AM - 12:30 PM PST, <a href="https://berkeley.zoom.us/j/93889827349" target="_blank"> Lecture Zoom Link </a>, Meeting ID: 938 8982 7349 </p>
+</div>
+
+<p> <font color="purple"> <b> 1/18/2020: </b> </font> <b> The Discussion Schedule has been released <a href="index.html#colored-calendar"> below </a> </b>. Please be sure to see the table and <i>also</i> the important information under it. There are sections at a wide range of times, with different emphases and styles; feel free to check out several and see which works best for you. Also, for some popular time slots, there are multiple sections at the same time to offer choices. Recorded sections will be posted in the schedule table below (the passwords will be updated as well when the time comes). </p>
+
+<p> <font color="purple"> <b> 1/18/2020: </b> </font> <b> The <a href="https://piazza.com/class/kj9duntmc4w7ib?cid=160" target="_blank"> EECS 16B Link Hub </a> has been released. All relevant and important updates regarding lecture, discussion, lab, OH, HW Party, etc. will be posted here! </b> </p>
+
+<!-- <p> <font color="purple"> <b> 12/9/2020: </b> </font> <b> Discussion Checkoff Solutions have been released! </b> See either the <a href="https://piazza.com/class/ke3aj8z75apb0?cid=2018"> associated Piazza post </a> or the identical <a href="https://eecs16a.org/student-resources/fa20_disc_checkoff_sols.pdf"> compiled PDF document </a>. </p>
+
+<p> <font color="purple"> <b> 10/5/2020: </b> </font> <b> All information about the (completely optional) Practice Sets has been moved <a href="#practiceSets">here</a> to avoid confusion with the required HW.</b> Good luck on today's midterm! </p>
+
+<p> <font color="purple"> <b> 9/29/2020: </b> </font> <b> CSM Materials are now available on the site! </b> Click <a href="#csm">here</a> to see a list of the materials that have been released by CSM so far, and a quick overview of the topics that each worksheet covers. We hope this helps with midterm preparation for next Monday! </p>
+
+<p> <font color="purple"> <b> 9/1/2020: </b> </font> <b> Discussion checkoff
+  links will be released weekly, starting today!
+  </b> All links can be found in the <a href="#schedule">schedule</a>
+  below, and the most recent link will also be kept here for convenience.
+
+<div class="indentsmall">
+	<p> <a href="https://forms.gle/X3fVU45ZVV5pQuxS7" target="_blank">
+  Checkoff Link 14A/14B </a> </p>
+</div>
+
+<p> <font color="purple"> <b> 8/31/2020: </b> </font> <b> The first discussion sections are today! </b> The meeting links for each section now and going forward can be found in the <a href="#google-calendar">google calendar</a>, <a href="https://piazza.com/class/ke3aj8z75apb0">Piazza</a>, or hyperlinked in the <a href="#colored-calendar">table</a>. Please note that the <b> password for any cloud recordings </b> for discussion (which will be added <a href="#schedule">below</a> at the end of each M/W) will be <b><span style="display:inline" id="p2">eecs16a!</span></b> <input type="button" style="background-color: #dceef5; border-radius:20px" value="copy cloud-recording password!" onclick = "copyToClipboard('#p2')">. </p>
+
+<p> <font color="purple"> <b> 8/29/2020: </b> </font> <b> 16A Study Group Formation: </b> Please see the additional section added to the policies about Study Groups <a href="policies.html#studyGroups">here</a>. </p>
+
+<p> <font color="purple"> <b> 8/26/2020: </b> </font> <b> Lecture information: </b> Lecture will be held through a Zoom livestream. This will be recorded and linked below as soon as possible each Tuesday and Thursday. The password for lecture (and other) meeting links is <b><span style="display:inline" id="p1">16a</span></b> <input type="button" style="background-color: #dceef5; border-radius:20px" value="copy meeting password!" onclick = "copyToClipboard('#p1')">.
+
+<div class="indentsmall">
+  <p> Lectures: T/Th 12:30-2:00 PM PST, <a href="https://berkeley.zoom.us/j/92494938293 " target="_blank"> Lecture Zoom Link </a>
+</div>
+
+<p> <font color="purple"> <b> 8/26/2020: </b> </font> <b> The Discussion Schedule has been released <a href="https://eecs16a.org/#colored-calendar"> below </a> </b>. Please be sure to see the table and <i>also</i> the important information under it. There are sections at a wide range of times, with different emphases and styles; feel free to check out several and see which works best for you. Also, for many popular time slots, there are multiple sections at the same time to offer choices. </p> -->
+
+<!-- <p> <font color="purple"> <b> 7/11/2020: </b> </font> <b> The EECS16A Status Check has been released! </b> You can visit <a href="https://status.eecs16a.org/" target="_blank">this link</a> to see a summary of your scores in the class so far (at least, those which have been graded and processed). There will be a delay between when assignments are due or when they're graded to when they're put on the Status Check. A summary of the assignments that have been released is below, and <a href="https://piazza.com/class/kazyttw5d622vq?cid=160" target="_blank">this associated piazza post </a> has more detail. If you spot an error, submit a ticket <a href="https://forms.gle/rf481Ja9ZNT87kRZ8" target="_blank">here</a>. </p>
+
+<table align="center" border="1" class="table table-responsive table-bordered table-striped table-condensed" style="width: 100%;">
+<thead>
+<tr style="background: #91c8d9">
+  <th class = "center" border = "5"> Exams </th>
+  <th class = "center" border = "5"> Homework (all) </th>
+  <th class = "center" border = "5"> Labs (all) </th>
+  <th class = "center" border = "5"> Participation (all) </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="center" style="background: #d8f2e6">
+	Midterm 1 <br>
+  Midterm 2 <br>
+  </td>
+  <td class="center" style="background: #d5e8f2">
+	0A, 0B, 1A, 1B <br>
+  2A, 2B, 3A, 3B <br>
+  4A, 4B, 5A, 5B <br>
+  6A, 6B, 7A <br>
+  </td>
+  <td class="center" style="background: #d9d3f2">
+	Imaging I, II, III <br>
+  Touchscreen I, II, III <br>
+  APS I, II <br>
+  </td>
+  <td class="center"  style="background: #f2d8e1">
+	Checkoffs 1 to 16 (all of them!) <br>
+  </td>
+</tr>
+</tbody>
+</table>
+
+<p> <font color="purple"> <b> 7/5/2020 + 7/16/2020: </b> </font> <b> Discussion Checkoff Solutions are mapped to their respective Piazza Post below. </b>
+
+<table align="center" border="1" class="table table-responsive table-bordered table-striped table-condensed" style="width: 35%;">
+<thead>
+<tr style="background: #91c8d9">
+  <th class = "center" border = "5"> Week # </th>
+  <th class = "center" border = "5"> Checkoffs </th>
+  <th class = "center" border = "5"> Post Link(s) </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Weeks 0 + 1 </td>
+  <td class="center" style="background: #d9d3f2"> 1, 2, 3, 4 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=101" target="_blank">@101 </a> </td>
+</tr>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Week 2 </td>
+  <td class="center" style="background: #d9d3f2"> 5, 6 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=128" target="_blank">@128</a> </td>
+</tr>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Week 3 </td>
+  <td class="center" style="background: #d9d3f2"> 7, 8 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=196" target="_blank">@196</a>, <a href="https://piazza.com/class/kazyttw5d622vq?cid=204" target="_blank">@204</a> </td>
+</tr>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Week 4 </td>
+  <td class="center" style="background: #d9d3f2"> 9, 10 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=239" target="_blank">@239</a>, <a href="https://piazza.com/class/kazyttw5d622vq?cid=242" target="_blank">@242</a> </td>
+</tr>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Week 5 </td>
+  <td class="center" style="background: #d9d3f2"> 11, 12 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=289" target="_blank">@289</a></td>
+</tr>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Week 6 </td>
+  <td class="center" style="background: #d9d3f2"> 13, 14 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=351" target="_blank">@351</a></td>
+</tr>
+<tr>
+  <td class="center" style="background: #d8f2e6"> Week 7 </td>
+  <td class="center" style="background: #d9d3f2"> 15 </td>
+  <td class="center" style="background: #f2d8e1"> <a href="https://piazza.com/class/kazyttw5d622vq?cid=390" target="_blank">@390</a></td>
+</tr>
+</tbody>
+</table>
+</p> -->
+
+<!-- <p> <font color="purple"> <b> 6/23/2020: </b> </font> <b> Discussion checkoffs begin today! </b> All links can be found in the schedule below, and the most recent link will also be kept here for convenience.
+
+<div class="indentsmall">
+	<p> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdXRy5s9ES92e1KZrhmWxG_zdaQxdfDHV8RVgxbghJXNFgPfA/viewform" target="_blank"> Checkoff Link (16 of 16) </a> </p>
+</div> -->
+
+<div id="snackbar1">copied password to clipboard!</div>
+<div id="snackbar2">changed site font!</div>
+
+<script>
+function fontChange(f) {
+	if (typeof(Storage) !== "undefined") {
+    var prev = localStorage.getItem("fontFamily");
+	  localStorage.setItem("fontFamily", f);
+	  document.body.style.fontFamily = localStorage.getItem("fontFamily");
+    showFontChange(f, prev);
+	}
+}
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+
+  showCopied();
+}
+
+function showCopied() {
+  var x = document.getElementById("snackbar1");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function showFontChange(f, prev) {
+  var x = document.getElementById("snackbar2");
+  if (prev == f) {
+    x.innerHTML = "site font is already ".concat(prev).concat("!");
+  }
+  else {
+    x.innerHTML = "changed site font to: ".concat(f).concat("!");
+  }
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+<div class='row'>
+  <a class="anchor" id="schedule"></a>
+  <h2>Schedule</h2>
+  <p> <b> Please note that Youtube videos will require that you are signed into a berkeley.edu account. </b> Otherwise, you'll see some indication of the video being private. The schedule below is subject to change; for deviations from the schedule, see above. </p>
+  <!--   <p> <b> Note: </b> Due to Zoom's password length constraints, the <b> password for cloud recordings </b> for discussion will be <b><span style="display:inline" id="p2">eecs16a!</span></b> <input type="button" style="background-color: #dceef5; border-radius:20px" value="copy cloud-recording password!" onclick = "copyToClipboard('#p2')">. </p> -->
+  <p> (Please scroll horizontally if you're viewing this on your phone.) </p>
+  <div class="table-responsive">
+    <table border="3", class="table table-bordered table-striped-sched table-hover-sched">
+      <thead>
+        <tr>
+          <th style="background: #91c8d9", class='col-md-1 center'><b>Week</b></th>
+          <th style="background: #91c8d9", class='col-md-1 center'><b>Date</b></th>
+          <th style="background: #91c8d9", class='col-md-4 center'><b>Lecture Topic</b></th>
+          <th style="background: #91c8d9", class='col-md-2 center'><b>Section</b></th>
+          <th style="background: #91c8d9", class='col-md-2 center'><b>Lab</b></th>
+          <th style="background: #91c8d9", class='col-md-2 center'><b>Homework</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            1
+            <br/>          </td>
+          <td class="center date-hl">
+            01/19 Tu
+          </td>
+          <td>
+            16A Review and Equivalent Circuits
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture1A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/N0qWN8PKUTQ">YouTube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/VZd1zITsqWU">DSP Link</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note0A.pdf">Note 0A</a>)
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note0B.pdf">Note 0B</a>)
+          </td>
+          <td class="center">
+          </td>
+          <td rowspan="2" class="center">
+            Syllabus Overview
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/sp21_lab_syllabus.pdf">Syllabus</a> <br/>
+            <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 01<br/>
+                (<i>Due 01/24 Su</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob01.pdf">Prob PDF</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol01.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-01.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            01/21 Th
+          </td>
+          <td>
+            Computing: Transistors and Logic
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture1B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/jgaxFmUfNlA">YouTube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/ZlDEz7OZ8CE">DSP Link</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note1.pdf">Note 1</a>)
+          </td>
+          <td class="center">
+                Section 1B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/ckGDfU3beMFaEGM49">Checkoff 1B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/17epBZ08_gg3Ru9EAJHiedd6Gp6AnwWcf/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis1B.pdf">Gaoyue&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis01B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans01B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            2
+            <br/>          </td>
+          <td class="center date-hl">
+            01/26 Tu
+          </td>
+          <td>
+            Computing: Transient Analysis, Intro to Differential Equations
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture2A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/ez3_R4VcPXg">YouTube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/ez3_R4VcPXg">DSP Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "http://www.kaltura.com/tiny/ku1hu">Kaltura Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/jan26_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note2.pdf">Note 2</a>)
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/notej.pdf">Note j</a>)
+          </td>
+          <td class="center">
+                Section 2A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/p1dSRmR2bvdVB2Zt8">Checkoff 2A/2B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1jBSuBRX9DhJwqVc6FdUgfI-BxOIxZDwP/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/neelesh_dis2A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis02A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans02A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Lab 1: Tinkercad Intro, SW Installation
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/lab1_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Flab1-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/lab1_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Flab1-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 02<br/>
+                (<i>Due 01/29 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob02.pdf">Prob PDF</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol02.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-02.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            01/28 Th
+          </td>
+          <td>
+            Signal Processing: First-order Circuits, General Scalar Differential Equations
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture2B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/9VzviF1-mLA">YouTube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/9VzviF1-mLA">DSP Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "http://www.kaltura.com/tiny/ycewx">Kaltura Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/jan28_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 2B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/p1dSRmR2bvdVB2Zt8">Checkoff 2A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1FxmooaDWpcrL-9pM3M9-C7csSrPT9cLM/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis2B.pdf">Gaoyue&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis02B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans02B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            3
+            <br/>          </td>
+          <td class="center date-hl">
+            02/02 Tu
+          </td>
+          <td>
+            Signal Processing: Second-order Circuits, Vector Differential Equations (VDEs)
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture3A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/ZTrswmukmy8">YouTube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/ZTrswmukmy8">DSP Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "http://www.kaltura.com/tiny/w63fs">Kaltura Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/feb2_qa.csv">Webinar Q/A</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/16Areview.pdf">EECS 16A Review Session Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "http://www.kaltura.com/tiny/w8epx">EECS 16A Review Session Kaltura Recording</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note3A.pdf">Note 3A</a>)
+          </td>
+          <td class="center">
+                Section 3A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/FvgnWkEjcS4vipjL8">Checkoff 3A/3B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1z4QnFR6EkzU55qpm-g-hZDWVXo2Mcy_P/view?usp&#x3D;sharing">Ana&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/ana_dis3A.pdf">Ana&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1ZC8oB3SD-07DOg1L4ent67xANHCCqELw/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/neelesh_dis3A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis03A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans03A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Lab 2: Debugging
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/lab2_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fdebugging-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/lablite2_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fdebugging_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 03<br/>
+                (<i>Due 02/05 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob03.pdf">Prob PDF</a>
+                <br/> <a href = "homework/prob03.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw03%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol03.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-03.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            02/04 Th
+          </td>
+          <td>
+            Signal Processing: Diagonalization to Solve VDEs and Intro to Inductors
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture3B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/AR7J8m3QDDw">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "http://www.kaltura.com/tiny/y6pbx">Kaltura Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/feb4_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 3B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/FvgnWkEjcS4vipjL8">Checkoff 3A/3B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1aFO968pfvwizoPBTvtWHMrOBKOTNCEv2/view?usp&#x3D;sharing">Justin&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/justin_dis3B.pdf">Justin&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1Wd3BQPJ8VRSsnz0fHsZU9mso9ecfmESI/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis3B.pdf">Gaoyue&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis03B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans03B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            4
+            <br/>          </td>
+          <td class="center date-hl">
+            02/09 Tu
+          </td>
+          <td>
+            Signal Processing: Inductors, RLC Circuits, Complex Numbers
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture4A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "http://www.kaltura.com/tiny/rsuyj">Kaltura Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/Y8eC8Med_BA">YouTube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/feb9_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note3B.pdf">Note 3B</a>)
+          </td>
+          <td class="center">
+                Section 4A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/EJJj4YiUsXrsQgALA">Checkoff 4A/4B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/11EzTPu0bLh7DFNLBC8q7MkYnQKjMfvdL/view?usp&#x3D;sharing">Ana&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/ana_dis4A.pdf">Ana&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1lcP1UdAyI__jrFgBcGhoQGA9ZEjBxTkq/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/neelesh_dis4A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis04A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans04A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Lab 3: DAC/ADC
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/lab3_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fdac_adc-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/lablite3_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fdac_adc_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 04<br/>
+                (<i>Due 02/12 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob04.pdf">Prob PDF</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol04.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-04.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            02/11 Th
+          </td>
+          <td>
+            Signal Processing: Phasors and RLC Circuit Analysis
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture4B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/qrxbUpADKIA">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8246068">Kaltura Recording</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/feb11_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note4.pdf">Note 4</a>)
+          </td>
+          <td class="center">
+                Section 4B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/EJJj4YiUsXrsQgALA">Checkoff 4A/4B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1djhkY5GwkC7htpq61oi2xxP7ieTk0PYH/view?usp&#x3D;sharing">Justin&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/justin_dis4B.pdf">Justin&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/118G5Xc6z3yo3ZJzpOLh_GzxBPsHOYmiw/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis4B.pdf">Gaoyue&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis04B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans04B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            5
+            <br/>          </td>
+          <td class="center date-hl">
+            02/16 Tu
+          </td>
+          <td>
+            Signal Processing: Frequency Response and Bode Plots
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture5A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/wd7lZZ6kgbo">Youtube link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/feb16_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note5.pdf">Note 5</a>)
+          </td>
+          <td class="center">
+          </td>
+          <td rowspan="2" class="center">
+            Buffer Week
+            <br/>
+            <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 05<br/>
+                (<i>Due 02/19 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob05.pdf">Prob PDF</a>
+                <br/> <a href = "homework/prob05.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw05%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol05.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-05.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            02/18 Th
+          </td>
+          <td>
+            Signal Processing: Frequency Response of RLC Circuits
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture5B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/hIXN38pmlQY">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8248404">Bcourses link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/feb18_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note6.pdf">Note 6</a>)
+          </td>
+          <td class="center">
+                Section 5B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/V2TEZoFoCheE11dk9">Checkoff 5B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/17s6quLnrd3QGii6Nx7TJSdKdoUuzbzEt/view?usp&#x3D;sharing">Manav&#x27;s Recording Q1</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/16c76ltBhFUwXi7rNOdg35ZGP9u7HR_Zr/view?usp&#x3D;sharing">Manav&#x27;s Recording Q2</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1ODhihiJQNfOE8Mi40jExrVEy7UGPld0D/view?usp&#x3D;sharing">Manav&#x27;s Recording Q3</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1XxR4BBxAIk_9htJxsv1C19gmvBaI1XZe/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/gaoyue_dis5B.pdf">Gaoyue&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis05B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans05B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            6
+            <br/>          </td>
+          <td class="center date-hl">
+            02/23 Tu
+          </td>
+          <td>
+            Signal Processing: Frequency Response of RLC Circuits and Applications
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture6A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8250065">BCourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/qgLdoYOZMrI">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/feb23_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 6A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/RGY7HV4KSCUwPyPL8">Checkoff 6A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1dJhVkv5bpl5Qlz4vDElPTGIBz-2S8DBE/view?usp&#x3D;sharing">Anmol&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1JwOt4QozgNQXfFI_DcXUebPDlzUNVEik/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/neelesh_dis6A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis06A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans06A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Lab 4: Color Organ
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/lab4_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fcolor_organ-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/lablite4_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fcolor_organ_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 06<br/>
+                (<i>Due 02/26 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/prob06.pdf">Prob PDF</a>
+                <br/> <a href = "https://eecs16b.org/homework/prob06.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw06%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/sol06.pdf">Sol PDF</a>
+                  <br/> <a href = "https://eecs16b.org/homework/sol06.zip" target="_blank" download="sol06.zip">iPython Sol ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/self-grade-06.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            02/25 Th
+          </td>
+          <td>
+            Robotics: Basics Concepts for Control in Discrete Time
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture6B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8250855">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/9L6F9VnkJ4k">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/feb25_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note7A.pdf">Note 7A</a>)
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note7B.pdf">Note 7B</a>)
+          </td>
+          <td class="center">
+                Section 6B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/RGY7HV4KSCUwPyPL8">Checkoff 6A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1OcqK2P-sMhO8vZQLKssCYZNpf8k1ur9j/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/gaoyue_dis6B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1F-r-6k_xZNkzKrEMVpAGhBQcZK7L-pof/view?usp&#x3D;sharing">Kareem&#x27;s Walkthrough</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/kareem_dis6B.pdf">Kareem&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis06B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans06B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            7
+            <br/>          </td>
+          <td class="center date-hl">
+            03/02 Tu
+          </td>
+          <td>
+            Robotics: System Identification
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture7A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8252076">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/VtOqIqTqm8I">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar2_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note8.pdf">Note 8</a>)
+          </td>
+          <td class="center">
+                Section 7A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/g4qU4btV8ffEoCfb8">Checkoff 7A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/17vRUc6jgl2XOFym6YHkQUC00BGBPfYX3/view?usp&#x3D;sharing">Kareem&#x27;s Walkthrough</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/kareem_dis7A.pdf">Kareem&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1xy4MJ9DJio1SQhZDnUVeOB3fLCD2Gdc3/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/neelesh_dis7A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis07A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans07A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 1: Start Front-End Circuits
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/proj1_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Ffront_end-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/projlite1_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Ffront_end_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 07<br/>
+                (<i>Due 03/05 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/prob07.pdf">Prob PDF</a>
+                <br/> <a href = "https://eecs16b.org/homework/prob07.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw07%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/sol07.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/self-grade-07.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            03/04 Th
+          </td>
+          <td>
+            Robotics: Feedback Stabilization
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture7B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8252898">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/83m3ak5nKSc">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar4_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 7B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/g4qU4btV8ffEoCfb8">Checkoff 7A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1Uhd_WIFUyK5capRP2Ygx81YcfSIlzqnl/view?usp&#x3D;sharing">Manav&#x27;s Recording Q1</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1_xF21vFVjBgISQ7FgzZsBgCijtAPGmR0/view?usp&#x3D;sharing">Manav&#x27;s Recording Q2</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1vJlYGDCRWGFECNYufcBkLVTsC0wenyCe/view?usp&#x3D;sharing">Manav&#x27;s Recording Q3</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://jamboard.google.com/d/1i64d_Tl94DYdDVKu8nOPa_3ev1Fm2LjuiTFJXW1W650/edit?usp&#x3D;sharing">Manav&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1xYKjN7miVhQVeVVgzKvoJT7AcCFgOYRr/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/gaoyue_dis7B.pdf">Gaoyue&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis07B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans07B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            8
+            <br/>          </td>
+          <td class="center date-hl">
+            03/09 Tu
+          </td>
+          <td>
+            Robotics: Controllability
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture8A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/yWJ4NNUD-Io">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8254488">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar9_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note9.pdf">Note 9</a>)
+          </td>
+          <td class="center">
+                Section 8A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/F7hQ8W853W4DDexf8">Checkoff 8A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1PCuyQ0wvPRyoq50s-uOEcrY52sorxV0x/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/neelesh_dis8A.pdf">Neelesh&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1_4nUP-Wb3kI4ZU8k_8YkmVd2JMUZrMBh/view?usp&#x3D;sharing">Anmols&#x27; Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/anmol_dis8A.pdf">Anmol&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis08A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans08A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 2: System ID
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/proj2_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fsystem_id-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/projlite2_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fsystem_id_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 08<br/>
+                (<i>Due 03/12 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/prob08.pdf">Prob PDF</a>
+                <br/> <a href = "https://eecs16b.org/homework/prob08.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw08%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/sol08.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/self-grade-08.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            03/11 Th
+          </td>
+          <td>
+            Learning: Gram-Schmidt
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture8B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/WhU1MlmHQV4">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8255386">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar11_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 8B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/F7hQ8W853W4DDexf8">Checkoff 8A/B</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/13Go2vxhbji3ZGc-e_OF47WUpsWK0C4zu/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/gaoyue_dis8B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1VPXYc2g2i3JaGbegczaInYWLY4zGg7_s/view?usp&#x3D;sharing">Manav&#x27;s Recording Q1</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1XC53dEkjuf2Tzl8jOjsPxjDoXy_9kM-l/view?usp&#x3D;sharing">Manav&#x27;s Recording Q2</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1A-BZSYAfhJUTQ88gYSVj5-PBAzqzxC1f/view?usp&#x3D;sharing">Manav&#x27;s Recording Q3</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/manav_dis8B.pdf">Manav&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis08B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans08B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            9
+            <br/><b><font color="red">MT1, March 15, 7-9 PM PST</font></b>
+                <br/><a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/student-resources/exams/sp21_mt1_instructions.pdf">Instructions</a>
+                <br/><a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/student-resources/exams/sp21_mt1_template.pdf">Template</a>
+                <br/><a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/student-resources/exams/sp21_mt1_exam.pdf">PDF</a>
+                <br/><a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/student-resources/exams/sp21_mt1_sol.pdf">Sol</a>
+          </td>
+          <td class="center date-hl">
+            03/16 Tu
+          </td>
+          <td>
+            Robotics: Stability Continued
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture9A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/lyt3QtqXlPk">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8258042">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar16_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note10A.pdf">Note 10A</a>)
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note10B.pdf">Note 10B</a>)
+          </td>
+          <td class="center">
+                Section 9A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/JLBCqn9RCSMjPCdw9">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1aLuT4CuUfBWLsk1uf3j7FRaWK_LjDUSZ/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/neelesh_dis9A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis09A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans09A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Buffer Week
+            <br/>
+            <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 09<br/>
+                (<i>Due 03/21 Su</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/prob09.pdf">Prob PDF</a>
+                <br/> <a href = "https://eecs16b.org/homework/prob09.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw09%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/sol09.pdf">Sol PDF</a>
+                  <br/> <a href = "https://eecs16b.org/homework/sol09.zip" target="_blank" download="sol09.zip">iPython Sol ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/self-grade-09.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            03/18 Th
+          </td>
+          <td>
+            Learning: The Spectral Theorem
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture9B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/C-rvWPJs0x8">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8258752">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar18_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note11.pdf">Note 11</a>)
+          </td>
+          <td class="center">
+                Section 9B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/JLBCqn9RCSMjPCdw9">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1HzKkBxIShyxatbbRiNeLebC0OevdOweS/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/gaoyue_dis9B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1hfiegcoPatdClahFMRNbsfRp6jK-k6rP/view?usp&#x3D;sharing">Manav&#x27;s Recording Q1</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1wAdvYD1fGPx2OtYO5RTMNyV034ma7MU9/view?usp&#x3D;sharing">Manav&#x27;s Recording Q2</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/manav_dis9B.pdf">Manav&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis09B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans09B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            10
+            <br/>          </td>
+          <td class="center date-hl">
+            03/30 Tu
+          </td>
+          <td>
+            Robotics and Learning: Minimum Energy Solutions
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture10A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/sYRaM7TZJ1k">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8260696">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/mar30_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note12.pdf">Note 12</a>)
+          </td>
+          <td class="center">
+                Section 10A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_dis10A%2F&amp;branch&#x3D;master">Datahub Link</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/8XwAsqybe1ZiQ36g8">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/14t_VVJgABQJnUnO9KTm_TPhtEdn3qFBy/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/neelesh_dis10A.pdf">Neelesh&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/15SXcWcsVwSmCzfzs7cBVzeuZJx2W3lBq/view?usp&#x3D;sharing">Anmol&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/anmol_dis10A.pdf">Anmol&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis10A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans10A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 3: Closed-Loop Control
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/proj3_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fcontrols-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/projlite3_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fcontrols_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 10<br/>
+                (<i>Due 04/02 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/prob10.pdf">Prob PDF</a>
+                <br/> <a href = "https://eecs16b.org/homework/prob10.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw10%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/homework/sol10.pdf">Sol PDF</a>
+                  <br/> <a href = "https://eecs16b.org/homework/sol10.zip" target="_blank" download="sol10.zip">iPython Sol ZIP</a>
+                    <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw10_sol%2F&amp;branch&#x3D;master">Sol DataHub Link</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/self-grade-10.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            04/01 Th
+          </td>
+          <td>
+            Learning: SVD
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture10B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/Qv9XkHQf8gI">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8260697">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/apr1.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note13.pdf">Note 13</a>)
+          </td>
+          <td class="center">
+                Section 10B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/8XwAsqybe1ZiQ36g8">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1AS2eSNz7Hnm6xufIoYJLDBHTJPcqWaUe/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/gaoyue_dis10B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1LdCrhdweu4ModHth3GK5MA-erq6Yq7mx/view?usp&#x3D;sharing">Kareem&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/kareem_dis10B.pdf">Kareem&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis10B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans10B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            11
+            <br/>          </td>
+          <td class="center date-hl">
+            04/06 Tu
+          </td>
+          <td>
+            Learning: Classification and PCA
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/lecture11A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/eRCN9A2Uwa4">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8262672">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lecture/apr6_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/notes/sp21/note14.pdf">Note 14</a>)
+          </td>
+          <td class="center">
+                Section 11A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/TRjsyFEw2dyXWQb17">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1SymMliPO6nwkvWuTpw2QFzom9jNO8uEV/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/neelesh_dis11A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/dis11A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/ans11A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 4A: SVD/PCA
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs16b.org/lab/proj4_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fsvd_pca-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/projlite4_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fsvd_pca_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 11<br/>
+                (<i>Due 04/09 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob11.pdf">Prob PDF</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol11.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-11.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            04/08 Th
+          </td>
+          <td>
+            Learning: PCA Continued
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture11B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/_9lq24Lwy6g">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8262673">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr8_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 11B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/TRjsyFEw2dyXWQb17">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1VjeeNCpckG6I9I_rp5QMy4iGBpaItok1/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis11B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1TNDAP4ID-JssmXBxInRG52FrxbwW4WbD/view?usp&#x3D;sharing">Manav&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs16b.org/discussion/recordingNotes/manav_dis11B.pdf">Manav&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis11B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans11B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            12
+            <br/>          </td>
+          <td class="center date-hl">
+            04/13 Tu
+          </td>
+          <td>
+            Local Linearization for Nonlinear Control Problems
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture12A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/piXv45H9J5E">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8264631">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr13_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note15.pdf">Note 15</a>)
+          </td>
+          <td class="center">
+                Section 12A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_dis12A%2F&amp;branch&#x3D;master">Datahub Link</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/YqWEP3Tyw2HWZ9bD9">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/16PruNrUkaWwEDesq4e_n7X7cuDb3Rosa/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/neelesh_dis12A.pdf">Neelesh&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1aJ3THN96mUIVdaXr-JllXsfs88JPKc4Q/view?usp&#x3D;sharing">Anmols&#x27; Recording</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis12A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans12A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 4B: SVD/PCA
+            <br/>
+            <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 12<br/>
+                (<i>Due 04/16 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob12.pdf">Prob PDF</a>
+                <br/> <a href = "homework/prob12.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw12%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol12.pdf">Sol PDF</a>
+                  <br/> <a href = "homework/sol12.zip" target="_blank" download="sol12.zip">iPython Sol ZIP</a>
+                    <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw12_sol%2F&amp;branch&#x3D;master">Sol DataHub Link</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-12.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            04/15 Th
+          </td>
+          <td>
+            Linearization for Classification
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture12B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/c3TAF440QTY">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8264632">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr15_qa.csv">Webinar Q/A</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/pca_on_artificial_data_lecture_16Bversion_testing.zip">PCA iPython</a>
+                          </td>
+          <td class="center">
+                Section 12B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_dis12B%2F&amp;branch&#x3D;master">Datahub Link</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/YqWEP3Tyw2HWZ9bD9">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1qs7JZd_UOxcKmD25CebKxriKHwU_uvRy/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis12B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1tzj20-JeiIeZaYZrXNojos85uZSP1APm/view?usp&#x3D;sharing">Kareem&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/kareem_dis12B.pdf">Kareem&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis12B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans12B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            13
+            <br/>          </td>
+          <td class="center date-hl">
+            04/20 Tu
+          </td>
+          <td>
+            Linearization (Quadratic Approximation)
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture13A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/EBdBbMYxUj4">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8266752">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr20_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note16.pdf">Note 16</a>)
+          </td>
+          <td class="center">
+                Section 13A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/LhZbRrHT6zqXN6V28">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/18oo-DbebKhxT2rlXcPqe44luOS7m50GN/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/neelesh_dis13A.pdf">Neelesh&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis13A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans13A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 5: Advanced Controls
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/proj5_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fadvanced_controls-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/projlite5_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fadvanced_controls_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 13<br/>
+                (<i>Due 04/23 Fr</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob13.pdf">Prob PDF</a>
+                <br/> <a href = "homework/prob13.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw13%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol13.pdf">Sol PDF</a>
+                  <br/> <a href = "homework/sol13.zip" target="_blank" download="sol13.zip">iPython Sol ZIP</a>
+                    <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw13_sol%2F&amp;branch&#x3D;master">Sol DataHub Link</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-13.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            04/22 Th
+          </td>
+          <td>
+            Classification
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture13B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/ORW-_LvOhe0">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8266754">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr22_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 13B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/LhZbRrHT6zqXN6V28">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1C1clZPgMmC8-CnwnKL8Y0_jQGmLrFooY/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis13B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/174ouL68ZfUUIx-wUZh3RBGUY9rCKXrq1/view?usp&#x3D;sharing">Manav&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis13B.pdf">Manav&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis13B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans13B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            14
+            <br/>          </td>
+          <td class="center date-hl">
+            04/27 Tu
+          </td>
+          <td>
+            DFT
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture14A.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/5uJGXUQSnWc">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8266755">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr27_qa.csv">Webinar Q/A</a>
+                              <br/>
+                (<a rel="noopener noreferrer" target="_blank" href = "notes/sp21/note17.pdf">Note 17</a>)
+          </td>
+          <td class="center">
+                Section 14A (Mon)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/xPn61xEv3aGsTmfUA">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/106sdMCJwc-djult8738utXBPOfXIvYSY/view?usp&#x3D;sharing">Neelesh&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/neelesh_dis14A.pdf">Neelesh&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1fTzYGZG0P1kxvoLI6JnsTc0IjgYx540Q/view?usp&#x3D;sharing">Anmol&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/anmol_dis14A.pdf">Anmol&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis14A.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans14A.pdf">Ans PDF</a> <br>
+          </td>
+          <td rowspan="2" class="center">
+            Project Part 6: Integration
+            <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/proj6_sp21.zip">Lab ZIP File</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fintegration-sp21%2F&amp;branch&#x3D;master">Lab DataHub Link</a> <br/>
+                 <a rel="noopener noreferrer" target="_blank" href = "lab/16b_report_hands_on_sp21.pdf">Lab Final Report</a> <br/>
+            <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/projlite6_sp21.zip">Lab-Lite ZIP File</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-notebooks&amp;urlpath&#x3D;tree%2Fpublic-notebooks%2Fintegration_lite-sp21%2F&amp;branch&#x3D;master">Lab-Lite DataHub Link</a> <br/>
+                <a rel="noopener noreferrer" target="_blank" href = "lab/16b_report_lite_sp21.pdf">Lab-Lite Final Report</a> <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Homework 14<br/>
+                (<i>Due 05/02 Su</i>)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob14.pdf">Prob PDF</a>
+                <br/> <a href = "homework/prob14.zip" download>iPython ZIP</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "https://eecs.datahub.berkeley.edu/hub/user-redirect/git-pull?repo&#x3D;https%3A%2F%2Fgithub.com%2Fee16b%2Fpublic-hw-notebooks&amp;urlpath&#x3D;tree%2Fpublic-hw-notebooks%2Fsp21_hw14%2F&amp;branch&#x3D;master">Prob DataHub Link</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol14.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-14.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            04/29 Th
+          </td>
+          <td>
+            DFT
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/lecture14B.pdf">Written Notes</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://youtu.be/RllKfX6qASg">Youtube Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8266756">Bcourses Link</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/apr29_qa.csv">Webinar Q/A</a>
+                          </td>
+          <td class="center">
+                Section 14B (Wed)
+              <br/>
+
+
+                <a rel="noopener noreferrer" target="_blank" href="https://forms.gle/xPn61xEv3aGsTmfUA">Checkoff</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1tauuyCw0I68iTKvjf7NTXbfoPHgL4pDV/view?usp&#x3D;sharing">Gaoyue&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/gaoyue_dis14B.pdf">Gaoyue&#x27;s Notes</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="https://drive.google.com/file/d/1JeIyLoF3Eua5zBeOgjSqrcyOP55QIuTU/view?usp&#x3D;sharing">Manav&#x27;s Recording</a> <br>
+
+                <a rel="noopener noreferrer" target="_blank" href="discussion/recordingNotes/manav_dis14B.pdf">Manav&#x27;s Notes</a> <br>
+              <br/>
+                <a rel="noopener noreferrer" target="_blank" href="discussion/dis14B.pdf">Prob PDF</a> <br>
+                              <a rel="noopener noreferrer" target="_blank" href="discussion/ans14B.pdf">Ans PDF</a> <br>
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td rowspan="2" class="center">
+            15
+            <br/><b><font color="red">Final, May 13, 8-11 AM PST</font></b>
+          </td>
+          <td class="center date-hl">
+            05/04 Tu
+          </td>
+          <td>
+            RRR Week
+                  <br> <a rel="noopener noreferrer" target="_blank" href = "discussion/recordingNotes/anmol_review_dft.pdf">Anmol&#x27;s DFT Review Section</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "discussion/recordingNotes/neelesh_review_circuits.pdf">Neelesh&#x27;s Circuits Review Section</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "https://bcourses.berkeley.edu/courses/1502860/assignments/8271842">Review Session Recording</a>
+                                  <br> <a rel="noopener noreferrer" target="_blank" href = "lecture/review_qa.csv">Review Session QA</a>
+                          </td>
+          <td class="center">
+          </td>
+          <td rowspan="2" class="center">
+            Buffer Week
+            <br/>
+            <br/>
+          </td>
+          <td rowspan="2" class="center">
+                Optional Problems (Finals Prep)
+
+                <br/><a rel="noopener noreferrer" target="_blank" href = "homework/prob15.pdf">Prob PDF</a>
+              <br/>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "homework/sol15.pdf">Sol PDF</a>
+                <br/> <a rel="noopener noreferrer" target="_blank" href = "self-grade-15.html">Self Grade</a>
+
+            <br>
+            <!--  -->
+          </td>
+        </tr>
+        <tr>
+          <td class="center date-hl">
+            05/06 Th
+          </td>
+          <td>
+            RRR Week
+          </td>
+          <td class="center">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var x = document.getElementsByClassName("date-hl");
+  var k = x.length
+  var i;
+  for (i = 0; i < k; i++) {
+    x[i].setAttribute("id", "date-hl".concat(i.toString()));
+  }
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+
+  today = mm + '/' + dd + '/' + yyyy;
+
+  for (j = 0; j < k; j++) {
+    var currDate = document.getElementById("date-hl".concat(j.toString())).innerText
+    var curr_dd = String(currDate).slice(3, 5)
+    var curr_mm = String(currDate).slice(0, 2); //January is 0!
+
+    currDate = curr_mm + '/' + curr_dd + '/2021';
+
+    if (currDate < today) {
+      document.getElementById("date-hl".concat(j.toString())).style.backgroundColor = "#daede0";
+    } else if (currDate === today) {
+      document.getElementById("date-hl".concat(j.toString())).style.backgroundColor = "#f5f5e6";
+    } else {
+      document.getElementById("date-hl".concat(j.toString())).style.backgroundColor = "#ede3df";
+    }
+  }
+
+}, false);
+</script>
+
+</div>
+<div class="row">
+  <a class="anchor" id="notes"></a>
+  <h2>Notes</h2>
+  Reading to accompany lectures. This table will be updated as time passes. Grey notes are from previous semesters, and their content has not yet been covered in lecture. Blue notes have been covered in lecture. Notes with an [updated] tag to their left have been changed since a prior semester's iteration. Be aware that the un-updated notes are subject to change, and the material itself is subject to restructuring.
+
+  <div class="note-list">
+    <ul>
+          <li updated><a href="notes/sp21/note0A.pdf">Note 0A - Overview</a></li>
+          <li updated><a href="notes/sp21/note0B.pdf">Note 0B - Circuit Equivalence (16A)</a></li>
+          <li updated><a href="notes/sp21/note1.pdf">Note 1 - Transistors, Differential Equations</a></li>
+          <li updated><a href="notes/sp21/note2.pdf">Note 2 - Transient Analysis, Inputs</a></li>
+          <li updated><a href="notes/sp21/note3A.pdf">Note 3A - Vector Differential Equations</a></li>
+          <li updated><a href="notes/sp21/note3B.pdf">Note 3B - Inductors and RLC Circuits</a></li>
+          <li active><a href="notes/sp21/notej.pdf">Note j - Complex Numbers</a></li>
+          <li updated><a href="notes/sp21/note4.pdf">Note 4: Phasors</a></li>
+          <li updated><a href="notes/sp21/note5.pdf">Note 5: Circuit Filters</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note6.pdf">Note 6: Bode Plots</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note7A.pdf">Note 7A: Controls Overview</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note7B.pdf">Note 7B: System ID</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note8.pdf">Note 8: Stability</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note9.pdf">Note 9: Controllability</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note10A.pdf">Note 10A: Orthonormalization</a></li>
+            <li>[Optional] <a href="https://eecs16b.org/notes/sp21/note10B.pdf">Note 10B: Speeding up OMP</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note11.pdf">Note 11: Upper Triangularization</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note12.pdf">Note 12: Minimum Energy Control</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note13.pdf">Note 13: SVD</a></li>
+          <li updated><a href="https://eecs16b.org/notes/sp21/note14.pdf">Note 14: PCA</a></li>
+            <li>[Optional] <a href="notes/sp21/noteCCF.pdf">Note: CCF</a></li>
+          <li updated><a href="notes/sp21/note15.pdf">Note 15: Linearization</a></li>
+          <li updated><a href="notes/sp21/note16.pdf">Note 16: Classification</a></li>
+          <li active><a href="notes/sp21/note_InterpolationSupplement.pdf">Note: Interpolation Supplement</a></li>
+          <li active><a href="notes/sp21/note17.pdf">Note 17: DFT</a></li>
+          <li active><a href="https://inst.eecs.berkeley.edu//~ee16b/sp18/note/16Breader.pdf#page&#x3D;57">Note: DFT Content from Reader</a></li>
+    </ul>
+  </div>
+</div><div class='row'>
+  <a class="anchor" id="google-calendar"></a>
+  <h2>Calendars</h2>
+  <p> If nothing shows up below, or you get a message indicating some kind of refused connection from Google, please ensure that you're signed into your berkeley.edu email address (Google account). If that still doesn't work, try a different browser, or perhaps incognito mode (which will force you to re-log into your berkeley.edu Google account.) </p>
+  <div class="scrollable">
+    <iframe src="https://calendar.google.com/calendar/embed?title=EECS16B%20Calendar&amp;mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=c_h4so3sob7lbgbrmfgefmu3hlls@group.calendar.google.com&amp;color=%235229A3&amp;src=c_1djebt7edho68p2nhqv866j3jc@group.calendar.google.com&amp;color=%230F4B38&amp;src=c_i9bs8lnvm5qrqmpnde77fnoa5k@group.calendar.google.com&amp;color=%23222222&amp;src=c_ibpnpcpkgg6ve2laqfc7tsgs1k@group.calendar.google.com&amp;color=%23630b0b&amp;src=berkeley.edu_tifp2lotolrhccemi2huc2p4ds@group.calendar.google.com&amp;color=%234c7f9e&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+  </div>
+</div>
+<style>
+div.indentlarge {
+  text-indent: 120px;
+}
+</style>
+<div class='row'>
+  <a class="anchor" id="colored-calendar"></a>
+  <h2>Discussion Schedule </h2>
+  <p> <b> Please note the important information below the table, which describes various section details. </b> The set of ASEs assisting with a given discussion (if any) is given by the bulleted list. </p>
+  <div class="table-responsive">
+    <table align="left" border="1" class="table table-bordered table-striped-disc-cal" style="width: 95%;">
+      <thead>
+        <tr>
+          <td style="background-color: #91c8d9" class="center" border="5" colspan="5"> <b> Discussion Schedule </b> </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">Time (Mon/Wed)</td>
+          <td colspan="2" style="text-align:center; background-color: rgba(197, 186, 232, 0.5)">Monday</td>
+          <td colspan="2" style="text-align:center; background-color: rgba(197, 186, 232, 0.5)">Wednesday</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">9am-10am</td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/94310456870" target="_blank">Ashwin</a> <br> <b> [Freshmen/Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Jerry</li> </ul>
+          </td>
+          <td></td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/99785000193" target="_blank">Gaoyue</a> <br> <b> [RECORDED] </b> <br> <b> [Freshmen/Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Brendan</li> </ul>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">10am-11am</td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/99184330705" target="_blank">Kevin</a>
+            <ul style="margin-bottom:0px;"> <li>Rishi</li> </ul>
+          </td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/99743966015" target="_blank">Ayan</a> <br> <b> [Freshmen/Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Kamyar</li> </ul>
+          </td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/98762059892" target="_blank">Maxwell</a>
+            <ul style="margin-bottom:0px;"> <li>Brendan</li> </ul>
+          </td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/94765184230" target="_blank">Daniel</a> <br> <b> [Freshmen/Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Hannah</li> </ul>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">11am-12pm</td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/95750582037" target="_blank">Jaiveer</a> <br> <b> [Freshmen] </b>
+            <ul style="margin-bottom:0px;"> <li>Jerry</li> </ul>
+          </td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/91919243151" target="_blank">Kevin</a> <br> <b> [Freshmen/Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Brandon</li> <li>Rishi</li> </ul>
+          </td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/98446868446" target="_blank">Druv</a> <br> <b> [Freshmen] </b>
+            <ul style="margin-bottom:0px;"> <li>Amber</li> </ul>
+          </td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/99726655136" target="_blank">Maxwell</a> <br> <b> [Freshmen/Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Kitty</li> <li>Brendan</li> </ul>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">12pm-1pm</td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/95001991788" target="_blank">Neelesh</a> <br> <b> [RECORDED] </b> <br> <b> [Freshmen] </b>
+            <ul style="margin-bottom:0px;"> <li>Anish</li> </ul>
+          </td>
+          <td></td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/98351842892" target="_blank">Kareem</a> <br> <b> [Freshmen] </b>
+            <ul style="margin-bottom:0px;"> <li>Hannah</li> </ul>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">1pm-2pm</td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/95890056954" target="_blank">Anmol</a> <br> <b> [Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Brandon</li> </ul>
+          </td>
+          <td></td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/97750242477" target="_blank">Manav</a> <br> <b> [Sophomore] </b>
+            <ul style="margin-bottom:0px;"> <li>Aster</li> </ul>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">2pm-3pm</td>
+          <td rowspan="2" style="background-color: rgba(156, 256, 207, 0.3)">
+            <a href="https://berkeley.zoom.us/j/96819332058" target="_blank">Ana</a> <br> <b> ends at 3:30pm </b> <br> <b> [Fresh/Soph/Transfer] </b>
+            <ul style="margin-bottom:0px;"> <li>Kamyar</li> </ul>
+          </td>
+          <td style="background-color: rgba(200, 8, 8, 0.25)">
+            <a href="https://berkeley.zoom.us/j/94069099388" target="_blank">Ayan</a> <br> <b> [Transfer] </b>
+            <ul style="margin-bottom:0px;"> <li>Anish</li> </ul>
+          </td>
+          <td rowspan="2" style="background-color: rgba(156, 256, 207, 0.3)">
+            <a href="https://berkeley.zoom.us/j/94993541966" target="_blank">Justin</a> <br> <b> ends at 3:30pm </b> <br> <b> [Fresh/Soph/Transfer] </b>
+            <ul style="margin-bottom:0px;"> <li>Amber</li> </ul>
+          </td>
+          <td style="background-color: rgba(200, 8, 8, 0.25)">
+            <a href="https://berkeley.zoom.us/j/97319210552" target="_blank">Daniel</a> <br> <b> [Transfer] </b>
+            <ul style="margin-bottom:0px;"> <li>Kitty</li></ul>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">3pm-4pm</td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/98736046033" target="_blank">Ashwin</a>
+            <ul style="margin-bottom:0px;"> <li>Anish</li> <li>Brandon</li> </ul>
+          </td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/98412162106" target="_blank">Gaoyue</a>
+            <ul style="margin-bottom:0px;"> <li>Aster</li> </ul>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">4pm-5pm</td>
+          <td></td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/99559677540" target="_blank">Jaiveer</a> <br> <b> [Freshmen] </b>
+            <ul style="margin-bottom:0px;"> <li>Rishi</li> </ul>
+          </td>
+          <td></td>
+          <td style="background-color: rgba(145, 200, 217, 0.25)">
+            <a href="https://berkeley.zoom.us/j/98069697230" target="_blank">Druv</a> <br> <b> [Freshmen] </b>
+            <ul style="margin-bottom:0px;"> <li>Kitty</li> <li>Aster</li> </ul>
+          </td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">5pm-6pm</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">6pm-7pm</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td style="background-color: rgba(232, 225, 211, 0.5)">7pm-8pm</td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/91069757390" target="_blank">Gavin</a>
+            <ul style="margin-bottom:0px;"> <li>Jerry</li> </ul>
+          </td>
+          <td></td>
+          <td style="background-color: rgba(200, 8, 8, 0.15)">
+            <a href="https://berkeley.zoom.us/j/93444160904" target="_blank">Gavin</a>
+            <ul style="margin-bottom:0px;"> <li>Hannah</li> </ul>
+          </td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><b>Note: Monday and Wednesday discussion sections cover different material, and you should attend Discussion A and Discussion B each week. You can attend any of the discussions in the table above. Scroll horizontally to view entire table, and see below for critical information on how to read the table. </b> </p>
+  <p>
+    <b> To account for different learning styles, there will be 3 different styles of discussion sections.</b>
+    <ul>
+      <li> <font color="blue"> “Group Discussions" (blue) </font> are meant to serve as an opportunity to work with other students on problems while receiving TA advice and feedback. </li>
+      <li> <font color="red"> "Lecture Discussions" (red) </font> are meant to serve as an opportunity to review material with the TA, and then work through the problems as a class. </li>
+      <li> <font style="color:rgba(13, 207, 124, 1)"> "Slower-Paced Discussions" (mint green) </font> are meant to cover material at a more thorough pace, and are likely to include a mixture of lecture and group methods. These will likely be about <b> 1.5 hours </b> long, but have been allotted 2 hours. </li>
+    </ul>
+  </p>
+  <p> Furthermore note the following; despite the bold labels in some sections, <b> anyone is welcome in any discussion. </b> The label for each discussion will indicate the groups to which this discussion will be geared towards, but these are not strict divisions. The label is just a guide to help students with potentially similar experiences to find a group. If there is no label listed, the discussion is not expressly geared towards any group.
+  </p>
+
+
+<!-- <div class="exam-list">
+  <table align="left" border="1" class="table table-bordered table-striped table-condensed" style="width: 82%;">
+  <thead>
+    <tr style="background: #91c8d9">
+      <th class = "center" border = "50" colspan = "5"> Discussion Schedule </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> Start Time (PST) </b> </td>
+
+      <td class="center" style="background: #efe4f0"> <b> Monday </b> </td>
+
+      <td class="center" style="background: #efe4f0"> <b> Tuesday </b> </td>
+
+      <td class="center" style="background: #efe4f0"> <b> Wednesday </b> </td>
+
+      <td class="center" style="background: #efe4f0"> <b> Thursday </b> </td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 11:00 AM </b> </td>
+      <td class="center" style="background: #e09989"> 201: Ben, Moses </td>
+      <td class="center" style="background: #e09989"> 201: Ben, Moses </td>
+      <td class="center" style="background: #e09989"> 201: Spencer, Moses </td>
+      <td class="center" style="background: #e09989"> 201: Spencer, Moses </td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 12:00 PM </b> </td>
+      <td class="center" style="background: #aee6ae"> 202: Moses, Ben </td>
+      <td class="center" style="background: #aee6ae"> 202: Moses, Ben </td>
+      <td class="center" style="background: #aee6ae"> 202: Moses, Spencer </td>
+      <td class="center" style="background: #aee6ae"> 202: Moses, Spencer </td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 1:00 PM </b> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 2:00 PM </b> </td>
+      <td class="center" style="background: #e09989"> 204: Spencer, Miyuki </td>
+      <td class="center" style="background: #e09989"> 204: Spencer, Miyuki </td>
+      <td class="center" style="background: #e09989"> 204: Miyuki, Ben </td>
+      <td class="center" style="background: #e09989"> 204: Miyuki, Ben </td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 3:00 PM </b> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 4:00 PM </b> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 5:00 PM </b> </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="center" style="background: #efe4f0"> <b> 6:00 PM </b> </td>
+      <td class="center" style="background: #e09989"> 205: Deepshika, Spencer </td>
+      <td class="center" style="background: #e09989"> 205: Deepshika, Spencer </td>
+      <td class="center" style="background: #e09989"> 205: Ben, Deepshika </td>
+      <td class="center" style="background: #e09989"> 205: Ben, Deepshika </td>
+    </tr>
+
+  </tbody>
+  </table>
+</div>
+
+<div class="row">
+</br>
+  <div class="col-sm-4">
+    <table class="table table-bordered table-hover table-condensed table-striped">
+      <thead>
+        <tr>
+          <th style="background: #91c8d9" class='col-md-1 center'><b>Color</b></th>
+          <th style="background: #91c8d9" class='col-md-2 center'><b>Recommended Students</b></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="col-sm-8">
+    <p><b>Note: Monday, Tuesday, Wednesday, and Thursday discussion sections cover different material, and you need to go to a discussion each day of the week (M-Th). Scroll horizontally to view entire table. See below for discussion Zoom links and <a rel="noopener noreferrer" target="_blank" href="https://piazza.com/class/kazyttw5d622vq?cid=10">this Piazza post</a> for all joining info. </b> </p>
+
+    <div class="center">
+      <p> <a href="https://berkeley.zoom.us/j/9805390432" target="_blank"> Link: 11 AM - 12 PM (PST) </a> </p>
+      <p> <a href="https://berkeley.zoom.us/j/9805390432" target="_blank"> Link: 12 PM - 1 PM (PST)</a> </p>
+      <p> <a href="https://berkeley.zoom.us/j/94573073090" target="_blank"> Link: 2 PM - 3 PM (PST) </a> </p>
+      <p> <a href="https://berkeley.zoom.us/j/99430838258" target="_blank"> Link: 6 PM - 7 PM (PST) </a> </p>
+    </div>
+
+    <p> Students are welcome to attend any discussion they choose. This year we are offering a variety of sections that may be of interest to different groups of students. Incoming first-years and transfer students are encouraged to go to the section colored in green, and red sections are open to everyone. Feel free to try out different discussion sections, and go to the one that works best for you! </p>
+  </div> --><div class="row">
+  <a class="anchor" id="resources"></a>
+  <h2>Resources</h2>
+
+  <a target="_blank" href="https://piazza.com/class/kj9duntmc4w7ib">Piazza:</a> ask questions here.
+  <br/><a href="hw-practice/index.html">Homework Practice:</a> These Practice Sets typically contain questions which are intended to be approachable after watching lecture and attending discussion. They are not necessary at the difficulty-level of exam questions, but are a good way to check fundamentals and review concepts.
+
+  <h3>Extra Reference Material</h3>
+  <ul>
+
+      <li> <a href="student-resources/circuits_reader.pdf" target="_blank">[Circuits] Course Reader</a> </li>
+
+      <li> <a href="http://inst.eecs.berkeley.edu/~ee16b/sp18/note/16Breader.pdf" target="_blank">[Controls] Murat Arcak&#x27;s EECS16B reader</a> </li>
+  </ul>
+  <h3>Lab</h3>
+  <ul>
+
+      <li> <a href="https://www.youtube.com/playlist?list&#x3D;PLQ1OVCqw6RUMX2JzPw2G15s5mZovuav8-" target="_blank">Past Lab tutorials</a> </li>
+
+      <li> <a href="student-resources/oscilloscope-cheatsheet.pdf" target="_blank">Oscilloscope cheat sheet</a> </li>
+  </ul>
+  <h3>Video Notes</h3>
+  <ul>
+
+      <li> <a href="https://youtu.be/dfVwHtDC5IM" target="_blank">Scalar Diff Eq</a> </li>
+
+      <li> <a href="https://youtu.be/v1yDrhxrYa8" target="_blank">Change of Basis</a> </li>
+
+      <li> <a href="https://youtu.be/MKyH7Sw_sUY" target="_blank">Diagonalization</a> </li>
+
+      <li> <a href="https://youtu.be/D5z239Kbg_0" target="_blank">Systems of Diff Eqs</a> </li>
+
+      <li> <a href="https://youtu.be/Zo9MP7Byf_s" target="_blank">Phasors</a> </li>
+
+      <li> <a href="https://youtu.be/iq9MLvDYP7k" target="_blank">Filters</a> </li>
+
+      <li> <a href="https://youtu.be/dgehwPAaxmI" target="_blank">Controllability</a> </li>
+
+      <li> <a href="https://youtu.be/sViCJpJ-pVM" target="_blank">Linearization</a> </li>
+
+      <li> <a href="https://www.youtube.com/watch?v&#x3D;_le5zcPd1Lg" target="_blank">PCA Part 1</a> </li>
+
+      <li> <a href="https://www.youtube.com/watch?v&#x3D;YYa7FpCNyoc" target="_blank">PCA Part 2</a> </li>
+
+      <li> <a href="https://www.youtube.com/watch?v&#x3D;hzFcDYodP7A" target="_blank">Feedback Control</a> </li>
+  </ul>
+  <h3>Controls</h3>
+  <ul>
+
+      <li> <a href="http://inst.eecs.berkeley.edu/~ee16b/sp18/note/16Breader.pdf" target="_blank">Murat Arcak&#x27;s EECS16B reader</a> </li>
+
+      <li> <a href="http://www.cds.caltech.edu/~murray/amwiki/index.php/Main_Page" target="_blank">Murray and Astrom</a> </li>
+
+      <li> <a href="https://www.amazon.com/Digital-Control-Dynamic-Systems-Edition/dp/0201820544" target="_blank">Franklin, Powell, and Workman</a> </li>
+  </ul>
+  <h3>Selected Summer 2020 Worksheets and Solutions</h3>
+  <ul>
+      <li> <a href="student-resources/worksheets/prob_circuits.pdf" target="_blank">Circuits</a> (<a href="student-resources/worksheets/sol_circuits.pdf" target="_blank">sol</a>) </li>
+
+      <li> <a href="student-resources/worksheets/prob_controls.pdf" target="_blank">Controls</a> (<a href="student-resources/worksheets/sol_controls.pdf" target="_blank">sol</a>) </li>
+
+      <li> <a href="student-resources/worksheets/prob_svd.pdf" target="_blank">SVD</a> (<a href="student-resources/worksheets/sol_svd.pdf" target="_blank">sol</a>) </li>
+
+      <li> <a href="student-resources/worksheets/prob_signals.pdf" target="_blank">Signals</a> (<a href="student-resources/worksheets/sol_signals.pdf" target="_blank">sol</a>) </li>
+
+  </ul>
+  <h3>Fall 2019</h3>
+  <ul>
+
+      <li> <a href="student-resources/Fa19_EECS16B_BigPictureStory.pdf" target="_blank">16B Big Picture Themes and Story</a> </li>
+  </ul>
+
+  <h3>EECS Student Climate & Incident Reporting <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4NYHdUJ8IzYA1SoiTinWBybGWkj0mfmdnHAeygAxkZajelQ/viewform">Form</a></h3>
+  <ul>
+    <li> <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4NYHdUJ8IzYA1SoiTinWBybGWkj0mfmdnHAeygAxkZajelQ/viewform">Link to the Form</a> </li>
+    <li> EECS Department Message: It is very important to the EECS Department that every student in the EECS community feels safe, respected and welcome.  We recognize though that incidents happen, sometimes unintentionally, that run counter to that goal. There are many things we can do to try to improve department climate, but we need to understand where the challenges lie. If you experience a remark, or disrespectful treatment, or if you feel you are being ignored, excluded or marginalized in a course or department-related activity, please speak up.  If you witness such treatment toward someone else, please also say something. If you notice course content (such as lectures, discussions, assignments, exams) that marginalize or alienate you, please point them out. This is particularly important if the offending actions/content are based on gender, race, age, disability, or other protected category but it’s not always possible to tell and so we encourage you to share with us in any case. The more we hear, the more we can do to improve the climate in our courses and department-supported activities. We also welcome suggestions on things we could do to improve department climate.
+    </li>
+  </ul>
+</div>
+<div class="row">
+  <a class="anchor" id="exams"></a>
+  <h2>Past Exams</h2>
+  Past exams vary in scope from semester to semester, and may include topics that are not in scope for the current semester or module. Unavailable exams are indicated by N/A. In-scope topics for the current semester will be posted on Piazza about a week before the corresponding exam.
+  <br>
+  <br>
+  <div class="table-responsive exam-list">
+    <table border="3" class="table table-bordered table-condensed table-striped table-hover" style="width: 65%;">
+      <thead>
+        <tr>
+          <th style="background: #91c8d9" scope="col" class='col-md-1 center'>Semester</th>
+          <th style="background: #91c8d9" scope="col" class='col-md-2 center'>Midterm 1</th>
+          <th style="background: #91c8d9" scope="col" class='col-md-2 center'>Midterm 2</th>
+          <th style="background: #91c8d9" scope="col" class='col-md-2 center'>Final</th>
+          <th style="background: #91c8d9" scope="col" class='col-md-2 center'>Other</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class='center'> sp21 </td>
+          <td class='center'>
+            <a href="https://eecs16b.org/student-resources/exams/sp21_mt1_exam.pdf" target="_blank">pdf</a>, <a href="https://eecs16b.org/student-resources/exams/sp21_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> fa20 </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa20_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa20_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa20_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa20_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa20_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa20_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa20_quest_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa20_quest_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> su20 </td>
+          <td class='center'>
+            <a href="student-resources/exams/su20_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/su20_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/su20_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/su20_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/su20_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/su20_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> sp20 </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp20_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp20_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp20_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp20_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp20_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp20_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> fa19 </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa19_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa19_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa19_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa19_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa19_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa19_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> sp19 </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp19_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp19_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp19_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp19_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp19_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp19_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> fa18 </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa18_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa18_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa18_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa18_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+
+
+
+            N/A
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> sp18 </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp18_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp18_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+
+
+
+            N/A
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp18_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp18_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> fa17 </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa17_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa17_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+
+            <a href="student-resources/exams/fa17_mt2_sol.pdf" target="_blank">sol</a>
+
+
+          </td>
+          <td class='center'>
+
+
+
+            N/A
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> sp17 </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp17_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp17_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp17_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp17_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+
+
+
+            N/A
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> fa16 </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa16_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa16_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+
+
+
+            N/A
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa16_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa16_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> sp16 </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp16_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp16_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp16_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp16_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/sp16_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/sp16_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td class='center'> fa15 </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa15_mt1_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa15_mt1_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa15_mt2_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa15_mt2_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+          <td class='center'>
+            <a href="student-resources/exams/fa15_final_exam.pdf" target="_blank">pdf</a>, <a href="student-resources/exams/fa15_final_sol.pdf" target="_blank">sol</a>
+
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div><style>
+.gsicollapsible {
+  display: inline-block;
+  width: 150px;
+  height: 35px;
+  font-family: Raleway;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 0.3s ease-in-out;
+  border-radius:50px 50px 50px 50px;
+  padding: 0px;
+}
+
+.gsicollapsible.active {
+  background: #7876d061;
+  border: 1px solid #ff91cb;
+  border-radius:50px 50px 50px 50px;
+}
+
+.gsicollapsible:hover {
+  transition: 0.3s ease-in-out;
+  background: #7876d061;
+  border-radius:50px 50px 50px 50px;
+}
+
+.gsicontent {
+  padding: 0px 0px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: rgba(145, 200, 217,0.2);
+
+}
+</style>
+<a class="anchor" id="staff"></a>
+<h2>Course Staff</h2>
+Please add berkeley.edu to the end of all emails!
+<h3>Instructor</h3>
+<div class='row'>
+  <div class='center col-md-4 col-sm-4 col-xs-6 bottomspace'>
+    <img class='headshot img-circle' src='photos-instructor/GireejaRanade.jpg'/></a>
+    <br/>
+    <b>Gireeja Ranade</b><br/>
+    <small> she/her/hers </small> <br/>
+    ranade@eecs.
+  </div>
+  <div class='center col-md-4 col-sm-4 col-xs-6 bottomspace'>
+    <img class='headshot img-circle' src='photos-instructor/VladimirStojanovic.jpg'/></a>
+    <br/>
+    <b>Vladimir Stojanovic</b><br/>
+    <small> he/him/his </small> <br/>
+    vlada@
+  </div>
+</div>
+
+<h3>GSIs</h3>
+<br> <br>
+<div class='row'>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MaxwellChen.jpg' onmouseover="this.src='photos-gsi/MaxwellChenFun.jpg'" onmouseout="this.src='photos-gsi/MaxwellChen.jpg'" data-toggle="modal" data-target="#modal_gsi0"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey everyone! I&#x27;m a third-year CS major from San Jose, CA. I&#x27;m really interested in applications of CS and EE in biology and medicine. Outside of class, I&#x27;m working on computational neuroscience research, helping out with CSM, and trying to discover new indie/alt/postrock music. Hope I can help make this semester suck a little bit less and inspire you to take other EE and EECS courses in the future. See y&#x27;all on Zoom :&#x27;)</small></p>
+      </div>
+    <b>Maxwell Chen</b><br/>
+    Head Admin, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    eecs16b-sp21@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AnaTudor.jpg' onmouseover="this.src='photos-gsi/AnaTudorFun.jpg'" onmouseout="this.src='photos-gsi/AnaTudor.jpg'" data-toggle="modal" data-target="#modal_gsi1"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I’m a 4th year undergrad studying EECS and minoring in data science. I’m interested in applied data science research, and in my free time these days I love exploring the outdoors, and listening to/making music. Please feel free to reach out anytime about anything from research, to hobbies, to class concerns!</small></p>
+      </div>
+    <b>Ana Tudor</b><br/>
+    Head Admin, Discussion<br/>
+    <small> she/her/hers </small> <br/>
+    eecs16b-sp21@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/StevenLu.jpg' data-toggle="modal" data-target="#modal_gsi2"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a 4th year EECS major with a passion for the EE/hardware side with an emphasis in IC design. I enjoy playing board/video games, doing escape rooms, and playing the clarinet.</small></p>
+      </div>
+    <b>Steven Lu</b><br/>
+    Head Lab<br/>
+    <small> he/him/his </small> <br/>
+    stevenl@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/SravyaBasvapatri.jpg' onmouseover="this.src='photos-gsi/SravyaBasvapatriFun.jpg'" onmouseout="this.src='photos-gsi/SravyaBasvapatri.jpg'" data-toggle="modal" data-target="#modal_gsi3"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a junior studying EECS &amp; Business, originally from Philadelphia, PA. I love photography and making art. Feel free to reach out to me to chat about anything, I&#x27;m looking forward to meeting you!</small></p>
+      </div>
+    <b>Sravya Basvapatri</b><br/>
+    Head Lab<br/>
+    <small> she/her/hers </small> <br/>
+    sravyab@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AliciaMatsumoto.jpg' onmouseover="this.src='photos-gsi/AliciaMatsumotoFun.jpg'" onmouseout="this.src='photos-gsi/AliciaMatsumoto.jpg'" data-toggle="modal" data-target="#modal_gsi4"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I&#x27;m Alicia (or Ali!) and I&#x27;m a sophomore studying EECS. This is my third semester working within the EECS 16 series, and I love the application-based approach 16A and 16B take to learning about circuits. When I&#x27;m not on campus, you can find me sketching, hiking in the Berkeley hills, or shopping for candles.</small></p>
+      </div>
+    <b>Alicia Matsumoto</b><br/>
+    Admin<br/>
+    <small> she/her/hers </small> <br/>
+    aliciamatsumoto@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DivijaHasteer.jpg' onmouseover="this.src='photos-gsi/DivijaHasteerFun.jpg'" onmouseout="this.src='photos-gsi/DivijaHasteer.jpg'" data-toggle="modal" data-target="#modal_gsi5"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I hope you&#x27;re not procrastinating on something right now. Hi! I&#x27;m a second-year EECS student, born and raised in the Bay Area. Don&#x27;t ask me to choose my favorite subject within EECS – I&#x27;m confused and indecisive... I have a few arguably unhealthy addictions in life: answering questions on Piazza, playing bullet chess, and watching TikTok. I look forward to meeting you in the semester ahead!</small></p>
+      </div>
+    <b>Divija Hasteer</b><br/>
+    Admin<br/>
+    <small> she/her/hers </small> <br/>
+    dhasteer@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/NeeleshRamachandran.jpg' onmouseover="this.src='photos-gsi/NeeleshRamachandranFun.jpg'" onmouseout="this.src='photos-gsi/NeeleshRamachandran.jpg'" data-toggle="modal" data-target="#modal_gsi6"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I&#x27;m a 3rd year EECS undergraduate from Los Gatos, CA, interested in hardware (devices and circuits). After 4 semesters TA&#x27;ing EECS 16A, I&#x27;m super excited to be teaching 16B! I&#x27;ll be developing discussion worksheets, teaching a Monday discussion, and handling some software to make the semester go smoothly. I enjoy studying integrated circuits and circuit design, and I&#x27;m doing some device design research as well. Always feel free to email me, I look forward to meeting many of you!</small></p>
+      </div>
+    <b>Neelesh Ramachandran</b><br/>
+    Content, Discussion, Software<br/>
+    <small> he/him/his </small> <br/>
+    neelesh.r@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/JaiveerSingh.jpg' onmouseover="this.src='photos-gsi/JaiveerSinghFun.jpg'" onmouseout="this.src='photos-gsi/JaiveerSingh.jpg'" data-toggle="modal" data-target="#modal_gsi7"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I&#x27;m a junior studying EECS and Business, with a particular interest in robotics and entrepreneurship. I&#x27;m an avid hardware hacker and I enjoy building all sorts of crazy projects - everything from a walking 8:1 scale LEGO minifigure to AI-powered woodcut art.</small></p>
+      </div>
+    <b>Jaiveer Singh</b><br/>
+    Discussion, Software<br/>
+    <small> he/him/his </small> <br/>
+    j.singh@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AshwinVangipuram.jpg' data-toggle="modal" data-target="#modal_gsi8"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey! I&#x27;m a third year EECS major and grew up near Detroit, Michigan. I enjoy playing video games, and working on robots. 16B was my favorite lower div class and I&#x27;ll try to make it your favorite too!</small></p>
+      </div>
+    <b>Ashwin Vangipuram</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    avangipuram@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/GaoyueZhou.jpg' data-toggle="modal" data-target="#modal_gsi9"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I am a fourth-year CS and math major. My research interests lie in reinforcement learning and robotics. Recently, I enjoy snowboarding and eating A LOT of kiwis. This will be my 3rd time being a TA for 16B and I am looking forward to a great semester with you all!</small></p>
+      </div>
+    <b>Gaoyue Zhou</b><br/>
+    Content, Discussion<br/>
+    <small> she/her/hers </small> <br/>
+    zhougy_99@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DruvPai.jpg' data-toggle="modal" data-target="#modal_gsi10"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a third year CS major from the Bay Area, and it&#x27;s my third semester as a TA. Outside of classes and teaching, you can often find me doing research on foundations of deep learning, playing basketball, or screwing around with TeX. Feel free to email me about anything, related to this class or not (druvpai@).</small></p>
+      </div>
+    <b>Druv Pai</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    druvpai@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AyanBiswas.jpg' data-toggle="modal" data-target="#modal_gsi11"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I am a 4th year PhD student in INC, EECS. My research involves high speed serial links design and development of Berkeley Analog Generator. Some of my hobbies include chess, archery, hiking, and reading books.</small></p>
+      </div>
+    <b>Ayan Biswas</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    ayan_biswas@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KareemAhmad.jpg' onmouseover="this.src='photos-gsi/KareemAhmadFun.jpg'" onmouseout="this.src='photos-gsi/KareemAhmad.jpg'" data-toggle="modal" data-target="#modal_gsi12"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I&#x27;m a 5th yr MS student in the EECS dept interested in Computer Architecture. In particular, my research focuses on building hardware accelerators for graph convolutional networks. In the past I&#x27;ve taught EECS16A and EECS151, so I&#x27;m excited to try something new. Outside of classes I enjoy hiking/biking, graphic design, and have recently started flying fpv drones. I hope you are all as excited as I am for this semester.</small></p>
+      </div>
+    <b>Kareem Ahmad</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    kareemalgalaly@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DanielAbraham.jpg' data-toggle="modal" data-target="#modal_gsi13"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I am a 4th year EECS transfer with interests in controls, embedded systems, and signal processing. When I am not EECS-ing away, I love hiking, video games, long-boarding, and herpetology. I really enjoyed taking EECS 16B and will do my best to ensure that you guys will too!</small></p>
+      </div>
+    <b>Daniel Abraham</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    daniel_abraham1@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KouroshHakhamaneshi.jpg' onmouseover="this.src='photos-gsi/KouroshHakhamaneshiFun.jpg'" onmouseout="this.src='photos-gsi/KouroshHakhamaneshi.jpg'" data-toggle="modal" data-target="#modal_gsi14"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>PhD student, Research: Machine Learning / Reinforcement Learning, Using AI for Circuit Design</small></p>
+      </div>
+    <b>Kourosh Hakhamaneshi</b><br/>
+    Content<br/>
+    <small> he/him/his </small> <br/>
+    kourosh_hakhamaneshi@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/JustinYu.jpg' onmouseover="this.src='photos-gsi/JustinYuFun.jpg'" onmouseout="this.src='photos-gsi/JustinYu.jpg'" data-toggle="modal" data-target="#modal_gsi15"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, my name is Justin, and I&#x27;m a third-year EECS major from Los Altos, CA. This is my third time teaching 16B, and I&#x27;ve been part of CSM16B for two semesters in the past. I&#x27;m currently obsessed with The Strokes and The Voidz and basically all things Julian Casablancas. I&#x27;m a little late to the game, but it&#x27;s all I&#x27;ve listened to for the past month :&#x27;) Always feel free to reach out through email if you have any course questions/concerns!</small></p>
+      </div>
+    <b>Justin Yu</b><br/>
+    Discussion<br/>
+    <small> he/him/his </small> <br/>
+    justinvyu@
+    </div>
+</div>
+<div class='row' style="margin-top: -20px;">
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/GavinLiu.jpg' data-toggle="modal" data-target="#modal_gsi0"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m Gavin, a junior studying in EECS and my first time as a TA for EECS 16B and I&#x27;ll be teaching a discussion alongside many other things. I enjoy studying robotics, controls and many types of circuit design. I&#x27;m excited for everyone to be in this class and learn as much as possible.</small></p>
+      </div>
+    <b>Gavin Liu</b><br/>
+    Discussion<br/>
+    <small> he/him/his </small> <br/>
+    nareauphol.liu@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ManavRathod.jpg' onmouseover="this.src='photos-gsi/ManavRathodFun.jpg'" onmouseout="this.src='photos-gsi/ManavRathod.jpg'" data-toggle="modal" data-target="#modal_gsi1"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey! I&#x27;m a Senior studying EECS + Business major from Michigan. I&#x27;m really interested in researching applications of NLP to education and other social good areas. In my spare time, I love reading, watching TV, playing board games, listening to music, and talking to friends. I am super excited to work with all of you this semester to make this class as enjoyable as possible and to get you ready and excited for all of the future EE/EECS courses that this class prepares you for.</small></p>
+      </div>
+    <b>Manav Rathod</b><br/>
+    Discussion<br/>
+    <small> he/him/his </small> <br/>
+    manav.rathod@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AnmolParande.jpg' data-toggle="modal" data-target="#modal_gsi2"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a 3rd year in EECS focusing on Signal Processing and Embedded Systems. I originally came to Berkeley thinking I would focus on the CS side of EECS, but 16B changed that for me, so I hope I can give you all a similar experience. In my free-time, I love to work on random side-projects (see my website anmolparande.com) and write tech-related articles on Medium.</small></p>
+      </div>
+    <b>Anmol Parande</b><br/>
+    Discussion<br/>
+    <small> he/him/his </small> <br/>
+    aparande@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KevinZhang.jpg' onmouseover="this.src='photos-gsi/KevinZhangFun.jpg'" onmouseout="this.src='photos-gsi/KevinZhang.jpg'" data-toggle="modal" data-target="#modal_gsi3"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I&#x27;m a senior, majoring in pure math and CS. I like to play piano, and recently I&#x27;ve been learning how to draw and play jazz.</small></p>
+      </div>
+    <b>Kevin Zhang</b><br/>
+    Discussion<br/>
+    <small> he/him/his </small> <br/>
+    kevinzhang1@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/PriyansDesai.jpg' data-toggle="modal" data-target="#modal_gsi4"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I am Priyans. I am a junior studying CS and minoring in Data Science. This is my 4th time on 16B staff. I really enjoyed the car project, especially controls when I took the class. I am heavily involved with teaching through different clubs and courses at Berkeley. Hoping to make labs a great experience for you all!</small></p>
+      </div>
+    <b>Priyans Desai</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    priyansdesai@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KaitlynChan.jpg' data-toggle="modal" data-target="#modal_gsi5"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Heyo, I&#x27;m Kaitlyn and this is my third year as an EECS student. I enjoy doing school stuff (research, PiE, teaching), and recently read of lot of horror manhwa. Feel free to reach out with questions/feedback about lab (or what I should read next)!</small></p>
+      </div>
+    <b>Kaitlyn Chan</b><br/>
+    Lab<br/>
+    <small> she/her/hers </small> <br/>
+    kaitlynjchan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/CalebKuo.jpg' data-toggle="modal" data-target="#modal_gsi6"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m Caleb, a senior EECS major excited to help out with labs! Outside of school, I like to spend my time drawing and playing the piano. Feel free to email me for anything school or non-school related questions! Always happy to talk!</small></p>
+      </div>
+    <b>Caleb Kuo</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    calebkuo@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/EricYang.jpg' data-toggle="modal" data-target="#modal_gsi7"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I&#x27;m a sophomore studying EECS from New York. I&#x27;m really interested in control systems and optimization. In my free time, I love aviation, playing basketball, and watching the NBA. My goal is to make remote labs very fun and exciting. Feel free to talk to me about anything and I can&#x27;t wait to get to know everyone over Zoom!</small></p>
+      </div>
+    <b>Eric Yang</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    ericzyang@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MeganZeng.jpg' data-toggle="modal" data-target="#modal_gsi8"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a 2nd year EECS major. Outside of school, I enjoy cooking and drawing. I look forward to working with you all in lab!</small></p>
+      </div>
+    <b>Megan Zeng</b><br/>
+    Lab<br/>
+    <small> she/her/hers </small> <br/>
+    zengmegan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/RafaelCalleja.jpg' onmouseover="this.src='photos-gsi/RafaelCallejaFun.jpg'" onmouseout="this.src='photos-gsi/RafaelCalleja.jpg'" data-toggle="modal" data-target="#modal_gsi9"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I’m currently pursuing a Master&#x27;s Degree in the EECS department with an emphasis in signal processing and machine learning. I currently conduct research for MRI under Michael Lustig. Beyond academics, I enjoy video games, snowboarding, and volleyball!</small></p>
+      </div>
+    <b>Rafael Calleja</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    rafael.calleja@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ZhongkaiWang.jpg' data-toggle="modal" data-target="#modal_gsi10"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>PhD student of integrated circuit; badminton</small></p>
+      </div>
+    <b>Zhongkai Wang</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    zhongkai@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/HosseinNajafiaghdam.jpg' data-toggle="modal" data-target="#modal_gsi11"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>5th year INC PhD student by day, tired swiftie by night</small></p>
+      </div>
+    <b>Hossein Najafi</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    hossein_najafi@
+    </div>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("gsicollapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script><div class="row">
+  <a class="anchor" id="exams"></a>
+  <h2>Policies</h2>
+  For a full list of course policies and the syllabus, see <a href="policies.html" target="_blank">here</a>.
+</div><h2>Aesthetics and Feedback</h2>
+<a class="anchor" id="aesthetics"></a>
+
+<p class="add-bottom-margin"> You can optionally toggle between the 16 Series legacy font (Roboto) and the default font (Raleway) for this website. If you have other suggestions for this website, feel free to let the software TAs know <a rel="noopener noreferrer" target="_blank" href="mailto:neelesh.r@berkeley.edu">here.</a>
+<div class="center">
+	<input type="button" style="background-color: #dceef5; border-radius:20px" value="Toggle Font: Roboto" onclick = "fontChange('Roboto')">
+	<input type="button" style="background-color: #dceef5; border-radius:20px" value="Toggle Font: Raleway (Default)" onclick = "fontChange('Raleway')">
+</div>
+<br>
+<br>
+<br>
+
+<script>
+function fontChange(f) {
+	if (typeof(Storage) !== "undefined") {
+    var prev = localStorage.getItem("fontFamily");
+	  localStorage.setItem("fontFamily", f);
+	  document.body.style.fontFamily = localStorage.getItem("fontFamily");
+    showFontChange(f, prev);
+	}
+}
+
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+
+  showCopied();
+}
+
+function showCopied() {
+  var x = document.getElementById("snackbar1");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function showFontChange(f, prev) {
+  var x = document.getElementById("snackbar2");
+  if (prev == f) {
+    x.innerHTML = "site font is already ".concat(prev).concat("!");
+  }
+  else {
+    x.innerHTML = "changed site font to: ".concat(f).concat("!");
+  }
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+    </div>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/parallax.min.js"></script>
+
+  </body>
+</html>
