@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VL949KBR71"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VL949KBR71');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="http://eecs.berkeley.edu/favicon.ico" type="image/x-icon">
+    <link href="bootstrap-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <title>EECS16B: Designing Information Devices and Systems II, Spring 2022</title>
+  </head>
+
+  <body data-spy="scroll" data-target="#navscroll" onload="getCurrFont()">
+
+    <div id="navscroll">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="index.html" style="color: #000;"><strong>EECS16B</strong> | Spring 2022</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse" >
+              <ul class="nav navbar-nav pull-right">
+                <li><a id="na1" href="index.html#schedule">Schedule</a></li>
+                <li><a id="na1" href="index.html#notes">Notes</a></li>
+                <li><a id="na1" href="index.html#labLinks">Lab Links</a></li>
+                <li><a id="na1" href="index.html#google-calendar">Calendar</a></li>
+                <li><a id="na1" href="index.html#colored-calendar">Discussions</a></li>
+                <li><a id="na4" href="hw-practice/index.html%3F.html">Practice</a></li>
+                <li><a id="na5" href="index.html#resources">Resources</a></li>
+                <li><a id="na5" href="index.html#exams">Past Exams</a></li>
+                <li><a id="na4" href="staff.html">Staff</a></li>
+                <li class="dropdown">
+                  <a href="policies.html" class="dropbtn">Policies</a>
+                  <div class="dropdown-content">
+                    <a href="policies.html#courseInfo">Course Info</a>
+                    <a href="policies.html#gradeBreak">Grade Breakdown</a>
+                    <a href="policies.html#gradeScale">Grading Scale</a>
+                    <a href="policies.html#secondChance">Exam Clobber Policy</a>
+                    <a href="policies.html#hwPartyOH">Homework Party and OH</a>
+                    <a href="policies.html#hwSubmission">Homework Submission</a>
+                    <a href="policies.html#hwSelfgrade">Homework Grading - Self-Grading</a>
+                    <a href="policies.html#hwResubmission">Homework Resubmission</a>
+                    <a href="policies.html#hwEffort">Homework Effort</a>
+                    <a href="policies.html#discPolicies">Discussion Policies</a>
+                    <a href="policies.html#labPolicies">Lab Policies</a>
+                    <a href="policies.html#exampolicy">Exam Policies</a>
+                    <a href="policies.html#proctoring">Exam Proctoring</a>
+                    <a href="policies.html#exceptions">Exceptions and Exam Accomodation</a>
+                    <a href="policies.html#communication">Course Communication</a>
+                    <a href="policies.html#collaboration">Collaboration</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  <div class="parallax-window" data-parallax="scroll" data-image-src="img/background2.jpg" data-speed="0.1">
+    <div class='container'>
+      <div class="main-container">
+
+<script>
+function getCurrFont() {
+  if (typeof(Storage) !== "undefined") {
+    if (localStorage.getItem('fontFamily')) {
+      document.body.style.fontFamily = localStorage.getItem("fontFamily");
+    }
+    else {
+      localStorage.setItem("fontFamily", "Roboto");
+      document.body.style.fontFamily = localStorage.getItem("fontFamily")
+    }
+  }
+}
+</script><!-- Maintained by Berkeley's ee16b staff-->
+
+<div class='row'>
+  <h1><b>EECS16B</b>, Designing Information Devices and Systems II</h1>
+  <h3>Spring 2022</h3>
+</div>
+
+<style>
+.gsicollapsible {
+  display: inline-block;
+  width: 150px;
+  height: 35px;
+  font-family: Raleway;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 0.3s ease-in-out;
+  border-radius:50px 50px 50px 50px;
+  padding: 0px;
+}
+
+.gsicollapsible.active {
+  background: #7876d061;
+  border: 1px solid #ff91cb;
+  border-radius:50px 50px 50px 50px;
+}
+
+.gsicollapsible:hover {
+  transition: 0.3s ease-in-out;
+  background: #7876d061;
+  border-radius:50px 50px 50px 50px;
+}
+
+.gsicontent {
+  padding: 0px 0px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: rgba(145, 200, 217,0.2);
+
+}
+</style>
+<a class="anchor" id="staff"></a>
+<h2>Course Staff</h2>
+Please add berkeley.edu to the end of all emails!
+<h3>Instructors</h3>
+<div class='row'>
+  <div class='center col-md-4 col-sm-4 col-xs-6 bottomspace'>
+    <img class='headshot img-circle' src='photos-instructor/VladimirStojanovic.jpg'/></a>
+    <br/>
+    <b>Vladimir Stojanovic</b><br/>
+    <small> he/him/his </small> <br/>
+    vlada@
+  </div>
+  <div class='center col-md-4 col-sm-4 col-xs-6 bottomspace'>
+    <img class='headshot img-circle' src='photos-instructor/MuratArcak.jpg'/></a>
+    <br/>
+    <b>Murat Arcak</b><br/>
+    <small> he/him/his </small> <br/>
+    arcak@
+  </div>
+</div>
+
+<h3>GSIs</h3>
+<br> <br>
+<div class='row'>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AliciaMatsumoto.jpeg' onmouseover="this.src='photos-gsi/AliciaMatsumotoFun.jpg'" onmouseout="this.src='photos-gsi/AliciaMatsumoto.jpeg'" data-toggle="modal" data-target="#modal_gsi0"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey hi hello! I&#x27;m a third-year majoring in EECS and minoring in Astrophysics, and this is my fifth semester on EECS 16A/B staff. I&#x27;m super interested in educational accessibility and applications of linear algebra, especially in physics and astronomy. I drink a lot more coffee than I probably should, and my socks have cats on them roughly half the time. Email me about anything anytime -- so excited for the semester ahead!</small></p>
+      </div>
+    <b>Alicia Matsumoto</b><br/>
+    Admin Head (HW / Grading)<br/>
+    <small> she/her/hers </small> <br/>
+    eecs16b-sp22@, aliciamatsumoto@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MaxwellChen.jpg' data-toggle="modal" data-target="#modal_gsi1"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>:)</small></p>
+      </div>
+    <b>Maxwell Chen</b><br/>
+    Admin Head (Internal), Discussion<br/>
+    <small> he/him/his </small> <br/>
+    eecs16b-sp22@, maxhchen@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DivijaHasteer.JPG' onmouseover="this.src='photos-gsi/DivijaHasteerFun.JPG'" onmouseout="this.src='photos-gsi/DivijaHasteer.JPG'" data-toggle="modal" data-target="#modal_gsi2"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey there, I&#x27;m a third-year EECS major, currently researching the intersection between hardware and machine learning. Talk to me about the Cal dining halls, the curly girl method, sneakers, grammar, chess, or driving [or EECS 16B] and I&#x27;ll talk your ear off. Please swing by my office hours any time. Looking very forward to meeting you all! </small></p>
+      </div>
+    <b>Divija Hasteer</b><br/>
+    Admin Head (Communications / Piazza), Discussion<br/>
+    <small> she/her/hers </small> <br/>
+    eecs16b-sp22@, dhasteer@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/NimaRahmanian.jpg' onmouseover="this.src='photos-gsi/NimaRahmanianFun.jpg'" onmouseout="this.src='photos-gsi/NimaRahmanian.jpg'" data-toggle="modal" data-target="#modal_gsi3"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey, I&#x27;m Nima! I&#x27;m a second year CS major interested in making life easier with software. I like listening to classic rock, reggae, and Persian music. I hope you enjoy 16B as much as I do!</small></p>
+      </div>
+    <b>Nima Rahmanian</b><br/>
+    Admin<br/>
+    <small> he/him/his </small> <br/>
+    eecs16b-sp22@, nimsi@
+    </div>
+</div>
+<div class="row">
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/BridgetAgyare.png' data-toggle="modal" data-target="#modal_gsi0"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I am a second year EECS major from the Bay Area. I would say my favorite part of 16B is all of the math! Outside of school I like exercising, shopping, and listening to Ariana Grande.</small></p>
+      </div>
+    <b>Bridget Agyare</b><br/>
+    Admin<br/>
+    <small> she/her/hers </small> <br/>
+    eecs16b-sp22@, bridgetagyare@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/PriyansDesai.jpeg' onmouseover="this.src='photos-gsi/PriyansDesaiFun.png'" onmouseout="this.src='photos-gsi/PriyansDesai.jpeg'" data-toggle="modal" data-target="#modal_gsi1"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I am Priyans, a CS senior from India. I really enjoy teaching, especially 16B labs. I am very interested in systems programming and it&#x27;s intersection with data, especially parallel programming. I am also interested in Machine Learning. I work in the RISE lab on the NumS project, which is a distributed-computing based NumPy-like library. I have recently developed interest in cooking and baking, but I am yet to create something magical. I like going on runs (more like walks lol) in Berkeley. I absolutely love the food at Gypsy&#x27;s and Seniore&#x27;s. Please do not hesitate in reaching out to me! It&#x27;s my last semester teaching 16B and I want to make it the best for all of you. See you all in lab soon. :)</small></p>
+      </div>
+    <b>Priyans Desai</b><br/>
+    Lab Head<br/>
+    <small> he/him/his </small> <br/>
+    eecs16b-sp22@, priyansdesai@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/EricYang.jpeg' data-toggle="modal" data-target="#modal_gsi2"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone, I&#x27;m Eric! I&#x27;m a junior studying EECS from New York. I&#x27;m really interested in many fields, including controls and optimization. In my free time, I love anything aviation-related, playing basketball, and watching the NBA. Please feel free to come talk or reach out to me about anything at all. I can&#x27;t wait to get to know everyone!</small></p>
+      </div>
+    <b>Eric Yang</b><br/>
+    Lab Head<br/>
+    <small> he/him/his </small> <br/>
+    eecs16b-sp22@, ericzyang@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/SravyaBasvapatri.jpg' onmouseover="this.src='photos-gsi/SravyaBasvapatriFun.JPG'" onmouseout="this.src='photos-gsi/SravyaBasvapatri.jpg'" data-toggle="modal" data-target="#modal_gsi3"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi friends! I&#x27;m a senior studying EECS/Business and this is my 5th time teaching lab with 16B! In my free time, I love crafting, painting, lifting, and photography. I love to travel and see nature and I&#x27;ve visited Yosemite, Death Valley, and the Grand Canyon this past semester. Feel free to reach out to me to chat about the course or anything at all. I&#x27;m looking forward to meeting you!</small></p>
+      </div>
+    <b>Sravya Basvapatri</b><br/>
+    Lab Head<br/>
+    <small> she/her/hers </small> <br/>
+    eecs16b-sp22@, sravyab@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/NeeleshRamachandran.jpg' onmouseover="this.src='photos-gsi/NeeleshRamachandranFun.jpg'" onmouseout="this.src='photos-gsi/NeeleshRamachandran.jpg'" data-toggle="modal" data-target="#modal_gsi4"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I&#x27;m a senior studying EECS, and I&#x27;m from Los Gatos, CA. I&#x27;m interested in everything hardware-related, and particularly enjoy studying integrated circuits and circuit design. My research has spanned the development of new devices (memory-based transistors) and education research (!) so feel free to ask about that! I&#x27;m excited to be teaching 16B for the 3rd time, and always feel free to email me. I look forward to meeting many of you!</small></p>
+      </div>
+    <b>Neelesh Ramachandran</b><br/>
+    Content Head, Discussion, Software<br/>
+    <small> he/him/his </small> <br/>
+    neelesh.r@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DruvPai.jpg' onmouseover="this.src='photos-gsi/DruvPaiFun.jpg'" onmouseout="this.src='photos-gsi/DruvPai.jpg'" data-toggle="modal" data-target="#modal_gsi5"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a fourth year CS major from the Bay Area, and it&#x27;s my fourth semester as a TA. Outside of classes and teaching, I&#x27;m usually doing research on foundations of deep learning, playing basketball, or screwing around with TeX. Feel free to reach out with questions, comments, or if you just want to talk about anything, class-related or not. Looking forward to having a great semester with you all, and please do come see me in section!</small></p>
+      </div>
+    <b>Druv Pai</b><br/>
+    Content Head, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    druvpai@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AnishMuthali.jpg' data-toggle="modal" data-target="#modal_gsi6"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a third year EECS major doing research in controls, robotics, and ML. I&#x27;m also super interested in finance and trading. Outside of academics, I enjoy playing tennis and riding my bike around the wonderful city of Berkeley.</small></p>
+      </div>
+    <b>Anish Muthali</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    anishmuthali@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/JichanChung.JPG' data-toggle="modal" data-target="#modal_gsi7"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I love trying new food. I often check news in the poster wall in the Sather Gate and the Mofitt Library. In my opinion, my hometown Seoul is the coolest place. Lots of food to enjoy, and also safe at night even if you are outside. I like the transport layer because it is where the most of the algorithmic developments in internet are happening, and testing a new algorithm is usually free while testing new hardware can be expensive.</small></p>
+      </div>
+    <b>Jichan Chung</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    jichan3751@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/SallyAnnHui.png' data-toggle="modal" data-target="#modal_gsi8"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I&#x27;m a 2nd year PhD in EECS. As your GSI I&#x27;m never gonna give up on you, never gonna let you down. Never gonna run around and desert you.</small></p>
+      </div>
+    <b>Sally Hui</b><br/>
+    Content, Discussion<br/>
+    <small> she/her/hers </small> <br/>
+    sally.ann@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/TanmayGautam.jpg' data-toggle="modal" data-target="#modal_gsi9"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I&#x27;m a 3rd year PhD student in CIR, EECS. My research interests lie broadly at the intersection of optimization, control and machine learning. More specifically, some projects that I have worked on are focused on convex neural network training and safe reinforcement learning. Outside of work, you can often find me playing tennis or exploring new restaurants around the East bay!</small></p>
+      </div>
+    <b>Tanmay Gautam</b><br/>
+    Content, Discussion<br/>
+    <small> he/him/his </small> <br/>
+    tgautam23@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AntroyRoyChowdhury.PNG' data-toggle="modal" data-target="#modal_gsi10"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I&#x27;m a second year PhD student at EECS majoring in Integrated Circuits. My field of research is high-speed wireline links and Silicon Photonics. I love designing circuits and systems for different applications. Apart from academics, I enjoy reading Vedic scriptures (the famous ancient wisdom texts) and they always show me proper directions in the journey of life.</small></p>
+      </div>
+    <b>Antroy Roy Chowdhury</b><br/>
+    Content<br/>
+    <small> he/him/his </small> <br/>
+    antroy@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/WahidRahman.jpeg' data-toggle="modal" data-target="#modal_gsi11"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>3rd year PhD student in integrated circuits. Research interests include system and transistor-level design of next-generation high speed electrical and optical links</small></p>
+      </div>
+    <b>Wahid Rahman</b><br/>
+    Content<br/>
+    <small>  </small> <br/>
+    wahid.rahman@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/doge.jpg' data-toggle="modal" data-target="#modal_gsi12"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>:)</small></p>
+      </div>
+    <b>Ke Wang</b><br/>
+    Content<br/>
+    <small>  </small> <br/>
+    kewang@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/doge.jpg' data-toggle="modal" data-target="#modal_gsi13"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>:)</small></p>
+      </div>
+    <b>Risheek Pingili</b><br/>
+    Discussion<br/>
+    <small>  </small> <br/>
+    risheekp@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/IsabellaBorkovic.png' onmouseover="this.src='photos-gsi/IsabellaBorkovicFun.png'" onmouseout="this.src='photos-gsi/IsabellaBorkovic.png'" data-toggle="modal" data-target="#modal_gsi14"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I am a second-year student whose hobbies include watching tennis, using my imagination, and laughing. Looking forward to a good semester! :-)</small></p>
+      </div>
+    <b>Isabella Borkovic</b><br/>
+    Discussion<br/>
+    <small> she/her/hers </small> <br/>
+    iborkovic@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/NareaupholLiu.png' onmouseover="this.src='photos-gsi/NareaupholLiuFun.jpeg'" onmouseout="this.src='photos-gsi/NareaupholLiu.png'" data-toggle="modal" data-target="#modal_gsi15"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m Gavin, a senior studying in EECS and I&#x27;ll be teaching discussion alongside many other things. I enjoy studying robotics, controls and many types of circuit design. I&#x27;m excited to meet everyone this Spring (hopefully!)</small></p>
+      </div>
+    <b>Nareauphol (Gavin) Liu</b><br/>
+    Discussion<br/>
+    <small> he/him/his </small> <br/>
+    nareauphol.liu@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/RohitAgarwal.jpg' data-toggle="modal" data-target="#modal_gsi16"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small> Hi, my name is Rohit and I&#x27;m a second-year EECS major from NJ. I love math, puzzles, food, and learning new things. Tell me your favorite place to eat in Berkeley. </small></p>
+      </div>
+    <b>Rohit Agarwal</b><br/>
+    Discussion<br/>
+    <small>  </small> <br/>
+    rohaga@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MeganZeng.jpg' data-toggle="modal" data-target="#modal_gsi17"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a third year EECS major, and I&#x27;m interested in signal processing, circuits, and ML. I&#x27;m looking forward to lab this semester!</small></p>
+      </div>
+    <b>Megan Zeng</b><br/>
+    Lab Content<br/>
+    <small> she/her/hers </small> <br/>
+    zengmegan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/StevenLu.jpg' data-toggle="modal" data-target="#modal_gsi18"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m an EECS 5th year MS student with an emphasis in IC design. Outside of academics, I enjoy playing board/video games, skiing, and playing the clarinet and piano.</small></p>
+      </div>
+    <b>Steven Lu</b><br/>
+    Lab Content<br/>
+    <small>  </small> <br/>
+    stevenl@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/Yi-HsuanShih.jpg' data-toggle="modal" data-target="#modal_gsi19"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I am a 4th year PhD student in integrated circuits. My research involves clocking circuits in high speed serial links. Looking forward to working with you through the semester!</small></p>
+      </div>
+    <b>Yi-Hsuan Shih</b><br/>
+    Lab Content<br/>
+    <small> she/her/hers </small> <br/>
+    yihsuan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/BozhiYin.jpg' data-toggle="modal" data-target="#modal_gsi20"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>4th year PhD student in INC, EECS; like game, anime, and badminton</small></p>
+      </div>
+    <b>Bozhi Yin</b><br/>
+    Lab Content<br/>
+    <small> he/him/his </small> <br/>
+    bozhi_yin@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ChristineLou.png' data-toggle="modal" data-target="#modal_gsi21"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey everyone! I&#x27;m Christine and currently a senior studying computer science. Born and raised in the Bay Area, I love to hike and play with my puppy, Teddy. Excited to get to meet y&#x27;all!</small></p>
+      </div>
+    <b>Chistine Lou</b><br/>
+    Lab<br/>
+    <small> she/her/hers </small> <br/>
+    christinelou@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DarbyClement.jpg' onmouseover="this.src='photos-gsi/DarbyClementFun.jpg'" onmouseout="this.src='photos-gsi/DarbyClement.jpg'" data-toggle="modal" data-target="#modal_gsi22"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>What&#x27;s good y&#x27;all! I&#x27;m a third year EECS undergrad and I&#x27;m pumped to TA lab for the second time! Outside of spending half of my waking hours walking to/from and working in Cory, I like to climb and run, neither of which I am particularly good at. </small></p>
+      </div>
+    <b>Darby Clement</b><br/>
+    Lab<br/>
+    <small> she/her/hers </small> <br/>
+    darbyclement@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KaitlynChan.jpg' onmouseover="this.src='photos-gsi/KaitlynChanFun.JPG'" onmouseout="this.src='photos-gsi/KaitlynChan.jpg'" data-toggle="modal" data-target="#modal_gsi23"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello, I&#x27;m Kaitlyn and I&#x27;m a fourth year EECS major. Feel free to reach out to me about school stuff (research, classes, teaching) or hobbies (reading, looking at cats). See you in lab! ʕ•ᴥ•ʔ</small></p>
+      </div>
+    <b>Kaitlyn Chan</b><br/>
+    Lab<br/>
+    <small> she/her/hers </small> <br/>
+    kaitlynjchan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/TomXie.png' onmouseover="this.src='photos-gsi/TomXieFun.png'" onmouseout="this.src='photos-gsi/TomXie.png'" data-toggle="modal" data-target="#modal_gsi24"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey, I&#x27;m a senior in EECS currently leaning towards EE; feel free to ask me questions about both EE and CS courses or really anything! This is my 6th semester on lab staff. In my free time, I listen to funk and jazz, watch anime, play Switch games, and occasionally exercise. Can&#x27;t wait to (hopefully) see y&#x27;all in person!</small></p>
+      </div>
+    <b>Tom Xie</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    xie.tom.zy@b
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MartinHodde.jpg' onmouseover="this.src='photos-gsi/MartinHoddeFun.jpg'" onmouseout="this.src='photos-gsi/MartinHodde.jpg'" data-toggle="modal" data-target="#modal_gsi25"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey! I&#x27;m a junior EECS major and I&#x27;m stoked to build circuits with you all in lab for the fourth consecutive semester now. I love biking around the Bay Area, curating Spotify playlists, and playing poker with friends. Looking forward to a fun semester!</small></p>
+      </div>
+    <b>Martin Hodde</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    mhodde@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/NoahLee.jpg' onmouseover="this.src='photos-gsi/NoahLeeFun.jpg'" onmouseout="this.src='photos-gsi/NoahLee.jpg'" data-toggle="modal" data-target="#modal_gsi26"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a junior studying Computer Science! 16B labs may be painful at times, but they are honestly my favorite part of this course! I enjoy running and baking bread when I don&#x27;t feel like being lazy.</small></p>
+      </div>
+    <b>Noah Lee</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    leenoahk00@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ChristopherLung.JPG' data-toggle="modal" data-target="#modal_gsi27"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I&#x27;m Chris, a senior majoring in BioE with a concentration in biomedical devices. My hobbies include playing piano and watching Worth It episodes. I really enjoyed the labs when I took the class, so I hope you all have the same fun and exciting experience too!</small></p>
+      </div>
+    <b>Christopher Lung</b><br/>
+    Lab<br/>
+    <small> he/him/his </small> <br/>
+    christopherlung2000@
+    </div>
+</div>
+
+<h3>ASEs, Readers, Tutors</h3>
+<br> <br>
+<div class='row'>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AmyDoo.jpg' data-toggle="modal" data-target="#modal_gsi0"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! I&#x27;m a 4th year EECS major from the Bay Area. In my free time, I like to listen to music, learn to cook, and attempt to exercise.</small></p>
+      </div>
+    <b>Amy Doo</b><br/>
+    Software ASE<br/>
+    <small> she/her/hers </small> <br/>
+    amy30@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DerekLiu.png' data-toggle="modal" data-target="#modal_gsi1"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>senior second semester eecs i like robots and things that control robots as software i write robots that make course logistics go brrr</small></p>
+      </div>
+    <b>Derek Liu</b><br/>
+    Software ASE<br/>
+    <small> he/they </small> <br/>
+    liuderek@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/StellaZeng.jpg' onmouseover="this.src='photos-gsi/StellaZengFun.jpg'" onmouseout="this.src='photos-gsi/StellaZeng.jpg'" data-toggle="modal" data-target="#modal_gsi2"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a sophomore from central Iowa (kudos if you know where that is) studying EECS. I&#x27;m currently searching for what I want to do in life. In my free time I like to listen to classical music, go hiking, try new food, and travel!</small></p>
+      </div>
+    <b>Stella Zeng</b><br/>
+    Software ASE<br/>
+    <small> she/her/hers </small> <br/>
+    zengstellas@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ZackoriCui.jpeg' onmouseover="this.src='photos-gsi/ZackoriCuiFun.jpeg'" onmouseout="this.src='photos-gsi/ZackoriCui.jpeg'" data-toggle="modal" data-target="#modal_gsi3"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>👶⚡️💻🎓👨‍🏫👨‍🎓👨‍💻📀💵👩‍❤️‍👨📈💰🏠👨‍👩‍👧‍👦🧓✌️☁️</small></p>
+      </div>
+    <b>Zijin (Zackori) Cui</b><br/>
+    Piazza ASE<br/>
+    <small> he/him/his </small> <br/>
+    zijincui281@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/BenLiao.jpg' onmouseover="this.src='photos-gsi/BenLiaoFun.png'" onmouseout="this.src='photos-gsi/BenLiao.jpg'" data-toggle="modal" data-target="#modal_gsi4"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey everyone! Really excited to be on course staff on a Discussion ASE this semester! Feel free to drop by with any questions that you might have with the class. Relating to academics, I am interested in power electronics and renewable energy. Outside of academics, I enjoy amateur astronomy, hiking, biking, baking Taiwanese pastries (I&#x27;m Taiwanese), and speedcubing. I&#x27;m always down to talk, anyone is welcome to my section to chat!</small></p>
+      </div>
+    <b>Ben Liao</b><br/>
+    Discussion ASE<br/>
+    <small> he/him/his </small> <br/>
+    benliao1@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/YukiIto.jpg' onmouseover="this.src='photos-gsi/YukiItoFun.jpg'" onmouseout="this.src='photos-gsi/YukiIto.jpg'" data-toggle="modal" data-target="#modal_gsi5"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I am a 3rd year CS student from Bogart, Georgia. Interested in a lot of things like digital design, signal processing, and optimization. I love taking getaway trips and watching Japanese comedy shows in my free-time! Feel free to hmu!</small></p>
+      </div>
+    <b>Yuki Ito</b><br/>
+    HW ASE<br/>
+    <small> he/him/his </small> <br/>
+    itoyuki@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/OliverYu.jpg' onmouseover="this.src='photos-gsi/OliverYuFun.JPG'" onmouseout="this.src='photos-gsi/OliverYu.jpg'" data-toggle="modal" data-target="#modal_gsi6"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I&#x27;m a second-year EECS major, and I&#x27;m really excited to be helping out with 16B this semester! In my free time, I enjoy browsing the aisles of Trader Joe&#x27;s, playing Settlers of Catan, shopping at UNI-QLO, and taking 15-minute power naps.</small></p>
+      </div>
+    <b>Oliver Yu</b><br/>
+    HW ASE<br/>
+    <small> he/him/his </small> <br/>
+    oliveryu@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/SakethMalyala.jpg' onmouseover="this.src='photos-gsi/SakethMalyalaFun.jpg'" onmouseout="this.src='photos-gsi/SakethMalyala.jpg'" data-toggle="modal" data-target="#modal_gsi7"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I&#x27;m a second-year CS &amp; math major. I like to eat, run and bake. I don&#x27;t like eggplant. Once I set off a fire alarm five times in a row. Looking forward to working with you all in 16B!</small></p>
+      </div>
+    <b>Saketh Malyala</b><br/>
+    HW ASE<br/>
+    <small> he/him/his </small> <br/>
+    sakethmalyala@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DerickTseng.jpg' data-toggle="modal" data-target="#modal_gsi8"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello everyone! I&#x27;m a 3rd year EECS and MSE double major from SoCal. I&#x27;m interested in semiconductors and hardware design. In my free time, I like to play StarCraft, chess, and putting up my spaghetti code on github. Looking forward to meeting and working with everyone!</small></p>
+      </div>
+    <b>Derick Tseng</b><br/>
+    HW ASE<br/>
+    <small> he/him/his </small> <br/>
+    derickwtseng@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/BrianTaylor.png' onmouseover="this.src='photos-gsi/BrianTaylorFun.png'" onmouseout="this.src='photos-gsi/BrianTaylor.png'" data-toggle="modal" data-target="#modal_gsi9"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I&#x27;m a second-year L&amp;S CS student from Sacramento, California. Outside of classes, I&#x27;ve dabbled in networking and web dev, and I love to rock climb and ski!</small></p>
+      </div>
+    <b>Brian Taylor</b><br/>
+    HW ASE<br/>
+    <small> he/him/his </small> <br/>
+    bpt@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MaryamAzmandian.jpg' onmouseover="this.src='photos-gsi/MaryamAzmandianFun.JPG'" onmouseout="this.src='photos-gsi/MaryamAzmandian.jpg'" data-toggle="modal" data-target="#modal_gsi10"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi you lovely people! My name is Maryam (Mær-Yæm—&#x27;Yam&#x27; like the vegetable :D) and I&#x27;m a third year studying EECS! I have a broad range of interests, including Human-Computer Interaction, Signal Processing, Robotics, Virtual Reality, and Machine Learning! I love playing sports (especially basketball!), going on nice walks/hikes around town (def checkout Fire Trails!), and watching cute cat videos ᴖᴥᴖ. ʕっ• ᴥ • ʔっ[A bit of advice!] I was a 16B student last semester (Fa21) and I really appreciated how encouraging the staff were and helped me build a strong conceptual foundation about the very cool content in this class which helped me enjoy it so much! (especially during the Study Strategy OH, come to OH and ask me about it and I&#x27;ll gladly share the many ways it helped me!). I&#x27;d love to support you on this amazing journey and am excited to see you and learn your name!</small></p>
+      </div>
+    <b>Maryam Azmandian</b><br/>
+    HW ASE<br/>
+    <small> she/her/hers </small> <br/>
+    m_azmandian@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AndrewZhang.jpg' data-toggle="modal" data-target="#modal_gsi11"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I am a 3rd year CS and Physics student interested in quantum computing and embedded systems. I play minecraft and coh2 when I&#x27;m not busy drawing inductors or doing homework.</small></p>
+      </div>
+    <b>Andrew Zhang</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    andrewzhang1635@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DylanReimer.jpeg' data-toggle="modal" data-target="#modal_gsi12"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! My name is Dylan, I am a third year EECS undergrad with interests in full stack / front end dev, embedded systems and digital logic. In my free time I love to produce music, work on side projects, play videogames/sports, and thrift :) Can&#x27;t wait to share this next semester with you all!</small></p>
+      </div>
+    <b>Dylan Reimer</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    dylanreimer@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/FourthTeerakapibal.jpg' data-toggle="modal" data-target="#modal_gsi13"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m Fourth, a rising senior studying EECS with interest in Deep Learning. In my free time I like to play guitar and do photography.</small></p>
+      </div>
+    <b>Fourth Teerakapibal</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    todsatid@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ShivangSingh.JPEG' data-toggle="modal" data-target="#modal_gsi14"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>👋 I&#x27;m a junior EECS major. This is my third time on 16b course staff, and my first time doing hands on lab! I am currently involved with distributed systems research in RISE Lab. I enjoy playing soccer and basketball.</small></p>
+      </div>
+    <b>Shivang Singh</b><br/>
+    Lab ASE<br/>
+    <small>  </small> <br/>
+    shivangsingh@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/IngaZhuravleva.jpeg' onmouseover="this.src='photos-gsi/IngaZhuravlevaFun.jpeg'" onmouseout="this.src='photos-gsi/IngaZhuravleva.jpeg'" data-toggle="modal" data-target="#modal_gsi15"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! My name is Inga, and I am a sophomore studying EECS. I am interested in neurotech, brain-machine interfaces, and electronics. In my free time, I enjoy reading, playing the piano, listening to podcasts, and working on side projects.. And sometimes, I build useless stuff like this blinking hat or an iron man gauntlet. Looking forward to a fun semester and feel free to reach out about anything!</small></p>
+      </div>
+    <b>Inga Zhuravleva</b><br/>
+    Lab ASE<br/>
+    <small> she/her/hers </small> <br/>
+    ing4@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/PhilipHa.jpg' onmouseover="this.src='photos-gsi/PhilipHaFun.JPG'" onmouseout="this.src='photos-gsi/PhilipHa.jpg'" data-toggle="modal" data-target="#modal_gsi16"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi there! I&#x27;m a second year undergrad majoring in CS and Cognitive Science! I love playing video games, binging movies and TV shows, and streaming on Twitch. Can&#x27;t wait to meet you all this semester and help you get through the labs! </small></p>
+      </div>
+    <b>Philip Ha</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    philipha620@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MingyangWang.png' onmouseover="this.src='photos-gsi/MingyangWangFun.jpeg'" onmouseout="this.src='photos-gsi/MingyangWang.png'" data-toggle="modal" data-target="#modal_gsi17"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Peekaboo! I&#x27;m Mingyang, a current sophomore in EECS. If you see someone with a Thomas the flamethrower zoom background, that&#x27;s probably me. In my free time, I commit too much time wasting my life away on degenerate video games and a crippling obsession with legos. Yes I&#x27;m the duck guy. No I have no clue what I&#x27;m doing. Feel free to spam me, I&#x27;m probably bored or something like that.</small></p>
+      </div>
+    <b>Mingyang Wang</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    quackquack@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/BryanNgo.png' onmouseover="this.src='photos-gsi/BryanNgoFun.png'" onmouseout="this.src='photos-gsi/BryanNgo.png'" data-toggle="modal" data-target="#modal_gsi18"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I&#x27;m Bryan, a junior studying EECS from Union City, CA, and I&#x27;m excited to be a lab assistant this semester! 16B is an exciting class, and I hope to show you all why. In my free time you&#x27;ll see me gaming the days away. Feel free to ask me anything from flag design to mechanical keyboards.</small></p>
+      </div>
+    <b>Bryan Ngo</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    bryanngo@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/RoshanRegula.jpg' data-toggle="modal" data-target="#modal_gsi19"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! My name is Roshan and I&#x27;m a sophomore studying CS from the Bay. I&#x27;m interested in the filed of ML/AI. Outside of school, I love watching tv shows or movies. I watch a lot of anime too. I also love any sort of physical activity ranging from martial arts to table tennis. Feel free to reach out to me about anything and hope you have a great semester!</small></p>
+      </div>
+    <b>Roshan Regula</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    rregula.3312@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/SerenaGu.png' data-toggle="modal" data-target="#modal_gsi20"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I am a second year CS and Econ major from Beijing and Vancouver. I enjoy doing outdoor activities, trying out new restaurants, taking naps, and I recently started cooking. I look forward to this semester with y&#x27;all!</small></p>
+      </div>
+    <b>Serena Gu</b><br/>
+    Lab ASE<br/>
+    <small> she/her/hers </small> <br/>
+    serena.gu@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/VincentWang.jpg' data-toggle="modal" data-target="#modal_gsi21"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! If you&#x27;re reading this, thank you for going out of your way to toggle my bio! Unfortunately, I&#x27;m not a particularly interesting person and I don&#x27;t have much to say for myself, but I&#x27;m a 2nd year EECS major, and this is my 2nd semester as a lab ASE. I like to play piano in my free time, and I love a good story. Thanks for coming to my ted talk!</small></p>
+      </div>
+    <b>Vincent Wang</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    vincent-wang@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ShreyAeron.png' onmouseover="this.src='photos-gsi/ShreyAeronFun.png'" onmouseout="this.src='photos-gsi/ShreyAeron.png'" data-toggle="modal" data-target="#modal_gsi22"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hiya! I’m Shrey, a sophomore studying EECS. I’m also known as shreystechtips 🤪. In my free time, you can find me exploring random parts of campus, hiking, taking photos, and watching tech YouTube (LTT, anyone?). Being a passion of mine, I’m active in robotics research in agriculture and fabric manipulation along with building Battlebots! Feel free to message me if ya want to talk about anything :D PS: https://youtube.com/shreystechtips</small></p>
+      </div>
+    <b>Shrey Aeron</b><br/>
+    Lab ASE<br/>
+    <small>  </small> <br/>
+    aeron@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/doge.jpg' data-toggle="modal" data-target="#modal_gsi23"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>:)</small></p>
+      </div>
+    <b>Sean Chen</b><br/>
+    Lab ASE<br/>
+    <small>  </small> <br/>
+    00schen@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/EranKohenBehar.jpg' data-toggle="modal" data-target="#modal_gsi24"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m Eran, a sophomore EECS major from Istanbul, Turkey. Besides teaching I love traveling, photography and to play the piano. Feel free to reach out to me about anything, 16B related or not :)</small></p>
+      </div>
+    <b>Eran Kohen Behar</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    erankohen@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/RohanMathur.jpg' onmouseover="this.src='photos-gsi/RohanMathurFun.jpg'" onmouseout="this.src='photos-gsi/RohanMathur.jpg'" data-toggle="modal" data-target="#modal_gsi25"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m Rohan and I am a sophomore from Cincinnati, Ohio studying computer science and economics. My hobbies include playing guitar, bass, and running. P.S. IF ANYONE FINDS A LIGHTNING MCQUEEN LUNCHBOX ON CAMPUS, PLEASE EMAIL ME AT LightningMcQueenLunchBox@gmail.com</small></p>
+      </div>
+    <b>Rohan Mathur</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    rohanmathur@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MartinZhai.jpeg' onmouseover="this.src='photos-gsi/MartinZhaiFun.jpeg'" onmouseout="this.src='photos-gsi/MartinZhai.jpeg'" data-toggle="modal" data-target="#modal_gsi26"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi there! I am Martin, currently a junior here at Cal studying applied math and computer science. Outside classes, I enjoyed traveling a lot, been to Norway (love that place so much that I will definitely visit that place again). Hope to meet everyone in this semester!</small></p>
+      </div>
+    <b>Martin (Yuqi) Zhai</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    yuq1zhai@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DominicVentimiglia.png' data-toggle="modal" data-target="#modal_gsi27"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello everyone, my name is Dominic. I am currently a second year EECS student and I am interested in machine learning. I am from Orange County, down in Southern California, and in my free time I love to snowboard, surf, and play baseball. I spend most of my time here studying and sleeping, but if you can catch me outside of a nap, I am always down for a good chat about baseball or the endless wonders of space.</small></p>
+      </div>
+    <b>Dominic Ventimiglia</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    Ventimdg@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KalieChing.jpg' onmouseover="this.src='photos-gsi/KalieChingFun.JPG'" onmouseout="this.src='photos-gsi/KalieChing.jpg'" data-toggle="modal" data-target="#modal_gsi28"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I’m Kalie, and I’m a sophomore studying CS and DS. I love live music, painting, and hiking until I find a good view. Much of my free time is spent trying out new recipes and talking about life. Send me some book recommendations! Always down to talk about anything so feel free to reach out. :))</small></p>
+      </div>
+    <b>Kalie Ching</b><br/>
+    Lab ASE<br/>
+    <small> she/her/hers </small> <br/>
+    kalieching@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/JackieRoche.jpeg' onmouseover="this.src='photos-gsi/JackieRocheFun.jpeg'" onmouseout="this.src='photos-gsi/JackieRoche.jpeg'" data-toggle="modal" data-target="#modal_gsi29"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a second-year EECS major from LA. A couple of my interests include embedded systems and entrepreneurship. Besides classes, I&#x27;m involved in AWE and I love baking, running, and crossing things off my bucket list!</small></p>
+      </div>
+    <b>Jackie Roche</b><br/>
+    Lab ASE<br/>
+    <small> she/her/hers </small> <br/>
+    jroche@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/BrendanRyanBenner.jpg' onmouseover="this.src='photos-gsi/BrendanRyanBennerFun.jpg'" onmouseout="this.src='photos-gsi/BrendanRyanBenner.jpg'" data-toggle="modal" data-target="#modal_gsi30"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a third-year CS major from Los Angeles, California. I&#x27;m interested in computer architecture and software development, and I&#x27;m excited to be working with you all this semester! Outside of class, I really love hiking, playing video games, and binging Star Wars.</small></p>
+      </div>
+    <b>Brendan Benner</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    brendanbenner@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/AndrewFan.jpg' data-toggle="modal" data-target="#modal_gsi31"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I&#x27;m Andrew, a 3rd year studying ME from Maryland. In my free time I enjoy sleeping, playing video games and reading. I&#x27;m excited to see you guys in lab this semester.</small></p>
+      </div>
+    <b>Andrew Fan</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    andrew.fan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ArnavGupta.jpeg' onmouseover="this.src='photos-gsi/ArnavGuptaFun.png'" onmouseout="this.src='photos-gsi/ArnavGupta.jpeg'" data-toggle="modal" data-target="#modal_gsi32"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I&#x27;m a sophomore in EECS. I like talking about cool stuff, playing chess, making music, being outdoors, and EECS, obviously. I&#x27;m excited to meet y&#x27;all.</small></p>
+      </div>
+    <b>Arnav Gupta</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    arnav-gupta@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/JoyLiu.jpg' onmouseover="this.src='photos-gsi/JoyLiuFun.png'" onmouseout="this.src='photos-gsi/JoyLiu.jpg'" data-toggle="modal" data-target="#modal_gsi33"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I&#x27;m a second-year studying CS and applied math. I like stir fry and things that fry my brain, and I dislike things that fry my Launchpad. Add me on Goodreads! www.goodreads.com/joyliu</small></p>
+      </div>
+    <b>Joy Liu</b><br/>
+    Lab ASE<br/>
+    <small> she/her/hers </small> <br/>
+    joy.liu@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/XavierBarneclo.jpg' onmouseover="this.src='photos-gsi/XavierBarnecloFun.jpg'" onmouseout="this.src='photos-gsi/XavierBarneclo.jpg'" data-toggle="modal" data-target="#modal_gsi34"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Heyo, I&#x27;m a Junior MechE major/EECS minor that enjoys hiking and all things outdoors. My favorite game has gotta be Hollow Knight, and I&#x27;m currently involved in research related to fluids -- in particular contact angles -- and embedded systems. Looking forward to helping you out in my favorite part of this course: labs!</small></p>
+      </div>
+    <b>Xavier Barneclo</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    xavierbarneclo@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/RaymondMo.jpg' onmouseover="this.src='photos-gsi/RaymondMoFun.jpg'" onmouseout="this.src='photos-gsi/RaymondMo.jpg'" data-toggle="modal" data-target="#modal_gsi35"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey I&#x27;m Raymond, a sophomore studying EECS. I am super interested in applying CS to astronomy and space tech! In my free time I play video games, hike, star gaze, and try to go outside to touch grass. Feel free to message/email me if you wanna chat about astronomy :)</small></p>
+      </div>
+    <b>Raymond Mo</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    raymondmo@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/VenkataAlapati.jpg' onmouseover="this.src='photos-gsi/VenkataAlapatiFun.jpg'" onmouseout="this.src='photos-gsi/VenkataAlapati.jpg'" data-toggle="modal" data-target="#modal_gsi36"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi, I am sophomore majoring in BioE &amp; Business and am interested in biorobotics. In my free time, I enjoy watching way more Netflix than I should and cooking (mostly) edible things. I also sometimes wonder how I made it onto course staff. Feel free to reach out if you have any questions or just want to chat!</small></p>
+      </div>
+    <b>Venkata Alapati</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    venkata.alapati@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KamalNahas.png' data-toggle="modal" data-target="#modal_gsi37"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey everyone! I am Kamal Nahas, sophomore majoring in EECS and I am a Lab Assistant this semester - could not be more excited about it! I am from France and Lebanon so if you ever need good food or good parties recs you know who to contact!</small></p>
+      </div>
+    <b>Kamal Nahas</b><br/>
+    Lab ASE<br/>
+    <small>  </small> <br/>
+    kamal.nahas@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/WalkerBrowning.png' onmouseover="this.src='photos-gsi/WalkerBrowningFun.png'" onmouseout="this.src='photos-gsi/WalkerBrowning.png'" data-toggle="modal" data-target="#modal_gsi38"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi everyone! I’m Walker, and I’m a third year studying materials science and EECS (If you have any questions about joint majors feel free to ask). I’m interested in electrical materials and circuit design and outside of school I enjoy running and playing soccer with friends.</small></p>
+      </div>
+    <b>Walker Browning</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    Walkerbrowning@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/CharlieHe.jpg' onmouseover="this.src='photos-gsi/CharlieHeFun.JPG'" onmouseout="this.src='photos-gsi/CharlieHe.jpg'" data-toggle="modal" data-target="#modal_gsi39"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I&#x27;m Charlie a 2nd year studying computer science from San Jose. I&#x27;m trying to get into Robotics/ML research and I love to lift weights and explore new places. My music preferences are rap, R&amp;B, and indie pop.</small></p>
+      </div>
+    <b>Charles He</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    cyhe@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/ArthurDeng.png' data-toggle="modal" data-target="#modal_gsi40"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I am a second year EECS major from Toronto, Canada. Feel free to shoot me an email if you want to play tennis, board games, ski together, or just want to chat!</small></p>
+      </div>
+    <b>Arthur Deng</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    langxing.deng@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/NitishSahni.jpg' data-toggle="modal" data-target="#modal_gsi41"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! My name is Nitish, and I&#x27;m a third-year EECS major from New Delhi. My interests include ML and systems tech. Outside classes, I enjoy playing the drums, golfing, and watching a ton of Netflix!</small></p>
+      </div>
+    <b>Nitish Sahni</b><br/>
+    Lab ASE<br/>
+    <small> he/him/his </small> <br/>
+    sahni@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/WesleyJiang.jpg' data-toggle="modal" data-target="#modal_gsi42"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hello! My name is Wesley - a sophomore EECS major. Currently, I&#x27;m still in the process of trying to figure out what I want to do for the rest of my college career. I&#x27;m excited to be a reader for y&#x27;all this semester.</small></p>
+      </div>
+    <b>Wesley Jiang</b><br/>
+    Reader<br/>
+    <small> he/him/his </small> <br/>
+    wesjiang@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/doge.jpg' data-toggle="modal" data-target="#modal_gsi43"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>:)</small></p>
+      </div>
+    <b>Yang Chen</b><br/>
+    Reader<br/>
+    <small>  </small> <br/>
+    yang.chen@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/SebastianArevalo.png' onmouseover="this.src='photos-gsi/SebastianArevaloFun.png'" onmouseout="this.src='photos-gsi/SebastianArevalo.png'" data-toggle="modal" data-target="#modal_gsi44"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi y’all! I’m a second year CS major from the LA area. I’m interested in various aspects of computer science, from hardware to machine learning. I’m a big foodie, so always feel free to ask about restaurants or let me know of your favorite ones here around Berkeley! I enjoy doing just about anything so long as I’m with friends, but I usually game or eat with them. I particularly love to ski and hike, as they’re great ways to burn calories to eat more delicious food!</small></p>
+      </div>
+    <b>Sebastian Arevalo</b><br/>
+    Reader<br/>
+    <small> he/him/his </small> <br/>
+    sarevalo@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/KarthikDharmarajan.jpeg' data-toggle="modal" data-target="#modal_gsi45"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>I&#x27;m a second year EECS major with a huge passion for robotics. In particular, I enjoy working with autonomous UAVs and performing any robotics-related compute intensive tasks in the cloud. When I&#x27;m not programming or working on robots, I enjoy playing video games, playing the piano, and singing.</small></p>
+      </div>
+    <b>Karthik Dharmarajan</b><br/>
+    Reader<br/>
+    <small>  </small> <br/>
+    kdharmarajan@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/RileyPeterlinz.png' onmouseover="this.src='photos-gsi/RileyPeterlinzFun.png'" onmouseout="this.src='photos-gsi/RileyPeterlinz.png'" data-toggle="modal" data-target="#modal_gsi46"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hi! I&#x27;m a junior transfer studying Physics + CS. Like many of you, I took 16B without having taken 16A so I hope I can be of specific assistance in navigating that experience. Feel free to shoot me an email if you need any help!</small></p>
+      </div>
+    <b>Riley Peterlinz</b><br/>
+    Reader<br/>
+    <small> he/him/his </small> <br/>
+    rpeterlinz@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/JeshuaGustafson.jpeg' data-toggle="modal" data-target="#modal_gsi47"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>My name is Jeshua, I&#x27;m studying IEOR with a minor in EECS.</small></p>
+      </div>
+    <b>Jeshua Gustafson</b><br/>
+    Reader<br/>
+    <small> he/him/his </small> <br/>
+    jeshuagustafson@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/DhruvVaish.jpeg' onmouseover="this.src='photos-gsi/DhruvVaishFun.jpeg'" onmouseout="this.src='photos-gsi/DhruvVaish.jpeg'" data-toggle="modal" data-target="#modal_gsi48"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey y&#x27;all! I am second-year EECS + Bioengineering from L.A. I loved this class when I took it, and my current interests (inspired by this class) include medical devices, signals, IC design, and embedded software. Other than that, I love studying in Kresge and walking around campus, so maybe I&#x27;ll see you around!</small></p>
+      </div>
+    <b>Dhruv Vaish</b><br/>
+    Reader<br/>
+    <small> he/him/his </small> <br/>
+    dvaish@
+    </div>
+      <div class='col-md-3 center col-sm-4 col-xs-6 bottomspace'>
+        <img class='headshot img-circle' src='photos-gsi/MihranMiroyan.jpg' onmouseover="this.src='photos-gsi/MihranMiroyanFun.jpg'" onmouseout="this.src='photos-gsi/MihranMiroyan.jpg'" data-toggle="modal" data-target="#modal_gsi49"/>
+      <button type="button" class="gsicollapsible">Click to Toggle Bio!</button>
+      <div class="gsicontent">
+        <p><small>Hey! I am a sophomore, studying Computer Science and Statistics. I am an international student from Armenia. I enjoyed 16B during my first in-person semester at Cal and fell in love with Berkeley. Besides academics I love playing chess, watching movies, and playing soccer with my friends. Email me if you have any questions or just wanna chat. Go 16B!</small></p>
+      </div>
+    <b>Mihran Miroyan</b><br/>
+    Reader<br/>
+    <small> he/him/his </small> <br/>
+    miroyan.mihran@
+    </div>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("gsicollapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>    </div>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bootstrap-dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="js/parallax.min.js"></script>
+
+  </body>
+</html>
