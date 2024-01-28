@@ -1,0 +1,336 @@
+Terminology
+===========
+
+This writeup is meant to provide quick definitions for a number of networking
+terms that we will use as we discuss networking security issues.  The writeup
+is structured into a number of topics:
+
+	General concepts
+	Layering
+	Terms associated with different layers
+	Terms associated with TCP
+	Protocols known by their acronyms
+	Notions particular to DNS
+
+which in general reflects the order in which we discuss different facets
+of networking in the overview lecture.  Within each topic, terms are listed
+alphabetically, except for "General concepts", where we cluster them
+according to themes that should help with following lecture.
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+General concepts:
+
+	Protocol
+		How a communication between distinct parties is specified
+		and structured.  This includes both its format (how to
+		determine the value of different groups of bits) and its
+		semantics (how to interpret what particular information
+		those values convey).
+
+	Message
+		A unit of communication between a sender and a receiver.
+		In some contexts, this is the same as "Packet" (see below),
+		but in other contexts, a message may be made up of multiple
+		packets.  For example, a single Web request is one HTTP
+		"message", but may require a large number of TCP messages
+		(packets), each of which is sent using an IP packet.
+
+	Packet
+		An atomic unit of structured communication.  In lowest
+		level terms, a series of bits sent consecutively along
+		a network link.  The bits are structured in terms of
+		headers (reflecting the management information associated
+		with different protocols) and data for those protocols,
+		also referred to as "payload".
+
+	Datagram
+		See "Packet" (synonym).
+
+	Header
+		The portion of a packet or a message that includes information
+		particular to a given protocol.  The term refers to the
+		fact that generally headers come *before* the "data" 
+		(or "payload") portion of the packet or message.  Headers
+		for different protocols often come directly one after another,
+		a reflection of *layering*.
+
+	End system
+		A computer that originates or receives packets in a network,
+		but does not forward them on behalf of other systems.
+
+	Host
+		This term is usually used as a synonym for "End system".
+		Sometimes, however, it is used as a synonym for the related
+		concept of "Node".
+
+	Node
+		A computer that's a member of a network.  This can be
+		either an "end system" or a "router".
+
+	Link
+		A direct communication path between/among two or more
+		computers.  If specifically between two computers, the
+		link is referred to as a "point-to-point" link.  If shared
+		among more than two, it is generally a "broadcast" link.
+
+	Subnetwork or Subnet
+		A network that uses a single physical technology.  That
+		is, all of the nodes in the network can communicate with
+		one another using that technology.
+
+	Forwarding
+		Transmitting a packet or message along a single network
+		connection.
+
+	Routing
+		Used to both refer to the process of computing hop-by-hop
+		paths through a network, and to refer to the act of
+		forwarding packets along those paths.
+
+	End-to-end
+		Considering (or implementing) a property all the way from
+		its ultimate source to its ultimate destination.  Often
+		used in contrast to "Hop-by-hop".  For example, end-to-end
+		protection against packets getting mangled during transmission
+		would be implemented by the sender including some sort of
+		checksum for a message, and the ultimate receiver testing
+		to see whether the checksum validates (discarding the
+		message if it does not validate).  Intermediary nodes might
+		not bother checking the checksum because any problems will
+		be dealt with ultimately anyway.
+
+	Hop-by-hop
+		Considering (or implementing) a property in terms of
+		explicitly propagating it through each forwarding step
+		along a network path.  For example, hop-by-hop protection
+		against packets getting mangled during transmission could
+		be implemented by each router validating a packet's checksum
+		and discarding the packet if the checksum fails to validate.
+		The router might also compute a new checksum prior to
+		forwarding the packet.
+
+	Layering
+		Building one protocol in terms of using the capabilities
+		and services provided by another protocol.  This is a type
+		of modular design, and is especially done in terms of a
+		"protocol stack".  See below for a separate section on the
+		names of standard network layers.
+
+	Protocol stack
+		A suite of protocols for which those at each layer (see
+		below) uses the functionality provided to it by one or
+		more protocols at the next layer "below" (i.e., by the
+		protocol one level below).
+
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Layering:
+
+	General notion
+		The Internet's design is layered, with each layer scoped
+		to provide a particular general class of functionality.
+		Each layer is designed to use the functionality provided
+		by the layer immediately below it, and to make available
+		functionality for use by the layer immediately above it.
+
+	Physical layer
+		The lowest layer in the Internet's design ("layer 1").
+		Provides the service of transmitting individual bits over
+		a single physical link.
+
+	Link layer
+		Uses the physical layer to transmit collections of bits
+		that have been grouped (or "framed") together into individual
+		messages ("packets", or "frames") for transmission across
+		a single subnetwork.  Also referred to as "layer 2".
+		
+	Internetwork layer or Network layer or IP layer (or just IP)
+		Uses the link layers provided by a series of network hops
+		to connect together multiple subnets and provide end-to-end
+		"internetwork" connectivity between nodes.  As part of
+		providing this, introduces a notion of "global" (Internet-wide)
+		addresses.  Also referred to as "layer 3".
+
+		IP = "Internet protocol", and refers to the Internet's
+		layer 3 protocol.
+
+		There are two versions of IP in use, 4 and 6.  These
+		are referred to as IPv4 and IPv6.  Today, IPv4 heavily
+		predominates, though there is a shift towards increasing
+		use of IPv6.  While there are some security differences
+		between the two, these are minor for our purposes.  We
+		will stick with IPv4, often referring to it as simply "IP"
+		(which is commonly done), unless explicitly noted otherwise.
+
+	Transport layer
+		Uses IP to provide end-to-end communication between
+		processes.  Can include a lot of additional end-to-end
+		functionality (such as reliability), though this is
+		not a fundamental requirement.  Includes a notion of
+		"ports" to identify the processes associated with the
+		communication.  Also referred to as "layer 4".
+
+	Application layer
+		Uses a transport-layer protocol to provide functional
+		end-to-end communication.  All sorts of styles of
+		communication are possible.  Examples are email (the
+		"SMTP" protocol), web ("HTTP"), Skype, and BitTorrent.
+
+		Also referred to as "layer 7 " (NOT "layer 5", due to
+		ancient history).
+
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Terms associated with different layers:
+
+	Address / IP address
+		A network-layer term that identifies a location in the
+		Internet.  Addresses usually refer to individual network
+		nodes, though some nodes can have multiple addresses, and
+		some devices ("NATs") can remap addresses of nodes.
+
+	Best effort
+		The datagram delivery service provided by IP (the Internet's
+		network layer).  Despite the name, it actually means
+		"IP will not callously throw away a packet without reason -
+		but it will give one not-bad try at forwarding/delivering
+		a packet, and if that fails, it will give up and throw it
+		away".
+
+	Broadcast
+		The ability for a single message to be received by
+		every node on a network.  Usually used in the context
+		of physical-layer or link-layer transmission, such
+		as electrical signals along a shared cable (physical
+		layer) or WiFi's everyone-receives-each-transmission
+		(link layer).
+
+	Port
+		A transport-layer notion that associates a 16-bit number
+		with a process at a given communication endpoint.
+		Internet transport-layer headers include a *source* port
+		(the number associated with the sender's process)
+		and a *destination* port (the number associated with
+		the receiver's process).  Some ports are by convention
+		associated with specific application-layer protocols,
+		such as TCP's port 80 with the HTTP protocol used for
+		standard web access.
+
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Terms associated with TCP:
+
+	Acknowledgment
+		A statement from one host in a TCP connection to the other
+		host confirming the reception of either a portion of the
+		byte stream or a previous control message.
+
+	Byte Stream
+		An abstraction provided by the Internet's main transport
+		protocol, TCP.  A byte stream is a sequence of bytes that
+		a sender transmits into the network and that subsequently
+		arrives in the same order, and with high reliability, at
+		the receiver.
+
+		Each TCP connection has *two* separate byte streams, one
+		from the host that initiated the connection (the "client")
+		to the host that accepted it (the "server"), and one from
+		the server to the client.
+
+	Control flags
+		Bits in the TCP header that indicate particular types
+		of information associated with managing the connection:
+
+		SYN	Indicates setting up a new connection.
+
+		ACK     Indicates that a TCP packet includes an acknowledgment
+			of some sort.
+
+		FIN	Used to agree on terminating a connection.
+
+		RST     Indicates an abrupt termination of a connection
+			because the host can no longer continue due to a
+			problem.
+
+		There are some other control flags, too, but we won't be
+		discussing them as their security impliations are minor.
+
+	Initial sequence number or ISN
+		A 32-bit number that identifies the index associated
+		with the *beginning* of a byte stream.
+
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Protocols known by their acronyms (for most, the expansion of the acronym
+isn't actually important, other than to help remember the acronym itself):
+
+	DHCP	Dynamic Host Configuration Protocol
+		A layer-2 protocol for bootstrapping a host's network setup.
+
+	DNS	Domain Name System
+		A layer-7 protocol used to map human-readable names like
+		www.google.com to Internet addresses.  (Also provides other
+		forms of mapping that we will discuss as needed.)
+
+	HTTP	Hypertext Transfer Protocol
+		The main (layer-7) protocol used for Web transfers/access.
+
+	IP	Internet Protocol
+		The Internet's layer 3 protocol.
+
+	SMTP	Simple Mail Transfer Protocol
+		The layer-7 protocol used for email.
+
+	TCP	Transmission Control Protocol
+		The Internet's most significant layer-4 protocol.
+		Used to provide reliable communication between hosts.
+
+	UDP	User Datagram Protocol
+		A lightweight layer-4 protocol, used for communication
+		where simplicity outweighs the needs for more complex
+		services such as reliability or a "byte stream" abstraction.
+
+
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+Notions particular to DNS:
+
+	Authoritative name server
+		The name server responsible for a subtree of the DNS naming
+		hierarchy.  For example, there is a set of authoritative
+		name servers responsible for ".com", and a separate set
+		of authoritative name servers for ".google.com".
+
+	Name server
+		A server that accepts incoming DNS lookup requests
+		and returns DNS answers in reply.
+
+	Resolver
+		A server that a given client has been configured to use
+		to get DNS answers.  Sometimes this refers to a process
+		running on the same computer as the client; other times
+		it refers to a process running on a separate computer,
+		such as an ISP's resolver, meaning the name server that
+		an ISP configures its clients to use.
+
+	Root
+		The topmost point in the DNS naming hierarchy, also referred
+		to as "." ("dot").  For example, both "com" and "org" are
+		names that can be looked up in ".".
+
+	Top-level domain or TLD
+		A DNS name that comes just below the root, such as "com"
+		or "org".  These are often referred to with a leading
+		dot, such as "dot-com" or "dot-org".
+
+	TTL or Time To Live
+		For DNS, refers to how long a DNS reply may be cached
+		(in seconds).  Note that TTL is used with a quite
+		different meaning in the IP protocol header, though
+		we will not encounter that use until later in the
+		course (if at all).
