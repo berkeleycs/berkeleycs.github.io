@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <base href="">
+  <meta charset="UTF-8" />
+  <meta name="description" content="Course information for UC Berkeley's CS 162: Operating Systems and Systems Programming">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 162 &mdash; Spring 2021</title>
+  <link rel="shortcut icon" href="static/site/cs162bean.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+          integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="static/css/custom.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<a href="index.html" class="navbar-brand">CS 162</a>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+<ul class="nav navbar-nav">
+<li><a href="info/index.html">Course Info</a></li>
+<li><a href="staff/index.html">Staff</a></li>
+<li><a href="resources/index.html">Resources</a></li>
+<li><a href="https://piazza.com/berkeley/spring2021/cs162">Piazza <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="autograder/log_in/index.html">Autograder <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="https://oh.cs162.org/queue">Office Hours Queue <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container" id="main">
+  
+  <div class="row">
+    <div class="col-lg-1" style="margin-right: 20px; padding-top: 30px;">
+      <a href="index.html">
+          <img src="static/site/cs162bean.png" width="93" height="100" alt="A smiling pinto bean being poked with a fork; References to the PintOS operating system students build in this class, and the fork syscall.">
+      </a>
+    </div>
+    <div class="col-lg-10">
+      <h1>
+        CS 162: Operating Systems and Systems Programming
+      </h1>
+      <p>
+        Instructors: Anthony D. Joseph, Natacha Crooks<br />
+	Lecture: Asynchronous (<a href="https://youtube.com/playlist?list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp">Lecture Playlist</a>)
+      </p>
+    </div>
+  </div>
+  <hr />
+  <h3>Schedule (Tentative)</h3>
+<div class="table-responsive"><table id="calendar" class="table"><tr><th>Week</th><th>Day</th><th>#</th><th>Lecture</th><th>Reading/Section</th><th>Homework</th><th>Project</th><th>Event</th><th>Forms</th></tr><tr><td class="weeknum" rowspan=3>1</td><td ><div>Tu</div>01/19</td><td >1</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=bzK3PdEXkrM&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=1">Overview, User/Kernel virtualization, HW management, protected sharing</a>  [<a href="static/lectures/1.pdf">pdf</a>]  [<a href="static/lectures/1.pptx">ppt</a>]</td><td >A&D Ch 1</td><td  class="hw0"><a href="static/homeworks/homework0.pdf">Release HW0: Intro</a></td><td ></td><td ></td><td ></td></tr><tr><td ><div>Th</div>01/21</td><td >2</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=fzqatcVvYWc&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=9">Four Fundamental Concepts of Operating Systems</a>  [<a href="static/lectures/2.pdf">pdf</a>]  [<a href="static/lectures/2.pptx">ppt</a>]</td><td >A&D Ch 2</td><td  class="hw0"></td><td ></td><td ></td><td ></td></tr><tr><td ><div>F</div>01/22</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section0.pdf">Section 0: Tools, x86, and C</a> [<a href="static/sections/section0-sol.pdf">Solutions</a>] [<a href="https://youtu.be/ppDjUZyhuG0">GDB Tutorial</a>]</td><td  class="hw0"></td><td ></td><td >Autograder Registration Deadline</td><td ><a href="https://forms.gle/Pv1Q3a6hg5qS1uao7" target="_blank">Pre-Semester Survey Due</a></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=6>2</td><td ><div>M</div>01/25</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw0"></td><td  class="proj1"><a href="static/projects/project0.pdf">Release Project 0: Pintos Introduction</a></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Tu</div>01/26</td><td >3</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=Aa-xmAEZryc&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=14">Abstractions 1: Threads and Processes</a>  [<a href="static/lectures/3.pdf">pdf</a>]  [<a href="static/lectures/3.pptx">ppt</a>]</td><td >A&D Ch 4</td><td  class="hw0"></td><td  class="proj1"></td><td ><a href="https://drive.google.com/file/d/1CbRv4Lq9fGX3r7XFs4JAOwZW2d0EeLLm/view"><b>61C/C Review Session</b> Optional (5-7PM)</a></td><td ></td></tr><tr class="gray-bg"><td ><div>W</div>01/27</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw0"></td><td  class="proj1"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Th</div>01/28</td><td >4</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=tko45PcidPQ&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=19">Abstractions 2: Files and I/O</a>  [<a href="static/lectures/4.pdf">pdf</a>]  [<a href="static/lectures/4.pptx">ppt</a>]</td><td >A&D Ch 3</td><td  class="hw0">HW0 Due</td><td  class="proj1"></td><td ><a href="https://piazza.com/class/kjffms7injc3r5?cid=85"><b>Zoom Student Mixer</b> Optional (5-6:30PM)</a></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>01/29</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section1.pdf">Section 1: OS Concepts, Processes, Threads</a> [<a href="static/sections/section1-sol.pdf">Solutions</a>] [<a href="https://youtu.be/d5R55K_jQEM">Walkthrough</a>]</td><td  class="hw1"><a href="static/homeworks/homework1.pdf">Release HW1: Lists</a></td><td  class="proj1"></td><td ><b>Early Drop Deadline</b></td><td ></td></tr><tr class="gray-bg"><td ><div>Sun</div>01/31</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw1"></td><td  class="proj1"></td><td ></td><td ><a href="https://forms.gle/bMwnkB9UpsxxwbGu7" target="_blank">Group Registration/​Availability Form due</a></td></tr><tr><td class="weeknum" rowspan=4>3</td><td ><div>M</div>02/01</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw1"></td><td  class="proj1">Project 0 Due</td><td ></td><td ></td></tr><tr><td ><div>Tu</div>02/02</td><td >5</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=fvn_lhVy6vw&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=25">Abstractions 3: IPC, Pipes and Sockets</a>  [<a href="static/lectures/5.pdf">pdf</a>]  [<a href="static/lectures/5.pptx">ppt</a>]</td><td ></td><td  class="hw1"></td><td  class="proj2"><a href="static/projects/project1.pdf">Release Project 1: User Programs</a></td><td ></td><td ></td></tr><tr><td ><div>Th</div>02/04</td><td >6</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=J6gN8iYhxgY&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=31">Synchronization 1: Concurrency and Mutual Exclusion</a>  [<a href="static/lectures/6.pdf">pdf</a>]  [<a href="static/lectures/6.pptx">ppt</a>]</td><td >A&D Ch 5.1-5.3<br><a href="https://www.cs.unc.edu/~anderson/teach/comp790/papers/mars_pathfinder_long_version.html">Mars Pathfinder Priority Inversion</a></br><a href="https://betterembsw.blogspot.com/2014/09/a-case-study-of-toyota-unintended.html">Toyota Uncontroller Acceleration</a></td><td  class="hw1"></td><td  class="proj2"></td><td ></td><td ></td></tr><tr><td ><div>F</div>02/05</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section2.pdf">Section 2: Files, Pipes, Signals, Dup, Sockets</a> [<a href="https://youtu.be/Hx4h2ATemLw">Sockets</a>] [<a href="https://youtu.be/ls82OmB2jTA">Shared Data</a>] [<a href="static/sections/section2-sol.pdf">Solutions</a>]</td><td  class="hw1"></td><td  class="proj2"></td><td ></td><td ></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=4>4</td><td ><div>Tu</div>02/09</td><td >7</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=LZ9YMYRW4vo&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=37">Synchronization 2: Semaphores (Con't), Lock Implementation, Atomic Instructions</a>  [<a href="static/lectures/7.pdf">pdf</a>]  [<a href="static/lectures/7.pptx">ppt</a>]</td><td >A&D Ch 5.4-5.7</td><td  class="hw1"></td><td  class="proj2">Design Doc Due</td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>W</div>02/10</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw1">HW1 Due </td><td  class="proj2"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Th</div>02/11</td><td >8</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=oBFjmCFfdwU&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=44">Synchronization 3: Atomic Instructions (Con't), Monitors, Readers/Writers</a>  [<a href="static/lectures/8.pdf">pdf</a>]  [<a href="static/lectures/8.pptx">ppt</a>]</td><td ></td><td  class="hw2"><a href="static/homeworks/homework2.pdf">Release HW2: Shell</a></td><td  class="proj2"></td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09">Underrepresented Social Hour</a></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>02/12</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section3.pdf">Section 3: Synchronization</a> [<a href="static/sections/section3-sol.pdf">Solutions</a>] [<a href="https://youtu.be/n9aKtZnOYsQ">Walkthrough Pt. 1</a>] [<a href="https://youtu.be/c8tV7E04pvY">Walkthrough Pt. 2</a>]</td><td  class="hw2"></td><td  class="proj2"></td><td ></td><td ><a href="https://forms.gle/KX6MP4eHFpNrLPqD8" target="_blank">MT1 Conflict Form due</a></td></tr><tr><td class="weeknum" rowspan=4>5</td><td ><div>M</div>02/15</td><td ></td><td  class="td-left">President's Day Holiday</td><td ></td><td  class="hw2"></td><td  class="proj2"></td><td ></td><td ></td></tr><tr><td ><div>Tu</div>02/16</td><td >9</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=OhaSfno90kI&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=49">Synchronization 4: Readers/Writers (Con't), Process Structure, Device Drivers</a>  [<a href="static/lectures/9.pdf">pdf</a>]  [<a href="static/lectures/9.pptx">ppt</a>]</td><td ></td><td  class="hw2"></td><td  class="proj2">Checkpoint 1</td><td ><b>Midterm I Review</b> Optional (5-7PM)</td><td ></td></tr><tr><td ><div>Th</div>02/18</td><td ></td><td  class="td-left"><b>Midterm I (5-6:30PM)</b></td><td ></td><td  class="hw2"></td><td  class="proj2"></td><td ><b>Midterm I (5-6:30PM)</b></td><td ></td></tr><tr><td ><div>F</div>02/19</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section4.pdf">Section 4: Sockets Review</a> [<a href="static/sections/section4-sol.pdf">Solutions</a>] [<a href="https://youtu.be/Hx4h2ATemLw">Walkthrough</a>]</td><td  class="hw2"></td><td  class="proj2"></td><td ></td><td ></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=4>6</td><td ><div>Tu</div>02/23</td><td >10</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=limCzngxvxg&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=57">Scheduling 1: Concepts and Classic Policies</a>  [<a href="static/lectures/10.pdf">pdf</a>]  [<a href="static/lectures/10.pptx">ppt</a>]</td><td >A&D Ch 7.1 - 7.2</td><td  class="hw2"></td><td  class="proj2">Checkpoint 2</td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Th</div>02/25</td><td >11</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=NXxJfwZvGIo&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=63">Scheduling 2: Scheduling Case Studies, Realtime Scheduling, Forward Progress</a>  [<a href="static/lectures/11.pdf">pdf</a>]  [<a href="static/lectures/11.pptx">ppt</a>]</td><td >A&D Ch 7.4 & 7.6</td><td  class="hw2"></td><td  class="proj2"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>02/26</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section5.pdf">Section 5: Scheduling</a> [<a href="static/sections/section5-sol.pdf">Solutions</a>] [<a href="https://youtu.be/cINfSlbODZo">Priority Donation</a>] [<a href="https://drive.google.com/drive/u/1/folders/1GeyP_dM5xrXENHXcB5aCe1TBT34mRgb5">Walkthroughs</a>]</td><td  class="hw2"></td><td  class="proj2">Code Due</td><td ></td><td ><a href="https://forms.gle/qjaRgy2FuomvXYuo8" target="_blank">Academic Dishonesty Admittance Form due</a></td></tr><tr class="gray-bg"><td ><div>Sun</div>02/28</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw2"></td><td  class="proj2">Final Report Due</td><td ></td><td ></td></tr><tr><td class="weeknum" rowspan=6>7</td><td ><div>M</div>03/01</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw2"></td><td  class="proj3"><a href="static/projects/proj2.pdf">Release Project 2: Threads</a></td><td ></td><td ><a href="https://docs.google.com/forms/d/e/1FAIpQLSeK88R-obgXLthTPGRMXv3N4vMnb2ZJECscC2L01TW41l65cA/viewform" target="_blank">Midsemester Survey #1 due</a></td></tr><tr><td ><div>Tu</div>03/02</td><td >12</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=6VgD7vsgu4A&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=68">Scheduling 3: Performance, Deadlock</a>  [<a href="static/lectures/12.pdf">pdf</a>]  [<a href="static/lectures/12.pptx">ppt</a>]</td><td >A&D Ch 6</td><td  class="hw2"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td ><div>W</div>03/03</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw2">HW 2 Due</td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td ><div>Th</div>03/04</td><td >13</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=WtlGr-pNnW8&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=77">Memory 1: Address Translation & Virtual Memory</a>  [<a href="static/lectures/13.pdf">pdf</a>]  [<a href="static/lectures/13.pptx">ppt</a>]</td><td >A&D Ch 8</td><td  class="hw3"><a href="static/homeworks/homework3.pdf">Release HW3: Malloc</a></td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td ><div>F</div>03/05</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section6.pdf">Section 6: Scheduling, Deadlock</a> [<a href="static/sections/section6-sol.pdf">Solutions</a>] [<a href="https://www.youtube.com/watch?v=GlHUwdj8Sz4&feature=youtu.be">Walkthrough Pt. 1</a>] [<a href="https://youtu.be/1C2IDwraBdc">Walkthrough Pt. 2</a>]</td><td  class="hw3"></td><td  class="proj3"></td><td ></td><td ><a href="https://forms.gle/zH2UHjhTLw2miDNJ7">LOST Section Interest Form due</a></td></tr><tr><td ><div>Sun</div>03/07</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw3"></td><td  class="proj3"></td><td ></td><td ><a href="https://forms.gle/EfjXBfv7ymiQJRsv6" target="_blank">Project 1 Group Evals due</a></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=5>8</td><td ><div>M</div>03/08</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw3"></td><td  class="proj3">Design Doc Due</td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr class="gray-bg"><td ><div>Tu</div>03/09</td><td >14</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=36Hqfwlqu9c&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=81">Memory 2: Virtual Memory (Con't), Caching and TLBs</a>  [<a href="static/lectures/14.pdf">pdf</a>]  [<a href="static/lectures/14.pptx">ppt</a>]</td><td ></td><td  class="hw3"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>W</div>03/10</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw3"></td><td  class="proj3"></td><td ></td><td ><a href="https://forms.gle/RaJq1TmxCJaXN9Gw8" target="_blank">Midterm 2 Conflict Form due</a></td></tr><tr class="gray-bg"><td ><div>Th</div>03/11</td><td >15</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=nnc5I5ju_zU&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=88">Memory 3: Caching and TLBs (Con't), Demand Paging</a>  [<a href="static/lectures/15.pdf">pdf</a>]  [<a href="static/lectures/15.pptx">ppt</a>]</td><td >A&D Ch 9</td><td  class="hw3"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>03/12</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section7.pdf">Section 7: Virtual Memory<!--[<a href="static/sections/section7-sol.pdf">Solutions</a>]--></a><br/>[<a href="static/sections/section7-sol.pdf">Solutions</a>]</td><td  class="hw3"></td><td  class="proj3"></td><td ><a href="https://berkeley.zoom.us/rec/share/-zQd-5rNwMEX16BIc0-cGAt0EK-Sb9uxfXx62-Gi2lAHbe0GMUKvvLW_Qx0z9nHe.M7iO53nVFmmXNKit">LOST Section</a></td><td ></td></tr><tr><td class="weeknum" rowspan=5>9</td><td ><div>M</div>03/15</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw3"></td><td  class="proj3"></td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr><td ><div>Tu</div>03/16</td><td >16</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=ZcIazB34Iqw&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=93">Memory 4: Demand Paging Policies</a>  [<a href="static/lectures/16.pdf">pdf</a>]  [<a href="static/lectures/16.pptx">ppt</a>]</td><td >A&D Ch 10 & 12</td><td  class="hw3"></td><td  class="proj3"></td><td ><a href="https://zoom.us/meeting/92064381121" target="_blank"><b>Midterm II Review</b></a> Optional (5-7PM)</td><td ></td></tr><tr><td ><div>Th</div>03/18</td><td ></td><td  class="td-left"><b>Midterm II</b></td><td ></td><td  class="hw3"></td><td  class="proj3"></td><td ><b>Midterm II (5-6:30PM)</b></td><td ></td></tr><tr><td ><div>F</div>03/19</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section8.pdf">Section 8: Demand Paging</a> [<a href="static/sections/section8-sol.pdf">Solutions</a>] [<a href="https://www.youtube.com/playlist?list=PL6J1enN7GbbXPyCzLIsAKfWgOLNAKg7K_">Walkthrough Playlist</a>]</td><td  class="hw3">HW3 Due</td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td ><div>Sat</div>03/20</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw4"><a href="static/homeworks/homework4.pdf">Release HW4: Memory</a></td><td  class="proj3"></td><td ></td><td ></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=3>10</td><td ><div>Tu</div>03/23</td><td ></td><td  class="td-left"><i>Spring Recess (No classes)</i></td><td ></td><td  class="hw4"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Th</div>03/25</td><td ></td><td  class="td-left"><i>Spring Recess (No classes)</i></td><td ></td><td  class="hw4"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>03/26</td><td ></td><td  class="td-left"><i>Spring Recess (No classes)</i></td><td ></td><td  class="hw4"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td class="weeknum" rowspan=5>11</td><td ><div>M</div>03/29</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw4"></td><td  class="proj3"></td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr><td ><div>Tu</div>03/30</td><td >17</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=zkZptGLSxyc&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=99">General I/O, Storage Devices</a>  [<a href="static/lectures/17.pdf">pdf</a>]  [<a href="static/lectures/17.pptx">ppt</a>]</td><td ></td><td  class="hw4"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td ><div>Th</div>04/01</td><td >18</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=aQcUrSscAUg&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=106">General I/O (Con't), Storage Devices, Performance</a>  [<a href="static/lectures/18.pdf">pdf</a>]  [<a href="static/lectures/18.pptx">ppt</a>]</td><td >A&D Ch 7.5</td><td  class="hw4"></td><td  class="proj3"></td><td ></td><td ></td></tr><tr><td ><div>F</div>04/02</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section9.pdf">Section 9: IO, Devices</a> [<a href="static/sections/section9-sol.pdf">Solutions</a>] [<a href="https://youtu.be/3xdFC_YjGUg">Question 4 Video</a>]</td><td  class="hw4"></td><td  class="proj3">Code Due</td><td ></td><td ></td></tr><tr><td ><div>Sun</div>04/04</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw4"></td><td  class="proj3">Final Report Due</td><td ></td><td ><a href="https://forms.gle/XaiBFwXWRiJjdFuM9" target="_blank">Happy Hour form due</a></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=5>12</td><td ><div>M</div>04/05</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw4"></td><td  class="proj4"><a href="static/projects/project3.pdf">Release Project 3: Filesys</a></td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr class="gray-bg"><td ><div>Tu</div>04/06</td><td >19</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=z5Gv2hrggpw&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=113">Filesystems 1: Performance (Cont'), Queueing Theory, Filesystem Design</a>  [<a href="static/lectures/19.pdf">pdf</a>]  [<a href="static/lectures/19.pptx">ppt</a>]</td><td >A&D Ch 11 & 13</td><td  class="hw4"></td><td  class="proj4"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>W</div>04/07</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw4">HW4 Due</td><td  class="proj4"></td><td ></td><td ><a href="https://forms.gle/vp6NufwTMr4k3ZjMA" target="_blank">Midsemester Survey #2 due</a></td></tr><tr class="gray-bg"><td ><div>Th</div>04/08</td><td >20</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=UjEtnanYNiQ&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=118">Filesystems 2: Filesystem Design (Con't), Filesystem Case Studies</a>  [<a href="static/lectures/20.pdf">pdf</a>]  [<a href="static/lectures/20.pptx">ppt</a>]</td><td ></td><td  class="hw5"><a href="static/homeworks/homework5.pdf">Release HW5: HTTP Server</a></td><td  class="proj4"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>04/09</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section10.pdf">Section 10: Filesystems</a> [<a href="static/sections/section10-sol.pdf">Solutions</a>] [<a href="https://drive.google.com/file/d/1JCiBccVYDI0pUzqAoATLcGGQ6koOx3x9/view?usp=sharing">Question 5 Video (@ 6:23)</a>]</td><td  class="hw5"></td><td  class="proj4"></td><td ><a href="https://berkeley.zoom.us/j/97085076811?pwd=OWN4L2dYb21NVFNrT0QwaUlDUUxpUT09"><b>LOST Section</b> (5-6:30PM)</a></td><td ></td></tr><tr><td class="weeknum" rowspan=4>13</td><td ><div>M</div>04/12</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw5"></td><td  class="proj4">Design Doc Due</td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr><td ><div>Tu</div>04/13</td><td >21</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=bH0TlHBZtD8&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=124">Filesystems 3: Filesystem Case Studies (Con't), Buffering, Reliability, Transactions</a>  [<a href="static/lectures/21.pdf">pdf</a>]  [<a href="static/lectures/21.pptx">ppt</a>]</td><td >A&D Ch 14<br><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/dist-nfs.pdf">NFS</a></td><td  class="hw5"></td><td  class="proj4"></td><td ></td><td ></td></tr><tr><td ><div>Th</div>04/15</td><td >22</td><td  class="td-left"><a href="https://www.youtube.com/watch?v=qsGVpRTJfFk&list=PLnocShPlK-FsJZ5_PaSkBwH_SdsrKnhUp&index=130">Transactions (Con't), End-to-End Arguments, Distributed Decision Making</a>  [<a href="static/lectures/22.pdf">pdf</a>]  [<a href="static/lectures/22.pptx">ppt</a>]</td><td ><a href="static/readings/endtoend.pdf">End to End</a></td><td  class="hw5"></td><td  class="proj4"></td><td ></td><td ></td></tr><tr><td ><div>F</div>04/16</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section11.pdf">Section 11: Filesystems, Journaling<!--[<a href="static/sections/section11-sol.pdf">Solutions</a>]--></a><br/>[<a href="static/sections/section11-sol.pdf">Solutions</a>]</td><td  class="hw5"></td><td  class="proj4"></td><td ><a href="https://berkeley.zoom.us/j/97440700585?pwd=cHcyVWR1K0RrZkJDNUhiamluQnpnQT09"><b>LOST Section</b> (5-6:30PM)</a></td><td ><a href="https://forms.gle/kLAgZrA495F8nXY66" target="_blank">MT3 Conflict Form due</a></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=4>14</td><td ><div>M</div>04/19</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw5"></td><td  class="proj4"></td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr class="gray-bg"><td ><div>Tu</div>04/20</td><td >23</td><td  class="td-left"><a href="https://drive.google.com/file/d/1qhz7yWf7Qf-ON6GRt-FXUKdplIMtJezV/view?usp=sharing">Networking and TCP/IP</a>  [<a href="static/lectures/23.pdf">pdf</a>]  [<a href="static/lectures/23.pptx">ppt</a>]</td><td ><a href="http://book.mixu.net/distsys/index.html">Distributed Systems for Fun and Profit (Ch 1, 2, 4)</a>, <br><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/dist-intro.pdf">Dist Sys: RPC</a></td><td  class="hw5"></td><td  class="proj4"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Th</div>04/22</td><td >24</td><td  class="td-left"><a href="https://drive.google.com/drive/folders/17wzcFditJ3GYPa0_klbiuj81IfQ39FgN?usp=sharing"> RPC, Distributed File Systems </a>  [<a href="static/lectures/24.pdf">pdf</a>]  [<a href="static/lectures/24.pptx">ppt</a>]</td><td ><a href="static/readings/jacobson-congestion.pdf">Van Jacobsen's TCP paper</a>,</br> <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/dist-nfs.pdf">NFS filesystem</a></td><td  class="hw5"></td><td  class="proj4"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>04/23</td><td ></td><td  class="td-left"></td><td ><a href="static/sections/section12.pdf">Section 12: Networking, 2PC, RPC<!--[<a href="static/sections/section12-sol.pdf">Solutions</a>]--></a><br/>[<a href="static/sections/section12-sol.pdf">Solutions</a>]</td><td  class="hw5"></td><td  class="proj4"></td><td ></td><td ></td></tr><tr><td class="weeknum" rowspan=4>15</td><td ><div>M</div>04/26</td><td ></td><td  class="td-left"></td><td ></td><td  class="hw5"></td><td  class="proj4"></td><td ><a href="https://berkeley.zoom.us/j/92955636961?pwd=Ym9KendRdjd5aGFCWFgvcXNHRmpvZz09"><b>Underrepresented Social Hour</b> Optional (8-9PM)</a></td><td ></td></tr><tr><td ><div>Tu</div>04/27</td><td >25</td><td  class="td-left">Ask me Anything (Prof Joseph, Prof Crooks)</td><td ><a href="http://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf">Chord Paper</a>, <a href="http://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf">Amazon Dynamo</a></td><td  class="hw5"></td><td  class="proj4"></td><td ><b>Midterm III Review</b> Optional (6:30-8:30PM)</td><td ></td></tr><tr><td ><div>Th</div>04/29</td><td ></td><td  class="td-left"><b>Midterm III</b></td><td ></td><td  class="hw5"></td><td  class="proj4"></td><td ><b>Midterm III (5-6:30PM)</b></td><td ></td></tr><tr><td ><div>F</div>04/30</td><td ></td><td  class="td-left"></td><td >No section</td><td  class="hw5">HW5 Due</td><td  class="proj4"></td><td ></td><td ></td></tr><tr class="gray-bg"><td class="weeknum" rowspan=4>16</td><td ><div>Tu</div>05/04</td><td ></td><td  class="td-left"><i>RRR (No classes)</i></td><td ></td><td ></td><td  class="proj4"></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>W</div>05/05</td><td ></td><td  class="td-left"><i>RRR (No classes)</i></td><td ></td><td ></td><td  class="proj4">Code & Final Report Due</td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>Th</div>05/06</td><td ></td><td  class="td-left"><i>RRR (No classes)</i></td><td ></td><td ></td><td  class="proj5">Release Pintos Fun<!--<br> Example: <a href="static/fun/cs162proj.dsk">cs162proj.dsk</a>, <a href="static/fun/cs162proj.vmdk">cs162proj.vmdk</a>, <a href="https://youtu.be/6pZZpCWGXPM">Video</a>--></td><td ></td><td ></td></tr><tr class="gray-bg"><td ><div>F</div>05/07</td><td ></td><td  class="td-left"><i>RRR (No classes)</i></td><td ></td><td ></td><td  class="proj5"></td><td ></td><td ></td></tr><tr><td class="weeknum" rowspan=1>17</td><td style="background: #ffffd8"><div>F</div>05/14</td><td style="background: #ffffd8"></td><td style="background: #ffffd8" class="td-left">No Final Exam</td><td style="background: #ffffd8"></td><td style="background: #ffffd8"></td><td style="background: #ffffd8" class="proj5"></td><td style="background: #ffffd8"></td><td style="background: #ffffd8"></td></tr></table></div>
+
+  <hr />
+
+  <a name="weekly-schedule"></a>
+  <h3>Weekly Discussion Schedule (Tentative)</h3>
+  <p><a href="index.html#office-hours">Click here to see office hours</a></p>
+  <div class="table-responsive">
+    <table id="schedule" class="table">
+      <tr>
+        <th></th>
+        
+        <th colspan="6">Monday</th>
+        
+        <th colspan="6">Tuesday</th>
+        
+        <th colspan="6">Wednesday</th>
+        
+        <th colspan="6">Thursday</th>
+        
+        <th colspan="6">Friday</th>
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">9:00-9:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">9:30-10:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">10:00-10:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class="sched-dis">DIS102: Online (Eleanor)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">10:30-11:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">11:00-11:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class="sched-dis">DIS103: Online (Eleanor)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">11:30-12:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">12:00-12:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class="sched-dis">DIS104: Online (Kevin)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">12:30-1:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">1:00-1:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="2" rowspan="2" class="sched-dis">DIS105: Online (Kevin)</td>
+          
+        
+          
+          <td colspan="2" rowspan="2" class="sched-dis">DIS106: Online (Alina)</td>
+          
+        
+          
+          <td colspan="2" rowspan="2" class="sched-dis">DIS107: Online (Allan)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">1:30-2:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">2:00-2:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="3" rowspan="2" class="sched-dis">DIS108: Online (Alina)</td>
+          
+        
+          
+          <td colspan="3" rowspan="2" class="sched-dis">DIS109: Online (Allan)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">2:30-3:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">3:00-3:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class="sched-dis">DIS110: Online (William)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">3:30-4:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">4:00-4:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="3" rowspan="2" class="sched-dis">DIS111: Online (William)</td>
+          
+        
+          
+          <td colspan="3" rowspan="2" class="sched-dis">DIS112: Online (Marcus)</td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">4:30-5:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">5:00-5:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">5:30-6:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">6:00-6:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">6:30-7:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">7:00-7:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class="sched-dis">DIS101: Online (Akshat)</td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">7:30-8:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">8:00-8:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">8:30-9:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">9:00-9:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">9:30-10:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">10:00-10:30</th>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+          
+          <td colspan="6" rowspan="2" class=""></td>
+          
+        
+      </tr>
+      
+      <tr>
+        
+          
+          <th class="min30">10:30-11:00</th>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </tr>
+      
+    </table>
+  </div>
+  <br/><p>Please note that all events start 10 minutes after they are listed on the above calendar due to Berkeley time.</p>
+
+  <hr />
+
+  <a name="office-hours"></a>
+  <h3>Office Hours</h3>
+  <p>This calendar includes changes in the normal Office Hours schedule (cancellation and rescheduling).</p>
+
+  <!-- This calendar is owned by Peter Perfect. -->
+  <iframe title="Office Hours schedule" src="https://calendar.google.com/calendar/embed?src=4k7bir5mjr8dm57puplg1f7hoo%40group.calendar.google.com&ctz=America%2FLos_Angeles&mode=WEEK" style="border: 0; width: 100%; height: 900px;" frameborder="0" scrolling="no"></iframe>
+
+</div>
+</body>
+</html>

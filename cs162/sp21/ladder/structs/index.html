@@ -1,0 +1,221 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.0.1/showdown.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css">
+
+    <style>
+        #code, #code-output {
+            font-size: 16px;
+        }
+        #description-markdown {
+            font-size: 16px;
+        }
+        .nav-btn {
+            font-size: 20px;
+        }
+        .nav-link {
+
+        }
+        #main { /* Overriding main container in parent */
+            width: 80%;
+        }
+    </style>
+</head>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <base href="">
+  <meta charset="UTF-8" />
+  <meta name="description" content="Course information for UC Berkeley's CS 162: Operating Systems and Systems Programming">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 162 &mdash; Spring 2021</title>
+  <link rel="shortcut icon" href="../../static/site/cs162bean.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+          integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../../static/css/custom.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<a href="../../index.html" class="navbar-brand">CS 162</a>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+<ul class="nav navbar-nav">
+<li><a href="../../info/index.html">Course Info</a></li>
+<li><a href="../../staff/index.html">Staff</a></li>
+<li><a href="../../resources/index.html">Resources</a></li>
+<li><a href="https://piazza.com/berkeley/spring2021/cs162">Piazza <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="../../autograder/log_in/index.html">Autograder <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="https://oh.cs162.org/queue">Office Hours Queue <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container" id="main">
+  
+<div class="ladder-container">
+<h1>Ladder</h1>
+
+<!-- Description and code -->
+<div class="row">
+    <div class="col-xs-6">
+        <div id="description-markdown">
+
+    
+### Structs
+
+Structs organize and group variables in a container so that they're easily accessible by a single pointer.
+
+As in other languages, creating objects is extremely helpful in keeping your abstractions clean!
+
+Let's analyze the code
+
+- We can declare a struct type by using the `struct name {fields}` syntax.
+
+- To access fields of a struct value, we can use the `.` syntax.
+
+- To access fields of a struct pointer, we have two choices
+
+    - We can dereference the pointer to get a struct value and then use the `.` notation
+
+    - Or we can use the arrow notation `->` to quickly do the first option
+
+    - The arrow notation is probably the cleaner and quicker method
+
+- When we pass struct values into functions (such as `modify1`), they are copied
+
+    - <p>This means any changes we make to that struct are not reflected in the original struct</p>
+
+- When we pass struct pointers into functions (such as `modify2`), the original struct may be modified
+
+    - <p>Since we have a pointer, we can go to the location of the struct and modify that struct</p>
+
+
+
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <pre><code class="cal hljs" id="code">
+
+        </code></pre>
+
+        <pre><code class="cal hljs" id="code-output">
+
+        </code></pre>
+    </div>
+</div>
+
+<!-- Navigation buttons -->
+<div class="row">
+    <a href="../malloc/index.html" class="nav-link">
+        <span class="glyphicon glyphicon-menu-left nav-btn" aria-hidden="true"></span>
+    </a>
+    <a href="../index.html" class="nav-link">
+        <span class="glyphicon glyphicon-menu-right nav-btn" aria-hidden="true"></span>
+    </a>
+</div>
+</div>
+
+<script>
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+var escapeSpecialSymbols = function(str) {
+    return str.replaceAll('&amp;', '&')
+            .replaceAll('&gt;', '>')
+            .replaceAll('&lt;', '<');
+}
+
+window.onload = function () {
+    // Highlight and set code
+    document.getElementById('code').innerHTML = hljs.highlight('C',
+        String.raw`#include <stdio.h>
+
+// Declare a struct type
+struct coord {
+    int x;
+    int y;
+};
+
+int main(int argc, char *argv[]) {
+    // Declare a struct on the stack
+    struct coord c1;
+    // We can access and assign fields using the . syntax
+    c1.x = 3;
+    c1.y = 4;
+
+    // Declare a struct on the heap
+    struct coord *c2 = malloc(sizeof(struct coord));
+    // This dereferences the struct pointer to get the struct
+    // and accesses its field x
+    (*c2).x = 3;
+    // When we have a pointer to a struct we can use
+    // the arrow syntax to quickly reference its fields
+    c2->y = 4;
+
+    // No change because a copy of the struct is passed
+    modify1(c1);
+    modify1(*c2);
+    printf("modify1\n");
+    printf("x: %d, y: %d\n", c1.x, c1.y);
+    printf("x: %d, y: %d\n", c2->x, c2->y);
+
+    // Change because we passed a pointer to the struct
+    modify2(&c1);
+    modify2(c2);
+    printf("modify2\n");
+    printf("x: %d, y: %d\n", c1.x, c1.y);
+    printf("x: %d, y: %d\n", c2->x, c2->y);
+
+    return 0;
+}
+
+// structs are copied if given the struct itself
+void modify1(struct coord c) {
+    c.x = 5;
+    c.y = 6;
+}
+
+void modify2(struct coord *c) {
+    c->x = 5;
+    c->y = 6;
+}
+`
+    ).value;
+
+    // Highlight and set output
+    document.getElementById('code-output').innerHTML = hljs.highlight('C',
+        String.raw`Output:
+modify1
+x: 3, y:4
+x: 3, y:4
+modify2
+x: 5, y:6
+x: 5, y:6
+`
+    ).value;
+
+    // Render markdown and set description
+    var description = escapeSpecialSymbols(document.getElementById('description-markdown').innerHTML),
+        target = document.getElementById('description-markdown'),
+        converter = new showdown.Converter(),
+        html = converter.makeHtml(description);
+
+    target.innerHTML = html;
+}
+</script>
+
+
+</div>
+</body>
+</html>

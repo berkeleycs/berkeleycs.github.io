@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <base href="">
+  <meta charset="UTF-8" />
+  <meta name="description" content="Course information for UC Berkeley's CS 162: Operating Systems and Systems Programming">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 162 &mdash; Spring 2021</title>
+  <link rel="shortcut icon" href="../static/site/cs162bean.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+          integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../static/css/custom.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<a href="../index.html" class="navbar-brand">CS 162</a>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+<ul class="nav navbar-nav">
+<li><a href="index.html">Course Info</a></li>
+<li><a href="../staff/index.html">Staff</a></li>
+<li><a href="../resources/index.html">Resources</a></li>
+<li><a href="https://piazza.com/berkeley/spring2021/cs162">Piazza <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="../autograder/log_in/index.html">Autograder <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="https://oh.cs162.org/queue">Office Hours Queue <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container" id="main">
+  
+<h1>Course Info</h1>
+<hr />
+<p>The purpose of this course is to teach the design of operating systems and
+    operating systems concepts that appear in other computer systems.
+    Topics we will cover include concepts of operating systems,
+    systems programming, networked and distributed systems, and storage systems,
+    including multiple-program systems
+    (processes, interprocess communication, and synchronization), memory allocation
+    (segmentation, paging), resource allocation and scheduling, file systems, basic
+    networking (sockets, layering, APIs, reliability), transactions,
+    security, and privacy.
+</p>
+<p>We will be using the Pintos educational operating system for all three projects.
+</p>
+<p>Homeworks and projects will all be submitted and autograded via GitHub.
+Individuals and groups will
+have GitHub repositories. Intermediate pushes will help the staff see how students are
+progressing.
+</p>
+<p>Project teams must have 4 people. If the class does not divide evenly into
+groups of 4, then a few select groups may have a size of 3.</p>
+<p>We are using the textbook, &ldquo;Operating Systems:
+Principles and Practice&rdquo; by Anderson and Dahlin (A&amp;D). The reading from
+this textbook is <b> required</b>. There will be some additional readings that are
+not from this textbook that are freely available online.
+</p>
+<h3>Prerequisites</h3>
+<p>CS 61A, CS 61B, CS 61C, and CS 70. This means that you understand:
+    <ul>
+        <li>Data structures: arrays, linked lists, binary trees, and hashing</li>
+        <li>Assembly language programming</li>
+        <li>The C programming language</li>
+        <li>Debugging C using GDB</li>
+        <li>CPU caches and memory hierarchy</li>
+        <li>Virtual memory as covered in CS 61C</li>
+        <li>CPU pipelines and basic digital logic design</li>
+        <li>Basic knowledge of random variables and probability distributions as covered in CS 70</li>
+    </ul>
+    The TAs will spend a small amount of time reviewing some of the material
+    you are less likely to remember. We will assume that you either know the
+    material that is supposed to be covered in those courses, or that you are
+    willing to learn the material as necessary. We will not spend time in
+    lecture covering any of this material.
+    <b>Perhaps more important than formal prequisites, however, is experience
+    and maturity with debugging large programs, designing and implementing
+    useful abstractions, and computational problem solving in general. This
+    class will exercise your skills in these areas.</b>
+</p>
+<p>
+    If you feel that you would benefit from additional review of these
+    prerequisites, we recommend using the following resources:
+    <br /><br />
+    1. For a good review of probability as you&rsquo;ll need it in this class, read
+    through CS 70 Lecture Notes
+    <a href="https://inst.eecs.berkeley.edu/~cs70/sp14/notes/n15.pdf">15</a>,
+    <a href="https://inst.eecs.berkeley.edu/~cs70/sp14/notes/n16.pdf">16</a>,
+    <a href="https://inst.eecs.berkeley.edu/~cs70/sp14/notes/n17.pdf">17</a>,
+    <a href="https://inst.eecs.berkeley.edu/~cs70/sp14/notes/n18.pdf">18</a>,
+    and
+    <a href="https://inst.eecs.berkeley.edu/~cs70/sp14/notes/n19.pdf">19</a>.
+    <br /><br />
+    2. Hennessy, John L. and Patterson, David A. <i>Computer Architecture:
+        A Quantitative Approach</i>. 5th edition.
+        <b>Although the main content of this book goes far more in-depth into
+        computer architecture than you are expected to know for this class, the
+        appendices provide an excellent overview of some of the prerequisites.
+        Focus specifically on the sections below:</b>
+    <ul>
+        <li>2.1 and B.1 - B.4 (you can skip the sixth optimization in B.3)
+            review caching, virtual memory, and memory hierarchies.</li>
+        <li>C.1 - C.2 review CPU pipelines at the level of CS 61C.</li>
+        <li>This book is available at the Engineering Library on campus:
+            <a href="http://oskicat.berkeley.edu/record=b18534483~S1">check
+            OskiCat</a>.</li>
+        <li>Other editions (some older, some newer) are also available at the
+            Engineering Library.</li>
+    </ul>
+</p>
+<h3>Enrollment</h3>
+<p>All decisions concerning appeals for enrolling in the course are made by CS departmental
+    staff; the course staff have no say in the matter. If you have questions or
+    concerns, feel free to contact the departmental staff.</p>
+<h3>Grading</h3>
+<p>
+    At the end of the term, each student is assigned a score out of 100 points.
+    It is determined as follows:
+    <ul>
+        <li>36% Exams</li>
+        <li>36% Projects</li>
+        <li>18% Homeworks</li>
+        <li>10% Participation</li>
+    </ul>
+    It is important that you attend discussion sections and get to know your TA.
+    Section and the TAs will provide essential specifics on hands-on aspects of
+    the course, including tools, techniques and concepts. In the past, TAs have
+    bumped borderline grade cases up or down based on participation.
+</p>
+<p>
+    Discussion attendance and design review attendance is mandatory and your
+    cameras must be ON when in online discussion sections and design reviews. This
+    will count towards your participation grade.
+</p>
+<p>
+    Once students' raw scores are computed as described above, final grades are
+    assigned using a curved scale.
+</p>
+
+<h3>Exams</h3>
+<p>
+    3 midterms are scheduled, with no final exam. Each exam will be cumulative
+    and cover material seen in the course so far. Please consult the class schedule
+    for the dates and times of these exams. If you have a conflict, let us know, and
+    we will schedule a makeup exam. Exams will cover material from lecture, sections,
+    the readings, homework assignments, and projects. <b> You are likely to do poorly
+    on the exams if you do not do your share of work on the project.</b>
+</p>
+<p>
+    Exams will be delivered in a remote format. Our exams will be closed-book. You <i>may</i>
+    be allowed some number of handwritten cheat sheets, which we will specify prior to
+    each exam. You are allowed to write these on a tablet and print them out. <b>You may
+    <i>not</i> collaborate with other people, either in person or online, during the
+    midterm exams.</b>
+</p>
+<p>
+    The weight of each exam is:
+    <ul>
+        <li>12% Midterm 1</li>
+        <li>12% Midterm 2</li>
+        <li>12% Midterm 3</li>
+    </ul>
+</p>
+
+<h3>Homework</h3>
+<p>
+We see homework mostly as a chance for exercise. Solutions will not be made 
+available online, but you may come to Office Hours to see them 2 days after
+all possible slip days on the assignment have expired.
+
+</p>
+<h3>Project and Sections</h3>
+<p>The projects in this course provide a deep experience with operating system
+   and distributed system design and implementation. We have tried hard to
+   keep the workload manageable and to focus on learning concepts, rather than
+   busy work. The project experience is essential to the course.
+</p>
+<p>If you plan to do software or hardware development after graduation, you will almost
+    certainly need to know how to work in a group. Recent CS grads almost
+    all say that the ability to work in groups was the single most important
+    thing they wished they had learned at Berkeley. Hence, for this project, you
+    will need to form into groups of 4 people; the assignments will be the
+    same no matter what size group you have. <i>We will not permit anyone to do
+    the projects in a group smaller than 3, and we will only permit a few groups
+    to have a size of three, if the class is not evenly divisible by 4.</i>. 
+    In order to ensure everyone in the group does their fair share of the work,
+    we will ask each of you to turn in assessments of the relative contributions
+    of your project partners. These assessments are important, and they can have
+    a <i>substantial</i> impact on your grade if you do not participate.
+</p>
+<p>TAs will grade all parts of your project. The TAs have been
+    instructed to grade in part on design. In other words, it is <b>not</b> enough
+    to get a working solution; you must implement the solution in a clean way that
+    would simplify making further enhancements. (Several employers in the area
+    have said that many of our graduates don&rsquo;t know how to program well &mdash; it will
+    really benefit you in the long run to work on your software engineering skills.)
+</p>
+<p>For each project, you will turn in an initial design document and a TA
+    will meet with your group for an oral presentation of your design at a <b>design
+                      review</b>. These reviews serve several purposes:</p>
+<ol>
+    <li>To encourage you to get an early start on the assignments (a key to success
+        in this course).</li>
+    <li>To catch design errors early, <b>before</b> you spend a lot of time debugging.
+    </li>
+    <li>To give you an opportunity to explain and defend your approach (this is an
+        important skill to learn as engineers).</li>
+    <li>To provide an opportunity to assess your understanding of the project.</li>
+</ol>
+Following the review, you will turn in the actual project code.
+
+<h3>Piazza Policy</h3>
+<p>See the <a href="https://piazza.com/class/kjffms7injc3r5?cid=15">etiquette post</a> on Piazza.</p>
+
+<h3>OH Policy</h3>
+<p>When submitting a ticket to the OH queue, you must use the ticket template provided
+on the <a href="https://oh.cs162.org/">queue</a>.</p>
+<p>Students will be required to copy and paste the template into the "Issue" input box
+and fill out the template (deleting sections where necessary). If students don't have
+a templated ticket, the ticket may be ignored and you will not receive help until the
+formatting has been fixed.</p> 
+
+<h3>Late Policy</h3>
+<p>All assignments are due at 11:59:59 PM Pacific Time on the day listed on the
+    schedule.</p>
+<p>Your group gets <b>7</b> project &ldquo;slip days&rdquo;. You will not need to use
+    project slip days twice for code and final report deadlines. Instead, we will apply
+    the maximum number of slip days used for <i>either</i> submission for each project.
+    However, project slip days can <b>not</b> be used for design docs.
+    After the project slip days are used up, no credit
+    will be given for late project submissions.</p>
+<p>There are <b>5</b> homework &ldquo;slip days&rdquo;. After the homework
+    slip days are used up, no credit will be given for late
+    homework submissions.</p>
+<p>Slip days can only be used in whole numbers. Although no credit will be given for
+    submissions after slip days have expired, we <i>may</i> be lenient in special
+    circumstances, and grant manual extensions on assignments at our discretion.</p>
+
+<h3>Collaboration Policy</h3>
+
+<b style="font-weight: bold; color: red;">Note:</b>
+<span style="font-weight: bold; color: red;">Projects are a shared responsiblity and
+    all project members will incur penalties for cheating. You are accountable for
+    the actions of your teammates.</span>
+
+<p>We encourage you to ask other students
+    <span style="font-weight: bold; font-style: italic;">in this semester&rsquo;s course</span> about the concepts, algorithms, or approaches
+    needed to do the projects and assignments; both giving and taking advice will help
+    you to learn. However, what you turn in must be your own, or for projects,
+    your group&rsquo;s own work; copying other people&rsquo;s code, solution sets, or from
+    any other sources, including online sources, is strictly prohibited. The project
+    assignments must be the work of the students turning them in.
+    Wherever you have benefited from the work of others, you should
+    credit it properly in your code and/or writeup.
+    Note: Only projects are group assignments.
+    Homeworks are individual and you should not look at or copy other code, even that of your project groupmates.
+</p>
+
+<p>Examples of
+    <span style="text-decoration: underline;">acceptable</span> collaboration between students in different project groups
+    <span style="font-weight: bold; font-style: italic;">in this semester&rsquo;s course</span>:</p>
+<ul>
+    <li>Explaining a concept to another student, or asking another student to explain
+        a concept to you</li>
+    <li>Discussing various algorithms or approaches for project components</li>
+    <li>Discussing testing strategies and approaches</li>
+    <li>Searching online for algorithms or implementations of generic (non-project-specific)
+        abstractions (e.g., searching for various implementations of a hash table)</li>
+    <li>Helping another student with debugging approaches <span style="color: red;">(note that it is
+        <span style="font-weight: bold;">not</span> acceptable to give that student code solutions
+        or even look at their code, as described below)</span>
+
+    </li>
+</ul>
+
+<p>Examples of
+    <span style="text-decoration: underline;">unacceptable</span> collaboration:</p>
+<ul>
+    <li>Looking at code from a different group&rsquo;s project or another student&rsquo;s homework &mdash; this includes looking at
+        online code from prior semesters or other institutions</li>
+    <li>Using code from a different group&rsquo;s project or another student&rsquo;s homework &mdash; this includes incorporating
+        online code from prior semesters or other institutions</li>
+    <li>Looking at or using specific test case instances from a different group&rsquo;s project
+        or another student&rsquo;s homework &mdash; this includes incorporating online code from prior semesters or other
+        institutions</li>
+    <li>Searching online for specific implementations of project abstractions or functions</li>
+</ul>
+
+<p>We use an automated system for detecting cheating: it performs a pairwise comparison
+of all assignment submissions with all others for this class, prior semester classes,
+and various online repositories. The system reports any suspicious similarities. The
+course staff will manually review any such similarities. Moreover, we have a dedicated
+staff of readers who will manually review code, and note similarities between algorithms
+and designs used in other students solutions as well as any solutions available online.
+Do NOT try to fool our automatic cheating detection system, because you WILL be caught
+by our human readers.</p>
+
+<p>If two assignments are determined to be obviously very similar (i.e., we believe
+that they were done together or one was copied from the other), then all the students
+involved the incident, both the copy-er and the copy-ee, will receive a penalty. The
+minimum penalty is to receive a negative score on the assignment. More serious cases of
+academic dishonesty, such as repeat offences or cheating on exams, will incur a greater
+penalty at the instructor's discretion, such as receiving an F in the class. In addition,
+for every instance, a letter to the Center of Student Conduct will be attached to your
+permanent record, and a copy will be placed in the CS division office.</p>
+
+<p>Note that you are responsible for not leaving copies of
+your assignments lying around and for protecting your files &mdash; do not use public
+unprotected source code repositories to store your code. You must set up your files
+and directories so that they are protected from others reading them.</p>
+
+<p>Any mechanisms used in attempt to "hardcode" solutions to homeworks or projects will
+be punishable as cheating cases (leading to negative scores on assignments, an F in the
+class, a letter to the CSC, etc.) We will have hidden test cases on which any hardcoded
+solutions will fail, as well as readers who will manually inspect your code solution
+for any such instances of cheating.</p>
+
+<h3>Course Material Policy</h3>
+<p>Under no circumstances are students permitted to upload course materials online or
+    distribute these materials to anyone not enrolled in the course. This policy will
+    be enforced <b>during</b> and <b>after</b> the course.</p> 
+<p>This policy applies to any course materials that are not already publicly available,
+    including but not limited to:
+    <ul>
+        <li>Exam Questions and Solutions</li>
+        <li>Design Documents and Final Reports</li>
+        <li>Homework and Project Solutions</li>
+    </ul>
+</p>
+<p>Please see the Collaboration Policy for information on sharing course materials
+    among enrolled students.</p>
+
+<h3>Reading</h3>
+<h4>Required</h4>
+<h5>
+    <a href="http://ospp.cs.washington.edu/">
+    Operating Systems: Principles and Practice (2nd Edition)
+    </a>
+</h5>
+<h4>Recommended</h4>
+<h5>
+    <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/">
+    Operating Systems: Three Easy Pieces
+    </a>
+</h5>
+<h4>Supplemental</h4>
+<h5>
+    <a href="http://www.amazon.com/Linux-Kernel-Development-3rd-Edition/dp/0672329468">Linux Kernel Development (3rd Edition) </a>
+</h5>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.0.1/showdown.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css">
+
+    <style>
+        #code, #code-output {
+            font-size: 16px;
+        }
+        #description-markdown {
+            font-size: 16px;
+        }
+        .nav-btn {
+            font-size: 20px;
+        }
+        .nav-link {
+
+        }
+        #main { /* Overriding main container in parent */
+            width: 80%;
+        }
+    </style>
+</head>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <base href="">
+  <meta charset="UTF-8" />
+  <meta name="description" content="Course information for UC Berkeley's CS 162: Operating Systems and Systems Programming">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 162 &mdash; Spring 2021</title>
+  <link rel="shortcut icon" href="../../static/site/cs162bean.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+          integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../../static/css/custom.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<a href="../../index.html" class="navbar-brand">CS 162</a>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+<ul class="nav navbar-nav">
+<li><a href="../../info/index.html">Course Info</a></li>
+<li><a href="../../staff/index.html">Staff</a></li>
+<li><a href="../../resources/index.html">Resources</a></li>
+<li><a href="https://piazza.com/berkeley/spring2021/cs162">Piazza <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="../../autograder/log_in/index.html">Autograder <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="https://oh.cs162.org/queue">Office Hours Queue <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container" id="main">
+  
+<div class="ladder-container">
+<h1>Ladder</h1>
+
+<!-- Description and code -->
+<div class="row">
+    <div class="col-xs-6">
+        <div id="description-markdown">
+
+    
+### Arrays
+
+C arrays can be tricky since we can represent them using the `[]` syntax or as pointers using the `*` syntax.
+
+In the case of the `[]` syntax
+
+- <p>We can access elements by using the familiar `arr1[index]` syntax</p>
+
+In the case of the pointer `*` syntax
+
+- `malloc` returns a pointer to the start of a buffer that is the same size as the argument that is passed in
+
+- So, the value of `int *arr2` in this case is a pointer to the start of a buffer of size `12`
+
+    - <p>Each `int` is 4 bytes and there are 3 of them</p>
+
+- We can access elements using pointer arithmetic and dereferencing
+
+    - We can think of `arr2 + i` as a pointer that points to the location of the ith element
+
+    - We can then get the value at that location by dereferencing it using `*(arr2 + i)`
+
+Pointer artihmetic (for example `arr2 + i`) is a little more subtle than this as shown by the print output
+
+- `arr2 + i` results in `i * sizeof(type(arr2))` bytes being added to `arr2`
+
+- In this case, `type(arr2)` is `int` and `sizeof(int)` is 4, which results in the increments of 4 in the output
+
+Why should we even use the pointer representation of arrays?
+
+- If we dynamically create our array and don't know the size ahead of time, we're forced to use `malloc`
+
+
+
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <pre><code class="cal hljs" id="code">
+
+        </code></pre>
+
+        <pre><code class="cal hljs" id="code-output">
+
+        </code></pre>
+    </div>
+</div>
+
+<!-- Navigation buttons -->
+<div class="row">
+    <a href="../pointers/index.html" class="nav-link">
+        <span class="glyphicon glyphicon-menu-left nav-btn" aria-hidden="true"></span>
+    </a>
+    <a href="../strings/index.html" class="nav-link">
+        <span class="glyphicon glyphicon-menu-right nav-btn" aria-hidden="true"></span>
+    </a>
+</div>
+</div>
+
+<script>
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+var escapeSpecialSymbols = function(str) {
+    return str.replaceAll('&amp;', '&')
+            .replaceAll('&gt;', '>')
+            .replaceAll('&lt;', '<');
+}
+
+window.onload = function () {
+    // Highlight and set code
+    document.getElementById('code').innerHTML = hljs.highlight('C',
+        String.raw`#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    int NUM_ELEMS = 3;
+    // Below are two equivalent ways of initializing an array
+
+    // Declare an array on the stack
+    int arr1[NUM_ELEMS];
+
+    for (int i = 0; i < NUM_ELEMS; i++) {
+        arr1[i] = i;
+    }
+
+    // Declare an array via malloc which is on the heap
+    // arr2 is a pointer to the start of the array
+    int *arr2 = malloc(sizeof(int) * NUM_ELEMS);
+
+    printf("arr2: %x\n", arr2);
+
+    for (int i = 0; i < NUM_ELEMS; i++) {
+        // Add offset i to the start of the array
+        // and get the value at that location by dereferencing
+        *(arr2 + i) = i;
+        // Note there is no "dereference" in the print statement
+        printf("(arr2 + %d): %x\n", i, arr2 + i);
+    }
+
+    return 0;
+}
+`
+    ).value;
+
+    // Highlight and set output
+    document.getElementById('code-output').innerHTML = hljs.highlight('C',
+        String.raw`Output:
+arr2: 0x10008000
+(arr2 + 0): 0x10008000
+(arr2 + 1): 0x10008004
+(arr2 + 2): 0x10008008
+`
+    ).value;
+
+    // Render markdown and set description
+    var description = escapeSpecialSymbols(document.getElementById('description-markdown').innerHTML),
+        target = document.getElementById('description-markdown'),
+        converter = new showdown.Converter(),
+        html = converter.makeHtml(description);
+
+    target.innerHTML = html;
+}
+</script>
+
+
+</div>
+</body>
+</html>

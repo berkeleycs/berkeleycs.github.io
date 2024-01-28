@@ -1,0 +1,190 @@
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.0.1/showdown.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/atom-one-dark.min.css">
+
+    <style>
+        #code, #code-output {
+            font-size: 16px;
+        }
+        #description-markdown {
+            font-size: 16px;
+        }
+        .nav-btn {
+            font-size: 20px;
+        }
+        .nav-link {
+
+        }
+        #main { /* Overriding main container in parent */
+            width: 80%;
+        }
+    </style>
+</head>
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <base href="">
+  <meta charset="UTF-8" />
+  <meta name="description" content="Course information for UC Berkeley's CS 162: Operating Systems and Systems Programming">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CS 162 &mdash; Spring 2021</title>
+  <link rel="shortcut icon" href="../../static/site/cs162bean.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  <script defer src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+          integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../../static/css/custom.css">
+</head>
+<body>
+<div class="navbar navbar-default navbar-fixed-top">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+<a href="../../index.html" class="navbar-brand">CS 162</a>
+</div>
+<div class="navbar-collapse collapse" id="navbar-main">
+<ul class="nav navbar-nav">
+<li><a href="../../info/index.html">Course Info</a></li>
+<li><a href="../../staff/index.html">Staff</a></li>
+<li><a href="../../resources/index.html">Resources</a></li>
+<li><a href="https://piazza.com/berkeley/spring2021/cs162">Piazza <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="../../autograder/log_in/index.html">Autograder <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+<li><a href="https://oh.cs162.org/queue">Office Hours Queue <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container" id="main">
+  
+<div class="ladder-container">
+<h1>Ladder</h1>
+
+<!-- Description and code -->
+<div class="row">
+    <div class="col-xs-6">
+        <div id="description-markdown">
+
+    
+### Introduction to C Syntax
+
+Below is a flurry of C syntax (we promise it won't be like this for the future exercises).
+
+- At the top of the file we have an `include` statement to include `stdio.h`, a library that contains functions such as printf.
+
+- Next is an array declaration using the `int {name}[{size}]` syntax.
+    - <p>This array declared on the `stack`. The distinction between declaration on the stack and heap is important to keep in mind!</p>
+
+- We can initialize the values by using the `{elem1, elem2, ...}` initializer syntax.
+
+- We can also assign each element individually to initialize the array.
+    - <p>If we do not assign a value to an element then it takes on garbage data. Be careful!</p>
+
+- We have a `for` loop that iterates over our array
+    - <p>Note that there is no len function to determine the length of an array, so we typically keep track of the length in a variable.</p>
+
+- There's a `printf` statement that formats a string to be printed out. In this case `%d` formats the input into a number.
+    - <p>`printf` is your friend for debugging!</p>
+
+- We can declare a string by using the type `char*` which is a pointer to the first character of the string
+    - In this case we use `%s` inside `printf` to print out strings
+
+
+
+        </div>
+    </div>
+
+    <div class="col-xs-6">
+        <pre><code class="cal hljs" id="code">
+
+        </code></pre>
+
+        <pre><code class="cal hljs" id="code-output">
+
+        </code></pre>
+    </div>
+</div>
+
+<!-- Navigation buttons -->
+<div class="row">
+    <a href="../intro/index.html" class="nav-link">
+        <span class="glyphicon glyphicon-menu-left nav-btn" aria-hidden="true"></span>
+    </a>
+    <a href="../pointers/index.html" class="nav-link">
+        <span class="glyphicon glyphicon-menu-right nav-btn" aria-hidden="true"></span>
+    </a>
+</div>
+</div>
+
+<script>
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
+var escapeSpecialSymbols = function(str) {
+    return str.replaceAll('&amp;', '&')
+            .replaceAll('&gt;', '>')
+            .replaceAll('&lt;', '<');
+}
+
+window.onload = function () {
+    // Highlight and set code
+    document.getElementById('code').innerHTML = hljs.highlight('C',
+        String.raw`#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    int NUMS_SIZE = 3;
+    // Declared an array on the stack!
+    int nums[NUMS_SIZE]; // Initially it's garbage
+
+    // Initialized an array in one line
+    nums = {1, 2, 5};
+
+    // Alternatively initialize an array like this
+    nums[0] = 1;
+    nums[1] = 2;
+    nums[2] = 5;
+
+    for (int i = 0; i < NUMS_SIZE; i++) {
+        // printf doesn't emit a new line so we add a \n
+        printf("Num at index %d is %d\n", i, nums[i]);
+    }
+
+    // We can declare strings and print them out using %s
+    char *str = "abcd";
+    printf("My string is %s\n", str);
+
+    // A return value of 0 means there were no errors
+    return 0;
+}
+`
+    ).value;
+
+    // Highlight and set output
+    document.getElementById('code-output').innerHTML = hljs.highlight('C',
+        String.raw`Output:
+Num at index 0 is 1
+Num at index 1 is 2
+Num at index 2 is 5
+My string is abcd
+`
+    ).value;
+
+    // Render markdown and set description
+    var description = escapeSpecialSymbols(document.getElementById('description-markdown').innerHTML),
+        target = document.getElementById('description-markdown'),
+        converter = new showdown.Converter(),
+        html = converter.makeHtml(description);
+
+    target.innerHTML = html;
+}
+</script>
+
+
+</div>
+</body>
+</html>
