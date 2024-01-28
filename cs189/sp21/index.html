@@ -1,0 +1,857 @@
+<html>
+<head>
+<title>CS 189/289A:  Introduction to Machine Learning</title>
+</head>
+<body bgcolor='ffffff'>
+
+<table border=0>
+<tr valign=top>
+<td>
+<img src="qdaaniso3d.png" width=500 height=383>
+</td>
+<td>
+<font size=6 color='900000'>CS 189/289A<br>
+                            Introduction to Machine Learning</font><p>
+
+<a href="http://www.cs.berkeley.edu/~jrs"><font size=5 color='009000'>Jonathan
+Shewchuk</font></a><br><br>
+
+<a href="https://people.eecs.berkeley.edu/~jrs/"><img src="../sig.gif" border=0 width=151 height=21></a><br>
+(Please send email only if you don't want anyone but me to see it; otherwise,
+use <a href="https://piazza.com/class/kjuzhu8786w5cs">Piazza</a>.
+I check Piazza more often than email.)
+<br><br>
+
+Spring 2021<br>
+Mondays and Wednesdays, 7:30&ndash;9:00 pm<br>
+<!-- Wheeler Hall Auditorium (a.k.a. 150 Wheeler Hall)<br> -->
+Begins Wednesday, January 20<br>
+Discussion sections begin Monday, January 25<br>
+<br>
+My office hours:<br>
+TBA and by appointment.<br>
+(I'm usually free after the lectures too.)
+</td>
+</table>
+
+
+<h3 style="background-color:#009000;color:#ffffff;padding:1px">&nbsp;</h3>
+
+<p>
+This class introduces algorithms for <i>learning</i>,
+which constitute an important part of artificial intelligence.
+</p>
+
+<p>
+Topics include
+  <ul>
+  <li>classification:  perceptrons, support vector machines (SVMs),
+      Gaussian discriminant analysis (including linear discriminant analysis,
+      LDA, and quadratic discriminant analysis, QDA), logistic regression,
+      decision trees, neural networks, convolutional neural networks,
+      boosting, nearest neighbor search;
+  <li>regression:  least-squares linear regression, logistic regression,
+      polynomial regression, ridge regression, Lasso;
+  <li>density estimation:  maximum likelihood estimation (MLE);
+  <li>dimensionality reduction:  principal components analysis (PCA),
+      random projection; and
+  <li>clustering:  <i>k</i>-means clustering, hierarchical clustering,
+      spectral graph clustering.
+  </ul>
+</p>
+
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Useful Links</h3>
+
+<ul> 
+<li>See the <a href="https://piazza.com/class/kjuzhu8786w5cs?cid=33">
+    schedule of discussion section times</a>.
+    Attend any section(s) you like.
+<!-- <li>Schedule of
+    <a href="https://calendar.google.com/calendar/r?cid=YmVya2VsZXkuZWR1X20ybGJlYmNoZnZxb2tudWJjYnR0bjMxMWQ0QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">
+    office hours</a>. -->
+<li>Access the CS 189/289A
+    <a href="https://piazza.com/class/kjuzhu8786w5cs">Piazza discussion
+    group</a>.
+<li>If you want an instructional account, you can
+    <a href="http://inst.eecs.berkeley.edu/webacct">get one online</a>.
+    Go to the same link if you forget your password or account name.
+<li>Check out <a href="https://ml-visualizer.herokuapp.com/">this
+    Machine Learning Visualizer</a> by your TA Sagnik Bhattacharya and
+    his teammates Colin Zhou, Komila Khamidova, and Aaron Sun.
+    It's a great way to build intuition for what decision boundaries different
+    classification algorithms find.
+</ul>
+
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Prerequisites</h3>
+
+<p>
+  <ul>
+  <li>Math 53 (or another vector calculus course),
+  <li>Math 54, Math 110, or EE 16A+16B (or another linear algebra course),
+  <li>CS 70, EECS 126, or Stat 134 (or another probability course).
+  <li>Enough programming experience to be able to debug complicated programs
+      without much help.  (Unlike in a lower-division programming course,
+      the Teaching Assistants are under no obligation to look at your code.)
+  </ul>
+You should take these prerequisites quite seriously:
+if you don't have them, I strongly recommend not taking CS 189.
+</p>
+
+<p>
+If you want to brush up on prerequisite material:
+</p>
+
+<p>
+  <ul>
+  <li>Here's a
+      <a href="http://gwthomas.github.io/docs/math4ml.pdf">short summary of
+      math for machine learning</a> written by our former TA Garrett Thomas.
+  <li>Stanford's machine learning class provides additional reviews of
+<a href="http://cs229.stanford.edu/section/cs229-linalg.pdf">linear algebra</a>
+      and
+      <a href="http://cs229.stanford.edu/section/cs229-prob.pdf">probability
+      theory</a>.
+  <li>There's a fantastic collection of linear algebra visualizations
+      on YouTube by
+<a href="https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw">3Blue1Brown</a>
+      starting with
+<a href="https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">this
+      playlist, <i>The Essence of Linear Algebra</i></a>.
+      I highly recommend them,
+      even if you think you already understand linear algebra.
+      It's not enough to know how to work with matrix algebra equations;
+      it's equally important to have a geometric intuition for
+      what it all means.
+  <li>To learn matrix calculus (which will rear its head first in Homework 2),
+      check out the first two chapters of
+      <a href="http://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">The
+      Matrix Cookbook</a>.
+  <li>Another locally written review of linear algebra appears in
+      <a href="http://livebooklabs.com/keeppies/c5a5868ce26b8125">this book</a>
+      by Prof. Laurent El Ghaoui.
+  <li>An alternative guide to CS 189 material
+      (if you're looking for a second set of lecture notes besides mine),
+      written by our former TAs Soroush Nasiriany and Garrett Thomas,
+      is available
+      <a href="http://snasiriany.me/cs189/">at this link</a>.
+      I recommend reading my notes first, but reading the same material
+      presented a different way can help you firm up your understanding.
+  </ul>
+</p>
+
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Textbooks</h3>
+
+<a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/">
+<img src="esl.jpg" border=0 align=right width=250 height=378>
+</a>
+<a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">
+<img src="isl.jpg" border=0 align=right width=251 height=378>
+</a>
+
+<p>
+Both textbooks for this class are available free online.
+Hardcover and eTextbook versions are also available.
+</p>
+
+<ul>
+<li>
+<a href="http://faculty.marshall.usc.edu/gareth-james/">Gareth James</a>,
+<a href="https://www.danielawitten.com">Daniela Witten</a>,
+<a href="http://web.stanford.edu/~hastie/">Trevor Hastie</a>, and
+<a href="http://statweb.stanford.edu/~tibs/">Robert Tibshirani</a>,
+<a href="https://statlearning.com"><i>An
+Introduction to Statistical Learning with Applications in R</i></a>,
+Springer, New York, 2013.  ISBN # 978-1-4614-7137-0.
+<a href="http://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370/">See Amazon for hardcover or eTextbook</a>.
+
+<li>
+<a href="http://web.stanford.edu/~hastie/">Trevor Hastie</a>,
+<a href="http://statweb.stanford.edu/~tibs/">Robert Tibshirani</a>, and
+<a href="http://statweb.stanford.edu/~jhf/">Jerome Friedman</a>,
+<a href="http://statweb.stanford.edu/~tibs/ElemStatLearn/">
+<i>The Elements of Statistical Learning:
+Data Mining, Inference, and Prediction</i></a>, second edition,
+Springer, 2008.
+<a href="http://www.amazon.com/Elements-Statistical-Learning-Springer-Statistics-ebook/dp/B00475AS2E/">See Amazon for hardcover or eTextbook</a>.
+</ul>
+<br clear=all>
+
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Homework and
+Exams</h3>
+
+
+<p>
+You have a <b>total</b> of <b>5</b> slip days that you can apply to your
+semester's homework.
+We will simply not award points for any late homework you submit that
+would bring your total slip days over five.
+If you are in the Disabled Students' Program and you are offered an extension,
+even with your extension plus slip days combined,
+<b>no single assignment can be extended more than 5 days</b>.
+(We have to grade them sometime!)
+</p>
+
+<p>
+<a href="project.html">The CS 289A <b>Project</b></a>
+has a proposal due <b>Friday, April 9</b>.
+The video is due <b>Saturday, May 8</b>, and
+the final report is due <b>Sunday, May 9</b>.
+Please sign up your group for a ten-minute meeting slot with one of the TAs on
+<a href="https://docs.google.com/spreadsheets/d/1nGLZ7ioUwQa9eUp-5JPPVnDfsCi4nbn2NRzKW_yN3T8/edit">this
+Google spreadsheet</a> <b>before 11:59 PM on April 4</b>.
+If you need serious computational resources,
+our former Teaching Assistant Alex Le-Tu has written lovely guides to
+<a href="https://docs.google.com/document/d/1YKSzyy5mk2h2lCKmoIyMUJ4AouT5nvzInwRlKxV2rQA/edit">using
+Google Cloud</a> and
+<a href="https://colab.research.google.com/drive/1arm1_HEMb868mk18FlLkEcqvHPB_Ibgb">using
+Google Colab</a>.
+</p>
+
+<p>
+<a href="https://drive.google.com/file/d/1PvzWzsJe5tio4UyV275jFP4NOYblCr3m"><b>Homework 1</b></a>
+is due <b>Wednesday, January 27 at 11:59 PM</b>.
+(Here's <a href="hw/hw1.pdf">just the written part</a>. <a href="hw/hw1-sol.pdf">(sol)</a>)
+</p>
+
+<p>
+<a href="hw/hw2.pdf"><b>Homework 2</b></a>
+is due <b>Wednesday, February 10 at 11:59 PM</b>.
+(Here's <a href="hw/hw2.pdf">just the written part</a>. <a href="hw/hw2-sol.pdf">(sol)</a>)
+</p>
+
+<p>
+<a href="https://drive.google.com/file/d/17pR7P-hq3ATuabsy0f8eokYsXXT_Qfkx"><b>Homework 3</b></a>
+is due <b>Wednesday, February 24 at 11:59 PM</b>.
+(Here's <a href="hw/hw3.pdf">just the written part</a>. <a href="hw/hw3-sol.pdf">(sol)</a>)
+</p>
+
+<p>
+<a href="https://drive.google.com/file/d/1PrvHynSx8U5VFX-U0MUSibq0E8mkJ1E2"><b>Homework 4</b></a>
+is due <b>Wednesday, March 10 at 11:59 PM</b>.
+(Here's <a href="hw/hw4.pdf">just the written part</a>. <a href="hw/hw4-sol.pdf">(sol)</a>)
+</p>
+
+<p>
+<a href="https://drive.google.com/file/d/1mm7RFh7pemWhze9SoSFXMKtD3uD9XRUa"><b>Homework 5</b></a>
+is due <b>Thursday, April 1 at 11:59 PM</b>.
+(Here's <a href="hw/hw5.pdf">just the written part</a>. <a href="hw/hw5-sol.pdf">(sol)</a> <a href="hw/hw5-code-sol.pdf">(code sol)</a>)
+</p>
+
+<p>
+<a href="https://drive.google.com/file/d/1I20VUlgKIqyYKBfFmHoY464Y9WYbIb5m"><b>Homework 6</b></a>
+is due <b>Wednesday, April 21 at 11:59 PM</b>.
+(Here's <a href="hw/hw6.pdf">just the written part</a>. <a href="hw/hw6-sol.pdf">(sol)</a>)
+</p>
+
+<p>
+<a href="https://drive.google.com/file/d/1aidX_00pNlblZv7M9wO6AZuTVZdhKkbw"><b>Homework 7</b></a>
+is due <b>Thursday, May 6 at 11:59 PM</b>.
+(Here's <a href="hw/hw7.pdf">just the written part</a>.)
+</p>
+
+<p>
+The <a href="exam/mids21.pdf">Midterm</a> took place
+on <b>Wednesday, March 17 at 7:30&ndash;9:00 PM</b>.
+Please download the <a href="hw/honorcode.pdf"><b>Honor Code</b></a>, sign it,
+scan it, and
+<a href="https://www.gradescope.com/courses/229562/assignments/1097594">submit
+it to Gradescope</a> by <b>Tuesday, March 16 at 11:59 PM</b>.
+</p>
+
+<p>
+Previous midterms are available:
+Without solutions:
+<a href="exam/mids13blank.pdf">Spring 2013</a>,
+<a href="exam/mids14blank.pdf">Spring 2014</a>,
+<a href="exam/mids15blank.pdf">Spring 2015</a>,
+<a href="exam/midf15blank.pdf">Fall 2015</a>,
+<a href="exam/mids16blank.pdf">Spring 2016</a>,
+<a href="exam/mids17blank.pdf">Spring 2017</a>,
+<a href="exam/mids19blank.pdf">Spring 2019</a>,
+<a href="exam/midsu19blank.pdf">Summer 2019</a>,
+<a href="exam/mids20ablank.pdf">Spring 2020 Midterm A</a>,
+<a href="exam/mids20bblank.pdf">Spring 2020 Midterm B</a>,
+<a href="exam/mids21blank.pdf">Spring 2021</a>.
+With solutions:
+<a href="exam/mids13.pdf">Spring 2013</a>,
+<a href="exam/mids14.pdf">Spring 2014</a>,
+<a href="exam/mids15.pdf">Spring 2015</a>,
+<a href="exam/midf15.pdf">Fall 2015</a>,
+<a href="exam/mids16.pdf">Spring 2016</a>,
+<a href="exam/mids17.pdf">Spring 2017</a>,
+<a href="exam/mids19.pdf">Spring 2019</a>,
+<a href="exam/midsu19.pdf">Summer 2019</a>,
+<a href="exam/mids20a.pdf">Spring 2020 Midterm A</a>,
+<a href="exam/mids20b.pdf">Spring 2020 Midterm B</a>,
+<a href="exam/mids21.pdf">Spring 2021</a>.
+</p>
+
+<p>
+The <b>Final Exam</b> will take place on <b>Friday, May 14, 3&ndash;6 PM.</b>
+Previous final exams are available.
+Without solutions:
+<a href="exam/finals13blank.pdf">Spring 2013</a>,
+<a href="exam/finals14blank.pdf">Spring 2014</a>,
+<a href="exam/finals15blank.pdf">Spring 2015</a>,
+<a href="exam/finalf15blank.pdf">Fall 2015</a>,
+<a href="exam/finals16blank.pdf">Spring 2016</a>,
+<a href="exam/finals17blank.pdf">Spring 2017</a>,
+<a href="exam/finals19blank.pdf">Spring 2019</a>,
+<a href="exam/finals20blank.pdf">Spring 2020</a>.
+With solutions:
+<a href="exam/finals13.pdf">Spring 2013</a>,
+<a href="exam/finals14.pdf">Spring 2014</a>,
+<a href="exam/finals15.pdf">Spring 2015</a>,
+<a href="exam/finalf15.pdf">Fall 2015</a>,
+<a href="exam/finals16.pdf">Spring 2016</a>,
+<a href="exam/finals17.pdf">Spring 2017</a>,
+<a href="exam/finals19.pdf">Spring 2019</a>,
+<a href="exam/finals20.pdf">Spring 2020</a>.
+</p>
+
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Lectures</h3>
+
+
+<p>
+Now available:
+<a href="http://www.cs.berkeley.edu/~jrs/papers/machlearn.pdf">The complete
+semester's lecture notes (with table of contents and introduction)</a>.
+</p>
+
+<p>
+The lecture Zoom meeting numbers and passwords are available on
+<a href="https://piazza.com/class/kjuzhu8786w5cs?cid=35">Piazza</a>.
+</p>
+
+<p>
+<b>Lecture 1</b> (January 20):
+Introduction.
+Classification, training, and testing.
+Validation and overfitting.
+Read ESL, Chapter 1.
+My <a href="lec/01.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1bKPTBfmjV86s8Ykc7Fj5pybXZa_qgiSp">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 2</b> (January 25):
+Linear classifiers.
+Decision functions and decision boundaries.
+The centroid method.
+Perceptrons.
+Read parts of the Wikipedia
+<a href="https://en.wikipedia.org/wiki/Perceptron">Perceptron</a> page.
+Optional:  Read ESL, Section 4.5&ndash;4.5.1.
+My <a href="lec/02.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1yOqpI6GeG3PDwwyTpF48gUW7DWYmRQWL">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 3</b> (January 27):
+Gradient descent, stochastic gradient descent, and
+the perceptron learning algorithm.
+Feature space versus weight space.
+The maximum margin classifier, aka hard-margin support vector machine (SVM).
+Read ISL, Section 9&ndash;9.1.
+My <a href="lec/03.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1k8lIWGTbMqGZGOEm_7gYgEEA9R9cGM9q">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 4</b> (February 1):
+The support vector classifier, aka soft-margin support vector machine (SVM).
+Features and nonlinear decision boundaries.
+Read ESL, Section 12.2 up to and including the first paragraph of 12.2.1.
+My <a href="lec/04.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1xsz3ONBLmARRpviHlPswAANwCwqR8R_c">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 5</b> (February 3):
+Machine learning abstractions:  application/data, model,
+optimization problem, optimization algorithm.
+Common types of optimization problems:
+unconstrained, constrained (with equality constraints),
+linear programs, quadratic programs, convex programs.
+Optional:  Read (selectively) the Wikipedia page on
+<a href="https://en.wikipedia.org/wiki/Mathematical_optimization">mathematical
+  optimization</a>.
+My <a href="lec/05.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/10CHzCj90QJO3Y3MRaMf4SwqccRBTNmdb">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 6</b> (February 8):
+Decision theory:  the Bayes decision rule and optimal risk.
+Generative and discriminative models.
+Read ISL, Section 4.4.1.
+My <a href="lec/06.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1CKWeMH_lwxISxbQof2HKfpJLkwDNr226">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 7</b> (February 10):
+Gaussian discriminant analysis, including
+quadratic discriminant analysis (QDA) and linear discriminant analysis (LDA).
+Maximum likelihood estimation (MLE) of the parameters of a statistical model.
+Fitting an isotropic Gaussian distribution to sample points.
+Read ISL, Section 4.4.
+Optional:  Read (selectively) the Wikipedia page on
+<a href="https://en.wikipedia.org/wiki/Maximum_likelihood">maximum
+likelihood</a>.
+My <a href="lec/07.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1WJrlVM43W2Y0OPuBgg284hlOuqMnwYZK">screencast</a>.
+</p>
+
+<p>
+<b>February 15 is Presidents' Day.</b>
+</p>
+
+<p>
+<b>Lecture 8</b> (February 17):
+Eigenvectors, eigenvalues, and the eigendecomposition.
+The Spectral Theorem for symmetric real matrices.
+The quadratic form and ellipsoidal isosurfaces as
+an intuitive way of understanding symmetric matrices.
+Application to anisotropic normal distributions (aka Gaussians).
+Read <a href="http://cs229.stanford.edu/section/gaussians.pdf">Chuong Do's
+notes on the multivariate Gaussian distribution</a>.
+My <a href="lec/08.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/10qErOM5wjgK_ncjRJT41CnYGaaMsMP-t">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 9</b> (February 22):
+Anisotropic normal distributions (aka Gaussians).
+MLE, QDA, and LDA revisited for anisotropic Gaussians.
+Read ISL, Sections 4.4 and 4.5.
+My <a href="lec/09.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1tKs23teL9BlUwVgealc2mY5eD39J3n_c">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 10</b> (February 24):
+Regression:  fitting curves to data.
+The 3-choice menu of regression function + loss function + cost function.
+Least-squares linear regression as quadratic minimization and as
+orthogonal projection onto the column space.
+The design matrix, the normal equations, the pseudoinverse, and
+the hat matrix (projection matrix).
+Logistic regression; how to compute it with gradient descent or
+stochastic gradient descent.
+Read ISL, Sections 4&ndash;4.3.
+My <a href="lec/10.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1EUhD7meRpp0mZGraJb3Wam3MaCshW3E4">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 11</b> (March 1):
+Newton's method and its application to logistic regression.
+LDA vs. logistic regression:  advantages and disadvantages.
+ROC curves.
+Weighted least-squares regression.
+Least-squares polynomial regression.
+Read ISL, Sections 4.4.3, 7.1, 9.3.3; ESL, Section 4.4.1.
+Optional:  here is
+<a href="http://stats.stackexchange.com/questions/105501/understanding-roc-curve">a
+fine short discussion of ROC curves</a>&mdash;but skip the incoherent question
+at the top and jump straight to the answer.
+My <a href="lec/11.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1214waSyonb_Ppai5Un3LB3SmO6yCq_vZ">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 12</b> (March 3):
+Statistical justifications for regression.
+The empirical distribution and empirical risk.
+How the principle of maximum likelihood motivates the cost functions for
+least-squares linear regression and logistic regression.
+The bias-variance decomposition;
+its relationship to underfitting and overfitting;
+its application to least-squares linear regression.
+Read ESL, Sections 2.5 and 2.9.
+Optional:  Read the Wikipedia page on
+<a href="http://en.wikipedia.org/wiki/Bias-variance_tradeoff">the
+bias-variance trade-off</a>.
+My <a href="lec/12.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1UOZ7Q2W5AdBzW3ZcQ9wHgMOd5uAkFitX">screencast</a>.
+</p>
+
+<img src="ridgelassoItayEvron.gif" loop=infinite align=right width=800 height=400>
+
+<p>
+<b>Lecture 13</b> (March 8):
+Ridge regression:  penalized least-squares regression for reduced overfitting.
+How the principle of maximum <i>a posteriori</i> (MAP) motivates
+the penalty term (aka Tikhonov regularization).
+Subset selection.
+Lasso:  penalized least-squares regression for reduced overfitting and
+subset selection.
+Read ISL, Sections 6&ndash;6.1.2, the last part of 6.1.3 on validation,
+and 6.2&ndash;6.2.1; and ESL, Sections 3.4&ndash;3.4.3.
+Optional:  This CrossValidated page on
+<a href="http://stats.stackexchange.com/questions/151304/why-is-ridge-regression-called-ridge-why-is-it-needed-and-what-happens-when">ridge
+regression</a> is pretty interesting.
+My <a href="lec/13.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1IJAqBDrpT888xU5tscwoPHB-gWKf2bHt">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 14</b> (March 10):
+Decision trees; algorithms for building them.
+Entropy and information gain.
+Read ISL, Sections 8&ndash;8.1.
+My <a href="lec/14.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1KDo6-XSvDS_b3RUJGFVFRd9sYqRkR50L">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 15</b> (March 15):
+More decision trees:  multivariate splits; decision tree regression;
+stopping early; pruning.
+Ensemble learning:  bagging (bootstrap aggregating), random forests.
+Read ISL, Section 8.2.
+My <a href="lec/15.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1YMW6buDvq4xGMD38Eop-Eln9lIJzJ6Lm">screencast</a>.
+</p>
+
+<p>
+The <font color='ff0000'><a href="exam/mids21.pdf">Midterm</a></font>
+took place on <b>Wednesday, March 17</b>.
+The midterm will cover Lectures 1&ndash;13,
+the associated readings listed on the class web page, Homeworks 1&ndash;4, and
+discussion sections related to those topics.
+Please download the <a href="hw/honorcode.pdf"><b>Honor Code</b></a>, sign it,
+scan it, and
+<a href="https://www.gradescope.com/courses/229562/assignments/1097594">submit
+it to Gradescope</a> by <b>Tuesday, March 16 at 11:59 PM</b>.
+</p>
+
+<p>
+<b>March 22&ndash;26 is Spring Recess.</b>
+</p>
+
+<p>
+<b>Lecture 16</b> (March 29):
+Kernels.  Kernel ridge regression.  The polynomial kernel.
+Kernel perceptrons.  Kernel logistic regression.  The Gaussian kernel.
+Optional:  Read ISL, Section 9.3.2 and ESL, Sections 12.3&ndash;12.3.1
+if you're curious about kernel SVM.
+My <a href="lec/16.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1E3ouvbno7w49t6UkylYz0gm2RR8A91xG">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 17</b> (March 31):
+Neural networks.
+Gradient descent and the backpropagation algorithm.
+Read ESL, Sections 11.3&ndash;11.4.
+Optional:  Welch Labs' video tutorial
+<a href="https://www.youtube.com/watch?v=bxe2T-V8XRs&list=PLiaHhY2iBX9hdHaRr6b7XevZtgZRa1PoU&nohtml5=False">Neural
+Networks Demystified</a> on YouTube is quite good
+(note that they transpose some of the matrices from our representation).
+Also of special interest is this Javascript
+<a href="http://playground.tensorflow.org/">neural net demo</a>
+that runs in your browser.
+Here's
+<a href="http://cs231n.stanford.edu/handouts/linear-backprop.pdf">another
+derivation of backpropagation</a> that some people have found helpful.
+My <a href="lec/17.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/190bm3WhTZiSG8EftJmA_RobQqkdoRMQH">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 18</b> (April 5):
+Neuron biology:  axons, dendrites, synapses, action potentials.
+Differences between traditional computational models and
+neuronal computational models.
+Backpropagation with softmax outputs and logistic loss.
+Unit saturation, aka the vanishing gradient problem, and ways to mitigate it.
+Heuristics for avoiding bad local minima.
+Optional:  Try out some of the Javascript demos on
+<a href="http://neuralnetworksanddeeplearning.com/chap3.html">this
+excellent web page</a>&mdash;and if time permits, read the text too.
+The first four demos illustrate the neuron saturation problem and
+its fix with the logistic loss (cross-entropy) functions.
+The fifth demo gives you sliders so you can understand how softmax works.
+My <a href="lec/18.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1hI0T9HMdfotGlhIOJ9vGbx6Y_sKu7SPf">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 19</b> (April 7):
+Heuristics for faster training.
+Heuristics for avoiding bad local minima.
+Heuristics to avoid overfitting.
+Convolutional neural networks.
+Neurology of retinal ganglion cells in the eye and
+simple and complex cells in the V1 visual cortex.
+Read ESL, Sections 11.5 and 11.7.
+Here is <a href="https://www.youtube.com/watch?v=IOHayh06LJ4">the video about
+Hubel and Wiesel's experiments on the feline V1 visual cortex</a>.
+Here is <a href="lec/LeNet5.mov">Yann LeCun's video demonstrating LeNet5</a>.
+Optional:  A fine paper on heuristics for better neural network learning is
+<a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf">Yann LeCun,
+Leon Bottou, Genevieve B. Orr, and Klaus-Robert M&uuml;ller,
+&ldquo;Efficient BackProp,&rdquo;</a> in G. Orr and K.-R. M&uuml;ller (Eds.),
+<i>Neural Networks:  Tricks of the Trade</i>, Springer, 1998.
+Also of special interest is this Javascript
+<a href="https://cs.stanford.edu/people/karpathy/convnetjs/demo/cifar10.html">convolutional
+neural net demo</a> that runs in your browser.
+<a href="lec/cnn.pdf">Some slides about the V1 visual cortex and ConvNets</a>
+(PDF).
+My <a href="lec/19.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/10rFHJ5guePC1er43R9pqLO5MT9dEBRxr">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 20</b> (April 12):
+Unsupervised learning.
+Principal components analysis (PCA).
+Derivations from maximum likelihood estimation, maximizing the variance, and
+minimizing the sum of squared projection errors.
+Eigenfaces for face recognition.
+Read ISL, Sections 10&ndash;10.2 and the Wikipedia page on
+<a href="https://en.wikipedia.org/wiki/Eigenface">Eigenface</a>.
+<a href="https://gravis.dmi.unibas.ch/publications/Sigg99/siggraph99.mpg">Watch
+the video for Volker Blanz and Thomas Vetter's
+<i>A Morphable Model for the Synthesis of 3D Faces</i>.</a>
+My <a href="lec/20.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/19gRMDLvTpMKxom6hFFrvNvkRnM7njcBc">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 21</b> (April 14):
+The singular value decomposition (SVD) and its application to PCA.
+Clustering:  <i>k</i>-means clustering aka Lloyd's algorithm;
+<i>k</i>-medoids clustering; hierarchical clustering;
+greedy agglomerative clustering.
+Dendrograms.
+Read ISL, Section 10.3.
+My <a href="lec/21.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1LCrIh-PH-SAZ-tWDCpBmpC8x5v2quUC3">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 22</b> (April 19):
+Spectral graph partitioning and graph clustering.
+Relaxing a discrete optimization problem to a continuous one.
+The Fiedler vector, the sweep cut, and Cheeger's inequality.
+The vibration analogy.
+Greedy divisive clustering.
+The normalized cut and image segmentation.
+Read my survey of <a href="https://people.eecs.berkeley.edu/~jrs/papers/partnotes.pdf"><i>Spectral and
+Isoperimetric Graph Partitioning</i></a>,
+Sections 1.2&ndash;1.4, 2.1, 2.2, 2.4, 2.5, and optionally A and E.2.
+For reference:  Jianbo Shi and Jitendra Malik,
+<a href="http://www.cs.berkeley.edu/~malik/papers/SM-ncut.pdf"><i>Normalized
+Cuts and Image Segmentation</i></a>,
+IEEE Transactions on Pattern Analysis and Machine Intelligence
+<b>22</b>(8):888&ndash;905, 2000.
+My <a href="lec/22.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/15MtqiDVyfOc-bF2fQ5aDB9Li7-SajxkL">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 23</b> (April 21):
+Graph clustering with multiple eigenvectors.
+The geometry of high-dimensional spaces.
+Random projection.
+An application of machine learning:  predicting personality from faces.
+<!-- Latent factor analysis (aka latent semantic indexing). -->
+<!-- Optional:  Read the Wikipedia page on
+<a href="https://en.wikipedia.org/wiki/Latent_semantic_analysis">latent
+semantic analysis</a>. -->
+Optional:  Mark Khoury,
+<a href="https://marckhoury.github.io/counterintuitive-properties-of-high-dimensional-space/"><i>Counterintuitive
+Properties of High Dimensional Space</i></a>.
+Optional:  Section E.2 of <a href="https://people.eecs.berkeley.edu/~jrs/papers/partnotes.pdf">my survey</a>.
+For reference:  Andrew Y. Ng, Michael I. Jordan, and Yair Weiss,
+<a href="http://papers.nips.cc/paper/2092-on-spectral-clustering-analysis-and-an-algorithm.pdf">
+<i>On Spectral Clustering:  Analysis and an Algorithm</i></a>,
+Advances in Neural Information Processing Systems 14
+(Thomas G. Dietterich, Suzanna Becker, and Zoubin Ghahramani, editors),
+pages 849&ndash;856, the MIT Press, September 2002.
+For reference:  Sanjoy Dasgupta and Anupam Gupta,
+<a href="https://cseweb.ucsd.edu/~dasgupta/papers/jl.pdf"><i>An
+Elementary Proof of a Theorem of Johnson and Lindenstrauss</i></a>,
+Random Structures and Algorithms <b>22</b>(1)60&ndash;65, January 2003.
+<!-- For reference:  Xiangao Jiang, Megan Coffee, Anasse Bari, Junzhang Wang,
+Xinyue Jiang, Jianping Huang, Jichan Shi, Jianyi Dai, Jing Cai, Tianxiao Zhang,
+Zhengxing Wu, Guiqing He, and Yitong Huang,
+<a href="https://techscience.com/cmc/v63n1/38464"><i>Towards
+an Artificial Intelligence Framework for Data-Driven
+Prediction of Coronavirus Clinical Severity</i></a>,
+Computers, Materials &amp; Continua <b>63</b>(1):537&ndash;551, March 2020. -->
+For reference:  Sile Hu, Jieyi Xiong, Pengcheng Fu, Lu Qiao, Jingze Tan,
+Li Jin, and Kun Tang,
+<a href="https://www.nature.com/articles/s41598-017-00071-5"><i>Signatures of
+Personality on Dense 3D Facial Images</i></a>,
+Scientific Reports <b>7</b>, article number 73, 2017.
+My <a href="lec/23.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1XqpZzeF2o08K7yHeNiNF0p1wCLxMLhoo">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 24</b> (April 26):
+AdaBoost, a boosting method for ensemble learning.
+Nearest neighbor classification and its relationship to the Bayes risk.
+Read ESL, Sections 10&ndash;10.5, and ISL, Section 2.2.3.
+For reference:  Yoav Freund and Robert E. Schapire,
+<a href="https://doi.org/10.1006%2Fjcss.1997.1504"><i>A Decision-Theoretic
+Generalization of On-Line Learning and an Application to Boosting</i></a>,
+Journal of Computer and System Sciences <b>55</b>(1):119&ndash;139,
+August 1997.
+Freund and Schapire's
+<a href="https://sigact.org/prizes/g%C3%B6del/2003.html"> G&ouml;del
+Prize citation</a> and their
+<a href="https://awards.acm.org/award_winners/freund_5914554">ACM
+Paris Kanellakis Theory and Practice Award citation</a>.
+My <a href="lec/24.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1HAs_ncMwsxaXCB9Cha5zX15RbbCt5hqQ">screencast</a>.
+</p>
+
+<p>
+<b>Lecture 25</b> (April 28):
+The exhaustive algorithm for <i>k</i>-nearest neighbor queries.
+Speeding up nearest neighbor queries.
+Voronoi diagrams and point location.
+<i>k</i>-d trees.
+Application of nearest neighbor search to the problem of
+<i>geolocalization</i>:
+given a query photograph, determine where in the world it was taken.
+If I like machine learning, what other classes should I take?
+For reference:
+the best paper I know about how to implement a <i>k</i>-d tree is
+Sunil Arya and David M. Mount,
+<a href="http://www.cse.ust.hk/faculty/arya/pub/DCC.pdf"><i>Algorithms for
+Fast Vector Quantization</i></a>,
+Data Compression Conference, pages 381&ndash;390, March 1993.
+For reference:
+the <a href="http://graphics.cs.cmu.edu/projects/im2gps/">IM2GPS web page</a>,
+which includes a link to the paper.
+My <a href="lec/25.pdf">lecture notes</a> (PDF).
+The <a href="https://drive.google.com/file/d/1YDs7vKmT1Gz9-F_2QqcslxpWSBdmEwUx">screencast</a>.
+</p>
+
+<p>
+The <font color='ff0000'>Final Exam</font>
+will take place on <b>Friday, May 14, 3&ndash;6 PM</b> online.
+</p>
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Discussion
+Sections and Teaching Assistants</h3>
+
+<p>
+<a href="disc/dis1.pdf">disc1</a>
+<a href="disc/dis1sol.pdf">disc1-sol</a>
+<a href="disc/dis2.pdf">disc2</a>
+<a href="disc/dis2sol.pdf">disc2-sol</a>
+<a href="disc/dis3.pdf">disc3</a>
+<a href="disc/dis3sol.pdf">disc3-sol</a>
+<a href="disc/dis4.pdf">disc4</a>
+<a href="disc/dis4sol.pdf">disc4-sol</a>
+<a href="disc/dis5.pdf">disc5</a>
+<a href="disc/dis5sol.pdf">disc5-sol</a>
+<a href="disc/dis6.pdf">disc6</a>
+<a href="disc/dis6sol.pdf">disc6-sol</a>
+<a href="disc/dis7.pdf">disc7</a>
+<a href="disc/dis7sol.pdf">disc7-sol</a>
+<a href="disc/dis8.pdf">disc8</a>
+<a href="disc/dis8sol.pdf">disc8-sol</a>
+<a href="disc/dis9.pdf">disc9</a>
+<a href="disc/dis9sol.pdf">disc9-sol</a>
+<a href="disc/dis10sol.pdf">disc10</a>
+<a href="disc/dis11.pdf">disc11</a>
+<a href="disc/dis11sol.pdf">disc11-sol</a>
+<a href="disc/decision-theory-note.pdf">decision-theory-note</a>
+<a href="disc/examprep5.pdf">examprep5</a>
+<a href="disc/examprep5sol.pdf">examprep5-sol</a>
+<a href="disc/examprep6.pdf">examprep6</a>
+<a href="disc/examprep6sol.pdf">examprep6-sol</a>
+<a href="disc/examprep7.pdf">examprep7</a>
+<a href="disc/examprep7sol.pdf">examprep7-sol</a>
+<a href="disc/examprep9sol.pdf">examprep9-sol</a>
+<a href="disc/examprep10sol.pdf">examprep10-sol</a>
+</p>
+
+<p>
+Sections begin to meet on January 25.
+</p>
+
+<p>
+Your Teaching Assistants are: <br>
+Kevin Li (Head TA) <br>
+Kumar Agrawal <br>
+Christina Baek <br>
+Sagnik Bhattacharya <br>
+Sohum Datta <br>
+Joey Hejna <br>
+An Ju <br>
+Zhuang Liu <br>
+Ziye Ma <br>
+Hermish Mehta <br>
+Nathan Miller <br>
+Kireet Panuganti <br>
+Deirdre Quillen <br>
+Arvind Sridhar <br>
+Arjun Sripathy <br>
+Yaodong Yu
+</p>
+
+<!-- <p>
+Office hours are listed
+<a href="https://calendar.google.com/calendar?cid=YmVya2VsZXkuZWR1X2NjMzZiNWYzMmluZDRwMGw0bWRkcjc3a2c4QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">in this Google calendar link</a>.
+</p> -->
+
+
+<!-- <a href="https://docs.google.com/spreadsheets/d/1gbGxdQsy4a7ry-m5nd_mpus1lp8VDPF7bUJgm16kuTg/">Office
+hours are listed here</a>.
+If you're planning to visit, please consider filling out
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSesNVV9mP2h2b6T3h66-zHSUERe5892stY9CdZIcR8TcivWWw/viewform">this
+online office hour queue form</a> so your TA can prepare, and
+so you'll know how many other students to expect there.
+-->
+
+
+<h3 style="background-color:#900000;color:#ffffff;padding:1px">Grading</h3>
+
+<ul>
+<li>
+<b>40%</b> for homeworks.
+
+<li>
+<b>20%</b> for the Midterm.
+
+<li>
+CS 189:  <b>40%</b> for the Final Exam.
+
+<li>
+CS 289A:  <b>20%</b> for the Final Exam.
+
+<li>
+CS 289A:  <b>20%</b> for a Project.
+</ul>
+
+
+<h3 style="background-color:#009000;color:#ffffff;padding:1px">&nbsp;</h3>
+
+
+<p>
+<img src="4meansanimation.gif" loop=infinite align=right width=480 height=480>
+
+<small>
+Supported in part by the National Science Foundation under
+Awards CCF-0430065, CCF-0635381, IIS-0915462, CCF-1423560, and CCF-1909204,
+in part by a gift from the Okawa Foundation,
+and in part by an Alfred P. Sloan Research Fellowship.
+</small>
+</p>
+
+</body>
+</html>
