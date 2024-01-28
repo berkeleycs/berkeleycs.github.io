@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework 5 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-a-bit-twiddling-puzzle">A. A Bit-Twiddling Puzzle</a></li>
+  <li><a href="index.html#b-implementing-a-packed-array-nybbles-java">B. Implementing a Packed Array: Nybbles.java</a></li>
+  <li><a href="index.html#c-linked-lists-via-arrays-with-a-twist">C. Linked Lists via Arrays (With a Twist)</a></li>
+  <li><a href="index.html#d-asymptotic-analysis">D. Asymptotic Analysis</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Homework 5: HW5: Bit Operations and Asymptotic Analysis</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-a-bit-twiddling-puzzle">A Bit-Twiddling Puzzle</a></li>
+  <li><a href="index.html#b-implementing-a-packed-array-nybblesjava">Implementing a Packed Array: Nybbles.java</a></li>
+  <li><a href="index.html#c-linked-lists-via-arrays-with-a-twist">Linked Lists via Arrays (With a Twist)</a></li>
+  <li><a href="index.html#d-asymptotic-analysis">Asymptotic Analysis</a></li>
+</ul>
+
+
+<h2 id="a-a-bit-twiddling-puzzle">A. A Bit-Twiddling Puzzle</h2>
+
+
+<p>Fill in the definition of <code>lastBit(n)</code> with a single <code>return</code> statement
+so that it returns the value of <code>n</code> with all but its last (least significant)
+1-bit set to 0.  For example, 100 in binary is <code>1100100</code>, so <code>lastBit(100)</code>
+should return 4, which is <code>100</code> in binary.  Your solution should only use the
+Java arithmetic operators and bitwise operations (<code>&amp;</code>, <code>|</code>, <code>^</code>, etc.).</p>
+
+<pre><code>public static int lastBit(int n) {
+     return _____________;
+}</code></pre>
+
+
+<h2 id="b-implementing-a-packed-array-nybbles-java">B. Implementing a Packed Array: Nybbles.java</h2>
+
+
+<p>Let's suppose we have an application that strains our
+computer's primary memory capacity and need to fit large arrays of
+small integers into as little space as possible.
+We want a data type that provides an array of integers that are
+limited in range to $-8$ to $7$.  Such integers are representable in
+4&nbsp;bits (half a byte, also known as a <em>nybble</em>).
+So in principle, it ought to be possible to 
+store $N$ integers in an $N/8$-integer array
+(packing 8 4-bit integers into each int).  Fill in the template
+below to provide a suitable small-int array type.  Do <em>not</em>
+perform any additional <strong>new</strong> operations in the implementation (you may
+include as many as you want for testing, if you put them in a
+different file).</p>
+
+<pre><code>/** Represents an array of integers each in the range &#x2d;8..7. */
+public class Nybbles {
+    /** An array of size N. */
+    public Nybbles(int N) {
+        /* DON&#x27;T CHANGE THIS. */
+        data = new int[(N+7) / 8];
+        this.N = N;
+    }
+
+    /** Return the number of nybbles in me. */
+    public int size () { return N; }
+
+    /** Return my Kth integer, numbering from 0.  Assumes 0 &lt;= K &lt; N. */
+    public int get(int k) {
+        if (k &lt; 0 || k &gt;= N)
+            throw new IndexOutOfBoundsException();
+        else 
+            return /* REPLACE WITH ANSWER */ 0;
+    }
+
+    /** Set my Kth integer to VAL.  Assumes 0 &lt;= K &lt; N and &#x2d;8 &lt;= VAL &lt; 8. */
+    public void set (int k, int val) {
+        if (k &lt; 0 || k &gt;= N)
+            throw new IndexOutOfBoundsException();
+        else if (val &lt; &#x2d;8 || val &gt;= 8)
+            throw new IllegalArgumentException();
+        else 
+            data[ /* REPLACE WITH ANSWER */ 0 ] =
+                /* REPLACE WITH ANSWER */ 0;
+    }
+
+    // DON&#x27;T CHANGE OR ADD TO THESE.
+    private private int N;
+    private private int[] data;
+}</code></pre>
+
+
+<h2 id="c-linked-lists-via-arrays-with-a-twist">C. Linked Lists via Arrays (With a Twist)</h2>
+
+
+<p>In the old days, programmers used array indices in place of pointers.
+<br/>
+Pointed-to objects would be elements of an array, and pointers to those objects
+would be integer array indices.  For example, one could implement a 
+doubly linked list containing the three strings "dog", "cat", "pony" with 
+three arrays and one integer variable (pointing to the start of the list).
+One way to do so is this:</p>
+
+<pre><code>String[] data = { &quot;cat&quot;, &quot;pony&quot;, &quot;dog&quot;, null, null };
+int[] next = { 1, &#x2d;1, 0, &#x2d;1, &#x2d;1 };
+int[] prev = { 2, 0, &#x2d;1, &#x2d;1, &#x2d;1 };
+int L = 2;</code></pre>
+
+<p>Here,</p>
+
+<ul>
+  <li><code>data</code> contains the three strings in some order (not necessarily the
+  intended order of the list), plus possibly some leftover space for later 
+  additions;</li>
+  <li><code>L</code> contains the index of the first string ("dog")
+  and represents a pointer to the start of the list; `</li>
+  <li><code>next[i]</code> is the index of the list item that comes after the item stored at
+  <code>data[i]</code>;</li>
+  <li><code>prev[i]</code> is the index of the list item that comes before the item stored at
+  <code>data[i]</code>;</li>
+  <li>-1 is used to represent the null pointer.</li>
+</ul>
+
+<p>By means of a clever hack, we don't need two arrays <code>prev</code> and <code>next</code>.
+We can actually
+get away with one array whose elements represent pointers going both
+ways!  Doing this relies on the properties of the exclusive-or 
+operation: <code>x^y</code>, or, as it is often written in technical literature,
+$x \oplus y$
+Specifically, since <code>x^x==0</code> for all values of <code>x</code>, and
+since exclusive-or is associative and commutative, it's always true that
+<code>x^y^y == x</code> and <code>x^y^x == y</code>.</p>
+
+<p>Suppose therefore that in place of 
+arrays <code>prev</code> and <code>next</code>, we have one array, <code>link</code>, where <code>link[i] = next[i]^prev[i]</code>.  Suppose I want to sequence through the list forward, starting at
+item <code>L</code>.  We know that <code>prev[L]</code> is -1, so we can compute <code>next[L]</code> as
+<code>n = link[L]^(&#x2d;1)</code>.  Now we have <code>n == next[L]</code> and <code>L</code>. Since <code>L</code> is 
+<code>prev[n]</code>, we can also compute <code>next[n]</code> (that is, <code>next[next[L]]</code>): it's just
+<code>L^link[n]</code>.  In this way, we can proceed forward down the list.
+By symmetry, we can also proceed backwards from the end of the list, starting 
+from a pointer to the end of the list (whose <code>next</code> value is -1).  Thus, 
+from the single array of integers, <code>link</code>, and the index of either 
+end of the list, we can traverse the entire list.</p>
+
+<p>In class, we saw the <code>AbstractList</code> class, which allows one to get a complete
+concrete implementation of a subtype of <code>List</code> just from implementing the
+methods <code>size</code>, <code>get</code>, <code>add</code>, <code>set</code>, and <code>remove</code> (or just the first two for
+a read-only list).  There is another abstract class,
+<a href="index.html">java.util.AbstractSequentialList</a>, which is better suited to implementing
+lists (such as linked lists) where random access (<code>get</code>) is slow, but where
+there is a fast way to iterate through the list sequentially.  You can get
+a full-blown <code>List</code> implementation from <code>AbstractSequentialList</code> by
+implementing just <code>size</code> and <code>listIterator</code>.  To implement <code>listIterator</code>, one
+generally has to also implement a subtype of <a href="index.html">java.util.ListIterator</a>.</p>
+
+<p>Fill in the skeleton class <code>CompactLinkedList</code> to implement a <code>List</code> class
+that uses the exclusive-or hack to represent a <code>List</code> with just one pointer
+per item.</p>
+
+
+<h2 id="d-asymptotic-analysis">D. Asymptotic Analysis</h2>
+
+
+<p>For these problems, you should give a brief explanation as hw5.txt.
+You should not use any fancy typesetting tools (like LaTeX, Word,
+etc.). Just submit a text file called <code>hw5.txt</code>.
+You are not required to explain your
+solutions, but you are encouraged to do so.</p>
+
+<p>Provide simple and tight asymptotic bounds for each of the following.
+Here, "simple" means roughly "no unnecessary terms or constants" and
+"tight" means "either the largest $\Omega(\cdot)$ and 
+smallest $O(\cdot)$
+bounds you can find, or if possible, a $\Theta(\cdot)$ bound."</p>
+
+<ol>
+  <li>$9x^2 + 3x + 14 \log x$</li>
+  <li>$\log(4x^3 + 2x^2)$</li>
+  <li>$\sum_{i=0}^{N}\sum_{j=0}^{i} j$.</li>
+  <li><p>The worst case running time of the following code fragment:</p>
+
+<pre><code>int j;
+j = 0;
+for (int i = 0; i &lt; N; i += 1) {
+   for ( ; j &lt; M; j += 1) {
+      if (bump (i, j)) 
+         break;
+   }
+}</code></pre>
+
+  <p>Assume that <code>M</code> and <code>N</code> are integers, and <code>bump</code>
+  is a constant-time ($O(1)$) method that returns a boolean result.
+  We're
+  looking for a $\Theta$ result that uses <code>M</code> and <code>N</code>.</p></li>
+  <li><p>The worst case running time of the function f5 for the code below.</p>
+
+<pre><code>public static int f1 (int n) {
+  int x = 0;
+  for (int i = 0; i &lt; n; i++) {
+      x++;
+  }
+  return x;
+}
+
+public static int f5 (int n) {
+  if (n &lt;= 1) {
+    return 1; 
+  }
+  return f1(n) + f5(n/2) + f5(n/2);
+}</code></pre>
+
+  <p>Give your answer as $\Theta$ result that uses <tt>n</tt>.</p></li>
+  <li>Show that $\log_b f(x) \in \Theta(\log_{10} f(x))$ for any constant $b>1$.
+  (To demonstrate a statement like this, go to the definition.  You must
+  find $K$ and $M$ such that $|\log_b f(x)| < |K\log_{10} f(x)|$ for 
+  $x > M$.</li>
+  <li>Suppose that $p(x)$ is any polynomial in $x$ with positive
+  coefficients.  Show that  $\log p(x) \in O(\log x)$.</li>
+  <li>Suppose that $f(n)$ is a positive, non-decreasing function.
+  <br/>
+  Show that $\lceil f(n)\rceil \in O(f(n))$, where $\lceil x \rceil$ is 
+  defined as $x$ rounded up to the nearest integer.</li>
+</ol>
+    </main></div>
+</body>
+</html>

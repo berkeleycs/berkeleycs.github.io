@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 4 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-before-you-start">A. Before You Start</a></li>
+  <li><a href="index.html#b-review">B. Review</a></li>
+  <li><a href="index.html#c-project-0">C. Project 0</a></li>
+  <li><a href="index.html#d-submission">D. Submission</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 4: Concept Review and Project 0</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-before-you-start">Before You Start</a></li>
+  <li><a href="index.html#b-review">Review</a></li>
+  <li><a href="index.html#c-project-0">Project 0</a></li>
+  <li><a href="index.html#d-submission">Submission</a></li>
+</ul>
+
+
+<h2 id="a-before-you-start">A. Before You Start</h2>
+
+
+<p>Now is a good time to make sure you've turned in what you think you turned in.</p>
+
+<ul>
+  <li>Use the <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html">Scores tab</a> of the course website to check that you have
+  submissions for everything at the times you expect.</li>
+  <li><p>To make sure that your local machine has all tags in the central repository,
+  run:</p>
+
+<pre><code>git fetch origin</code></pre></li>
+  <li><p>To see what tags you have, run:</p>
+
+<pre><code>git tag</code></pre></li>
+  <li><p>If you have a tag (say <code>hw1&#x2d;2</code>), then the command</p>
+
+<pre><code>git log &#x2d;1 hw1&#x2d;2   # That&#x27;s a one, not the letter &#x27;l&#x27;</code></pre>
+
+  <p>will print the log message for that tag, which has a date and time.</p></li>
+  <li>You can match up tags with [Scores] submissions by date.</li>
+  <li>Note: Run <code>git status</code> to see which files are ones you created and never
+  bothered to track, listed under "Untracked files". These files aren't being
+  tracked by git yet, and thus aren't part of ANY submission.</li>
+  <li><p>After making sure that you've committed all current work in your local
+  repository, you can check out any tagged submission (say, <code>hw1&#x2d;2</code>) with</p>
+
+<pre><code>git checkout hw1&#x2d;2</code></pre>
+
+  <p>It will tell you that you are in "detached head state". Despite sounding
+  sinister, that's actually quite normal. Detached head means that your git
+  repository is no longer at the latest commit, or "head", of your master
+  branch (or any branch, for that matter).
+  <br/>
+
+  Checking out a tag will allow you to see the exact files you submitted for
+  that tag.  Open any file, and you can see the state of that file for that
+  specific submission.</p></li>
+  <li><p>IMPORTANT: When you're finished looking around in "detached head" state, you
+  can run</p>
+
+<pre><code>git checkout master</code></pre>
+
+  <p>to go back to the master branch. This is important because if you start
+  modifying, adding, and committing files while your head is detached, you'll
+  end up with a very messy git repo that will need some cleaning up.</p></li>
+  <li><p>Let's clean up any untracked files that we don't care about. Run</p>
+
+<pre><code>git status</code></pre>
+
+  <p>If you don't see a section called "Untracked files", skip this step.
+  Otherwise, look through the list of untracked files. You may notice files
+  <code>.DS_Store</code> and <code>*.iml</code> and folders <code>.idea</code> and <code>out</code> under some of your lab
+  and homework directories. There are some files that you don't need to submit
+  to the autograder for labs, homeworks, and projects, but show up in your
+  repository anyways. As the semester continues, this list of "Untracked files"
+  that we don't care about may get longer, and this makes running <code>git status</code> a
+  bit annoying. Let's clean that up now.
+  <br/>
+
+  In the root of your git repository, ie. the repo folder, open the <code>.gitignore</code>
+  file if it exists, and create it if it doesn't with</p>
+
+<pre><code>touch .gitignore</code></pre>
+
+  <p>As the name implies, this file contains the names of files that we want git to
+  ignore. Add the untracked files that you don't want git to keep track of in
+  this file, one per line.  For example, any <code>.DS_Store</code> file or file ending
+  with <code>.iml</code> can be safely added to the <code>.gitignore</code>, along with any <code>out</code> or
+  <code>.idea</code> folders. You may have other files that you want git to ignore too --
+  feel free to add them, or ask a lab assistant/TA if you're unsure.
+  <br/>
+
+  Tip: the <code>.gitignore</code> allows you to pattern match files. This is helpful if
+  you have lots of similarly-named files that you want to ignore. For example,
+  <code>*.iml</code> tells git to ignore all files that end with <code>.iml</code>, in all
+  subdirectories.</p>
+
+  <p>When you're done, add and commit this <code>.gitignore</code> file just like any other
+  file, that we DO want git to keep track of.</p></li>
+</ul>
+
+
+<h2 id="b-review">B. Review</h2>
+
+
+<p>We'll start by reviewing pointers, arrays, and OOP. Complete these four
+interactive exercises:</p>
+
+<ul>
+  <li><a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fquiz.cgi%3Fquizname=lab4a_quiz.html">Exercise 1</a></li>
+  <li><a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fquiz.cgi%3Fquizname=lab4b_quiz1.html">Exercise 2</a></li>
+  <li><a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fquiz.cgi%3Fquizname=lab4b_quiz2.html">Exercise 3</a></li>
+  <li><a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fquiz.cgi%3Fquizname=lab4b_quiz3.html">Exercise 4</a></li>
+</ul>
+
+
+<h2 id="c-project-0">C. Project 0</h2>
+
+
+<p>Hopefully you've made some good progress on Project 0, which is due Monday,
+September 23. The rest of the lab is for you to work on the project. A couple
+of pointers:</p>
+
+<ul>
+  <li>Make sure you understand the rules of the game. If you have questions, first
+  reread the spec <a href="http://inst.eecs.berkeley.edu/~cs61b/fa19/materials/proj/proj0/index.html#the-puzzle">here</a>!</li>
+  <li>If you have questions, feel free to post on <a href="https://piazza.com/class/jxzgoek4x4j4u6">Piazza</a>. Make sure to
+  search to see if your question has already been asked before asking!</li>
+  <li>Code with <a href="../../../docs/style-guide.html">good style</a>! Make sure to run <code>style61b</code> or <code>make style</code> on
+  the necessary files.</li>
+</ul>
+
+
+<h2 id="d-submission">D. Submission</h2>
+
+
+<p>In order to receive credit for this lab, you must attempt all exercises in Section B. There is nothing to submit through git for this lab. Good luck with the project!</p>
+    </main></div>
+</body>
+</html>

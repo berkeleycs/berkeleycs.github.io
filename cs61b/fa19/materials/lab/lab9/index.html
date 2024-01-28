@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 9 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#a-intro">A. Intro</a></li>
+  <li><a href="index.html#b-implementations-of-queues-and-priority-queues">B. Implementations of queues and priority queues</a></li>
+  <ul>
+    <li><a href="index.html#exercise-implementing-your-own-min-heap">Exercise: Implementing your own min heap</a></li>
+  </ul>
+  <li><a href="index.html#c-heapsort">C. Heapsort</a></li>
+  <li><a href="index.html#d-heapify">D. Heapify</a></li>
+  <li><a href="index.html#c-submission">C. Submission</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 9: Heaps and Priority Queues</header>
+        
+<h2 id="a-intro">A. Intro</h2>
+
+
+<p>Today, we'll take a look at the <em>priority queue</em> and how it can be implemented
+using a heap. We'll then implement our own priority queue (called <code>ArrayHeap</code>),
+and then discuss some applications of heaps.</p>
+
+
+<h2 id="b-implementations-of-queues-and-priority-queues">B. Implementations of queues and priority queues</h2>
+
+
+<p>We’ve learned about a few abstract data types already, including the stack and
+queue. The stack is a last-in-first-out (LIFO) abstract data type where, much
+like a physical stack, one can only access the top of the stack and must pop off
+recently added elements to retrieve previously added elements. The queue is a
+first-in-first-out (FIFO) abstract data type. When we process items in a queue,
+we process the most recently added elements last.</p>
+
+<p>But what if we want to model an emergency room, where people waiting with the
+most urgent conditions are served first? We would need to serve patients
+regardless of when they arrive, since those arriving first or most recently will
+not necessarily be the ones most in pain.</p>
+
+<p>Sometimes, processing items LIFO or FIFO is not what we want. We may instead
+want to process items in order of importance or a priority value.</p>
+
+<p>The priority queue is an abstract data type that contains the following methods:</p>
+
+<ul>
+  <li><code>insert(item, priority)</code>: Inserts item into the priority queue with priority
+  value priority.</li>
+  <li><code>poll()</code>: Removes and returns the highest priority item in the priority queue.</li>
+  <li><code>peek()</code>: Returns the highest priority item.</li>
+</ul>
+
+<p>It is similar to a <code>Queue</code> though the insert method will insert an item with a
+corresponding “priority value” and the poll method in the priority queue will
+remove the element with the highest priority, rather than the oldest element in
+the queue.</p>
+
+<p><strong>Note:</strong> The element with the highest priority may not always have the highest
+priority value. Priorities are a function of priority values: if we have a
+maximum priority queue, the elements with higher priority will be the ones with
+larger priority values; on the other hand, if we have a minimum priority queue,
+the elements with higher priority will be the ones with smaller priority values.</p>
+
+<p>This seems like a cool thing to have, but how do we actually implement something
+like this? Java’s priority queue is actually implemented with a data structure
+called a binary min heap. For the remainder of this lab, we will study the heap
+data structure and create our own implementation of a priority queue using a
+binary min heap.</p>
+
+
+<h4 id="exercise-implementing-your-own-min-heap">Exercise: Implementing your own min heap</h4>
+
+
+<p>The class <code>ArrayHeap</code> implements a binary min heap using an <code>ArrayList</code>, just
+like we discussed at the beginning of this lab. Open it up and read the provided
+methods.</p>
+
+<p>Notice in the constructor we call <code>contents.add(null)</code>. Think about how this
+affects indexing and why we choose to add a <code>null</code> element.</p>
+
+<p>Fill in the incomplete methods in <code>ArrayHeap.java</code> (marked with TODOs) You should not edit the methods without TODOs but you can use them in the code you write. As John DeNero wisely says,
+code that doesn't respect abstraction barriers should BURN. Respect abstraction
+barriers! (You should able to finish the lab without directly accessing the
+<code>contents</code> <code>ArrayList</code>.)</p>
+
+<ul>
+  <li>First implement <code>getLeftOf(int i)</code>, <code>getRightOf(int i)</code>, <code>getParentOf(int i)</code>.</li>
+  <li>Next, using the previously implemented methods, implement <code>setLeft(int index,
+  Node n)</code> and <code>setRight(int index, Node n)</code></li>
+  <li>Next, implement <code>min(int index1, int index2)</code>, <code>peek()</code>, <code>bubbleUp(int
+  index)</code>, <code>bubbleDown(int index)</code></li>
+  <li>Lastly, implement <code>insert(T item, double priority)</code>, <code>removeMin()</code>,
+  <code>changePriority(T item, double priority)</code>. Make sure you use the <code>bubbleUp</code>
+  and <code>bubbleDown</code> methods when implementing these functions.</li>
+</ul>
+
+<p>We have provided a very basic test located in <code>ArrayHeapTest.java</code>. This test is
+by no means comprehensive, so we highly recommend adding your own tests.</p>
+
+
+<h2 id="c-heapsort">C. Heapsort</h2>
+
+
+<p>Now, let’s move onto an application of the heap data structure. Suppose you have
+an array of $N$ numbers that you want to sort smallest-to-largest. One algorithm
+for doing this is as follows:</p>
+
+<ol>
+  <li>Put all of the numbers in a min heap.</li>
+  <li>Repeatedly remove the min element from the heap, and store them in an array
+  in that order.</li>
+</ol>
+
+<p>This is called <em>heapsort</em>.</p>
+
+<p>Now, what is the runtime of this sort? Since each insertion takes proportional
+to $\log N$ comparisons once the heap gets large enough and each removal also
+takes proportional to $\log N$ comparisons, the whole process takes
+proportional to $N \log N$ comparisons.</p>
+
+<p>It turns out we can actually make step 1 of heapsort run faster—proportional to
+$N$ comparisons—using a process called heapify. (Unfortunately, we can’t make
+step 2 run any faster than $N \log N$, so the overall heapsort must take $N
+\log N$ time.)</p>
+
+
+<h2 id="d-heapify">D. Heapify</h2>
+
+
+<p>The algorithm for taking an arbitrary array and making it into a min (or max)
+heap in time proportional to $N$ is called <em>heapify</em>. Pseudocode for this
+algorithm is below:</p>
+
+<pre><code>def heapify(array):
+    index = N / 2
+    while index &gt; 0:
+        bubble down item at index
+        index &#x2d;= 1</code></pre>
+
+<p>Conceptually, you can think of this as building a heap from the bottom up. To
+get a visualization of this algorithm working, click on the BuildHeap button on
+<a href="https://www.cs.usfca.edu/~galles/JavascriptVisual/Heap.html">USFCA interactive animation of a min
+heap</a>. This loads a
+pre-set array and then runs heapify on it.</p>
+
+<p>Try to describe the approach in your own words. Why does the index start at the
+middle of the array rather than the beginning, 0, or the end, N? How does each
+bubble down operation maintain heap invariants?</p>
+
+<p>It is probably not immediately clear to you why this heapify runs in $O(N)$.
+For those who are curious, you can check out an explanation on
+<a href="https://stackoverflow.com/questions/9755721/how-can-building-a-heap-be-on-time-complexity">StackOverflow</a> or <a href="https://en.wikipedia.org/wiki/Binary_heap#Building_a_heap">Wikipedia</a>.</p>
+
+
+<h2 id="c-submission">C. Submission</h2>
+
+
+<p>Please submit <code>ArrayHeap.java</code>. The grader for this assignment will be the same as the test that we have provided for you. However if you pass this test you might still have a buggy implementation. To verify the correctness of your <code>ArrayHeap</code> code you should write more tests to fully test the behavior of your implementation. This also has the benefit of reinforcing your knowledge of how priortiy queue / array heap operations work as you will have to determine what the expected behavior is. If you want extra help thinking of tests feel free to reach out to a TA or academic intern for assistance!</p>
+    </main></div>
+</body>
+</html>

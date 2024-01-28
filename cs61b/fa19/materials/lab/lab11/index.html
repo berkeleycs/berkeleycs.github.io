@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 11 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#a-introduction">A. Introduction</a></li>
+  <li><a href="index.html#b-lab">B. Lab</a></li>
+  <li><a href="index.html#c-unit-testing">C. Unit Testing</a></li>
+  <ul>
+    <li><a href="index.html#legalmoves">LegalMoves</a></li>
+  </ul>
+  <li><a href="index.html#d-integration-tests">D. Integration Tests</a></li>
+  <li><a href="index.html#e-summary">E. Summary</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 11: Testing Tablut</header>
+        
+<h2 id="a-introduction">A. Introduction</h2>
+
+
+<p>Today you will start testing Project 2: Tablut. If you have not already, take a look at the <a href="../../proj/proj2/index.html">spec here</a>.</p>
+
+
+<h2 id="b-lab">B. Lab</h2>
+
+
+<p>In this lab, we will go over how to test your project. There will be nothing to submit for this lab, and feel free to take this lab section as time to ask your TA and/or academic interns questions about the project. The relevant file <code>TablutTests.java</code> will be under your <code>lab11</code> folder. Copy this file into tablut folder of your Project 2 directory. Feel free to use the tests that you write in this lab as part of the tests you submit for your project.</p>
+
+
+<h2 id="c-unit-testing">C. Unit Testing</h2>
+
+
+<p>While we suggest you write unit tests for most or all of the methods you implement, we will be focusing on writing tests for the <code>legalMoves</code> method in your Board class.</p>
+
+
+<h3 id="legalmoves">LegalMoves</h3>
+
+
+<p>In <code>TablutTests.java</code>, we provide you with skeleton for two tests that you can use to test your <code>legalMoves</code> method in your Board class. The test begins by initializing a new Board based off of <code>initialBoardState</code>, placing Pieces in that Board, and then calling <code>legalMoves</code>. Both the tests should pass successfully for correct implementation of <code>legalMoves</code> method.</p>
+
+<p>When you write your own unit tests, it is a good idea to think of many different cases of your method and where your methods could break. Can you think of other cases that you should be testing for this method? Try writing more assertions and/or another test for <code>legalMoves</code> that accounts for those. You can also create different board states similar to <code>initialBoardState</code> and run these tests on it to verify correctness of your implementation of <code>legalMoves</code> method. Ask your TA or an academic intern if you're not sure what cases to consider.</p>
+
+
+<h2 id="d-integration-tests">D. Integration Tests</h2>
+
+
+<p>To obtain the <code>proj2/testing/test&#x2d;tablut</code> file to run your integration tests (if you do not have it), first commit all your changes and then run:</p>
+
+<p><code>
+git fetch shared
+
+</code></p>
+
+<p>and then</p>
+
+<p><code>
+git merge shared/proj2
+
+</code></p>
+
+<p>See the <a href="../../proj/proj2/index.html#testing">project spec</a> as well as the provided example testing files under <code>proj2/testing</code> in your repo for more information on how to use this.</p>
+
+<p>These tests are useful to see that your entire game is working - the integration tests model a game being played on standard input.</p>
+
+<p><code>00&#x2d;initial&#x2d;1.in</code> checks if the initial board is correct.</p>
+
+<p><code>00&#x2d;simpmoves&#x2d;1.in</code> simulates a manual white player and checks if move command is working correctly.</p>
+
+<p>Some suggested ways of writing more tests:</p>
+
+<ol>
+  <li>Play an entire game against the staff Tablut program, and replicate all your moves and the staff moves as manual players in an integration test. Make sure that you are able to run through the whole sequence of moves without errors.</li>
+  <li>Observe a game between two automatic players in the staff solution. Replicate all but the last couple of the moves in a test, and then make both your players automatic. Does you AI find a similar win?</li>
+</ol>
+
+
+<h2 id="e-summary">E. Summary</h2>
+
+
+<p>That's it! There will be nothing to submit for this lab.</p>
+    </main></div>
+</body>
+</html>

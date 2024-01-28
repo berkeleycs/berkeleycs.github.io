@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 12 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#a-intro-balancing-search-trees">A. Intro: Balancing search trees</a></li>
+  <ul>
+    <li><a href="index.html#an-overview-of-balanced-search-trees">An Overview of Balanced Search Trees</a></li>
+  </ul>
+  <li><a href="index.html#b-b-trees">B. B-trees</a></li>
+  <ul>
+    <li><a href="index.html#2-4-trees">2-4 Trees</a></li>
+    <li><a href="index.html#insertion-into-a-2-4-tree">Insertion into a 2-4 Tree</a></li>
+    <li><a href="index.html#self-test-growing-a-2-4-tree">Self-test: Growing a 2-4 Tree</a></li>
+    <li><a href="index.html#b-trees">B-trees</a></li>
+  </ul>
+  <li><a href="index.html#c-red-black-trees">C. Red-Black Trees</a></li>
+  <ul>
+    <li><a href="index.html#2-4-tree-harr-red-black-tree"><em>2-4 tree</em> &harr; <em>Red-Black tree</em></a></li>
+    <li><a href="index.html#optional-exercise">Optional Exercise:</a></li>
+    <li><a href="index.html#red-black-trees-are-binary-search-trees">Red-Black trees are Binary Search Trees</a></li>
+  </ul>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 12: Balanced Search Trees</header>
+        
+<p>Lab 12 was cancelled to give you an additional project work day for Tablut. There was nothing to submit for that lab day but we have preserved the readings on this page because they may be helpful for homework 7.</p>
+
+
+<h2 id="a-intro-balancing-search-trees">A. Intro: Balancing search trees</h2>
+
+
+
+<h4 id="an-overview-of-balanced-search-trees">An Overview of Balanced Search Trees</h4>
+
+
+<p>Over the past couple of weeks, we have analyzed the performance of algorithms for access and insertion into binary search trees under the assumption that the trees were <em>balanced</em>. Informally, that means that the paths from root to leaves are all roughly the same length, and that we won't have to worry about lopsided trees in which search is linear rather than logarithmic.</p>
+
+<p>This balancing doesn't happen automatically, and we have seen how to insert items into a binary search tree to produce worst-case search behavior. There are two approaches we can take to make tree balancing happen: <em>incremental balance</em>, where at each insertion or deletion we do a bit of work to keep the tree balanced; and <em>all-at-once balancing</em>, where we don't do anything to keep the tree balanced until it gets too lopsided, then we completely rebalance the tree.</p>
+
+<p>In the activities of this segment, we start by analyzing some tree balancing code. Then we explore how much work is involved in maintaining complete balance. We'll move on to explore two kinds of balanced search trees, B trees and red-black trees.</p>
+
+
+<h2 id="b-b-trees">B. B-trees</h2>
+
+
+
+<h4 id="2-4-trees">2-4 Trees</h4>
+
+
+<p>Let us examine 2-4 trees that guarantee <code>O(log(n))</code> depth in any case. That is, the tree is always almost balanced.</p>
+
+<p>In a 2-4 tree, also known as a 2-3-4 tree, each node can have up to 3 keys in it. The additional invariant is that any non-leaf node <strong>must</strong> have one more child than it does keys. That means that a node with 1 key must have 2 children, a node with 2 keys must have 3 children, and a node with 3 keys must have 4 children. That's why it's called a 2-3-4 tree.</p>
+
+<p>Here's an example of one:</p>
+
+<p><img src="TwoThreeFourTree.png" alt="TwoThreeFourTree"></p>
+
+<p>It looks like a binary search tree, except each node can contain 1, 2, or 3 items in it. Notice that it even follows the ordering invariants of the binary search tree.</p>
+
+<p>Searching in a 2-4 tree is much like searching in a binary search tree. Like a BST, if there is only one key in a node, then everything to the left of the key is less than it and everything to the right is greater. If there are 2 keys, say A and B, then the leftmost child will all have keys less than or equal A, the middle child will have keys between A and B and the rightmost child will have keys greater than or equal to B. You can extend this to the 3 key case as well.</p>
+
+
+<h4 id="insertion-into-a-2-4-tree">Insertion into a 2-4 Tree</h4>
+
+
+<p>Although searching in a 2-4 tree is like searching in a BST, inserting a new item is a little different.</p>
+
+<p>First of all, we <em>always</em> insert the new key at the leaf node. We must find the correct place for the key that we insert to go, by traversing down the tree, then insert the new key in an appropriate place in the existing leaf.</p>
+
+<p>For example, say we are inserting <code>10</code>, and we traverse down the tree until we find a leaf with 2 other elements, <code>8</code>, <code>11</code>. Then, we can just insert <code>10</code> between <code>8</code> and <code>11</code>, and the leaf now has three elements: <code>8</code>, <code>10</code>, <code>11</code>.</p>
+
+<p>However, what if we come across a node that already has 3 keys, such as <code>8</code>, <code>9</code>, and <code>11</code>? We'd like to put the new item here, but it won't fit, because each node can only have up to 3 keys in it. What should we do?</p>
+
+<p>Here, we do NOT add the item as a new child of the node. Instead, we add the key temporarily to the node, and push one of the middle keys (note that the choice of which middle key to push up is arbitrary, and will be clearly specified in any example we ask of you) up into the parent node and split the remaining two keys into two 1-key nodes (Because we are doing this from the top down, the parent will always have room). Then we add the new item to one of the split nodes.</p>
+
+<p>For instance, say we had this 2-4 tree:</p>
+
+<p><img src="preInsert.png" alt="preInsert"></p>
+
+<p>Let's try to insert 9 into this tree. We see it's smaller than 20, so we go down to the left. Then we find a node with 3 keys. We push up the middle (11), then split the 10 and the 12. Then we put the 9 in the appropriate split node.</p>
+
+<p><img src="postInsert.png" alt="postInsert"></p>
+
+<p>There is one little special case we have to worry about when it comes to inserting, and that's if the root is a 3-key node. After all, roots don't have a parent. In that case, we still push up the middle key and instead of giving it to the parent, we make it the new root.</p>
+
+
+<h4 id="self-test-growing-a-2-4-tree">Self-test: Growing a 2-4 Tree</h4>
+
+
+<p>Suppose the keys 1, 2, 3, 4, 5, 6, 7, 8, 9, and 10 are inserted sequentially into an initially empty 2-4 tree. Which insertion causes the second split to take place? Assume we push up the left middle key when we try to insert into a node that is already full.</p>
+
+<selftest>
+
+<ul>
+  <li>2 ||| Incorrect.</li>
+  <li>3 ||| Incorrect.</li>
+  <li>4 ||| Incorrect.</li>
+  <li>5 ||| Incorrect</li>
+  <li>6 |||  Correct! The insertion of  4 splits the 1-2-3 node. Then the insertion of 6 splits the 3-4-5 node.</li>
+  <li>7 ||| Incorrect.</li>
+  <li>8 ||| Incorrect.</li>
+  <li>9 ||| Incorrect.</li>
+  <li>10 ||| Incorrect.</li>
+</ul>
+
+</selftest>
+
+
+<h4 id="b-trees">B-trees</h4>
+
+
+<p>A 2-4 tree is a special case of a structure called a <em>B-tree</em>. What varies among B-trees is the number of keys/subtrees per node. B-trees with lots of keys per node are especially useful for organizing storage of disk files, for example, in an operating system or database system. Since retrieval from a hard disk is quite slow compared to computation operations involving main memory, we generally try to process information in large chunks in such a situation, in order to minimize the number of disk accesses. The directory structure of a file system could be organized as a B-tree so that a single disk access would read an entire node of the tree. This would consist of (say) the text of a file or the contents of a directory of files.</p>
+
+
+<h2 id="c-red-black-trees">C. Red-Black Trees</h2>
+
+
+<p>We have seen that B-trees are balanced, guaranteeing that a path from the root to any leaf is almost <code>O(log(n))</code>. However, B-trees are notoriously difficult and cumbersome to code, with numerous corner cases for common operations.</p>
+
+<p>A Red-Black tree is a usual binary search tree, but it has additional invariants related to "coloring" each node red or black and the structure of the tree. If these are mainted then there will be an isometry (one-to-one mapping) between 2-4 trees and Red-Black trees!</p>
+
+<p>The conseqeunce is quite astounding: Red-Black trees maintain the balancedness of B-trees while inheriting all normal binary search tree operations (A Red-Black tree <em>IS</em> a binary search tree) with additional housekeeping. In fact, Java's <code>java.util.TreeMap</code> and <code>java.util.TreeSet</code> are implemented using Red-Black trees!</p>
+
+
+<h4 id="2-4-tree-harr-red-black-tree"><em>2-4 tree</em> &harr; <em>Red-Black tree</em></h4>
+
+
+<p>Notice that a 2-4 tree can have 1, 2, or 3 elements per node, and 2, 3, or 4 pointers to its children. Consider the following B-tree node:</p>
+
+<p><img src="node.jpg" alt="node"></p>
+
+<p><code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are pointers to its children nodes, therefore, its subtrees. <code>a</code> will have elements less than 4, <code>b</code> will have elements between 4 and 7, <code>c</code> will have elements between 7 and 10, and <code>d</code> will have elements greater than 10.</p>
+
+<p>Let's transform this into a "section" in a Red-Black tree that represents the above node and its children pointers:</p>
+
+<p><img src="redblack.jpg" alt="redblack"></p>
+
+<p>For each node in the 2-4 tree, we have a group of normal binary search tree nodes that correspond to it:</p>
+
+<p>Middle element &harr; black node that is the right or left child of its parent node.
+Left element &harr; red node on the left of the black node.
+Right element &harr; red node on the right of the black node.</p>
+
+<p>Notice that <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are also "sections" that correspond to a 2-4 tree node. Thus, the subtrees will have black root nodes.</p>
+
+<p>How about a 2-4 node with two elements?</p>
+
+<p><img src="node2.jpg" alt="node2"></p>
+
+<p>This node can be transformed as:</p>
+
+<p><img src="redblack2.jpg" alt="redblack2"></p>
+
+<p>or</p>
+
+<p><img src="redblack3.jpg" alt="redblack3"></p>
+
+<p>Both are valid. However, only the second transformation is a valid <em>Left-Leaning</em> Red-Black Tree, which we'll discuss in the next section.</p>
+
+<p>Trivially, for 2-4 node with only one element, it will translate into a single black node in a Red-Black tree.</p>
+
+<p>Convince yourself that the balancedness of the 2-4 tree still holds on a Red-Black tree and that the Red-Black tree is a binary search tree.</p>
+
+
+<h4 id="optional-exercise">Optional Exercise:</h4>
+
+<p>Read the code in <code>RedBlackTree.java</code> and <code>BTree.java</code>. Then, in <code>RedBlackTree.java</code>, fill in the implementation for <code>buildRedBlackTree</code> which returns the root node of the Red-Black tree which has a one-to-one mapping to a given 2-4 tree. For 2-4 tree node with 2 elements in a node, <em>you must</em> use the right element as the black node to pass the autograder tests, so you should be making a left leaning red black tree. For the example above, you must use the first representation of Red-Black tree where 5 is the black node.</p>
+
+
+<h4 id="red-black-trees-are-binary-search-trees">Red-Black trees are Binary Search Trees</h4>
+
+<p>As stated above, Red-Black trees are in fact binary search trees: a node's left subtree contains all elements less than that node's element and the same holds for the right subtree.</p>
+    </main></div>
+</body>
+</html>

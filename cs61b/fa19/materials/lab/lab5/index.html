@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 5 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#before-you-start">Before You Start</a></li>
+  <li><a href="index.html#a-introduction">A. Introduction</a></li>
+  <li><a href="index.html#b-collections">B. Collections</a></li>
+  <ul>
+    <li><a href="index.html#the-collection-interface">The Collection Interface</a></li>
+    <ul>
+      <li><a href="index.html#the-set-interface">The Set Interface</a></li>
+      <li><a href="index.html#the-list-interface">The List Interface</a></li>
+    </ul>
+    <li><a href="index.html#collections-usage-example">Collections usage example</a></li>
+  </ul>
+  <li><a href="index.html#c-introduction-to-iterators">C. Introduction to Iterators</a></li>
+  <li><a href="index.html#d-the-iterable-interface">D. The Iterable interface</a></li>
+  <ul>
+    <li><a href="index.html#an-iterator-for-fixedsizelist">An Iterator for <code>FixedSizeList</code></a></li>
+    <li><a href="index.html#in-summary">In Summary</a></li>
+  </ul>
+  <li><a href="index.html#e-programming-task-everyotherword-java">E. Programming Task: EveryOtherWord.java</a></li>
+  <li><a href="index.html#f-programming-task-meta-iteration-through-filters">F. Programming Task: Meta-Iteration through Filters</a></li>
+  <li><a href="index.html#g-submission">G. Submission</a></li>
+  <li><a href="index.html#h-optional-assignments">H. Optional Assignments</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 5: Collections, Iterators, and Iterables</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#before-you-start">Before You Start</a></li>
+  <li><a href="index.html#a-introduction">Introduction</a></li>
+  <li><a href="index.html#b-collections">Collections</a></li>
+  <li><a href="index.html#c-introduction-to-iterators">Introduction To Iterators</a></li>
+  <li><a href="index.html#d-the-iterable-interface">The Iterable Interface</a></li>
+  <li><a href="index.html#e-programming-task-everyotherword.java">Programming Task: EveryOtherWord.java</a></li>
+  <li><a href="index.html#f-programming-task-meta-iteration-through-filters">Programming Task: Meta-Iteration Through Filters</a></li>
+  <li><a href="index.html#g-submission">Submission</a></li>
+  <li><a href="index.html#h-optional-assignments">Optional Assignments</a></li>
+</ul>
+
+
+<h2 id="before-you-start">Before You Start</h2>
+
+
+<p>First, try your hand at this <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fquiz.cgi%3Fquizname=lab5_quiz0.html">short, mandatory quiz on polymorphism</a>.</p>
+
+
+<h2 id="a-introduction">A. Introduction</h2>
+
+<p>In this lab we will be giving you a small taste of the Java Standard Library. In particular, we will be looking at <em>Collections</em>, <em>Iterators</em>, and <em>Iterables</em>. Collections encompass many of the data structures that you will be working with this semester. Iterators are objects that control iteration through items in a collection via three methods: a constructor, <code>hasNext</code> (are there more items yet to be iterated over?), and <code>next</code> (return the next item in the iteration). Iterators are provided for every collection class in <code>java.util</code>. More generally, they provide a mechanism for unifying the operations of processing an array in several formats, handling input, and traversing more complicated structures.</p>
+
+<p>By the end of this lab, you should be comfortable with searching through the Java Standard Library documentation and with using Iterators and Iterables and Collections.</p>
+
+
+<h2 id="b-collections">B. Collections</h2>
+
+
+<p><em>Collection classes</em> represent collections of data. Most of the data structures we will study in the rest of this class are used to represent collections. At the most general level, pretty much anything you use to store multiple items at once is going to fufill the requirements to be a <em>collection</em>. The most commonly used collections are <em>sets</em> and <em>lists</em>, but there are many others. The hierarchy of all <em>collection classes</em> is organized using interfaces! As you will see soon, what that means is that <em>sets</em> and <em>lists</em> in Java are represented as interfaces that extend the <code>Collection</code> interface.</p>
+
+
+<h4 id="the-collection-interface">The Collection Interface</h4>
+
+
+<p>At the root of the organization is the <code>Collection</code> interface. This interface specifies methods like <code>isEmpty()</code>, <code>add(Object o)</code>, and many others. All <em>collection classes</em> implement <code>Collection</code> in one way or another. One important type of <em>collection</em> is the <code>List</code>, which you have seen before. Implementations of <code>List</code> include the <code>ArrayList</code> and the <code>LinkedList</code>. Another important <em>collection</em> is the <code>Set</code>, which you will implement shortly.</p>
+
+<p>All of the collections above are found in the package <code>java.util</code>.  A
+<em>package</em> is a set of (supposedly related) classes and subpackages.
+As elsewhere in Java, the notation <code>java.util.ArrayList</code> means "The
+class named <code>ArrayList</code> in the (sub)package named <code>util</code> in the
+package named <code>java</code>".  To make your life easier, you'll want to import
+them before you can use them as follows:</p>
+
+<pre><code>import java.util.ArrayList;
+import java.util.LinkedList;</code></pre>
+
+<p>(otherwise, you will have to write <code>java.util.ArrayList</code> everywhere instead
+of just <code>ArrayList</code>).</p>
+
+
+<h5 id="the-set-interface">The Set Interface</h5>
+
+
+<p><img src="SetMarbles.jpg" alt="SetMarbles"></p>
+
+<p>A set is a group of items with no duplicates. The <code>Set</code> interface does not require ordering (e.g. <code>HashSet</code>), but sets <em>can</em> be ordered (<code>TreeSet</code>, <code>ConcurrentSkipListSet</code>). Sets support (at least) the following operations:</p>
+
+<pre><code>1. Initialization (with a constructor)
+2. Adding an element to the set if it&#x27;s not already there
+3. Removing an element from the set
+4. Checking whether a given item is in the set
+5. Checking whether the set is empty</code></pre>
+
+<p>While a class implementing the <code>Set</code> interface must be able to support the above operations, the actual implementation and manipulation of the data is up to the class implementing the <code>Set</code> interface.</p>
+
+<p>Exercise: how could you represent a set of nonnegative integers? (hint: use a boolean array!)</p>
+
+<p>It's important to realize that a <code>Set</code>, although a subtype of <code>Collection</code> interface, is itself an interface. Yes, an interface can extend another interface. It is defined like this:</p>
+
+<pre><code>    public interface Set extends Collection {
+        ...
+    }</code></pre>
+
+<p><strong>IMPORTANT:</strong> Note that interfaces <code>extend</code> other interfaces, while classes <code>implement</code> interfaces.</p>
+
+<p><code>Set</code> is an interface because there are many types of sets that are implemented in a variety of ways. All of these <code>Set</code> subtypes fulfill the requirement of being a <code>Set</code>.</p>
+
+
+<h5 id="the-list-interface">The List Interface</h5>
+
+
+<p><img src="SequenceBunnies.jpg" alt="SequenceBunnies"></p>
+
+<p><code>List</code>s differ from sets in the way that elements have <em>positions</em> within the
+<code>List</code>, duplicates are allowed, and all lists are ordered. Thus, they support the following operations:</p>
+
+<pre><code>1. Initialization (with a constructor)
+2. Adding an element at a given position or at the end of the list
+3. Removing an element at a given position or at the end of the list
+4. Checking whether a given item is in the list
+5. Identifying the value at a given position in the list
+6. Checking whether the list is empty</code></pre>
+
+<p>Implementation of a list normally involves storing the elements of the
+list explicitly. One might use an array whose 0th element is the first
+list item, and so forth. You have implemented Lists through the IntList and IntDList classes. Similar to <code>Set</code> interface, <code>List</code> is an interface that might be defined like this:</p>
+
+<pre><code>    public interface List extends Collection {
+        ...
+    }</code></pre>
+
+
+<h4 id="collections-usage-example">Collections usage example</h4>
+
+<p>Let's take a closer look at the declaration, instantiation,
+and utilization of Collections, which is a bit
+syntactically different. For example, to instantiate a list of ints, add
+the integer 5, then get it back, we might write:</p>
+
+<pre><code>List&lt;Integer&gt; s;
+s = new ArrayList&lt;Integer&gt;();
+s.add(5);
+int x = s.get(0); /* gets the five back */</code></pre>
+
+<p>There are three funny things about the syntax above:</p>
+
+<ul>
+  <li>Angle bracket notation is used to denote the type of the item that goes in
+  the collection. For now at least, you should always use angle
+  brackets for both the declaration and the instantiation. We'll see
+  later in this lab and in this course that angle bracket notation can
+  be used in situations other than using a Collection.</li>
+  <li>If you're creating a Collection of primitives you should use the
+  wrapper type (e.g. Integer, Double, Character) instead of the
+  primitive type (e.g. int, double, char).</li>
+  <li>The retrieval method of our List returns an Integer, but thanks to
+  Java magic (autoboxing), the value we want is automatically unwrapped into an
+  int. For example, the following is valid Java code <code>int x = new Integer(5)</code>.</li>
+</ul>
+
+<p>Note that we declared <code>s</code> to be a variable that points to a <code>List</code> object, however the actual object we created was specifically an <code>ArrayList</code>. Recall that <code>List</code> refers to an interface, and so it is not actually possible to create a <code>List</code> object. Instead, we had to choose a concrete class that actually implemented <code>List</code>, in this example the Java <code>ArrayList</code> class. Recall that a concrete class is a non-abstract class that implements all the methods it potentially inherits from any abstract superclasses or interfaces.</p>
+
+<p>Since the LinkedList class is supposed to represent essentially the same abstraction (a numbered list of items), it has almost the same API (Application Programming Interface) as ArrayList. For our purposes today, that means it supports almost the same methods. This makes it easy to change back and forth between an ArrayList and a LinkedList.</p>
+
+<p>For our toy example, since LinkedList also has an add and get method, we could easily change our code to read:</p>
+
+<pre><code>List&lt;Integer&gt; s;
+s = new LinkedList&lt;Integer&gt;();
+s.add(5);
+int x = s.get(0); /* gets the five back */</code></pre>
+
+<p>That is, only the instantiation of <code>s</code> changes.</p>
+
+<p>It is nice that the Java designers gave us many implementations of the same collection, since each of these implementations has its own strengths and weaknesses.</p>
+
+
+<h2 id="c-introduction-to-iterators">C. Introduction to Iterators</h2>
+
+<p>An iterator is an object whose purpose is to
+traverse the values in a collection of objects (here we mean the
+abstract notion of a collection, not necessarily a capital C
+Collection as defined in Java), yielding them one at a time to the
+iterator's client.  The standard Java library defines a standard
+interface that iterators can implement:</p>
+
+<pre><code>package java.util;
+
+public interface Iterator&lt;Value&gt; {
+    /** Returns true iff this iterator has another value to deliver. */
+    boolean hasNext();
+
+    /** Returns the next value from this iterator, and advances to
+     *  the next.
+     *  Precondition: hasNext() must be true.
+     */
+    Value next();
+
+    /** Removes the last value delivered by next() from the
+     *  underlying collection of values being iterated over.
+     *  Optional method.  May be called at most once per call to
+     *  to next().
+     */
+    default void remove();
+}</code></pre>
+
+<p>While in principle a collection could itself implement the iterator
+interface, this would result in very strange code. This is because the collection
+itself is not the iterator! Instead, collections that wish to support iteration typically provide an
+<code>iterator()</code> method that returns an appropriate <code>Iterator</code> (this is a part of the <code>Iterable</code>
+interface that's described more in detail below). Consequently, the collection will now <em>have an</em> iterator
+that is accessible by calling <code>iterator()</code>.</p>
+
+<p>For example, if L is a <code>List&lt;String&gt;</code>, you can write</p>
+
+<pre><code>for (Iterator&lt;String&gt; i = L.iterator(); i.hasNext();) {
+    String value = i.next();
+    System.out.print(value + &quot; &quot;);
+}</code></pre>
+
+<p>This code would print out each item in the list, one at a time. An
+alternate way of writing this code is as follows:</p>
+
+<pre><code>Iterator&lt;String&gt; i = L.iterator();
+while (i.hasNext()) {
+    String value = i.next();
+    System.out.print(value + &quot; &quot;);
+}</code></pre>
+
+<p>In the code above, the <code>List</code> class provides an <code>iterator</code> method that
+returns an object of type <code>Iterator&lt;String&gt;</code>. How do you define an Iterator
+exactly? In short, implement the <code>Iterator</code> interface defined above. For the object
+you wish to define as an iterator, declare <code>implements Iterator</code> in its class definition, and
+provide a <code>next()</code>, a <code>hasNext()</code>, and (optionally) a <code>remove()</code> method. Let's take a look at the
+documentation for the <code>Iterator</code> interface <a href="https://docs.oracle.com/javase/10/docs/api/java/util/Iterator.html">here</a>
+and note some key details about the two required methods and the <code>remove()</code> method.</p>
+
+<ul>
+  <li><code>hasNext()</code> returns true only if there are more elements left to be iterated
+  over. Reading the next bullet, one can also think of this as <code>next()</code> has more
+  elements to return.</li>
+  <li><code>next()</code> returns the next element in the iteration. It's worth noting that
+  it is also typically implemented with a proper call to <code>hasNext()</code> beforehand,
+  thus ensuring that the iterator does indeed have a next value to return. If
+  there are no more elements to left for the iterator to, then it is common
+  practice to throw a <code>NoSuchElementException()</code></li>
+  <li><code>remove()</code> removes the last element returned by <code>next()</code> from the collection.
+  Because this is declared as a default method in the interface, it need not be overriden.
+  The default implementation throws an <code>UnsupportedOperationException()</code>
+  which denotes that it is not implemented. 
+  Though useful, it is rare to see this method actually implemented!</li>
+</ul>
+
+<p>Finally, let's see this in action. Java abstracts types such as <code>LinkedList</code> and
+<code>ArrayList</code> using the <code>List</code> interface. You can view the
+<a href="https://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/java/util/List.java#l111">source code of the List interface</a> here if interested!</p>
+
+<p>Java then provides an <code>AbstractList</code> class that provides default
+implementations for many <code>List</code> methods. Looking at the <a href="https://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/java/util/ArrayList.java#l818">source of
+AbstractList.iterator()</a>, we see
+that the <code>iterator()</code> method here returns a new object of type <code>Itr</code>, where <code>Itr</code>
+is a nested non-static class (nested non-static classes are called <em>inner classes</em>).</p>
+
+<p>Finally, take a look at the
+<a href="https://hg.openjdk.java.net/jdk8/jdk8/jdk/file/tip/src/share/classes/java/util/ArrayList.java#l825">source code for the Itr inner class</a>. This will show
+you exactly how the iterator for things like <code>LinkedList</code> and <code>ArrayList</code> works.
+Don't worry too much about the exact implementation details, do observe that
+it implements the <code>Iterator</code> interface and thus has a <code>next()</code> and <code>hasNext()</code>
+method as required by the interface! It also overrides the <code>remove()</code> method,
+though this is not necessary because <code>remove()</code> is a default method.
+If you want to dig even deeper you can consider how <code>Itr</code> keeps track of the 
+current element that calling <code>next()</code> will return.</p>
+
+
+<h2 id="d-the-iterable-interface">D. The Iterable interface</h2>
+
+
+<p>Iterating through interfaces using <code>next</code> and <code>hasNext</code> would be tedious to write every time, and thus Java has introduced a special
+syntax for this Java idiom known as the <code>Iterable</code> interface. If L has a type that implements <code>Iterable&lt;String&gt;</code> (as
+<code>List&lt;String&gt;</code> does), then the loops above may be written</p>
+
+<pre><code>for (String value: L) {
+   System.out.print(value + &quot; &quot;);
+}</code></pre>
+
+<p>This is called the enhanced for loop. It is very similar to the for loops that you saw in Python.</p>
+
+<p>The <code>Iterable</code> interface is really simple.  A class that implements it
+must simply provide an iterator method that returns an <code>Iterator</code>.</p>
+
+<pre><code>package java.lang;
+public interface Iterable&lt;Value&gt; {
+    /** Returns an iterator over my values. */
+    Iterator&lt;Value&gt; iterator();
+}</code></pre>
+
+
+<h4 id="an-iterator-for-fixedsizelist">An Iterator for <code>FixedSizeList</code></h4>
+
+
+<p>Here's another example of how <code>Iterable</code> and <code>Iterator</code> are used in practice. Suppose we had a class <code>FixedSizeList</code> that represents a list that stores its values in an integer array. Remember that we ask the FixedSizeList for an <code>Iterator</code> instance through the <code>iterator()</code> method. This then returns a <code>FixedSizeListIterator</code>, which is an inner class we've defined to iterate through our <code>FixedSizeList</code>.</p>
+
+<pre><code>import java.util.Iterator;
+
+public class FixedSizeList implements List&lt;Integer&gt;, Iterable&lt;Integer&gt; {
+
+    // instance variables
+    protected int[] values;   // list elements
+    int count;                // number of array cells used by list
+
+    // private Iterator class
+    private class FixedSizeListIterator implements Iterator&lt;Integer&gt; {
+
+        int nextIndexToReturn = 0;    // index of next item to return by iterator
+
+        public Integer next() {
+            int valToReturn = values[nextIndexToReturn];
+            nextIndexToReturn++;
+            return valToReturn;
+        }
+
+        public boolean hasNext() {
+            return nextIndexToReturn &lt; count;
+        }
+    }
+
+    public Iterator&lt;Integer&gt; iterator() {
+        return new FixedSizedListIterator();
+    }
+
+        ...
+}</code></pre>
+
+<p>We could build a <code>FixedSizeList</code> as follows.</p>
+
+<pre><code>public static void main(String [] args) {
+    FixedSizeList list = new FixedSizeList(10);
+    list.add(5);
+    list.add(3);
+    // list now contains the integers 5, 3;
+    // thus values[0] is 5, values[1] is 3,
+    // and count is 2.
+        ...
+}</code></pre>
+
+<p>Then we can use an iterator.</p>
+
+<pre><code>Iterator&lt;Integer&gt; iter = list.iterator();
+int m;
+m = iter.next();
+// m now contains 5 and nextIndexToReturn contains 1
+m = iter.next();
+// m now contains 3 and nextIndexToReturn contains 2</code></pre>
+
+<p>At this point, another call to <code>next</code> would be invalid since <code>nextIndexToReturn</code> is past the end of the list values.</p>
+
+<p>The code maintains an important invariant: prior to any call to <code>next</code>, <code>nextIndexToReturn</code> contains the index of the next value in the list to return.</p>
+
+
+<h4 id="in-summary">In Summary</h4>
+
+
+<p>An <code>Iterator</code> is an object that provides a <code>next()</code>,
+<code>hasNext()</code>, and (optionally) <code>remove()</code> method. Iterators are intended to provide a
+way to step through some sort of data structure one item at a time in some fashion. If you have access to an <code>Iterator</code> to some collection, you can use the
+<code>next()</code> and <code>hasNext()</code> methods to go through it step by step.</p>
+
+<p>Using <code>next()</code> and <code>hasNext()</code> is tedious, so if a class declares itself
+as implementing <code>Iterable</code>, you can use the <code>:</code> operator with for loop to iterate
+instead. To follow the <code>Iterable</code> contract, the class that implements
+<code>Iterable</code> must provide a method that returns an <code>Iterator</code> that allows iteration through that object.</p>
+
+<p>Food for thought: Why doesn't the List class just implement Iterator itself?</p>
+
+
+<h2 id="e-programming-task-everyotherword-java">E. Programming Task: EveryOtherWord.java</h2>
+
+
+<p>Fill in the everyOtherWord method of <code>EveryOtherWord.java</code> such that it
+performs the task described in its comment and passes the test in
+<code>main</code>. Do not change anything in the file other than the
+everyOtherWord method, except that you may import the Iterator class
+(though this is not necessary). You shouldn't need any helper methods.</p>
+
+
+<h2 id="f-programming-task-meta-iteration-through-filters">F. Programming Task: Meta-Iteration through Filters</h2>
+
+
+<p>As we saw in EveryOtherWord, we don't always want to iterate in
+exactly the way that the available iterator tells us. One approach is
+to write special purpose methods (e.g. everyOtherWord) that generate a
+new Iterable that contain all the items we require. This is fine as
+long as we have the memory and time to spend on building this
+iterable, which may potentially be quite large and slow to construct.</p>
+
+<p>An alternate approach is to use an intermediary class that will feed
+us the items we want, one at a time. These are often referred to as
+<em>filters</em>.</p>
+
+<p>Open up the <code>Filter</code> abstract class in the <code>utils</code> package.
+As the class implements <code>Iterator</code> <em>and</em> <code>Iterable</code>,
+it has the <code>next</code>, <code>hasNext</code>, and <code>iterator</code> methods. Recall that
+implementing <code>Iterable</code> indicates that <code>Filter</code> should be able to provide an
+iterator object over its items, and since <code>Filter</code> implements <code>Iterator</code>, it <em>is</em>
+an iterator, and so just returns itself!</p>
+
+<p>You'll see that <code>Filter</code> acts as a middleman between client code and some <code>Iterator</code>.
+Specifically, if you look at the <code>hasNext()</code> method, you'll see that it
+keeps calling <code>next()</code> on the underlying Iterator until the <code>keep()</code>
+method returns true.</p>
+
+<p>Concrete implementations of the <code>Filter</code> class will implement a <code>keep()</code>
+method that results in the desired behavior. For example, a filter
+designed to only return every other item would return true for every
+other call to keep.</p>
+
+<p>Complete the implementations of <code>TrivialFilter</code>, <code>AlternatingFilter</code>, <code>MonotonicFilter</code> and <code>PredicateFilter</code> so that they pass the <code>TestFilters</code> test.
+You might find the <code>FilterClient</code> class to be useful for manually testing your
+implementations.</p>
+
+<p>Note that <code>PredicateFilter</code> is a kind of filter that takes in a <code>Predicate</code> object (as defined in the <code>utils</code> package)
+as the first argument in its constructor.</p>
+
+
+<h2 id="g-submission">G. Submission</h2>
+
+<p>Make sure to have completed the following</p>
+
+<ul>
+  <li>Polymorphism Quiz</li>
+  <li><code>EveryOtherWord.java</code></li>
+  <li><code>TrivialFilter.java</code></li>
+  <li><code>AlternatingFilter.java</code></li>
+  <li><code>MonotonicFilter.java</code></li>
+  <li><code>PredicateFilter.java</code></li>
+</ul>
+
+<p>Attempting the quiz is mandatory, so make sure you do! The files can be submitted via the usual commands for committing, tagging, and pushing. Remember that you have a test coming up on (10/3). We suggest starting to take a look at past exams, which can be found under the resources tab of the course website.</p>
+
+
+<h2 id="h-optional-assignments">H. Optional Assignments</h2>
+
+
+<p>As two <em>optional</em> but highly recommended exercises, there is also an everyFourth and evenNumberFilter method in <code>FilterClient</code> that you should feel free to implement.</p>
+
+<p>These assignments provide extra practice with iterators and iterating.</p>
+    </main></div>
+</body>
+</html>

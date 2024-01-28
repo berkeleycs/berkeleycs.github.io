@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework 7 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-implementing-sorting-algorithms">A. Implementing Sorting Algorithms</a></li>
+  <li><a href="index.html#b-quicksort-and-mergesort-mechanics">B. Quicksort and Mergesort Mechanics</a></li>
+  <ul>
+    <li><a href="index.html#bsts-1b-1c-1d-in-sortingproblems-txt">BSTs (1b, 1c, 1d in sortingProblems.txt)</a></li>
+    <li><a href="index.html#mergesort-1e-in-sortingproblems-txt">Mergesort (1e in sortingProblems.txt)</a></li>
+  </ul>
+  <li><a href="index.html#c-sorting-problems">C. Sorting Problems</a></li>
+  <ul>
+    <li><a href="index.html#intervals-intervals-java">Intervals (Intervals.java)</a></li>
+    <li><a href="index.html#distribution-count-for-large-numbers-sortints-java">Distribution Count for Large Numbers (SortInts.java)</a></li>
+    <li><a href="index.html#inversion-counting-inversions-java">Inversion Counting (Inversions.java)</a></li>
+    <li><a href="index.html#two-sum-sum-java">Two Sum (Sum.java)</a></li>
+  </ul>
+  <li><a href="index.html#d-left-leaning-red-black-trees-llrb">D. Left-Leaning Red-Black Trees (LLRB)</a></li>
+  <ul>
+    <li><a href="index.html#rotations">Rotations</a></li>
+    <li><a href="index.html#discussion-rotation-by-hand">Discussion: Rotation by Hand</a></li>
+    <li><a href="index.html#exercise-rotation-implementation">Exercise: Rotation Implementation</a></li>
+    <li><a href="index.html#color-flip">Color Flip</a></li>
+    <li><a href="index.html#insertion">Insertion</a></li>
+    <li><a href="index.html#restoring-llrb-properties-after-insertion">Restoring LLRB Properties after Insertion.</a></li>
+    <li><a href="index.html#exercise">Exercise:</a></li>
+    <li><a href="index.html#discussion">Discussion.</a></li>
+    <li><a href="index.html#deletion">Deletion</a></li>
+  </ul>
+  <li><a href="index.html#e-making-a-balanced-tree">E. Making a Balanced Tree</a></li>
+  <ul>
+    <li><a href="index.html#exercise-build-a-balanced-tree-from-a-linked-list">Exercise: Build a Balanced Tree from a Linked List</a></li>
+    <li><a href="index.html#self-test-linkedlisttotree-speed">Self-test: <code>linkedListToTree</code> Speed</a></li>
+  </ul>
+  <li><a href="index.html#f-submission">F. Submission</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Homework 7: A Balanced Variety of all Sorts of Fun!</header>
+        
+<p>This homework is intended to give you a chance to better understand
+sorting and balanced search trees.</p>
+
+
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-implementing-sorting-algorithms">Implementing Sorting Algorithms</a></li>
+  <li><a href="index.html#b-quicksort-and-mergesort-mechanics">Quicksort and Mergesort Mechanics</a></li>
+  <li><a href="index.html#c-sorting-problems">Sorting Problems</a></li>
+  <li><a href="index.html#d-left-leaning-red-black-trees-llrb">Left-Leaning Red-Black Trees (LLRB)</a></li>
+  <li><a href="index.html#e-making-a-balanced-tree">Making a Balanced Tree</a></li>
+  <li><a href="index.html#f-submission">Submission</a></li>
+</ul>
+
+
+<h2 id="a-implementing-sorting-algorithms">A. Implementing Sorting Algorithms</h2>
+
+
+<p>The skeleton, <code>MySortingAlgorithms.java</code>
+provides a template for implementing various sorting algorithms.</p>
+
+<p>Implement the algorithms below (the ones with an asterisk next to it
+are required). Clicking on the links will take you to an animation of
+the sort to refresh your memory.</p>
+
+<ul>
+  <li>*<a href="https://www.youtube.com/watch?v=kPRA0W1kECg">Selection sort</a>: Easier</li>
+  <li>*<a href="https://www.youtube.com/watch?v=kPRA0W1kECg&t=0m9s">Insertion sort</a>: Easier</li>
+  <li>*<a href="https://www.youtube.com/watch?v=kPRA0W1kECg&t=1m05s">Mergesort</a>: Moderate</li>
+  <li>Distribution sort: Moderate</li>
+  <li><a href="https://www.youtube.com/watch?v=kPRA0W1kECg&t=1m28s">Heapsort</a>: Harder</li>
+  <li><a href="https://www.youtube.com/watch?v=kPRA0W1kECg&t=0m38s">Quicksort</a>: Harder</li>
+  <li>*<a href="https://www.youtube.com/watch?v=kPRA0W1kECg&t=1m54s">LSD radix sort</a>: Harder</li>
+  <li>MSD radix sort: Harder</li>
+</ul>
+
+<p>You can use <code>MySortingAlgorithmsTest.java</code> to test your implementations.</p>
+
+<hr/>
+
+<p>Once you're done, here are some questions to ponder (you don't need to
+record nor submit your responses):</p>
+
+<ul>
+  <li>How many items are sorted in the video for selection sort?</li>
+  <li>Why does insertion sort take longer/more compares than selection sort?</li>
+  <li>At what time stamp does the first partition complete for Quicksort?</li>
+  <li>Could the size of the input used by mergesort in the video be a power of 2?</li>
+  <li>What do the colors mean for heapsort?</li>
+  <li>How many characters are in the alphabet used for the LSD sort problem?</li>
+  <li>How many digits are in the keys used for the LSD sort problem?</li>
+  <li>The complete video ends with a rather odd sort that doesn't complete.
+  Without
+  looking at the captions, can you tell what it's doing?</li>
+  <li>How does the standard sort from the GCC library, a form of quicksort,
+  differ from the other version of quicksort shown?</li>
+</ul>
+
+<hr/>
+
+<p>Additionally, the <code>RunBenchmarks</code> class runs timing tests on our
+various sorts.  Currently, it is configured to perform two timing
+tests:</p>
+
+<ul>
+  <li>Compare (y)our implementation against Arrays.sort (which uses
+  <code>Quicksort</code> for ints).</li>
+  <li>Time insertion sort for almost sorted arrays.</li>
+</ul>
+
+<p>Run the code, and you should see results that are in line with things
+we've learned in class.</p>
+
+<p>If the second test takes too long to complete, you can "Edit
+Configurations" in IntelliJ and type a number for program arguments to
+run the test on a smaller input size.</p>
+
+<p>Other interesting tests you might try:</p>
+
+<ul>
+  <li>How do LSD and MSD compare with Quicksort and Mergesort? How large
+  must N be before they become faster?</li>
+  <li>Find a case where LSD is faster than MSD.</li>
+  <li>For what N is insertion sort faster than Quicksort?</li>
+  <li>How do selection sort and insertion sort compare?</li>
+</ul>
+
+<p>Feel free to post interesting tests and/or observations on Piazza. You
+don't need to submit anything related to this Benchmark test.</p>
+
+
+<h2 id="b-quicksort-and-mergesort-mechanics">B. Quicksort and Mergesort Mechanics</h2>
+
+
+<p>Interestingly enough, quicksorting an array is equivalent to inserting
+all of its items into a BST.  In this problem, we'll see why.</p>
+
+<p>First, we need a specific implementation for partitioning.</p>
+
+<p>Consider the array <code>[5, 3, 2, 1, 7, 8, 4, 6]</code>, and suppose that
+we pick the leftmost item 5 as our pivot. One approach to partitioning
+is to perform a "stable" partitioning where all items that are less
+than 5 appear in the same order as they did before partitioning, and
+likewise for the greater items. For the given array, we'd get <code>[3,
+2, 1, 4, 5, 7, 8, 6]</code>.</p>
+
+<p>One inefficient but simple way to implement this stable partitioning
+algorithm is to perform the following steps:</p>
+
+<ul>
+  <li>Create three empty Lists for storing integers smaller, equal to, and
+  larger than the pivot, respectively.</li>
+  <li>Go through each item of the list, comparing it to the pivot, and
+  adding items to the respective list based on the comparison.</li>
+  <li>Concatenting the three Lists into a single concatenated List.</li>
+  <li>Copying the concatenated List back into the array.</li>
+</ul>
+
+<p>So for example if we partition <code>[5, 3, 2, 1, 7, 8, 4, 6]</code> from index 0
+to index 7, we'd get:</p>
+
+<pre><code>Smaller items: [3, 2, 1, 4]
+Equal items  : [5]
+Larger items : [7, 8, 6]</code></pre>
+
+<p>The concatenation of these lists is just <code>[3, 2, 1, 4, 5, 7, 8, 6]</code>.
+Along the way, we compared the following pairs of numbers: <code>5&#x2d;3, 5&#x2d;2,
+5&#x2d;1, 5&#x2d;4, 5&#x2d;7, 5&#x2d;8,</code> and <code>5&#x2d;6</code>.</p>
+
+<p>If we are using partition to sort, we then repeat this process for
+the left half and right half sides as discussed in class.</p>
+
+<p>In <code>sortingProblems.txt</code>, fill out the list of comparisons used by
+Quicksort. You might find running Quicksort.java from the skeleton to
+be useful.</p>
+
+
+<h3 id="bsts-1b-1c-1d-in-sortingproblems-txt">BSTs (1b, 1c, 1d in sortingProblems.txt)</h3>
+
+
+<p>Now draw the BST that results when you insert <code>[5, 3, 2, 1, 7, 8, 4, 6]</code>
+(in that order) into an initially empty BST. Record the comparions you
+observe in sortingProblems.txt. Answer questions 1c and 1d in
+sortingProblems.txt.</p>
+
+
+<h3 id="mergesort-1e-in-sortingproblems-txt">Mergesort (1e in sortingProblems.txt)</h3>
+
+
+<p>Finally, for 1e, give an example of a comparison performed by
+mergesort that is not performed by Quicksort or BST. This isn't
+particularly interesting, but we're just asking to make sure you
+understand how Mergesort works.</p>
+
+
+<h2 id="c-sorting-problems">C. Sorting Problems</h2>
+
+
+<p>There are many problems for which sorting provides a fast solution,
+even though the problem isn't really about sorting. We encourage you
+to do all of these, but you only need to do any one of them for full
+credit.</p>
+
+
+<h3 id="intervals-intervals-java">Intervals (Intervals.java)</h3>
+
+<p>Define an interval to be a pair of numbers $[x_i, x_i&#x27;]$ such
+that $x_i < x_i&#x27;$. An interval specifies a range of values in
+1D space, where we can call $x_i$ the start point, and
+$x_i&#x27;$ the end point.</p>
+
+<p>Given a list of such intervals, we want to know the total length of
+the regions covered by one or more of the intervals.  This is not
+simply the sum of their lengths, $\Sigma x_i&#x27; - x_i$, since
+several may cover the same span.</p>
+
+<p>For example, if we have intervals $[19, 30]$, $[6,
+12]$, $[4, 5]$, $[8, 15]$, and $[3,
+10]$, then the total length covered is 23: the last four
+intervals together totally cover the interval $[3, 15]$ of
+length 12, and the first covers a disjoint interval of length 11.</p>
+
+<p>Fill in <code>Intervals.java</code> so that the <code>coveredLength</code> method returns the
+correct total length in $\Theta(N log N)$ time.</p>
+
+<p>There is a clever trick to this problem that you'll need to figure out
+to get $\Theta(N log N)$ time. You do not need to use any
+nested loops for this problem, and in fact if you find yourself using
+them, you probably haven't found the right approach.</p>
+
+
+<h3 id="distribution-count-for-large-numbers-sortints-java">Distribution Count for Large Numbers (SortInts.java)</h3>
+
+
+<p>[Goodrich &amp; Tamassia] Given a sequence of n distinct integers, each
+one of which is in the range $[0, n^2 - 1]$, develop an
+$O(n)$ algorithm for sorting them. See the skeleton file
+SortInts.java. You can't use ordinary distribution sort for this,
+because that would require initializing and traversing arrays of size
+$n^2$, which would take too long</p>
+
+
+<h3 id="inversion-counting-inversions-java">Inversion Counting (Inversions.java)</h3>
+
+
+<p>Find an algorithm that runs in $O(n \lg n)$ time for
+computing the number of inversions in a list of n items. Array
+elements that are "out of order" can be corrected by swapping two
+adjacent elements at a time, each of which counts as a single
+inversion. See the skeleton file Inversions.java. To test that your
+code is actually $O(n \lg n)$, provide it a very large list
+(say hundreds of thousands).</p>
+
+
+<h3 id="two-sum-sum-java">Two Sum (Sum.java)</h3>
+
+
+<p>[Goodrich &amp; Tamassia] Given two sequences of integers, $A$
+and $B$, find an algorithm that runs in $O(n \lg n)$
+time (where n is the total number of integers in A and B) that
+determines, for a given parameter $m$, whether there is an
+integer $a$ in $A$ and an integer $b$ in
+$B$ such that $m = a + b$. See the skeleton file
+<code>Sum.java</code>. To test that your algorithm runs in $O(n \lg n)$
+time, provide sequences of hundreds of thousands of integers. Feel
+free to use any of the methods in java.util.Arrays.</p>
+
+
+<h2 id="d-left-leaning-red-black-trees-llrb">D. Left-Leaning Red-Black Trees (LLRB)</h2>
+
+
+<p>In discussion, we examined 2-4 trees their relationship to Red-Black
+trees. If you need a reference or refresher, take a look at <a href="../../lab/lab12/index.html">this
+page</a>. Here, we will examine 2-3 trees and their
+corresponding Left-Leaning Red-Black trees.</p>
+
+<p>2-3 trees are B-trees, just like 2-4 trees. However, they can have up
+to <em>2</em> elements and <em>3</em> children, whereas 2-4 trees could have one
+more of each. Naturally, we can come up with a Red-Black tree
+counterpart. However, since we can only have nodes with 1 or 2
+elements, we can either have a single black node (for a one-element 2-3
+node) or a "section" with a black node and a red node (for a two-element 
+2-3 node). As seen in the previous section, we can either let
+the red node be a left child or a right child. However, we choose to
+<em>always</em> let the red node be the <em>left</em> child of the black node. This
+leads to the name, "Left-Leaning" Red-Black tree.</p>
+
+<p>The advantages of the LLRB tree over the usual Red-Black tree is the
+ease of implementation. Since there are less special cases for each
+"section" that represents a 2-3 node, the implementation is much
+simpler.</p>
+
+<p>Normal binary search tree insertions and deletions can break the Red-Black
+tree invariants, so we need additional operations that can
+"restore" the Red-Black tree properties. In LLRB trees, there are two
+key operations that we use to restore the properties: rotations and
+color flips.</p>
+
+
+<h4 id="rotations">Rotations</h4>
+
+
+<p>Consider the following tree:</p>
+
+<pre><code>   parent
+     |
+     7
+   /   \
+  1     c
+ / \
+a   b</code></pre>
+
+<p><code>a</code> is a subtree with all elements less than 1, <code>b</code> is a subtree with
+elements between 1 and 7, and <code>c</code> is a subtree with all elements
+greater than 7. Now, let's take a look at another tree:</p>
+
+<pre><code>parent
+  |
+  1
+ / \
+a   7
+   / \
+  b   c</code></pre>
+
+<p>There are few key things to notice:</p>
+
+<ol>
+  <li>The root of the tree has changed from 7 to 1.</li>
+  <li><code>a</code>, <code>b</code>, and <code>c</code> are still correctly placed. That is, their items
+  do not violate the binary search tree invariants.</li>
+  <li>The height of the tree can change by 1.</li>
+</ol>
+
+<p><em>Here, we call this transition from the first tree to the second a
+"right rotation on 7"</em>.</p>
+
+<p>Now, convince yourself that a "left rotation on 1" on the second tree
+will give us the first tree. The two operations are symmetric, and
+both maintain the binary search tree property!</p>
+
+
+<h4 id="discussion-rotation-by-hand">Discussion: Rotation by Hand</h4>
+
+<p>We are given an extremely unbalanced binary search tree:</p>
+
+<pre><code>    0
+     \
+      1
+       \
+        3
+       / \
+      2   6
+         / \
+        4   8</code></pre>
+
+<p>Write down a series of rotations (i.e. rotate right on 2) that will
+make tree balanced and have height of 2.  <em>HINT</em>: Two rotations are
+sufficient.</p>
+
+
+<h4 id="exercise-rotation-implementation">Exercise: Rotation Implementation</h4>
+
+<p>Now we have seen that we can rotate the tree to balance it without
+violating the binary search tree invariants. Now, we will implement it
+ourselves!  In <code>RedBlackTree.java</code>, implement <code>rotateRight</code> and
+<code>rotateLeft</code>. For your implementation, make the new root have the
+color of the old root, and color the old root red. Why should we have
+the colors change here and what might happen if we did not change the
+colors?</p>
+
+<p><em>Hint</em>: The two operations are symmetric. Should the code
+significantly differ?</p>
+
+
+<h4 id="color-flip">Color Flip</h4>
+
+<p>Now we consider the color flip operation that is essential to LLRB
+tree implementation. Given a node, this operation simply flips the
+color of itself, and the left and right children. However simple it
+may look now, we will examine its consequences later on.</p>
+
+<p>For now, take a look at the implementation provided in <code>RedBlackTree.java</code>.</p>
+
+
+<h4 id="insertion">Insertion</h4>
+
+
+<p>Finally, we are ready to put the puzzles together and see how
+insertion works on LLRB trees!</p>
+
+<p>Say we are inserting <code>x</code>.</p>
+
+<ol>
+  <li>If the tree is empty, let <code>x</code> be the root with black color.</li>
+  <li>Otherwise do the normal binary search tree insertion, and color <code>x</code> <em>red</em>.</li>
+  <li>Restore LLRB properties.</li>
+</ol>
+
+
+<h4 id="restoring-llrb-properties-after-insertion">Restoring LLRB Properties after Insertion.</h4>
+
+
+<p>First, let's assume that our new node <code>x</code> is the only child of a black
+node. That is:</p>
+
+<pre><code>     parent (black)
+    /
+   x (red)</code></pre>
+
+<p>or</p>
+
+<pre><code>   parent (black)
+        \
+         x (red)</code></pre>
+
+<p>Since we decided to make our tree left leaning, we know that the first
+tree is the valid form and we will not have to do anything else. If we
+end up with the second tree (<code>x</code> > <code>parent</code>) we can simply apply
+<code>rotateLeft</code> on <code>parent</code> to get the first tree.</p>
+
+<p>Now, let's consider the case when our new node <code>x</code> becomes a child to
+a black node which already has a left child, or a child to a red node.
+LLRB have a one-to-one mapping to 2-3 trees. This is like inserting
+<code>x</code> into a 2-3 tree node that already has 3 children!</p>
+
+<p>Here, we have to deal with 3 different cases, and we will label them
+case A, B, C.</p>
+
+<p><strong>Case A</strong>: <code>x</code> ends up as the right child of the black node.</p>
+
+<pre><code>         |
+         5(black)
+     /      \
+    1(red)   x(red)</code></pre>
+
+<p>For case A, the resulting section is the same as a 2-3 tree node with
+one extra element:</p>
+
+<pre><code>      |
+   1  5  x</code></pre>
+
+<p>To fix it, we "split" the 2-3 node into two halves, "pushing" up the
+middle element to its parent:</p>
+
+<pre><code>        |
+     5  (sibling)
+   |  |         |
+   1  x     (nephews)</code></pre>
+
+<p>Analogously, for our LLRB section, we can apply <code>flipColor</code> on <code>5</code>.
+This results in:</p>
+
+<pre><code>      |
+      5 (red)
+  /      \
+1(black)  x(black)</code></pre>
+
+<p>This exactly models the 2-3 node we desired. 5 is now a red node,
+which means that it is now part of the "parent 2-3 node section". Now,
+if 5 as a new red node becomes a problem, we can <em>recursively</em> deal
+with it as we are dealing with <code>x</code> now.  Also, the root of the whole
+tree should <em>always</em> be black, and it is perfectly fine for the root
+to have two black children. It is simply a root 2-3 node with single
+element and two children, each with single element.</p>
+
+<p><strong>Case B</strong>: <code>x</code> ends up as the left child of the red node.</p>
+
+<pre><code>     |
+     5 (black)
+    /
+   1 (red)
+  /
+ x (red)</code></pre>
+
+<p>In this case, we can apply <code>rotateRight</code> on <code>5</code>, which will result in:</p>
+
+<pre><code>        |
+        1 (black)
+   /        \
+  x(red)     5 (red)</code></pre>
+
+<p>This should look familiar, since it is <em>exactly</em> case A that we just
+examined before! After a rotation, our problem reduces to solving case
+A. Convince yourself that rotation performed here correctly handles
+the color changes and maintains the binary search tree properties.</p>
+
+<p><strong>Case C</strong>: <code>x</code> ends up as the right child of the red node.</p>
+
+<pre><code>          |
+          5 (black)
+       /
+     1 (red)
+      \
+       x (red)</code></pre>
+
+<p>In this case, we can apply <code>rotateLeft</code> on <code>1</code>, which will result in:</p>
+
+<pre><code>         |
+         5 (black)
+        /
+       x (red)
+      /
+     1 (red)</code></pre>
+
+<p>This also should look familiar, since it is <em>exactly</em> case B that we
+just examined. We just need one more rotation and color flip to
+restore LLRB properties.</p>
+
+
+<h4 id="exercise">Exercise:</h4>
+
+<p>Now, we will implement <code>insert</code> in <code>RedBlackTree.java</code>. We have
+provided you with most of the logic structure, so all you need to do
+is deal with normal binary search tree insertion and handle case A, B,
+and C.</p>
+
+
+<h4 id="discussion">Discussion.</h4>
+
+<p>We have seen that even though the LLRB tree guarantees that the tree
+will be almost balanced, LLRB insert operation requires many rotations
+and color flips. Examine the procedure for the insertion and convince
+yourself that the insert operation still takes
+<code>O(log(n))</code> as in balanced binary search trees.</p>
+
+<p><em>Hint:</em> How long is the path from root to the new leaf? For each node
+along the path, are additional operations limited to some constant
+number? What does that mean?</p>
+
+
+<h4 id="deletion">Deletion</h4>
+
+<p>Deletion deals with many more corner cases and is generally more
+difficult to implement. For time's sake, deletion is left out for this
+assignment.</p>
+
+
+<h2 id="e-making-a-balanced-tree">E. Making a Balanced Tree</h2>
+
+
+
+<h4 id="exercise-build-a-balanced-tree-from-a-linked-list">Exercise: Build a Balanced Tree from a Linked List</h4>
+
+
+<p>In <code>BST.java</code> complete the <code>linkedListToTree</code> method, which should
+build a <em>balanced</em> binary search tree out of an <em>already sorted</em>
+<code>LinkedList</code>. Also, provide a good comment for the method
+<code>linkedListToTree</code>. In the BST constructor, we pass in
+<code>list.iterator()</code> to <code>linkedListToTree</code>. What do we know about
+repeated calls to <code>iter.next()</code> given that the <code>LinkedList</code> is already
+sorted?</p>
+
+<p><strong>HINT</strong>: Recursion!</p>
+
+<p><strong>Question</strong>: If it's a BST, why can the items just be of <code>Object</code>
+type in order to do the problem? Why not <code>Comparable</code>?</p>
+
+<p><strong>Answer</strong>: Because you shouldn't need to ever do any comparisons
+yourself. Just trust that the order in the <code>LinkedList</code> is correct.</p>
+
+
+<h4 id="self-test-linkedlisttotree-speed">Self-test: <code>linkedListToTree</code> Speed</h4>
+
+
+<p>Give the runtime of <code>linkedListToTree</code>, where N is the length of the
+linked list. The runtime is in (stroke over the areas after <code>|||</code> to
+see if an answer is corect).</p>
+
+<selftest>
+
+<ul>
+  <li><code>O(N)</code> ||| <font color="FFFFFF">Correct!  We can only call iter.next() N times,
+  and since we call it at most once per recursive call, this must be the
+  runtime of the algorithm.</font></li>
+  <li><code>O(N^2)</code> ||| <font color="FFFFFF">Incorrect. In each recursive call we call
+  iter.next() exactly once (or return null). How many of these recursive
+  calls can there be?</font></li>
+  <li><code>O(log N)</code> ||| <font color="FFFFFF">Incorrect. Even though we make a recursive
+  call where we divide the problem in half, we make two of these
+  recursive calls, so we don't reduce to log N time.</font></li>
+  <li><code>(N*log N)</code> ||| <font color="FFFFFF">Incorrect. In each recursive call we call
+  iter.next() exactly once (or return null). How many of these recursive
+  calls can there be?</font></li>
+</ul>
+
+</selftest>
+
+
+<h2 id="f-submission">F. Submission</h2>
+
+
+<p>You will be required to submit:</p>
+
+<ol>
+  <li><code>MySortingAlgorithms.java</code> with Selection Sort, Insertion Sort,
+  Mergesort, and LSD Radix Sort implemented.</li>
+  <li><code>sortingProblems.txt</code>.</li>
+  <li><code>RedBlackTree.java</code>.</li>
+  <li>At least one of <code>Intervals.java</code>, <code>SortInts.java</code>, <code>Inversions.java</code>, and
+  <code>Sum.java</code>.  (We urge you to do all of them, however.)</li>
+  <li>BST.java.</li>
+</ol>
+    </main></div>
+</body>
+</html>

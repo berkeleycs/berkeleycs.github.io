@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project 0 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/proj.css" rel="stylesheet" type="text/css">
+
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#due-monday-23-september-2019">Due: Monday, 23 September 2019</a></li>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#introduction">Introduction</a></li>
+  <li><a href="index.html#the-puzzle">The Puzzle</a></li>
+  <li><a href="index.html#program-design">Program Design</a></li>
+  <li><a href="index.html#instrumentation-and-testing">Instrumentation and Testing</a></li>
+  <li><a href="index.html#getting-started">Getting Started</a></li>
+  <li><a href="index.html#submission-and-version-control">Submission and Version Control</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Project 0: Signpost</header>
+        
+<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+	    tex2jax: {inlineMath: [["$","$"]]}
+	  });
+	</script>
+	<script type="text/javascript"
+	   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+
+
+<h2 id="due-monday-23-september-2019">Due: Monday, 23 September 2019</h2>
+
+
+
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#introduction">Introduction</a></li>
+  <li><a href="index.html#the-puzzle">The Puzzle</a></li>
+  <li><a href="index.html#program-design">Program Design</a></li>
+  <li><a href="index.html#instrumentation-and-testing">Instrumentation and Testing</a></li>
+  <li><a href="index.html#discussion">Discussion</a></li>
+  <li><a href="index.html#submission-and-version-control">Submission and Version Control</a></li>
+</ul>
+
+
+<h2 id="introduction">Introduction</h2>
+
+
+<p>This initial programming assignment is intended as an extended finger exercise:
+a mini-project rather than a full-scale programming project. The intent is to
+give you a chance to get familiar with Java and the various tools used in the
+course.</p>
+
+<p>We will be grading <em>solely</em> on whether you manage to get your program to work
+(according to our tests) and to hand in the assigned pieces.  There is a slight
+stylistic component: the submission and grading machinery require that your
+program pass a mechanized style check (<code>style61b</code>), which mainly checks for
+formatting and the presence of comments in the proper places.  See <a href="https://inst.eecs.berkeley.edu/~cs61b/fa19/docs/style-guide.html">the style61b
+guide</a> for a description of the style it enforces and how to run it yourself.</p>
+
+<p>First, make sure that everything in your repository is properly updated and
+checked in.  Before you start, the command</p>
+
+<pre><code>cd  ~/repo
+git status</code></pre>
+
+<p>should report that the directory is clean and that there are no untracked files
+that should be added and committed.  <em>Never</em> start a new project without doing
+this.</p>
+
+<p>To obtain the skeleton files (and set up an initial entry for your project in
+the repository), you can use the command sequence</p>
+
+<pre><code>git fetch shared
+git merge shared/proj0 &#x2d;m &quot;Get proj0 skeleton&quot;
+git push</code></pre>
+
+<p>from your Git working directory.  Should we update the skeleton, you can use the
+same sequence (with an appropriate change in the <code>&#x2d;m</code> parameter) to update your
+project with the same changes.</p>
+
+<p>On the instructional machines (only), you can run the staff version of this
+program with the command</p>
+
+<pre><code> staff&#x2d;signpost</code></pre>
+
+<p>It takes the same options as your project (see <a href="index.html#instrumentation-and-testing">Instrumentation and Testing</a>).</p>
+
+
+<h2 id="the-puzzle">The Puzzle</h2>
+
+
+<p>The puzzle game Signpost is one of <a href="https://www.chiark.greenend.org.uk/~sgtatham/">Simon Tatham's</a> collection of
+GUI games (available on a variety of operating-system configurations, including
+Ubuntu.) He attributes the puzzle to  <a href="https://www.janko.at/Raetsel/Pfeilpfad/index.htm">Angela and Otto Janko</a>,
+who call it <em>Pfeilpfad</em> (arrow path).
+In this mini-project, you
+are given an incomplete Java program that creates these puzzles and allows its
+user to solve them, and you must supply the missing parts to complete the
+implementation.</p>
+
+<p>The puzzle itself is quite simple. It is played on a $W\times H$
+rectangular grid of square cells. All but one of the squares is
+annotated with an arrow pointing horizontally, vertically, or
+diagonally.  The remaining square&mdash;the goal&mdash;is annotated with a
+star.  Some squares contain distinct numbers between 1 and $W\cdot H$.
+The first and last squares in sequence (those numbered 1 and $W \cdot H$)
+are always numbered.
+The puzzle may be set to have <em>free ends</em>, in which case the first and last
+squares may appear anywhere on the board.  By default, there are no free
+ends and the first and last squares are in the upper-left and lower-right
+corners, respectively.  The idea is to connect the squares
+into a sequence from square 1 to $W \cdot H$. Each square is connected
+to another that is in the direction of its arrow such that all the
+squares are connected.  If a square initially has a number, it must be the 
+number of that square in the sequence of connected squares.</p>
+
+<p>The diagrams below show a sample puzzle on the left and its solution on the
+right. The bottom-left corner of the board has the coordinates $(0, 0)$, with
+the positive x-axis running horizontally to the right, and the positive y-axis
+running vertically upwards.</p>
+
+<center>
+<img src="img/signpost-unsolved.png" alt="Signpost Puzzle Example">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="img/signpost-solved.png" alt="Signpost Puzzle Solution">
+</center>
+
+<p>To connect two squares, press and hold on the first in sequence and drag to
+the second.  To disconnect them, press and hold on the first,
+drag to a position
+off the grid, and release.</p>
+
+
+<h2 id="program-design">Program Design</h2>
+
+
+<p>The skeleton exhibits a <em>design pattern</em> in common use: the
+Model-View-Controller Pattern (MVC).</p>
+
+<p>The MVC pattern divides our problem into three parts:</p>
+
+<ul>
+  <li>The <em>model</em> represents the subject matter being represented and acted
+  upon&mdash;in this case incorporating the state of a board and the rules by
+  which it may be modified. Our model resides in the <code>Model</code> and <code>Place</code> classes.</li>
+  <li>A <em>view</em> of the model, which displays the puzzle state to the user.
+  Our view resides in the <code>GUI</code> and <code>BoardWidget</code> classes.</li>
+  <li>A <em>controller</em> for the puzzle, which translates user actions into
+  operations on the model.  In our case, it also notifies the view when the
+  model has been modified. Our controller
+  resides mainly in the <code>Controller</code> class, although it also uses the GUI class
+  to read mouse clicks.</li>
+</ul>
+
+<p>Your job for this project is just to modify and complete the <code>Model</code>, <code>Place</code>,
+<code>PuzzleGenerator</code>, and <code>BoardWidget</code> classes.
+We've marked places that need attention with comments containing "<code>FIXME</code>" (the
+style checker will point these out to you should you forget to fix one).
+Don't let that stop you from looking at all the other code in the project.
+That's actually part of the point of giving you the skeleton.  You can learn a
+great deal about programming by reading other people's programs.</p>
+
+<p>In fact, you can change other source files if you want, just so long as the
+program continues to behave the same when tested.</p>
+
+<p>Initially, the skeleton contains some dummy code so that when run, you'll see
+a board, although you won't be able to do anything with it to speak of.</p>
+
+
+<h2 id="instrumentation-and-testing">Instrumentation and Testing</h2>
+
+
+<p>To facilitate automated testing of your work, there are a few features that you
+can use to record sessions and to play back moves for testing or debugging
+purposes.  The skeleton is set up so that when you start your program with</p>
+
+<pre><code>java &#x2d;ea signpost.Main &#x2d;&#x2d;log</code></pre>
+
+<p>you'll get a record on the standard output of all of the edges clicked, all the
+randomly created puzzles, and all the menu commands entered. Typically logs would
+be printed to the terminal, but one might want to save them to a file which can be
+done by capturing a log through redirection. You can capture logs using 
+redirection, like this:</p>
+
+<pre><code>java &#x2d;ea signpost.Main &#x2d;&#x2d;log &gt; testing/myscript1.in</code></pre>
+
+<p>The <code>&#x2d;&#x2d;seed</code> option will allow you to prime the random number generation so that
+you can get the same set of random numbers each time:</p>
+
+<pre><code>java &#x2d;ea signpost.Main &#x2d;&#x2d;seed=42</code></pre>
+
+<p>The same seed produces the same random sequence, which will make the puzzle
+deterministic. This way bugs and other behavior can be reproduced.</p>
+
+<p>The <code>&#x2d;&#x2d;testing</code> option reads in a script produced by <code>&#x2d;&#x2d;log</code> and uses it (in
+place of user clicks and random numbers) to supply the results of <code>getPuzzle</code>
+and <code>getCommand</code>.  It also prints out a textual display of the initial
+board and after each command, which <code>Tester.py</code> can use to test the
+program.  For example, to read back the file <code>myscript1</code>, use</p>
+
+<pre><code>java &#x2d;ea signpost.Main &#x2d;&#x2d;testing &lt; testing/myscript1.in</code></pre>
+
+<p>This will print out what tester.py sees, which it compares to
+<code>testing/myscript1.out</code>.  Using <code>&#x2d;&#x2d;log</code> and <code>&#x2d;&#x2d;testing</code>, you can thus create
+your own <code>.in</code> and <code>.out</code> testing files to augment the ones we've provided in
+<code>testing</code>.</p>
+
+<p>We have set up the Makefiles in the <code>proj0</code> directory and in the <code>signpost</code>
+subdirectory to have targets <code>check</code> and <code>unit</code>.  In order to use make, you'll
+need to install it. Follow <a href="../../../docs/make-install.html">the instructions here</a> to do so.</p>
+
+<p>Once installed, the command</p>
+
+<pre><code>make unit</code></pre>
+
+<p>will run <em>unit tests</em> on <code>Model.java</code>.  A unit test checks a particular unit of
+a program&mdash;typically a method or small group of methods.  If you try this on
+the skeleton, you'll see that, unsurprisingly, it fails all these tests, giving
+you an indication of what needs to be changed.</p>
+
+<p>In addition, <code>make check</code> in the <code>proj0</code> directory will run <em>integration tests</em>,
+which run the program and check its outputs against expected output using the
+scripts <code>tester.py</code> and <code>testing.py</code> in the <code>testing</code> subdirectory. <strong>By the time
+you finish the project both <code>make unit</code> and <code>make check</code> should report no errors.</strong></p>
+
+
+<h2 id="getting-started">Getting Started</h2>
+
+
+<p>This project is largely an exercise in reading someone else's program and
+understanding its intent, which is actually a common activity in "real-world"
+programming as well.  While you can, in fact, scrap everything and start from
+scratch (you are free to change files other than <code>Model.java</code>), you certainly
+should <em>not</em> do so simply because you don't understand the skeleton provided.</p>
+
+<p>You'll see numerous uses of parts of the Java library we haven't talked about.
+However, you <em>have</em> seen all these data structures in Python.  Where Python has
+lists, Java has arrays, <code>ArrayList</code>s, <code>ArrayDeque</code>s, and <code>LinkedLists</code> (among
+others).  Where Python has dictionaries, Java has <code>HashMap</code>s and <code>TreeMap</code>s.
+Where Python has sets, Java has <code>HashSet</code>s, <code>TreeSet</code>s, and <code>BitSet</code>s.  Where Python uses
+"duck typing"&mdash;as when it calls something a sequence because we can apply
+generic operations like <code>len</code> and <code>map</code> to it and iterate over it&mdash;Java
+explicitly identifies supertypes of its various library types, such as <code>List</code>,
+<code>Set</code>, and <code>Collection</code>.  These and many more library classes are all defined in
+the <a href="http://docs.oracle.com/javase/8/docs/api/">online Java library documentation</a>, which should constitute much of your
+bedtime reading for this semester.</p>
+
+<p>A reasonable first step is to understand what <code>Place</code> and <code>Model</code> are
+supposed to do and what the
+comments on each of their methods are supposed to mean.  You might ask, "but how
+can I understand it unless I know how it's being used?"  It certainly helps to
+understand its use, but you should start developing the ability to understand
+and work on modules in isolation, one aspect of the "separation of concerns"
+that makes the construction of large systems possible.
+Also, we've gone to some pains to provide comments that actually indicate what
+things do (in sharp contrast, I fear, to standard practice these days).  We'd
+like you to get into the habit of doing the same.</p>
+
+<p>Reading and trying to understand these files and comments before beginning 
+programming will be well worth the time. Spending up-front time before 
+writing code can feel a bit counterintuitive at first. If you begin writing
+code before making an attempt to understand the preexisting code, you will likely
+struggle more. You need not understand every line of the given code, but you
+should strive to understand the different objects, their instance variables, what their 
+instance methods do, and how the methods relate to one another. The comments
+in line with the methods and instance methods are a great way to begin learning
+about the code. Feel free to read these, discuss with classmates, and ask questions
+as they arise.</p>
+
+<p>We have marked places where code needs to be added with <code>//</code> comments containing
+the work <code>FIXME</code>.  These appear in the classes <code>Model</code>, <code>Place</code>, and
+<code>PuzzleGenerator</code>.  There is also one trivial FIXME in <code>BoardWidget</code>, which
+is only there as a stopgap to make the initial skeleton display something. 
+Generally the <code>FIXME</code>'s will have instructions to implement something specific, 
+remove certain lines, etc. Again do not feel as if you have to adhere to these
+instructions, but they should be a good starting point.</p>
+
+<p>Again the four files you will need to modify are as follows:</p>
+
+<ol>
+  <li><code>Model</code> - Represents a signpost puzzle. The instance variables of this object store
+  the information needed to describe the state of the puzzle (the dimensions
+  of the board, the arrows in
+  the squares, which squares are connected, which squares have numbers, etc.)
+  and will be updated as the puzzle is solved. 
+  This contains the vast majority of the code you will change, so understanding this
+  file will be crucial. Contained within <code>Model</code> is another class <code>Sq</code>
+  (or <code>Model.Sq</code>), which represents
+  a square on the board and its contents.</li>
+  <li><code>Place</code> - An (x, y) position on a Signpost puzzle board. This differs from
+  <code>Model.Sq</code>: <code>Place</code> only corresponds to the location of a square on the
+  board, not its contents.</li>
+  <li><code>PuzzleGenerator</code> - Class to help randomly generate Boards.</li>
+  <li><code>BoardWidget</code> - An object that describes how to display the puzzle board.
+  This file
+  can remain mostly untouched, only one thing needs to be removed. The contents of this
+  file are less important to understand than the rest (but by all means take
+  the opportunity to peruse it).</li>
+</ol>
+
+<p>This project tries to make good use of abstraction; the simpler functions
+you write will be instrumental in helping you accomplish more complex goals.
+Be sure
+to respect the abstraction barriers to minimize the impact of bugs
+or logical errors in your code.
+Further, if you find yourself bogged down by the details of a particular
+method, consider pausing to break it down into
+"helper" functions, each performing some coherent piece of the original function
+(only, as a stylistic matter, do give these new functions descriptive names,
+generally avoiding the word "helper" in the name.)</p>
+
+
+<h2 id="submission-and-version-control">Submission and Version Control</h2>
+
+
+<p>It is important that you commit work to your repository <em>at frequent intervals</em>.
+Version control is a powerful tool for saving yourself when you mess something
+up or your dog eats your project, but you must use it regularly if it is to be
+of any use.  Feel free to commit every 15 minutes; Git only saves what has
+changed, even though it acts as if it takes a snapshot of your entire project.</p>
+
+<p>The command <code>git status</code> will tell you what you have modified, removed, or
+added since the last commit.  It will also tell you what you have
+not yet sent to your central repository.  You needn't just assume that things
+are as you expect; <code>git status</code> will tell you whether you've committed and
+pushed everything.</p>
+
+<p>If you are switching between using a clone of your central repository on the
+instructional computers and another at home (or on your laptop), be careful to
+synchronize your work.  When you are done working on one system, be sure to push
+your work to the central repository:</p>
+
+<pre><code>git status                          # To see what needs to be added or committed.
+git add &lt;filepath&gt;                  # To add, or stage, any modified files.
+git commit &#x2d;a &#x2d;m &quot;Commit message&quot;   # To commit changes.
+git push</code></pre>
+
+<p>If you start working on the other system, you then do</p>
+
+<pre><code>git status          # To make sure you didn&#x27;t accidentally leave
+                    # stuff uncommitted or untracked.
+git pull &#x2d;&#x2d;rebase   # Get changes from your central repo.</code></pre>
+
+<p>Submit your project by committing and tagging it:</p>
+
+<pre><code>git tag proj0&#x2d;0     # Or proj0&#x2d;1, etc.
+git push
+git push &#x2d;&#x2d;tags</code></pre>
+
+<p>Be sure to respond to all prompts and to make sure the messages you get indicate
+that the submission was successful.  Don't just "say the magic words" and assume
+that everything's OK.</p>
+    </main></div>
+</body>
+</html>

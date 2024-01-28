@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 3 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-preliminaries">A. Preliminaries</a></li>
+  <li><a href="index.html#b-intdlists-overview">B. IntDLists Overview</a></li>
+  <li><a href="index.html#c-debugging">C. Debugging</a></li>
+  <li><a href="index.html#d-intdlists-practice">D. IntDLists Practice</a></li>
+  <li><a href="index.html#e-submissions">E. Submissions</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 3: IntDLists and Debugging</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-preliminaries">Preliminaries</a></li>
+  <li><a href="index.html#b-intdlists-overview">IntDLists Overview</a></li>
+  <li><a href="index.html#c-debugging">Debugging</a></li>
+  <li><a href="index.html#d-intdlists-practice">IntDLists Practice</a></li>
+  <li><a href="index.html#e-submissions">Submissions</a></li>
+</ul>
+
+
+<h2 id="a-preliminaries">A. Preliminaries</h2>
+
+
+<p>As usual, you can retrieve the files for this lab (after first using <code>git status</code>, <code>git commit</code>, and <code>git push</code> to make sure you have cleaned up, committed, and pushed everything that needs it) with</p>
+
+<pre><code>$ git fetch shared
+$ git merge shared/lab3 &#x2d;m &quot;Start lab3&quot;
+$ git push</code></pre>
+
+<p>This will add <code>shared/lab3</code> to your current branch (in this case, master).  When opening the project in IntelliJ,  remember to add the libraries through <code>File &#x2d;&gt; Project Structure &#x2d;&gt; Libraries &#x2d;&gt; +</code>, then select the <code>lib</code> folder in <code>cs61b&#x2d;software</code>.</p>
+
+<p>When you are ready to submit your work, commit and push everything, and then use</p>
+
+<pre><code>$ git tag lab3&#x2d;1      # Or whatever sequence number you get to
+$ git push
+$ git push &#x2d;&#x2d;tags</code></pre>
+
+<p>If you want to download lab3 in another local repository (e.g., you started on the
+instructional machines and now want to work entirely on your own
+laptop) then go into this other repository (presumably cloned from
+your central cs61b repository) and (after committing and pushing anything you already have
+there) run</p>
+
+<pre><code>$ git pull</code></pre>
+
+
+<h2 id="b-intdlists-overview">B. IntDLists Overview</h2>
+
+
+<p>In class, you've seen what is called a <em>singly linked list</em>,
+<code>IntList</code>.  The term <em>singly linked</em> refers to the single pointer (or <em>link</em>),
+<code>.tail</code>, used to traverse the elements of the list.  For this
+problem, we'll define a new data structure, the <code>IntDList</code>, which uses a
+<em>doubly linked list</em>.
+<br/>
+
+The <code>IntDList</code> class uses another internal data structure, called a
+<code>DNode</code>, to actually house its data. Read through <code>IntDList.java</code> to see why
+we refer to this as an internal data structure!!! Each <code>DNode</code> has <em>two</em> pointers, <code>_prev</code> and <code>_next</code>.  <code>_prev</code> points to the previous <code>DNode</code> in the chain, and <code>_next</code> points to the next <code>DNode</code> in the sequence.  Each <code>Dnode</code> also stores a value, called <code>_val</code>.</p>
+
+<p>Note that the <code>IntDList</code> itself contains two pointers, <code>_front</code> and <code>_back</code>. <code>_front</code> points to the first <code>DNode</code> in the chain and <code>_back</code> points to to the last.  For example, if <code>d</code> were an <code>IntDList</code>, this is how we could represent the sequence <code>[3, 14, 15]</code>:</p>
+
+<p><img src="intdlist.png" alt="Sample IntDList"></p>
+
+<p>Note that the pointers in this diagram point to the entire boxes they are directed towards, not just the smaller boxes within.  Thus, <code>_front</code> points to a <code>DNode</code> whose <code>_prev</code> is <code>null</code>, <code>_val</code> is 3, and <code>_next</code> points to a <code>DNode</code> whose <code>_val</code> is 14. If we wanted to get 14, we could say either <code>_front._next._val</code> or <code>_back._prev._val</code>.</p>
+
+<p><em>Self Test</em> - To help ourselves work with <code>IntDList</code>s, answer the following question:  What are the data types for <code>_front</code>, <code>_back</code>, <code>_prev</code>, <code>_next</code>, and <code>_val</code>?  <em>Hint: 4 of them share the same type.</em></p>
+
+<p><em>Answer</em> - <code>_front</code>, <code>_back</code>, <code>_prev</code>, and <code>_next</code> have type <code>DNode</code>, and <code>_val</code> has type <code>int</code>.</p>
+
+<p>As you can see, unlike <code>IntList</code>, there's an <em>extra level of
+indirection</em> at work here.  The user (or <em>client</em>) of <code>IntDList</code>
+doesn't see the actual <code>DNode</code>s that hold the data.  This has various
+advantages.  One of them is that the client can now do operations that modify
+the list without having to return and reassign its value (that is, we
+can use <code>void</code> methods to insert and delete things).  That's because
+we never change the pointer to the <code>IntDList</code> itself; we only modify
+its fields.  Another is that we can change our implementation of our <code>IntDList</code> without requiring that anyone change the way they use our <code>IntDList</code> class.</p>
+
+<p>Reflecting on our current design, is there anything that can be simplified? It seems like our <code>IntDList</code> stores a pointer to a "next" node (<code>_front</code>) and a pointer to a "previous" node (<code>_back</code>).  Could we instead have our <code>IntDList</code> only store a pointer to a special <code>DNode</code>, whose <code>_next</code> points to whichever <code>_front</code> would've pointed to and whose <code>_prev</code> points to whichever <code>_back</code> would've pointed to? This is called a <em>sentinel node</em>. The doubly linked list with a sentinel node is typically used in practice as the linked list representation, like in Java's own standard library class, <code>java.util.LinkedList</code>.  While you won't be implementing this exact design today, it's good practice to reflect on the pros and cons of our current design, and the implications on performance and development.</p>
+
+
+<h2 id="c-debugging">C. Debugging</h2>
+
+
+<p>We're going to go through a short debugging exercise to help you write some of the methods in <code>IntDList.java</code>.</p>
+
+<p>There are 4 files involved here.</p>
+
+<ul>
+  <li><code>BuggyIntDList.java</code>, which contains a buggy <code>insertBack</code> method. <strong>This should not be modified</strong></li>
+  <li><code>BuggyIntDListTest.java</code>, which contains a test for this buggy method that should help you fix it.</li>
+  <li><code>BuggyIntDListSolution.java</code>, which is a duplicate of <code>BuggyIntDList.java</code> with a few extra methods you will implement. However, you should <strong>only be editing <code>BuggyIntDListSolution.java</code></strong>.</li>
+  <li><code>BuggyIntDListSolutionTest.java</code>, which will test the method you are actively fixing .</li>
+</ul>
+
+<p>In addition to fixing the bug, fill in the methods <code>getException</code>, <code>getErrorFunction</code>, and <code>getErrorLineNumber</code> in <code>BuggyIntDListSolution.java</code> after running the debugger and reading its output. You should modify the contents of these functions to return a string of the corresponding part of the stack trace (e.g. for <code>getException</code>, you should return the string "SomethingException").  <strong>DO NOT MAKE ANY CHANGES TO <code>BuggyIntDList.java</code></strong>.</p>
+
+<p><em>Self Test</em> - Which file(s) contains the error, and which file should you be editing?</p>
+
+<p><em>Answer</em> - Both <code>BuggyIntDList.java</code> and <code>BuggyIntDListSolution.java</code> contain an erroneous <code>insertBack</code> method, but I should only be editing <code>BuggyIntDListSolution.java</code>.</p>
+
+<p>You should see the following when you run <code>BuggyIntDListTest.java</code>:</p>
+
+<p><img src="insertBackBuggyStackTrace.png" alt="Buggy Stacktrace"></p>
+
+<p>There are a few important things to note here.  First, we can read the type of exception that was thrown - <code>NullPointerException</code>. To read the Oracle docs on what a <code>NullPointerException</code> is, take a look <a href="https://docs.oracle.com/javase/10/docs/api/java/lang/NullPointerException.html">here</a>.  To summarize what they say, a <code>NullPointerException</code> is thrown when <code>null</code> is used where an object is required (for example, trying to call an instance method of a <code>null</code> object, or accessing or modifying the instance variables of a <code>null</code> object).</p>
+
+<p><em>Self Test</em> - If we have a box and pointer diagram as we did above, would executing <code>_front._prev._val</code> cause a <code>NullPointerException</code>?
+<br/>
+
+The diagram is displayed again here for your convenience:</p>
+
+<p><img src="intdlist.png" alt="Sample IntDList"></p>
+
+<p><em>Answer</em> - Yes. <code>_front._prev</code> is <code>null</code>, and trying to access an instance variable of a <code>null</code> object causes a <code>NullPointerException</code>.</p>
+
+<p>Next, we can see the stack trace.  This is a listing of all functions that were called before the exception was thrown.  The stack trace can be read chronologically from bottom to top - that is, first the method <code>testInsertBack</code> was called, and then the constructor for <code>BuggyIntDList</code> was called, then the constructor for <code>IntDList</code>, and then the method <code>insertBack</code> was called.  Since <code>insertBack</code> is at the top of our stack trace, we know that it was the function in which the exception was thrown.  The stack trace also provides us the exact line numbers where functions are called.
+<br/>
+
+We can see that the last function call before the <code>NullPointerException</code> was made at line 21 of <code>BuggyIntDList.java</code>.
+If you'd like, take a look at this <a href="https://stackoverflow.com/questions/3988788/what-is-a-stack-trace-and-how-can-i-use-it-to-debug-my-application-errors">Stack Overflow Post</a> on what a stack trace is.</p>
+
+<p>Use the stack trace, along with the skeleton code provided to you to fix the <code>insertBack</code> method in <code>BuggyIntDListSolution.java</code>. Again, <strong>DO NOT MAKE ANY CHANGES TO <code>BuggyIntDList.java</code></strong>. Once you understand what a <code>NullPointerException</code> is, the next question is why would this occur? To answer this, use the IntelliJ Debugger and set a break point at the line 21 in <code>BuggyIntDList.java</code>. If you'd like to review using the IntelliJ Debugger, take a look at <a href="../lab2/index.html#h-using-intellij">lab2</a>.</p>
+
+<p>After putting this breakpoint and running the debugger, you should see this in your IntelliJ window:</p>
+
+<p><img src="debugger.png" alt="Debugging Window"></p>
+
+<p>Now that we know the error, and the line the error occurs on, we need to reflect on what could be causing this error.  Are we trying to access an instance variable of a null object?</p>
+
+<p>Now that we understand what the error is, and why the error occurred, we can start to think about fixing it.  Try drawing a box and pointer diagram, or using the Java Visualizer (see <a href="../lab2/index.html#h-using-intellij">lab2</a> for more information on how to use it).  When does this error occur, and what would be the simplest fix?</p>
+
+<p>Remember to make all changes to <code>BuggyIntDListSolution.java</code>.</p>
+
+<p><strong>Note</strong>: the tests in <code>BuggyIntDListSolutionTest.java</code> are not rigorous, so do not take passing them as a guarantee that your <code>insertBack</code> is bug free.</p>
+
+<p>To check that your <code>insertBack</code> implementation is correct, complete the following tasks:</p>
+
+<ul>
+  <li>Draw a box and pointer diagram (or use the visualizer) to see what your code is doing, and verify you are assigning all pointers correctly.</li>
+  <li>Write your own comprehensive tests in <code>BuggyIntDListSolutionTest.java</code> to verify the functionality of your code.</li>
+</ul>
+
+
+<h2 id="d-intdlists-practice">D. IntDLists Practice</h2>
+
+<p>Among the skeleton files, you'll find <code>IntDList.java</code>.  <strong>Fill in the methods</strong> <code>insertBack</code>, <code>get</code>, <code>size</code>, <code>insertFront</code>, <code>deleteBack</code>, and <code>toString</code>.  While we haven't explicitly talked about <code>String</code> very much, treat this as an exercise in asking your peers, academic interns, TAs, or the internet for advice. Note that the <code>IntDList</code> constructor calls <code>insertBack</code>, so you will need to implement <code>insertBack</code> before
+running any unit tests in the <code>IntDListTest</code> class.  However, your <code>insertBack</code> should already be done from part C.</p>
+
+
+<h2 id="e-submissions">E. Submissions</h2>
+
+
+<p>You will be turning in <code>BuggyIntDListSolution.java</code> and <code>IntDList.java</code>.</p>
+
+<p>You should've filled out the following methods in <code>BuggyIntDListSolution.java</code>:</p>
+
+<ul>
+  <li><code>insertBack</code></li>
+  <li><code>getException</code></li>
+  <li><code>getErrorFunction</code></li>
+  <li><code>getErrorLineNumber</code></li>
+</ul>
+
+<p>You should've filled out the following methods in <code>IntDList.java</code>:</p>
+
+<ul>
+  <li><code>insertBack</code></li>
+  <li><code>get</code></li>
+  <li><code>size</code></li>
+  <li><code>insertFront</code></li>
+  <li><code>deleteBack</code></li>
+  <li><code>toString</code></li>
+</ul>
+
+<p>As usual, add your files, commit, and tag the commit. Push your commits to your central repository, then push your tags by running</p>
+
+<pre><code>git push &#x2d;&#x2d;tags</code></pre>
+    </main></div>
+</body>
+</html>

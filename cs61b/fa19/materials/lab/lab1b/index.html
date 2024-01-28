@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 1b | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-windows-setup">A. Windows Setup</a></li>
+  <ul>
+    <li><a href="index.html#install-java">Install Java</a></li>
+    <li><a href="index.html#install-git-and-git-bash">Install Git and Git Bash</a></li>
+    <li><a href="index.html#install-python3">Install python3</a></li>
+    <li><a href="index.html#set-up-environment-variables">Set up Environment Variables</a></li>
+  </ul>
+  <li><a href="index.html#b-macos-setup">B. macOS Setup</a></li>
+  <li><a href="index.html#c-unix-and-linux-setup">C. Unix and Linux Setup</a></li>
+  <li><a href="index.html#d-test-run">D. Test Run</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 1b: Setting Up Your Computer</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-windows-setup">Windows Setup</a></li>
+  <li><a href="index.html#b-macos-setup">macOS Setup</a></li>
+  <li><a href="index.html#c-unix-and-linux-setup">Unix and Linux Setup</a></li>
+  <li><a href="index.html#d-test-run">Test Run</a></li>
+</ul>
+
+<p>Depending on your operating system, there are a bunch of things we need to do to
+setup your computer up for this course. Follow the instructions linked above,
+which is dependent on the operating system of your computer.</p>
+
+
+<h2 id="a-windows-setup">A. Windows Setup</h2>
+
+
+
+<h3 id="install-java">Install Java</h3>
+
+
+<p>You'll need to install the Java 12 JDK in order to compile your code for this
+class.</p>
+
+<ol>
+  <li>First, head over to the
+  <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk12-downloads-5295953.html">Oracle</a>
+  website.</li>
+  <li><p>In the Java SE Development Kit Section of the page, agree to the license. Then proceed to download the
+  binary file for Windows.</p>
+
+  <p><img src="img/java_agreement.png" alt="Java Agreement"></p></li>
+  <li>Run the installation file and follow the prompts to install Java onto your
+  computer. It's okay to follow all the default options.</li>
+</ol>
+
+
+<h3 id="install-git-and-git-bash">Install Git and Git Bash</h3>
+
+
+<ol>
+  <li>Head over <a href="http://git-scm.com/download/win">here</a> and grab git for Windows.
+  Run the <code>.exe</code> file that is downloaded.</li>
+  <li><p>When you run the installer, you’ll be faced with many options. Unlike
+  everything else, we do not recommend the default options. Instead, you should
+  choose the options listed below.</p>
+
+  <ul>
+    <li><p>Checking <code>Windows Explorer integration</code> will let you do git things upon
+    right-clicking a file or folder, more specifically, run Git Bash and the
+    Git GUI respectively. This is not required, but might be handy.</p>
+
+    <p><img src="img/git-install1.png" alt="Git Installation 1"></p></li>
+    <li><p>Next we'll select a default Git Bash. Unless you've used vim before, we
+    strongly recommend using nano instead.</p>
+
+    <p><img src="img/git-nano.png" alt="Git Installation 2"></p></li>
+    <li><p>Git Bash is a bash shell with built-in git support and lets you use some
+    MinGW/Linux tools. If you already know what bash is and have a preferred
+    terminal, you're welcome to use that instead. Using Git from Git Bash is
+    the recommended option.</p>
+
+    <p><img src="img/git-install2.png" alt="Git Installation 2"></p></li>
+    <li><p>Windows and Unix based systems use different things to denote line endings
+    in files. Use the recommended option (the first one) to avoid seemingly
+    mysterious bugs down the road.</p>
+
+    <p><img src="img/git-install3.png" alt="Git Installation 3"></p></li>
+    <li><p>We recommend that you use the default OpenSSL library.</p>
+
+    <p><img src="img/git-ssl.png" alt="Git SSL"></p></li>
+    <li><p>This option lets you pick between two different "terminal emulators." This
+    will deeply affect the aesthetics of your working environment. Our
+    official directions assume you choose MinTTY, so if you pick the other
+    option, you're on your own.</p>
+
+    <p><img src="img/git-install4.png" alt="Git Installation 4"></p></li>
+    <li><p>Last but not least, enable all of these extra options.</p>
+
+    <p><img src="img/git-extra.png" alt="Git extra"></p></li>
+  </ul></li>
+</ol>
+
+
+<h3 id="install-python3">Install python3</h3>
+
+
+<ol>
+  <li><a href="https://www.python.org/downloads/">Install python3</a>. We'll be using it to
+  compile more complicated projects later on.</li>
+</ol>
+
+
+<h3 id="set-up-environment-variables">Set up Environment Variables</h3>
+
+
+<p>Now it's time to update your environment variables to include Java and Python!</p>
+
+<ol>
+  <li><p>The fine-grain details of this will depend on your OS, but the first step is
+  to open up your <strong>system</strong> (not user) environment variables...</p>
+
+  <p><strong>Windows 8/8.1/10:</strong> Press Windows and type <code>Environment Variables</code>. Then,
+  select "Edit the system environment variables". The first image below is the
+  search on Windows 8.1, while the second image is the search on Windows 10.</p>
+
+  <p><img src="img/start_menu.png" alt="Windows 8.1 Search"></p>
+
+  <p><img src="img/windows10_environment_search.png" alt="Windows 10 Search"></p>
+
+  <p><strong>Windows 7 and earlier:</strong> Search the control panel for the same thing.</p>
+
+  <p><img src="img/win7_control_panel.png" alt="Windows 7 Control Panel"></p></li>
+  <li><p>Navigate to the "Advanced" tab, and click "Environment Variables...".</p>
+
+  <p><img src="img/sys_props.png" alt="System Properties"></p></li>
+  <li><p>Under "System variables" (this section will be unavailable if you are editing
+  <em>account</em> or <em>user</em> variables), click "New..."</p>
+
+  <p><img src="img/env_vars.png" alt="System Variables"></p></li>
+  <li><p>Define the following variables and use the values specified below as the
+  value of the variable. <strong>If the variable already exists</strong>, select the
+  variable and click "Edit...", then <strong>add the value specified below to the
+  front of the value</strong>, followed by a semicolon.</p>
+
+  <ul>
+    <li><p><strong>JAVA_HOME:</strong> Set this to the location which you installed Java JDK
+    (for example, <code>C:\Program Files\Java\jdk&#x2d;12.0.2</code>).</p>
+
+    <p><img src="img/java_home.png" alt="Define Environment Variable"></p></li>
+    <li><strong>PYTHON_HOME:</strong> Set this to the location where you installed Python,
+    for instance, <code>C:\Python35</code> or <code>C:\Program Files\Python35</code>.</li>
+    <li><strong>PATH:</strong> (<strong>This most likely already exists!</strong>) On Windows 10, click
+    “New”, and enter exactly <code>%JAVA_HOME%\bin</code> in the new box. Then, click
+    "New" again, and enter exactly <code>%PYTHON_HOME%</code>. On older versions, add
+    exactly <code>%JAVA_HOME%\bin;%PYTHON_HOME%;</code> to the beginning of the variable.
+    The <code>%</code> symbols demarcate a path substitution in Windows. There are NO
+    spaces; putting spaces in Windows path definitions can sneakily RUIN your
+    day!</li>
+  </ul></li>
+  <li>Save your changes by hitting <code>OK</code> to close out of "Environment Variables" and
+  "System Properties". At this point, your <code>javac</code> should be working. Open Git
+  Bash and type in <code>javac &#x2d;version</code> and ensure that it responds <code>java version
+  &quot;12....</code>. If it claims <code>javac</code> isn't a recognized command, something is wrong
+  with your path setup. (You must <code>OK</code> out of those configuration windows first
+  for your changes to take effect.)</li>
+</ol>
+
+<p>At this point, everything should be working now. Continue on to the <a href="index.html#d-test-run">Test
+Run</a> section and return here if something goes wrong.</p>
+
+
+<h2 id="b-macos-setup">B. macOS Setup</h2>
+
+
+<ol>
+  <li><p>Install Homebrew, a very easy to use package manager. To install, go to your
+  Terminal and enter the following:</p>
+
+<pre><code>ruby &#x2d;e &quot;$(curl &#x2d;fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></pre>
+
+  <p>During the process, you may be prompted to enter a password. When you enter
+  your password, nothing will display on the terminal, but the computer is
+  actually recording your password. This is a security measure. Just type your
+  password and hit enter.</p></li>
+  <li><p>Then, check to make sure brew is working properly on your system by typing:</p>
+
+<pre><code>brew doctor</code></pre>
+
+  <p>You may encounter warnings like this, but you should be fine. Proceed to the
+  next step.</p>
+
+  <p><img src="img/homebrew_warnings.png" alt="Homebrew Warnings"></p></li>
+  <li>If you encounter a warning asking you to download Command Line Tools, you
+  will need to do this. Please follow the StackOverflow post
+  <a href="http://stackoverflow.com/questions/9329243/xcode-4-4-and-later-install-command-line-tools">here</a>.</li>
+  <li><p>Install java, python3, and git. You can do this by typing:</p>
+
+<pre><code>brew cask install java
+brew install git
+brew install python3</code></pre></li>
+  <li><p>You can test your version of java by running:</p>
+
+<pre><code> java &#x2d;version</code></pre>
+
+  <p>If the version does not begin with a "12", try uninstalling and then reinstalling with:</p>
+
+<pre><code> brew cask reinstall java</code></pre></li>
+</ol>
+
+<p>At this point, everything should be working now. Continue on to the <a href="index.html#d-test-run">Test
+Run</a> section and return here if something goes wrong.</p>
+
+
+<h2 id="c-unix-and-linux-setup">C. Unix and Linux Setup</h2>
+
+
+<ol>
+  <li><p>If you are using a Linux/Unix distro, use your package manager (apt-get, yum,
+  etc) to install the Java 12 JDK, python3, and git.</p>
+
+  <p>First, check to see if Java 12 is already installed by typing:</p>
+
+<pre><code>sudo apt&#x2d;get install oracle&#x2d;java12&#x2d;installer python3 git</code></pre>
+
+  <p>Again, be sure to use your distro-specific package manager. If you are using
+  yum for example, substitute the apt-get command with yum.</p>
+
+  <p>Finally, if you have an older version of java, you can check out <a href="https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04">these
+  instructions</a>
+  for how to manage multiple Java installations.</p></li>
+</ol>
+
+<p>Alternatively, follow <a href="https://tecadmin.net/install-java-non-tls-on-ubuntu/">these beautiful
+instructions</a> for Ubuntu,
+Linux Mint, or <a href="https://tecadmin.net/install-java-non-lts-on-centos/">these beautiful
+instructions</a> for CentOS,
+Redhat, Fedora. If you're a different Debian system, you can follow the first
+link. If you're running a Linux distro that hasn't been mentioned, you probably
+already know how to install Java 12 and much more!</p>
+
+<p>At this point, everything should be working. Continue on to the <a href="index.html#d-test-run">Test
+Run</a> section and return here if something goes wrong.</p>
+
+
+<h2 id="d-test-run">D. Test Run</h2>
+
+
+<p>Let's try running a Java program to try out your new setup! Just this once, we
+will tell you to do things without any explanation as to how or why they work.
+This dark magic will be explained in lab 1 and lecture 1, but for now, is just
+here for you to check your setup in a quick n' dirty manner.</p>
+
+<ol>
+  <li><p>Open up your terminal (for Windows, use Git Bash or a related bash terminal)
+  and run this magic:</p>
+
+<pre><code>mkdir &#x2d;p ~/temp &amp;&amp; cd ~/temp</code></pre>
+
+  <p>(This forcibly creates a folder "temp", and navigates there.)</p></li>
+  <li><p>Then, do a platform specific action to open your file explorer in this
+  directory:</p>
+
+  <ul>
+    <li>Mac: <code>open .</code></li>
+    <li>Windows: <code>explorer .</code></li>
+    <li>Ubuntu: <code>xdg&#x2d;open .</code></li>
+    <li>Linux Mint: <code>xdg&#x2d;open .</code> or <code>mate .</code></li>
+  </ul>
+
+  <p>If this command does not work, you can always manually open the file
+  explorer like you normally would.</p></li>
+  <li><p>In this newly opened directory, create a file called <code>HelloWorld.java</code> with
+  these contents (you can do this using an ordinary text editor):</p>
+
+<pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello world!&quot;);
+    }
+}</code></pre></li>
+</ol>
+
+<p>Okay. Now you're ready to start the real test. Here's a screenshot of your dream
+goal, a perfect, no-error run-through that indicates your java setup is just
+fine:</p>
+
+<p><img src="img/hello_world.png" alt="hello_world"></p>
+
+<ol>
+  <li>In your terminal, enter <code>ls</code> (list the files/folders in this directory). You
+  should see <code>HelloWorld.java</code> listed.</li>
+  <li>Run <code>javac HelloWorld.java</code>. If this produces any output, then something is
+  wrong with your setup. If there is no output, when you <code>ls</code>, you should see
+  both <code>HelloWorld.java</code> and a freshly created <code>HelloWorld.class</code> (the <code>javac</code>
+  command created this file).</li>
+  <li>Run <code>java HelloWorld</code>. It should print out "Hello world!" for you. If it
+  didn't, something is wrong with your setup!</li>
+  <li><p>You may now delete the "temp" folder and its contents. Either delete the
+  folder manually or if you're feeling brave, you may use the command:</p>
+
+<pre><code>cd .. &amp;&amp; rm &#x2d;rf ~/temp</code></pre>
+
+  <p>(This navigates you into the parent directory then removes the folder ~/temp
+  and its contents.)</p></li>
+  <li>You're done! You may now proceed to Lab 1.</li>
+</ol>
+    </main></div>
+</body>
+</html>

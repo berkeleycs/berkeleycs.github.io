@@ -1,0 +1,585 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Main | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Computer Science 61B: Data Structures">
+    <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Paul Hilfinger, Berkeley, EECS">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/index.css">
+
+    <script src="assets/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="assets/js/script.js"></script>
+    <!-- <script src="assets/js/cheet.min.js"></script> ??? -->
+</head>
+<body>
+    <a href="index.html"><div id="coursename">
+        <span id="courseid">CS 61B</span>
+        Data Structures, Fall 2019
+    </div></a>
+    <div id="courseinfo">
+        Instructor: Paul Hilfinger</br>
+        Lecture: MWF 5-6PM, Wheeler 150
+    </div>
+    <div id="navbar" class="navbar-top navitems">
+        <a href="index.html"><div class="navitem">Main</div></a>
+        <a href="about.html"><div class="navitem">Course Info</div></a>
+        <a href="staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq" target="blank"><div class="navitem">Piazza</div></a>
+    </div>
+
+
+  <div id="content">
+        <div class="segment">
+          <div class="segmenttitle">
+            Announcements
+            [<a href="announcement-archive.html">Past Announcements</a>]
+          </div>
+          <table id="announcements">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Announcement</th>
+              </tr>
+            </thead>
+            <tr>
+                <td><a href="https://piazza.com/class/jkx2gta66436jq?cid=3379" target="_blank">11/18</a></td>
+                <td>Projects</td>
+                 <td>
+Project 3 (Gitlet) has been released.</td>
+            </tr>
+            <tr>
+                <td>8/28</td>
+                <td>Lectures</td>
+                 <td>
+Because the class is bigger than Wheeler will hold, we do not require lecture
+attendance.  Feel free to use the screencasts and posted slides (linked to 
+from the website) instead.  After the first few sessions, enough people will
+use these resources exclusively that there will be room in Wheeler for all who
+prefer to attend in person.</td>
+            </tr>
+            <tr>
+                <td>6/29</td>
+                <td>Misc</td>
+                 <td>
+The <tt>git-bug</tt> command (available on the instructional machines and in
+cs61b-software) will send us a useful bug report that includes all your code and
+a message about what problem you are having with it.  It requires that you
+commit and push your work (as you should be doing anyway) and that you provide a
+text file (which you don't have to commit)
+containing a description of the problem you are seeing.  Please use
+this instead of screenshots, emails of code snippets, etc., which are almost
+never sufficient for debugging purposes.  You can find some additional
+documentation <a href="docs/gitbug.html" target="blank">here.</a>.</td>
+            </tr>
+            <tr>
+                <td>8/28</td>
+                <td>Admin</td>
+                 <td>
+Announcements from outside groups will now be kept on Piazza in the outside_postings folder.  You can narrow your view to this category using the tab on the folder
+bar at the top of the Piazza page.</td>
+            </tr>
+            <tr>
+                <td>6/29</td>
+                <td>Admin</td>
+                 <td>
+Tests will be as follows:
+<ul>
+<li> Test #1: Thursday, 3 October 2019 7-9PM </li>
+<li> Test #2: Wednesday 6 November 2019 7-9PM </li>
+<li> Final: Friday, 20 December 2019 3:00PM-6PM </li>
+</ul></td>
+            </tr>
+            <tr>
+                <td>6/29</td>
+                <td>Admin</td>
+                 <td>
+For those of you with conflicts with tests #1 or #2, we will be addressing this
+issue closer to the time of the exams.  Please do not mail us with conflicts at
+this time, but watch for further announcements.  We do not offer accommodation to
+those with conflicting finals as a result of taking two courses with the same
+lecture time.
+</td>
+            </tr>
+            <tr>
+                <td>6/29</td>
+                <td>Admin</td>
+                 <td>
+To join the Piazza page for CS 61B, head over to this
+<a href="https://piazza.com/berkeley/fall2019/cs61b">this link</a>. The access code is <strong>61bfa19</strong>.
+</td>
+            </tr>
+            <tr>
+                <td>6/29</td>
+                <td>Admin</td>
+                 <td>
+The Scores tab above will show you what you have submitted and any logs produced
+by the autograder.</td>
+            </tr>
+            <tr>
+                <td>6/29</td>
+                <td>Lectures</td>
+                 <td>
+Lectures are screencast (with audio) and all slides are online.  Attendance is
+not mandatory.  In fact, we do not all fit into Wheeler, so I recommend that
+those of you who are so inclined stay home and watch them.  Experience indicates
+that after the initial week or so, there will be plenty of space in lecture for
+those who prefer live attendance.
+</td>
+            </tr>
+
+
+          </table>
+        </div>
+
+        <div class="segment">
+            <div class="segmenttitle">Calendar</div>
+            <b> Legend:</b>
+            <ul>
+              <li> HFJ: <i> Head First Java</i> </li>
+              <li> AJR: <a href="materials/book1/java.pdf" target="blank"> <i> A Java Reference</i> </a> </li>
+              <li> DSIJ: <a href="materials/book2/data-structures.pdf" target="blank"> <i>Data Structures (Into Java)</i> </a> </li>
+            </ul>
+            <table id="calendar">
+                <thead>
+                    <tr>
+                        <th>Week</th>
+                        <th>Date</th>
+                        <th>Reading</th>
+                        <th>Lecture</th>
+                        <th>Discussion</th>
+                        <th>Lab</th>
+                        <th>Assignments/Exams</th>
+                    </tr>
+                </thead>
+                <tbody>
+<!-- -*-Python-*- -->
+                <!-- Week 1 -->
+                       <tr class="odd">
+                       <td rowspan="3">1</td>
+                       <td>Mon 8/26</td>
+                       <td colspan="2" class="emph2">No classes</td>
+                <td rowspan="3">
+                No discussion section
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab1/index.html" target="_blank">javac, java, git</a>
+                </td>
+                   <td rowspan="3"><a href="materials/hw/hw0/index.html" target="_blank">HW0: A Few Java Exercises</a><br>(due 9/6)</td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 8/28</td>
+                       <td>HFJ 1-26</td>
+                       <td> Intro, Hello World Java <br> <a href="materials/lectures/lect1.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 8/30</td>
+                       <td>AJR 1.1-1.9</td>
+                       <td> A Little Programming <br> <a href="materials/lectures/lect2.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect2/index.html">[code]</a></td>
+                    </tr>
+                <!-- Week 2 -->
+                       <tr>
+                       <td rowspan="3">2</td>
+                       <td>Mon 9/2</td>
+                       <td colspan="2" class="emph2">No classes</td>
+                <td rowspan="3">
+                <a href="materials/disc/discussion1.pdf" target="_blank">Intro to Java</a>
+                <a href="materials/disc/discussion1sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab2/index.html" target="_blank">IntelliJ and IntLists</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[HW0 due 9/6]</span><br><a href="materials/hw/hw1/index.html" target="_blank">HW1: JUnit testing, basic syntax, and linked lists</a><br>(due 9/11)
+<br><a href="https://inst.eecs.berkeley.edu/~cs61b/fa19/materials/proj/proj0/index.html" target="_blank">Project 0: Signpost</a><br>(due 9/23)</td>
+                </tr>
+                    <tr>
+                       <td>Wed 9/4</td>
+                       <td>HFJ 27-36. AJR Chapter 4</td>
+                       <td> Values and Containers <br> <a href="materials/lectures/lect3.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect3/index.html">[code]</a></td>
+                    </tr>
+                    <tr>
+                       <td>Fri 9/6</td>
+                       <td></td>
+                       <td> Simple Pointer Manipulation <br> <a href="materials/lectures/lect4.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect4/index.html">[code]</a></td>
+                    </tr>
+                <!-- Week 3 -->
+                       <tr class="odd">
+                       <td rowspan="3">3</td>
+                       <td>Mon 9/9</td>
+                       <td>HFJ 670</td>
+                       <td> Arrays <br> <a href="materials/lectures/lect5.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect5/index.html">[code]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion2.pdf" target="_blank">Pointers</a>
+                <a href="materials/disc/discussion2sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab3/index.html" target="_blank">IntDLists and Debugging</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[HW1 due 9/11]</span><br><a href="materials/hw/hw2/index.html" target="_blank">HW2: Arrays and Lists of Lists</a><br>(due 9/18)</td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 9/11</td>
+                       <td>HFJ 50-62</td>
+                       <td> Developing a Sort, Unit Testing <br> <a href="materials/lectures/lect6.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect6/index.html">[code]</a></td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 9/13</td>
+                       <td>HFJ 73-87</td>
+                       <td> Object-Based Programming <br> <a href="materials/lectures/lect7.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect7/index.html">[code]</a></td>
+                    </tr>
+                <!-- Week 4 -->
+                       <tr>
+                       <td rowspan="3">4</td>
+                       <td>Mon 9/16</td>
+                       <td>HFJ 168-191, 236-265, 287-293</td>
+                       <td> Object-oriented Mechanisms <br> <a href="materials/lectures/lect8.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion3.pdf" target="_blank">More objects and arrays</a>
+                <a href="materials/disc/discussion3sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab4/index.html" target="_blank">Mostly Proj0</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[HW2 due 9/18]</span><br><a href="materials/proj/proj1/index.html" target="_blank">Project 1: The Enigma</a><br>(due 10/21)<br><a href="materials/hw/hw3/index.html" target="_blank">HW3: OOP, Interfaces, and Inheritance</a><br>(due 9/27)</td>
+                </tr>
+                    <tr>
+                       <td>Wed 9/18</td>
+                       <td>HFJ 200-229</td>
+                       <td> Interfaces and Abstract Classes <br> <a href="materials/lectures/lect9.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr>
+                       <td>Fri 9/20</td>
+                       <td>HFJ 73-87</td>
+                       <td> Interfaces and Abstract Classes <br> <a href="materials/lectures/lect10.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect10/index.html">[code]</a></td>
+                    </tr>
+                <!-- Week 5 -->
+                       <tr class="odd">
+                       <td rowspan="3">5</td>
+                       <td>Mon 9/23</td>
+                       <td></td>
+                       <td> Examples: Comparable and Reader <br> <a href="materials/lectures/lect11.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect11/index.html">[code]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion4.pdf" target="_blank">Inheritance</a>
+                <a href="materials/disc/discussion4sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab5/index.html" target="_blank">Collections, Iterators, and Iterables</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[Project 0 (Signpost) due 9/23]</span><br><span class="proj">[HW3 due 9/27]</span><br></td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 9/25</td>
+                       <td>HFJ 228-229. 250-256, 316-348</td>
+                       <td> Additional OOP Details, Exceptions <br> <a href="materials/lectures/lect12.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 9/27</td>
+                       <td>HFJ 154-160, 587-593, 665-668</td>
+                       <td> Packages, Access, Loose Ends <br> <a href="materials/lectures/lect13.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 6 -->
+                       <tr>
+                       <td rowspan="4">6</td>
+                       <td>Mon 9/30</td>
+                       <td>AJR 6.3, 6.4, HFJ 274-310</td>
+                       <td> Integers <br> <a href="materials/lectures/lect14.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="4">
+                <a href="materials/disc/discussion5.pdf" target="_blank">Test review</a>
+                <a href="materials/disc/discussion5sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="4">
+                Office Hours
+                </td>
+                   <td rowspan="4"><a href="materials/hw/hw4/index.html" target="_blank">HW4: Scanners and Patterns</a><br>(due 10/14)</td>
+                </tr>
+                    <tr>
+                       <td>Wed 10/2</td>
+                       <td>DSIJ Chapter 1</td>
+                       <td> Integers</td>
+                    </tr>
+                    <tr>
+                       <td>Thur 10/3</td>
+                       <td colspan="2" class="emph1">Test #1, 7-9PM</td>                    </tr>
+                    <tr>
+                       <td>Fri 10/4</td>
+                       <td></td>
+                       <td> Complexity <br> <a href="materials/lectures/lect16.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 7 -->
+                       <tr class="odd">
+                       <td rowspan="3">7</td>
+                       <td>Mon 10/7</td>
+                       <td>DSIJ Chapters 2 and 3</td>
+                       <td> Collections, Amortization <br> <a href="materials/lectures/lect17.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion6.pdf" target="_blank">Bits and Algorithmic Analysis</a>
+                <a href="materials/disc/discussion6sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab7/index.html" target="_blank">Asymptotic Analysis</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[HW4 due 10/14]</span><br><a href="materials/hw/hw5/index.html" target="_blank">HW5: Bit Operations, Asymptotic Analysis</a><br>(due 10/23)</td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 10/9</td>
+                       <td>DSIJ Chapter 4</td>
+                       <td> Sequences, Some Design Patterns <br> <a href="materials/lectures/lect18.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect18/index.html">[code]</a></td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 10/11</td>
+                       <td></td>
+                       <td> Sequences (II)</td>
+                    </tr>
+                <!-- Week 8 -->
+                       <tr>
+                       <td rowspan="3">8</td>
+                       <td>Mon 10/14</td>
+                       <td>DSIJ Chapter 5</td>
+                       <td> Trees <br> <a href="materials/lectures/lect20.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion7.pdf" target="_blank">More Algorithmic Analysis</a>
+                <a href="materials/disc/discussion7sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                Project 1 Workday
+                </td>
+                   <td rowspan="3"><a href="materials/proj/proj2/index.html" target="_blank">Project 2: Tablut</a><br>(due 11/15)<br>Project 2 milestone<br>(due 11/8)</td>
+                </tr>
+                    <tr>
+                       <td>Wed 10/16</td>
+                       <td>DSIJ Chapter 6</td>
+                       <td> Tree searching <br> <a href="materials/lectures/lect21.pdf" target="_blank">[slides]</a><a href="materials/lectures/lect21/index.html">[code]</a></td>
+                    </tr>
+                    <tr>
+                       <td>Fri 10/18</td>
+                       <td></td>
+                       <td> Game trees <br> <a href="materials/lectures/lect22.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 9 -->
+                       <tr class="odd">
+                       <td rowspan="3">9</td>
+                       <td>Mon 10/21</td>
+                       <td>DSIJ 6.4, 6.5</td>
+                       <td> Priority Queues, Range Queries <br> <a href="materials/lectures/lect23.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion8.pdf" target="_blank">Binary Trees</a>
+                <a href="materials/disc/discussion8sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab9/index.html" target="_blank">Heaps and Priority Queues</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[Project 1 (Enigma) due 10/21]</span><br><span class="proj">[HW5 due 10/23]</span><br><a href="materials/hw/hw6/index.html" target="_blank">HW6: Searching: BSTs, Ranges, and Hashing</a><br>(due 10/30)</td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 10/23</td>
+                       <td>DSIJ Chapter 7</td>
+                       <td> Hashing <br> <a href="https://inst.eecs.berkeley.edu/~cs61b/fa19/materials/lectures/lect24.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 10/25</td>
+                       <td>AJR Chapter 10</td>
+                       <td> Generics  <br> <a href="materials/lectures/lect25.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 10 -->
+                       <tr>
+                       <td rowspan="3">10</td>
+                       <td>Mon 10/28</td>
+                       <td>DSIJ 8</td>
+                       <td> Sorting <br> <a href="materials/lectures/lect26.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion9.pdf" target="_blank">Heaps and Hashing</a>
+                <a href="materials/disc/discussion9sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab10/index.html" target="_blank">Debugging</a>
+                </td>
+                   <td rowspan="3"><span class="proj">[HW6 due 10/30]</span><br></td>
+                </tr>
+                    <tr>
+                       <td>Wed 10/30</td>
+                       <td></td>
+                       <td> Sorting (II) <br> <a href="materials/lectures/lect27.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr>
+                       <td>Fri 11/1</td>
+                       <td><a href="materials/lectures/lect28/index.html" target="blank">sorting demos</a></td>
+                       <td> Sorting (III) <br> <a href="materials/lectures/lect28.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 11 -->
+                       <tr class="odd">
+                       <td rowspan="4">11</td>
+                       <td>Mon 11/4</td>
+                       <td>DSIJ 9 <br> <a href="materials/lectures/lect29/index.html" target="blank">balanced-search demos</a></td>
+                       <td> Balanced Search Structures <br> <a href="materials/lectures/lect29.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="4">
+                <a href="materials/disc/discussion10.pdf" target="_blank">Sorting</a>
+                <a href="materials/disc/discussion10sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="4">
+                <a href="materials/lab/lab11/index.html" target="_blank">Testing Project</a>
+                </td>
+                   <td rowspan="4"></td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 11/6</td>
+                       <td></td>
+                       <td> Review</td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Wed 11/6</td>
+                       <td colspan="2" class="emph1">Test #2, 7-9PM</td>                    </tr>
+                    <tr class="odd">
+                       <td>Fri 11/8</td>
+                       <td></td>
+                       <td> Balanced Search Structures (II) <br> <a href="materials/lectures/lect31.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 12 -->
+                       <tr>
+                       <td rowspan="3">12</td>
+                       <td>Mon 11/11</td>
+                       <td colspan="2" class="emph2">Veterans Day: No classes</td>
+                <td rowspan="3">
+                <a href="materials/disc/discussion11.pdf" target="_blank">Balanced Search</a>
+                <a href="materials/disc/discussion11sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                Project Office Hours
+                </td>
+                   <td rowspan="3"><a href="materials/hw/hw7/index.html" target="_blank">HW7: Sorting and Searching</a><br>(due 11/20)<br><span class="proj">[Project 2 checkpoint due 11/11]</span><br><span class="proj">[Project 2 (Tablut) due 11/15]</span><br></td>
+                </tr>
+                    <tr>
+                       <td>Wed 11/13</td>
+                       <td>DSIJ 11</td>
+                       <td> Pseudo-Random Sequences <br> <a href="materials/lectures/lect32.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr>
+                       <td>Fri 11/15</td>
+                       <td>DSIJ 12</td>
+                       <td> Graphs, Introduction, Traversals <br> <a href="materials/lectures/lect33.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 13 -->
+                       <tr class="odd">
+                       <td rowspan="3">13</td>
+                       <td>Mon 11/18</td>
+                       <td></td>
+                       <td> A* Search, Minimal spanning trees, Union-find <br> <a href="materials/lectures/lect34.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                <a href="materials/disc/discussion12.pdf" target="_blank">Graphs</a>
+                <a href="materials/disc/discussion12sol.pdf" target="_blank"><br>[Solution]</a>
+                </td>
+                <td rowspan="3">
+                <a href="materials/lab/lab13/index.html" target="_blank">Graphs</a>
+                </td>
+                   <td rowspan="3"><a href="materials/hw/hw8/index.html" target="_blank">HW8: Graphs</a><br>(due 11/27)<br><a href="materials/proj/proj3/index.html" target="_blank">Project 3: Gitlet</a><br>(due 12/11)<br>Project 3 milestone<br>(due 12/4)</td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 11/20</td>
+                       <td></td>
+                       <td> Git internals <br> <a href="materials/lectures/lect35.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 11/22</td>
+                       <td>DSIJ 10, HFJ pp. 489-516</td>
+                       <td> Dynamic Programming, Enumeration Types <br> <a href="materials/lectures/lect36.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 14 -->
+                       <tr>
+                       <td rowspan="3">14</td>
+                       <td>Mon 11/25</td>
+                       <td></td>
+                       <td> Threads, Garbage Collection <br> <a href="materials/lectures/lect37.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                A* Search
+                <br>[Solution]
+                </td>
+                <td rowspan="3">
+                No labs
+                </td>
+                   <td rowspan="3"><span class="proj">[HW8 due 11/27]</span><br></td>
+                </tr>
+                    <tr>
+                       <td>Wed 11/27</td>
+                       <td colspan="2" class="emph2">No lecture</td>                    </tr>
+                    <tr>
+                       <td>Fri 11/29</td>
+                       <td colspan="2" class="emph2">Thanksgiving Holiday</td>                    </tr>
+                <!-- Week 15 -->
+                       <tr class="odd">
+                       <td rowspan="3">15</td>
+                       <td>Mon 12/2</td>
+                       <td><a href="https://docs.google.com/presentation/d/1GZuJRqQx03W9jr4L-PNKos1Wq3IBjL-QH_KmTa6Rib8/pub?start=false&loop=false&delayms=3000&slide=id.g536bf0065_00" target="_blank">Slides from Josh Hug</a></td>
+                       <td> Compression (extra material; see 11/14 slides) <br> <a href="materials/lectures/lect38.pdf" target="_blank">[slides]</a></td>
+
+                <td rowspan="3">
+                Fun and Review
+                <br>[Solution]
+                </td>
+                <td rowspan="3">
+                Proj3 Work Day
+                </td>
+                   <td rowspan="3"><span class="proj">[Project 3 checkpoint due 12/4]</span><br></td>
+                </tr>
+                    <tr class="odd">
+                       <td>Wed 12/4</td>
+                       <td></td>
+                       <td> (See 11/19 slides) <br> </td>
+                    </tr>
+                    <tr class="odd">
+                       <td>Fri 12/6</td>
+                       <td></td>
+                       <td> Summary, Survey <br> <a href="materials/lectures/lect40.pdf" target="_blank">[slides]</a></td>
+                    </tr>
+                <!-- Week 16 -->
+                       <tr>
+                       <td rowspan="3">16</td>
+                       <td>Mon 12/9</td>
+                       <td colspan="2" class="emph2">RRR week</td>
+                <td rowspan="3">
+                No discussion section
+                </td>
+                <td rowspan="3">
+                No labs
+                </td>
+                   <td rowspan="3"><span class="proj">[Project 3 (Gitlet) due 12/11]</span><br></td>
+                </tr>
+                    <tr>
+                       <td>Mon 12/11</td>
+                       <td colspan="2" class="emph2">RRR week</td>                    </tr>
+                    <tr>
+                       <td>Mon 12/13</td>
+                       <td colspan="2" class="emph2">RRR week</td>                    </tr>
+
+
+                </tbody>
+            </table>
+         </div>
+
+<P>
+<h2>Discussion and Lab Schedule</h2>
+<center><iframe src="https://calendar.google.com/calendar/embed?mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=berkeley.edu_1datll9g4c38cpk3cn9l8kpaoc%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe><center>
+
+<ul>
+  Professor Hilfinger's office hours are in 787 Soda Hall. Feel free to drop by whenever the door is open. All other office hours are located in 109 Morgan.</li>
+</ul>
+
+<h2>Office Hour Schedule</h2>
+
+<center><iframe src="https://calendar.google.com/calendar/embed?mode=WEEK&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=berkeley.edu_5b6jk9h2jne7mk1s8ta1ra5sq0%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe></center>
+
+</body></html>

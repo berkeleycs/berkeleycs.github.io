@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 7 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-intro">A. Intro</a></li>
+  <ul>
+    <li><a href="index.html#learning-goals">Learning Goals</a></li>
+  </ul>
+  <li><a href="index.html#b-estimating-efficiency-by-timing-functions">B. Estimating Efficiency by Timing Functions</a></li>
+  <ul>
+    <li><a href="index.html#algorithms">Algorithms</a></li>
+    <li><a href="index.html#time-estimates">Time Estimates</a></li>
+    <li><a href="index.html#exercise-measuring-some-sorting-functions">Exercise: Measuring Some Sorting Functions</a></li>
+    <li><a href="index.html#discussion-timing-results">Discussion: Timing Results</a></li>
+  </ul>
+  <li><a href="index.html#c-abbreviated-estimates">C. Abbreviated Estimates</a></li>
+  <ul>
+    <li><a href="index.html#estimation-with-proportional-to">Estimation with Proportional To</a></li>
+    <li><a href="index.html#asymptotic-analysis-with-big-theta">Asymptotic Analysis with Big-Theta</a></li>
+    <li><a href="index.html#formal-definition-of-big-oh">Formal Definition of Big-Oh</a></li>
+    <li><a href="index.html#formal-definitions-of-big-omega-and-big-theta">Formal Definitions of big-Omega and big-Theta</a></li>
+    <li><a href="index.html#orders-of-growth-are-proportional-to-a-given-variable">Orders of Growth are Proportional to a Given Variable</a></li>
+    <li><a href="index.html#commonly-occurring-orders-of-growth">Commonly-Occurring Orders of Growth</a></li>
+    <li><a href="index.html#logarithmic-algorithms">Logarithmic Algorithms</a></li>
+  </ul>
+  <li><a href="index.html#d-modeling-runtime-analysis">D. Modeling Runtime Analysis</a></li>
+  <ul>
+    <li><a href="index.html#a-graphical-approach-to-analyzing-iteration">A Graphical Approach to Analyzing Iteration</a></li>
+    <li><a href="index.html#tree-recursion">Tree Recursion</a></li>
+    <li><a href="index.html#self-test-choosing-the-right-notation">Self-test: Choosing the Right Notation</a></li>
+  </ul>
+  <li><a href="index.html#e-practice">E. Practice</a></li>
+  <ul>
+    <li><a href="index.html#exercise-complete-quiz-runtimequiz-java">Exercise: Complete <code>quiz.RuntimeQuiz.java</code></a></li>
+  </ul>
+  <li><a href="index.html#f-conclusion">F. Conclusion</a></li>
+  <ul>
+    <li><a href="index.html#summary">Summary</a></li>
+    <li><a href="index.html#practical-tips">Practical Tips</a></li>
+    <li><a href="index.html#useful-formulas">Useful Formulas</a></li>
+    <li><a href="index.html#deliverables">Deliverables</a></li>
+  </ul>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 7: Asymptotic Analysis</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-intro">Intro</a></li>
+  <li><a href="index.html#b-estimating-efficiency-by-timing-functions">Estimating Efficiency by Timing Functions</a></li>
+  <li><a href="index.html#c-abbreviated-estimates">Abbreviated Estimates</a></li>
+  <li><a href="index.html#d-modeling-runtime-analysis">Modeling Runtime Analysis</a></li>
+  <li><a href="index.html#e-practice">Practice</a></li>
+  <li><a href="index.html#f-conclusion">Conclusion</a></li>
+</ul>
+
+
+<h2 id="a-intro">A. Intro</h2>
+
+
+<p>Pull the files for lab 7 from the skeleton.</p>
+
+<pre><code>git fetch shared
+git merge shared/lab7 &#x2d;m &quot;Start lab7&quot;
+git push</code></pre>
+
+
+<h4 id="learning-goals">Learning Goals</h4>
+
+
+<p>In this lab, we consider ways of measuring the efficiency of a given code segment. Given a function <code>f</code>, we want to find out how fast that function runs. One way of doing this is to take out a stopwatch and measuring exactly how much time it takes for <code>f</code> to run on some input. We will look at some plots of runtime to understand how some functions' runtimes change with the size of their input. However, we will also see that there are problems with using elapsed time for this purpose.</p>
+
+<p>Then, we will learn how to develop better models for analyzing runtime complexity. Often times, the programs we need to analyze are too complex to solve using basic counting rules so we need some way of organizing information and reducing the complexity of the problem. In this last section, we will learn how we can break complex algorithms down into smaller pieces that we can then individually analyze.</p>
+
+
+<h2 id="b-estimating-efficiency-by-timing-functions">B. Estimating Efficiency by Timing Functions</h2>
+
+
+
+<h4 id="algorithms">Algorithms</h4>
+
+
+<p>An <em>algorithm</em> is an abstract notion that describes an approach for solving a problem. The code we write in this class, our programs, are implementations of algorithms.</p>
+
+<p>For example, consider the problem of sorting a list of numbers. One algorithm we might use to solve this problem is called <em>bubble sort</em>. Bubble sort tells us we can sort a list by repeatedly looping through the list and swapping adjacent items if they are out of order, until the entire sorting is complete.</p>
+
+<p>Another algorithm we might use to solve this problem is called <em>insertion sort</em>. Insertion sort says to sort a list by repeatedly looping through our list, removing the minimum element, and putting it into a new list in the correct order.</p>
+
+<p>Several websites like <a href="http://visualgo.net/sorting">VisuAlgo</a>, <a href="http://sorting.at/">Sorting.at</a>, <a href="https://www.toptal.com/developers/sorting-algorithms/">Sorting Algorithms</a>, and <a href="http://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html">USF</a> have developed some animations that can help us visualize these sorting algorithms. Spend a little time playing around with these demos to get an understanding of how much time it takes for bubble sort or insertion sort to completely sort a list. We'll revisit sorting in more detail later in this course, but for now, try to get a feeling of how long each algorithm takes to sort a list. How many comparison does each sort need? And how many swaps?</p>
+
+<p>Since each comparison and each swap takes time, we want to know which is the faster algorithm: bubble sort or insertion sort? And how fast can we make our Java programs that implement them?</p>
+
+
+<h4 id="time-estimates">Time Estimates</h4>
+
+
+<p>To start, it seems that the most reasonable way to estimate the time an algorithm takes is to measure the time directly. Each computer has an internal clock that keeps track of time, usually in the number of fractions of a second that have elapsed since a given base date. The Java method that accesses the clock is <code>System.nanoTime()</code>. A <code>timing.Timer</code> class is provided in <code>timing.Timer.java</code>.</p>
+
+<p>Before we start, find out</p>
+
+<ul>
+  <li>exactly what value <code>System.nanoTime()</code> returns, and</li>
+  <li>how to use the <code>timing.Timer</code> class to measure the time taken by a given segment of code.</li>
+</ul>
+
+
+<h4 id="exercise-measuring-some-sorting-functions">Exercise: Measuring Some Sorting Functions</h4>
+
+
+<p>The file <code>timing.Sorter.java</code> contains multiple implementations of various sorting algorithms, including the bubble sort and insertion sort algorithms mentioned earlier.
+Its <code>getRandomArray</code> method returns an array of the specified size filled with randomly generated values.</p>
+
+<p>The file <code>timing.GraphSorters</code> contains some code to generate a plot of the run-times of different sorting implementations, sorting different sizes of arrays.
+Its main method accepts three arguments (or sets them by default) corresponding to the number of different array sizes it should test (<code>ntrials</code>),
+the interval by which it should increase the array size between trials (<code>by</code>), and the number of times it should repeat each size array per sorting implementation
+(<code>nrepeats</code>). By default, the minimum size array is 5.</p>
+
+<p>For example, the commands</p>
+
+<pre><code>javac timing/GraphSorters.java
+java timing.GraphSorters 100 50 10</code></pre>
+
+<p>uses the command-line arguments to plot all sorters' runtimes for 100 trials, each increasing by 50 elements, and repeating each trial 10 times (and averaging the result).</p>
+
+<p>Try running the program, either with IntelliJ or over the command line. To run with IntelliJ, you can simply run the main method of <code>GraphSorters</code> and alter the <code>ntrials</code>, <code>by</code>, and <code>nrepeats</code> values. If you're running it on the command line, run the above commands from the lab7 directory.
+Play with the values of <code>ntrials</code>, <code>by</code>, and <code>nrepeats</code> to see how the graphs change!</p>
+
+
+<h4 id="discussion-timing-results">Discussion: Timing Results</h4>
+
+
+<p>How fast is <code>timing.Sorter.java</code>? As you can see, this answer clearly depends on the sorting algorithm, as well as the size of the array.</p>
+
+<p>Is one sorting algorithm <em>always</em> faster than another? Does increasing the array size <em>always</em> mean the sorting takes longer?</p>
+
+<p>How does changing <code>nrepeats</code> change the plot?</p>
+
+<p>Is your plot the <em>exact</em> same as your neighbors plot, even with the same values of <code>ntrials</code>, <code>by</code>, and <code>nrepeats</code>?</p>
+
+<p>Look at the source code for <code>timing.BubbleSorter</code> to <code>timing.WipingBubbleSorter</code>. After looking at the plots, can you intuitively explain why
+<code>timing.WipingBubbleSorter</code> is usually 2x as fast as <code>timing.BubbleSorter</code>? 
+(Hint: Consider the immobility of some elements when the swapping passes are single directional (i.e. only going forward), and how this "Wiping" strategy helps deal with that issue.)</p>
+
+<p>While timing how long a program runs is certainly useful, it doesn't give us a reliable answer - there are too many variables.</p>
+
+<p>You do not need to submit the answers to these questions, but it's important to think about them, try to answer them, and explain why. Talk to your neighbors or ask a TA/AI if you have questions!</p>
+
+
+<h2 id="c-abbreviated-estimates">C. Abbreviated Estimates</h2>
+
+
+
+<h4 id="estimation-with-proportional-to">Estimation with Proportional To</h4>
+
+
+<p>Instead of timing how long a program segment takes, we can say that a program segment runs in time <em>proportional to</em> a given expression, where that expression is in simplest possible terms. Here, <em>proportional to</em> means <em>within a constant multiple of</em>.</p>
+
+<p>Thus $2N + 3$ is "proportional to $N$" since it's approximately $2 \times N$. Likewise, $3N^{5} + 19N^{4} + 35$ is "proportional to $N^{5}$" since it's approximately $3 \times N^{5}$. As $N$ approaches infinity, the approximation better models the function's real runtime.</p>
+
+<p>Basically, what we're doing here is discarding all but the most significant (fastest growing) term of the estimate and also discarding any constant factor of that term. In a later section, we can show exactly why this holds with a more formal notation.</p>
+
+
+<h4 id="asymptotic-analysis-with-big-theta">Asymptotic Analysis with Big-Theta</h4>
+
+
+<p>A notation often used to provide even more concise estimates is <em>big-Theta</em>, represented by the symbol $\Theta$. Say we have two functions $f(n)$ and $g(n)$ that take in non-negative integers and return real values. We could say</p>
+
+<blockquote><p>$f(n) \in \Theta(g(n))$</p></blockquote>
+
+<p>(where $a \in b$ is read as $a \text{ is in } b$)</p>
+
+<p>if and only if $f(n)$ is proportional to $g(n)$ as $n$ approaches infinity.</p>
+
+<p>Why do we say "in" $\Theta$? You can think of $\Theta(g(n))$ as a set of functions that all grow proportional to $g$. When we claim that $f$ is in this set, we are claiming that $f$ is a function that grows proportional to $g$.</p>
+
+<p>There are analogous notations called <em>big-Oh</em> ($Ο$) and <em>big-Omega</em> ($\Omega$), where big-Oh is used for upper-bounding and big-Omega is used for lower-bounding. If $f(n)$ is in $O(g(n))$, it means $f$ is in a set of functions that are upper-bounded by $g$, as in they grow at most as quickly as $g$. Likewise, if $f(n)$ is in $\Omega(g(n))$, it means $f$ is in a set of functions that are lower-bounded by $g$, as in they grow at least as quickly as $g$.</p>
+
+
+<h4 id="formal-definition-of-big-oh">Formal Definition of Big-Oh</h4>
+
+
+<p>In this section, we provide a more formal, mathematical definition of big-Oh notation. These are two equivalent definitions of the statement $f(n) \text{ is in } O(g(n))$:</p>
+
+<ol>
+  <li>There exist positive constants M and N such that for all values of $n > N$, $f(n) < M \times g(n)$.
+
+  Example: Given $f(n) = n^{2}$ and $g(n) = n^{3}$, is $f(n) \text{ in } O(g(n))$? Is $g(n) \text{ in } O(f(n))$?
+
+  We can choose $M = 1$ and $N = 1$. We know that for all $n > 1$, $n^{2} < 1 \times n^{3}$. Therefore, $f(n) \text{ is in } O(g(n))$.
+
+  However, it is impossible to find positive integers $M$ and $N$ such that $n^{3} < M \times n^{2}$ for all $n > N$. Notice that to satisfy the inequality $n^{3} < M \times n^{2}$, $n$ must be less than $M$. But since $M$ a constant, $n^{3} < M \times n^{2}$ does <strong>not</strong> hold for arbitrarily large values of $n$.</li>
+  <li><p>$f(n) \in O(g(n)) \Longleftrightarrow \lim\limits_{n \to \infty} \frac{f(n)}{g(n)} < \infty$</p>
+
+  <p>This means, essentially, that for very large values of $n$, $f$ is not a lot bigger than $g$.</p>
+
+  <p>Example: Given $f(n) = n^{5}$ and $g(n) = 5^{n}$, is $f(n) \text{ in } O(g(n))$? Is $g(n) \text{ in } O(f(n))$?</p>
+
+  <p>After repeatedly applying L'Hôpital's rule, we see that $f(n) \text{ is in } O(g(n))$:</p>
+
+  <p>$$\lim\limits_{n \to \infty} \frac{f(n)}{g(n)} = \lim\limits_{n \to \infty} \frac{n^{5}}{5^{n}} = \lim\limits_{n \to \infty} \frac{5n^{4}}{5^{n} \log 5} = \cdots = \lim\limits_{n \to \infty} \frac{5!}{5^{n} \log^5 5} = 0$$</p>
+
+  <p>However, $g(n)$ is <strong>not</strong> in $O(f(n))$:</p>
+
+  <p>$$\lim\limits_{n \to \infty} \frac{g(n)}{f(n)} = \lim\limits_{n \to \infty} \frac{5^{n}}{n^{5}} = \lim\limits_{n \to \infty} \frac{5^{n} \log 5}{5n^{4}} = \cdots = \lim\limits_{n \to \infty} \frac{5^{n} \log 5}{5!} = \infty$$</p></li>
+</ol>
+
+
+<h4 id="formal-definitions-of-big-omega-and-big-theta">Formal Definitions of big-Omega and big-Theta</h4>
+
+
+<p>There are a few different ways to define big-Omega and big-Theta.</p>
+
+<p>big-Omega:</p>
+
+<p>$$f(n) \in \Omega(g(n)) \Longleftrightarrow g(n) \in O(f(n)) \Longleftrightarrow \lim\limits_{n \to \infty} \frac{f(n)}{g(n)} > 0$$</p>
+
+<p>big-Theta:</p>
+
+<p>$$f(n) \in \Theta(g(n)) \Longleftrightarrow f(n) \in O(g(n)) \text{ AND } g(n) \in O(f(n)) \\ \Longleftrightarrow \lim\limits_{n \to \infty} \frac{f(n)}{g(n)} = c \\ \text{ for some constant } 0 < c < \infty$$ </p></p>
+
+
+<h4 id="orders-of-growth-are-proportional-to-a-given-variable">Orders of Growth are Proportional to a Given Variable</h4>
+
+
+<p>Unfortunately, students are sometimes careless about specifying the quantity on which an estimate depends. Don't just use $N$ without making clear what $N$ means. This distinction is important especially when we begin to touch on sorting later in the course. It may not always be clear what $N$ means.</p>
+
+
+<h4 id="commonly-occurring-orders-of-growth">Commonly-Occurring Orders of Growth</h4>
+
+
+<p>Here are some commonly-occurring estimates listed from no growth at all to fastest growth.</p>
+
+<ul>
+  <li><strong>constant time</strong> or <em>proportional to</em> $1$, or any constant number $c$</li>
+  <li><strong>logarithmic time</strong> or <em>proportional to</em> $\log N$</li>
+  <li><strong>linear time</strong> or <em>proportional to</em> $N$</li>
+  <li><strong>quadratic/polynomial time</strong> or <em>proportional to</em> $N^{2}$ or $N^k$ for a constant $k$, respectively</li>
+  <li><strong>exponential time</strong> or <em>proportional to</em> $k^{N}$ for a constant $k$</li>
+  <li><strong>factorial time</strong> or <em>proportional to</em> $N!$</li>
+</ul>
+
+
+<h4 id="logarithmic-algorithms">Logarithmic Algorithms</h4>
+
+
+<p>We will shortly encounter algorithms that run in time proportional to $\log N$ for some suitably defined $N$. Recall from algebra that the base-10 logarithm of a value is the exponent to which 10 must be raised to produce the value. It is usually abbreviated as $\log_{10}$. Thus</p>
+
+<ul>
+  <li>$\log_{10} 1000$ is 3 because $10^{3} = 1000$</li>
+  <li>$\log_{10} 90$ is slightly less than 2 because $10^{2} = 100$</li>
+  <li>$\log_{10} 1$ is 0 because $10^{0} = 1$</li>
+</ul>
+
+<p>In algorithms, we commonly deal with the base-2 logarithm, written as $\lg$, defined similarly.</p>
+
+<ul>
+  <li>$\lg 1024$ is 10 because $2^{10} = 1024$</li>
+  <li>$\lg 9$ is slightly more than 3 because $2^{3} = 8$</li>
+  <li>$\lg 1$ is 0 because $2^{0} = 1$</li>
+</ul>
+
+<p>Another way to think of log is the following: $\log_{\text{base}} N$ is the number of times $N$ must be divided by $base$ before it hits 1. For the purposes of determining orders of growth, however, the log base actually doesn't make a difference because, by the change of base formula, we know that any logarithm of $N$ is within a constant factor of any other logarithm of $N$. We usually express a logarithmic algorithm as simply $\log N$ as a result.</p>
+
+<p>Algorithms for which the running time is logarithmic are those where processing discards a large proportion of values in each iterations. For example, let's consider a guessing game where we are trying to guess a secret number that a person is thinking of within a certain range (i.e. 1 to 1024), and this person will tell us if our current guess is higher or lower than secret number. We can use binary search in order to guess a number that a person is thinking - specifically, we would guess a number in the middle of the current valid range, and then remove half the options that we know won't be correct (i.e. if we were told higher, we can limit our range to the upper half), and do this to completion. In each iteration, this algorithm discards half the possible values for the secret number, repeatedly dividing the size of the problem by 2 until there is only one value left, as illustrated by the table below.</p>
+
+
+
+<table>
+  <tr>
+    <th>Round #</th>
+    <th>Numbers left</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>1024</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>512</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>256</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>128</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>64</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>32</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>16</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>8</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>1</td>
+  </tr>
+</table>
+
+
+
+<p>We know from above that $\lg 1024 = 10$ which gives us an approximation of how many rounds it will take.</p>
+
+<p>We will see further applications of logarithmic behavior when we work with trees in subsequent activities.</p>
+
+
+<h2 id="d-modeling-runtime-analysis">D. Modeling Runtime Analysis</h2>
+
+
+
+<h4 id="a-graphical-approach-to-analyzing-iteration">A Graphical Approach to Analyzing Iteration</h4>
+
+
+<p>We've thus far defined the language of asymptotic analysis and developed some simple methods based on counting the total number of steps. However, the kind of problems we want to solve are often too complex to think of just in terms of number iterations times however much work is done per iteration.</p>
+
+<p>Consider the following function, <code>repeatedSum</code>.</p>
+
+<pre><code>long repeatedSum(int[] values) {
+    int N = values.length;
+    long sum = 0;
+    for (int i = 0; i &lt; N; i++) {
+        for (int j = i; j &lt; N; j++) {
+            sum += values[j];
+        }
+    }
+    return sum;
+}</code></pre>
+
+<p>In <code>repeatedSum</code>, we're given an array of <code>values</code> of length N. We want to take the repeated sum over the array as defined by the following sequence of <code>j</code>'s.</p>
+
+<blockquote><p>$0, 1, 2, 3, \cdots, N - 1$</p>
+
+<p>$1, 2, 3, 4, \cdots, N - 1$</p>
+
+<p>$2, 3, 4, 5, \cdots, N - 1$</p></blockquote>
+
+<p>Notice that each time, the number of elements, or the iterations of <code>j</code>, being added is reduced by 1. While in the first iteration, we sum over all $N$ elements, in the second iteration, we only sum over $N - 1$ elements. On the next iteration, even fewer: just $N - 2$ elements. This pattern continues until the outer loop's counting variable, <code>i</code>, has incremented all the way to $N$.</p>
+
+<p>One possible approach to this problem is to draw a bar graph to visualize how much work is being done for each iteration of <code>i</code>. We can represent this by plotting the values of <code>i</code> across the X-axis of the graph and the number of steps for each corresponding value of <code>i</code> across the Y-axis of the graph.</p>
+
+<p><img src="empty_plot.png" alt="Empty plot"></p>
+
+<p>Now, let's plot the amount of work being done on the first iteration of <code>i</code> where <code>i = 0</code>. If we examine this iteration alone, we just need to measure the amount of work done by the <code>j</code> loop. In this case, the <code>j</code> loop does work proportional to $N$ steps as the loop starts at 0, increments by 1, and only terminates when <code>j = N</code>.</p>
+
+<p>How about the next iteration of <code>i</code>? The loop starts at 1 now instead of 0 but still terminates at $N$. In this case, the <code>j</code> loop is proportional to $N - 1$ steps. The next loop, then, is proportional to $N - 2$ steps.</p>
+
+<p><img src="partial_linear_plot.png" alt="Partial linear plot"></p>
+
+<p>We can start to see a pattern forming. As <code>i</code> increases by 1, the amount of work done on each corresponding <code>j</code> loop decreases by 1. As <code>i</code> approaches $N$, the number of steps in the <code>j</code> loop approaches 0. In the final iteration, <code>i = N&#x2d;1</code>, the <code>j</code> loop performs work proportional to 1 step.</p>
+
+<p><img src="extrapolated_linear_plot.png" alt="Extrapolated linear plot"></p>
+
+<p>We've now roughly measured each loop proportional to some number of steps. Each independent bar represents the amount of work any one iteration of <code>i</code> will perform. The runtime of the entire function <code>repeatedSum</code> then is the sum of all the bars, or simply the area underneath the line.</p>
+
+<p><img src="complete_linear_plot.png" alt="Complete linear plot"></p>
+
+<p>The problem is now reduced to finding the area of a triangle with a base of $N$ and height of also $N$, giving us an area of $\frac{N * N}{2} = \frac{N^{2}}{2} \in \Theta(N^{2})$. Thus, the runtime of <code>repeatedSum</code> is in $\Theta(N^{2})$.</p>
+
+<p>We can verify this result mathematically by noticing that the sequence can be described by the following summation:</p>
+
+<p>$1 + 2 + 3 + ... + N = \frac{N(N + 1)}{2}$ or, roughly, $\frac{N^{2}}{2}$ which is in $\Theta(N^{2})$. It's useful to know both the formula as well as its derivation through the graph above.</p>
+
+
+<h4 id="tree-recursion">Tree Recursion</h4>
+
+
+<p>Now that we've learned how to use a bar graph to represent the runtime of an iterative function, let's try the technique out on a recursive function, <code>mitosis</code>.</p>
+
+<pre><code>int mitosis(int N) {
+    if (N == 1) {
+        return 1;
+    }
+    return mitosis(N / 2) + mitosis(N / 2);
+}</code></pre>
+
+<p>Let's start by trying to map each $N$ over the x-axis like we did before and try to see how much work is done for each call to the function. The conditional contributes a constant amount of work to each call. But notice that in our return statement, we make two recursive calls to <code>mitosis</code>. How do we represent the runtime for these calls? We know that each call to <code>mitosis</code> does a constant amount of work evaluating the conditional base case but it's much more difficult to model exactly how much work each recursive call will do. While a bar graph is a very useful way of representing the runtime of iterative functions, it's not always the right tool for recursive functions.</p>
+
+<p>Instead, let's try another strategy: drawing call trees. Like the graphical approach we used for iteration earlier, the <em>call tree</em> will reduce the complexity of the problem and allow us to find the overall runtime of the program on large values of $N$ by taking the tree recursion out of the problem. Consider the call tree for <code>fib</code> below.</p>
+
+<pre><code>int fib(int N) {
+    if (N &lt;= 1) {
+        return 1;
+    }
+    return fib(n &#x2d; 1) + fib(n &#x2d; 2);
+}</code></pre>
+
+<p><img src="fib_tree.png" alt="Fibonacci tree"></p>
+
+<p>At the <em>root</em> of the tree, we make our first call to <code>fib(n)</code>. The recursive calls to <code>fib(n &#x2d; 1)</code> and <code>fib(n &#x2d; 2)</code> are modeled as the two <em>children</em> of the root node. We say that this tree has a <em>branching factor</em> of two as each node contains two children. It takes a constant number of instructions to evaluate the conditional, addition operator, and the return statement as denoted by the <code>1</code>.</p>
+
+<p>We can see this pattern occurs for all nodes in the tree: each node performs the same constant number of operations if we don't consider recursive calls. If we can come up with a scheme to count all the nodes, then we can simply multiply by the constant number of operations to find the overall runtime of <code>fib</code>.</p>
+
+<p>Remember that the number of nodes in a tree is calculated as the branching factor, $k$, raised to the height of the tree, $h$, or $k^{h}$. Spend a little time thinking about the maximum height of this tree: when does the base case tell us the tree recursion will stop?</p>
+
+
+<h4 id="self-test-choosing-the-right-notation">Self-test: Choosing the Right Notation</h4>
+
+
+<p>Together, we are going to identify the asymptotic runtime complexity of <code>fib(N)</code>.</p>
+
+<ul>
+  <li><p>Try 1: $\Theta(N^{2})$</p>
+
+  <ul>
+    <li>This is incorrect. Each instance of <code>fib</code> makes two recursive calls to <code>fib</code> again. This continues for N levels.</li>
+  </ul></li>
+  <li><p>Try 2: $O(N^{2})$</p>
+
+  <ul>
+    <li>Again incorrect for the same reason - each instance of <code>fib</code> makes two recursive calls to <code>fib</code> again. This continues for N levels.</li>
+  </ul></li>
+  <li><p>Try 3: $\Theta(2^{N})$</p>
+
+  <ul>
+    <li>While incorrect, the intuition is right. It's important to notice that, while each call to <code>fib</code> makes two more recursive calls to <code>fib</code>, the recursive calls are <strong>not</strong> equal as one calls <code>fib(N &#x2d; 1)</code> while the other calls <code>fib(N &#x2d; 2)</code>. The left side of the tree will do significantly more work than the right side of the tree to the point where the runtime is no longer exactly within $\Theta(2^{N})$.</li>
+  </ul></li>
+  <li><p>Try 4: $O(2^{N})$</p>
+
+  <ul>
+    <li>Correct! There's a small but significant difference between big-Oh and big-Theta in this problem as the runtime for <code>fib</code> is not exactly $\Theta(2^{N})$ as given by the tight bound, theta. The call tree is actually imbalanced as the left edge contains $N$ nodes but the right edge contains only $N/2$ nodes. We describe this runtime more exactly as  $\Theta(1.618^{N})$ which is within $O(2^{N})$ but <strong>not</strong> within $\Theta(2^{N})$.</li>
+  </ul></li>
+</ul>
+
+<p>Now, back to <code>mitosis</code>. The problem is setup just like <code>fib</code> except instead of decrementing $N$ by 1 or 2, we now divide $N$ in half each time. Each node performs a constant amount of work but also makes two recursive calls to <code>mitosis(N / 2)</code>.</p>
+
+<p><img src="n_tree.png" alt="N-time tree"></p>
+
+<p>Like before, we want to identify both the branching factor and the height of the tree. In this case, the branching factor is 2 like before. Recall that the series $N, N/2, \cdots , 4, 2, 1$ contains $\log_{2} N$ elements since, if we start at $N$ and break the problem down in half each time, it will take us approximately $\log_{2} N$ steps to completely reduce down to 1.</p>
+
+<p>Plugging into the formula, we get $2^{\log_{2} N}$ nodes which simplifies to $N$. Therefore, $N$ nodes performing a constant amount of work each will give us an overall runtime in $\Theta(N)$.</p>
+
+<p>In general, for a recursion tree, we can think of the total work as $\sum_{\text{layers}} \frac{\text{nodes}}{\text{layer} }\frac{\text{work}}{\text{node}}$ For <code>mitosis</code>, we have $\lg N$ layers, $2^i$ nodes in layer $i$, with $1$ (constant) work per node. Thus we see the summation $\sum_{i = 0}^{\lg N} 2^i (1)$, which is exactly the quantity we just calculated.</p>
+
+
+<h2 id="e-practice">E. Practice</h2>
+
+
+
+<h4 id="exercise-complete-quiz-runtimequiz-java">Exercise: Complete <code>quiz.RuntimeQuiz.java</code></h4>
+
+
+<p>Look in <code>quiz.RuntimeQuiz.java</code>, where we have provided one example and some more common method types for you to analyze the run-time of in asymptotic notation. Fill out the missing fields to correctly match the runtime to the method.</p>
+
+<p>Asymptotic analysis is the primary overarching way we look at <em>efficiency</em>, determining how fast a method is, before we look at the constant factors in a method. Throughout the rest of the class, you should expect to see analysis of each data structure's runtime in asymptotic notation.</p>
+
+<p>Tag and submit this lab as for an ordinary assignment.  The autograder will be
+running frequently during the lab, so that within a minute or two you 
+should be able to see how you did by consulting the lab7 entry in the Scores tab.</p>
+
+
+<h2 id="f-conclusion">F. Conclusion</h2>
+
+
+
+<h4 id="summary">Summary</h4>
+
+
+<p>In this section, we learned about two different techniques for analyzing the runtime of program.</p>
+
+<ol>
+  <li>First, we tried to estimate the runtime efficiency of a program by <strong>timing it</strong>. But we found that the results weren't always the same between different computers or even running at different times.</li>
+  <li><p>Second, we learned how to <strong>estimate</strong> the efficiency of an algorithm using proportionality and <strong>orders of growth</strong>.</p>
+
+  <ul>
+    <li>big-Oh describes an <em>upper bound</em> for an algorithm's runtime.</li>
+    <li>big-Omega describes a <em>lower bound</em> for an algorithm's runtime.</li>
+    <li>big-Theta describes a <em>tight bound</em> for an algorithm's runtime.</li>
+  </ul></li>
+</ol>
+
+<p>In the final section, we applied what we learned about estimation and orders of growth to model algorithmic analysis for larger problems. Two techniques, <em>graphs</em> and <em>call trees</em>, helped us break down challenging problems into smaller pieces that we could analyze individually.</p>
+
+
+<h4 id="practical-tips">Practical Tips</h4>
+
+
+<ol>
+  <li>Before attempting to calculate a function's runtime, first try to understand what the function does.</li>
+  <li>Try some small sample inputs to get a better intuition of what the function's runtime is like. What is the function doing with the input? How does the runtime change as the input size increases? Can you spot any 'gotchas' in the code that might invalidate our findings for larger inputs?</li>
+  <li>Try to lower bound and upper bound the function runtime given what you know about how the function works. This is a good sanity check for your later observations.</li>
+  <li>If the function is recursive, draw a call tree to map out the recursive calls. This breaks the problem down into smaller parts that we can analyze individually. Once each part of the tree has been analyzed, we can then reassemble all the parts to determine the overall runtime of the function.</li>
+  <li>If the function has a complicated loop, draw a bar graph to map out how much work the body of the loop executes for each iteration.</li>
+</ol>
+
+
+<h4 id="useful-formulas">Useful Formulas</h4>
+
+
+<ul>
+  <li>$1 + 2 + 3 + 4 + \cdots + N \text{ is in } \Theta(N^{2})$</li>
+  <li>There are $N$ terms in the sequence $1, 2, 3, 4, \cdots, N$</li>
+  <li>$1 + 2 + 4 + 8 + \cdots + N \text{ is in } \Theta(N)$</li>
+  <li>There are $\lg N$ terms in the sequence $1, 2, 4, 8, \cdots, N$</li>
+  <li>The number of nodes in a tree, $N$, is equal to $k^{h}$ where $k$ is the <em>branching factor</em> and $h$ is the <em>height</em> of the tree</li>
+  <li>All logarithms are proportional to each other by the Change of Base formula so we can express them generally as just $\log$.</li>
+</ul>
+
+<p>It's worth spending a little time proving each of these to yourself with a visual model!</p>
+
+
+<h4 id="deliverables">Deliverables</h4>
+
+
+<p>A quick recap of what you need to do to finish today's lab:</p>
+
+<p>-	Look through the <code>timing.Timer</code> class and look at the resulting graphs from timing the algorithms in <code>timing.Sorter.java</code> for different inputs. Answer the exploratory discussion questions. There is nothing to turn in for this part.</p>
+
+<p>-	Read through the content on asymptotic analysis (big-theta, O, and omega) focusing on how to handle logarithmic, iterative, and recursive algorithms.</p>
+
+<p>-	Complete the exercises in <code>quiz.RuntimeQuiz.java</code> and make sure they pass the autograder tests.</p>
+    </main></div>
+</body>
+</html>

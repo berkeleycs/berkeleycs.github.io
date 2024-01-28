@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project 2 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400italic,700" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/proj.css" rel="stylesheet" type="text/css">
+
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#introduction">Introduction</a></li>
+  <li><a href="index.html#notation">Notation</a></li>
+  <li><a href="index.html#commands">Commands</a></li>
+  <li><a href="index.html#output">Output</a></li>
+  <li><a href="index.html#your-task">Your Task</a></li>
+  <li><a href="index.html#staff-program">Staff Program</a></li>
+  <li><a href="index.html#testing">Testing</a></li>
+  <li><a href="index.html#checkpoint">Checkpoint</a></li>
+  <li><a href="index.html#extra-credit">Extra Credit</a></li>
+  <li><a href="index.html#advice">Advice</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Project 2: Tablut</header>
+        
+<center>
+"<em>Tafl emk ǫrr at efla....</em>"
+Jarl Rognvald Kali Kolsson
+</center>
+
+<p>[Revisions to the project spec since its release are <span class="updated">underlined</span>.]</p>
+
+
+<h2 id="introduction">Introduction</h2>
+
+
+<p>Tablut is one of the family of <em>tafl</em> (or <em>hnefatafl</em>) games: Nordic and Celtic
+strategy games played on checkered boards between two asymmetric armies.
+These are ancient games,
+possibly related to the Roman game <em>ludus latrunculorum</em>,
+that were generally displaced by chess in the 12th century.
+Tablut is a variant from Lapland (the northernmost region of Finland).
+The detailed rules of these games are generally disputed; tablut, having
+survived into the 1700s, is perhaps best documented (by none other than
+Carl Linnaeus, the fellow responsible for our state animal being known as
+<em>Ursus arctos californicus</em> and our state trees as
+<em>Sequoia sempervirens</em>  and <em>Sequoiadendron giganteum</em> in scientific circles).
+However, his account is itself incomplete and additional confusion resulted from
+the later mistranslation of his manuscript from Latin.  Therefore, any of you
+familiar with modern reconstructions of the
+game should not expect that our version will be identical to yours.</p>
+
+<p>Tablut is played on a 9x9 checkerboard between a set of 9 white pieces and 16
+black pieces.  The middle square is called the <em>throne</em> (or castle).
+One of the white pieces is the king, and the others, his
+guards, are known as <em>Swedes</em>. The white side wins if
+the king reaches one of the edges of the board.  The black pieces are known
+as <em>Muscovites</em> (referring to the Grand Duchy of Moscow).  Their aim is to
+capture the king before he reaches the edge of the board.
+<br/>
+
+<center>
+<img src="img/tablut1.png" alt="Game of Tablut Initial">
+<img src="img/tablut2.png" alt="Game of Tablut Move"></p>
+
+<blockquote><p><strong>Figure 1.</strong> On the left: a Tablut board showing the standard numbering of
+squares, and the initial placement of the pieces.
+On the right: the board that results after the three moves <code>i6&#x2d;g</code>, <code>d5&#x2d;7</code>,
+<code>i4&#x2d;g</code> (the last move is a capture).
+</center></p></blockquote>
+
+<p>All pieces move like chess rooks: any number of squares orthogonally 
+(horizontally or
+vertically).  Pieces may not jump over each other or land on top of another piece.
+No piece other than the king may land on the throne, although any piece may
+pass through it when it is empty. The black (Muscovite) side goes first.</p>
+
+<p>A piece other than the king is captured when, as a result of an enemy move
+<span class="updated">to an orthogonally adjacent square</span>,
+the piece is enclosed on two opposite sides (again orthogonally) by <em>hostile
+squares</em>.  A square is hostile if it contains an enemy piece, or if it is the
+throne square and is empty (that is, it is hostile to both white and black
+pieces).  The occupied throne is also hostile to white pieces when three of
+the four squares surrounding it are occupied by black pieces.
+Captures result only as a result of enemy moves;
+a piece may move so as to land between two enemy pieces without being
+captured.  A single move can capture up to three pieces.</p>
+
+<p>The king is captured like other pieces except when he is on the throne square
+or on one of the four squares orthogonally adjacent to the throne.  In that
+case, the king is captured only when surrounded on all four sides by hostile
+squares (of which the empty throne may be one).</p>
+
+<p>A side also loses when it has no legal moves on its turn, or if its move returns
+the board to a previous position (same pieces in the same places and the same
+side to move).  As a result, there are no drawn games.</p>
+
+
+<h2 id="notation">Notation</h2>
+
+
+<p>A square is denoted by a column letter followed by a row number (as in
+<code>e4</code>). Columns are enumerated from left to right with letters a through i.
+Rows are enumerated from the bottom to the top with numbers 1 through 9.
+An entire move then consists of the starting square, a hyphen, and 
+the ending row (if vertical) or column (if horizontal).
+Thus, <code>b3&#x2d;6</code> means "Move from b3 to b6" and <code>b3&#x2d;f</code> means "Move from b3 to f3."</p>
+
+
+<h2 id="commands">Commands</h2>
+
+
+<p>When running from the command line, the program will accept the following
+commands, which may be preceded by whitespace.</p>
+
+<ul>
+  <li><strong>new</strong>: End any game in progress, clear the board to its initial position,
+  and set the current player to black.</li>
+  <li>A move in the format described in <a href="index.html#notation">Notation</a>.</li>
+  <li><strong>seed</strong> <em>N</em>: If the AIs are using random numbers for move selection, this
+  command seeds their random-number generator with the integer <em>N</em>. Given
+  the same seed and the same opposing moves, an AI should always make the same
+  moves.  This feature makes games reproducible.</li>
+  <li><strong>auto</strong> <em>C</em>: Make the <em>C</em> player an automated player.
+  Here, <em>C</em> is "black" or "white", case-insensitive.</li>
+  <li><strong>manual</strong> <em>C</em>: Make the <em>C</em> player a human player (entering moves as
+  manual commands).</li>
+  <li><strong>limit</strong> <em>N</em>: Make <em>N</em> be the maximum number of moves that a
+  player may make during the current game.  A player loses if
+  the game has not ended by the time he must make his $(N+1)$st move.
+  The command is in error if either player has already made at least <em>N</em> moves.
+  The move limit is removed by a <strong>new</strong> command.
+  (A move limit is not a normal provision of Tablut; we've added it for testing
+  convenience so that we can test whether a program can find a forced win within
+  a given number of moves.)</li>
+  <li><p><strong>dump</strong>: Print the current state of the board in <strong><em>exactly</em></strong> the
+  following format:</p>
+
+<pre><code>===
+  &#x2d; &#x2d; &#x2d; B B B &#x2d; &#x2d; &#x2d;
+  &#x2d; &#x2d; &#x2d; &#x2d; B &#x2d; &#x2d; &#x2d; &#x2d;
+  &#x2d; &#x2d; &#x2d; &#x2d; W &#x2d; &#x2d; &#x2d; &#x2d;
+  B &#x2d; &#x2d; &#x2d; W &#x2d; &#x2d; &#x2d; B
+  B B W W K W W B B
+  B &#x2d; &#x2d; &#x2d; W &#x2d; &#x2d; &#x2d; B
+  &#x2d; &#x2d; &#x2d; &#x2d; W &#x2d; &#x2d; &#x2d; &#x2d;
+  &#x2d; &#x2d; &#x2d; &#x2d; B &#x2d; &#x2d; &#x2d; &#x2d;
+  &#x2d; &#x2d; &#x2d; B B B &#x2d; &#x2d; &#x2d;
+===</code></pre>
+
+  <p>Here, <code>K</code> denotes the king, <code>W</code> another white piece (Swede) and 
+  <code>B</code> a black piece (Muscovite).
+  You must not use the <code>===</code> lines for any other output).</p></li>
+  <li><strong>quit</strong>: Exit the program.</li>
+</ul>
+
+<p>Feel free any other commands you think might be nice.</p>
+
+
+<h2 id="output">Output</h2>
+
+
+<p>When an AI plays, it should print out each move that it makes using
+exactly the format</p>
+
+<pre><code> * a1&#x2d;4</code></pre>
+
+<p>(with asterisk shown).
+Do not print these lines out for a manual player's moves.</p>
+
+<p>When one side wins, the program should print out one of</p>
+
+<pre><code> * White wins.
+ * Black wins.</code></pre>
+
+<p>(also with periods) as appropriate.  Do not use the <code>*</code> character in any
+other output you produce.</p>
+
+<p>You may prompt a manual player for input using the form</p>
+
+<pre><code>...&gt;</code></pre>
+
+<p>where "..." may be any text.  The grading scripts will discard any text
+from the beginning of a line up to a <code>&gt;</code> character.</p>
+
+
+<h2 id="your-task">Your Task</h2>
+
+
+<p>Your job is to write a program to play Tablut.  To run it in text mode,
+use the command</p>
+
+<pre><code>java &#x2d;ea tablut.Main</code></pre>
+
+<p>to enter commands from the terminal or use</p>
+
+<pre><code>java &#x2d;ea tablut.Main INPUT</code></pre>
+
+<p>to feed it commands from file INPUT.</p>
+
+<p>The AI in your program should be capable of finding a win that is within 4
+moves.
+Experiment a bit to see what works.  The autograder will allow 3 minutes for
+a fully automated game.</p>
+
+<p>The GUI  is an optional (extra credit) part of this project.  We will
+actually do automatic testing only on the commands</p>
+
+<pre><code>java &#x2d;ea tablut.Main</code></pre>
+
+<p>and</p>
+
+<pre><code>java &#x2d;ea tablut.Main INPUT</code></pre>
+
+
+<h2 id="staff-program">Staff Program</h2>
+
+
+<p>The <code>staff&#x2d;tablut</code> program on the instructional machines runs our
+solution to the project.  This version has additional bells and
+whistles that you are <strong><em>not</em></strong> required to duplicate.  It is
+<strong><em>not</em></strong> the standard for this project, just as example of a
+solution.  In particular, your GUI (if you do it) need not look
+anything like ours.  The autograder will use this program in some of
+its tests to check your program's output.</p>
+
+
+<h2 id="testing">Testing</h2>
+
+
+<p>We have only provided a token <code>UnitTest</code> file; you can add additional
+unit test files and list them in <code>UnitTest</code> so that they all get run
+by</p>
+
+<pre><code>java &#x2d;ea tablut.UnitTest</code></pre>
+
+<p>(which is what <code>make check</code> does).</p>
+
+<p>We have provided two simple integration tests in the <code>testing</code> subdirectory.
+They are certainly not adequate to test your program.  Be warned, we will not
+run the autograder until near the deadline; <strong><em>DO NOT RELY ON THE AUTOGRADER FOR
+YOUR TESTING!</em></strong></p>
+
+<p>The integration test program, <code>test&#x2d;tablut</code>, feeds commands to one or two 
+running programs and passes appropriate moves from one to the other, allowing
+you to test your program and to test it against another program (such as the 
+staff version).
+To run <code>test&#x2d;tablut</code>, you'll use</p>
+
+<pre><code>python3 testing/test&#x2d;tablut TESTFILE&#x2d;1.in</code></pre>
+
+<p>to run <code>TESTFILE&#x2d;1.in</code> through your program and</p>
+
+<pre><code>python3 testing/test&#x2d;tablut TESTFILE&#x2d;1.in TESTFILE&#x2d;2.in</code></pre>
+
+<p>to run two programs simultaneously so that each one sends all of its AI's moves
+(such as "<code>*</code>&nbsp;<code>i4</code>&#x2011<code>g</code>"
+as described previously) to the other program.
+(Replace "TESTFILE" with the actual name of your test file.)</p>
+
+<p>Each <code>.in</code> and input file should start with a Unix-style command for
+running a program preceded by "<code>#*</code>", such as</p>
+
+<pre><code> #* java &#x2d;ea tablut.Main</code></pre>
+
+<p>(You will probably use just the command command above; 
+the autograder will sometimes
+replace it with an invocation of <code>staff&#x2d;tablut</code>.)
+The rest of the <code>.in</code> file is fed to this program as the standard
+input, except for lines that start with "<code>#*</code>" in the first column,
+which are special instructions to the testing script.</p>
+
+<ul>
+  <li>The command <code>#*time</code> <em>MOVE</em> <em>GAME</em> puts a time limit of <em>MOVE</em> seconds
+  on each move in a game and <em>GAME</em> seconds for one side's moves in an
+  entire game (i.e., an entire sequence of moves controlled
+  by one of the <code>move/win</code> commands below).</li>
+  <li>The command <code>#*move</code> means "wait for the program to output an AI move,
+  and then continue with
+  the script."  When used with the two-argument form of <code>test&#x2d;tablut</code>, it
+  also sends this
+  move as input to the other program.</li>
+  <li>The command <code>#*move/win</code> is intended for use when both players are AIs,
+  and means
+  "wait for the program to output a complete sequence of AI moves,
+  followed by "<code>* ... wins.</code>"
+  It does not print either the moves or the "win" message.</li>
+  <li>The command <code>#*move/win+</code> is the same as <code>#*move/win</code>, but also prints
+  the "<code>* ... wins.</code>" message.</li>
+  <li>The command <code>#*win+</code> waits for a "<code>* ... wins.</code>" message from the program
+  and prints it.</li>
+  <li>All lines that don't start with <code>#*</code> are sent to the program being tested.</li>
+</ul>
+
+<p>A few other commands apply only to the two-argument form of <code>test&#x2d;tablut</code>.
+They are intended to
+allow two programs to play each other.</p>
+
+<ul>
+  <li>The command <code>#*remote move/win</code> means "Wait for an AI move from the other
+  program, give it to
+  this program, then execute a <code>#*move</code> command. Repeat
+  until one side sends a win message. Do not print the moves or win message.</li>
+  <li>The command <code>#*remote move/win+</code> is the same as <code>#*remote move/win</code>,
+  but prints the "win" message.</li>
+</ul>
+
+<p>The idea with these two commands is that one of the two scripts will,
+at a certain point,
+contain the commands</p>
+
+<pre><code>#*move
+#*remote move/win</code></pre>
+
+<p>and the other will contain</p>
+
+<pre><code>#*remote move/win</code></pre>
+
+<p>so that the first sends a move from its AI to the other program, which
+then waits for a response
+from its AI to send back, and so forth.</p>
+
+<p>For the <code>remote</code> commands, both programs should generate "wins" messages,
+and <tt>test&#x2011;tablut</tt> will check
+that they are the same.</p>
+
+<p>The <code>test&#x2d;tablut</code> script throws out any other output from either program
+except for properly
+formatted board dumps, as are supposed to be produced by the <strong>dump</strong> command
+described previously.   You can see all the output by running it with</p>
+
+<pre><code> python3 testing/test&#x2d;tablut &#x2d;&#x2d;verbose TESTFILE&#x2d;1.in</code></pre>
+
+<p>or</p>
+
+<pre><code> python3 testing/test&#x2d;tablut &#x2d;&#x2d;verbose TESTFILE&#x2d;1.in TESTFILE&#x2d;2.in</code></pre>
+
+<p>which will show all the commands sent to each program and all their output.</p>
+
+<p>The <code>test&#x2d;tablut</code> program will report an error if a program hangs or
+times out, or if it exits abnormally (with an exception or an exit
+code other than 0).  Finally, if there is a file <code>TESTFILE&#x2d;1.std</code> or
+<code>TESTFILE&#x2d;2.std</code>, <span class="updated"><code>make check</code></span> will check it against the output 
+from the program for</change>
+<code>TESTFILE&#x2d;1.in</code> (likewise for <code>TESTFILE&#x2d;2.std</code> against the output for
+<code>TESTFILE&#x2d;2.in</code>);
+<span class="updated"><code>make check</code> uses on the script <code>testing/tester.py</code> to do this comparison.</span></p>
+
+
+<h2 id="checkpoint">Checkpoint</h2>
+
+
+<span class="updated">By <strong>Monday, November 11 (11/11)</strong>, if your implementation is </span>
+<span class="updated"> able to pass a staff integration test, you will receive <strong>3 extra points </strong></span>.
+<span class="updated">The test will cover the following: </span>
+
+<ol>
+  <li><span class="updated">Correct program compilation;</span></li>
+  <li><span class="updated">Board initialization;</span></li>
+  <li><span class="updated">Non-capturing moves;</span></li>
+  <li><span class="updated">Properly handling illegal moves (i.e., not changing the board contents).</span></li>
+</ol>
+
+<span class="updated">Not all of this behavior is covered in the provided tests, so you are</span>
+<span class="updated">encouraged to write your own. </span>
+
+<span class="updated">Submit your checkpoint in the <tt>proj2</tt> directory as <tt>proj2a</tt>.</span>
+
+
+<h2 id="extra-credit">Extra Credit</h2>
+
+
+<p>First get your program working, and then, if you feel the urge,
+try the extra-credit GUI (Graphical User Interface).
+If you do, the option</p>
+
+<pre><code>java &#x2d;ea tablut.Main &#x2d;&#x2d;display</code></pre>
+
+<p>should create the GUI.  If you don't implement the GUI, this option should
+cause your program to exit with a non-zero code via <code>System.exit(2)</code>.
+Your GUI does <strong><em>not</em></strong> have to look at all like ours.
+<span class="updated">This will be worth up to 3 points.</span></p>
+
+
+<h2 id="advice">Advice</h2>
+
+
+<p>Your final work must be your own, but especially on this project,
+feel free to get together with other
+students to discuss ideas and plan strategies.  Of course, you should
+always feel free to consult your TA or me.</p>
+
+<p>The board is an obvious place to start.  We have provided suggestions
+for methods that you can use if you want, but you are not required to
+do so. We have structured the skeleton so that the different kinds of
+player (ordinary human at the keyboard using text commands, AI, or
+human using a GUI) are represented as different subtypes of a type
+<code>Player</code>, an example of how using OOP can cut down on pervasive
+conditional tests for types of player.</p>
+    </main></div>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 13 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#a-introduction-to-our-maze-solver">A. Introduction to our Maze Solver</a></li>
+  <li><a href="index.html#b-breadth-first-search">B. Breadth First Search</a></li>
+  <li><a href="index.html#c-depth-first-search-amp-cycle-check">C. Depth First Search &amp; Cycle Check</a></li>
+  <li><a href="index.html#d-dijkstra-s-algorithm">D. Dijkstra's Algorithm</a></li>
+  <ul>
+    <li><a href="index.html#runtime">Runtime</a></li>
+  </ul>
+  <li><a href="index.html#e-a-optional-but-worth-a-read">E. A* (optional, but worth a read)</a></li>
+  <li><a href="index.html#submission">Submission</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 13: Graphs</header>
+        
+<p>The graphs is a powerful and fundamental data abstraction in computer
+science. It is defined to be a set of vertices and edges and can be
+used to represent many things, such as network connections,
+dependencies, image compositions, state machines, and artificial
+neural networks. It is <em>critical</em> for you understand graphs if you
+want to pursue a future in computer science<-->whether that's in
+research or industry. We will explore some of the most fundamental
+graph algorithms today, namely <em>breadth first search</em> (BFS), <em>depth
+first search</em> (DFS), <em>Dijkstra's algorithm</em>, and the <em>A star
+algorithm</em> (A*).</p>
+
+
+<h2 id="a-introduction-to-our-maze-solver">A. Introduction to our Maze Solver</h2>
+
+
+<p>In this lab, we'll explore how a few graph algorithms behave in the
+context of mazes, like the one shown below.  We will only be
+using this maze visualization with a select few of the graph
+algorithms (BFS, DFS, and A*, not Dijkstra's; we will work with
+Dijkstra's algorithm in a different way for this lab).</p>
+
+<center><img src="blankmaze.png" alt="blank maze" style="width: 300px;"/></center>
+
+<p>One way to represent a maze is as an undirected graph. The vertices of
+such a graph are shown below, with one dimensional (vertex number)
+coordinates on the left version and (X, Y) coordinates on the right
+version. If there is no wall between two adjacent vertices, then the
+corresponding graph has an undirected edge between the vertices. For
+example, adj(11) would be an iterable containing the integers 12 and
+16.</p>
+
+<center>
+<img src="mazeNumbering.png" alt="mazeNumbering" style="width: 300px;"/>
+<img src="mazeNumberingByXY.png" alt="mazeNumberingByXY" style="width: 300px;"/>
+</center>
+
+<p>Following the representation method dictated above, both of these
+mazes could be represented as the graph shown below, where each red
+circle represents a vertex (also called nodes) and each black line
+represents an undirected edge between two vertices.</p>
+
+<center>
+<img src="mazeGraph.png" alt="mazeGraph" style="width: 300px;"/>
+</center>
+
+<p>In this lab, you'll implement a few key graph algorithms using the
+provided <code>Maze</code> class, which has the following methods of interest:</p>
+
+<pre><code>	<b>public int N()</b>: Size of the maze [mazes are N x N]
+	<b>public int V()</b>: Total number of vertices in the maze
+	<b>public Iterable<Integer> adj(int v)</b>: Returns the neighbors of v
+	<b>public int toX(int v)</b>: Returns the x coordinate of vertex v
+	<b>public int toY(int v)</b>: Returns the y coordinate of vertex v
+	<b>public int xyTo1D(int x, int y)</b>: Returns the vertex number of x, y</code></pre>
+
+<p>We've provided <code>MazeDepthFirstPaths.java</code>, a version of <em>depth first
+paths</em> adapted for use with mazes. Later in the lab, we will ask you
+to implement <em>breadth first paths</em> and a <em>cycle detection algorithm</em>.
+For those of you who want a deeper understanding of graph algorithms,
+we've also provided an optional challenge to implement the <em>A*
+shortest paths algorithm</em>. For this particular section of the lab, you
+will be required to modify the following files:</p>
+
+<ul>
+  <li><code>MazeBreadthFirstPaths.java</code>: Uses BFS to find all paths from a given
+  source, terminating as soon as the target vertex is observed.</li>
+  <li><code>MazeCycles.java</code>: Searches for cycles in the maze. 
+  If a cycle is detected, the algorithm terminates.</li>
+</ul>
+
+<p>The following file is optional:</p>
+
+<ul>
+  <li><code>MazeAStarPath.java</code>: Searches for the shortest path from source to a target
+  using A*, terminating when the target is observed.</li>
+</ul>
+
+<p>These maze solvers should be subclasses of the abstract <code>MazeExplorer</code>
+class, which has the following fields and methods:</p>
+
+<pre><code>	<b>public boolean[] marked</b>: Locations to mark in blue
+	<b>public int[] distTo</b>: Distances to draw over the Maze
+	<b>public int[] edgeTo</b>: Edges to draw on Maze
+	<b>public Maze maze</b>: The maze being solved
+	<b>public void announce()</b>: Call whenever you want the drawing updated
+	<b>public solve()</b>: Solves the given Maze problem</code></pre>
+
+<p>The <code>Maze</code> class has special functionality built in so that it can see
+your <code>MazeExplorer</code>'s public variables. Specifically, whenever you
+call <code>announce</code>, it will draw the contents of your <code>MazeExplorer</code>'s
+<code>marked</code>, <code>distTo</code>, and <code>edgeTo</code> arrays. Make sure to call the
+<code>announce</code> method any time you want the drawing to be updated.</p>
+
+<p>As an example, try compiling and running
+<code>TrivialMazeExplorerDemo.java</code> in IntelliJ. Open up the
+<code>TrivialMazeExplorer.java</code> and <code>TrivialMazeExplorerDemo.java</code> files to
+understand what's going on.</p>
+
+<p>If you would like to compile these files without IntelliJ, simply run
+<code>make</code> or <code>javac &#x2d;g *.java</code> in the lab directory with all the Java files.
+To run a particular demo, say <code>TrivialMazeExplorerDemo</code>, execute <code>java
+TrivialMazeExplorerDemo</code> in the command line.</p>
+
+<p>As a more complex example, try compiling and running <code>DepthFirstDemo</code>.
+This code was adapted from the 
+<a href="http://algs4.cs.princeton.edu/41undirected/DepthFirstPaths.java.html">DepthFirstPaths class</a>.</p>
+
+<p>Before moving to the next section, try tweaking the parameters of the
+maze by editing the <code>maze.config</code> file. There are three different
+types of maze (<code>SINGLE_GAP</code>, <code>POPEN_SOLVABLE</code>, and <code>BLANK</code>) to choose
+from. A "%" sign at the beginning of a line in the config file comments
+it out. Feel free to play around with all different types by changing
+which <code>MazeType</code>s are commented out.</p>
+
+
+<h2 id="b-breadth-first-search">B. Breadth First Search</h2>
+
+
+<p>BFS and DFS are very similar. BFS uses a queue (FIFO) to store the
+fringe, whereas DFS uses a stack (FILO). Naturally, programmers often
+use recursion for DFS, since we can take advantage of and use the
+implicit recursive call stack as our fringe. For BFS? There are no
+implicit structures that we can use. We must use a loop to simulate
+the expansion of the fringe.</p>
+
+<p>You will need to use a FIFO queue for this part. Luckily, Java's
+powerful library already has a [<code>Queue</code> interface]<a href="https://inst.eecs.berkeley.edu/~cs61b/fa19/materials/lab/lab13/a&#32;sub-interface&#32;of&#32;the&#32;almighty&#32;`Collection`&#32;interface"></a> built in.
+Read the interface documentation carefully. <strong>Hint:</strong> see if you can
+find a familiar <code>Collection</code>-implementing class that also implements
+this <code>Queue</code> interface. Feel free to use any of them.</p>
+
+<p>You'll now write a class <code>MazeBreadthFirstPaths.java</code> that extends
+<code>MazeExplorer</code>. It is highly recommended you look at the code in
+<code>MazeDepthFirstPaths</code> and use it as inspiration. When you compile and
+run <code>BreadthFirstDemo.java</code>, you should see your algorithm crawl the
+graph, locating the shortest path from position (1, 1) to (N, N),
+stopping as soon as the (N, N) position is found.</p>
+
+<p>You can also use
+<a href="http://algs4.cs.princeton.edu/41undirected/BreadthFirstPaths.java.html">BreadthFirstPaths</a>
+as inspiration, as well as this <a href="http://youtu.be/nCg1qsqIVPY">video</a>
+created by Professor Hug showcasing the expected behavior of each
+class (though there's a small bug in <code>MazeBreadthFirstPaths</code> that he
+pointed out during the video).</p>
+
+
+<h2 id="c-depth-first-search-amp-cycle-check">C. Depth First Search &amp; Cycle Check</h2>
+
+
+<p>In the world of graph theory, there exist many cycle detection
+algorithms. For example, the union-find algorithm can detect cycle in
+$O(E \cdot \lg V)$ time. For today's exercise, we will use DFS to detect
+cycles in this maze (an undirected graph) in $O(V + E)$ time. For every
+visited vertex <code>v</code>, if there is an adjacent <code>u</code> such that <code>u</code> is
+already visited and <code>u</code> is not parent of <code>v</code>, then there is a cycle in
+graph.</p>
+
+<p>For this part of the lab, you'll write a cycle detection algorithm.
+When you compile and run <code>CyclesDemo</code>, you should see your algorithm
+crawl the graph. If it identifies any cycles, it should connect the
+vertices of the cycle using purple lines (by setting values in the
+<code>edgeTo</code> array and calling <code>announce()</code>) and terminate immediately.
+The vertices of the part of the graph that has been traversed to find
+the cycle should also be drawn, but there should be no edges
+connecting the part of the graph that doesn't contain a cycle. <strong>The
+only edges that should be drawn are the ones connecting the cycle.</strong>
+Consider using another data structure to keep track of edges until a
+cycle is detected and <code>edgeTo</code> is updated in order to avoid
+displaying edges that are not part of the cycle. You
+can change the maze type by making edits to your <code>maze.config</code> file,
+allowing you to test on a maze with cycles.</p>
+
+<p>You can use either recursion or a <code>Stack</code>
+class for DFS. If you decide to go with latter, you need to look up
+the Java <code>Stack</code> class, or use some linear structure in a FILO
+fashion.</p>
+
+
+<h2 id="d-dijkstra-s-algorithm">D. Dijkstra's Algorithm</h2>
+
+
+<p>Dijkstra's algorithm is useful when we want to find the shortest paths
+from a starting vertex to all vertices in the graph, effectively
+finding the 'shortest paths tree' (SPT).</p>
+
+<p>You will be implementing Dijkstra's algorithm in the file
+<code>Graph.java</code>. Take a look at that class and familiarize yourself with
+how the graph is being represented. For this method, assume that each
+edge in the graph has a weight field that is a positive integer, which
+will be represented by the <code>Edge</code> object's <code>edgeWeight</code> field.</p>
+
+<p>For this exercise, we will not ask you to reconstruct the paths in
+your algorithm. However, implementing this functionality is good
+practice and may be something you want to try out on your own!</p>
+
+<p><strong>Hint 1:</strong> At a certain point in Dijkstra's algorithm, you have to
+change the value of nodes in the fringe. Java's priority queue does
+not support this operation, unfortunately.  This is understandable; they are
+using a heap to implement the queue, and finding an arbitrary element in a heap
+in order to update its position is expensive.  Instead, we can simply use
+a <code>TreeSet</code>, which supports finding and removing the smallest element
+in $\lg N$ time as well as removing and adding items in
+$\lg N$ time. Thus, you can remove an element from the queue,
+change its priority, and then re-insert it (in that order).</p>
+
+<p><strong>Hint 2:</strong> Adding the vertices to our priority queue fringe directly
+won't be enough. Our vertices are Integers, so our priority queue will
+order them by their natural ordering. Is this what we want? If not, is
+there a way we can change how to order the items in the queue?  (Be careful
+here.  In order for <code>TreeSet</code> to work, the ordering relation must never
+give two items equal priority.  Sets do not have duplicates, and <code>TreeSet</code>
+will throw out items that are given equal ordering.  Fortunately, it doesn't
+matter which of two nodes with equal weight gets chosen as smaller, so you
+can arrange to order first by weight and break ties by choosing the
+smaller-numbered node.)</p>
+
+
+<h3 id="runtime">Runtime</h3>
+
+
+<p>When implemented properly using a binary heap, Dijkstra's algorithm
+should run in
+$O((|V| + |E|) \cdot \log |V|)$
+time. This is because at
+all times our heap size remains a polynomial factor of
+$|V|$
+(even with lazy removal, our heap size never exceeds
+$|V|^2$),
+and we make at most
+$|V|$
+equeues and
+$|E|$
+updates requiring heap operations.</p>
+
+<p>For connected graphs, the runtime can be simplified to
+$O(|E| \cdot \log |V|)$,
+as the number of edges must be at least
+$|V|-1$.
+Using
+alternative implementations of the priority queue can lead to
+increased or decreased runtimes.</p>
+
+
+<h2 id="e-a-optional-but-worth-a-read">E. A* (optional, but worth a read)</h2>
+
+
+<p>In graph theory, determining the shortest path between two nodes is
+one of the most common and important questions asked. This problem has
+many real world examples, with shortest route between two cities as
+one of the most overused in computer science. Dijkstra's algorithm is
+the most basic shortest path algorithm and can find the shortest path
+between two points assuming no negative edge weights. Dijkstra's is
+very similar to BFS, for we can replace the queue in BFS with a
+priority queue (with some more minor tweaks) and end up with
+Dijkstra's!</p>
+
+<p>However, Dijkstra's algorithm is a uniform-cost search. If we want to
+find the shortest path from SF to NYC, Dijkstra's will expand in all
+directions centered at SF, meaning the traversal will reach Seattle
+before even getting close to the East coast. It can explore in the
+wrong direction and end up wasting time doing unnecessary work.
+However, we can make it "smarter" by giving it a <em>heuristic</em>.</p>
+
+<p>Introducing A* ("A star") search! A* is the state-of-the-art
+shortest path finding algorithm (given that the programmer provides a
+good heuristic, such as the Manhattan distance to the destination).
+Let's go back to the SF to NYC path finding analogy: with this new
+heuristic, A* will prioritize moving to the East first, since our
+heuristic will tell it that moving straight up toward Seattle (going
+to Canada?) is bad compared to moving toward Denver (closer to NYC).</p>
+
+<p>Here is a <a href="https://qiao.github.io/PathFinding.js/visual/">nice visualization</a> for BFS, DFS, Dijkstra's algorithm,
+and A* algorithm. We highly recommend playing around with it to
+improve your understanding of these most basic graph algorithms.</p>
+
+<p>For this part of the lab, you'll implement the A* algorithm. When you
+compile and run <code>AStarDemo</code>, you should see your algorithm crawl the
+graph, seeking the shortest path from (1, 1) to (N, N). Unlike BFS,
+the algorithm should take into account the target vertex.</p>
+
+<p>For your heuristic h(v), we recommend that you use the <a href="http://en.wikipedia.org/wiki/Taxicab_geometry">Manhattan
+distance</a>, which can be simply expressed as:</p>
+
+<pre><code>    Math.abs(sourceX &#x2d; targetX) + Math.abs(sourceY &#x2d; targetY);</code></pre>
+
+<p>Experiment with different graph types and heuristics to see how they behave.</p>
+
+
+<h2 id="submission">Submission</h2>
+
+
+<ul>
+  <li>You need to submit <code>MazeBreadthFirstPaths.java</code>, <code>MazeCycles.java</code>,
+  and <code>Graph.java</code> with Dijkstra's algorithm implemented.</li>
+  <li><code>MazeAStarPath.java</code> is optional.</li>
+  <li>Make sure to run <code>BreadthFirstDemo</code> and <code>CyclesDemo</code> and that your code
+  functions correctly before you submit!</li>
+</ul>
+    </main></div>
+</body>
+</html>

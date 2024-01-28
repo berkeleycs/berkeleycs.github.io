@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submitting Bug Reports and Help Requests with Git-bug | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../index.html"><div class="navitem">Main</div></a>
+        <a href="../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="gitbug.html#navigation">Navigation</a></li>
+  <li><a href="gitbug.html#a-how-not-to-report-a-bug">A. How Not to Report a Bug</a></li>
+  <li><a href="gitbug.html#b-using-git-bug">B. Using Git-bug</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Submitting Bug Reports and Help Requests with Git-bug</header>
+        <div class="due-date">Author: P. N. Hilfinger</div>
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="gitbug.html#a-how-not-to-report-a-bug">How Not to Report a Bug</a></li>
+  <li><a href="gitbug.html#b-using-git-bug">Using Git-bug</a></li>
+</ul>
+
+
+<h2 id="a-how-not-to-report-a-bug">A. How Not to Report a Bug</h2>
+
+
+<p>Every now and then, you will inevitably run into a problem with an
+assignment that you can't figure out.  If it is simply a matter of not
+understanding some aspect of Java or some quirk of our support
+software, you can ask a question on Piazza. But when it involves the
+code you have written for an assignment or project, Piazza is just not
+the way to go.  First, you'll be posting information (such as your
+answers) that is intended to be kept to yourself.  Second, Piazza just
+isn't cut out for posting large pieces of code in a form that others
+can easily understand.</p>
+
+<p>In addition, there is the question of just what constitutes a proper bug report.
+Here, for example, is a (redacted) Piazza post from a student:</p>
+
+<blockquote><p>I'm trying to use HW0 for my java file and class name but it seems
+like I cannot compile (I know how to get to this point and I've
+passed tests using other names). I'm wondering why HW0.java
+with a class named HW0 did not work.</p></blockquote>
+
+<p>Well, we can tell that the student had a compilation problem of some sort, but
+we can't tell from this:</p>
+
+<ul>
+  <li>What precisely was in HW0.java.</li>
+  <li>What command was used to compile it.</li>
+  <li>From what directory that command was issued.</li>
+  <li>Where HW0.java was relative to that directory.</li>
+  <li>What error message(s) resulted.</li>
+</ul>
+
+<p>In short, no rational person would ever expect anyone to be able to answer this
+question!  In fact, the issues listed above are not exhaustive.  One might need
+to know.</p>
+
+<ul>
+  <li>What version of Java was being used.</li>
+  <li>On what operating system.</li>
+  <li>What the CLASSPATH was.</li>
+</ul>
+
+<p>and so on.</p>
+
+<p>Nor is this example the worst we've seen.  There are many reports
+that amount simply to "Why does my program not work?" where we
+can't even tell what "doesn't work" means (Doesn't compile?  Gets an exception
+when executed?  Produces the wrong answer?).</p>
+
+<p>Sometimes, a student will attempt to be, in effect, <em>too</em> helpful.
+Typically, this involves posting a carefully trimmed snippet of code
+that he assumes is the source of the problem, or giving a blow-by-blow account
+of various things tried in order to find or fix the problem.  Again,
+we find in general
+that such attempts almost always manage to leave out the vital details that
+are actually needed to answer the question.</p>
+
+
+<h2 id="b-using-git-bug">B. Using Git-bug</h2>
+
+
+<p>To make the process of bug reporting more productive, we've developed a
+procedure that (we hope) makes it easy to get us all the information we need
+to address your problems with labs, homeworks, and projects.   First, to make
+sure that your report includes all the source code we need, we have added
+a hook to the Git repository you use for managing and submitting your work
+that allows you to label certain commits as "buggy".  By tagging
+and submitting an entire
+commit, you are much less likely to leave out the important (i.e., erroneous)
+parts of your code.</p>
+
+<p>The code alone, however, is not enough.  We must also know what problem you
+are having with it and&mdash;most importantly&mdash;how we can reproduce the problem
+in order to see it ourselves.  This in turn means at least telling us
+<em>exactly</em> what commands you enter to compile and run the program, what results
+you see, and how they differ from the results you expect.</p>
+
+<p>To make this process convenient, we've developed a Python 3 script
+called <code>git&#x2d;bug</code>, which is available on the instructional machines, and which
+you can also import to your home computer and run there.  To use it, first
+make sure that you have committed (via git) all your current work so that we
+see what you see.  The command <code>git status</code> should report no untracked files or
+uncommitted changes.   Be sure to include any test input files you use
+(yes, testing files should also be part of your repository).</p>
+
+<p>Now create a file with your favorite editor (let's call it <code>error.txt</code>
+here).  containing the other data we need to understand your issue.
+Cut and paste <a href="gitbug-template.txt">this template</a> as a guide for
+what to include.  The file does not have to be in your repository.</p>
+
+<p>Finally, submit your bug with</p>
+
+<pre><code>  git&#x2d;bug ASSGN ERROR&#x2d;FILE</code></pre>
+
+<p>replacing <code>ASSGN</code> with the name of the assignment (e.g., <code>hw0</code>) and
+<code>ERROR&#x2d;FILE</code> with the name of the file you created above (e.g., <code>error.txt</code>).
+Optionally, you can leave off these two command-line arguments and the
+script will prompt you for them.  If you are not on the instructional machines,
+you are likely to have to run <code>git&#x2d;bug</code> explicitly with Python, as in</p>
+
+<pre><code>  python3 &lt;directory containing git&#x2d;bug script&gt;/git&#x2d;bug ASSGN ERROR&#x2d;FILE</code></pre>
+
+<p>or</p>
+
+<pre><code>  python &lt;directory containing git&#x2d;bug script&gt;/git&#x2d;bug ASSGN ERROR&#x2d;FILE</code></pre>
+
+<p>depending on what Python3 is called on your machine.</p>
+    </main></div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 10 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#a-intro">A. Intro</a></li>
+  <li><a href="index.html#b-debugging">B. Debugging</a></li>
+  <ul>
+    <li><a href="index.html#a-review-of-debugging-tools">A Review of Debugging Tools</a></li>
+    <li><a href="index.html#exercise-debugging-an-implementation-of-minimax">Exercise: Debugging an Implementation of Minimax</a></li>
+    <li><a href="index.html#exercise-a-debugging-mystery">Exercise: A Debugging Mystery</a></li>
+    <li><a href="index.html#exercise-sortedlist-helper">Exercise: SortedList™ Helper</a></li>
+    <li><a href="index.html#exercise-plumbum-beta">Exercise: Plumbum|Beta</a></li>
+    <ul>
+      <li><a href="index.html#sparseintvector">SparseIntVector</a></li>
+      <li><a href="index.html#swizzler">Swizzler</a></li>
+      <li><a href="index.html#listutilities-filter">ListUtilities.filter</a></li>
+    </ul>
+  </ul>
+  <li><a href="index.html#c-submission">C. Submission</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 10: Debugging: The Sequel</header>
+        
+<h2 id="a-intro">A. Intro</h2>
+
+
+<p>Today, we will go over how to use some of the more powerful debugger functionalities. Your job will be to debug a variety of buggy classes, primarily using a debugger.</p>
+
+
+<h2 id="b-debugging">B. Debugging</h2>
+
+
+
+<h4 id="a-review-of-debugging-tools">A Review of Debugging Tools</h4>
+
+
+<p>If you're still not familiar with debuggers, please take the time to review their documentation. You have a variety of options to choose from, but the two most popular debuggers are listed below.</p>
+
+<ul>
+  <li><a href="https://www.jetbrains.com/help/idea/debugging.html">IntelliJ</a></li>
+  <li><a href="http://www-inst.eecs.berkeley.edu/~cs61b/fa08/docs/gjdb.pdf">gjdb from command line</a></li>
+</ul>
+
+<p>In IntelliJ, in addition to traditional breakpoints you can also have conditional breakpoints. Understanding how to use them will be useful for this lab.</p>
+
+
+<h4 id="exercise-debugging-an-implementation-of-minimax">Exercise: Debugging an Implementation of Minimax</h4>
+
+
+<p>Now we'll take a closer look at a variation of the Minimax algorithm we saw in lecture. Consider the game Top-Bottom-Draw, wherein two players take turns drawing cards from the top or bottom of a deck. Player A's goal is to maximize her total score and Player B's goal is to minimize Player A's score.</p>
+
+<p>Assume both players are playing optimally and know the order of all the cards in the deck. If Player A goes first, what is the maximum score she can achieve?</p>
+
+<p>Player A only has two options: take the bottom card or take the top card. Her best choice is to take the maximum(value of top card + best score on deck after Player B takes a turn on deck with top card removed, value of bottom card + best score on deck after Player B takes a turn on deck with bottom card removed). Player B is playing to minimize Player A's score, so we can assume that he takes the minimum(Player A's best score on deck with top card removed, Player A's best score on deck with bottom card removed). Do you see why? If not, discuss the problem with a neighbor and try writing out a few examples.</p>
+
+<p>This is what we want to achieve, but the code in <code>TopBottomDraw.java</code> is not working! Use your debugger of choice to find the error.</p>
+
+
+<h4 id="exercise-a-debugging-mystery">Exercise: A Debugging Mystery</h4>
+
+
+<p>An important skill to learn is how to exhaustively debug. When done properly, debugging should allow you to rapidly narrow down where a bug might be located, even when you are debugging code you don't fully understand.</p>
+
+<p>Your company, Flik Enterprises, has released a fine software library called Flik.java that is able to determine whether two Integers are the same or not.</p>
+
+<p>You receive an email from someone named "Horrible Steve" who describes a problem they're having with your library:</p>
+
+<pre><code>&quot;Dear Flik Enterprises,
+
+Your library is very bad. See the attached code. It should print out 500 but actually it&#x27;s printing out 128.
+
+(attachment: HorribleSteve.java)&quot;</code></pre>
+
+<p>Using you choice of debugger, figure out whether the bug is in Horrible Steve's code or in Flik Enterprise's library.</p>
+
+<p>Once you find the bug, fix it. You might find conditional breakpoints useful for this exercise.</p>
+
+
+<h4 id="exercise-sortedlist-helper">Exercise: SortedList™ Helper</h4>
+
+
+<p>After the embarrassing incident in the previous part, Flik Enterprises rebranded itself as Flik Enterprises Corp, and sought to clear its name by releasing a new, improved library. This library allows for easy insertion and maintenance of sorted lists -- that is, lists whose elements are sorted in increasing order.</p>
+
+<p>The Flik Enterprises Corp issued a press release assuring the public that this library was 100% bug free: after all, it ships with JUnit tests, and the tests pass! However, an anonymous whistleblower involved in the development of <em>SortedList™ Helper</em> tells you that they fear the provided tests are incomplete, and the library isn't so bug-free after all...</p>
+
+<p>1.	Add statements to the <code>testInsertIntoSortedList</code> test in <code>SortedListTester</code> to more thoroughly test the behavior of <code>SortedListHelper#insertIntoSortedList</code>. Feel free to use <code>SortedListHelper#isListSorted</code> in your test. 
+	Hint: edit the <code>@Test</code> annotation above your test into <code>@Test(timeout=1000)</code> to impose a time limit of 1000 milliseconds on your test.</p>
+
+<p>2.	Is <code>insertIntoSortedList</code> correct? If not, find and fix the bug.
+	Hint: if the code is taking an unusually long time to complete, run the code in Debug mode, and click the blue 'pause' button to arbitrarily suspend the execution of your program, allowing you to more easily figure out what's taking so long.</p>
+
+
+<h4 id="exercise-plumbum-beta">Exercise: Plumbum|Beta</h4>
+
+
+<p>After the demise of Flik Enterprises Corp in the previous part, you decide to leave the company and start your own software company, specializing in mathematical software.</p>
+
+<p>Your first product is Plumbum|Beta, a computer algebra system (CAS) written in Java.</p>
+
+
+<h5 id="sparseintvector">SparseIntVector</h5>
+
+
+<p>One of your software engineers submits an initial version of the SparseIntVector class (along with a SparseIntVectorTest) for review. To your dismay, you find that the provided tests don't pass.
+Note: a sparse vector is a vector (i.e. 1D ordered list of numbers) that contains very few non-zero elements.</p>
+
+<p>Ignoring the fact that your engineer submitted code which clearly doesn't work, please fill in the static variables in <code>PlumbumBetaAnswers</code> with your answers to the following questions as you find and fix the bugs in the code. You should only modify existing lines or replace the entire contents of a line marked <code>// replace this comment with something?</code>.</p>
+
+<ol>
+  <li>Start by running the provided test, which fails with an exception.
+  A. What is the name of the exception thrown?
+  B. Which line (in the format <code>SourceFile.java:239</code> for an exception thrown on line 239 of SourceFile.java) is the exception thrown by?
+  C. Is the line in the stack trace corresponding to the method which threw the exception on the top or bottom (of the stack trace)? Answer "top" or "bottom".</li>
+  <li>Now fix the first bug. In one to two sentences, describe the cause of the bug.</li>
+  <li>Run the tests again. Unfortunately, there's another bug. Find and fix this bug.
+  A. Which line (in the same format as above) contained the bug?
+  B. Describe the bug in a single phrase.
+  C. Which line (in the same format as above) called the method that contained the bug? Hint: look at the stack trace thrown by the second exception.</li>
+</ol>
+
+
+<h5 id="swizzler">Swizzler</h5>
+
+
+<p>Now, you want to add <a href="https://en.wikipedia.org/wiki/Swizzling_(computer_graphics)">swizzling</a> functionality to Plumbum|Beta.</p>
+
+<p>Swizzling is an operation that reorders the elements of a vector (or list), given a list of indices into the list.</p>
+
+<p>For example, the list <code>[2, 4, 6, 8, 10]</code> may be swizzled with the list of indices <code>[0, 1, 2, 0, 0, 4]</code>, producing the output array <code>[2, 4, 6, 2, 2, 10]</code>.</p>
+
+<p>Each element <code>i</code> in the index arrays corresponds to an element in the output array, copying the <code>i</code>-th element of the input array.</p>
+
+<p>However, all of your engineers were busy, so you decided to hire an outside software firm to write the <code>Swizzler</code> class for you.  Unfortunately, the <code>Swizzler</code> class you commissioned does not work.</p>
+
+<p>Find the bug, and fix the code so that the tests pass.</p>
+
+
+<h5 id="listutilities-filter">ListUtilities.filter</h5>
+
+
+<p>Finally, you want to create a ListUtilities class for internal use. This class will provide several helpful utility methods for working on lists which will be used throughout the Plumbum|Beta codebase.</p>
+
+<p>You start by creating <code>ListUtilities.filter</code>, a method that takes an input list and a predicate (a function that takes a single argument and returns a boolean).</p>
+
+<p>The intended functionality is for <code>filter</code> to remove all of the elements from the input list that don't satisfy the predicate (that is, <code>predicate(element)</code> returns false).</p>
+
+<p>Despite this simple functionality (and short and simple implementation!), the <code>filter</code> method is buggy.</p>
+
+<p>As usual, find the bug and fix the code!</p>
+
+
+<h2 id="c-submission">C. Submission</h2>
+
+
+<p>Please submit all of the Java files in the lab.</p>
+    </main></div>
+</body>
+</html>

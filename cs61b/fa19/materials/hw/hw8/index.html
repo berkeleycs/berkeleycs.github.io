@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework 8 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-union-find">A. Union-Find</a></li>
+  <li><a href="index.html#b-minimum-spanning-trees">B. Minimum Spanning Trees</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Homework 8: Graphs</header>
+        
+<p>As with other homeworks, you may not need to pass all tests for a full score. 
+The assignment can be submitted in the usual fashion and is due at <strong>11:59pm</strong> on <strong>Wednesday, November 27th</strong>.</p>
+
+
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-union-find">Union-Find</a></li>
+  <li><a href="index.html#b-minimal-spanning-trees">Minimum Spanning Trees</a></li>
+</ul>
+
+
+<h2 id="a-union-find">A. Union-Find</h2>
+
+
+<p>Consider the contiguous set of integers $1$ to $V$. Each integer is part of some partition.
+Initially, there are $V$ partitions, with each partition containing a single integer.
+We want to support the operations of finding which partition any given
+integer belongs to and merging two partitions into one ("union").  We identify
+partitions by choosing one representative member for each.
+Fill in the file <code>UnionFind.java</code> to implement the <code>find</code> and <code>union</code> operations.
+Do <strong><em>not</em></strong> use any data structures from the Java library (the utilities
+in the <code>Arrays</code> class are OK), and do <strong><em>not</em></strong> define any classes other than
+<code>UnionFind</code>.  Just use arrays and primitive values.</p>
+
+<p>Tip: If you need to speed up your Union-Find operations, you can try:</p>
+
+<ul>
+  <li>Implementing path compression</li>
+  <li>Re-considering how you are currently deciding which sub-tree to pick as the 
+  root when unioning. (Should you pick the larger or smaller tree?)</li>
+</ul>
+
+
+<h2 id="b-minimum-spanning-trees">B. Minimum Spanning Trees</h2>
+
+
+<p>Consider an undirected graph whose vertices are numbered $1$ to $V$ and
+whose edges are labeled with non-negative integer weights. Given such a graph,
+we would like to find a minimal spanning tree in the form of an array of edges
+from the graph that are included in the tree.  To give you some exercise in
+true data-structure hacking, for this problem we'll represent the graph using
+only arrays and ints.  Fill in the skeleton file <code>MST.java</code> to use Kruskal's
+Algorithm to create this tree.
+Assume that we will be giving you <em>large</em> graphs to operate on.
+As for part A, do <strong><em>not</em></strong> use any data structures from the
+Java library (the utilities in the <code>Arrays</code> class are OK).</p>
+
+<p>The class <code>MSTTest</code> runs some JUnit tests on your MST algorithm.  If a test case
+fails, you can use the main program of <code>Utils.java</code> to see exactly what graph was
+fed to it, if desired.
+<br/>
+The test cases will print out parameters for the main program that generate the 
+graph in the test case.  Executing the following command (after replacing the
+arguments with the printed out parameters) prints the corresponding test case 
+and the MST your program produces from it.</p>
+
+<pre><code>    java Utils V MINEDGES MAXWEIGHT RANDOM&#x2d;SEED true</code></pre>
+
+<p>(The arguments V through RANDOM-SEED tell <code>Utils.randomConnectedGraph</code>
+what graph to generate). This is less helpful on really large test cases,
+of course.</p>
+    </main></div>
+</body>
+</html>

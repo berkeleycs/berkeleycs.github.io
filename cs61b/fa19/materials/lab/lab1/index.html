@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lab 1 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-setup">A. Setup</a></li>
+  <li><a href="index.html#b-java-compilation-amp-development">B. Java Compilation &amp; Development</a></li>
+  <ul>
+    <li><a href="index.html#java-and-compilation">Java and Compilation</a></li>
+    <li><a href="index.html#why-compilation">Why Compilation?</a></li>
+    <li><a href="index.html#compiling-java-programs">Compiling Java Programs</a></li>
+    <li><a href="index.html#running-java-programs">Running Java Programs</a></li>
+  </ul>
+  <li><a href="index.html#c-writing-java-programs">C. Writing Java Programs</a></li>
+  <ul>
+    <li><a href="index.html#java-is-object-oriented">Java is Object-Oriented</a></li>
+    <li><a href="index.html#format-of-a-java-program">Format of a Java Program</a></li>
+    <li><a href="index.html#comments-in-java">Comments in Java</a></li>
+  </ul>
+  <li><a href="index.html#d-using-git">D. Using Git</a></li>
+  <ul>
+    <li><a href="index.html#leap-year-program">Leap-Year Program</a></li>
+    <li><a href="index.html#some-java-vocabulary-in-leap-year">Some Java Vocabulary in Leap Year</a></li>
+    <li><a href="index.html#testing-leap-year">Testing Leap Year</a></li>
+    <li><a href="index.html#general-git-workflow">General Git Workflow</a></li>
+    <li><a href="index.html#complete-lab-1">Complete Lab 1</a></li>
+    <li><a href="index.html#running-unit-tests">Running Unit Tests</a></li>
+    <li><a href="index.html#submitting">Submitting</a></li>
+  </ul>
+  <li><a href="index.html#e-recap">E. Recap</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Lab 1: Intro to Java & Git</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-setup">Setup</a></li>
+  <li><a href="index.html#b-java-compilation-amp-development">Java Compilation &amp; Development</a></li>
+  <li><a href="index.html#c-writing-java-programs">Writing Java Programs</a></li>
+  <li><a href="index.html#d-using-git">Using Git</a></li>
+  <li><a href="index.html#e-recap">Recap</a></li>
+</ul>
+
+
+<h2 id="a-setup">A. Setup</h2>
+
+
+<p>Welcome to CS 61B! First things first, let's get ourselves all set up for the
+semester.</p>
+
+<p>If you become stuck, don't be discouraged; your TA is ready to help! The best
+place to ask for help is in the actual lab, so come if you're not physically
+here already!</p>
+
+<p><strong>Make sure to complete the bullets below in their entirety before moving on to
+the next section. IF YOU DECIDE TO SKIP THIS SECTION, YOU WILL RUN INTO
+TROUBLE.</strong></p>
+
+<ul>
+  <li>If you need to set up your personal computer, read <a href="../lab1b/lab1b.html">lab1b</a>.</li>
+  <li>Read this doc about <a href="../../../docs/instructional-accounts.html">instructional accounts</a>.</li>
+  <li>Complete the <a href="../../../docs/git.html">git setup parts A-C</a>.</li>
+  <li>Get a text editor (we recommend Sublime Text or something similar).</li>
+</ul>
+
+
+<h2 id="b-java-compilation-amp-development">B. Java Compilation &amp; Development</h2>
+
+
+
+<h4 id="java-and-compilation">Java and Compilation</h4>
+
+
+<p>Java is sometimes called a "compiled language" while Python is called an
+"interpreted language". However, it is likely that neither of these terms make 
+any sense yet, which is good, since they really don't make any sense.
+In most Java implementations, programs are 
+compiled (translated into a form that is easily executed) in a separate, 
+user-visible step from being executed, while most Python implementations give 
+users the impression that the actual programs that they write are executed 
+directly. These are not properties of the languages, however; Java can
+be interpreted and Python can be compiled.  But as often happens, even in
+CS, people get sloppy in their terminology and fail to distinguish between
+programming languages and their implementations.</p>
+
+<p>The Java implementations we use compile Java <em>source code</em> (what is written by
+the programmer) into Java class files containing <em>virtual byte code</em>, which may
+then be executed by a separate program.  (Often, this separate program,
+called <code>java</code>, does a mix of interpreting the class file and compiling it into
+machine code and then having the bare hardware execute it.)</p>
+
+<p>Let's see an example. Here is the same "Hello World" program that you used to
+test your setup on the Lab 1b page.</p>
+
+<pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(&quot;Hello world!&quot;);
+    }
+}</code></pre>
+
+<p>Here is what the corresponding Java compiled code (called <em>bytecode</em>) looks
+like. The virtual machine can interpret this to run the program.</p>
+
+<p><img src="img/bytecode.png" alt="Java bytecode"></p>
+
+
+<h4 id="why-compilation">Why Compilation?</h4>
+
+
+<p>At this point, you may be wondering why Java is (usually) compiled. Compilers
+are quite helpful for several reasons:</p>
+
+<ol>
+  <li><p>They can check for errors prior to <em>runtime</em> (program execution). The Java
+  compiler will catch and report errors like:</p>
+
+  <ul>
+    <li>type errors, which can be produced by giving functions the wrong objects
+    as parameters (like a <code>String</code> instead of a <code>int</code>)</li>
+    <li>syntax errors, which can be caused by forgetting syntactical elements like
+    parentheses or braces</li>
+  </ul>
+
+  <p>Catching these and many other types of errors prior to runtime helps to 
+  prevent many of the possible bugs caused by programmer error, making Java 
+  programs more stable before they are run.</p></li>
+  <li>Compilers can help speed up programs. Programs run by interpreters can be
+  slow because interpreters must parse text that is understandable to humans
+  and translate it into an executable form. Furthermore, for various
+  engineering reasons, this executable form is generally not actual machine
+  code (directly executable by the hardware), but some other intermediate form
+  that another program (the interpreter) then executes. A compiler does this
+  translation work once and saves the instructions to a file variously called a
+  <em>binary</em>, <em>object file</em>, or (in the case of Java) a <em>class file</em>. As such, 
+  Java programs do not have to translate the code at runtime, decreasing the 
+  overall runtime of the code.</li>
+</ol>
+
+<p>There are many other reasons some languages have compilers, some of which you
+will learn by taking CS 61C. But for now, you will just need to know how to
+compile and run your Java program.</p>
+
+
+<h4 id="compiling-java-programs">Compiling Java Programs</h4>
+
+
+<p>There are many different <a href="http://en.wikipedia.org/wiki/Java_compiler">Java
+compilers</a>, but we'll be using
+<code>javac</code> from the command line in this class.  As stated in Lab 1b, <code>javac</code> is
+included in Oracle's Java Development Kit (JDK) and should be accessible to you
+now.</p>
+
+<p>To compile a Java file called <code>File.java</code>, you would type the following command
+into your terminal:</p>
+
+<pre><code>$ javac File.java</code></pre>
+
+<p>You can also add some helpful options, which are called <em>flags</em> to the compile
+command. Full documentation is available
+<a href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/javac.html">here</a>.</p>
+
+<pre><code>javac &#x2d;g File.java</code></pre>
+
+<p>The '-g' flag is one of the most helpful flags because it will generate
+debugging information, including information about local variables. This is good
+for testing programs.</p>
+
+<p><strong>Note: If you change a file after compiling, you must recompile the file to
+reflect the change.</strong></p>
+
+
+<h4 id="running-java-programs">Running Java Programs</h4>
+
+
+<p>Compiling your program using the command above should give you <code>.class</code> files.
+For example, let's pretend that you've compiled <code>File.java</code>. This would generate
+a new file called <code>File.class</code>. Opening the <code>.class</code> files will show you
+something like the bytecode in the image at the very beginning of this lab.</p>
+
+<p>Once you have your <code>File.class</code> file, you can run your Java program with this
+command in your terminal:</p>
+
+<pre><code>java File</code></pre>
+
+<p>You do not type <code>File.class</code>. Doing so is a common mistake that will cause an
+error message like this:</p>
+
+<pre><code>Error: Could not find or load main class</code></pre>
+
+<p>You also don't type <code>File.java</code> either.</p>
+
+
+<h2 id="c-writing-java-programs">C. Writing Java Programs</h2>
+
+
+
+<h4 id="java-is-object-oriented">Java is Object-Oriented</h4>
+
+
+<p>Java is an <em>object-oriented</em> programming language. What this means is that
+you'll organize your programs around the <em>types of data</em> that it manupulates.
+Each of these data types describes a class of <em>objects</em> and how these objects
+will interact with each other. Those of you who took 61A may recognize that term
+as having been applied to Python/Scheme. Java takes OOP a step further. In Java,
+all functions (or <em>methods</em>, as the OOP inventors renamed them in order to 
+make-believe they were inventing an entirely new concept) and all variables 
+reside in some class definition.</p>
+
+
+<h4 id="format-of-a-java-program">Format of a Java Program</h4>
+
+
+<p>Every Java source file contains a class, interface, or "enum" (a special kind of
+class). For now, let's just discuss <em>class definitions</em>. A class definition
+provides the name of the class and serves as a template for objects. In
+addition, a class definition contains <em>variables</em> and <em>methods</em> that define the
+behavior of that class.</p>
+
+<p>Here is a deconstruction of the aforementioned "Hello World" program:</p>
+
+<p><img src="img/HelloWorld.png" alt="HelloWorld" title="HelloWorld"></p>
+
+<p>A Java program consists of a collection of one of more of these Java files. At
+least one of the classes in a complete Java program must contain a method called
+<code>main</code> having the header shown in the <code>HelloWorld</code> code above. This <em>main
+method</em> is where execution of your program begins.</p>
+
+<p>This is why running the <code>HelloWorld</code> program prints out <code>Hello world!</code>. The
+<code>main</code> method in the <code>HelloWorld</code> class is being run when you type <code>java
+HelloWorld</code> into the terminal.</p>
+
+
+<h4 id="comments-in-java">Comments in Java</h4>
+
+
+<p>There are two formats for comments in a Java program:</p>
+
+<ol>
+  <li><p>Single-line comments start with two consecutive slash characters and continue
+  to the end of the line</p>
+
+<pre><code>// This is a single&#x2d;line comment</code></pre></li>
+</ol>
+
+<p>In general, we use these only for temporary comments, or to add explanatory text
+to a difficult block of code.  Our style rules require that you <em>not</em> use them
+in projects you hand in.</p>
+
+<ol>
+  <li><p>Multi-line comments start with /* and end with */</p>
+
+<pre><code>/* This is a
+   multi&#x2d;line
+   comment */</code></pre>
+
+  <p>To improve readability, you can add single asterisks at the start of each
+  line after the first.</p>
+
+<pre><code>/* This is a
+ * multi&#x2d;line
+ * comment */</code></pre></li>
+  <li><p>Finally, a subclass of the multiline comments called <em>documentation comments</em>
+  or <em>javadoc comments</em> are intended to provide specifications of methods
+  (functions), classes, and instance variables.  Our style rules, in fact,
+  require them.  For example.</p>
+
+<pre><code>/** Returns the current size of the list. */
+public int size() { ... }</code></pre></li>
+</ol>
+
+
+<h2 id="d-using-git">D. Using Git</h2>
+
+
+<p><strong>IF YOU DID NOT DO SECTIONS A-C OF THE GIT GUIDE, THIS NEXT PART WILL NOT WORK.
+PLEASE DO THE GIT GUIDE FIRST.</strong></p>
+
+
+<h4 id="leap-year-program">Leap-Year Program</h4>
+
+
+<p>For our second Java program, we'll be writing a program that prints out whether
+or not a year is a leap year or not. A leap year is either:</p>
+
+<ol>
+  <li>divisible by 400 <strong>or</strong></li>
+  <li>divisible by 4 and not by 100.</li>
+</ol>
+
+<p>For example, 2000 and 2004 are leap years. 1900, 2003, and 2100 are not leap
+years.</p>
+
+<p>Your Java file should be called <code>LeapYear.java</code>. These lines should go into the
+<code>main</code> method of the <code>LeapYear</code> class. Your class name should match the name of
+your file. Your program should include the line:</p>
+
+<pre><code>int year = 2000;</code></pre>
+
+<p>If you're not sure where to start, you can copy and paste lines from <a href="lab1_copy_and_paste.txt">this
+file</a> (all of these lines may not be needed and their 
+order is scrambled).</p>
+
+
+<h4 id="some-java-vocabulary-in-leap-year">Some Java Vocabulary in Leap Year</h4>
+
+
+<ul>
+  <li>The <code>%</code> operator implements <em>remainder</em>. Thus, the value of <code>year % 4</code> will be
+  0, 1, 2, or 3.</li>
+  <li>The <code>!=</code> operator compares two values for <em>inequality</em>. The code fragment <code>if
+  (year % 4 != 0)</code> reads as "if the remainder when dividing <code>year</code> by 4 is not
+  equal to 0."</li>
+  <li>The method <code>System.out.println</code> prints its argument to "standard output"
+  (which is, in this case, your terminal window) when called.</li>
+  <li>When one of the arguments of the <code>+</code> operator is a string, the arguments are
+  concatenated as strings. <em>String concatenation</em> is the operation of joining
+  two character strings end-to-end.</li>
+</ul>
+
+
+<h4 id="testing-leap-year">Testing Leap Year</h4>
+
+
+<p>When you've arranged the lines properly and compiled successfully, running the
+program should print out the following line:</p>
+
+<pre><code>2000 is a leap year.</code></pre>
+
+<p>You can test your program with other <code>year</code> values by changing the line</p>
+
+<pre><code>int year = 2000;</code></pre>
+
+<p>to other numbers. Once your program is correct, save it as <code>LeapYear.java</code>.
+You'll be submitting it at the conclusion of this lab.</p>
+
+
+<h4 id="general-git-workflow">General Git Workflow</h4>
+
+
+<p>As you proceed below, be sure to understand what each command does since you'll
+be using these commands all semester (if not for longer!). Read the output (if
+any) before entering the next command, in case unexpected behavior occurs (it
+might mean that you accidentally skipped a step!).</p>
+
+<ol>
+  <li><p>You must first <code>fetch</code> from the <code>shared</code> remote in order to get the starter
+  code for lab1. You will do this every time new projects and assignments are
+  released.</p>
+
+<pre><code>cd repo              # If not already there
+git fetch shared
+git merge &#x2d;m &quot;Start Lab 1&quot; shared/lab1
+git push</code></pre>
+
+  <p>This copies our skeleton code for lab1 into your local repository (in a
+  subdirectory called <code>lab1</code>). It then transfers this branch to your central
+  repository. Now that you've done this, you can <code>pull</code> these changes from any
+  other local repository that you've cloned from your central repository.</p></li>
+  <li>Now let's make changes to the code within our local repository. Since we've
+  already written some code, let's just move <code>LeapYear.java</code> into the <code>lab1</code>
+  directory.</li>
+  <li><p>Now we stage and commit <code>LeapYear.java</code> to tell Git to take a snapshot of
+  it's current state and to remember what changes we've made up to this point.</p>
+
+<pre><code>git add lab1/LeapYear.java
+git commit &#x2d;a &#x2d;m &quot;Completed LeapYear.java&quot;</code></pre></li>
+  <li><p>Once again, now we push these changes to the central repository so that your
+  changes are uploaded to the course server. Your changes will also be
+  available to <code>pull</code>.</p>
+
+<pre><code>git push</code></pre></li>
+</ol>
+
+<p>Get into the habit of saving your files and doing the <code>git commit</code> step <em>often</em>
+(i.e. every 15 minutes). It can save your skin when you mess things up, since it
+allows you to back out of changes and to see what you have changed recently.</p>
+
+<p>Basically, right when you sit down to work in your repository, first <code>git pull</code>
+to make sure you are starting with the most recent code. While you are working,
+frequently commit. When you are finished, <code>git push</code> so all your changes are
+uploaded and ready for you to pull again next time. Since pushing uploads to our
+course server, you must push in order for the staff to get a hold of your work,
+whether that is to ask for help or to have your assignments graded.</p>
+
+
+<h4 id="complete-lab-1">Complete Lab 1</h4>
+
+
+<p>If you get confused with the git commands in this section, please refer to
+<a href="../../../docs/git.html">Section D of the git guide</a>.</p>
+
+<p>Let's make some more changes! Now that you have the skeleton, you should see a
+file in the lab1 directory called <code>Year.java</code>.</p>
+
+<p>Fill it out using code similar to your implementation for <code>LeapYear.java</code>, but
+this time however, notice that <code>year</code> is a parameter for the <code>isLeapYear</code> method
+rather than a local variable within a method.</p>
+
+<p>After you have filled out that file, you should make a commit since you have
+finished making a notable modification. First, check the <code>status</code> of your local
+repository by typing:</p>
+
+<pre><code>git status</code></pre>
+
+<p>You will see the file that you just changed in red text, which is Git telling
+you that you have outstanding changes that have not been added yet.</p>
+
+<p>Go ahead and <code>add</code> the file. Check the <code>status</code> again and it should have turned
+into green text. Then, proceed to making your <code>commit</code>.</p>
+
+
+<h4 id="running-unit-tests">Running Unit Tests</h4>
+
+
+<ol>
+  <li><p>At some points in your development, you may want to run the autograder. For
+  this lab, we have given you an explicit program to show how this sort of
+  thing works. The file <code>AGTestYear.java</code> contains a number of <em>unit tests</em>, a
+  term that refers to simple tests of individual components (units) of a
+  program. In this case, there is one component in question: your <code>isLeapYear</code>
+  program.</p>
+
+  <p>You cannot run this file on your local machine yet, so this part must be done
+  on the instructional account (either on the lab computer or by ssh'ing).
+  However, in later labs, we will remedy this. (If you are switching from
+  another machine to a lab computer at this point, remember to <code>push</code>/<code>pull</code>
+  first!)</p>
+
+  <p>Compile the autograder with:</p>
+
+<pre><code>   cd repo/lab1              # If not already there
+   javac &#x2d;g AGTestYear.java</code></pre>
+
+  <p>And run it with:</p>
+
+<pre><code>   java AGTestYear</code></pre></li>
+  <li><p>If your program was correct, then you'll get an encouraging message like:</p>
+
+<pre><code>   Time: 0.014
+   Ran 4 tests. All passed.   </code></pre>
+
+  <p>Otherwise, you'll get messages such as:</p>
+
+<pre><code>   There were 2 failures:
+
+   1) test400(AGTestYear)
+      should be leap year
+      at AGTestYear.test400:12 (AGTestYear.java)
+
+   2) ...</code></pre>
+
+  <p>If you didn't get an error message, try deliberately breaking your program by
+  inserting a bug and try testing it again (remember to compile it before
+  trying to test it!). <strong>Be sure to undo the damage before submitting.</strong></p>
+
+  <p><strong>Note 1</strong>: In later assignments, we may hide the autograder from you, and
+  send you email about the results.  We'll explain how that works at a later
+  date.</p>
+
+  <p><strong>Note 2</strong>: This autograder may not be running the full number of tests that
+  will be used to grade your assignment. (This is especially true for the
+  projects.) It should be used as a sanity check, not as a thorough test. You
+  should always write your own unit tests (and we will go over how to do this
+  later).</p></li>
+</ol>
+
+
+<h4 id="submitting">Submitting</h4>
+
+
+<ol>
+  <li>If you are ready to submit your lab, first make sure that all your work is
+  committed. You can do so by calling upon <code>git status</code> once again; it should
+  tell you that your working directory is clean.</li>
+  <li><p>Now <code>tag</code> your latest commit as a submission. Tags in Git are symbolic names
+  given to specific commits.</p>
+
+  <ul>
+    <li><p>Create a tag for this commit.</p>
+
+<pre><code>git tag lab1&#x2d;0</code></pre>
+
+    <p>For our purposes, tag names shall have the form of the assignment name,
+    followed by a sequence number.</p></li>
+    <li><p>Now push your commits and tags to your central repository so that we can
+    see them, too.</p>
+
+<pre><code>git push
+git push &#x2d;&#x2d;tags</code></pre></li>
+    <li>You won't receive any indication of your submission this time, so do not
+    worry about that.</li>
+    <li>You can continue updating your work and submitting newer versions by
+    following the same procedures (remember to <em>always</em> commit before you
+    tag). Just increase the sequence number to keep the submissions distinct:
+    lab1-1, lab1-2, etc. The actual numbers don't matter; the largest is your
+    official latest submission at any time.</li>
+  </ul></li>
+</ol>
+
+<p>These last few sub-sections were a bare-bones walkthrough of Sections D and E of
+the <a href="../../../docs/git.html">Git guide</a> and we used the commands described there to complete
+this lab. Be sure to refer back to the Git guide to ensure that you submit all
+future assignments properly. You will find Section F of the Git guide to be a
+useful cheatsheet.</p>
+
+
+<h2 id="e-recap">E. Recap</h2>
+
+
+<ol>
+  <li>You can use <code>javac</code> to compile your code and <code>java</code> to run it.</li>
+  <li>Java is an object-oriented language. Every Java file must contain either a
+  class, interface, or enumeration.</li>
+  <li>When running a Java program, the <code>main</code> method is where execution begins.
+  This <code>main</code> method can call other methods/classes in the program.</li>
+  <li>Git is a version control system that tracks the history of a set of files in
+  the form of commits.</li>
+  <li>Commit often and use informative commit messages.</li>
+  <li>Fetch from the <code>shared</code> remote repository to get or update starter code for
+  assignments.</li>
+  <li>Tag a commit and push it and your tags to submit assignments.</li>
+</ol>
+    </main></div>
+</body>
+</html>

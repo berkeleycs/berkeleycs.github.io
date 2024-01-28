@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homework 0 | CS 61B Fall 2019</title>
+    <meta charset="UTF-8">
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/common.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/lab.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets/css/highlight/styles/tomorrow.css" rel="stylesheet" type="text/css">
+    
+    <script src="../../../assets/js/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="../../../assets/css/highlight/highlight.pack.js" type="text/javascript"></script> 
+    <script src="../../../assets/js/sidebar.js" type="text/javascript"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+
+    tex2jax: {inlineMath: [["$", "$"]]}
+})
+   
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+</head>
+<body>
+    <div class="navbar-top"><div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <!--<a href="../../../assign.html"><div class="navitem">Assignments</div></a>-->
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fscreencasts.html" target="_blank"><div class="navitem">Screencasts</div></a>
+        <a href="../../../../../../auth.berkeley.edu/cas/login%3Fservice=https:%252F%252Finst.EECS.Berkeley.EDU%252F~cs61b%252Ffa19%252Fcgi-bin%252Fcalnet-auth-scores.cgi.html" target="_blank"><div class="navitem">Scores</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+        <a href="https://piazza.com/class/jkx2gta66436jq"><div class="navitem">Piazza</div></a>
+    </div></div>
+    <div id="sidebar">
+        <div id="sidebar-content">
+            <h3>Navigation</h3>
+            <ul>
+  <li><a href="index.html#navigation">Navigation</a></li>
+  <li><a href="index.html#a-preliminaries">A. Preliminaries</a></li>
+  <ul>
+    <li><a href="index.html#goals">Goals</a></li>
+    <li><a href="index.html#do-the-reading">Do the Reading</a></li>
+  </ul>
+  <li><a href="index.html#b-max">B. Max</a></li>
+  <li><a href="index.html#c-3sum">C. 3SUM</a></li>
+  <li><a href="index.html#d-3sum_distinct">D. 3SUM_DISTINCT</a></li>
+</ul>
+        </div>
+    </div>
+    <div id="content-container"><main id="content">
+        <header class="title">Homework 0: A Few Java Exercises</header>
+        
+<h2 id="navigation">Navigation</h2>
+
+
+<ul>
+  <li><a href="index.html#a-preliminaries">Preliminaies</a></li>
+  <li><a href="index.html#b-max">MAX</a></li>
+  <li><a href="index.html#c-3sum">3SUM</a></li>
+  <li><a href="index.html#d-3sum_distinct">3SUM_DISTINCT</a></li>
+</ul>
+
+
+<h2 id="a-preliminaries">A. Preliminaries</h2>
+
+
+
+<h3 id="goals">Goals</h3>
+
+
+<p>The exercises here aim to introduce you to a few basic points of Java 
+syntax.
+<br/>
+
+<ul>
+  <li>Initializing variables, e.g. <code>int x = 5;</code></li>
+  <li>Comparisons and logical operators</li>
+  <li>Conditionals (if statements)</li>
+  <li>Iteration (using if and while)</li></li>
+</ul></p>
+
+<p>For this assignment, we'll give you credit for just submitting something, but 
+we suggest that you do give them a serious try in order to give yourself a 
+chance to get comfortable with Java and dust off your programming skills from
+last semester.</p>
+
+<p>For each of the problems,</p>
+
+<ul>
+  <li>No starter code is provided. 
+  Use examples from class and the textbook to write your solutions.
+  We don't care what you call your classes, since we don't intend to test
+  your submissions.</li>
+  <li>You can use whatever tool you'd like to write and run your code. 
+  This could be the javac/java on your own computer or the lab machines, etc.,
+  or IntelliJ,
+  or an <a href="https://inst.eecs.berkeley.edu/~cs61b/fa19/materials/hw/hw0/[http://www.tutorialspoint.com/compile_java8_online.php]">online execution tool</a>.</li>
+  <li>For each problem, use the main method to perform an ad-hoc test 
+  (by ad-hoc, I just mean a crude test that isn't generalizable 
+  like the fancier tests that you'll be developing in HW1).</li>
+</ul>
+
+<p>As with lab1, start this homework by using the following commands in your
+local <code>repo</code> directory (assuming that you are using our normal setup--working
+on the default <code>master</code> branch--and that you have committed any files you
+you already have there from other assignments.)</p>
+
+<pre><code>git fetch shared
+git merge shared/hw0 &#x2d;m &quot;Get HW0 skeleton&quot;
+git push</code></pre>
+
+<p>This time there will be no skeleton file for your solution. The idea
+is for you create and add the necessary files.  As you create new files, be sure
+to use <code>git add</code> to add bring them under Git's control.
+<br/>
+We have provided a skeleton <code>Tester.java</code> file for writing simple tests of your
+solutions.  However, you will have to figure out how to get it to actually
+call your solutions before you can compile and run it.
+You can use <code>javac</code> to compile it, and <code>java Tester</code> to run it.
+<br/>
+
+To submit, follow the same instructions as for lab1:</p>
+
+<ul>
+  <li>Commit (with <code>git commit &#x2d;a</code>) any changes you've made.</li>
+  <li>Tag the submission (e.g., <code>git tag hw0&#x2d;0</code>).</li>
+  <li>Push your commits and tags (<code>git push</code> and <code>git push &#x2d;&#x2d;tags</code>).</li>
+</ul>
+
+
+<h3 id="do-the-reading">Do the Reading</h3>
+
+
+<p>Make sure you've done the first reading assignment: AJR 1.1 through 1.9 and Chapter 1
+of Head First Java. If you don't have Head First Java, that's fine,
+AJR provides all the information you need (but might be a harder
+read).</p>
+
+<p>While you're reading, you may find it helpful to be able to run Java code so that you can experiment. You can compile and execute as you have done in lab, 
+of course.  There is also a convenient
+<a href="http://www.tutorialspoint.com/compile_java8_online.php">online Java compilation tool</a>. 
+To run code, simply add the code you'd like to execute to the <code>main</code> 
+method and then press the Compile and  Execute buttons.</p>
+
+<p>Head First Java provides you with exercises that you can do as you
+read.  Feel free to skip doing these if you'd like.</p>
+
+
+<h2 id="b-max">B. Max</h2>
+
+
+<p>Write a function <code>max(int[] a)</code> that returns the maximum value
+of the an int array. Try writing this function using both a while loop
+and a for loop. See the sidebar for convenient syntax for creating
+arrays.</p>
+
+<blockquote><p>You can specify an array using curly braces. A strange choice of
+symbols, for a Python programmer, but we're in the C family of languages
+here. For
+example:</p>
+
+<pre><code>int[] a = {1, 2, 3, 4}</code></pre>
+
+<p>would create an array
+containing 1, 2, 3, and 4 and then give it the name a.</p>
+
+<p>In this context, the curly braces are interpreted in a completely
+different way from when we use them to begin and end a block of code.</p></blockquote>
+
+
+<h2 id="c-3sum">C. 3SUM</h2>
+
+
+<p>Suppose we have an array of integers <code>int[] a</code>. 
+The <a href="http://en.wikipedia.org/wiki/3SUM">3SUM problem</a> asks if
+there are three integers in <code>a[]</code> whose sum is zero.</p>
+
+<p>For this problem, write a function <code>threeSum(int[] a)</code> that returns true if there exist three integers in a that sum to zero and false otherwise. Integers may be used more than once. As in part 1, use your main function to perform an ad-hoc test that <code>threeSum</code> works.</p>
+
+<p>For loops will look a lot more compact than while loops for this problem.</p>
+
+<p>Examples:</p>
+
+<ul>
+  <li><code>threeSum({&#x2d;6, 2, 4})</code> is true, can select -6, 2, and 4.</li>
+  <li><code>threeSum({&#x2d;6, 2, 5})</code> is false.</li>
+  <li><code>threeSum({&#x2d;6, 3, 10, 200})</code> is true, can select -6, 3, and 3.</li>
+  <li><code>threeSum({8, 2, &#x2d;1, 15})</code> is true, can select 2, -1, and -1.</li>
+  <li><code>threeSum({8, 2, &#x2d;1, &#x2d;1, 15})</code> is true, can select 2, -1, -1.</li>
+  <li><code>threeSum({5, 1, 0, 3, 6})</code> is true, can select 0, 0, and 0.
+  </ul></li>
+</ul>
+
+<p>This might seem daunting at first, but it's relatively
+straightforward. As a hint, consider an
+alternative way of stating the problem: Do there exist three indices
+(not necessarily distinct) f, g, and h such that a[f] + a[g] + a[h] ==
+0?</p>
+
+
+<h2 id="d-3sum_distinct">D. 3SUM_DISTINCT</h2>
+
+
+<p>Repeat the exercise from Part C, but with the constraint that each
+number can be used only once.</p>
+
+<p>Examples:</p>
+
+<ul>
+  <li><code>threeSumDistinct({&#x2d;6, 2, 4})</code> is true, can select -6, 2, and 4.</li>
+  <li><code>threeSumDistinct({&#x2d;6, 2, 5})</code> is false.</li>
+  <li><code>threeSumDistinct({&#x2d;6, 3, 10, 200})</code> is false.</li>
+  <li><code>threeSumDistinct({8, 2, &#x2d;1, 15})</code> is false.</li>
+  <li><code>threeSumDistinct({8, 2, &#x2d;1, &#x2d;1, 15})</code> is true, can select 2, -1, and -1.</li>
+  <li><code>threeSumDistinct({5, 1, 0, 3, 6})</code> is false.</li>
+</ul>
+    </main></div>
+</body>
+</html>
