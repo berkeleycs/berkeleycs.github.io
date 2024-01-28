@@ -1,0 +1,1025 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../../../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../../../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../../../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../../../assets/favicon.png">
+    <link href="../../../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../../../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../../../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../../assets/bootstrap-toc.min.js"></script>
+    <script src="../../../assets/moment.min.js"></script>
+    <script src="../../../assets/fullcalendar.min.js"></script>
+    <script src="../../../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../../../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Project 4&#58; Numc</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <style>
+table {
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    border-collapse:
+    collapse; border-spacing: 0;
+    padding: 10px;
+    align:center;
+}
+
+td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */
+
+th {
+    background: #F3F3F3; /* Light grey background */
+    font-weight: bold; /* Make sure they're bold */
+    padding: 10px;
+}
+
+td {
+    background: #FAFAFA; /* Lighter grey background */
+    text-align: center; /* Center our text */
+    padding: 10px;
+}
+
+.grading-graphs td {
+    width: 50%;
+}
+
+.container .row img {
+  max-width: 100%;
+}
+</style>
+
+<h2 id="overview">Overview</h2>
+
+<p><strong>Due Thursday, August 6th</strong></p>
+
+<p>This project is designed to be both a C project as well as a performance project. In this project you will be implementing a slower version of numpy. Your version of numpy, <code class="language-plaintext highlighter-rouge">numc</code> (how exciting!), is most likely to be slower than numpy, but much faster than the naive implementations of matrix operations. You will first complete a naive solution for some matrix functions in C, then you will experiment with the setup file in Python to install your <code class="language-plaintext highlighter-rouge">numc</code> module. After that, you will gain a deeper understanding of the Python-C interface by overloading some operators and defining some instance methods for <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects. Finally, you will speed up your naive solution, thus making <code class="language-plaintext highlighter-rouge">numc.Matrix</code> operations faster.</p>
+
+<p>Do not expect your final completed <code class="language-plaintext highlighter-rouge">numc</code> module to be as good as numpy, but you should expect a very large speedup compared to the naive solution, especially for matrix multiplication and exponentiation!</p>
+
+<h2 id="tips-and-guidelines">Tips and Guidelines</h2>
+<div id="tip"></div>
+
+<ul>
+  <li>Please start early! Because there are many more 61C students than Hive machines, you will likely share resources with your classmates. This might affect the measurement of your code’s speedup. We encourage you to use <a href="https://hivemind.eecs.berkeley.edu/">Hivemind</a> to help balance the load amongst the hive machines.</li>
+  <li>You can either allocate new matrices and throw errors in <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong> or <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong>, but you have to make sure you throw a type error if the inputs are not valid, an index error if the indices you are trying to access are out of range, or a runtime error if any matrix allocation fails during the execution of a number method</li>
+  <li>We will not be directly testing your C code. All tests will be in Python!</li>
+  <li>You may change the function signatures in <strong><code class="language-plaintext highlighter-rouge">matrix.h</code></strong> and <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> as you deem appropriate, but you may not change the function signatures in <strong><code class="language-plaintext highlighter-rouge">numc.h</code></strong> and <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong>.</li>
+  <li>You may change the skeleton code in <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong>, especially if you are not using a row-major setup for your matrices.</li>
+  <li>You may <strong>NOT</strong> add/remove any additional imports.</li>
+  <li>If you would like to run the reference solution to compare your solution to, you can import the <strong><code class="language-plaintext highlighter-rouge">dumbpy</code></strong> library on hive as we have already installed it there for you!</li>
+  <li>For this project, <strong>we strongly suggest working on Hive machines under you cs61c account</strong>. We have set up a few environment settings that only work if you use your cs61c account.</li>
+</ul>
+
+<h2 id="getting-started">Getting Started</h2>
+<p>ssh into one of the hive machines <strong>under your cs61c class account</strong>. Hive machines’ names start with <strong>hive</strong>.</p>
+
+<p>Please follow the directions in this Google Form to get a repository: <a href="https://forms.gle/VxTAcwSPsJGL3dpM6">https://forms.gle/VxTAcwSPsJGL3dpM6</a>. After completing the form, clone your GitHub Classroom repository and add the starter code repository as a remote:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone YOUR_REPO_NAME
+<span class="nv">$ </span><span class="nb">cd </span>YOUR_REPO_NAME
+<span class="nv">$ </span>git remote add starter https://github.com/61c-teach/su20-proj4-starter.git
+</code></pre></div></div>
+<p>If we publish changes to the starter code, retrieve them using git pull starter master.</p>
+
+<p>To be able install the modules that you will complete in this project, you must create a virtual environment with by running</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python3.6 <span class="nt">-m</span> venv .venv
+</code></pre></div></div>
+<p>Note that you <strong>MUST</strong> use python 3.6 as our reference module <code class="language-plaintext highlighter-rouge">dumbpy</code> only supports this specific version of python.
+Finally, run the following command to activate the virtual environment:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> .venv/bin/activate
+</code></pre></div></div>
+<p>This will put you in a virtual environment needed for this project. Please remember that if you exit the virtual environment and want to return to work on the project, you must re-run <code class="language-plaintext highlighter-rouge">source .venv/bin/activate</code>. This also means every time you re-ssh into the hive, you will have to re-run <code class="language-plaintext highlighter-rouge">source .venv/bin/activate</code>.</p>
+
+<p>Then, run</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">-r</span> requirements.txt
+</code></pre></div></div>
+<p>in the virtual environment. This will install all python packages you need for running your custom python tests.</p>
+
+<p>Finally, if you have to exit out of the virtual environment, you can do so by running:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>deactivate
+</code></pre></div></div>
+
+<p><strong>We already have the reference library <code class="language-plaintext highlighter-rouge">dumbpy</code> installed for you on Hive machines.</strong> You can import it with or without the virtual environment while using python3.6, and all object and function names are the same as the <code class="language-plaintext highlighter-rouge">numc</code> module that you will implement (please refer to <a href="index.html#task-3-interface">Task 3</a>). <strong>You will only be able to access the dumbpy package on hive as we will not be directly releasing it</strong>. You can use it as a reference for both correctness and speed.</p>
+
+<p>Again, for this project, <strong>we strongly suggest working on Hive machines in your cs61c class account</strong>. <strong>You will not be able to import dumbpy if you are using other class accounts</strong>. We may be unable to help you with issues caused by working outside of the Hive.</p>
+
+<h2 id="task-1-matrix-functions-in-c">Task 1: Matrix functions in C</h2>
+<p>For this task, you will need to complete all functions in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> labelled with
+<code class="language-plaintext highlighter-rouge">/* TODO: YOUR CODE HERE */</code>. The comments above each function signature in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> contain instructions on how to implement the functions, so read them carefully before you start coding.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">matrix</code> struct is defined in <strong><code class="language-plaintext highlighter-rouge">matrix.h</code></strong>. Feel free to change it, but make sure your changes are compatible with our starter code.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">matrix</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">rows</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">cols</span><span class="p">;</span>
+    <span class="kt">double</span><span class="o">*</span> <span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">ref_cnt</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">matrix</span> <span class="o">*</span><span class="n">parent</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">matrix</span><span class="p">;</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">rows</code> is the number of rows of this matrix, <code class="language-plaintext highlighter-rouge">cols</code> is the number of columns, and <code class="language-plaintext highlighter-rouge">data</code> is a 1D representation of the 2D matrix data. <code class="language-plaintext highlighter-rouge">ref_cnt</code> is the number of existing <code class="language-plaintext highlighter-rouge">matrix</code> structs (including itself) that share all or part of the data array with this particular <code class="language-plaintext highlighter-rouge">matrix</code> struct. <code class="language-plaintext highlighter-rouge">parent</code> indicates whether this <code class="language-plaintext highlighter-rouge">matrix</code> struct is a slice of another matrix, and should be set to its parent <code class="language-plaintext highlighter-rouge">matrix</code> struct if it is and <code class="language-plaintext highlighter-rouge">NULL</code> otherwise.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">matrix.h</code></strong> also imports the library <code class="language-plaintext highlighter-rouge">Python.h</code>, but for this part you should not need any other functions besides <code class="language-plaintext highlighter-rouge">PyErr_SetString</code>.</p>
+
+<p>Depending on your implementation of <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> and <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong>, you may or may not assume that <code class="language-plaintext highlighter-rouge">result</code> is already preallocated or that all inputs’ dimensions are valid. However, as mentioned in the <a href="index.html#tip">Tips and Guidelines</a> section, your Python number methods will need to handle the case where matrix allocation fails.</p>
+
+<p>The function <code class="language-plaintext highlighter-rouge">allocate_matrix_ref</code> is called from <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong>’s <code class="language-plaintext highlighter-rouge">Matrix61c_subscript</code> function and and is used for getting a row of the <code class="language-plaintext highlighter-rouge">from</code> matrix (see <a href="index.html#indexing">Info: numc.Matrix indexing</a> for an example). Currently, <code class="language-plaintext highlighter-rouge">Matrix61c_subscript</code> and <code class="language-plaintext highlighter-rouge">allocate_matrix_ref</code> assume a row-major setup. If you choose to implement your matrices as column-major, you will have to change the implementation of <code class="language-plaintext highlighter-rouge">Matrix61c_subscript</code>, and you might also want to change the function signature of <code class="language-plaintext highlighter-rouge">allocate_matrix_ref</code>.</p>
+
+<p>Again, you may change any function signature in <strong><code class="language-plaintext highlighter-rouge">matrix.h</code></strong> and <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong>.</p>
+
+<h3 id="testing-for-correctness">Testing for Correctness</h3>
+<p>We’ve provided some sanity in <code class="language-plaintext highlighter-rouge">mat_test.c</code>. <strong>These tests make several assumptions:</strong></p>
+<ul>
+  <li>They assume that all result matrices are already pre-allocated with the correct dimensions and that all input dimensions are valid.</li>
+  <li>They assume that you have not modified the <code class="language-plaintext highlighter-rouge">matrix</code> struct in <strong><code class="language-plaintext highlighter-rouge">matrix.h</code></strong></li>
+  <li>All tests except the tests for <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">set</code> assume that your <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">set</code> are correct</li>
+  <li>They assume that you have not modified the function signatures.</li>
+</ul>
+
+<p>Violation of one or more of these assumptions may not cause your tests to fail, but please keep this in mind if your tests are failing and you are violating at least one of these assumptions.</p>
+
+<p>To run the CUnit tests, run</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make <span class="nb">test</span>
+</code></pre></div></div>
+<p>in the root folder of your project. This will create an executable called <strong><code class="language-plaintext highlighter-rouge">test</code></strong> in the root folder and run it.</p>
+
+<p>By default, CUnit will run these tests in Normal mode. When debugging a specific issue, it may be helpful to switch to Verbose mode, which can be done by commenting and uncommenting the relevant lines in <code class="language-plaintext highlighter-rouge">mat_test.c</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// CU_basic_set_mode(CU_BRM_NORMAL);</span>
+<span class="n">CU_basic_set_mode</span><span class="p">(</span><span class="n">CU_BRM_VERBOSE</span><span class="p">);</span>
+</code></pre></div></div>
+<p>Make sure that one line is uncommented at a time.</p>
+
+<p>Please keep in mind that these tests are not comprehensive, and passing all the sanity tests does not necessarily mean your implementation is correct. This is especially true with the memory functions <code class="language-plaintext highlighter-rouge">allocate_matrix</code>, <code class="language-plaintext highlighter-rouge">allocate_matrix_ref</code>, and <code class="language-plaintext highlighter-rouge">deallocate_matrix</code>. Also keep in mind that the autograder will be using our own set of sanity tests, and will not be running your CUnit tests.</p>
+
+<p>Another thing to note is that the <strong><code class="language-plaintext highlighter-rouge">Makefile</code></strong> is written for compilation on the hive machines. If you wish to run it locally, you will have to modify the <strong><code class="language-plaintext highlighter-rouge">Makefile</code></strong> by replacing the path to your CUnit/Python libraries in your <code class="language-plaintext highlighter-rouge">CUNIT</code> and <code class="language-plaintext highlighter-rouge">PYTHON</code> variables. You will also need to make sure that your local computer supports AVX extensions and OpenMP.</p>
+
+<p>Finally, you are welcomed to modify the <strong><code class="language-plaintext highlighter-rouge">mat_test.c</code></strong> file in the <code class="language-plaintext highlighter-rouge">tests</code> directory to implement your custom test cases.</p>
+
+<h2 id="task-2-writing-the-setup-file">Task 2: Writing the setup file</h2>
+<p>The <code class="language-plaintext highlighter-rouge">setup.py</code> file is used for installing your custom-built modules. After completing it, you should be able to install <code class="language-plaintext highlighter-rouge">numc</code> by simply running:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make
+</code></pre></div></div>
+<p>This will uninstall your previously installed <code class="language-plaintext highlighter-rouge">numc</code> module if it existed and reinstall <code class="language-plaintext highlighter-rouge">numc</code>. We have written <code class="language-plaintext highlighter-rouge">numc.c</code> so that <code class="language-plaintext highlighter-rouge">numc.Matrix</code> will be initialized and ready to import upon succesful installation of the <code class="language-plaintext highlighter-rouge">numc</code> module. You should rerun <code class="language-plaintext highlighter-rouge">make</code> every time you make changes and want them to be reflected in the <code class="language-plaintext highlighter-rouge">numc</code> module.</p>
+
+<p>You can uninstall your <code class="language-plaintext highlighter-rouge">numc</code> module by running</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make uninstall
+</code></pre></div></div>
+
+<p>We have provided you with the compiler and linker flags in <code class="language-plaintext highlighter-rouge">setup.py</code>, and your task is to find out how to use them to build your module.</p>
+
+<p>You will likely get a lot of warnings about functions being defined but not used, and that’s ok! You should ignore these warnings for now, and they will be gone after you finish writing Task 3.</p>
+
+<p>Remember that <strong>you must be in the virtual environment that you set up in order to install the modules</strong>, otherwise you will get a “Read-only file system” error.</p>
+
+<p><strong>READ FIRST</strong>: take a look at the function <code class="language-plaintext highlighter-rouge">distutils.core.setup</code> (<a href="https://docs.python.org/3.6/distutils/apiref.html">https://docs.python.org/3.6/distutils/apiref.html</a>), and here is an <a href="https://docs.python.org/3.6/extending/building.html">example usage</a>. You only need two function calls to complete this section, if you’re doing more than that, please reread the docs included as you’re likely doing something wrong</p>
+
+<div id="task-3-interface"></div>
+
+<h2 id="task-3-writing-the-python-c-interface">Task 3: Writing the Python-C interface</h2>
+<p>Now that you have successfully installed your <code class="language-plaintext highlighter-rouge">numc</code> module, you can import your <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects in Python programs! Here are some ready-to-use features already implemented for <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects. You might find them helpful when debugging Task 3.</p>
+
+<h3 id="info-importing-numcmatrix">Info: Importing <code class="language-plaintext highlighter-rouge">numc.Matrix</code></h3>
+<p>Here are several ways of importing <code class="language-plaintext highlighter-rouge">numc.Matrix</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">numc</span> <span class="kn">import</span> <span class="n">Matrix</span>
+
+<span class="kn">import</span> <span class="nn">numc</span>
+<span class="n">numc</span><span class="p">.</span><span class="n">Matrix</span>
+
+<span class="kn">import</span> <span class="nn">numc</span> <span class="k">as</span> <span class="n">nc</span>
+<span class="n">nc</span><span class="p">.</span><span class="n">Matrix</span>
+</code></pre></div></div>
+
+<h3 id="info-numcmatrix-initialization">Info: <code class="language-plaintext highlighter-rouge">numc.Matrix</code> initialization</h3>
+<p>The code block below lists all the different ways of creating a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numc</span> <span class="k">as</span> <span class="n">nc</span>
+<span class="c1"># This creates a 3 * 3 matrix with entries all zeros
+</span><span class="n">mat1</span> <span class="o">=</span> <span class="n">nc</span><span class="p">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># This creates a 2 * 3 matrix with entries all ones
+</span><span class="n">mat2</span> <span class="o">=</span> <span class="n">nc</span><span class="p">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># This creates a 2 * 3 matrix with first row 1, 2, 3, second row 4, 5, 6
+</span><span class="n">mat3</span> <span class="o">=</span> <span class="n">nc</span><span class="p">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="c1"># This creates a 1 * 2 matrix with entries 4, 5
+</span><span class="n">mat4</span> <span class="o">=</span> <span class="n">nc</span><span class="p">.</span><span class="n">Matrix</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</code></pre></div></div>
+<p>More specifically:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nc.Matrix(rows: int, cols: int)</code> will create a matrix with <code class="language-plaintext highlighter-rouge">rows</code> rows and <code class="language-plaintext highlighter-rouge">cols</code> cols. All entries in this matrix are defaulted to 0.</li>
+  <li><code class="language-plaintext highlighter-rouge">nc.Matrix(rows: int, cols: int, val: float)</code> will create a matrix with <code class="language-plaintext highlighter-rouge">rows</code> rows and <code class="language-plaintext highlighter-rouge">cols</code> cols. All entries in this matrix will be initialized to <code class="language-plaintext highlighter-rouge">val</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">nc.Matrix(rows: int, cols: int, lst: List[int])</code> will create a matrix with <code class="language-plaintext highlighter-rouge">rows</code> rows and <code class="language-plaintext highlighter-rouge">cols</code> cols. <code class="language-plaintext highlighter-rouge">lst</code> must have length <code class="language-plaintext highlighter-rouge">rows * cols</code>, and entries of the matrix will be initialized to values of <code class="language-plaintext highlighter-rouge">lst</code> in a row-major order.</li>
+  <li><code class="language-plaintext highlighter-rouge">nc.Matrix(lst: List[List[int]])</code> will create a matrix with the same shape as the 2D <code class="language-plaintext highlighter-rouge">lst</code> (i.e. each list in <code class="language-plaintext highlighter-rouge">lst</code> is a row for this matrix).</li>
+</ul>
+
+<div id="indexing"></div>
+
+<h3 id="info-numcmatrix-indexing">Info: <code class="language-plaintext highlighter-rouge">numc.Matrix</code> indexing</h3>
+<p>You can index into a matrix and change either the value of one single entry or an entire row. More specifically, <code class="language-plaintext highlighter-rouge">mat[i]</code> should give you the <code class="language-plaintext highlighter-rouge">i</code>th row of <code class="language-plaintext highlighter-rouge">matrix</code>. If <code class="language-plaintext highlighter-rouge">mat</code> has more than 1 column, <code class="language-plaintext highlighter-rouge">mat[i]</code> should also be of type <code class="language-plaintext highlighter-rouge">numc.Matrix</code> with (<code class="language-plaintext highlighter-rouge">mat</code>’s number of columns, 1) as its shape. In other words, <code class="language-plaintext highlighter-rouge">mat[i]</code> returns a column vector. This is to support 2D indexing of <code class="language-plaintext highlighter-rouge">numc</code> matrices.</p>
+
+<p>If <code class="language-plaintext highlighter-rouge">mat</code> only has one column, then <code class="language-plaintext highlighter-rouge">mat[i]</code> will return a double. <code class="language-plaintext highlighter-rouge">mat[i][j]</code> should give you the entry at the <code class="language-plaintext highlighter-rouge">i</code>th row and <code class="language-plaintext highlighter-rouge">j</code>th column. If you are setting one single entry by indexing, the data type must be float or int. If you are setting an entire row of a matrix that has more than one column, you must provide a 1D list that has the same length as the number of columns of that matrix. Every element of this list must be either of type float or int.</p>
+
+<p>Please note that if <code class="language-plaintext highlighter-rouge">mat[i]</code> has more than 1 entry, it will share data with <code class="language-plaintext highlighter-rouge">mat</code>, and changing <code class="language-plaintext highlighter-rouge">mat[i]</code> will result in a change in <code class="language-plaintext highlighter-rouge">mat</code>.</p>
+
+<p>The example given below assumes the matrices are initialized from the code block above.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># mat1
+</span><span class="k">print</span><span class="p">(</span><span class="n">mat1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># this gives the 0th row of mat1, should print out [[0.0], [0.0], [0.0]]
+</span><span class="k">print</span><span class="p">(</span><span class="n">mat1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># this should print out 0
+</span><span class="n">mat1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mat1</span><span class="p">)</span> <span class="c1"># this should print out [[0.0, 5.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+</span><span class="n">mat1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mat1</span><span class="p">)</span> <span class="c1"># this should print out [[4.0, 5.0, 6.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+</span>
+<span class="c1"># mat2
+</span><span class="k">print</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span> <span class="c1"># [[1.0, 1.0, 1.0], [1.0, 1.0, 1.0], [1.0, 1.0, 1.0]]
+</span><span class="n">mat2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mat2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># [[1.0], [2.0], [1.0]]
+</span>
+<span class="c1"># You can change a value in a slice, and that will change the original matrix
+</span><span class="k">print</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span> <span class="c1"># [[1.0, 1.0, 1.0], [1.0, 2.0, 1.0], [1.0, 1.0, 1.0]]
+</span><span class="n">mat2_slice</span> <span class="o">=</span> <span class="n">mat2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># [[1.0], [1.0], [1.0]]
+</span><span class="n">mat2_slice</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mat2_slice</span><span class="p">)</span> <span class="c1"># [[5.0], [1.0], [1.0]]
+</span><span class="k">print</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span> <span class="c1"># [[5.0, 1.0, 1.0], [1.0, 2.0, 1.0], [1.0, 1.0, 1.0]]
+</span></code></pre></div></div>
+
+<p>Partial slices, however, are not supported. For example,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mat</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># not allowed
+</span><span class="n">mat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># not allowed
+</span></code></pre></div></div>
+
+<h3 id="info-instance-attributes">Info: instance attributes</h3>
+<p>The matrices and vectors have an attribute shape, which is a tuple of <code class="language-plaintext highlighter-rouge">(rows, cols)</code>. Example is given below.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">mat1</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># this should print out (3, 3)
+</span></code></pre></div></div>
+
+<h3 id="info-pythonc-api-reference">Info: Python/C API Reference</h3>
+<p>Here is the link to the full reference manual: <a href="https://docs.python.org/3.6/c-api/index.html">https://docs.python.org/3.6/c-api/index.html</a>. If you ever find anything confusing in the skeleton code or are at a lost on how to implement <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong>, this is a great resource.</p>
+
+<hr />
+<h3 id="quick-overview-of-numc-skeleton-code">Quick Overview of <code class="language-plaintext highlighter-rouge">numc</code> skeleton code</h3>
+
+<p>We define the <code class="language-plaintext highlighter-rouge">Matrix61c</code> struct in <strong><code class="language-plaintext highlighter-rouge">numc.h</code></strong>. It is of type <code class="language-plaintext highlighter-rouge">PyObject</code> (this means you can always cast <code class="language-plaintext highlighter-rouge">Matrix61c</code> to <code class="language-plaintext highlighter-rouge">PyObject</code>, but not vice versa), which according to the official documentation, “contains the information Python needs to treat a pointer to an object as an object”. Our <code class="language-plaintext highlighter-rouge">Matrix61c</code> has the <code class="language-plaintext highlighter-rouge">matrix</code> struct we defined in <strong><code class="language-plaintext highlighter-rouge">matrix.h</code></strong>.</p>
+
+<p>Then we define a struct <code class="language-plaintext highlighter-rouge">PyTypeObject</code> named <code class="language-plaintext highlighter-rouge">Matrix61cType</code> to specify the intended behaviors of our Python object <code class="language-plaintext highlighter-rouge">Matrix61c</code>. This struct will then be initialized to be our <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">PyTypeObject</span> <span class="n">Matrix61cType</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">PyVarObject_HEAD_INIT</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="p">.</span><span class="n">tp_name</span> <span class="o">=</span> <span class="s">"numc.Matrix"</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_basicsize</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Matrix61c</span><span class="p">),</span>
+    <span class="p">.</span><span class="n">tp_dealloc</span> <span class="o">=</span> <span class="p">(</span><span class="n">destructor</span><span class="p">)</span><span class="n">Matrix61c_dealloc</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_repr</span> <span class="o">=</span> <span class="p">(</span><span class="n">reprfunc</span><span class="p">)</span><span class="n">Matrix61c_repr</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_as_number</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Matrix61c_as_number</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_flags</span> <span class="o">=</span> <span class="n">Py_TPFLAGS_DEFAULT</span> <span class="o">|</span>
+        <span class="n">Py_TPFLAGS_BASETYPE</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_doc</span> <span class="o">=</span> <span class="s">"numc.Matrix objects"</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_methods</span> <span class="o">=</span> <span class="n">Matrix61c_methods</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_members</span> <span class="o">=</span> <span class="n">Matrix61c_members</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_as_mapping</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">Matrix61c_mapping</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_init</span> <span class="o">=</span> <span class="p">(</span><span class="n">initproc</span><span class="p">)</span><span class="n">Matrix61c_init</span><span class="p">,</span>
+    <span class="p">.</span><span class="n">tp_new</span> <span class="o">=</span> <span class="n">Matrix61c_new</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>For example, <code class="language-plaintext highlighter-rouge">.tp_dealloc</code> tells Python which function to call to destroy a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object when its reference count becomes 0, and <code class="language-plaintext highlighter-rouge">.tp_members</code> tells Python what instance attributes <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects have. You can take a look at the <a href="https://docs.python.org/3.6/c-api/typeobj.html">official documentation</a> if you are curious.</p>
+
+<h3 id="useful-functions">Useful functions:</h3>
+<p>Here is a list of some functions and Python objects from <code class="language-plaintext highlighter-rouge">&lt;Python.h&gt;</code> that you may find useful. You can also choose any other functions at this <a href="https://docs.python.org/3.6/c-api/index.html">link</a>.</p>
+<ul>
+  <li><a href="https://docs.python.org/3.6/c-api/object.html">PyObject_TypeCheck</a></li>
+  <li><a href="https://docs.python.org/3.6/c-api/exceptions.html">PyErr_SetString</a></li>
+  <li><a href="https://docs.python.org/3.6/c-api/arg.html">Py_BuildValue</a></li>
+  <li><a href="https://docs.python.org/3.6/c-api/tuple.html">PyTupleObject</a></li>
+  <li><a href="https://docs.python.org/3.6/c-api/long.html">PyLongObject</a></li>
+  <li><a href="https://docs.python.org/3.6/c-api/float.html">PyFloatObject</a></li>
+  <li><a href="https://docs.python.org/3.6/c-api/list.html">PyListObject</a></li>
+</ul>
+
+<hr />
+<p>Now you are ready to complete <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong>, the Python-C interface! As before, you will need to fill out all functions and variables labeled <code class="language-plaintext highlighter-rouge">/* TODO: YOUR CODE HERE */</code>. The code for initializing the module <code class="language-plaintext highlighter-rouge">numc</code> and the object type <code class="language-plaintext highlighter-rouge">numc.Matrix</code> is already done for you. Although not required, we encourage you to take a look at the existing code to better understand the interface.</p>
+
+<p>Below are the two main parts for this task.</p>
+
+<h3 id="number-methods">Number Methods</h3>
+<p>For this part, we ask you to overload operators for <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects. Here are the expected behaviors of overloaded operators:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">a + b</code>: Element-wise sum of <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>. <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> must have the same dimensions. Returns a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object. You will have to throw a type error if they don’t.</li>
+  <li><code class="language-plaintext highlighter-rouge">a - b</code>: Element-wise subtraction of <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>. <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> must have the same dimensions. Returns a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object. You will have to throw a type error if they don’t.</li>
+  <li><code class="language-plaintext highlighter-rouge">a * b</code>: Matrix multiplication of <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code>. <code class="language-plaintext highlighter-rouge">a</code>’s number of columns must be equal to <code class="language-plaintext highlighter-rouge">b</code>’s number of rows. Returns a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object. You will have to check for those conditions and throw a type error if arguments are invalid. Remember that this is a matrix multiplication, not an element-wise multiplication.</li>
+  <li><code class="language-plaintext highlighter-rouge">-a</code>: Element-wise negation of <code class="language-plaintext highlighter-rouge">a</code>. Returns a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object.</li>
+  <li><code class="language-plaintext highlighter-rouge">abs(a)</code>: Element-wise absolute value of <code class="language-plaintext highlighter-rouge">a</code>. Returns a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object.</li>
+  <li><code class="language-plaintext highlighter-rouge">a ** pow</code>: Raise <code class="language-plaintext highlighter-rouge">a</code> to the <code class="language-plaintext highlighter-rouge">pow</code>th power. <code class="language-plaintext highlighter-rouge">pow</code> must be a non-negative integer and <code class="language-plaintext highlighter-rouge">a</code> must be a square matrix. Returns a <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object. You will have throw a type error if matrix is not square or if <code class="language-plaintext highlighter-rouge">pow</code> is negative. This operator is defined in terms of matrix multiplication, not element-wise multiplication.</li>
+</ul>
+
+<p><strong>Please note that for all these operations above, you never directly modify the matrix that you pass in.</strong> You always make a new <code class="language-plaintext highlighter-rouge">numc.Matrix</code> object to hold your result, so make sure you set the <code class="language-plaintext highlighter-rouge">shape</code> attribute of the new <code class="language-plaintext highlighter-rouge">numc.Matrix</code>. You can use <code class="language-plaintext highlighter-rouge">Matrix61c_new</code> to create new <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects. Take a look at the implementation of <code class="language-plaintext highlighter-rouge">Matrix61c_subscript</code> for an example.</p>
+
+<p>For all the functions above, throw a runtime error if any error occurs (such as matrix allocation failure) and causes the operation to fail. Moreover, for any operations that involve two instances of <code class="language-plaintext highlighter-rouge">numc.Matrix</code>, you will have to make sure that the second instance <code class="language-plaintext highlighter-rouge">b</code> is indeed of type <code class="language-plaintext highlighter-rouge">numc.Matrix</code> as we do not support operations between <code class="language-plaintext highlighter-rouge">numc.Matrix</code> and other data/object types. <strong>Please read the comments in <code class="language-plaintext highlighter-rouge">numc.c</code> carefully</strong>.</p>
+
+<p>Here is a table that tells you which function in <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong> in which you will implement each of the above operators</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th style="text-align: left">Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>+</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_add</code></td>
+    </tr>
+    <tr>
+      <td>- (subtraction)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_sub</code></td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_multiply</code></td>
+    </tr>
+    <tr>
+      <td>- (negation)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_neg</code></td>
+    </tr>
+    <tr>
+      <td>abs()</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_abs</code></td>
+    </tr>
+    <tr>
+      <td>**</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_pow</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>All these functions will be called through a Python-C interface after you complete the <code class="language-plaintext highlighter-rouge">numc</code> module. In other words, these are the functions that will be called when you do matrix operations with <code class="language-plaintext highlighter-rouge">numc.Matrix</code> objects, and these interface methods will call <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> methods that you just implemented. You will have to check for the validity of the dimensions before actually carrying out the arithmetic, and throw an error if needed. Specifically, throw an type error if the arguments’ dimensions are invalid, and a runtime error if any memory allocation fails during execution. Again, depending on your implementation, these error checks could either be in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> or <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong></p>
+
+<p>After you implement all the functions above, you will need to fill out the struct <code class="language-plaintext highlighter-rouge">Matrix61c_as_number</code>, which is used to define the object type <code class="language-plaintext highlighter-rouge">numc.Matrix</code>.</p>
+
+<p>Here is the link to the official documentation of a <code class="language-plaintext highlighter-rouge">PyNumberMethods</code> struct: <a href="https://docs.python.org/3/c-api/typeobj.html#c.PyNumberMethods">https://docs.python.org/3/c-api/typeobj.html#c.PyNumberMethods</a></p>
+
+<h3 id="instance-methods">Instance Methods</h3>
+<p>You will implement two instance methods for <code class="language-plaintext highlighter-rouge">numc.Matrix</code>:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">set(self: numc.Matrix, i: int, j: int, val: float)</code>: Set <code class="language-plaintext highlighter-rouge">self</code>’s entry at the <code class="language-plaintext highlighter-rouge">i</code>th row and <code class="language-plaintext highlighter-rouge">j</code>th column to <code class="language-plaintext highlighter-rouge">val</code>. Throw a type error if the number of arguments parsed from args is not 3 or if the arguments are of the wrong types. Throw an index error if either <code class="language-plaintext highlighter-rouge">i</code>, <code class="language-plaintext highlighter-rouge">j</code>, or both are out of range. Return None.</li>
+  <li><code class="language-plaintext highlighter-rouge">get(self: numc.Matrix, i: int, j: int)</code>: Returns the entry at the <code class="language-plaintext highlighter-rouge">i</code>th row and <code class="language-plaintext highlighter-rouge">j</code>th column. Throw a type error if the number of arguments parsed from args is not 2 or if the arguments are of the wrong types. Throw an index error if either <code class="language-plaintext highlighter-rouge">i</code>, <code class="language-plaintext highlighter-rouge">j</code>, or both are out of range. Return value is a Python float.</li>
+</ul>
+
+<p>These functions will call <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">set</code> in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> to actually get or set the value. Again, you can throw errors either in <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong> or <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong>.</p>
+
+<p>Here is a table that tells you which functions in <strong><code class="language-plaintext highlighter-rouge">numc.c</code></strong> in which you will implement each of the above instance methods</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Python method</th>
+      <th style="text-align: left">C Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">set</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_set_value</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">get</code></td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Matrix61c_get_value</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After you implement all the functions above, you will need to fill out the array of  <code class="language-plaintext highlighter-rouge">PyMethodDef</code> structs <code class="language-plaintext highlighter-rouge">Matrix61c_methods</code>, which is used to define the object type <code class="language-plaintext highlighter-rouge">numc.Matrix</code>.</p>
+
+<p>This link tells you what goes into a <code class="language-plaintext highlighter-rouge">PyMethodDef</code> struct: <a href="https://docs.python.org/3/c-api/structures.html">https://docs.python.org/3/c-api/structures.html</a></p>
+
+<h3 id="indexing">Indexing</h3>
+<p>As mentioned in task 1, if you are storing your matrix data in a non-row-major order, you might want to change your <code class="language-plaintext highlighter-rouge">Matrix61c_subscript</code>.</p>
+
+<p>Regardless of how you are storing you matrices, now is a good time to check if your <code class="language-plaintext highlighter-rouge">allocate_matrix_ref</code> in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong> is working as intended. A correct implementation of <code class="language-plaintext highlighter-rouge">allocate_matrix_ref</code> and <code class="language-plaintext highlighter-rouge">Matrix61c_subscript</code> should result in behaviors specified in <a href="index.html#indexing">the indexing info section</a> above.</p>
+
+<hr />
+
+<h3 id="how-to-debug">How to Debug</h3>
+<p>To debug the Python-C interface, we suggest that you write your test files in Python, and use gdb or both gdb and pdb to debug.</p>
+
+<div id="only-gdb"></div>
+
+<h4 id="using-only-gdb">Using only gdb</h4>
+<p>You don’t have to use pdb if you do not wish to set breakpoints in your Python test file. Open your terminal and run</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gdb python3
+</code></pre></div></div>
+<p>Then you can set breakpoints in your C files using the normal gdb commands. gdb will warn you with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No source file named {your c file}
+Make breakpoint pending on future shared library load? (y or [n])
+</code></pre></div></div>
+<p>Press ‘y’ (without the quotes) to proceed.</p>
+
+<p>After that, you can run <code class="language-plaintext highlighter-rouge">run {your python test file name}.py</code> in gdb, and gdb will break at the breakpoints that you just set.</p>
+
+<h4 id="using-both-gdb-and-pdb">Using both gdb and pdb</h4>
+<p>You will have to use pdb if you wish to set breakpoints in your Python file. Here’s how it works. Start gdb by running</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gdb python3
+</code></pre></div></div>
+<p>and set your breakpoints in C (see <a href="index.html#only-gdb">previous section</a>). Then you will need to run in gdb</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run <span class="nt">-m</span> pdb <span class="o">{</span>your python file<span class="o">}</span>.py
+</code></pre></div></div>
+<p>After this step, you can set breakpoints in your Python file using gdb syntax (for example, <code class="language-plaintext highlighter-rouge">b test.py:5</code>). With this approach, your debugger will switch between pdb and gdb depending on whether you are stepping through a Python file or a C file.</p>
+
+<h2 id="task-4-speeding-up-matrix-operations">Task 4: Speeding up matrix operations</h2>
+<p>Now that you have completed the three steps above and successfully installed your naive version of <code class="language-plaintext highlighter-rouge">numc</code>, it’s time to speed up your matrix functions in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong>! Below we outline some steps for boosting performance.</p>
+
+<h3 id="step-1-unrolling-and-other-optimizations">Step 1: Unrolling and Other Optimizations</h3>
+<p>You should first try to speed up the computation by trying to apply conventional code optimizations (i.e. without using SSE or OpenMP). While we won’t tell you the exact steps, here are some hints that should help you get started:</p>
+
+<ol>
+  <li>Function calls are expensive since they involve setting up a stack frame and jumping to a different part of code. See if there are any functions that are frequently called that don’t necessarily need to be.</li>
+  <li>Are there any places where you could do manual loop unrolling?</li>
+  <li>Is there any unnecessary computation being done?</li>
+</ol>
+
+<p>Note that the above hints relate to general optimization practices. You do not necessarily need to do all of these to achieve a good speedup.</p>
+
+<p>Once you have improved performance using these optimizations, you can start applying vectorization and parallelization to make the program even faster. Note that you have considerable freedom to apply any of these optimizations, and there is more than one correct solution. Try to experiment with different approaches and see which one gives you the best performance.</p>
+
+<h3 id="step-2-simd-instructions">Step 2: SIMD Instructions</h3>
+<p>From lectures, you learned how to apply SIMD instructions to improve performance. The processors in the hive machines support the Intel AVX extensions, which allow you to do SIMD operations on 256 bit values (not just 128 bit, as we have seen in the lab). You should use these extensions to perform four operations in parallel (since all floating point numbers are doubles, which are 64 bit in size). If you are unfamiliar with SIMD instructions, lab 12 can be a good warmup.</p>
+
+<p>As a reminder, you can use the <a href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">Intel Intrinsics Guide</a> as a reference to look up the relevant instructions. You will have to use the <code class="language-plaintext highlighter-rouge">__m256d</code> type to hold 4 doubles in a YMM register, and then use the <code class="language-plaintext highlighter-rouge">_mm256_*</code> intrinsics to operate on them.</p>
+
+<p>Here is a list of AVX instructions that you may find helpful, although you are also allowed to use other AVX instructions not on the list.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">_mm256_storeu_pd</span> <span class="p">(</span><span class="kt">double</span> <span class="o">*</span> <span class="n">mem_addr</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_set1_pd</span> <span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_set_pd</span> <span class="p">(</span><span class="kt">double</span> <span class="n">e3</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e2</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e1</span><span class="p">,</span> <span class="kt">double</span> <span class="n">e0</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_loadu_pd</span> <span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="o">*</span> <span class="n">mem_addr</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_add_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_sub_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_fmadd_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_mul_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_cmp_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">imm8</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_and_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">__m256d</span> <span class="n">_mm256_max_pd</span> <span class="p">(</span><span class="n">__m256d</span> <span class="n">a</span><span class="p">,</span> <span class="n">__m256d</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="step-3-openmp">Step 3: OpenMP</h3>
+<p>Finally you should use OpenMP to parallelize computation. Note that you will need to make sure that none of the different threads overwrites each others’ data. Just adding a <code class="language-plaintext highlighter-rouge">#pragma omp parallel for</code> may cause errors.</p>
+
+<p>Note that the Hive machines have 4 cores with two hyperthreads each. This means that you should expect a speed-up of 4-8x (note that hyperthreads mean that two different threads execute on the same physical core at the same time; they will therefore compete for processor resources, and as a result, you will not get the same performance as if you were running on two completely separate cores).</p>
+
+<h3 id="testing">Testing</h3>
+<p><strong>We will not be grading your tests but we will NOT help you debug unless you have written a test which shows how your code is failing. This means just using the autograder to figure out your issues will not be acceptable for office hours.</strong></p>
+
+<p>We use <strong><code class="language-plaintext highlighter-rouge">pytest</code></strong> as the framework for testing and have provided a <code class="language-plaintext highlighter-rouge">testing</code> folder that contains this framework for testing your python module. <code class="language-plaintext highlighter-rouge">testing/test_correctness.py</code> will have all the skeleton code for the correctness tests, and <code class="language-plaintext highlighter-rouge">testing/test_performance.py</code> will have all the skeleton code for the performance tests. It is up to you to design and code up the tests. We will not be grading your tests.</p>
+
+<p>As mentioned in <a href="index.html#tip">Tips and Guidelines</a> and <a href="index.html#getting-started">Getting Started</a>, We have installed the naive solution which we will be comparing against on hive! The python package is called <code class="language-plaintext highlighter-rouge">dumbpy</code> and you can import it like any other python library (so long as you are on hive)! Please note we will not be distributing this binary which means you must work on hive if you want to test with it. You should use this and the <strong><code class="language-plaintext highlighter-rouge">time</code></strong> package to determine how much you sped up your code.</p>
+
+<h4 id="more-about-pytest">More about <code class="language-plaintext highlighter-rouge">pytest</code></h4>
+<ul>
+  <li>Running
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>pytest
+</code></pre></div>    </div>
+    <p>will run all test cases in both <code class="language-plaintext highlighter-rouge">test_correctness.py</code> and <code class="language-plaintext highlighter-rouge">test_performance.py</code>.</p>
+  </li>
+  <li>If you only want to run tests in one particular python file, run
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>pytest <span class="o">{</span>filename<span class="o">}</span>
+</code></pre></div>    </div>
+    <p>For example, you can run <code class="language-plaintext highlighter-rouge">pytest test_correctness.py</code>.</p>
+  </li>
+  <li>If you want to run all tests in a specific test class of a specific python file, run
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pytest <span class="o">{</span>filename<span class="o">}</span>::classname
+</code></pre></div>    </div>
+    <p>For example, <code class="language-plaintext highlighter-rouge">pytest test_correctness.py::TestAddCorrectness</code> will run all tests of the class <code class="language-plaintext highlighter-rouge">TestAddCorrectness</code>.</p>
+  </li>
+  <li>If you want to run an individual test, run
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  pytest <span class="o">{</span>filename<span class="o">}</span>::classname::testname
+</code></pre></div>    </div>
+    <p>For example, <code class="language-plaintext highlighter-rouge">pytest test_correctness.py::TestAddCorrectness::test_small_add</code> will only run the test named <code class="language-plaintext highlighter-rouge">test_small_add</code>.</p>
+  </li>
+  <li>Append a <code class="language-plaintext highlighter-rouge">-s</code> at the end of your entire <code class="language-plaintext highlighter-rouge">pytest</code> command to force print statements to be printed to stdout.</li>
+  <li>Feel free to add more test classes and/or tests that are not provided by the skeleton code! Make sure you follow these <a href="https://docs.pytest.org/en/reorganize-docs/goodpractices.html#test-discovery">naming conventions</a> for your new tests/classes/python files or else they might be skipped by <code class="language-plaintext highlighter-rouge">pytest</code>.</li>
+</ul>
+
+<h2 id="task-5-tell-us-what-you-did">Task 5: Tell us what you did!</h2>
+<p>Write up what you did in your README.md! While we do not have a specific format we are looking for, you should discuss what you did as a whole, the different python functions you implemented, what performance improvements you had, what were you surprised about, etc. It should be at least a page long (aka more than both 500 words/3000 characters). You will be graded on this so make sure you do it or you will lose points!</p>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+<div id="faq"></div>
+
+<h3 id="task-1">Task 1</h3>
+
+<div id="faq-1.1"></div>
+
+<ul>
+  <li><strong>Q 1.1</strong>: Will we be graded on what types of errors we threw? Or do we just have to throw some error?<br />
+  <strong>A 1.1</strong>: Yes we expect you to throw the correct error types. We do not care about the error strings tho.<br /><br /></li>
+</ul>
+
+<div id="faq-1.2"></div>
+
+<ul>
+  <li><strong>Q 1.2</strong>: I’m getting this when I run <code class="language-plaintext highlighter-rouge">make test</code>, what is happening?
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  rm -f test
+  gcc -g -Wall -std=c99 -fopenmp -mavx -mfma -pthread -O3 mat_test.c matrix.c -o test -fopenmp -L/home/ff/cs61c/cunit/install/lib -I/home/ff/cs61c/cunit/install/include -lcunit -I/usr/include/python3.6 -lpython3.6m
+  ./test
+       CUnit - A unit testing framework for C - Version 2.1-2
+       http://cunit.sourceforge.net/
+  Makefile:25: recipe for target 'test' failed
+  make: *** [test] Illegal instruction (core dumped)
+</code></pre></div>    </div>
+    <p><strong>A 1.2</strong>: This means either you are not using hive machines or your code segfaulted before any assert statements was reached and none of the tests passed. Use gdb to locate your bug.<br /><br /></p>
+  </li>
+</ul>
+
+<div id="faq-1.3"></div>
+
+<ul>
+  <li><strong>Q 1.3</strong>: Do we assume rows and cols start at 1 or 0?<br />
+  <strong>A 1.3</strong>: They are both zero-indexed.<br /><br /></li>
+</ul>
+
+<div id="faq-1.4"></div>
+
+<ul>
+  <li><strong>Q 1.4</strong>: Do our functions need to support self-referential operations? For example, <code class="language-plaintext highlighter-rouge">mul_matrix(mat, mat, mat)</code>.<br />
+  <strong>A 1.4</strong>: No.<br /><br /></li>
+</ul>
+
+<div id="faq-1.5"></div>
+
+<ul>
+  <li><strong>Q 1.5</strong>: Is it reasonable to run valgrind on <code class="language-plaintext highlighter-rouge">./test</code>?
+  <strong>A 1.5</strong>: You can try, but would not recommend. Setting up valgrind for C-Python interface can be difficult.<br /><br /></li>
+</ul>
+
+<div id="faq-1.6"></div>
+
+<ul>
+  <li><strong>Q 1.6</strong>: When we throw an error, is it just a fprintf call to stderr?<br />
+  <strong>A 1.6</strong>: Nope, you should throw errors in a python context. i.e., when your python code calls this underlying C function, it should error. Take a look at the Python/C API’s reference manual for <a href="https://docs.python.org/3.6/c-api/exceptions.html">exception handling</a>.<br /><br /></li>
+</ul>
+
+<div id="faq-1.7"></div>
+
+<ul>
+  <li><strong>Q 1.7</strong>: Can we make a slice on slice? for example, <code class="language-plaintext highlighter-rouge">mat1 = [[1,2,3],[4,5,6]]</code>, <code class="language-plaintext highlighter-rouge">mat2 = mat1[0]</code>. Can we do <code class="language-plaintext highlighter-rouge">mat3 = mat2[0]</code>?<br />
+  <strong>A 1.7</strong>: No a “slice” on slice is just a number and is pass by value. In this case, <code class="language-plaintext highlighter-rouge">mat3</code> will just be a number and changing its value will not change <code class="language-plaintext highlighter-rouge">mat2</code>.<br /><br /></li>
+</ul>
+
+<div id="faq-1.8"></div>
+
+<ul>
+  <li><strong>Q 1.8</strong>: Does our solution need to exactly match the reference?<br />
+  <strong>A 1.8</strong>: No, we allow an error margin of 1e-6.<br /><br /></li>
+</ul>
+
+<h3 id="task-2">Task 2</h3>
+<div id="faq-2.1"></div>
+
+<ul>
+  <li><strong>Q 2.1</strong>: I’m getting undefined symbols upon import (for example, <code class="language-plaintext highlighter-rouge">undefined symbol: allocate_matrix_ref</code>). What is happening?<br />
+  <strong>A 2.1</strong>: Think about what files your module needs, especially where the undefined symbol is located.<br /><br /></li>
+</ul>
+<div id="faq-2.2"></div>
+
+<ul>
+  <li><strong>Q 2.2</strong>: The values in my matrices change after I print their slices.<br />
+  <strong>A 2.2</strong>: This is likely a memory leak. Double check your <code class="language-plaintext highlighter-rouge">deallocate_matrix</code> implementation. What happens when you call <code class="language-plaintext highlighter-rouge">print(mat[0])</code> is that it will create a slice, then immediately deallocate it after this line.<br /><br /></li>
+</ul>
+
+<h3 id="task-3">Task 3</h3>
+<div id="faq-3.1"></div>
+
+<ul>
+  <li><strong>Q 3.1</strong>: Getting <code class="language-plaintext highlighter-rouge">&lt;class 'AttributeError'&gt; -- shape</code>.<br />
+  <strong>A 3.1</strong>: Make sure the relevant method in numc.c is setting <code class="language-plaintext highlighter-rouge">mat-&gt;shape</code><br /><br /></li>
+</ul>
+<div id="faq-3.2"></div>
+
+<ul>
+  <li><strong>Q 3.2</strong>: Getting <code class="language-plaintext highlighter-rouge">&lt;class 'SystemError'&gt; -- &lt;built-in method set of numc.Matrix object at 0x7f175faffef0&gt; returned NULL without setting an error!</code><br />
+  <strong>A 3.2</strong>: You need to throw an error before returning <code class="language-plaintext highlighter-rouge">NULL</code> in any interface function.<br /><br /></li>
+</ul>
+<div id="faq-3.3"></div>
+
+<ul>
+  <li><strong>Q 3.3</strong>: <code class="language-plaintext highlighter-rouge">UnicodeDecodeError: ‘utf-8’ codec can't decode byte 0x89 in position 5: invalid start byte</code> upon import. What’s wrong?<br />
+  <strong>A 3.3</strong>: <code class="language-plaintext highlighter-rouge">{NULL, NULL, 0, NULL}</code> from starter code must be last element of <code class="language-plaintext highlighter-rouge">Matrix61c_methods</code>, so make sure you don’t accidentally remove that!<br /><br /></li>
+</ul>
+<div id="faq-3.4"></div>
+
+<ul>
+  <li><strong>Q 3.4</strong>: Are we allowed to call methods we wrote in <strong><code class="language-plaintext highlighter-rouge">matrix.c</code></strong>?<br />
+  <strong>A 3.4</strong>: Yes please do!<br /><br /></li>
+</ul>
+<div id="faq-3.5"></div>
+
+<ul>
+  <li><strong>Q 3.5</strong>: How do we know what gets passed into <code class="language-plaintext highlighter-rouge">PyObject* args</code>?<br />
+  <strong>A 3.5</strong>: Read the <a href="https://docs.python.org/3.6/c-api/">official documentation</a>! (You can also take a look at the starter code for examples.)<br /><br /></li>
+</ul>
+
+<h3 id="task-4">Task 4</h3>
+<div id="faq-4.1"></div>
+
+<ul>
+  <li><strong>Q 4.1</strong>: <code class="language-plaintext highlighter-rouge">#pragma omp parallel for</code> above a simple for loop slows down my add_matrix drastically?<br />
+  <strong>A 4.1</strong>: You need big matrices to actually see the effect of speedup (something around 1000 * 1000).<br /><br /></li>
+</ul>
+<div id="faq-4.2"></div>
+
+<ul>
+  <li><strong>Q 4.2</strong>: I’m getting <code class="language-plaintext highlighter-rouge">warning: ignoring #pragma omp parallel [-Wunknown-pragmas]</code> but I have not changed the Makefile?<br />
+  <strong>A 4.2</strong>: It might be your task 2. Take a look at the compiler and linker flags we provided you.<br /><br /></li>
+</ul>
+
+<h3 id="autograder-related-questions">Autograder-related Questions</h3>
+<div id="faq-5.1"></div>
+
+<ul>
+  <li><strong>Q 5.1</strong>: I’m passing my local correctness tests but failing autograder. What might be the case?<br />
+  <strong>A 5.1</strong>: Here are some common sources of bugs. 1. Make sure you test your matrix operations on non-integer floating point values (such as 1.2, 1.3). In the past semester, some students’ code was only able to generate correct results when every floating point value in their matrices were integer-valued floating points (such as 1.0, 2.0). 2. Make sure you are setting the <code class="language-plaintext highlighter-rouge">shape</code> attribute of every returned matrix! 3. Please do NOT modify anything related to generating random matrices! Do NOT try to speed them up! We use those to generate matrices to test on the autograder. We don’t include the time for generating matrices when testing for performance.<br /><br /></li>
+</ul>
+<div id="faq-5.2"></div>
+
+<ul>
+  <li><strong>Q 5.2</strong>: Performance tests are failing but correctness tests all pass.<br />
+  <strong>A 5.2</strong>: Our performance tests test on much larger matrices than the correctness tests, so make sure you handle those cases correctly!<br /><br /></li>
+</ul>
+<div id="faq-5.3"></div>
+
+<ul>
+  <li><strong>Q 5.3</strong>: Failing tests that are related to throwing errors.<br />
+  <strong>A 5.3</strong>: Make sure you are throwing the correct type of error, not just any error.<br /><br /></li>
+</ul>
+
+<div id="grading"></div>
+
+<h2 id="grading">Grading</h2>
+<p>The grading breakdown for Project 4 is as follows:</p>
+<ul>
+  <li>Correctness: 55%</li>
+  <li>Speedup: 40%
+    <ul>
+      <li>Multiplication: 20%</li>
+      <li>Power: 25%</li>
+      <li>Simple: 12.5%</li>
+      <li>Comprehensive: 42.5%</li>
+    </ul>
+  </li>
+  <li>README.md: 5%</li>
+</ul>
+
+<p>Here are the graphs for the speedup tests. The x-axis is your speedup times and the y-axis indicates what percentage of that test’s total score you will receive.</p>
+
+<div class="grading-graphs">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Multiplication</th>
+        <th style="text-align: center">Power</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center"><img src="speedup_images/mul.png" alt="mul.png" /></td>
+        <td style="text-align: center"><img src="speedup_images/pow.png" alt="pow.png" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">Simple</th>
+        <th style="text-align: center">Comprehensive</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center"><img src="speedup_images/simple.png" alt="simple.png" /></td>
+        <td style="text-align: center"><img src="speedup_images/comprehensive.png" alt="comprehensive.png" /></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<p>Minimum speedup for 100% on each test:</p>
+<ul>
+  <li>Multiplication: 95x</li>
+  <li>Power: 1900x</li>
+  <li>Simple: 5x</li>
+  <li>Comprehensive: 98x</li>
+</ul>
+
+<p>Since we are running your submissions on hive, albeit reserved, speedup times may fluctuate a bit. You should try to go above the speedup value as we will rerun the ag after the deadline and your speedup may go up or down. We will not rerun submissions if they went down unless we made another change to the autograder.</p>
+
+<p>We will only be using your <code class="language-plaintext highlighter-rouge">matrix.h</code>, <code class="language-plaintext highlighter-rouge">matrix.c</code>, <code class="language-plaintext highlighter-rouge">numc.c</code>, <code class="language-plaintext highlighter-rouge">setup.py</code>, and <code class="language-plaintext highlighter-rouge">README.md</code> for grading. Gradescope shows you all of the correctness tests we have currently written. The tests you can see on gradescope are trying to be comprehensive though we may add more tests if we find this test suit is missing some tests, so be aware tests may be added even after the deadline. We do not know how many more we will add as we are looking at common problems to see which tests would be good to add.</p>
+
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../../../assets/theme/theme.js"></script>
+  </body>
+</html>

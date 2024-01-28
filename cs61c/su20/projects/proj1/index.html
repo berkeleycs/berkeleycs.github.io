@@ -1,0 +1,465 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../../../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../../../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../../../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../../../assets/favicon.png">
+    <link href="../../../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../../../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../../../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../../assets/bootstrap-toc.min.js"></script>
+    <script src="../../../assets/moment.min.js"></script>
+    <script src="../../../assets/fullcalendar.min.js"></script>
+    <script src="../../../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../../../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Project 1&colon; Philspel (due 7/1)</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <style>
+table {
+    color: #333; /* Lighten up font color */
+    font-family: Helvetica, Arial, sans-serif; /* Nicer font */
+    border-collapse:
+    collapse; border-spacing: 0;
+    padding: 10px;
+    align:center;
+}
+
+td, th { border: 1px solid #CCC; height: 30px; } /* Make cells a bit taller */
+
+th {
+    background: #F3F3F3; /* Light grey background */
+    font-weight: bold; /* Make sure they're bold */
+    padding: 10px;
+}
+
+td {
+    background: #FAFAFA; /* Lighter grey background */
+    text-align: center; /* Center our text */
+    padding: 10px;
+}
+</style>
+
+<p>This project is designed to serve as an introduction to the C
+language.  To complete it, you will have to use the C file
+input/output library, do memory allocation, manipulate strings, and
+coerce strings to void pointers and vice versa.  Although there is
+conceptually a lot to learn to complete this project, the actual amount of code
+you will need to write is short.  For reference, the “official” solution
+only adds about 120 lines including comments.</p>
+
+<p><code class="language-plaintext highlighter-rouge">philspel</code> is a very simple and silly spelling checker.  It
+accepts a single command line argument: the file name of a dictionary to
+use. For example, to use philspel, all you would need to type into the terminal is:</p>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./philspel dictionary.txt
+</code></pre></div></div>
+<p>Of course, you can replace <code class="language-plaintext highlighter-rouge">dictionary.txt</code> with whichever file you wish to use for your dictionary.</p>
+
+<p>This dictionary consists of a list of valid words to use in
+checking the input.  <code class="language-plaintext highlighter-rouge">philspel</code> processes standard input and
+copies it to standard output.  For each word (strictly defined as a sequence of letters
+unbroken by any non-letter character) in the input, <code class="language-plaintext highlighter-rouge">philspel</code> looks for all of the following variations of the word in its dictionary:</p>
+<ol>
+  <li>The word itself.</li>
+  <li>The word converted entirely to lowercase letters</li>
+  <li>The word with all but the first letter converted to lowercase.</li>
+</ol>
+
+<p>If any of the three variations are found in the dictionary, the word is copied directly to
+standard output.  Otherwise, the word is copied to standard output
+with the string <code class="language-plaintext highlighter-rouge">" [sic]"</code> (without the quotation marks,
+but <em>with the spaces</em>) appended.  All other input (e.g. whitespace) is copied to standard
+output unchanged.</p>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<ol>
+  <li>Please follow the directions here to get a repository: <a href="https://forms.gle/QQiz3sh33fnfqyxTA">https://forms.gle/QQiz3sh33fnfqyxTA</a></li>
+  <li><code class="language-plaintext highlighter-rouge">git clone https://github.com/61c-student/su20-proj1-&lt;Your User Name&gt;.git</code></li>
+  <li><code class="language-plaintext highlighter-rouge">cd su20-proj1-&lt;Your User Name&gt;</code></li>
+</ol>
+
+<p>This copies over a Makefile for the project and several partially implemented source files.</p>
+
+<p><code class="language-plaintext highlighter-rouge">hashtable.c</code> and <code class="language-plaintext highlighter-rouge">hashtable.h</code> define a simple generic chained hash table.  <code class="language-plaintext highlighter-rouge">hashtable.h</code> acts as an interface through which other files interact with our hash table implementation. Likewise, <code class="language-plaintext highlighter-rouge">philspel.h</code> declares the functions that are defined in <code class="language-plaintext highlighter-rouge">philspel.c</code>.  <code class="language-plaintext highlighter-rouge">philspel.c</code> contains the main function, which serves as the program’s entry point.</p>
+
+<p>For those who want a review of hashing, these <a href="https://docs.google.com/presentation/d/1QevjelsyVO8Ea375VRhIf-o--MIMDYB83OxBbXnbQZU/edit#slide=id.g52624185f6_2_3410">Hug slides</a> are a good reference.</p>
+
+<p>To finish this project, you will have to fill in the definition of <code class="language-plaintext highlighter-rouge">struct HashTable</code> in <code class="language-plaintext highlighter-rouge">hashtable.h</code> and correctly implement the following functions:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">void insertData(HashTable *table, void *key, void *data)</code> in <code class="language-plaintext highlighter-rouge">hashtable.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">void *findData(HashTable *table, void *key)</code> in <code class="language-plaintext highlighter-rouge">hashtable.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">unsigned int stringHash(void *s)</code> in <code class="language-plaintext highlighter-rouge">philspel.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">int stringEquals(void *s1, void *s2)</code> in <code class="language-plaintext highlighter-rouge">philspel.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">void readDictionary(char *dictName)</code> in <code class="language-plaintext highlighter-rouge">philspel.c</code></li>
+  <li><code class="language-plaintext highlighter-rouge">void processInput()</code> in <code class="language-plaintext highlighter-rouge">philspel.c</code></li>
+</ol>
+
+<p>We suggest working on the subparts in the order listed above. Also, note that you may NOT import additional files and that
+all your changes should be contained to <code class="language-plaintext highlighter-rouge">hashtable.c</code>, <code class="language-plaintext highlighter-rouge">hashtable.h</code>, and <code class="language-plaintext highlighter-rouge">philspel.c</code>.</p>
+
+<p>Remember to regularly check the piazza thread and pull from the <a href="https://github.com/61c-teach/su20-proj1-starter/tree/master">starter repo</a> to ensure that you get any updates/bug fixes.</p>
+
+<h3 id="testing-your-program">Testing your program</h3>
+
+<p>Also included in the repo is a sample dictionary, input, and output.  Your output
+should <strong>EXACTLY</strong> match ours, since we will be using automated
+scripts to grade your program.  Another useful dictionary for testing
+is contained in <code class="language-plaintext highlighter-rouge">/usr/dict/words</code> or <code class="language-plaintext highlighter-rouge">/usr/share/dict/words</code>
+depending on the system.  You can type <code class="language-plaintext highlighter-rouge">make test</code> in your
+project 1 directory to compile and test your program against the sample
+dictionary/input.  You can also safely output all sorts of debugging
+information to <code class="language-plaintext highlighter-rouge">stderr</code>, as this will be ignored by our scripts
+and by the test routine provided in the Makefile.</p>
+
+<p>Furthermore, you can initially assume that both the dictionary and the
+input won’t contain words longer than 60 characters.  This gets you the
+majority of the credit. However, for full credit, you must ensure
+that your program fully works even if you get words which are arbitrarily longer than
+60 characters.</p>
+
+<p>You should assume that the dictionary is well formatted (i.e., individual words 
+delimited by new lines) if it exists.  You CANNOT assume anything
+about what comes in through standard input except for the length of
+“words” for 80% credit.</p>
+
+<p><strong>Tip:</strong> Consider running your program under valgrind to detect
+any memory errors. For example, use <code class="language-plaintext highlighter-rouge">valgrind -q ./philspel ...</code> to
+have valgrind print out any invalid memory accesses it detects
+during the run. In C, it’s easy to write a program that appears to
+work correctly for simple tests, but which fails or crashes with larger
+inputs. Valgrind catches many of these hidden bugs that might otherwise appear only in the autograder.</p>
+
+<h3 id="submitting">Submitting</h3>
+
+<p>Please submit using <a href="https://www.gradescope.com/courses/92697/assignments/513153">Gradescope to Project 1</a>, using the GitHub submission option to ensure that your files are in the right place.</p>
+
+<p><strong>REMEMBER</strong>: the grading will be done almost entirely by automated
+scripts. We will be only using your <code class="language-plaintext highlighter-rouge">hashtable.c</code>, <code class="language-plaintext highlighter-rouge">hashtable.h</code>, and <code class="language-plaintext highlighter-rouge">philspel.c</code> files when grading! 
+Your output must exactly match the specified format, making correctness the primary goal of this project.  Upon submission, the
+autograder will give you the result of a basic sanity test but
+<strong>will not</strong> give you your complete grade.  Rather, you are responsible
+for developing any tests you need to make sure that you meet the
+requirements of the project.  We deliberately did not include a
+more comprehensive test. We want you to practice writing your own tests!</p>
+
+<p>You are to do this work individually.  It is OK to assist your
+classmates with their project, but don’t copy code, and don’t go
+searching for previous solutions!</p>
+
+<h3 id="faq">FAQ</h3>
+
+<h2 id="the-autograder-failed-to-execute-correctly">The autograder failed to execute correctly?!?!</h2>
+<p>This is typically due to you having a lot of print statements which will cause the autograder to hang or run out of memory when it is executing. If you run into this, please remove/comment out your print statements and resubmit. If you continue to have this issue after you have confirmed that you have done that <strong>AND</strong> you have confirmed that you pass the sanity test locally, please make a post on piazza <strong>with</strong> a link to your submission. If you do not include a link, we will not be able to easily find your submission!</p>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../../../assets/theme/theme.js"></script>
+  </body>
+</html>

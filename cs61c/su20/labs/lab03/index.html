@@ -1,0 +1,616 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../../../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../../../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../../../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../../../assets/favicon.png">
+    <link href="../../../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../../../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../../../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../../assets/bootstrap-toc.min.js"></script>
+    <script src="../../../assets/moment.min.js"></script>
+    <script src="../../../assets/fullcalendar.min.js"></script>
+    <script src="../../../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../../../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 3</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: Monday, July 6th</p>
+
+<h2 id="goals">Goals</h2>
+<ul>
+  <li>Practice running and debugging RISC-V assembly code.</li>
+  <li>Write RISC-V functions with the correct function calling procedure.</li>
+  <li>Get an idea of how to translate C code to RISC-V.</li>
+</ul>
+
+<h2 id="getting-the-files">Getting the files</h2>
+<p>To get the starter files for this lab, run the following command in your <code class="language-plaintext highlighter-rouge">labs</code>
+directory.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull starter master
+</code></pre></div></div>
+
+<p>If you get an error like the following:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: <span class="s1">'starter'</span> does not appear to be a git repository
+fatal: Could not <span class="nb">read </span>from remote repository.
+</code></pre></div></div>
+<p>make sure to set the starter remote as follows:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add starter https://github.com/61c-teach/su20-lab-starter.git
+</code></pre></div></div>
+<p>and run the original command again.</p>
+
+<h2 id="intro-to-assembly-with-risc-v-simulator">Intro to Assembly with RISC-V Simulator</h2>
+<p>So far, we have been dealing with C program files (<code class="language-plaintext highlighter-rouge">.c</code> file extension),
+and have been using the <code class="language-plaintext highlighter-rouge">gcc</code> compiler to execute these higher-level
+language programs. Now, we are learning about the RISC-V assembly
+language, which is a lower-level language much closer to machine code.
+For context, <code class="language-plaintext highlighter-rouge">gcc</code> takes the C code we write, first compiles this down
+to assembly code (e.g. x86, ARM), and then assembles this down to machine
+code/binary.</p>
+
+<p>In this lab, we will deal with several RISC-V assembly program files,
+each of which have a <code class="language-plaintext highlighter-rouge">.s</code> file extension. To run these, we will need to
+use <strong>Venus</strong>, a RISC-V simulator that you can find <a href="https://venus.cs61c.org/">here</a>.
+There is also a <code class="language-plaintext highlighter-rouge">.jar</code> version of Venus that we have provided in the <code class="language-plaintext highlighter-rouge">tools</code>
+folder under your base lab repository.</p>
+
+<h3 id="assemblyvenus-basics">Assembly/Venus Basics:</h3>
+<ul>
+  <li>Enter your code in the “Editor” tab</li>
+  <li>Programs start at the first line regardless of the label. That means
+that the <code class="language-plaintext highlighter-rouge">main</code> function must be put first.
+    <ul>
+      <li>Note: Sometimes, we want to pre-allocate some items in memory before the
+program starts executing (more on this in <a href="index.html#exercise-1-familiarizing-yourself-with-venus">Exercise 1</a>
+below!). Since this allocation isn’t actual code, we can place it before
+the <code class="language-plaintext highlighter-rouge">main</code> function.</li>
+    </ul>
+  </li>
+  <li>Programs end with an <code class="language-plaintext highlighter-rouge">ecall</code> with argument value 10. This signals
+for the program to exit. The <code class="language-plaintext highlighter-rouge">ecall</code> instructions are analogous to
+“System Calls” and allow us to do things such as print to the
+console or request chunks of memory from the heap.</li>
+  <li>Labels end with a colon (<code class="language-plaintext highlighter-rouge">:</code>).</li>
+  <li>Comments start with a pound sign (<code class="language-plaintext highlighter-rouge">#</code>).</li>
+  <li>You CANNOT put more than one instruction per line.</li>
+  <li>When you are done editing, click the “Simulator” tab to prepare for
+execution.</li>
+</ul>
+
+<p><strong>For the following exercises, please save your completed code in a file
+on your local machine. Otherwise, we will have no proof that you
+completed the lab exercises.</strong></p>
+
+<h2 id="exercise-1-familiarizing-yourself-with-venus">Exercise 1: Familiarizing yourself with Venus</h2>
+
+<p>Getting started:</p>
+
+<ol>
+  <li>Paste the contents of <code class="language-plaintext highlighter-rouge">ex1.s</code> into the Venus editor.</li>
+  <li>Click the “Simulator” tab and click the “Assemble &amp; Simulate from Editor” button.
+This will prepare the code you wrote for execution. If you click back to the
+“Editor” tab, your simulation will be reset.</li>
+  <li>In the simulator, to execute the next instruction, click the “step”
+button.</li>
+  <li>To undo an instruction, click the “prev” button.</li>
+  <li>To run the program to completion, click the “run” button.</li>
+  <li>To reset the program from the start, click the “reset” button.</li>
+  <li>The contents of all 32 registers are on the right-hand side, and the
+console output is at the bottom</li>
+  <li>To view the contents of memory, click the “Memory” tab on the right.
+You can navigate to different portions of your memory using the
+dropdown menu at the bottom.</li>
+</ol>
+
+<h3 id="action-item">Action Item</h3>
+<p>Paste the contents of <code class="language-plaintext highlighter-rouge">ex1.s</code> in Venus and record your answers to the following
+questions. Some of the questions will require you to run the RISC-V code using
+Venus’ simulator tab.</p>
+
+<ol>
+  <li>What do the <code class="language-plaintext highlighter-rouge">.data</code>, <code class="language-plaintext highlighter-rouge">.word</code>, <code class="language-plaintext highlighter-rouge">.text</code> directives mean (i.e. what do
+you use them for)? <em>Hint</em>: think about the 4 sections of memory.</li>
+  <li>Run the program to completion. What number did the program output?
+What does this number represent?</li>
+  <li>At what address is <code class="language-plaintext highlighter-rouge">n</code> stored in memory? <strong>Hint</strong>: Look at the
+contents of the registers.</li>
+  <li>Without actually editing the code (i.e. without going into the “Editor” tab),
+have the program calculate the 13th fib number (0-indexed) by <em>manually</em>
+modifying the value of a register. You may find it helpful to first step
+through the code. If you prefer to look at decimal values, change the “Display
+Settings” option at the bottom.</li>
+</ol>
+
+<h2 id="exercise-2-translating-from-c-to-risc-v">Exercise 2: Translating from C to RISC-V</h2>
+
+<p>Open the files <code class="language-plaintext highlighter-rouge">ex2.c</code> and <code class="language-plaintext highlighter-rouge">ex2.s</code>. The assembly code provided (.s file) is a
+translation of the given C program into RISC-V.</p>
+
+<h3 id="action-item-1">Action Item</h3>
+<p>Find/explain the following components of this assembly file.</p>
+<ul>
+  <li>The register representing the variable <code class="language-plaintext highlighter-rouge">k</code>.</li>
+  <li>The register representing the variable <code class="language-plaintext highlighter-rouge">sum</code>.</li>
+  <li>The registers acting as pointers to the <code class="language-plaintext highlighter-rouge">source</code> and <code class="language-plaintext highlighter-rouge">dest</code> arrays.</li>
+  <li>The assembly code for the loop found in the C code.</li>
+  <li>How the pointers are manipulated in the assembly code.</li>
+</ul>
+
+<h2 id="exercise-3-factorial">Exercise 3: Factorial</h2>
+
+<p>In this exercise, you will be implementing the <code class="language-plaintext highlighter-rouge">factorial</code> function in RISC-V.
+This function takes in a single integer parameter <code class="language-plaintext highlighter-rouge">n</code> and returns <code class="language-plaintext highlighter-rouge">n!</code>. A stub of
+this function can be found in the file <code class="language-plaintext highlighter-rouge">factorial.s</code>.</p>
+
+<p>You will only need to add instructions under the <code class="language-plaintext highlighter-rouge">factorial</code> label, and
+the argument that is passed into the function is configured to be
+located at the label <code class="language-plaintext highlighter-rouge">n</code>. You may solve this problem using either
+recursion or iteration.</p>
+
+<h3 id="testing">Testing</h3>
+<p>As a sanity check, you should make sure your function properly returns
+that <code class="language-plaintext highlighter-rouge">3! = 6</code>, <code class="language-plaintext highlighter-rouge">7! = 5040</code> and <code class="language-plaintext highlighter-rouge">8! = 40320</code>.</p>
+
+<p>You have the option to test this using the online version of Venus, but we’ve
+provided a <code class="language-plaintext highlighter-rouge">.jar</code> for you to test locally! We’ll be using the <code class="language-plaintext highlighter-rouge">.jar</code> in the
+autograder so make sure to update your <code class="language-plaintext highlighter-rouge">factorial.s</code> file and run the following
+command before you submit to verify that the output is correct. Note that you
+will need to have java installed to run this command.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> tools/venus.jar lab03/factorial.s
+</code></pre></div></div>
+
+<h2 id="exercise-4-risc-v-function-calling-with-map">Exercise 4: RISC-V function calling with <code class="language-plaintext highlighter-rouge">map</code></h2>
+
+<p>This exercise uses the file <code class="language-plaintext highlighter-rouge">list_map.s</code>.</p>
+
+<p>In this exercise, you will complete an implementation of <a href="https://en.wikipedia.org/wiki/Map_(higher-order_function)"><code class="language-plaintext highlighter-rouge">map</code></a>
+on linked-lists in RISC-V. Our function will be simplified to mutate the
+list in-place, rather than creating and returning a new list with the
+modified values.</p>
+
+<p>You will find it helpful to refer to the <a href="https://cs61c.org/resources/pdf?file=riscvcard.pdf">RISC-V green
+card</a> to
+complete this exercise. If you encounter any instructions or
+pseudo-instructions you are unfamiliar with, use this as a resource.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">map</code> procedure will take two parameters; the first parameter will
+be the address of the head node of a singly-linked list whose values are
+32-bit integers. So, in C, the structure would be defined as:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Our second parameter will be the <strong>address of a function</strong> that takes
+one int as an argument and returns an int. We’ll use the <code class="language-plaintext highlighter-rouge">jalr</code> RISC-V
+instruction to call this function on the list node values.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">map</code> function will recursively go down the list, applying the
+function to each value of the list and storing the value returned in
+that corresponding node. In C, the function would be something like
+this:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">map</span><span class="p">(</span><span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">f</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">head</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+    <span class="n">map</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span><span class="n">f</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you haven’t seen the <code class="language-plaintext highlighter-rouge">int (*f)(int)</code> kind of declaration before,
+don’t worry too much about it. Basically it means that <code class="language-plaintext highlighter-rouge">f</code> is a pointer
+to a function, which, in C, can then be used exactly like any other
+function.</p>
+
+<p>There are exactly nine (9) markers (8 in <code class="language-plaintext highlighter-rouge">map</code> and 1 in <code class="language-plaintext highlighter-rouge">main</code>) in the
+provided code where it says <code class="language-plaintext highlighter-rouge">YOUR CODE HERE</code>.</p>
+
+<h3 id="action-item-2">Action Item</h3>
+<p>Complete the implementation of <code class="language-plaintext highlighter-rouge">map</code> by filling out each of these nine markers
+with the appropriate code. Furthermore, provide a sample call to <code class="language-plaintext highlighter-rouge">map</code> with <code class="language-plaintext highlighter-rouge">square</code>
+as the function argument. There are comments in the code that explain what should
+be accomplished at each marker. When you’ve filled in these instructions, running
+the code should provide you with the following output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>9 8 7 6 5 4 3 2 1 0
+81 64 49 36 25 16 9 4 1 0
+</code></pre></div></div>
+<p>The first line is the original list, and the second line is the modified
+list after the map function (in this case square) is applied.</p>
+
+<h3 id="testing-1">Testing</h3>
+<p>To test this locally, run the following command in your root lab directory (much
+like the one for <code class="language-plaintext highlighter-rouge">factorial.s</code>):</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> tools/venus.jar lab03/list_map.s
+</code></pre></div></div>
+
+<h2 id="transitioning-to-more-complex-risc-v-programs">Transitioning to More Complex RISC-V Programs.</h2>
+<p>Once we begin to write more complex RISC-V programs, it will become necessary
+to split our code into multiple files and debug/test them individually. This is
+impossible to do in the regular Venus web editor, but if we open the “Venus” tab,
+we’ll see that there is an online web terminal (with a corresponding virtual
+filesystem) that we can use to edit and test multiple files at once.</p>
+
+<p><strong>Note:</strong> To ensure that you don’t lose any of your work, make sure to save local
+copies of your files <em>frequently</em>.</p>
+
+<h3 id="working-with-multiple-files">Working with Multiple Files</h3>
+<ul>
+  <li>The way we work with multiple files in RISC-V is with the <code class="language-plaintext highlighter-rouge">.import</code> and <code class="language-plaintext highlighter-rouge">.globl</code>
+keywords.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">.globl</code> keyword can be placed in a file and defines the labels we want
+to expose to other files when they import this file; it’s analogous to defining
+a function in a header file.
+    <ul>
+      <li>If you open the <code class="language-plaintext highlighter-rouge">factorial.s</code> file, you’ll notice that we export your
+<code class="language-plaintext highlighter-rouge">factorial</code> label at the top with the <code class="language-plaintext highlighter-rouge">.globl factorial</code> line at the top.
+This is actually how the autograder tests your function so don’t remove it!</li>
+    </ul>
+  </li>
+  <li>The <code class="language-plaintext highlighter-rouge">.import</code> line allows us to import other files into the current one.
+Specifically, it will import only the labels that the file specifies with the
+<code class="language-plaintext highlighter-rouge">.globl</code> keyword. So, if we wanted to import the <code class="language-plaintext highlighter-rouge">factorial</code> label in a
+different file, we would add the line <code class="language-plaintext highlighter-rouge">.import factorial.s</code> at the top of the
+new file.</li>
+</ul>
+
+<h3 id="using-the-venus-web-terminal">Using the Venus Web Terminal</h3>
+<ul>
+  <li>So far, we’ve spent most of our time in the <code class="language-plaintext highlighter-rouge">Editor</code> and <code class="language-plaintext highlighter-rouge">Simulator</code> tabs on
+Venus.</li>
+  <li>If we open the <code class="language-plaintext highlighter-rouge">Venus</code> tab, we’ll see a terminal-looking interface. Entering
+<code class="language-plaintext highlighter-rouge">help</code> will show us some of the commands we can run in this terminal environment.</li>
+  <li>The commands you’ll likely use most are <code class="language-plaintext highlighter-rouge">ls</code>, <code class="language-plaintext highlighter-rouge">touch</code>, <code class="language-plaintext highlighter-rouge">edit</code>, <code class="language-plaintext highlighter-rouge">upload</code>, and
+<code class="language-plaintext highlighter-rouge">download</code>.
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ls</code>: Lists the contents of the current directory.</li>
+      <li><code class="language-plaintext highlighter-rouge">touch</code>: Creates a new empty file that we can modify later.</li>
+      <li><code class="language-plaintext highlighter-rouge">edit</code>: Opens up the specified file in the “Editor” tab (Ex. <code class="language-plaintext highlighter-rouge">edit file.s</code>).
+Note that the <kbd>Cmd</kbd> + <kbd>S</kbd> and <kbd>Ctrl</kbd> + <kbd>S</kbd>
+shortcuts will work to save the file in the virtual filesystem if you
+choose to edit a different file later. But, to ensure that your work is
+saved, we recommend that you periodically save local copies of every file.</li>
+      <li><code class="language-plaintext highlighter-rouge">upload</code>: Opens a prompt to upload files from our local computer to the
+virtual filesystem. You can hold down the <kbd>Ctrl</kbd> or <kbd>Cmd</kbd>
+keys to select multiple files to upload. Once a file is uploaded, we can
+edit it in the Venus editor using the <code class="language-plaintext highlighter-rouge">edit</code> command.</li>
+      <li><code class="language-plaintext highlighter-rouge">download</code>: Downloads the specified files locally. You can specify multiple
+files to download, e.g. <code class="language-plaintext highlighter-rouge">download file1.s file2.s</code>, and each one will have
+a corresponding prompt to ask you where to download the files.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="passing-in-command-line-arguments">Passing in Command Line Arguments</h3>
+<ul>
+  <li>If you’re working locally, then the Venus jar will interpret anything after
+the filename and relevant flags to be command-line arguments. For instance,
+if our <code class="language-plaintext highlighter-rouge">factorial.s</code> accepted command-line arguments, we could run the following:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>java <span class="nt">-jar</span> tools/venus.jar lab03/factorial.s arg1 arg2 arg3
+</code></pre></div>    </div>
+  </li>
+  <li>If Venus detects that command-line arguments are being passed, then it will
+set <code class="language-plaintext highlighter-rouge">a0</code> to be the equivalent of <code class="language-plaintext highlighter-rouge">argc</code> and <code class="language-plaintext highlighter-rouge">a1</code> to be the equivalent of <code class="language-plaintext highlighter-rouge">argv</code>.</li>
+  <li>We can pass command-line arguments to our programs by using the “Simulator
+Default Args” field and then you can run the program using those arguments by
+going to the “Simulator” tab.</li>
+</ul>
+
+<h2 id="checkoff">Checkoff</h2>
+<p>Please submit to the Lab Autograder assignment (same as last week!).</p>
+
+<p>Checkoff questions for lab 4:</p>
+<ul>
+  <li>Make sure you understand and can answer the questions in exercises 1 and 2!</li>
+</ul>
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../../../assets/theme/theme.js"></script>
+  </body>
+</html>

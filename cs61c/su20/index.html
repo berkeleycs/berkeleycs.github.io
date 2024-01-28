@@ -1,0 +1,4970 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <link href="../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/bootstrap-toc.min.js"></script>
+    <script src="../assets/moment.min.js"></script>
+    <script src="../assets/fullcalendar.min.js"></script>
+    <script src="../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              
+
+
+
+<h2>
+    Great Ideas in Computer Architecture (Machine Structures)
+</h2>
+<h5 class="text-muted">
+    CS 61C at UC Berkeley with Stephan Kaminsky, Sean Farhat, Jenny Song - Summer 2020
+</h5>
+
+<p>Lecture: Online</p>
+
+<p>
+    Textbooks:
+    <ul>
+        <li><i>Computer Organization and Design RISC-V Edition, 1st ed.</i> by David Patterson, and John Hennessy</li>
+        <li><i>The C Programming Language, 2nd ed. </i> by Brian Kernighan and Dennis Ritchie</li>
+        <li><i>The Datacenter as a Computer</i> by Luiz André Barroso and Urs Hölzle, freely available <a href="https://cs61c.org/resources/pdf?file=WSCBarrosoHolzle.pdf">here</a></li>
+</p>
+
+
+<ul class="nav nav-tabs mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-by-week-tab" data-toggle="pill" href="index.html#by-week" role="tab" aria-controls="pills-by-week" aria-selected="true">By Week</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-lectures-tab" data-toggle="pill" href="index.html#lectures" role="tab" aria-controls="pills-lectures" aria-selected="false">Lectures</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-sections-tab" data-toggle="pill" href="index.html#discussions" role="tab" aria-controls="pills-sections" aria-selected="false">Discussions</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-labs-tab" data-toggle="pill" href="index.html#labs" role="tab" aria-controls="pills-labs" aria-selected="false">Labs</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-homeworks-tab" data-toggle="pill" href="index.html#hws" role="tab" aria-controls="pills-homeworks" aria-selected="false">Homeworks</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-project-tab" data-toggle="pill" href="index.html#projects" role="tab" aria-controls="pills-projects" aria-selected="false">Projects</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-exams-tab" data-toggle="pill" href="index.html#exams" role="tab" aria-controls="pills-exams" aria-selected="false">Exams</a>
+    </li>
+</ul>
+
+
+
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="by-week" role="tabpanel" aria-labelledby="pills-by-week-tab">
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 1</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 1</a></h5>
+            <span class="text-muted float-right">6/22</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520304">Intro, Number Representation</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqgoMQvogzmf7CKiSMSUS3M"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec01.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H 2.4, Binary slides
+                
+            
+            
+                
+                    , <a href = "policies.html">Course Policies</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 2</a></h5>
+            <span class="text-muted float-right">6/23</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520388">C Intro, Pointers</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aowA1mCateGNDJy0DTt_QaT"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec02.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: K&R Ch. 1-5, Brian Harvey's Intro to C
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 3</a></h5>
+            <span class="text-muted float-right">6/24</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520784">C Arrays, Strings</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aozC54gHfEbBrcx8qf8XNo0"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec03.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: K&R Ch. 5-6
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 4</a></h5>
+            <span class="text-muted float-right">6/25</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520472">C Memory Management</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqxW0XGUcDl5r0m_eRU30C9"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec04.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: K&R Ch. 7.8.5, 8.7
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc01.pdf.html">Discussion 1: Number Representation</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc01_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aobgYlRzG8wXzs_yd7B4bSX" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab00/index.html">Lab 0: Intro and Set Up</a></h5></li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="disc/index.html%3Ffile=disc02.pdf.html">Discussion 2: C Basics</a>
+                
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc02_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0ao_QvcWaaQt6etx-EMhmv04" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="labs/lab01/index.html">Lab 1: Number Rep, C and CGDB</a></h5></li>
+            
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512310">
+                    Homework 1: Number Rep<br /> Due 6/26</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512311">
+                    Homework 2: C Concepts<br /> Due 6/30</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a 
+            href="projects/proj1/index.html">
+                    Project 1 </a> Due 7/1</li>
+                
+            
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 2</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 5</a></h5>
+            <span class="text-muted float-right">6/29</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520785">Floating Point</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apCExy6OTfkoaciJtfA8hir"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec05.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:3.5, 3.9
+                
+            
+            
+                
+                    , IEEE 754 Simulator
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 6</a></h5>
+            <span class="text-muted float-right">6/30</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520571">Intro to Assembly Language, RISC-V Intro</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqsesqf46rxjtV2mkiwJOmr"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec06.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.1-2.3, 2.9-2.10
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 7</a></h5>
+            <span class="text-muted float-right">7/1</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520788">RISC-V, RISC-V Functions</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apCzwwwJGKn2p57tnhtSIIz"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec07.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.6-2.8, 3.2
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 8</a></h5>
+            <span class="text-muted float-right">7/2</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520672">RISC-V Instruction Formats</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apqzuxnUN2fkwt1IGbu3km3"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec08.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.5, 2.10
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc03.pdf.html">Discussion 3: Floating Point</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc03_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apBxaI-vf9HQ8WEN-Nu4nh3" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab02/index.html">Lab 2: Advanced C</a></h5></li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="disc/index.html%3Ffile=disc04.pdf.html">Discussion 4: RISC-V Intro, RISC-V Control Flow, ISA</a>
+                
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc04_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0arTlqjMnWQHcin30gVNrOI3" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="labs/lab03/index.html">Lab 3: RISC-V Assembly</a></h5></li>
+            
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512312">
+                    Homework 3: Floating Point<br /> Due 7/2</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512313">
+                    Homework 4: RISC-V<br /> Due 7/7</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a 
+            href="projects/proj2/index.html">
+                    Project 2 </a> Due A: 7/8 B: 7/12</li>
+                
+            
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 3</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 9</a></h5>
+            <span class="text-muted float-right">7/6</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520737">Compiler, Assembler, Linker, Loader (CALL)</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aoprCVNj3PG1kx7DTm3Qs6q"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec09.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.12
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 10</a></h5>
+            <span class="text-muted float-right">7/7</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520789">Combinational Digital Logic</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0ap04XFOxcFT2_Bflnz_RHWU"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec10.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: SDS Handout
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 11</a></h5>
+            <span class="text-muted float-right">7/8</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520790">Sequential Digital Logic</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arH8SCGZilk8Wn_2B45SOpW"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec11.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:A.3-A.6
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=state.pdf">State Handout</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+        
+        
+            <h5 class="float-left">Midterm 1</h5> 
+            <span class="text-muted float-right">7/9</span>
+            <div class="clearfix"></div>
+            <p class="card-text">Up to CALL</p>
+            <p></p>[<a href="https://cs61c.org/resources/exam?file=Su20_MT1_Blank.pdf"> Blank </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_MT1_Solutions.pdf"> Solutions </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_MT1_Blank_full.pdf"> Blank Full </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_MT1_Solutions_full.pdf"> Solutions Full </a>]
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc05.pdf.html">Discussion 5: RISC-V Procedures, CALL</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc05_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aqvQWKrEgfGjG4mzOWUl3Pm" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab04/index.html">Lab 4: RISCV Functions, Pointers</a></h5></li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="disc/index.html%3Ffile=disc06.pdf.html">Discussion 6: SDS, Logic, FSM</a>
+                
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc06_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0ap5iwJeUPvhCztEoyHq_6Gl" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512314">
+                    Homework 5: Logic, Timing<br /> Due 7/13</a></li>
+                
+            
+        
+
+        
+
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 4</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 12</a></h5>
+            <span class="text-muted float-right">7/13</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520760">RISC-V Datapath, Single-Cycle Control Intro</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arQ_gDRnVS4ams3sUajgfEL"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec12.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:4.1. 4.3
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 13</a></h5>
+            <span class="text-muted float-right">7/14</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520791">RISC-V Single-Cycle Control and Pipelining</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apjGBdVO4989kHARdZdfJz3"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec13.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:4.4
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 14</a></h5>
+            <span class="text-muted float-right">7/15</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520792">RISC-V 5-Stage Pipeline / Hazards</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aq-xpoKcmd7X9w-l6KHiNMa"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec14.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:4.6-4.10
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 15</a></h5>
+            <span class="text-muted float-right">7/16</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520793">Memory Hierarchy, Fully Associative Caches</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arMfAYMi7nskp5R79kgzlMB"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec15.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.1-4, 5.8-5.9, 5.13
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=caches.pdf">Cache Flowchart</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc07.pdf.html">Discussion 7: Single-Cycle Datapath</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc07_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apPh3q-08JQmJAHV0WgeUHo" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab05/index.html">Lab 5: Logisim</a></h5></li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="disc/index.html%3Ffile=disc08.pdf.html">Discussion 8: Pipelining and Hazards</a>
+                
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc08_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aozBSYRnKeYP-1v3ljnbL4g" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="labs/lab06/index.html">Lab 6: Pipelining and CPU, Mid Semester Survey</a></h5></li>
+            
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512315">
+                    Homework 6: RISC-V Datapath<br /> Due 7/17</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512316">
+                    Homework 7: Caches<br /> Due 7/22</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a 
+            href="projects/proj3/index.html">
+                    Project 3 </a> Due A: 7/16 B: 7/24</li>
+                
+            
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 5</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 16</a></h5>
+            <span class="text-muted float-right">7/20</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520794">Caches– Direct-mapped, set-associative</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apRiQ2QPjzyq8APGEjnqW1w"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec16.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.1-5.4, 5.8-5.9, 5.13
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=caches.pdf">Cache Flowchart</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 17</a></h5>
+            <span class="text-muted float-right">7/21</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520795">Mutilevel Caches, Cache Questions</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqHsuO6U2bIpwDGqO6UAetk"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec17.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.1-5.4, 5.8-5.9, 5.13
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=caches.pdf">Cache Flowchart</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 18</a></h5>
+            <span class="text-muted float-right">7/22</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520796">Operating Systems & Virtual Memory</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arq3vh2gcLvr5isLK4CuK3B"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec18.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 19</a></h5>
+            <span class="text-muted float-right">7/23</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520797">Virtual Memory</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0ar2Wia7JngBFMmwRlr4s79j"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec19.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.7-5.8
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc09.pdf.html">Discussion 9: Caches</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc09_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apudm8o_Qlk2X5-_KYE0js7" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab07/index.html">Lab 7: Caches</a></h5></li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="disc/index.html%3Ffile=disc10.pdf.html">Discussion 10: I/O, OS</a>
+                
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc10_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0arhledTsZUC46wi0uxYg-7N" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="labs/lab08/index.html">Lab 8: Virtual Memory</a></h5></li>
+            
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/515715">
+                    Homework 8: OS and I/O<br /> Due 7/28</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512317">
+                    Homework 9: Virtual Memory<br /> Due 7/28</a></li>
+                
+            
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a 
+            href="projects/proj4/index.html">
+                    Project 4 </a> Due 8/6</li>
+                
+            
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 6</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 20</a></h5>
+            <span class="text-muted float-right">7/27</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520799">Virtual Memory and I/O</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arYaPnLHJjk9BeoxvQVWLbR"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec20.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 21</a></h5>
+            <span class="text-muted float-right">7/28</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520800">Flynn Taxonomy, Data-Level Parallelism</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aozlyJaopsp-SahQXLjJpmG"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec21.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.11, 4.10, 5.10, 6.5
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+        
+        
+            <h5 class="float-left">Midterm 2</h5> 
+            <span class="text-muted float-right">7/29</span>
+            <div class="clearfix"></div>
+            <p class="card-text">Up to Virtual Memory</p>
+            <p></p>[<a href="https://cs61c.org/resources/exam?file=Su20_MT2_Blank.pdf"> Blank </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_MT2_Solutions.pdf"> Solutions </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_MT2_Blank_full.pdf"> Blank Full </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_MT2_Solutions_full.pdf"> Solutions Full </a>]
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 22</a></h5>
+            <span class="text-muted float-right">7/30</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520801">Amdahl's Law, Thread-level Parallelism, OpenMP Introduction</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqQPRPSUFfu9qNXJUwWUBmT"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec22.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.11, 4.10, 5.10, 6.5
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=OpenMP3.0-SummarySpec.pdf">OpenMP Summary Card</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc11.pdf.html">Discussion 11: Virtual Memory</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc11_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0arDz-b6KFhe9oCX1-FScCQ8" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab09/index.html">Lab 9: SIMD Instructions</a></h5></li>
+            
+        
+        
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512318">
+                    Homework 10: Performance Programming and Dependability<br /> Due 8/10</a></li>
+                
+            
+        
+
+        
+
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 7</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 23</a></h5>
+            <span class="text-muted float-right">8/3</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520802">Multithreading Issues, Cache Coherency</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqgj_8Og51XoE7iyAu5yEWZ"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec23.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: <a href = "https://cs61c.org/resources/pdf?file=WSCBarrosoHolzle.pdf">The Datacenter as a Computer:Ch 1, Ch 2.4, Ch 3, 5.1-5.3</a>
+                
+            
+            
+                
+                    , P&H:6.7
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 24</a></h5>
+            <span class="text-muted float-right">8/4</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520803">Warehouse Scale Computing, MapReduce (Spark)</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0ao8VjBQvFV4oFTAAzqQz5w4"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec24.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: <a href = "https://cs61c.org/resources/pdf?file=WSCBarrosoHolzle.pdf">The Datacenter as a Computer:Ch 1, Ch 2.4, Ch 3, 5.1-5.3</a>
+                
+            
+            
+                
+                    , P&H:6.7
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 25</a></h5>
+            <span class="text-muted float-right">8/5</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520804">Dependability and Redundancy</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aql_X8AxtE8Ib8ZVD9bw4ud"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec25.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H 5.2, 5.5, 5.11
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc12.pdf.html">Discussion 12: AMAT, Data-level Parallelism</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc12_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aolzh-w1GJJE6DJ9cucFnCF" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="labs/lab10/index.html">Lab 10: Thread Level Parallelism</a></h5></li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="disc/index.html%3Ffile=disc13.pdf.html">Discussion 13: Coherency and Atomic, Parallelism</a>
+                
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc13_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apxw1Ns7BhNV4nvrnagGGqW" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        <li class = "list-group-item">
+            
+                <a class="card-link" href="labs/lab11/index.html">Lab 11: Spark / Dependability</a></h5></li>
+            
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+            
+                
+                <li class = "list-group-item"> <a class="card-link" href="https://www.gradescope.com/courses/92697/assignments/512319">
+                    Homework 11: ECC, Parity & Potpourri<br /> Due 8/10</a></li>
+                
+            
+        
+
+        
+
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+            
+            <!--  -->
+    
+<div class="card-group py-0">
+
+    
+    
+        <div class="bg-light col-sm-auto wk-number p-2">
+            <h5 class="card-title"> Week 8</h5>
+        </div>
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 26</a></h5>
+            <span class="text-muted float-right">8/10</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520805">Summary</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arRgR8-E2A6QqQ_VNY6g8nS"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec26.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+
+    
+
+    
+    
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+            <h5 class="float-left"> Lec </a></h5>
+            <span class="text-muted float-right">8/12</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    Using Buffer Overflows to Speedrun Super Mario Bros. 3
+                
+                
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: <a href = https://cs161.org/>Optional lecture from CS161 from 5-6pm PT</a>
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+    
+    <div class="card">
+    <div class="card-body 
+    
+    ">
+        
+        
+        
+        
+            <h5 class="float-left">Final </h5> 
+            <span class="text-muted float-right">8/13</span>
+            <div class="clearfix"></div>
+            <p class="card-text">Covers all material</p>
+            <p></p>[<a href="https://cs61c.org/resources/exam?file=Su20_Final_Blank.pdf"> Blank </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_Final_Solutions.pdf"> Solutions </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_Final_Blank_full.pdf"> Blank Full </a>]<br> [<a href="https://cs61c.org/resources/exam?file=Su20_Final_Solutions_full.pdf"> Solutions Full </a>]
+        
+
+        
+        
+    </div>
+    
+</div>
+
+    
+
+    
+
+    <div class="card">
+	<div class="card-header">
+    	Materials
+  	</div>
+    <ul class="list-group list-group-flush">
+        
+        
+        
+        <li class = "list-group-item">
+        	
+        		<a class="card-link" href="disc/index.html%3Ffile=disc14.pdf.html">Discussion 14: WSC, RAID, (Spark, Map Reduce), Parity & ECC</a> 
+
+                
+                    (<a class="card-link " href="disc/index.html%3Ffile=disc14_sol.pdf.html" style="margin-left: 0em;">Solutions</a>, <a class="card-link " href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aorIVzibQ4C6tj5q4JutsEA" style="margin-left: 0em;">Video</a>)
+                
+            </li>
+            
+        
+        
+        
+        
+    </ul>
+</div>
+
+    
+
+
+<div class="card" style="width: 50%">
+    <div class="card-header">
+        Assignments
+        </div>
+    <ul class="list-group list-group-flush">
+        
+
+        
+
+        
+
+        
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+        
+    </div>
+    <div class="tab-pane fade" id="lectures" role="tabpanel" aria-labelledby="pills-lectures-tab">
+        <div class="row">
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 1</a></h5>
+            <span class="text-muted float-right">6/22</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520304">Intro, Number Representation</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqgoMQvogzmf7CKiSMSUS3M"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec01.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H 2.4, Binary slides
+                
+            
+            
+                
+                    , <a href = "policies.html">Course Policies</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 1 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 2</a></h5>
+            <span class="text-muted float-right">6/23</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520388">C Intro, Pointers</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aowA1mCateGNDJy0DTt_QaT"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec02.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: K&R Ch. 1-5, Brian Harvey's Intro to C
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 1 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 3</a></h5>
+            <span class="text-muted float-right">6/24</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520784">C Arrays, Strings</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aozC54gHfEbBrcx8qf8XNo0"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec03.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: K&R Ch. 5-6
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 1 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 4</a></h5>
+            <span class="text-muted float-right">6/25</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520472">C Memory Management</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqxW0XGUcDl5r0m_eRU30C9"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec04.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: K&R Ch. 7.8.5, 8.7
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 1 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 5</a></h5>
+            <span class="text-muted float-right">6/29</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520785">Floating Point</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apCExy6OTfkoaciJtfA8hir"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec05.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:3.5, 3.9
+                
+            
+            
+                
+                    , IEEE 754 Simulator
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 2 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 6</a></h5>
+            <span class="text-muted float-right">6/30</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520571">Intro to Assembly Language, RISC-V Intro</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqsesqf46rxjtV2mkiwJOmr"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec06.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.1-2.3, 2.9-2.10
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 2 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 7</a></h5>
+            <span class="text-muted float-right">7/1</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520788">RISC-V, RISC-V Functions</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apCzwwwJGKn2p57tnhtSIIz"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec07.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.6-2.8, 3.2
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 2 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 8</a></h5>
+            <span class="text-muted float-right">7/2</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520672">RISC-V Instruction Formats</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apqzuxnUN2fkwt1IGbu3km3"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec08.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.5, 2.10
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 2 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 9</a></h5>
+            <span class="text-muted float-right">7/6</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520737">Compiler, Assembler, Linker, Loader (CALL)</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aoprCVNj3PG1kx7DTm3Qs6q"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec09.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.12
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 3 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 10</a></h5>
+            <span class="text-muted float-right">7/7</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520789">Combinational Digital Logic</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0ap04XFOxcFT2_Bflnz_RHWU"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec10.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: SDS Handout
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 3 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 11</a></h5>
+            <span class="text-muted float-right">7/8</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520790">Sequential Digital Logic</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arH8SCGZilk8Wn_2B45SOpW"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec11.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:A.3-A.6
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=state.pdf">State Handout</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 3 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 12</a></h5>
+            <span class="text-muted float-right">7/13</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520760">RISC-V Datapath, Single-Cycle Control Intro</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arQ_gDRnVS4ams3sUajgfEL"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec12.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:4.1. 4.3
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 4 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 13</a></h5>
+            <span class="text-muted float-right">7/14</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520791">RISC-V Single-Cycle Control and Pipelining</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apjGBdVO4989kHARdZdfJz3"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec13.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:4.4
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 4 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 14</a></h5>
+            <span class="text-muted float-right">7/15</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520792">RISC-V 5-Stage Pipeline / Hazards</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aq-xpoKcmd7X9w-l6KHiNMa"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec14.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:4.6-4.10
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 4 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 15</a></h5>
+            <span class="text-muted float-right">7/16</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520793">Memory Hierarchy, Fully Associative Caches</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arMfAYMi7nskp5R79kgzlMB"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec15.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.1-4, 5.8-5.9, 5.13
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=caches.pdf">Cache Flowchart</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 4 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 16</a></h5>
+            <span class="text-muted float-right">7/20</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520794">Caches– Direct-mapped, set-associative</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0apRiQ2QPjzyq8APGEjnqW1w"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec16.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.1-5.4, 5.8-5.9, 5.13
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=caches.pdf">Cache Flowchart</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 5 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 17</a></h5>
+            <span class="text-muted float-right">7/21</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520795">Mutilevel Caches, Cache Questions</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqHsuO6U2bIpwDGqO6UAetk"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec17.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.1-5.4, 5.8-5.9, 5.13
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=caches.pdf">Cache Flowchart</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 5 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 18</a></h5>
+            <span class="text-muted float-right">7/22</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520796">Operating Systems & Virtual Memory</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arq3vh2gcLvr5isLK4CuK3B"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec18.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 5 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 19</a></h5>
+            <span class="text-muted float-right">7/23</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520797">Virtual Memory</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0ar2Wia7JngBFMmwRlr4s79j"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec19.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:5.7-5.8
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 5 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 20</a></h5>
+            <span class="text-muted float-right">7/27</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520799">Virtual Memory and I/O</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arYaPnLHJjk9BeoxvQVWLbR"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec20.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 6 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 21</a></h5>
+            <span class="text-muted float-right">7/28</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520800">Flynn Taxonomy, Data-Level Parallelism</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aozlyJaopsp-SahQXLjJpmG"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec21.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.11, 4.10, 5.10, 6.5
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 6 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 22</a></h5>
+            <span class="text-muted float-right">7/30</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520801">Amdahl's Law, Thread-level Parallelism, OpenMP Introduction</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqQPRPSUFfu9qNXJUwWUBmT"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec22.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H:2.11, 4.10, 5.10, 6.5
+                
+            
+            
+                
+                    , <a href = "https://cs61c.org/resources/pdf?file=OpenMP3.0-SummarySpec.pdf">OpenMP Summary Card</a>
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 6 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 23</a></h5>
+            <span class="text-muted float-right">8/3</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520802">Multithreading Issues, Cache Coherency</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aqgj_8Og51XoE7iyAu5yEWZ"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec23.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: <a href = "https://cs61c.org/resources/pdf?file=WSCBarrosoHolzle.pdf">The Datacenter as a Computer:Ch 1, Ch 2.4, Ch 3, 5.1-5.3</a>
+                
+            
+            
+                
+                    , P&H:6.7
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 7 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 24</a></h5>
+            <span class="text-muted float-right">8/4</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520803">Warehouse Scale Computing, MapReduce (Spark)</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0ao8VjBQvFV4oFTAAzqQz5w4"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec24.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: <a href = "https://cs61c.org/resources/pdf?file=WSCBarrosoHolzle.pdf">The Datacenter as a Computer:Ch 1, Ch 2.4, Ch 3, 5.1-5.3</a>
+                
+            
+            
+                
+                    , P&H:6.7
+                
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 7 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 25</a></h5>
+            <span class="text-muted float-right">8/5</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520804">Dependability and Redundancy</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0aql_X8AxtE8Ib8ZVD9bw4ud"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec25.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: P&H 5.2, 5.5, 5.11
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 7 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+            
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec 26</a></h5>
+            <span class="text-muted float-right">8/10</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    <a href = "https://www.gradescope.com/courses/92697/assignments/520805">Summary</a>
+                
+                
+                    <br> [<a href = "https://www.youtube.com/playlist?list=PLDoI-XvXO0arRgR8-E2A6QqQ_VNY6g8nS"> Video </a>]
+                
+                
+                    <br> [<a href = "lectures/index.html%3Ffile=lec26.pdf.html"> Slides </a>]
+                
+
+            </p>
+            <p>
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 8 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        <div class="card">
+    <div class="card-body  pb-0 
+    
+    ">
+        
+            <h5 class="float-left"> Lec </a></h5>
+            <span class="text-muted float-right">8/12</span>
+            <div class="clearfix"></div>
+            <p class="card-text">
+                
+                    Using Buffer Overflows to Speedrun Super Mario Bros. 3
+                
+                
+                
+
+            </p>
+            <p>
+            
+                
+                    Readings: <a href = https://cs161.org/>Optional lecture from CS161 from 5-6pm PT</a>
+                
+            
+            
+            </p>
+        
+        
+        
+        
+        
+
+        
+        
+    </div>
+    
+    <div class="card-footer text-muted">
+        <small> Week 8 </small>
+    </div>
+    
+</div>
+
+                    </div>
+                
+                
+                
+            
+        </div>
+    </div>
+    <div class="tab-pane fade" id="discussions" role="tabpanel" aria-labelledby="pills-discussions-tab">
+        <div class="row">
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 1</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Number Representation</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc01.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc01_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aobgYlRzG8wXzs_yd7B4bSX">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 1 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 2</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">C Basics</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc02.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc02_sol.pdf.html">Solutions</a>
+        </div><a class="list-group-item "
+        href="https://www.youtube.com/playlist?list=PLDoI-XvXO0ao_QvcWaaQt6etx-EMhmv04">Video</a>
+        <div class="card-footer text-muted">
+            <small> Week 1 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 3</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Floating Point</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc03.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc03_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apBxaI-vf9HQ8WEN-Nu4nh3">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 2 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 4</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">RISC-V Intro, RISC-V Control Flow, ISA</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc04.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc04_sol.pdf.html">Solutions</a>
+        </div><a class="list-group-item "
+        href="https://www.youtube.com/playlist?list=PLDoI-XvXO0arTlqjMnWQHcin30gVNrOI3">Video</a>
+        <div class="card-footer text-muted">
+            <small> Week 2 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 5</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">RISC-V Procedures, CALL</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc05.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc05_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aqvQWKrEgfGjG4mzOWUl3Pm">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 3 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 6</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">SDS, Logic, FSM</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc06.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc06_sol.pdf.html">Solutions</a>
+        </div><a class="list-group-item "
+        href="https://www.youtube.com/playlist?list=PLDoI-XvXO0ap5iwJeUPvhCztEoyHq_6Gl">Video</a>
+        <div class="card-footer text-muted">
+            <small> Week 3 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 7</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Single-Cycle Datapath</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc07.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc07_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apPh3q-08JQmJAHV0WgeUHo">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 4 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 8</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Pipelining and Hazards</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc08.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc08_sol.pdf.html">Solutions</a>
+        </div><a class="list-group-item "
+        href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aozBSYRnKeYP-1v3ljnbL4g">Video</a>
+        <div class="card-footer text-muted">
+            <small> Week 4 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 9</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Caches</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc09.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc09_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apudm8o_Qlk2X5-_KYE0js7">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 5 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 10</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">I/O, OS</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc10.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc10_sol.pdf.html">Solutions</a>
+        </div><a class="list-group-item "
+        href="https://www.youtube.com/playlist?list=PLDoI-XvXO0arhledTsZUC46wi0uxYg-7N">Video</a>
+        <div class="card-footer text-muted">
+            <small> Week 5 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 11</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Virtual Memory</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc11.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc11_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0arDz-b6KFhe9oCX1-FScCQ8">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 6 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 12</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">AMAT, Data-level Parallelism</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc12.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc12_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aolzh-w1GJJE6DJ9cucFnCF">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 7 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 13</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Coherency and Atomic, Parallelism</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc13.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc13_sol.pdf.html">Solutions</a>
+        </div><a class="list-group-item "
+        href="https://www.youtube.com/playlist?list=PLDoI-XvXO0apxw1Ns7BhNV4nvrnagGGqW">Video</a>
+        <div class="card-footer text-muted">
+            <small> Week 7 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Disc 14</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">WSC, RAID, (Spark, Map Reduce), Parity & ECC</p>
+            <a class="list-group-item " 
+                href="disc/index.html%3Ffile=disc14.pdf.html">Worksheet</a>
+            <a class="list-group-item "
+            href="disc/index.html%3Ffile=disc14_sol.pdf.html">Solutions</a><a class="list-group-item "
+            href="https://www.youtube.com/playlist?list=PLDoI-XvXO0aorIVzibQ4C6tj5q4JutsEA">Video</a></div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 8 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+                
+            
+        </div>
+    </div>
+    <div class="tab-pane fade" id="labs" role="tabpanel" aria-labelledby="pills-labs-tab">
+        <div class="row">
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 0</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Intro and Set Up</p>
+            <a class="list-group-item "
+            href="labs/lab00/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 1 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 1</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Number Rep, C and CGDB</p>
+            <a class="list-group-item "
+            href="labs/lab01/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 1 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 2</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Advanced C</p>
+            <a class="list-group-item "
+            href="labs/lab02/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 2 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 3</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">RISC-V Assembly</p>
+            <a class="list-group-item "
+            href="labs/lab03/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 2 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 4</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">RISCV Functions, Pointers</p>
+            <a class="list-group-item "
+            href="labs/lab04/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 3 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 5</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Logisim</p>
+            <a class="list-group-item "
+            href="labs/lab05/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 4 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 6</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Pipelining and CPU, Mid Semester Survey</p>
+            <a class="list-group-item "
+            href="labs/lab06/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 4 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 7</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Caches</p>
+            <a class="list-group-item "
+            href="labs/lab07/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 5 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 8</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Virtual Memory</p>
+            <a class="list-group-item "
+            href="labs/lab08/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 5 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 9</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">SIMD Instructions</p>
+            <a class="list-group-item "
+            href="labs/lab09/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 6 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 10</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Thread Level Parallelism</p>
+            <a class="list-group-item "
+            href="labs/lab10/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 7 </small>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="col-sm-3 py-2">
+    <div class="card">
+        <div class="card-body pb-0">
+            <h5 class="card-title">Lab 11</h5>
+        </div>
+        <div class="list-group list-group-flush">
+            <p class="list-group-item">Spark / Dependability</p>
+            <a class="list-group-item "
+            href="labs/lab11/index.html">Link</a>
+        </div>
+        
+        <div class="card-footer text-muted">
+            <small> Week 7 </small>
+        </div>
+        
+    </div>
+</div>
+
+                
+            
+                
+                
+                    
+                        
+
+
+
+
+
+
+
+
+
+                
+            
+        </div>
+    </div>
+    <div class="tab-pane fade" id="hws" role="tabpanel" aria-labelledby="pills-hws-tab">
+        <div class="row">
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 1</h5>
+        
+        <p>Deadline: 6/26</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512310">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 2</h5>
+        
+        <p>Deadline: 6/30</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512311">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 3</h5>
+        
+        <p>Deadline: 7/2</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512312">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 4</h5>
+        
+        <p>Deadline: 7/7</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512313">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 5</h5>
+        
+        <p>Deadline: 7/13</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512314">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 6</h5>
+        
+        <p>Deadline: 7/17</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512315">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 7</h5>
+        
+        <p>Deadline: 7/22</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512316">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 8</h5>
+        
+        <p>Deadline: 7/28</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/515715">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 9</h5>
+        
+        <p>Deadline: 7/28</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512317">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 10</h5>
+        
+        <p>Deadline: 8/10</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512318">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+            
+                
+                
+                
+                    
+                    <div class="col-sm-3 py-2">
+                        
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Homework 11</h5>
+        
+        <p>Deadline: 8/10</p>
+        
+    </div>
+    <div class="list-group list-group-flush">
+        <a class="list-group-item "
+        href="https://www.gradescope.com/courses/92697/assignments/512319">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+                
+                
+            
+                
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    <div class="tab-pane fade" id="projects" role="tabpanel" aria-labelledby="pills-projects-tab">
+        <div class="row">
+            
+                
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        
+
+
+
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Project 1</h5>
+        <p>Deadline: </p>
+    </div>
+    <div class="list-group list-group-flush">
+        <p class="list-group-item">Philspel</p>
+        <a class="list-group-item "
+        href="projects/proj1/index.html">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        
+
+
+
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Project 2</h5>
+        <p>Deadline: </p>
+    </div>
+    <div class="list-group list-group-flush">
+        <p class="list-group-item">CS61Classify</p>
+        <a class="list-group-item "
+        href="projects/proj2/index.html">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        
+
+
+
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Project 3</h5>
+        <p>Deadline: </p>
+    </div>
+    <div class="list-group list-group-flush">
+        <p class="list-group-item">CS61CPU</p>
+        <a class="list-group-item "
+        href="projects/proj3/index.html">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                
+                    <div class="col-sm-3 py-2">
+                        
+
+
+
+<div class="card">
+    <div class="card-body pb-0">
+        <h5 class="card-title">Project 4</h5>
+        <p>Deadline: </p>
+    </div>
+    <div class="list-group list-group-flush">
+        <p class="list-group-item">Numc</p>
+        <a class="list-group-item "
+        href="projects/proj4/index.html">Link</a>
+    </div>
+</div>
+
+
+                    </div>
+                
+            
+                
+                
+                
+                
+            
+                
+                
+                
+                
+            
+                
+                
+                
+                
+            
+        </div>
+    </div>
+    <div class="tab-pane fade" id="exams" role="tabpanel" aria-labelledby="pills-exams-tab">
+        <div class="row">
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+            
+            <div class="col-sm-3 py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="float-left">Midterm 1</h5> <span class="text-muted float-right">7/9</span>
+                        <div class="clearfix"></div>
+                        <p class="card-text">9:00AM - 11:00AM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-3 py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="float-left">Midterm 2</h5> <span class="text-muted float-right">7/29</span>
+                        <div class="clearfix"></div>
+                        <p class="card-text">9:00AM - 11:00AM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-3 py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="float-left">Final Exam</h5> <span class="text-muted float-right">8/13</span>
+                        <div class="clearfix"></div>
+                        <p class="card-text">9:00AM - 12:00PM</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        var hash = window.location.hash;
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+        });
+    });
+</script>
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../assets/theme/theme.js"></script>
+  </body>
+</html>

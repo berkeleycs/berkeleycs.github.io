@@ -1,0 +1,670 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <link href="../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../assets/bootstrap-toc.min.js"></script>
+    <script src="../assets/moment.min.js"></script>
+    <script src="../assets/fullcalendar.min.js"></script>
+    <script src="../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item  active ">
+    <a class="nav-link "
+         href="policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Policies</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Official Academic Guide <a href="https://classes.berkeley.edu/content/2020-summer-compsci-61c-001-lec-001">course description</a>.</p>
+
+<p>The subjects covered in this course include: C and assembly language programming, translation of high-level programs into machine language, computer organization, caches, performance measurement, parallelism, CPU design, warehouse-scale computing, and related topics.</p>
+
+<h3 id="reasons-for-course-redesign-over-summer">Reasons for Course Redesign over Summer</h3>
+
+<p><a href="decisions.html">We decided to share with you a few of the many decisions and hurdles we had to go over to determine what would be the best method to offer the class materials. We <strong>strongly</strong> recommend you read over them to get a better idea of the different decisions we had to make for the course.</a></p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>CS61A and CS61B (or equivalents). CS61B requirement can be bypassed if you have solid experience with a C-based programming language.</p>
+
+<h3 id="textbook">Textbook</h3>
+
+<p>We will be using the first edition of Patterson and Hennessy’s Computer Organization and Design RISC-V Edition book (“P&amp;H”), ISBN 0128122757. We are also requiring The C Programming Language, Second Edition by Kernighan and Ritchie (“K&amp;R”), and will reference its sections in the reading assignments. Other books are also suitable if you are already comfortable with them, but our lectures will be based on K&amp;R. Finally, we will be using The Datacenter as a Computer: An Introduction to the Design of Warehouse-Scale Machines (“WSC”), which is freely available online <a href="https://cs61c.org/resources/pdf?file=WSCBarrosoHolzle.pdf">here</a>.</p>
+
+<h2 id="exams">Exams</h2>
+
+<p>There will be two midterms and one final exam.</p>
+
+<ul>
+  <li>Midterm 1: 7/9 9-11AM. Covers up to and including the 7/6 lecture on CALL.</li>
+  <li>Midterm 2: 7/29 9-11AM. Covers up to and including the 7/23 lecture on VM.</li>
+  <li>Final: 8/13 9AM-12PM. All topics are in scope and are equally emphasised.</li>
+</ul>
+
+<p>Exams are open book, open internet, closed friend. Any collaboration on exams will result in failing the course!</p>
+
+<h2 id="clobber-policy">“Clobber” Policy</h2>
+<p>The clobber policy allows you to override your Midterm 1 score with the score on the final and Midterm 2 score with the score the final exam if you perform better on the final. Note that the reverse is not true - you must take the entire final exam, regardless of your Midterm 1 and Midterm 2 scores.</p>
+
+<p>Here is an example of the process:</p>
+
+<p>Suppose we are interested in computing your clobbered midterm 1 score:</p>
+
+<p><strong>Potential replacement score</strong> = (Final-subscore - Final-mean)/Final-stddev * Mt1-stddev + Mt1-mean</p>
+
+<p><strong>Clobbered mt score</strong> = MAX(Original mt1 score, Potential replacement score)</p>
+
+<p>Final-subscore is your score on the final, Final-mean and Final-stddev are the mean and standard deviation of the final, and Mt1-stddev and Mt1-mean are the standard deviation and mean of the actual midterm.</p>
+
+<p>“Clobbered mt1 score” is then filled in as your midterm score for the final grade calculation.</p>
+
+<p>Note that clobber will NOT give you more points than the exam is worth (meaning that it is really min(score, max score))</p>
+
+<h2 id="office-hours">Office Hours</h2>
+<p>We hope you take advantage of the ample office hours we have scheduled this term. When coming to office hours for lab or project help, there are some policies you’ll need to abide by.</p>
+
+<p>TAs shouldn’t be debugging code endlessly without reason. This is not a good use of their time, and part of the goal of this course is to turn <em>you</em> into a great tester and debugger.</p>
+
+<p>Therefore, before coming to office hours, students should have done the following <em>on the hive machines</em>:</p>
+<ul>
+  <li>Run valgrind and fixed all memory leaks/warnings</li>
+  <li>Written a test that isolates/demonstrates their issue (NOT a staff-provided test)</li>
+  <li>Stepped through the test with (c)gdb to find the line number the issue occurs on</li>
+</ul>
+
+<p>If you have not completed all of the items above, a TA has the right to refuse you assistance. There are instructions for testing on all project specs, and you can review how to run valgrind and (c)gdb in lab.</p>
+
+<p>Since our office hours will be in open zoom rooms, you MUST be in the Zoom room if you are on the queue. If we get to your to your name and you are not in the zoom call, we will skip you and you will have to sign up again.</p>
+
+<h2 id="computer-resources">Computer Resources</h2>
+
+<p><strong>NOTE:</strong> If you are an international student or someone who is unable to access some of our resources due to GEO restrictions or other blocking, please download and use the campus VPN to gain access to them: <a href="https://www.lib.berkeley.edu/using-the-libraries/vpn">https://www.lib.berkeley.edu/using-the-libraries/vpn</a>.</p>
+
+<h3 id="discussion-forum">Discussion Forum</h3>
+<p>All important course announcements will be made on Piazza. We will be automatically enrolling everyone and locking piazza enrollment: <a href="https://piazza.com/berkeley/summer2020/cs61c">https://piazza.com/berkeley/summer2020/cs61c</a>.
+If you are not on the roster and would like to join our piazza, please send an email to <a href="https://cs61c.org/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e18292d7d082a18384938a848d8498cf848594">[email&#160;protected]</a> with the subject ‘[CS61C Su20] Request to join Piazza’. You must give us the reason why you would like to join the piazza. We will then only add the email which the email was sent from IF it is a Berkeley email. If you would like to join our other resources, please make sure you also fill out this form: <a href="https://forms.gle/MbbtEjSwSJ5fZJJ3A">https://forms.gle/MbbtEjSwSJ5fZJJ3A</a></p>
+
+<h4 id="piazza-etiquette">Piazza Etiquette</h4>
+<ul>
+  <li><strong>Search before posting</strong>: Sometimes your question may have already been answered by us or other students in the past. This gives us more time to answer new questions. Also you will avoid having us link to another post as an answer.</li>
+  <li><strong>Link and screenshot any external resources you are referring to (exams, discussion, stackoverflow, lecture slides + webcast time/video)</strong>: It is more convenient for us and other students to look at the screenshot and follow the link if we need more context on the question. It will also substantially decrease the time it takes for us to answer your question. Also, you probably have whatever you are referring to opened already.</li>
+  <li><strong>Try to avoid too open-ended/vague questions such as</strong>: “How does C work?” or “How come the solution to a discussion problem is this?” or “How does this proof from the textbook work?” This keeps us guessing on what you are really stuck on. If you walk us through your thoughts and reference specific lines that you find confusing, we can better address the problem you are facing. It may even help us uncover any misunderstandings that you may have.</li>
+  <li><strong>Please try to post project/homework questions publicly as follow-ups on the appropriate question threads whenever possible.</strong> If your question is too detailed/revealing to fit there, that’s a sign that your question is better answered during office hours. We do not have the bandwidth to pre-grade/debug solutions on Piazza, so detailed private homework/project questions are discouraged.</li>
+  <li><strong>You should only post in the “Student Answer” box if you are fairly certain about your answer.</strong> Do not post follow up questions or +1 in the student answer. Posting in the “Student Answer” section marks a post as resolved and will likely be missed. Use “Follow ups” to follow up while leaving the overall post unresolved.</li>
+  <li><strong>You should NOT follow up with +1’s to a post you agree/like!</strong> Instead, you should use the <code class="language-plaintext highlighter-rouge">helpful</code> button on a question/followup.</li>
+  <li><strong>If you want a reply on a follow up, mark it as unresolved</strong>, or we may not see it.</li>
+  <li><strong>If you reply to a follow up answering the question at hand, mark the follow up as resolved</strong> since it no longer requires attention.</li>
+  <li><strong>If you don’t seem to understand the given responses to your question, come to OH and mark your question as a conceptual question when putting yourself on the queue.</strong> Conceptual questions, which are questions on discussions, past homeworks, concepts (ie from the textbook or lectures) and this semester’s exams get priority over homework or project questions. It is sometimes much easier to explain questions in a one on one setting where staff can articulate their points through illustrations.</li>
+  <li><strong>Excessive spam will result in a ban for at least a day!</strong> While we are here to help you learn, we are not the only tool you should use! If we find you posting a lot of excessive posts/followups asking for someone to answer a different post in a short period of time, we will ban you. Also if you have a question, try to think on it for an hour and use your other resources: the textbook, Google, Stackoverflow, etc to see if someone has already answered the question you had. Also feel free to come to office hours! Keep in mind that, if you are posting anonymously, you can’t edit posts, so be careful before clicking the Submit button. Please avoid long chains of 1-2 sentence followups; it unnecessarily extends the thread and makes it much harder to follow people’s thought processes and find questions that need answers.</li>
+</ul>
+
+<h3 id="computer-accounts">Computer Accounts</h3>
+<p>You will need a CS61C class account for use in the computer labs, submitting assignments, and tracking your grades. You must request a class login via <a href="https://inst.eecs.berkeley.edu/webacct">https://inst.eecs.berkeley.edu/webacct</a>. <strong>Make sure you remember your log-in information once you change it! We cannot recover your account information for you.</strong> If you are unable to request an account due to concurrent enrollment status, please follow the instructions in lab 0. If you are a late add, you may use any other class account, or your CS199 account until the option to create an inst account for CS61C is available to you. Note: The CS61C staff does not have any control over how quickly concurrent enrollment/late add accounts are processed.</p>
+
+<h3 id="computer-labs">Computer Labs</h3>
+
+<p>You can connect remotely to the lab computers using the following addresses:</p>
+<ul>
+  <li><a href="https://inst.eecs.berkeley.edu/cgi-bin/clients.cgi?choice=330soda">330 Soda (“The Hive” – Linux)</a></li>
+</ul>
+
+<p>If the Hive machine you have chosen is running too slow, try another one. You can find a list of the available Hive machines and their current workloads here:</p>
+
+<ul>
+  <li><a href="https://hivemind.eecs.berkeley.edu/">Hivemind</a></li>
+</ul>
+
+<h2 id="grading">Grading</h2>
+
+<p>In order to foster a collaborative environment, CS61C is initially graded on a fixed scale. The course is graded out of 300 points, with the following mappings from points to letter grades:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Raw Score</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">290+</td>
+      <td>A+</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[270,290)</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[260,270)</td>
+      <td>A-</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[250,260)</td>
+      <td>B+</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[230,250)</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[220,230)</td>
+      <td>B-</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[210,220)</td>
+      <td>C+</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[190,210)</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[180,190)</td>
+      <td>C-</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[140,180)</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">[0,140)</td>
+      <td>F</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In the event that our distribution does not align with the EECS departmental guidelines, we may decrease the raw score boundaries, but they will not increase (i.e. it is possible to receive a higher grade than the mapping suggests, but not a lower one).</p>
+
+<p>We will compute grades from a weighted average, as follows:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Assignment</th>
+      <th>Percentage of Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Lecture</td>
+      <td>5% (15 points)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Labs</td>
+      <td>5% (15 points)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Homework</td>
+      <td>10% (30 points)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Projects (4 total)</td>
+      <td>40% (120 points)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Midterm 1</td>
+      <td>10% (30 points)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Midterm 2</td>
+      <td>10% (30 points)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Final exam</td>
+      <td>20% (60 points)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Below, you will find sections describing some of these assignment types. Projects are evenly weighted unless otherwise mentioned.</p>
+
+<p>Note: Any assignment which is due by the end of the day is due by 11:59.00PM! Even if you submit a second late (aka 11:59.01PM), it will be considered one day late!</p>
+
+<h2 id="epa-tbd">EPA (TBD)</h2>
+
+<p>EPA was created to encourage people to be good academic citizens, in a way that traditional grades could not capture. This can help boost you over a grade boundary if you’re close to one. Scoring is confidential (<strong>we’ll never tell you your EPA score and you shouldn’t ask</strong>), and is decided by the teaching staff, so make sure they know your name.</p>
+
+<p>Here are the categories:</p>
+<ul>
+  <li>Effort = {Office hours, doing every single lab, hw, reading Piazza pages, etc.}</li>
+  <li>Participation = {Raising hand in discussion, asking Piazza questions, etc.}</li>
+  <li>Altruism = {Helping other students in lab, answering Piazza or Office Hrs questions}</li>
+</ul>
+
+<h2 id="lectures">Lectures</h2>
+
+<ul>
+  <li>Lectures will be pre-recorded and posted on YouTube. We will split up lectures into smaller topical videos to hopefully make it more engaging.</li>
+  <li>Lectures will be distributed on Gradescope as an Online Assignment. There will be questions for each topical video on Gradescope which you MUST complete for credit for each lecture. You will be graded on correct completion for each lecture. You will have unlimited attempts and see if you got the correct answers though the questions should be straight forward if you watched the video.</li>
+  <li>You will have 2 days to complete each lecture Online Assignment to keep you on schedule and make sure you don’t fall behind. If you have an emergency that will prevent you from doing this, please email the instructors or make a private Piazza post.</li>
+  <li>We will post on the website slides and a link to the Lecture playlist on YouTube so you can more easily access it later in the course.</li>
+  <li>If there is enough interest, we may hold live lectures at the end of each main topic to review the material and offer a chance for dialogue with the instructors.</li>
+</ul>
+
+<h2 id="labs">Labs</h2>
+
+<p><strong>The lab policy was updated to what is written below beginning with Week 2 of the course</strong></p>
+
+<p>Labs are designed to give you introductory experience with the course material. After completing each lab, you will need to complete a checkoff. You will be not be required to check off in partners, though we do highly encourage it. This process involves showing a staff member that you have completed the assignment, and if time pertains, will allow to spend individualized time with a staff member. You will have <strong>two attempts</strong> to be checked off. You will then provide your cs61c login (cs61c-xxx) and the staff member will check you off. This will automatically upload a token to Gradescope with the number of points the staff member is giving you for that assignment. Make sure you have a valid token on Gradescope after checkoff as we will NOT fix errors later on. We will also adjust the due time after the due date has passed to prevent student self uploads. The staff is not liable for missing checkoff points and any attempts to receive credit after the deadline will not be fulfilled.</p>
+
+<p>Labs are <strong>graded on correct completion.</strong> Completion of all labs is highly recommended for success in the course. Each of the labs are graded out of 2 points. If a TA is not satisfied with your lab checkoff (i.e. The student does not fully grasp the concepts the lab was teaching), you may receive fewer than 2 points! If you do not finish your checkoff in time, you will get 0 points. If either of these happens, utilize your second attempt to come back more prepared and you will have another chance to get full credit, as long as the attempt is before the posted lab deadline. Please note that these are not 2 points each from the 15 points “Labs” portion in your course grade. Each lab is simply graded out of 2 points, and we will scale the lab total to the 15 points course grade portion.</p>
+
+<p>For checkoffs, we will do an appointment based system using <a href="https://oh.cs61c.org/">https://oh.cs61c.org/</a>. Appointments for the week will be released on Sunday around 9 PM PDT, when all of the other material for the week is released. You may then sign up for <strong>UP TO</strong> one checkoff time per lab (so one checkoff slot for Tu, Wed, and the second for Th, Fri). While partners are not required, we recommend finding, working, and checking off with a partner for its learning benefits. If this proves to be difficult, it is fine to sign up by yourself, though be aware that another unknown student is able to sign up alongside with you.</p>
+
+<p>The checkoff slots will be 13 minutes long, with a 2 minute leeway, and <strong>will not be on Berkeleytime (they start at the assigned time)</strong>. If you would like to checkoff multiple labs in your appointment, you may do so, though you will not get extra time in your slot. Please utilize the Live Chat feature in the portal appropriately to communicate with your partner or the staff member during the checkoff, especially to check for if the staff member needs to tell you anything before the Zoom meeting begins. If you finish early, we encourage you to utilize these appointments to ask any questions you may have pertaining to the course, or simply check-in about how things are going for you; they are the most individualized and personal aspects of the course that we hope you use.</p>
+
+<p>For full credit, labs must be checked off by the stated deadlines, which are <strong>Wednesday EOD and Friday EOD</strong>, with the exception of holidays, for the 2 labs of the week, respectively. If you get checked off after the original deadline but before the next lab’s deadline, you will be able to receive half credit (1 point) at most. Anytime after that, you will not be able to be checked off for any credit, but you may still go over the checkoff to further your understanding if you wish. Because of this, we will be giving you <strong>one</strong> lab drop which will drop your lowest lab score.</p>
+
+<p>For each lab, we will have a lab office hours queue. This help queue is for students who need help completing the lab. <strong>You will have two official checkoff attempt per lab</strong>.</p>
+
+<p>You may get checked off in Lab OH as well, though we would prefer if the students choosing to do this are ones who were unable to pass the checkoff on their first try, or are checking off a lab late. Be aware that we will de-prioritize you over lab questions, which are what Lab OH are meant for. We have included this option to accommodate students, but there is not infrastructure for it to handle the volume of or replace the appointment system, so use this at your own risk (fair warning, in the past, students have waited hours to get checked off in the queue). You cannot get checked off at regular office hours.</p>
+
+<p>The staff recommends always asking for help on lab office hours when you need it, and to only request a check off when you have thought about the lab sufficiently and can have an informed conversation with a staff member. Each lab will contain questions you should be able to answer and some of them have a Gradescope autograder, even though we will not explicitly ask them to give you points. The purpose of the checkoff is to gauge your understanding and fill in any holes/build on your knowledge of the concepts assessed by the checkoff questions. If you are unsure of the answer to any of these questions you should ask for help before getting checked off.</p>
+
+<h2 id="homework">Homework</h2>
+
+<p>Homework is designed to give you more problem practice on the week’s material. We encourage you to work on the homework problems in small groups, but each student is required to turn in a solution that they have written themselves.</p>
+
+<p>Homework is done online via gradescope and is <strong>graded on correctness</strong>. Once again, completion of all HW is highly recommended. We will release homework solutions shortly after the [late] due date, so <strong>late homework is not accepted.</strong> There are no homework drops.</p>
+
+<p>Homeworks will give you unlimited attempts.</p>
+
+<h2 id="projects">Projects</h2>
+
+<p>Projects are designed to give you heavy-duty experience with the application of course content. <strong>Projects are graded on correctness</strong>.</p>
+
+<p>You will work on projects individually. Collaborating with other students is strictly prohibited. Please see the section on Academic Dishonesty below.</p>
+
+<p>For each day that a project is late, 1/3 of your earned points on the project are deducted, until the project is worth nothing. Lateness rounds up to the nearest day - that is, an assignment that is 2 hours late is one day late. Please note that projects have a hard deadline of 1 week after it is due. Even if you had a 5 day extension, you would only be able to use up to two of your slip days on it even if you had three.</p>
+
+<p><em>Projects are difficult, so don’t worry if you don’t get 100% on projects!</em> We also have a philosophy on autograders: we only provide visible sanity tests. So there will be immediate feedback that your code compiles and runs on a simple test case but you won’t be able to see the results of the tests that are used to determine your grade.  We do not want you to use the autograder as an oracle since much of programming is actually testing your code.</p>
+
+<h3 id="slip-days">Slip Days</h3>
+
+<p>To help you handle any issues that arise, we give you three slip-day tokens, which allow you to reduce your late penalties on late project submissions.</p>
+
+<p>Example usages:</p>
+<ul>
+  <li>Use two slip-days to receive no penalty on a project submitted two days late</li>
+  <li>Use two slip-days to receive no penalty for two separate projects each submitted one day late</li>
+  <li>Use three slip-days to receive just a 1/3 penalty on a project submitted 4 days late</li>
+  <li>We will track the total number of late days for your submissions and automatically apply them to optimize their usage.</li>
+  <li>Slip-days may only be applied towards projects, and not any other assignments. Slip-days will not be assessed against projects you did not submit. No extra credit is awarded for avoiding the use of slip-days, however it is in your best interest to avoid turning projects in late. Usually, a new project will be released very shortly after the current project is due.</li>
+  <li>Slip days are in terms of “days” meaning a project submitted one minute after the deadline consumes one entire token. Please plan accordingly as there is no grace period.</li>
+</ul>
+
+<h2 id="academic-dishonesty-and-cheating">Academic Dishonesty and Cheating</h2>
+
+<p>Please carefully read the policies below and ask a member of the course staff if you have any questions or if something is unclear.</p>
+
+<ul>
+  <li>All work that is to be done INDIVIDUALLY should be YOUR work and your work ALONE.</li>
+  <li>All partner work should be done by your project team ALONE (no discussing or sharing solutions or algorithmic approaches with other partners)</li>
+  <li>You are encouraged to help each other debug without viewing each other’s code or talking specifically about algorithms. Beyond that, we don’t want you sharing approaches, ideas, code or whiteboarding with other students.</li>
+  <li>It is <strong>NOT</strong> acceptable to copy solutions from other students.</li>
+  <li>It is <strong>NOT</strong> acceptable to copy (or start your) solutions from the Web.</li>
+  <li>It is <strong>NOT</strong> acceptable to leave your code anywhere where an unscrupulous student could find and steal it (e.g., public GITHUBs, walking away while leaving yourself logged on, leaving printouts lying around, etc.</li>
+  <li>We have tools and methods, developed over many years, for detecting this. You WILL be caught, and the penalties WILL be severe. This software can even detect attempts to purposefully obfuscate copying. If you have questions whether a behavior is crossing the line, ask! You can read some of the testimonials of students who were caught cheating which Josh Hug collected here: <a href="https://sp19.datastructur.es/materials/guides/incident-reports-2017.html">https://sp19.datastructur.es/materials/guides/incident-reports-2017.html</a>.</li>
+  <li>At the minimum negative points will be given for the assignment (meaning you’re better off NOT submitting anything than cheating), and a letter in your Cal record documenting the cheating.  Penalties can be greater, including an F in the class.</li>
+  <li>Both the giver and the receiver of code are equally culpable and suffer equal penalties.</li>
+</ul>
+
+<h2 id="disabled-students-program">Disabled Students’ Program</h2>
+
+<p>The Disabled Students’ Program (DSP) is committed to ensuring that all students with disabilities have equal access to educational opportunities at UC Berkeley. They offer a wide range of services for students with disabilities that are individually designed and remove the need to reveal sensitive medical information to the course staff. If you have a medical need for extensions of exam times or assignment deadlines, these will be granted through official documentation from DSP. Please start the process at https://dsp.berkeley.edu as soon as possible to avoid delays.</p>
+
+<p>If you already have documentation from DSP, please ensure its been submitted on the SCARAB portal so that instructors have access to your accommodations. Please do not email it or post it on Piazza!</p>
+
+<p>If you’d like to request an extension in line with your DSP status, please <a href="https://forms.gle/cgisRcnbqYvs3Ao76">use the form linked here</a>. If your request falls under the accommodations stated in your letter it will be automatically granted, otherwise it will be submitted to the instructors for additional review.</p>
+
+<h2 id="accomodations-and-extensions">Accomodations and Extensions</h2>
+
+<p>If you are a non-DSP student interested in requesting an extension or accommodation for an assignment, you can do so by <a href="https://forms.gle/MEpKjF2B1yBrvu9E6">filling out the form linked here</a>. Note that this form will not automatically grant any extensions; they will be logged and submitted to the instructors for additional review.</p>
+
+<p>For students who do not have DSP accommodations for extensions, if your partner is DSP and receives an extension, you will receive an extension too. To receive this extension, you must fill out the non-DSP request saying your partner was given a DSP extension and the name of the partner.</p>
+
+<h2 id="extenuating-circumstances-and-inclusiveness">Extenuating Circumstances and Inclusiveness</h2>
+
+<p>We recognize that our students come from varied backgrounds and can have widely-varying circumstances affect them during their time in the course. If you have any unforeseen circumstances that arise during the course, please do not hesitate to contact the instructors in office hours or via e-mail or private Piazza post to discuss your situation. The sooner we are made aware, the more easily these situations can be resolved. Extenuating circumstances include work-school balance, familial responsibilities, religious observations, military duties, unexpected travel, or anything else beyond your control that may negatively impact your performance in the class.</p>
+
+<p>If at any point you are made to feel uncomfortable, disrespected, or excluded by a staff member or fellow student, please report the incident to our instructors, head TA, or another member of staff you’re comfortable with so that we may address the issue and maintain a supportive and inclusive learning environment. Should you feel uncomfortable bringing up an issue with a staff member directly, you may consider contacting the Campus Ombuds Office or the ASUC Student Advocate’s Office (SAO).</p>
+
+<ul>
+  <li><a href="https://sa.berkeley.edu/ombuds">UC Berkeley Ombuds Office</a></li>
+  <li><a href="https://advocate.berkeley.edu/">Student Advocate’s Office</a></li>
+  <li><a href="https://www2.eecs.berkeley.edu/Faculty/Comms/#studgriev">EECS Student Grievance Committee</a></li>
+</ul>
+
+<p>If you’d like to report an incident, but feel uncomfortable doing so in person, you’re also welcome to use your TA’s EPA form.</p>
+
+<h2 id="campus-student-services">Campus Student Services</h2>
+
+<p>Your mental health is more important than this course. Seriously. If you’re
+feeling overwhelmed or not in control, talk to us and we’ll try to help. UC
+Berkeley also offers services to students which you can take advantage of.</p>
+
+<ul>
+  <li><a href="https://uhs.berkeley.edu/health-topics/mental-health">UHS Mental Health Services</a></li>
+  <li><a href="https://uhs.berkeley.edu/sites/default/files/ucb_goldfolder.pdf">Mental Health “Gold Folder”</a></li>
+</ul>
+
+<p>Campus resources are also available for survivors of sexual violence or
+harassment. Be aware that all course staff are mandatory reporters for such
+incidents. Confidential services are also available on campus:
+https://survivorsupport.berkeley.edu/Confidential-Resources-Anonymous-Reporting-and-Privacy.</p>
+
+<ul>
+  <li><a href="https://svsh.berkeley.edu/">UC Berkeley Sexual Violence Services</a></li>
+</ul>
+
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="policies.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../assets/theme/theme.js"></script>
+  </body>
+</html>

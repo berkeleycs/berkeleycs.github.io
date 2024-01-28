@@ -1,0 +1,661 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../../../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../../../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../../../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../../../assets/favicon.png">
+    <link href="../../../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../../../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../../../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../../assets/bootstrap-toc.min.js"></script>
+    <script src="../../../assets/moment.min.js"></script>
+    <script src="../../../assets/fullcalendar.min.js"></script>
+    <script src="../../../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../../../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 11</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: End of lab Friday, August 7</p>
+
+<h2 id="objectives">Objectives:</h2>
+<ul>
+  <li>Get hands-on experience running MapReduce and gain a deeper understanding of the MapReduce paradigm.</li>
+  <li>Become more familiar with Apache Spark and get hands on experience with running Spark on a local installation.</li>
+  <li>Learn how to apply the MapReduce paradigm to Spark by implementing certain problems/algorithms in Spark.</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+<p>Pull the lab files from the lab starter repository with</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull starter master
+</code></pre></div></div>
+
+<p><strong>Be aware, this lab is only going to work on Hive machines.</strong></p>
+
+<p>You will also be working with Spark (in Python!), so you may need to brush up a
+bit on your Python!!1! To be able to run Spark, you must create a virtual
+environment using the correct version of Python. This can be done as such:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">--name</span> lab11env <span class="nv">python</span><span class="o">=</span>2.7
+</code></pre></div></div>
+
+<p>Respond to the prompt to install packages with “y” (with no quotes). You can
+(and should) ignore any warnings about conda being out of date. These will take
+about 30 seconds to install. Finally, run the following command to activate the
+virtual environment:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source </span>activate lab11env
+</code></pre></div></div>
+
+<p>This will put you in a virtual environment needed for this lab. <strong>Please
+remember that if you exit the virtual environment and want to return to work on
+the lab, you must re-run <code class="language-plaintext highlighter-rouge">source activate lab11env</code> first for Spark to work.</strong></p>
+
+<p>In addition, when logged into the Hive machines, run the following command in your Terminal:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/lib/jvm/java-8-openjdk-amd64
+</code></pre></div></div>
+
+<p><strong>If you do not do this, Spark will throw an error about being unable to find the correct Java version.</strong></p>
+
+<h2 id="background-information">Background Information</h2>
+
+<p>In lecture we’ve exposed you to cluster computing (in particular, the MapReduce
+framework), how it is set up and executed, but now it’s time to get some
+hands-on experience running programs with a cluster computing framework!</p>
+
+<p>In this lab, we will be introducing you to a cluster computing framework called
+Spark. Spark was developed right at Berkeley before being donated to the
+Apache Software Foundation in 2013. We will be writing Python code to run in
+Spark to give us some practice in writing Map and Reduce routines.</p>
+
+<p><a href="https://spark.apache.org/">Spark</a> has its own website, so you are free to try
+to install it onto your local machines, although it may be easier to ssh into
+the lab computers to complete this lab.</p>
+
+<h3 id="avoid-global-variables">Avoid Global Variables</h3>
+
+<p>When using Spark, avoid using global variables! This defeats the purpose of
+having multiple tasks running in parallel and creates a bottleneck when
+multiple tasks try to access the same global variable. As a result, most
+algorithms will be implemented without the use of global variables.</p>
+
+<h3 id="documentation-and-additional-resources">Documentation, and Additional Resources</h3>
+
+<ul>
+  <li>
+    <p>A quickstart programming guide for Spark (click the Python tab to see the Python code) is <a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html">available here</a>!</p>
+  </li>
+  <li>
+    <p>The version of Spark we will be using will be 1.1.0 and the link to the API documentation is <a href="https://spark.apache.org/docs/latest/api/python/index.html">available here</a> (Note that the docs likely say a different version, but the API should be compatible).</p>
+  </li>
+</ul>
+
+<h2 id="exercises">Exercises</h2>
+
+<p>Note: Different exercises may be solvable or needed to be solved by
+reconsidering how map(), flat_map() and reduce() are implemented and called and
+in which order, so keep this in mind when calling whichever you must use.</p>
+
+<p>The following exercises use sample input files, which can be found in
+<code class="language-plaintext highlighter-rouge">seqFiles/</code>.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">billOfRights.txt.seq</code> – the first 10 Amendments of the US constitution split into separate documents (a very small input)</li>
+  <li><code class="language-plaintext highlighter-rouge">complete-works-mark-twain.txt.seq</code> – The Complete Works of Mark Twain (a medium-sized input)</li>
+</ol>
+
+<p>Notice the <code class="language-plaintext highlighter-rouge">.seq</code> extension, which signifies a sequence file that is readable
+by Spark. These are NOT human-readable. Spark supports other input formats, but
+you will not need to worry about that for this lab.</p>
+
+<p>The human-readable text file version of each is included in <code class="language-plaintext highlighter-rouge">textFiles/</code> so you
+can open those to get a sense of the contents of each file.</p>
+
+<p>Although an exercise may not explicitly ask you to use it, we recommend testing
+your code on the <code class="language-plaintext highlighter-rouge">billOfRights</code> data set first in order to verify correct
+behavior and help you debug.</p>
+
+<p><strong>Reminder:</strong> this lab will only work on Hive machines and requires you to first
+activate a python virtual environment, as described above.</p>
+
+<h3 id="exercise-0-generating-an-input-file-for-spark">Exercise 0: Generating an Input File for Spark</h3>
+
+<p>In this lab, we’ll be working heavily with textual data. We have some
+pre-generated datasets as indicated above, but it’s always more fun to use a
+dataset that you find interesting. This section of the lab will walk you
+through generating your own dataset using works from Project Gutenberg (a
+database of public-domain literary works).</p>
+
+<p><strong>Step 1:</strong> Head over to <a href="https://www.gutenberg.org/">Project Gutenberg</a>, pick a
+work of your choosing, and download the “Plain Text UTF–8” version into your
+lab directory.</p>
+
+<p><strong>Step 2:</strong> Open up the file you downloaded in your favorite text editor and
+insert <code class="language-plaintext highlighter-rouge">—END.OF.DOCUMENT—</code> by itself on a new line wherever you want Spark to
+split the input file into separate <code class="language-plaintext highlighter-rouge">(key, value)</code> pairs. The importer we’re using
+will assign an arbitrary key (like <code class="language-plaintext highlighter-rouge">doc_xyz</code>) and the value will be the
+contents of our input file between two <code class="language-plaintext highlighter-rouge">—END.OF.DOCUMENT—</code> markers. You’ll want
+to break the work into reasonably-sized chunks, but don’t spend too much time
+on this part (chapters/sections within a single work or individual works in a
+body of works are good splitting points).</p>
+
+<p><strong>Step 3:</strong> Now, we’re going to run our Importer to generate a <code class="language-plaintext highlighter-rouge">.seq</code> file that
+we can pass into the Spark programs we’ll write. The importer is actually a
+MapReduce program, written using Hadoop! You can take a look at <code class="language-plaintext highlighter-rouge">Importer.java</code>
+if you want, but the implementation details aren’t important for this part of
+the lab. You can generate your input file like so:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make generate-input <span class="nv">myinput</span><span class="o">=</span>YOUR_FILE_FROM_STEP_2.txt
+</code></pre></div></div>
+
+<p>Your generated <code class="language-plaintext highlighter-rouge">.seq</code> file can now be found in the <code class="language-plaintext highlighter-rouge">seqFiles/</code> directory in
+your lab directory. When you complete other exercise in this lab, run them
+on your downloaded file as well and investigate the results.</p>
+
+<h3 id="exercise-1-running-word-count">Exercise 1: Running Word Count</h3>
+
+<p>For this exercise you will use the already-completed <code class="language-plaintext highlighter-rouge">wordCount.py</code>. Open the
+file and take a look. Make sure you understand what the file is attempting to
+do.</p>
+
+<p>You can run it on the <code class="language-plaintext highlighter-rouge">billOfRights</code> text with the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ spark-submit wordCount.py seqFiles/billOfRights.txt.seq
+</code></pre></div></div>
+
+<p>Where <code class="language-plaintext highlighter-rouge">spark-submit</code> takes a python file describing a series of map and reduce
+steps, distributes that files between different worker processors (often across
+many physical computers, but just across local processors for this lab), and
+provides the <code class="language-plaintext highlighter-rouge">.seq</code> file as an input to that python file.</p>
+
+<p>In this case, the command will run <code class="language-plaintext highlighter-rouge">wordCount.py</code> over <code class="language-plaintext highlighter-rouge">billOfRights.txt.seq</code>.
+Your output should be visible in <code class="language-plaintext highlighter-rouge">spark-wc-out-wordCount/part-00000</code>.</p>
+
+<p>Next, try your the code on the larger input file
+<code class="language-plaintext highlighter-rouge">complete-works-mark-twain.txt.seq</code>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>spark-submit wordCount.py seqFiles/complete-works-mark-twain.txt.seq
+</code></pre></div></div>
+
+<p>Your output for this command will be located in the same
+<code class="language-plaintext highlighter-rouge">spark-wc-out-wordCount/part-00000</code> file (overwriting the previous results).
+Search through the file for a word like <code class="language-plaintext highlighter-rouge">'the'</code> to get a better understanding
+of the output.</p>
+
+<h3 id="exercise-2-how-many-documents-does-each-word-appear-in">Exercise 2: How many documents does each word appear in?</h3>
+
+<p>Earlier, we used the <code class="language-plaintext highlighter-rouge">—END.OF.DOCUMENT—</code> token to split a text file into
+multiple documents. The sample files included in this lab are also split into
+documents. For example, <code class="language-plaintext highlighter-rouge">billOfRights.txt</code> is split into 10 documents (one for
+each amendment). For this exercise we want to count how many documents each
+word appears in. For example, <code class="language-plaintext highlighter-rouge">"Amendment"</code> should appear in all 10 documents
+of <code class="language-plaintext highlighter-rouge">billOfRights.txt</code>.</p>
+
+<p>Open <code class="language-plaintext highlighter-rouge">perWordDocumentCount.py</code>. It currently contains code that will execute
+the same functionality as <code class="language-plaintext highlighter-rouge">wordCount.py</code>. Modify it to count the number of
+documents containing each word rather than the number of times each word occurs
+in the input and to sort that output in alphabetical order.</p>
+
+<p>To help you with understanding the code, we have added some comments, but you
+will also need to take a look at the list of Spark
+<a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#transformations">transformations</a>
+for a more detailed explanation of the methods that can be used in Spark.
+There are methods that you can use to help sort an
+output or remove duplicate items. To help with distinguishing when a word
+appears in a document, you will want to make use of the document ID as well –
+this is mentioned in the comments of <code class="language-plaintext highlighter-rouge">flatMapFunc</code>. Just because we gave you an
+outline doesn’t mean you need to stick to it, feel free to add/remove
+transformations as you see fit. You’re also encouraged to rename
+functions to more useful titles.</p>
+
+<p>You can test <code class="language-plaintext highlighter-rouge">perWordDocumentCount.py</code> (with results in
+<code class="language-plaintext highlighter-rouge">spark-wc-out-perWordDocumentCount/part-00000</code>) with the following command:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>spark-submit perWordDocumentCount.py seqFiles/billOfRights.txt.seq
+</code></pre></div></div>
+
+<p>You should also try it on the other sequence files you have to look for some
+interesting results.</p>
+
+<h4 id="check-off">Check-off</h4>
+<p>Explain your modifications to <code class="language-plaintext highlighter-rouge">perWordDocumentCount.py</code> to your TA.</p>
+
+<p>Show your output from <code class="language-plaintext highlighter-rouge">billOfRights</code> to the TA. In particular, what values did
+you get for <code class="language-plaintext highlighter-rouge">"Amendment"</code>, <code class="language-plaintext highlighter-rouge">"the"</code>, and <code class="language-plaintext highlighter-rouge">"arms"</code>? Do these values make sense?
+You can confirm your results by looking through the <code class="language-plaintext highlighter-rouge">billOfRights.txt</code> file.</p>
+
+<h3 id="exercise-3-full-text-index-creation">Exercise 3: Full Text Index Creation</h3>
+
+<p>Next, for each word and document in which that word appears at least once, we
+want to generate a list of index into the document for EACH appearance of the
+word, where an index is defined as the number of words since the beginning of
+the document (with the first word being index 0). Also make sure the output is
+sorted alphabetically by the word. Your output should have lines that look like
+the following (minor line formatting details don’t matter):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(word1  document1-id, word# word# ...)
+(word1  document2-id, word# word# ...)
+. . .
+(word2  document1-id, word# word# ...)
+(word2  document3-id, word# word# ...)
+. . .
+</code></pre></div></div>
+
+<p>Notice that there will be a line of output for EACH document in which that word
+appears and EACH word and document pair should only have ONE list of indices.
+Remember that you need to also keep track of the document ID as well.</p>
+
+<p>For example, given a document with the text <code class="language-plaintext highlighter-rouge">With great power comes great
+responsibility</code>, the word <code class="language-plaintext highlighter-rouge">With</code> appears at index 0 while the word <code class="language-plaintext highlighter-rouge">great</code>
+appears at index 1 and 4, and the output would look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>('comes doc_somerandomnumbers', 3)
+('great doc_somerandomnumbers', 1 4)
+('power doc_somerandomnumbers', 2)
+('responsibility doc_somerandomnumbers', 5)
+('With doc_somerandomnumbers', 0)
+</code></pre></div></div>
+
+<p>The file you should edit to do this task is <code class="language-plaintext highlighter-rouge">createIndices.py</code>. For this
+exercise, you may not need all the functions we have provided. If a function is
+not used, feel free to remove the method that is trying to call it. Make sure
+your output for this is sorted as well (just like in the previous exercise).</p>
+
+<p>You can test by running the script with <code class="language-plaintext highlighter-rouge">spark-submit</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>spark-submit createIndices.py seqFiles/billOfRights.txt.seq
+</code></pre></div></div>
+
+<p>The results are stored in <code class="language-plaintext highlighter-rouge">spark-wc-out-createIndices/part-00000</code>. The output
+from running this will be a large file. In order to more easily look at its
+contents, you can use the commands <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">head</code>, <code class="language-plaintext highlighter-rouge">more</code>, and <code class="language-plaintext highlighter-rouge">grep</code>:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">head</span> <span class="nt">-25</span> OUTPUTFILE       <span class="c"># view the first 25 lines of output</span>
+<span class="nv">$ </span><span class="nb">cat </span>OUTPUTFILE | more     <span class="c"># scroll through output one screen at a time (use Space)</span>
+<span class="nv">$ </span><span class="nb">cat </span>OUTPUTFILE | <span class="nb">grep </span>the <span class="c"># output only lines containing 'the' (case-sensitive)</span>
+</code></pre></div></div>
+
+<p>Make sure to verify your output. Open <code class="language-plaintext highlighter-rouge">billOfRights.txt</code> and pick
+a few words. Manually count a few of their word indices and make sure they all
+appear in your output file.</p>
+
+<h4 id="check-off-1">Check-off</h4>
+<p>Explain your code in <code class="language-plaintext highlighter-rouge">createIndices.py</code> to your TA. Next, run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>spark-submit createIndices.py seqFiles/complete-works-mark-twain.txt.seq
+</code></pre></div></div>
+
+<p>Show your TA the first page of your output for the word “Mark” in
+<code class="language-plaintext highlighter-rouge">complete-works-mark-twain.txt.seq</code> to verify correct output. You can do this by
+running:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>spark-wc-out-createIndices/part-00000 | <span class="nb">grep </span>Mark | less
+</code></pre></div></div>
+
+<h3 id="exercise-4-whats-the-most-popular-word">Exercise 4: What’s the most popular word?</h3>
+
+<p>Use Spark to determine what the most popular non-article word is in the Bill
+of Rights. (Articles are the words “a”, “an”, and “the”, so ignore those)
+We have copied over the code from <code class="language-plaintext highlighter-rouge">wordCount.py</code> into a new script <code class="language-plaintext highlighter-rouge">mostPopular.py</code>
+since it is a good starting point.</p>
+
+<p><em>Hint:</em> After the <code class="language-plaintext highlighter-rouge">reduceByKey</code> operation has been run, you can still apply
+additional map operations to the data. Looking at the arguments for <code class="language-plaintext highlighter-rouge">sortByKey</code>
+may save you a lot of scrolling as well.</p>
+
+<p>To test your code, run:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>spark-submit mostPopular.py seqFiles/billOfRights.txt.seq
+</code></pre></div></div>
+
+<p>The results are stored in <code class="language-plaintext highlighter-rouge">spark-wc-out-mostPopular/part-00000</code>. As a fun exercise,
+try doing this on the book you downloaded in Exercise 0!</p>
+
+<h3 id="check-off-2">Check-off</h3>
+
+<p>Explain your code to the TA and what the most popular non-article word is.</p>
+
+<hr />
+
+<h2 id="checkoffs">Checkoffs</h2>
+
+<p>Exercise 0:</p>
+<ul>
+  <li>No checkoff</li>
+</ul>
+
+<p>Exercise 1:</p>
+<ul>
+  <li>No checkoff</li>
+</ul>
+
+<p>Exercise 2:</p>
+<ul>
+  <li>Explain your modifications to <code class="language-plaintext highlighter-rouge">perWordDocumentCount.py</code></li>
+  <li>Show the output from <code class="language-plaintext highlighter-rouge">billOfRights</code> for the words <code class="language-plaintext highlighter-rouge">Amendment</code>, <code class="language-plaintext highlighter-rouge">the</code>, and <code class="language-plaintext highlighter-rouge">arms</code></li>
+</ul>
+
+<p>Exercise 3:</p>
+<ul>
+  <li>Explain your modifications to <code class="language-plaintext highlighter-rouge">createIndices.py</code></li>
+  <li>Show the output from <code class="language-plaintext highlighter-rouge">complete-works-mark-twain</code> for the word <code class="language-plaintext highlighter-rouge">Mark</code></li>
+</ul>
+
+<p>Exercise 4:</p>
+<ul>
+  <li>Explain your code to the TA</li>
+  <li>Demonstrate knowledge of the most popular non-article word</li>
+</ul>
+
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../../../assets/theme/theme.js"></script>
+  </body>
+</html>

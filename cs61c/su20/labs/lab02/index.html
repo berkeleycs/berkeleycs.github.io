@@ -1,0 +1,514 @@
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+
+
+
+ <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
+    <!-- <link rel="stylesheet" href="/assets/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="../../../assets/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/open-iconic-bootstrap.min.css" crossorigin="anonymous">
+    <link href='../../../assets/fontawesome/css/all.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../../../assets/open-sans.css" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/assets/theme/main.css" crossorigin="anonymous" id="theme"> -->
+    <link rel="stylesheet" href="../../../assets/theme/main.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/main_dark.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/theme/switch.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../assets/syntax.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="../../../assets/favicon.png">
+    <link href="../../../assets/open-iconic-bootstrap.min.css" rel="stylesheet">
+    <link href="../../../assets/bootstrap-toc.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar.min.css" rel="stylesheet">
+    <link href="../../../assets/jquery-ui.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!-- <link href="/assets/fullcalendar/packages/core/main.min.css" rel="stylesheet"> -->
+    <link href="../../../assets/fullcalendar/packages/daygrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/timegrid/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/list/main.min.css" rel="stylesheet">
+    <link href="../../../assets/fullcalendar/packages/bootstrap/main.min.css" rel="stylesheet">
+
+    <title> CS 61C </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154217821-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-154217821-1');
+    </script>
+    
+    <script>
+    var loc = window.location.href + '';
+    if (loc.indexOf('http://') == 0 && !["localhost", "127.0.0.1"].includes(window.location.hostname)){
+        window.location.href = loc.replace('http://','https://');
+    }
+    var baseurl = "";
+    </script>
+
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="../../../assets/jquery.min.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script> -->
+    <script src="../../../assets/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="../../../assets/bootstrap-toc.min.js"></script>
+    <script src="../../../assets/moment.min.js"></script>
+    <script src="../../../assets/fullcalendar.min.js"></script>
+    <script src="../../../assets/fullcalendar-gcal.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/core/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/daygrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/timegrid/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/list/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/google_calendar/main.min.js"></script>
+    <script type="text/javascript" src="../../../assets/fullcalendar/packages/bootstrap/main.min.js"></script>
+    <!-- <script type="text/javascript" src="/assets/fullcalendar/packages/moment/main.js"></script>
+    <script type="text/javascript" src="/assets/fullcalendar/packages/moment-timezone/main.js"></script> -->
+
+
+
+    <div class="wrapper bg-white">
+        <nav class="navbar bg-dark navbar-dark navbar-expand-md align-items-center">
+            <div class="container">
+                <a class="navbar-brand brand-berkeley" href="https://cs61c.org/su20">
+                  <img src = "../../../assets/icon-small.png" class="img-fluid" /> CS 61C
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../calendar.html" >
+        Calendar
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../staff.html" >
+        Staff
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="../../policies.html" >
+        Policies
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://piazza.com/" >
+        Piazza
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link  text-muted "
+         target = "_blank" href="https://venus.cs61c.org/" >
+        Venus
+        
+        <span class="oi oi-external-link"></span> 
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/resources/" >
+        Resources
+        
+    </a>
+    </li>
+
+
+                      
+                        
+
+
+    <li class="nav-item ">
+    <a class="nav-link "
+         href="https://cs61c.org/?redirect=false" >
+        Semesters
+        
+    </a>
+    </li>
+
+
+                      
+
+                      <li class="nav-item" align="center">
+                        <label class="switch">
+                        <input type="checkbox" id="themeSwitch" onload="if (returnThemeBasedOnLocalStorage() === 'dark') {this.clicked = true;}" onclick="enableTheme(this.checked === false ? 'light' : 'dark', true);">
+                          <span class="slider round"></span>
+                        </label>
+                        <br>
+                        <label for="themeSwitch" id="switch_text">Dark Mode</label>
+                      </li>
+                  </ul>
+                </div>
+            </div>
+          </nav>
+      
+          <div class="container">
+              <h1 class="mb-4">Lab 2</h1>
+
+
+    <div class="row">
+        <div class="col-sm-9">
+            <p>Deadline: Wednesday, July 1st</p>
+
+<h2 id="setup">Setup</h2>
+<p>To get the starter files for this lab, run the following command in your <code class="language-plaintext highlighter-rouge">labs</code>
+directory.</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull starter master
+</code></pre></div></div>
+
+<p>If you get an error like the following:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: <span class="s1">'starter'</span> does not appear to be a git repository
+fatal: Could not <span class="nb">read </span>from remote repository.
+</code></pre></div></div>
+<p>make sure to set the starter remote as follows:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add starter https://github.com/61c-teach/su20-lab-starter.git
+</code></pre></div></div>
+<p>and run the original command again.</p>
+
+<h2 id="objectives">Objectives</h2>
+<ul>
+  <li>TSWBAT perform specific bit manipulations through compositions of bit operations.</li>
+  <li>TSW identify potential issues with dynamic memory management.</li>
+</ul>
+
+<h2 id="exercise-0-makefiles">Exercise 0: Makefiles</h2>
+<p>As you saw in Lab 01, compiling C programs in the terminal is a tedious and time-consuming operation that requires the running of multiple commands with long series of arguments. While this is doable for simple C programs, for larger and more complex programs with often dozens of files and dependencies, this gets rather unweilding quickly.</p>
+
+<p>For large, complex, programs, most C programmers write what’s called a “makefile” to help with compilation. A makefile is a textfile (literally labelled “Makefile”) in the code directory that contains a set of rules, each of which has commands that compile the C program for them. Each makefile can contain multiple rules that each compile one or more targets (e.g. an executable) or do a different objective. To compile a target, the programmer just needs to type “make <target name="">" into their command terminal.</target></p>
+
+<p>Take a look at the “Makefile” included with this lab, and try to answer the following questions in “make.txt”. Feel free to use the internet to figure some of these questions out.</p>
+
+<ol>
+  <li>Which target is part of a rule that deletes all the compiled programs?</li>
+  <li>Which target is part of a rule that makes all the compiled programs?</li>
+  <li>Which compiler is currently being used?</li>
+  <li>What C standard are we currently using?</li>
+  <li>How would we reference a variable FOO in a makefile?</li>
+  <li>What operating system does the term “Darwin” represent?</li>
+  <li>What line creates the lfsr program from its object files? (Give its line number.)</li>
+</ol>
+
+<p>Makefiles look daunting, but are actually an amazing tool that help save a lot of time!</p>
+
+<h2 id="exercise-1-bit-operations">Exercise 1: Bit Operations</h2>
+<p>For this exercise, you will complete <code class="language-plaintext highlighter-rouge">bit_ops.c</code> by implementing the bit manipulation functions <code class="language-plaintext highlighter-rouge">get_bit</code>, <code class="language-plaintext highlighter-rouge">set_bit</code>, and <code class="language-plaintext highlighter-rouge">flip_bit</code> (shown below). You may only use bitwise operations such as and (&amp;), or (|), xor (^), not (~), left shifts («), and right shifts (»). You may not use any for/while loops or conditional statements. You also may not use modulo (%), division, addition subtraction, or multiplication for this question.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Return the nth bit of x.</span>
+<span class="c1">// Assume 0 &lt;= n &lt;= 31</span>
+<span class="kt">unsigned</span> <span class="nf">get_bit</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">x</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">);</span>
+
+<span class="c1">// Set the nth bit of the value of x to v.</span>
+<span class="c1">// Assume 0 &lt;= n &lt;= 31, and v is 0 or 1</span>
+<span class="kt">void</span> <span class="nf">set_bit</span><span class="p">(</span><span class="kt">unsigned</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">v</span><span class="p">);</span>
+
+<span class="c1">// Flip the nth bit of the value of x.</span>
+<span class="c1">// Assume 0 &lt;= n &lt;= 31</span>
+<span class="kt">void</span> <span class="nf">flip_bit</span><span class="p">(</span><span class="kt">unsigned</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">n</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>ACTION ITEM</strong>: Finish implementing <code class="language-plaintext highlighter-rouge">get_bit</code>, <code class="language-plaintext highlighter-rouge">set_bit</code>, and <code class="language-plaintext highlighter-rouge">flip_bit</code>.</p>
+
+<p>Once you complete these functions, you can compile and run your code using the following commands:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make bit_ops
+<span class="nv">$ </span>./bit_ops
+</code></pre></div></div>
+
+<p>This will print out the result of a few limited tests.</p>
+
+<h2 id="exercise-2-linear-feedback-shift-register">Exercise 2: Linear Feedback Shift Register</h2>
+<p>In this exercise, you will implement a <code class="language-plaintext highlighter-rouge">lfsr_calculate()</code> function to compute the next iteration of a linear feedback shift register (LFSR). Applications that use LFSRs are: Digital TV, CDMA cellphones, Ethernet, USB 3.0, and more! This function will generate pseudo-random numbers using bitwise operators. For some more background, read the <a href="https://en.wikipedia.org/wiki/Linear-feedback_shift_register">Wikipedia article on Linear feedback shift registers</a>. In <code class="language-plaintext highlighter-rouge">lfsr.c</code>, fill in the function <code class="language-plaintext highlighter-rouge">lfsr_calculate()</code> so that it does the following:</p>
+
+<h3 id="hardware-diagram">Hardware Diagram</h3>
+<p><img src="LFSR-F18.gif" alt="LFSR Diagram" /></p>
+
+<h3 id="explanation">Explanation</h3>
+<ul>
+  <li>On each call to <code class="language-plaintext highlighter-rouge">lfsr_calculate</code>, you will shift the contents of the register 1 bit to the right.</li>
+  <li>This shift is neither a logical shift or an arithmetic shift. On the left side, you will shift in a single bit equal to the Exclusive Or (XOR) of the bits originally in position 0, 2, 3, and 5.</li>
+  <li>The curved head-light shaped object is an XOR, which takes two inputs (a, b) and outputs a^b.</li>
+  <li>If you implemented <code class="language-plaintext highlighter-rouge">lfsr_calculate()</code> correctly, it should output all 65535 positive 16-bit integers before cycling back to the starting number.</li>
+  <li>Note that the leftmost bit is the MSB and the rightmost bit is the LSB.</li>
+</ul>
+
+<p><strong>ACTION ITEM</strong>: Implement <code class="language-plaintext highlighter-rouge">lfsr_calculate()</code>, compile <code class="language-plaintext highlighter-rouge">lfsr</code> and run it. Verify that the output looks like the following:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>make lfsr
+<span class="nv">$ </span>./lfsr
+My number is: 1
+My number is: 5185
+My number is: 38801
+My number is: 52819
+My number is: 21116
+My number is: 54726
+My number is: 26552
+My number is: 46916
+My number is: 41728
+My number is: 26004
+My number is: 62850
+My number is: 40625
+My number is: 647
+My number is: 12837
+My number is: 7043
+My number is: 26003
+My number is: 35845
+My number is: 61398
+My number is: 42863
+My number is: 57133
+My number is: 59156
+My number is: 13312
+My number is: 16285
+ ... etc etc ...
+Got 65535 numbers before cycling!
+Congratulations! It works!
+</code></pre></div></div>
+
+<h2 id="exercise-3-linked-lists">Exercise 3: Linked Lists</h2>
+<p>For this exercise, you will fill in the functions <code class="language-plaintext highlighter-rouge">append_node()</code> and <code class="language-plaintext highlighter-rouge">reverse_list()</code> in <code class="language-plaintext highlighter-rouge">list.c</code>. Don’t forget to look at <code class="language-plaintext highlighter-rouge">list.h</code> to see the definition of the node struct and also to see the general format of a simple .h (header) file!</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">append_node()</code>, you will append a node to the end of a linked list.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">reverse_list()</code>, you will reverse a linked list <strong>in place</strong> (i.e. without creating a new list). For example, the list <code class="language-plaintext highlighter-rouge">1-&gt;2-&gt;3-&gt;4-&gt;5</code> would become <code class="language-plaintext highlighter-rouge">5-&gt;4-&gt;3-&gt;2-&gt;1</code>.
+HINT: In each iteration of your loop to traverse the linked list, think about what information you need to store in variables before reversing the link so that you can still successfully keep iterating through the list and reversing links.
+This is a fairly difficult exercise in C; we recommend that you draw a picture if you get stuck because doing so tends to make double pointers seem less intimidating. Please write up what you think the algorithm should be before asking a TA for help. <strong>You can think of the double pointer as simply a pointer to a list of pointers to nodes.</strong></p>
+
+<p>Why do both of these functions take in a <code class="language-plaintext highlighter-rouge">node**</code> and not a <code class="language-plaintext highlighter-rouge">node*</code>? Think about memory management; if the input was a node*, would it be possible to modify the pointer that was passed into the function from, say, the main() function? Remember that C is pass-by-value!</p>
+
+<p><strong>ACTION ITEM</strong>: Finish implementing <code class="language-plaintext highlighter-rouge">append_node()</code> and <code class="language-plaintext highlighter-rouge">reverse_list()</code>.</p>
+
+<p>Once you complete these functions, you can compile and run your code using the following commands. If you make <strong>any</strong> changes, make sure to run <strong>ALL</strong> of the following commands again, in order.</p>
+
+<p><strong>If you compile and run locally, the test may print out that the next attributes of your nodes are 0x0 and that your test failed. This is completely fine; your tests will pass the autograder. If you’d like to be completely sure that your test passes locally, compile and run your code on the hive machines</strong>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>gcc <span class="nt">-c</span> list.c
+<span class="nv">$ </span>gcc <span class="nt">-c</span> test_list.c
+<span class="nv">$ </span>gcc <span class="nt">-g</span> <span class="nt">-o</span> test_list test_list.o list.o       <span class="c"># This will create an executable by linking test_list.o and list.o.</span>
+<span class="nv">$ </span>./test_list
+</code></pre></div></div>
+
+<p>This will print out the results of the test. To debug, you can run CGDB and step through the test in <code class="language-plaintext highlighter-rouge">test_list.c</code>.</p>
+
+<h2 id="exercise-4-memory-management">Exercise 4: Memory Management</h2>
+<p>This exercise uses <code class="language-plaintext highlighter-rouge">vector.h</code>, <code class="language-plaintext highlighter-rouge">vector_test.c</code>, and <code class="language-plaintext highlighter-rouge">vector.c</code>, where we provide you with a framework for implementing a variable-length array. This exercise is designed to help familiarize you with C structs and memory management in C.</p>
+
+<p><strong>ACTION ITEM</strong>: Explain why <code class="language-plaintext highlighter-rouge">bad_vector_new()</code> and <code class="language-plaintext highlighter-rouge">also_bad_vector_new()</code> are bad and fill in the functions <code class="language-plaintext highlighter-rouge">vector_new()</code>, <code class="language-plaintext highlighter-rouge">vector_get()</code>, <code class="language-plaintext highlighter-rouge">vector_delete()</code>, and <code class="language-plaintext highlighter-rouge">vector_set()</code> in <code class="language-plaintext highlighter-rouge">vector.c</code> (as well as the function headers in <code class="language-plaintext highlighter-rouge">vector.h</code>) so that our test code <code class="language-plaintext highlighter-rouge">vector_test.c</code> runs without any memory management errors. Also, implement a rule for the <code class="language-plaintext highlighter-rouge">vector_test</code> target in the makefile.</p>
+
+<p>Comments in the code describe how the functions should work. Look at the functions we’ve filled in to see how the data structures should be used. For consistency, <em>it is assumed that all entries in the vector are 0 unless set by the user. Keep this in mind as <code class="language-plaintext highlighter-rouge">malloc()</code> does not zero out the memory it allocates.</em></p>
+
+<p>For explaining why the two bad functions are incorrect, keep in mind that one of these functions will actually run correctly (assuming correctly modified <code class="language-plaintext highlighter-rouge">vector_new</code>, <code class="language-plaintext highlighter-rouge">vector_set</code>, etc.) but there may be other problems. <strong>Hint</strong>: think about memory usage.</p>
+
+<p><strong>ACTION ITEM</strong>: Test your implementation of <code class="language-plaintext highlighter-rouge">vector_new()</code>, <code class="language-plaintext highlighter-rouge">vector_get()</code>, <code class="language-plaintext highlighter-rouge">vector_delete()</code>, and <code class="language-plaintext highlighter-rouge">vector_set()</code> for both correctness and memory management (details below).</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 1) to check correctness</span>
+<span class="nv">$ </span>make vector_test
+<span class="nv">$ </span>./vector_test
+
+<span class="c"># 2) to check memory management using Valgrind:</span>
+<span class="nv">$ </span>make vector-memcheck
+</code></pre></div></div>
+
+<p>All the <code class="language-plaintext highlighter-rouge">vector-memcheck</code> <a href="https://www.gnu.org/software/make/manual/make.html#Rule-Introduction">rule</a> does is run the following valgrind command on our executable. For a review, read through Exercise 4 in <a href="https://cs61c.org/labs/lab01/">Lab 1</a>. Explain to yourself what each of the flags mean.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>valgrind <span class="nt">--tool</span><span class="o">=</span>memcheck <span class="nt">--leak-check</span><span class="o">=</span>full <span class="nt">--track-origins</span><span class="o">=</span><span class="nb">yes</span> <span class="o">[</span>OS SPECIFIC ARGS] ./&lt;executable&gt;
+</code></pre></div></div>
+
+<p>The last line in the valgrind output is the line that will indicate at a glance if things have gone wrong. Here’s a sample output from a buggy program:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==47132== ERROR SUMMARY: 1200039 errors from 24 contexts (suppressed: 18 from 18)
+</code></pre></div></div>
+
+<p>If your program has errors, you can scroll up in the command line output to view details for each one. For our purposes, you can safely ignore all output that refers to suppressed errors. In a leak-free program, your output will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>==44144== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 18 from 18)
+</code></pre></div></div>
+
+<p>Again, any number of suppressed errors is fine; they do not affect us.</p>
+
+<p>Feel free to also use CGDB or add <code class="language-plaintext highlighter-rouge">printf</code> statements to <code class="language-plaintext highlighter-rouge">vector.c</code> and <code class="language-plaintext highlighter-rouge">vector_test.c</code> to debug your code.</p>
+
+<h2 id="checkoff">Checkoff</h2>
+<p>Please submit to the <strong>Lab Autograder</strong> assignment (same as last week!).</p>
+
+<p>Checkoff questions for Exercise 4:</p>
+<ul>
+  <li>Explain to your TA/AI why <code class="language-plaintext highlighter-rouge">bad_vector_new()</code> and <code class="language-plaintext highlighter-rouge">also_bad_vector_new()</code> are bad. Also, show your TA/AI the output of <code class="language-plaintext highlighter-rouge">make vector-memcheck</code>.</li>
+</ul>
+
+
+        </div>
+        <div class="col-sm-3">
+            <nav id="toc" class="sticky-top" style="top: 40px;"></nav>
+        </div>
+    </div>
+    
+    <script>
+        $(function() {
+            var navSelector = "#toc";
+            var $myNav = $(navSelector);
+            Toc.init($myNav);
+            $("body").scrollspy({
+                target: navSelector
+            });
+        });
+    </script>
+
+
+          </div>
+    </div>
+
+    <footer class="page-footer">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link text-secondary" href="https://cs61c.org/su20">
+                  CS 61C
+                </a>
+              </li>
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../calendar.html" >
+      Calendar
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../staff.html" >
+      Staff
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="../../policies.html" >
+      Policies
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://piazza.com/" >
+      Piazza
+    </a>
+  </li>
+
+            
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link  text-dark "  href="https://venus.cs61c.org/" >
+      Venus
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/resources/" >
+      Resources
+    </a>
+  </li>
+
+            
+              
+
+<li class="nav-item">
+    <a class="nav-link "  href="https://cs61c.org/?redirect=false" >
+      Semesters
+    </a>
+  </li>
+
+            
+
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="index.html#">
+                Back to top
+              </a>
+            </li>
+        </ul>
+    </footer>
+
+    <script type="text/javascript" src="../../../assets/theme/theme.js"></script>
+  </body>
+</html>
