@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NBody Simulation | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">NBody Simulation</header><ul id="markdown-toc">
+  <li><a href="proj0.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="proj0.html#getting-the-skeleton-files" id="markdown-toc-getting-the-skeleton-files">Getting the Skeleton Files</a></li>
+  <li><a href="proj0.html#the-body-class-and-its-constructor" id="markdown-toc-the-body-class-and-its-constructor">The Body Class and Its Constructor</a></li>
+  <li><a href="proj0.html#understanding-the-physics" id="markdown-toc-understanding-the-physics">Understanding the Physics</a>    <ul>
+      <li><a href="proj0.html#pairwise-force" id="markdown-toc-pairwise-force">Pairwise Force</a></li>
+      <li><a href="proj0.html#net-forces" id="markdown-toc-net-forces">Net Forces</a></li>
+      <li><a href="proj0.html#force-and-acceleration" id="markdown-toc-force-and-acceleration">Force and Acceleration</a></li>
+      <li><a href="proj0.html#samh-aegir-and-rocinante" id="markdown-toc-samh-aegir-and-rocinante">Samh, Aegir, and, Rocinante</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#writing-the-body-class" id="markdown-toc-writing-the-body-class">Writing the Body Class</a>    <ul>
+      <li><a href="proj0.html#calcdistance" id="markdown-toc-calcdistance">calcDistance</a></li>
+      <li><a href="proj0.html#calcforceexertedby" id="markdown-toc-calcforceexertedby">calcForceExertedBy</a></li>
+      <li><a href="proj0.html#calcforceexertedbyx-and-calcforceexertedbyy" id="markdown-toc-calcforceexertedbyx-and-calcforceexertedbyy">calcForceExertedByX and calcForceExertedByY</a></li>
+      <li><a href="proj0.html#calcnetforceexertedbyx-and-calcnetforceexertedbyy" id="markdown-toc-calcnetforceexertedbyx-and-calcnetforceexertedbyy">calcNetForceExertedByX and calcNetForceExertedByY</a></li>
+      <li><a href="proj0.html#update" id="markdown-toc-update">update</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#optional-testing-your-body-class" id="markdown-toc-optional-testing-your-body-class">(Optional) Testing Your Body Class</a></li>
+  <li><a href="proj0.html#getting-started-with-the-simulator-nbodyjava" id="markdown-toc-getting-started-with-the-simulator-nbodyjava">Getting Started with the Simulator (NBody.java)</a>    <ul>
+      <li><a href="proj0.html#readradius" id="markdown-toc-readradius">readRadius</a></li>
+      <li><a href="proj0.html#readbodies" id="markdown-toc-readbodies">readBodies</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#drawing-the-initial-universe-state-main" id="markdown-toc-drawing-the-initial-universe-state-main">Drawing the Initial Universe State (main)</a>    <ul>
+      <li><a href="proj0.html#collecting-all-needed-input" id="markdown-toc-collecting-all-needed-input">Collecting All Needed Input</a></li>
+      <li><a href="proj0.html#drawing-the-background" id="markdown-toc-drawing-the-background">Drawing the Background</a></li>
+      <li><a href="proj0.html#drawing-one-body" id="markdown-toc-drawing-one-body">Drawing One Body</a></li>
+      <li><a href="proj0.html#drawing-more-than-one-body" id="markdown-toc-drawing-more-than-one-body">Drawing More than One Body</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#creating-an-animation" id="markdown-toc-creating-an-animation">Creating an Animation</a></li>
+  <li><a href="proj0.html#printing-the-universe" id="markdown-toc-printing-the-universe">Printing the Universe</a></li>
+  <li><a href="proj0.html#submission" id="markdown-toc-submission">Submission</a>    <ul>
+      <li><a href="proj0.html#trying-out-other-universes" id="markdown-toc-trying-out-other-universes">Trying Out Other Universes</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#extra-for-experts" id="markdown-toc-extra-for-experts">Extra for Experts</a>    <ul>
+      <li><a href="proj0.html#adding-audio" id="markdown-toc-adding-audio">Adding Audio</a></li>
+      <li><a href="proj0.html#going-above-and-beyond-gold-points---due-97" id="markdown-toc-going-above-and-beyond-gold-points---due-97">Going Above and Beyond (Gold Points) - Due 9/7</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#frequently-asked-questions" id="markdown-toc-frequently-asked-questions">Frequently Asked Questions</a>    <ul>
+      <li><a href="proj0.html#im-passing-all-the-local-tests-but-failing-even-easy-tests-like-testreadradius-in-the-autograder" id="markdown-toc-im-passing-all-the-local-tests-but-failing-even-easy-tests-like-testreadradius-in-the-autograder">I’m passing all the local tests, but failing even easy tests like testReadRadius in the autograder.</a></li>
+      <li><a href="proj0.html#the-test-demands-1335-and-im-giving-13349-but-it-still-fails" id="markdown-toc-the-test-demands-1335-and-im-giving-13349-but-it-still-fails">The test demands 133.5, and I’m giving 133.49, but it still fails!</a></li>
+      <li><a href="proj0.html#when-i-run-the-simulation-my-planets-start-rotating-but-then-quickly-accelerate-and-disappear-off-of-the-bottom-left-of-the-screen" id="markdown-toc-when-i-run-the-simulation-my-planets-start-rotating-but-then-quickly-accelerate-and-disappear-off-of-the-bottom-left-of-the-screen">When I run the simulation, my planets start rotating, but then quickly accelerate and disappear off of the bottom left of the screen.</a></li>
+      <li><a href="proj0.html#what-is-a-constructor-how-do-i-write-one" id="markdown-toc-what-is-a-constructor-how-do-i-write-one">What is a constructor? How do I write one?</a></li>
+      <li><a href="proj0.html#im-having-trouble-with-the-second-body-constructor-the-one-that-takes-in-another-body-as-its-only-argument" id="markdown-toc-im-having-trouble-with-the-second-body-constructor-the-one-that-takes-in-another-body-as-its-only-argument">I’m having trouble with the second Body constructor, the one that takes in another Body as its only argument.</a></li>
+    </ul>
+  </li>
+  <li><a href="proj0.html#acknowledgements" id="markdown-toc-acknowledgements">Acknowledgements</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>The goal of this project is to give you a crash course in Java. Since CS61B is
+not intended to be a course about Java, we will be moving quickly, learning
+fundamental aspects of the Java language in just four weeks.</p>
+
+<p>Before starting this project, you should have:</p>
+<ul>
+  <li>Completed lab 1.</li>
+  <li>Completed HW0.</li>
+  <li>Attended or <a href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD6XopUFumnRzFCgYXshKex3">watched lecture #2</a>.</li>
+</ul>
+
+<p>You do not need to fully understand the contents of lecture 2 to begin this
+assignment. Indeed, the main purpose of this project is to help you build some
+comfort with the material in that lecture.</p>
+
+<p>Unlike later projects, this assignment has a great deal of scaffolding. Future
+assignments will require significantly more independence. This project should be
+entirely your own work, i.e. you may not work closely with a partner or a group.</p>
+
+<p>However, you’re welcome to discuss the project with your classmates as described in the 
+rules described in the Course Info page. <!--For this project, you may work in
+pairs. To work in a pair, you must read the [collaboration
+guide](../../guides/partnerships.html) and fill out the partner request form
+available [here](https://beacon.datastructur.es/) under Partner Information for
+`Project 0: NBody`. Note that you will not be able to see this page until you
+have registered for your own [personal github
+repository](https://piazza.com/class/jqr7hfmf4v74e?cid=7). You do not need to
+wait for our approval to begin as long as you meet the requirements for
+partnerships. If you work with someone who is more experienced, you are likely
+to miss lots of important subtleties, which will be painful later when you start
+working on your own (i.e. the entire second half of the course).--></p>
+
+<p>Your goal for this project is to write a program simulating the motion of <code class="language-plaintext highlighter-rouge">N</code>
+objects in a plane, accounting for the gravitational forces mutually affecting
+each object as demonstrated by Sir Isaac Newton’s <a href="http://en.wikipedia.org/wiki/Newton%27s_law_of_universal_gravitation">Law of Universal
+Gravitation</a>.</p>
+
+<p>Ultimately, you will be creating a program <code class="language-plaintext highlighter-rouge">NBody.java</code> that draws an animation
+of bodies floating around in space tugging on each other with the power of
+gravity.</p>
+
+<p>If you run into problems, be sure to check out the
+<a href="proj0.html#frequently-asked-questions">FAQ</a> section before posting to Ed Discussions. We’ll keep
+this section updated as questions arise during the assignment. Always try
+googling before asking questions on Ed. Knowing how to find what you want
+on Google is a valuable skill. However, know when to yield! If you start
+getting frustrated with your search attempts, then turn to Ed. Be sure to check out our 
+<a href="https://fa20.datastructur.es/materials/guides/ed-guide.html">Ed Guide</a> and <a href="https://us.edstem.org/courses/979/discussion/109426">Ed Policies</a>.</p>
+
+<h2 id="getting-the-skeleton-files">Getting the Skeleton Files</h2>
+
+<p>Before proceeding, make sure you have completed
+<a href="https://fa20.datastructur.es/materials/lab/lab1/lab1">lab1</a>, and if you are
+working on your own computer, that you have completed
+<a href="https://fa20.datastructur.es/materials/lab/lab1setup/lab1setup">lab1setup</a> to
+set up your computer.</p>
+
+<p>Head to the folder containing your copy of your repository. For
+example, if your Class ID is ‘fa20-s109’, then head to the ‘fa20-s109’ folder (or any
+subdirectory).</p>
+
+<!--
+If you're working with a partner, you will have a shared repository with a link given on the  under Partner information on your [registration page](https://beacon.datastructur.es/). We'll discuss normal git-based file sharing practices
+when we get to project 2. For the remaining git instructions, if you have a partner, be sure to work in this shared repository. To create and use this shared repository, follow the instructions [here](https://piazza.com/class/jqr7hfmf4v74e?cid=96).-->
+
+<p>Now we’ll make sure you have the latest copy of the skeleton files with <code class="language-plaintext highlighter-rouge">git pull skeleton master</code>. Note: This command may result in a “merge”. You’ll know a merge has occurred if a text editor automatically opens. If this happens, see the <a href="../../guides/skeleton-merge-guide.html">Skeleton Merge Guide</a>.</p>
+
+<h2 id="the-body-class-and-its-constructor">The Body Class and Its Constructor</h2>
+
+<p>You’ll start by creating a Body class. In your favorite text editor, create a
+new file called <code class="language-plaintext highlighter-rouge">Body.java</code>. If you haven’t picked a text editor, we recommend
+<a href="http://www.sublimetext.com/">Sublime Text</a>. Remember that your .java files
+should have the same name as the class it contains.</p>
+
+<p><strong>Note: You should not use IntelliJ for this project!</strong> If you don’t know what IntelliJ is, good, that’s what we’ll be talking about in lab 2 (next week).</p>
+
+<p>Begin by creating a basic version of the Body class with the following 6
+instance variables:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">double xxPos</code>: Its current x position</li>
+  <li><code class="language-plaintext highlighter-rouge">double yyPos</code>: Its current y position</li>
+  <li><code class="language-plaintext highlighter-rouge">double xxVel</code>: Its current velocity in the x direction</li>
+  <li><code class="language-plaintext highlighter-rouge">double yyVel</code>: Its current velocity in the y direction</li>
+  <li><code class="language-plaintext highlighter-rouge">double mass</code>: Its mass</li>
+  <li><code class="language-plaintext highlighter-rouge">String imgFileName</code>: The name of the file that corresponds to the image that
+depicts the body (for example, <code class="language-plaintext highlighter-rouge">jupiter.gif</code>)</li>
+</ul>
+
+<p>Your instance variables must be named exactly as above, and they must be
+explicitly set to public via the <code class="language-plaintext highlighter-rouge">public</code> keyword. The reason we call them by
+double letters, e.g. <code class="language-plaintext highlighter-rouge">xxPos</code> rather than <code class="language-plaintext highlighter-rouge">xPos</code> is to reduce the chance of
+typos. In past semesters, students have accidentally pressed x when they meant
+y, and this has caused significant debugging hassle. After adding the 6 instance
+variables above, add in two Body constructors that can initialize an instance
+of the Body class. Later on, an instance of the Body class can represent a planet,
+star, or various objects in this universe. The signature of the first
+constructor should be:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nf">Body</span><span class="o">(</span><span class="kt">double</span> <span class="n">xP</span><span class="o">,</span> <span class="kt">double</span> <span class="n">yP</span><span class="o">,</span> <span class="kt">double</span> <span class="n">xV</span><span class="o">,</span>
+              <span class="kt">double</span> <span class="n">yV</span><span class="o">,</span> <span class="kt">double</span> <span class="n">m</span><span class="o">,</span> <span class="nc">String</span> <span class="n">img</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p class="redtext">Note: We have given parameter names that are different than
+the corresponding instance variable name. If you insist on making the parameter
+names the same as the instance variable names for aesthetic reasons, make sure
+to use the "this" keyword appropriately (mentioned only briefly in
+lecture).</p>
+
+<p>The second constructor should take in a Body object and initialize an
+identical Body object (i.e. a copy). The signature of the second constructor
+should be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public Body(Body b)
+</code></pre></div></div>
+
+<p>Your Body class should NOT have a main method, because we’ll never run the
+Body class directly (i.e. we will never run <code class="language-plaintext highlighter-rouge">java Body</code>). Also, all methods
+should be non-static.</p>
+
+<p>All of the numbers for this project will be doubles. We’ll talk more aobut what
+a <code class="language-plaintext highlighter-rouge">double</code> is later in the course, but for now, think of it is a real number,
+e.g. <code class="language-plaintext highlighter-rouge">double x = 3.5</code>. In addition, all <em>instance</em> variables and methods will be
+declared using the public keyword.</p>
+
+<p>Once you have filled in the constructors, you can test it out by compiling your
+<code class="language-plaintext highlighter-rouge">Body.java</code> file and the <code class="language-plaintext highlighter-rouge">TestBodyConstructor.java</code> file we have provided.</p>
+
+<p>You can compile with the command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java TestBodyConstructor.java
+</code></pre></div></div>
+
+<p><em>Don’t worry if you get warnings about deprecation when compiling for this project.</em></p>
+
+<p>You can run our provided test with the command</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java TestBodyConstructor
+</code></pre></div></div>
+
+<p>If you pass this test, you’re ready to move on to the next step. <strong>Do not
+proceed until you have passed this test.</strong></p>
+
+<h2 id="understanding-the-physics">Understanding the Physics</h2>
+
+<p>In this section, we’re not going to do any programming. Instead, we’re going
+to review some basic physics that we’ll need to understand in order to continue
+with the project. At the end of this section you should complete the exercise
+labeled “Samh, Aegir, and, Rocinante”. There is no way to submit this work,
+but make sure you can understand it before you proceed to the following section.</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">Body</code> objects will obey the laws of Newtonian physics.</p>
+
+<h3 id="pairwise-force">Pairwise Force</h3>
+
+<p><em>Newton’s law of universal gravitation</em> asserts that the
+strength of the gravitational force between two particles is given by the
+product of their masses divided by the square of the distance between them,
+scaled by the gravitational constant
+$G = 6.67 \cdot 10^{-11} \dfrac{\text{Nm}^2}{\text{kg}^2}$. The gravitational
+force exerted on a particle is along the straight line between them (we are
+ignoring here strange
+effects like the <a href="https://en.wikipedia.org/wiki/Curved_space">curvature of
+space</a>). Since we are using
+Cartesian coordinates to represent the position of a particle, it is convenient
+to break up the force into its $x$- and $y$-components ($F_x$, $F_y$). The
+relevant equations are shown below. We have not derived these equations, and you
+should just trust us.</p>
+
+<ul>
+  <li>$F = \dfrac{G \cdot m_1 \cdot m_2}{r^2}$</li>
+  <li>$r^2 = dx^2 + dy^2$</li>
+  <li>$F_x = \dfrac{F \cdot dx}{r}$</li>
+  <li>$F_y = \dfrac{F \cdot dy}{r}$</li>
+</ul>
+
+<p>Note that force is a vector (i.e., it has direction). In particular, be aware
+that dx and dy are signed (positive or negative).</p>
+
+<p>Consider a small example consisting of two celestial objects: Saturn and the
+Sun. Suppose the Sun is at coordinates $(1.0 \cdot 10^{12}, 2.0 \cdot 10^{11})$
+and Saturn is at coordinates $(2.3 \cdot 10^{12}, 9.5 \cdot 10^{11})$.
+Assume that the Sun’s mass is $2.0 \cdot 10^{30} \text{ kg}$ and
+Saturn’s mass is $6.0 \cdot 10^{26} \text{ kg}$. Here’s a diagram of this simple
+solar system:</p>
+
+<p><img src="pairwiseforce.png" alt="pairwise" /></p>
+
+<p>Let’s run through some sample calculations.  First let’s compute
+$F_1$, the force that Saturn exerts on the Sun.  We’ll begin by
+calculating $r$, which we’ve already expressed above in terms of $dx$ and $dy$.
+Since we’re calculating the force exerted by Saturn, $dx$ is Saturn’s
+$x$-position minus Sun’s $x$-position, which is $1.3 \times 10^{12} \text{ m}$.
+Similarly, $dy$ is $7.5 \cdot 10^{11} \text{ m}$.</p>
+
+<p>So, $r^2 = dx^2 + dy^2 = (1.3 \cdot 10^{12})^2 + (7.5 \cdot 10^{11})^2$. Solving
+for $r$ gives us $1.5 \cdot 10^{12} \text{ m}$. Now that we have $r$,
+computation of $F$ is straightforward:</p>
+
+<p>$F = \dfrac{G \cdot (2.0 \cdot 10^{30} \text{ kg}) \cdot (6.0 \cdot 10^{26}
+    \text{kg})}{(1.5 \cdot 10^{12} \text{ m})^2} = 3.6 \cdot 10^{22} \text{ N}$</p>
+
+<p>Note that the magnitudes of the forces that Saturn and the Sun exert on one
+another are equal; that is, $|F| = |F_1| = |F_2|$. Now that
+we’ve computed the pairwise force on the Sun, let’s compute the $x$- and
+$y$-components of this force, denoted with $F_{1,x}$ and $F_{1, y}$,
+respectively. Recall that $dx$ is $1.3 \cdot 10^{12}$ meters and $dy$ is
+$7.5 \cdot 10^{11}$ meters. So,</p>
+
+<ul>
+  <li>$F_{1,x} = \dfrac{F_1 \cdot (1.3 \cdot 10^{12} \text{ m})}{1.5 \cdot 10^{12}
+  \text{ m}} = 3.1 \cdot 10^{22} \text{ N}$</li>
+  <li>$F_{1, y} = \dfrac{F_1 \cdot (7.5 \cdot 10^{11} \text{ m})}{1.5 \cdot 10^{12}
+  \text{ m}} = 1.8 \cdot 10^{22} \text{ N}$</li>
+</ul>
+
+<p>Note that the sign of $dx$ and $dy$ is important! Here, $dx$ and $dy$ were both
+positive, resulting in positive values for $F_{1, x}$ and $F_{1, y}$. This makes
+sense if you look at the diagram: Saturn will exert a force that pulls the Sun
+to the right (positive $F_{1, x}$ ) and up (positive $F_{1, y}$).</p>
+
+<p>Next, let’s compute the x and y-components of the force that the Sun exerts on
+Saturn. The values of $dx$ and $dy$ are negated here, because we’re now
+measuring the displacement of the Sun relative to Saturn.  Again, you can
+verify that the signs should be negative by looking at the diagram: the Sun
+will pull Saturn to the left (negative $dx$) and down (negative $dy$).</p>
+
+<ul>
+  <li>$F_{2, x} = \dfrac{F_2 \cdot (-1.3 \cdot 10^{12} \text{ m})}{1.5 \cdot 10^{12}
+  \text{ m}} = -3.1 \cdot 10^{22} \text{ N}$</li>
+  <li>$F_{2, y} = \dfrac{F_2 \cdot(-7.5 \cdot 10^{11} \text{ m})}{1.5 \cdot 10^{12}
+  \text{ m}} = -1.8 \cdot 10^{22} \text{ N}$</li>
+</ul>
+
+<h3 id="net-forces">Net Forces</h3>
+
+<p>The <em>principle of superposition</em> says that the net force acting on
+a particle in the x- or y-direction is the sum of the pairwise forces acting on
+the particle in that direction.</p>
+
+<p>To illustrate this idea, let’s add Neptune to the mix and calculate the net force on Saturn. Here’s a diagram illustrating the forces being exerted on Saturn in this new system:</p>
+
+<p><img src="netforce.png" alt="net" /></p>
+
+<p>We can calculate the $x$-component of the net force on Saturn by summing the
+$x$-components of all pairwise forces. Likewise, $F_{\text{net}, y}$ can be
+calculated by summing the $y$-components of all pairwise forces. Assume the
+forces exerted on Saturn by the Sun are the same as above, and that
+$F_{2,x} = 1.1 \cdot 10^{22} \text{ N}$ and $F_{2,y} = 9.0 \cdot 10^{21}
+\text{N}$.</p>
+
+<ul>
+  <li>$F_{\text{net}, x} = F_{1, x} + F_{2, x} = -3.1 \cdot 10^{22} \text{ N} + 1.1
+  \cdot 10^{22} \text{ N} = -2.0 \cdot 10^{22} \text{ N}$</li>
+  <li>$F_{\text{net}, y} = F_{1, y} + F_{2, y} = -1.8 \cdot 10^{22} \text{ N} + 9.0
+  \cdot 10^{21} \text{ N} = -9.0 \cdot 10^{21} \text {N}$</li>
+</ul>
+
+<h3 id="force-and-acceleration">Force and Acceleration</h3>
+
+<p>Newton’s <em>second law of motion</em> says that the accelerations in
+the x- and y-directions are given by:</p>
+<ul>
+  <li>$a_x = \dfrac{F_x}{m}$</li>
+  <li>$a_y = \dfrac{F_y}{m}$</li>
+</ul>
+
+<p>For example, Saturn will experience an acceleration in the x direction of $\dfrac{F_{\text{net}, x}}{m} = \dfrac{-2.0 \cdot 10^{22} \text{ N}}{6.0 \cdot 10^{26} kg} = -2.0 \cdot 10^{-4} m/s^2$.</p>
+
+<h3 id="samh-aegir-and-rocinante">Samh, Aegir, and, Rocinante</h3>
+
+<p>Suppose there are three bodies in space as follows:</p>
+
+<ul>
+  <li>Samh: $x = 1, y = 0, \text{mass} = 7 \cdot 10^5$</li>
+  <li>Aegir: $x = 3, y = 3, \text{mass} = 8 \cdot 10^5$</li>
+  <li>Rocinante: $x = 5, y = -3, \text{mass} = 9 \cdot 10^6$</li>
+</ul>
+
+<p>Show that $F_{\text{net}, x}$ and $F_{\text{net}, y}$ exerted on Samh are around 15.04 N and -7.69 N, respectively. If you’re stuck and can’t figure these out, see:
+<a href="https://www.wolframalpha.com/input/?i=%286.67e-11+*+7e5+*+8e5%29+%2F+13+*+2+%2F+sqrt%2813%29+%2B+%286.67e-11+*+7e5+*+9e6%29+%2F25+*+4+%2F+sqrt%2825%29">here</a>
+for $F_{\text{net}, x}$ and
+<a href="https://www.wolframalpha.com/input/?i=%286.67e-11+*+7e5+*+8e5%29+%2F+13+*+3+%2F+sqrt%2813%29+%2B+%286.67e-11+*+7e5+*+9e6%29+%2F25+*+%28-3%29+%2F+sqrt%2825%29">here</a>
+for $F_{\text{net}, y}$.</p>
+
+<h2 id="writing-the-body-class">Writing the Body Class</h2>
+
+<p>In our program, we’ll have instances of the <code class="language-plaintext highlighter-rouge">Body</code> class do the job of calculating
+all the numbers we learned about in the previous example. We’ll write helper
+methods, one by one, until our Body class is complete.</p>
+
+<h4 id="calcdistance">calcDistance</h4>
+
+<p>Start by adding a method called <code class="language-plaintext highlighter-rouge">calcDistance</code> that calculates the distance
+between two <code class="language-plaintext highlighter-rouge">Body</code>s. This method will take in a single Body and should return
+a double equal to the distance between the supplied body and the body that
+is doing the calculation, e.g.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">samh</span><span class="o">.</span><span class="na">calcDistance</span><span class="o">(</span><span class="n">rocinante</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>It is up to you this time to figure out the signature of the method. Once you
+have completed this method, go ahead and recompile and run the next unit test
+to see if your code is correct.</p>
+
+<p>Compile and run with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java TestCalcDistance.java
+java TestCalcDistance
+</code></pre></div></div>
+
+<p>Note that in Java, there is no built-in 
+<a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html">operator</a> 
+that does squaring or
+exponentiation.</p>
+
+<h4 id="calcforceexertedby">calcForceExertedBy</h4>
+
+<p>The next method that you will implement is <code class="language-plaintext highlighter-rouge">calcForceExertedBy</code>. The
+<code class="language-plaintext highlighter-rouge">calcForceExertedBy</code> method takes in a <code class="language-plaintext highlighter-rouge">Body</code>, and returns a double describing
+the force exerted on this body by the given body.  You should be calling
+the <code class="language-plaintext highlighter-rouge">calcDistance</code> method inside this method. As an example,
+<code class="language-plaintext highlighter-rouge">samh.calcForceExertedBy(rocinante)</code> for the numbers in “Double Check Your
+Understanding” return $16.8084$. The force exerted by a body on itself should be 0.
+To compare two bodies, use the <code class="language-plaintext highlighter-rouge">.equals</code> method instead of <code class="language-plaintext highlighter-rouge">==</code>:
+<code class="language-plaintext highlighter-rouge">samh.equals(samh)</code> (which would return <code class="language-plaintext highlighter-rouge">true</code>). In week 2, we will explain the difference.</p>
+
+<p>Once you’ve finished <code class="language-plaintext highlighter-rouge">calcForceExertedBy</code>, re-compile and run the next unit
+test.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java TestCalcForceExertedBy.java
+java TestCalcForceExertedBy
+</code></pre></div></div>
+
+<p>Hint 1: Java supports scientific notation. For example, I can write <code class="language-plaintext highlighter-rouge">double
+someNumber = 1.03e-7;</code>.</p>
+
+<h4 id="calcforceexertedbyx-and-calcforceexertedbyy">calcForceExertedByX and calcForceExertedByY</h4>
+
+<p>The next two methods that you should write are <code class="language-plaintext highlighter-rouge">calcForceExertedByX</code> and
+<code class="language-plaintext highlighter-rouge">calcForceExertedByY</code>. Unlike the <code class="language-plaintext highlighter-rouge">calcForceExertedBy</code> method, which returns
+the total force, these two methods describe the force exerted in the X and Y
+directions, respectively. <em>Remember to check your signs!</em> Once you’ve finished,
+you can recompile and run the next unit test. As an example,
+<code class="language-plaintext highlighter-rouge">samh.calcForceExertedByX(rocinante)</code> in “Double Check Your Understanding”
+should return $13.44672$.</p>
+
+<p class="redtext">NOTE: Do not use
+Math.abs to fix sign issues with these methods. This will cause issues later
+when drawing planets.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java TestCalcForceExertedByXY.java
+java TestCalcForceExertedByXY
+</code></pre></div></div>
+
+<h4 id="calcnetforceexertedbyx-and-calcnetforceexertedbyy">calcNetForceExertedByX and calcNetForceExertedByY</h4>
+
+<p>Write methods <code class="language-plaintext highlighter-rouge">calcNetForceExertedByX</code> and <code class="language-plaintext highlighter-rouge">calcNetForceExertedByY</code> that each
+take in an array of <code class="language-plaintext highlighter-rouge">Body</code>s and calculates the net X and net Y force exerted by
+all bodies in that array upon the current Body. For example, consider the
+code snippet below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Body[] allBodys = {samh, rocinante, aegir};
+samh.calcNetForceExertedByX(allBodys);
+samh.calcNetForceExertedByY(allBodys);
+</code></pre></div></div>
+
+<p>The two calls here would return the values given in “Double Check Your
+Understanding.”</p>
+
+<p>As you implement these methods, remember that <code class="language-plaintext highlighter-rouge">Body</code>s cannot exert
+gravitational forces on themselves! Can you think of why that is the case
+(hint: the universe will possibly collapse in on itself, destroying everything
+including you)? To avoid this problem, ignore any body in the array that is
+equal to the current body.</p>
+
+<p>When you are done go ahead and run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java TestCalcNetForceExertedByXY.java
+java TestCalcNetForceExertedByXY
+</code></pre></div></div>
+
+<p>We recommend using the “enhanced for loop” for this part of the assignment.
+In case you missed it in HW0, you can read more about them at <a href="https://blogs.oracle.com/CoreJavaTechTips/entry/using_enhanced_for_loops_with">this
+link</a>.
+<a href="../../hw/hw0/hw0.html#the-enhanced-for-loop">HW0</a>. This is not necessary to
+complete the project, but it’s a nice piece of syntax with which to be familiar.</p>
+
+<h4 id="update">update</h4>
+
+<p>Next, you’ll add a method that determines how much the forces exerted on the
+body will cause that body to accelerate, and the resulting change in the
+body’s velocity and position in a small period of time $dt$. For example,
+<code class="language-plaintext highlighter-rouge">samh.update(0.005, 10, 3)</code> would adjust the velocity and position if an
+$x$-force of $10 \text{ Newtons}$ and a $y$-force of $3 \text{ Newtons}$ were
+applied for $0.005 \text{ seconds}$.</p>
+
+<p>You must compute the movement of the Body using the following steps:</p>
+
+<ol>
+  <li>Calculate the acceleration using the provided $x$- and $y$-forces.</li>
+  <li>Calculate the new velocity by using the acceleration and current velocity.
+Recall that acceleration describes the change in velocity per unit time, so the
+new velocity is $(v_x + dt \cdot a_x, v_y + dt \cdot a_y)$.</li>
+  <li>Calculate the new position by using the velocity computed in step 2 and the
+current position. The new position is $(p_x + dt \cdot v_x, p_y + dt \cdot
+v_y)$.</li>
+</ol>
+
+<p>Let’s try an example! Consider a squirrel initially at position $(0, 0)$ with a
+$v_x$ of $3 \dfrac{\text{m}}{\text{s}}$ and a $v_y$ of $5
+\dfrac{\text{m}}{\text{s}}$. $F_{\text{net}, x}$ is $-5 \text{ N}$ and
+$F_{\text{net}, y}$ is $-2 \text{ N}$. Here’s a diagram of this system:</p>
+
+<p><img src="squirrelforce.png" alt="squirrelforce" /></p>
+
+<p>We’d like to update with a time step of $1 \text{ second}$. First, we’ll
+calculate the squirrel’s net acceleration:</p>
+
+<ul>
+  <li>$a_{\text{net}, x} = \dfrac{F_{\text{net}, x}}{m} = \dfrac{-5 \text{ N}}{1
+  \text{ kg}} = -5 \dfrac{\text{m}}{\text{s}^2}$</li>
+  <li>$a_{\text{net}, y} = \dfrac{F_{\text{net}, y}}{m} = \dfrac{-2 \text{ N}}{1
+  \text{ kg}} = -2 \dfrac{\text{m}}{\text{s}^2}$</li>
+</ul>
+
+<p>With the addition of the acceleration vectors we just calculated, our system
+now looks like this:</p>
+
+<p><img src="squirrelacc.png" alt="squirrelacc" /></p>
+
+<p>Second, we’ll calculate the squirrel’s new velocity:</p>
+
+<ul>
+  <li>
+    <p>$v_{\text{new}, x} = v_{\text{old}, x} + dt \cdot a_{\text{net}, x} = 3
+  \dfrac{\text{m}}{\text{s}} + 1 \text{ s} \cdot -5
+  \dfrac{\text{m}}{\text{s}^2} = -2 \dfrac{\text{m}}{\text{s}}$</p>
+  </li>
+  <li>
+    <p>$v_{\text{new}, y} = v_{\text{old}, y} + dt \cdot a_{\text{net}, y} = 5
+  \dfrac{\text{m}}{\text{s}} + 1 \text{ s} \cdot -2
+  \dfrac{\text{m}}{\text{s}^2} = -3 \dfrac{\text{m}}{\text{s}}$</p>
+  </li>
+</ul>
+
+<p>Third, we’ll calculate the new position of the squirrel:</p>
+
+<ul>
+  <li>$p_{\text{new}, x} = p_{\text{old}, x} + dt \cdot v_{\text{new}, x} = 0
+  \text{ m} + 1 \text{ s} \cdot -2 \dfrac{\text{m}}{\text{s}} = -2 \text{ m}$</li>
+  <li>$p_{\text{new}, y} = p_{\text{old}, y} + dt \cdot v_{\text{new}, y} = 0
+  \text{ m} + 1 \text{ s} \cdot 3 \dfrac{\text{m}}{\text{s}} = 3 \text{ m}$</li>
+</ul>
+
+<p>Here’s a diagram of the updated system:</p>
+
+<p><img src="squirrelupdated.png" alt="squirrelupdated" /></p>
+
+<p>For math/physics experts: You may be tempted to write a more accurate
+simulation where the force gradually increases over the specified time window.
+Don’t! Your simulation must follow exactly the rules above.</p>
+
+<p>Write a method <code class="language-plaintext highlighter-rouge">update(dt, fX, fY)</code> that uses the steps above to update the
+body’s position and velocity instance variables (this method does not need to
+return anything).</p>
+
+<p>Once you’re done, recompile and test your method with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java TestUpdate.java
+java TestUpdate
+</code></pre></div></div>
+
+<p>Once you’ve done this, you’ve finished implementing the physics. Hoorah! You’re
+halfway there.</p>
+
+<h2 id="optional-testing-your-body-class">(Optional) Testing Your Body Class</h2>
+
+<p>As the semester progresses, we’ll be giving you fewer and fewer tests, and it
+will be your responsibility to write your own tests. Writing tests is a good
+way to improve your workflow and be more efficient.</p>
+
+<p>Go ahead and try writing your own test for the Body class. Make a
+<code class="language-plaintext highlighter-rouge">TestBody.java</code> file and write a test that creates two bodies and prints out
+the pairwise force between them. This is optional and we will not be grading
+this part of the assignment.</p>
+
+<h2 id="getting-started-with-the-simulator-nbodyjava">Getting Started with the Simulator (NBody.java)</h2>
+
+<p>Create a file named <code class="language-plaintext highlighter-rouge">NBody.java</code>. NBody is a class that will actually run your simulation. This class will have
+NO constructor. The goal of this class is to simulate a universe specified in
+one of the data files. For example, if we look inside data/planets.txt (using
+the command line <code class="language-plaintext highlighter-rouge">more</code> command), we see the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ more planets.txt
+5
+2.50e+11
+1.4960e+11  0.0000e+00  0.0000e+00  2.9800e+04  5.9740e+24    earth.gif
+2.2790e+11  0.0000e+00  0.0000e+00  2.4100e+04  6.4190e+23     mars.gif
+5.7900e+10  0.0000e+00  0.0000e+00  4.7900e+04  3.3020e+23  mercury.gif
+0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  1.9890e+30      sun.gif
+1.0820e+11  0.0000e+00  0.0000e+00  3.5000e+04  4.8690e+24    venus.gif
+</code></pre></div></div>
+
+<p>The input format is a text file that contains the information for a particular
+universe (in SI units). The first value is an integer <code class="language-plaintext highlighter-rouge">N</code> which represents the
+number of planets. The second value is a real number <code class="language-plaintext highlighter-rouge">R</code> which represents the
+radius of the universe, used to determine the scaling of the drawing window.
+Finally, there are <code class="language-plaintext highlighter-rouge">N</code> rows, and each row contains 6 values. The first two
+values are the x- and y-coordinates of the initial position; the next pair of
+values are the x- and y-components of the initial velocity; the fifth value is
+the mass; the last value is a String that is the name of an image file used to
+display the planets. Image files can be found in the <code class="language-plaintext highlighter-rouge">images</code> directory. The
+file above contains data for our own solar system (up to Mars).</p>
+
+<h4 id="readradius">readRadius</h4>
+
+<p>Your first method is <code class="language-plaintext highlighter-rouge">readRadius</code>. Given a file name as a <code class="language-plaintext highlighter-rouge">String</code>, it should return a double
+corresponding to the radius of the universe in that file, e.g.
+<code class="language-plaintext highlighter-rouge">readRadius("./data/planets.txt")</code> should return 2.50e+11.</p>
+
+<p>To help you understand the <code class="language-plaintext highlighter-rouge">In</code> class, we’ve provided a few examples for you in
+the <code class="language-plaintext highlighter-rouge">examples</code> folder given in the skeleton.
+The first one is called <code class="language-plaintext highlighter-rouge">BasicInDemo.java</code>. Take a look at the code, and
+its input file, <code class="language-plaintext highlighter-rouge">BasicInDemo_input_file.txt</code>. This program should
+output: <code class="language-plaintext highlighter-rouge">The file contained 5, 9.0, ketchup, brass, and 5.0</code>.</p>
+
+<p>There’s a slightly more complicated example called <code class="language-plaintext highlighter-rouge">InDemo.java</code>, which you can
+also find in the examples folder. While this demo does not perfectly match what
+you’ll be doing in this project, every method that you need is somewhere in
+this file. You’re also welcome to search the web for other examples (though it
+might be tricky to find since the class name <code class="language-plaintext highlighter-rouge">In</code> is such a common English
+word).</p>
+
+<p class="redtext">NOTE: Do not use System.exit(0) in your code, despite
+the example using it. This will break the autograder, and you will not obtain a
+score.</p>
+
+<p>Alternately, you can consult the <a href="http://introcs.cs.princeton.edu/java/stdlib/javadoc/In.html">full documentation for the In
+class</a>, though it
+can be found a bit intimidating.</p>
+
+<p>We encourage you to do your best to figure
+out this part of the assignment on your own. In the long run, you’ll need to
+gain the skills to independently figure out this sort of thing. However, if you
+start getting frustrated, don’t hesitate to ask for help!</p>
+
+<p>You can test this method using the supplied TestReadRadius.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac NBody.java TestReadRadius.java
+java TestReadRadius
+</code></pre></div></div>
+
+<h4 id="readbodies">readBodies</h4>
+
+<p>Your next method is readBodies. Given a file name, it should return an array
+of <code class="language-plaintext highlighter-rouge">Body</code>s corresponding to the bodies in the file, e.g.
+<code class="language-plaintext highlighter-rouge">readBodies("./data/planets.txt")</code> should return an array of five planets. You
+will find the <code class="language-plaintext highlighter-rouge">readInt()</code>, <code class="language-plaintext highlighter-rouge">readDouble()</code>, and <code class="language-plaintext highlighter-rouge">readString()</code> methods in the In
+class to be useful.</p>
+
+<p>You can test this method using the supplied TestReadBodies.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac Body.java NBody.java TestReadBodies.java
+java TestReadBodies
+</code></pre></div></div>
+
+<h2 id="drawing-the-initial-universe-state-main">Drawing the Initial Universe State (main)</h2>
+
+<p>Next, build the functionality to draw the universe in its starting position.
+You’ll do this in four steps. Because all code for this part of the assignment
+is in main, this part of the assignment will NOT have automated tests to check
+each little piece.</p>
+
+<h4 id="collecting-all-needed-input">Collecting All Needed Input</h4>
+
+<p>Create a <code class="language-plaintext highlighter-rouge">main</code> method in the NBody class. Write code so that your NBody class
+performs the following steps:</p>
+
+<ul>
+  <li>Store the 0th and 1st command line arguments as doubles named <code class="language-plaintext highlighter-rouge">T</code> and <code class="language-plaintext highlighter-rouge">dt</code>.
+Hint: the arguments come in as Strings. You will have to Google around in
+order to learn how to convert the Strings to doubles!</li>
+  <li>Store the 2nd command line argument as a String named <code class="language-plaintext highlighter-rouge">filename</code>.</li>
+  <li>Read in the bodies and the universe radius from the file described by
+<code class="language-plaintext highlighter-rouge">filename</code> using your methods from earlier in this assignment.</li>
+</ul>
+
+<h4 id="drawing-the-background">Drawing the Background</h4>
+
+<p>After your main method has read everything from the files, it’s time to get
+drawing. First, set the scale so that it matches the radius of the universe.
+Then draw the image <code class="language-plaintext highlighter-rouge">starfield.jpg</code> as the background. To do these, you’ll need
+to figure out how to use the StdDraw library.</p>
+
+<p>See <code class="language-plaintext highlighter-rouge">StdDrawDemo.java</code> in the examples folder for a demonstration of StdDraw.
+This example, like <code class="language-plaintext highlighter-rouge">InDemo.java</code>, does not perfectly match what you’re doing.</p>
+
+<p>In addition, make sure to check out <a href="http://introcs.cs.princeton.edu/java/15inout/">the StdDraw section of this
+mini-tutorial</a>, and if you’re
+feeling bold, the <a href="https://introcs.cs.princeton.edu/java/stdlib/javadoc/StdDraw.html">full StdDraw
+documentation</a>.
+This will probably take some trial and error. This may seem slightly
+frustrating, but it’s good practice!</p>
+
+<p>Note that, you may notice that putting <code class="language-plaintext highlighter-rouge">starfield.jpg</code> as a parameter into
+<code class="language-plaintext highlighter-rouge">StdDraw.picture()</code> results in a blank screen. This is because our
+<code class="language-plaintext highlighter-rouge">starfield.jpg</code> is inside the <code class="language-plaintext highlighter-rouge">images</code> folder. Thus, <strong>you will need to use the
+full relative path from the proj0 directory</strong>, i.e. <code class="language-plaintext highlighter-rouge">images/starfield.jpg</code> 
+in order to get your image. This applies
+to any other images you may use in the future.</p>
+
+<h4 id="drawing-one-body">Drawing One Body</h4>
+
+<p>Next, we’ll want a Body, such as a planet, to be able to draw itself at its
+appropriate position. To do this, take a brief detour back to the Body.java
+file.  Add one last method to the Body class, <code class="language-plaintext highlighter-rouge">draw</code>, that uses the StdDraw API
+mentioned above to draw the Body’s image at the Body’s position. The
+<code class="language-plaintext highlighter-rouge">draw</code> method should return nothing and take in no parameters.</p>
+
+<h4 id="drawing-more-than-one-body">Drawing More than One Body</h4>
+
+<p>Return to the main method in NBody.java and use the <code class="language-plaintext highlighter-rouge">draw</code> method you just
+wrote to draw each one of the bodies in the <code class="language-plaintext highlighter-rouge">Body</code>s array you created.  Be
+sure to do this after drawing the <code class="language-plaintext highlighter-rouge">starfield.jpg</code> file so that the planets
+don’t get covered up by the background.</p>
+
+<p>Test that your main method works by compiling:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac NBody.java
+</code></pre></div></div>
+
+<p>And running the following command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java NBody 157788000.0 25000.0 data/planets.txt
+</code></pre></div></div>
+
+<p>You should see the sun and four planets sitting motionless. You are almost
+done.</p>
+
+<h2 id="creating-an-animation">Creating an Animation</h2>
+
+<p>Everything you’ve done so far is leading up to this moment. With only a bit
+more code, we’ll get something very cool.</p>
+
+<p>To create our simulation, we will discretize time (please do not mention this
+to Stephen Hawking). The idea is that at every discrete interval, we will be
+doing our calculations and once we have done our calculations for that time
+step, we will then update the values of our <code class="language-plaintext highlighter-rouge">Body</code>s and then redraw the
+universe.</p>
+
+<p>Finish your <code class="language-plaintext highlighter-rouge">main</code> method by adding the following:</p>
+
+<ul>
+  <li>Enable double buffering by calling <code class="language-plaintext highlighter-rouge">enableDoubleBuffering()</code>. This is a
+graphics technique to prevent flickering in the animation. This should be just
+a single method call, so you shouldn’t do anything complicated here. You can see
+an example in <code class="language-plaintext highlighter-rouge">StdDrawDemo.java</code>. Here’s the official documentation that
+explains it in a few sentences. You don’t have to understand this for CS61B.
+Just know that if you don’t call this function, any attempt at smooth animation
+will look bad and flickery (remove it and see what happens!).
+    <ul>
+      <li>When double buffering is enabled by calling <code class="language-plaintext highlighter-rouge">enableDoubleBuffering()</code>, all
+drawing takes place on the offscreen canvas. The offscreen canvas is not
+displayed. Only when you call <code class="language-plaintext highlighter-rouge">show()</code> does your drawing get copied from the
+offscreen canvas to the onscreen canvas, where it is displayed in the
+standard drawing window. You can think of double buffering as collecting
+all of the lines, points, shapes, and text that you tell it to draw, and
+then drawing them all simultaneously, upon request.</li>
+    </ul>
+  </li>
+  <li>Create a variable that represents time. Set it to 0. Set up a loop to loop until this time
+variable reaches (and includes) the <code class="language-plaintext highlighter-rouge">T</code> from above.</li>
+  <li>For each time through the loop, do the following:
+    <ul>
+      <li>Create an <code class="language-plaintext highlighter-rouge">xForces</code> array and <code class="language-plaintext highlighter-rouge">yForces</code> array.</li>
+      <li>Calculate the net x and y forces for each Body, storing these in the
+<code class="language-plaintext highlighter-rouge">xForces</code> and <code class="language-plaintext highlighter-rouge">yForces</code> arrays respectively.</li>
+      <li>After calculating the net forces for every Body, call <code class="language-plaintext highlighter-rouge">update</code> on each of
+the <code class="language-plaintext highlighter-rouge">Body</code>s. This will update each body’s position, velocity, and acceleration.</li>
+      <li>Draw the background image.</li>
+      <li>Draw all of the <code class="language-plaintext highlighter-rouge">Body</code>s.</li>
+      <li>Show the offscreen buffer (see the <code class="language-plaintext highlighter-rouge">show</code> method of StdDraw).</li>
+      <li>Pause the animation for 10 milliseconds (see the <code class="language-plaintext highlighter-rouge">pause</code> method of StdDraw).
+You may need to tweak this on your computer.</li>
+      <li>Increase your time variable by <code class="language-plaintext highlighter-rouge">dt</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Important</strong>: For each time through the main loop, do not make any calls to
+<code class="language-plaintext highlighter-rouge">update</code> until all forces have been calculated and safely stored in <code class="language-plaintext highlighter-rouge">xForces</code>
+and <code class="language-plaintext highlighter-rouge">yForces</code>. For example, don’t call <code class="language-plaintext highlighter-rouge">bodies[0].update()</code> until after the
+entire <code class="language-plaintext highlighter-rouge">xForces</code> and <code class="language-plaintext highlighter-rouge">yForces</code> arrays are done! The difference is subtle, but
+the autograder will be upset if you call <code class="language-plaintext highlighter-rouge">bodies[0].update</code> before you
+calculate <code class="language-plaintext highlighter-rouge">xForces[1]</code> and <code class="language-plaintext highlighter-rouge">yForces[1]</code>.</p>
+
+<p>Compile and test your program:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac NBody.java
+java NBody 157788000.0 25000.0 data/planets.txt
+</code></pre></div></div>
+
+<p>Make sure to also try out some of the other simulations, which can all be found
+in the <code class="language-plaintext highlighter-rouge">data</code> directory. Some of them are very cool.</p>
+
+<h2 id="printing-the-universe">Printing the Universe</h2>
+
+<p>When the simulation is over, i.e. when you’ve reached time <code class="language-plaintext highlighter-rouge">T</code>, you should
+print out the final state of the universe in the same format as the input,
+e.g.:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5
+2.50e11
+1.4925e+11 -1.0467e+10  2.0872e+03  2.9723e+04  5.9740e+24    earth.gif
+-1.1055e+11 -1.9868e+11  2.1060e+04 -1.1827e+04  6.4190e+23    mars.gif
+-1.1708e+10 -5.7384e+10  4.6276e+04 -9.9541e+03  3.3020e+23 mercury.gif
+2.1709e+05  3.0029e+07  4.5087e-02  5.1823e-02  1.9890e+30      sun.gif
+6.9283e+10  8.2658e+10 -2.6894e+04  2.2585e+04  4.8690e+24    venus.gif
+</code></pre></div></div>
+
+<p>You are welcome to try to figure this out on your own, but if you’d prefer not
+to, the solution is right below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>StdOut.printf("%d\n", bodies.length);
+StdOut.printf("%.2e\n", radius);
+for (int i = 0; i &lt; bodies.length; i++) {
+    StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+                  bodies[i].xxPos, bodies[i].yyPos, bodies[i].xxVel,
+                  bodies[i].yyVel, bodies[i].mass, bodies[i].imgFileName);   
+}
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">bodies</code> is our filler variable name for reading in the bodies, as per the third bullet under 
+<a href="proj0.html#collecting-all-needed-input">Collecting All Needed Input</a>. 
+You may have a different variable name.</p>
+
+<p>This isn’t all that exciting (which is why we’ve provided a solution), but
+we’ll need this method to work correctly to autograde your assignment.</p>
+
+<h2 id="submission">Submission</h2>
+
+<p>Submit to Gradescope via Github. If you pass all the tests, you get all the
+points. Hoorah! You may submit as many times as you’d like. If you have
+multiple submissions, select the one you wish for us to grade by pressing
+activate. I<!--f you are working with a partner, be sure to add them on
+Gradescope&mdash;after you make your submission, click "Add Group Member"
+(above your score). If you want to resubmit to Gradescope, you must click "Add Group Member" again.--></p>
+
+<h4 id="trying-out-other-universes">Trying Out Other Universes</h4>
+
+<p>There are many more universes provided in the skeleton other
+than <code class="language-plaintext highlighter-rouge">planets.txt</code>. You can find them in the <code class="language-plaintext highlighter-rouge">data</code> folder, e.g.
+<code class="language-plaintext highlighter-rouge">java NBody 20000000 20000 ./data/suninterference.txt</code>. Try them out and see
+if you can find any favorites.</p>
+
+<h2 id="extra-for-experts">Extra for Experts</h2>
+
+<h4 id="adding-audio">Adding Audio</h4>
+
+<p>For a finishing touch, play the theme to <em>2001: A Space Odyssey</em> using
+<code class="language-plaintext highlighter-rouge">StdAudio</code> and the file <code class="language-plaintext highlighter-rouge">2001.mid</code>. Feel free to add your own audio files and
+create your own soundtracks! You may find <a href="http://introcs.cs.princeton.edu/java/15inout/">the StdAudio section of this
+mini-tutorial</a> helpful. There is
+no extra credit for adding sound. For some reason in more recent versions of
+Java, <code class="language-plaintext highlighter-rouge">StdAudio</code> has occasionally failed to work. We’ll try to help, but we’ve
+had a few cases where we were unable to get the sound file to play.</p>
+
+<h4 id="going-above-and-beyond-gold-points---due-97">Going Above and Beyond (Gold Points) - Due 9/7</h4>
+
+<p>For those of you who want to try something wild, crazy, and new,
+create new files <code class="language-plaintext highlighter-rouge">NBodyExtreme.java</code> and <code class="language-plaintext highlighter-rouge">BodyExtreme.java</code>. You may also add
+additional classes as needed. Please include “Extreme” at the end of the filenames for clarity.</p>
+
+<p>In the Extreme version of your NBody simulator, you should do something fundamentally
+new. There are a number of other interesting possibilities:</p>
+
+<ul>
+  <li>Support elastic (or inelastic) collisions.</li>
+  <li>Add the ability to programmatically generate planet images (rather than
+relying on input image files).</li>
+  <li>Add the ability to control a spacecraft that is subject to the gravitational
+forces of the objects in the solar system.</li>
+</ul>
+
+<p>No tips are provided here in the spec. If you want to know how to do any of the
+things listed above (or something else of your own imagining), try using search
+engines to learn how to do the thing you want to do.</p>
+
+<p>For 48 gold points, create a public youtube video that demonstrates the behavior
+<code class="language-plaintext highlighter-rouge">NBodyExtreme</code> and explains the changes you made. This video should be between 3
+and 15 minutes long, and must include examples of the code running. Ideally,
+you’ll have a narrative voice over, though it’s OK if you just want to use text
+captions instead. As with the assignment itself, we do not provide any
+specific guidance on HOW to make your video, and again encourage you to use
+search engines to learn how. Gold Points are all about staking off on your own
+and doing something independently. For reference, I’ve found that OBSStudio is
+pretty good for recording videos, and it’s what I use for the lecture recordings.</p>
+
+<p>There are no specific requirements for these points. If you’ve built something
+big enough that you feel happy publicly sharing and explaining what you’ve made,
+that’s good enough for us. Make sure your <code class="language-plaintext highlighter-rouge">NBodyExtreme</code> and <code class="language-plaintext highlighter-rouge">BodyExtreme</code> are
+pushed to GitHub. When you’ve posted your video, fill out
+<a href="https://forms.gle/sicGi25psmyc6Xg56">this form</a>.</p>
+
+<p>Even though your youtube video will be public, you should not post your
+code publicly. In addition, <strong>you should not display your code in the video</strong>.</p>
+
+<p>To see examples from previous semesters, check out <a href="https://www.youtube.com/playlist?list=PL1x2h-EOD2RvC0Nu0Pp54q5xanrbtInpm">this playlist</a>!</p>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+<h4 id="im-passing-all-the-local-tests-but-failing-even-easy-tests-like-testreadradius-in-the-autograder">I’m passing all the local tests, but failing even easy tests like testReadRadius in the autograder.</h4>
+
+<p>Make sure you’re actually using the string argument that testReadRadius takes
+as input. Your code should work for ANY valid data file, not just planets.txt.</p>
+
+<h4 id="the-test-demands-1335-and-im-giving-13349-but-it-still-fails">The test demands 133.5, and I’m giving 133.49, but it still fails!</h4>
+
+<p>Sorry, our sanity check tests have flaws. But you should ensure that your value
+for <code class="language-plaintext highlighter-rouge">G</code> is $6.67 \cdot 10^{-11} \dfrac{\text{Nm}^2}{\text{kg}^2}$ exactly,
+and not anything else (don’t make it more accurate).</p>
+
+<h4 id="when-i-run-the-simulation-my-planets-start-rotating-but-then-quickly-accelerate-and-disappear-off-of-the-bottom-left-of-the-screen">When I run the simulation, my planets start rotating, but then quickly accelerate and disappear off of the bottom left of the screen.</h4>
+
+<ul>
+  <li>Look at the way you’re calculating the force exerted on a particular planet
+in one time step.  Make sure that the force doesn’t include forces that were
+exerted in past time steps.</li>
+  <li>Make sure you did not use <code>Math.abs(...)</code> when calculating
+<code>calcForceExertedByX(...)</code> and
+<code>calcForceExertedByY(...)</code>. Also ensure that you are using a
+<code class="language-plaintext highlighter-rouge">double</code> to keep track of summed forces (not <code class="language-plaintext highlighter-rouge">int</code>)!</li>
+</ul>
+
+<h4 id="what-is-a-constructor-how-do-i-write-one">What is a constructor? How do I write one?</h4>
+
+<p>A constructor is a block of code that runs when a class is instantiated with
+the <code>new</code> keyword. Constructors serve the purpose of initializing a
+new object’s fields. Consider an example below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Dog {
+    String _name;
+    String _breed;
+    int _age;
+
+    public Dog(String name, String breed, int age) {
+        _name = name;
+        _breed = breed;
+        _age = age;
+    }
+}
+</code></pre></div></div>
+
+<p>The <code>Dog</code> class has three non-static fields. Each instance of the
+<code>Dog</code> class can have a name, a breed, and an age. Our simple
+constructor, which takes three arguments, initializes these fields for all new
+<code>Dog</code> objects.</p>
+
+<h4 id="im-having-trouble-with-the-second-body-constructor-the-one-that-takes-in-another-body-as-its-only-argument">I’m having trouble with the second Body constructor, the one that takes in another Body as its only argument.</h4>
+
+<p>Let’s walk through an example of how a constructor works.  Suppose you use the
+<code class="language-plaintext highlighter-rouge">Dog</code> constructor above to create a new <code class="language-plaintext highlighter-rouge">Dog</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dog fido = new Dog("Fido", "Poodle", 1);
+</code></pre></div></div>
+
+<p>When this line of code gets executed, the JVM first creates a new <code class="language-plaintext highlighter-rouge">Dog</code> object
+that’s empty.  In essence, the JVM is creating a “box” for the <code class="language-plaintext highlighter-rouge">Dog</code>, and that
+box is big enough to hold a box for each of the <code class="language-plaintext highlighter-rouge">Dog</code>’s declared instance
+variables.  This all happens before the constructor is executed.  At this
+point, here’s how you can think about what our new fluffy friend <code class="language-plaintext highlighter-rouge">fido</code> looks
+like (note that this is a simplification! We’ll learn about a more correct view
+of this when we learn about Objects and pointers later this semester):</p>
+
+<p><img src="constructor1.png" alt="constructor1" /></p>
+
+<p>Java will put some default values in each instance variable.  We’ll learn more
+about where these defaults come from (and what <code class="language-plaintext highlighter-rouge">null</code> means) later this
+semester.  For now, just remember that there’s space for all of the instance
+variables, but those instance variables haven’t been assigned meaningful values
+yet.  If you ever want to see this in action, you can add some print statements
+to your constructor:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public Dog(String name, String breed, int age) {
+    System.out.println("_name: " + _name + ", _breed: " + _breed + ", _age: " + _age);
+    _name = name;
+    _breed = breed;
+    _age = age;
+}
+</code></pre></div></div>
+
+<p>If this constructor had been used to create <code class="language-plaintext highlighter-rouge">fido</code> above, it would have
+printed:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_name: null, _breed: null, _age: 0
+</code></pre></div></div>
+
+<p>OK, back to making <code class="language-plaintext highlighter-rouge">fido</code>.  Now that the JVM has made some “boxes” for <code class="language-plaintext highlighter-rouge">fido</code>,
+it calls the <code class="language-plaintext highlighter-rouge">Dog</code> constructor function that we wrote.  At this point, the
+constructor executes just like any other function would.  In the first line of
+the constructor, <code class="language-plaintext highlighter-rouge">_name</code> is assigned the value <code class="language-plaintext highlighter-rouge">name</code>, so that <code class="language-plaintext highlighter-rouge">fido</code> looks
+like:</p>
+
+<p><img src="constructor2.png" alt="constructor2" /></p>
+
+<p>When the constructor completes, <code class="language-plaintext highlighter-rouge">fido</code> looks like:</p>
+
+<p><img src="constructor3.png" alt="constructor3" /></p>
+
+<p>Now, suppose you want to create a new <code class="language-plaintext highlighter-rouge">Dog</code> constructor that handles
+cross-breeding.  You want the new constructor to accept a name, an age, and two
+breeds, and create a new <code class="language-plaintext highlighter-rouge">Dog</code> that is a mixture of the two breeds.  Your first
+guess for how to make this constructor might look something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public Dog(String name, String breed1, String breed2, int age) {
+    Dog dog = new Dog(name, breed1 + breed2, age);
+}
+</code></pre></div></div>
+
+<p>However, if you try to create a new <code class="language-plaintext highlighter-rouge">Dog</code> using this constructor:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dog tommy = new Dog("Tommy", "Poodle", "Golden Retriever", 1);
+</code></pre></div></div>
+
+<p>This won’t do what you want!  As above, the first thing that happens is that
+the JVM creates empty “boxes” for each of <code class="language-plaintext highlighter-rouge">tommy</code>’s instance variables:</p>
+
+<p><img src="constructor4.png" alt="constructor4" /></p>
+
+<p>But then when the 4-argument constructor got called, it created a second <code class="language-plaintext highlighter-rouge">Dog</code>
+and assigned it to the variable <code class="language-plaintext highlighter-rouge">dog</code>.  It didn’t change any of <code class="language-plaintext highlighter-rouge">tommy</code>’s
+instance variables.  Here’s how the world looks after the line in our new
+constructor finishes:</p>
+
+<p><img src="constructor5.png" alt="constructor5" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">dog</code> isn’t visible outside of the constructor method, so when the constructor
+completes, <code class="language-plaintext highlighter-rouge">dog</code> will be destroyed by the garbage collector (more on this
+later!) and all we’ll have is the still un-initialized <code class="language-plaintext highlighter-rouge">tommy</code> variable.</p>
+
+<p>Here’s a cross-breed constructor that works in the way we’d like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public Dog(String name, String breed1, String breed2, int age) {
+    this(name, breed1 + breed2, age);
+}
+</code></pre></div></div>
+
+<p>Here, we’re calling the old 3-argument constructor on <code class="language-plaintext highlighter-rouge">this</code>; rather than
+creating a new <code class="language-plaintext highlighter-rouge">Dog</code>, we’re using the 3-argument constructor to fill in all of
+the instance variables on this dog.  After calling this new constructor to
+create <code class="language-plaintext highlighter-rouge">tommy</code>, <code class="language-plaintext highlighter-rouge">tommy</code> will correctly be initialized to:</p>
+
+<p><img src="constructor6.png" alt="constructor6" /></p>
+
+<p>We could have also written a new constructor that assigned each instance
+variable directly, rather than calling the existing constructor:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public Dog(String name, String breed1, String breed2, int age) {
+    _name = name;
+    _breed = breed1 + breed2;
+    _age = age;
+}
+</code></pre></div></div>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>This assignment is a major revision by Josh Hug, Matthew Chow, and Daniel
+Nguyen of an assignment created by Robert Sedgewick and Kevin Wayne from
+Princeton University.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

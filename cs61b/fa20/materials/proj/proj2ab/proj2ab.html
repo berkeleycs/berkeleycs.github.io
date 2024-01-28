@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 2AB: KDTree and Extrinsic PQ | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 2AB: KDTree and Extrinsic PQ</header><ul id="markdown-toc">
+  <li><a href="proj2ab.html#proj2a-k-d-tree" id="markdown-toc-proj2a-k-d-tree">Proj2A: K-d Tree</a>    <ul>
+      <li><a href="proj2ab.html#provided-files" id="markdown-toc-provided-files">Provided Files</a></li>
+      <li><a href="proj2ab.html#naivepointset" id="markdown-toc-naivepointset">NaivePointSet</a>        <ul>
+          <li><a href="proj2ab.html#example-usage" id="markdown-toc-example-usage">Example Usage</a></li>
+        </ul>
+      </li>
+      <li><a href="proj2ab.html#part-2-k-d-tree" id="markdown-toc-part-2-k-d-tree">Part 2: K-d Tree</a></li>
+      <li><a href="proj2ab.html#testing" id="markdown-toc-testing">Testing</a>        <ul>
+          <li><a href="proj2ab.html#basic-sanity-checks" id="markdown-toc-basic-sanity-checks">Basic Sanity Checks</a></li>
+          <li><a href="proj2ab.html#randomized-testing" id="markdown-toc-randomized-testing">Randomized Testing</a></li>
+          <li><a href="proj2ab.html#timing-tests" id="markdown-toc-timing-tests">Timing Tests</a></li>
+        </ul>
+      </li>
+      <li><a href="proj2ab.html#external-resources" id="markdown-toc-external-resources">External Resources</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2ab.html#proj2a-submission--grading" id="markdown-toc-proj2a-submission--grading">Proj2A Submission &amp; Grading</a>    <ul>
+      <li><a href="proj2ab.html#required-files-for-proj2a" id="markdown-toc-required-files-for-proj2a">Required Files for Proj2A</a></li>
+      <li><a href="proj2ab.html#grading" id="markdown-toc-grading">Grading</a>        <ul>
+          <li><a href="proj2ab.html#naivepointset-1" id="markdown-toc-naivepointset-1">NaivePointSet</a></li>
+          <li><a href="proj2ab.html#k-d-tree" id="markdown-toc-k-d-tree">K-d Tree</a>            <ul>
+              <li><a href="proj2ab.html#k-d-tree-tests" id="markdown-toc-k-d-tree-tests">K-d Tree Tests</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="proj2ab.html#provided-tests" id="markdown-toc-provided-tests">Provided Tests</a></li>
+      <li><a href="proj2ab.html#point-distribution" id="markdown-toc-point-distribution">Point Distribution</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2ab.html#proj2b---extrinsic-minpq" id="markdown-toc-proj2b---extrinsic-minpq">Proj2B - Extrinsic MinPQ</a>    <ul>
+      <li><a href="proj2ab.html#provided-files-1" id="markdown-toc-provided-files-1">Provided Files</a></li>
+      <li><a href="proj2ab.html#arrayheapminpq" id="markdown-toc-arrayheapminpq">ArrayHeapMinPQ</a></li>
+      <li><a href="proj2ab.html#testing-proj2b" id="markdown-toc-testing-proj2b">Testing Proj2B</a></li>
+      <li><a href="proj2ab.html#external-resources-1" id="markdown-toc-external-resources-1">External Resources</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2ab.html#project-2a-faq" id="markdown-toc-project-2a-faq">Project 2A FAQ</a></li>
+  <li><a href="proj2ab.html#project-2b-submission--grading" id="markdown-toc-project-2b-submission--grading">Project 2B Submission &amp; Grading</a>    <ul>
+      <li><a href="proj2ab.html#required-files-for-proj2a-1" id="markdown-toc-required-files-for-proj2a-1">Required Files for Proj2A</a></li>
+      <li><a href="proj2ab.html#grading-1" id="markdown-toc-grading-1">Grading</a>        <ul>
+          <li><a href="proj2ab.html#arrayheapminpq-1" id="markdown-toc-arrayheapminpq-1">ArrayHeapMinPQ</a></li>
+          <li><a href="proj2ab.html#arrayheapminpqtest" id="markdown-toc-arrayheapminpqtest">ArrayHeapMinPQTest</a></li>
+        </ul>
+      </li>
+      <li><a href="proj2ab.html#point-distribution-1" id="markdown-toc-point-distribution-1">Point Distribution</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>Over the next 5 weeks, you are going to building a system very similar to Google Maps.</p>
+
+<p>This system will have four major parts:</p>
+<ul>
+  <li>Project 2A (due 10/16): Building a k-d tree.</li>
+  <li>Project 2B (due 10/23): Building an ExtrinsicPQ.</li>
+  <li>Project 2C (due 11/2): Building an AI for solving problems (AStarSolver).</li>
+  <li>Project 2D (due 11/9): Combining all the pieces into a web-browser mapping application called BearMaps.</li>
+</ul>
+
+<p>Projects 2A and 2B are being released at the same time and in the same spec since they are quite similar in structure.</p>
+
+<p><strong>All parts of this project should be completed individually. Please refer to the course policies for our official policy on academic dishonesty.</strong></p>
+
+<p>This part of the project will be as much about testing as it is about implementation. The autograder will be very sparse, and it will be up to you to test your own code! <strong>Grading details for project 2A and 2B will not be released until the amnesty period for submissions is over (December 12th).</strong></p>
+
+<p>In this document, we’ll only discuss proj2ab. More details about the mapping system (proj2c and proj2d) will come later.</p>
+
+<h2 id="proj2a-k-d-tree">Proj2A: K-d Tree</h2>
+
+<p>For this part of the project, your primary goal will be to implement the <code class="language-plaintext highlighter-rouge">KDTree</code> class. This class implements a k-d tree as described in lecture 19. This part of the project is a warmup to part 2B, where you’ll be doing something quite similar, but with much less guidance from us.</p>
+
+<p><strong>If you’re not familiar with how k-d trees work, please see Lecture 19 before proceeding. It is absolutely imperative that you do this before starting this assignment.</strong></p>
+
+<p>This will ultimately be useful in your BearMaps application. Specifically, a user will click on a point on the map, and your k-d tree will be used to find the nearest intersection to that click.</p>
+
+<p>As mentioned above, the autograder for this project is minimal. Thus, you’ll need to verify the correctness and speed of your code on your own using your own tests. Since this is probably the first time you’ve ever had to do this in a project, I’ve created a <a href="https://youtu.be/W3XkBhYvNS0">pseudo-walkthrough video</a> where I give specific recommendations for steps that you might want to take to complete the project. This is ONLY available for project 2a! When you get to project 2b, you’ll be entirely on your own.</p>
+
+<p><strong>IMPORTANT NOTE: YOU MAY NOT SHARE ANY CODE ON THIS ASSIGNMENT WITH ANYONE. It is not OK to share code, even if it’s very similar to the code shown in the walkthrough video.</strong></p>
+
+<p>This walkthrough also includes links to a series of solutions videos, where in each video, I solve one part of the project (with the code mostly blurred out). These videos cover some, but not all of the project. Even if you solve the project entirely on your own, you still might find these solutions videos useful, so that you can compare your problem solving strategy to mine.</p>
+
+<p>Slides for this pseudo-walkthrough (including links to solution videos) can be found <a href="https://docs.google.com/presentation/d/14TpGMe8VtG3dGT7IfylkPBZ0AD46bGBlJHpbA3k8omM/edit#slide=id.g54401ae607_0_0">at this link</a>. You are not required to follow these steps or use this walkthrough!</p>
+
+<h3 id="provided-files">Provided Files</h3>
+
+<p>We provide a class called <code class="language-plaintext highlighter-rouge">Point.java</code> that represents a location with an x and y coordinate. You may not modify this class. There are three useful methods in this class:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public double getX()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">public double getY()</code></li>
+  <li><code class="language-plaintext highlighter-rouge">public static double distance(Point p1, Point p2)</code>: Note that this function returns the squared Euclidean distance.</li>
+</ul>
+
+<p>We also provide a interface called <code class="language-plaintext highlighter-rouge">PointSet</code> that represents a set of such points. It has only one method.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public Point nearest(double x, double y)</code>: Returns the point in the set nearest to x, y.</li>
+</ul>
+
+<h3 id="naivepointset">NaivePointSet</h3>
+
+<p>As we saw in lab 5, it is often easiest to test the implementation of a complex but fast data structure by first implementing a simple but slow data structure that we can use as a gold standard. Before you create your efficient <code class="language-plaintext highlighter-rouge">KDTree</code> class, you will first create a naive linear-time solution to solve the problem of finding the closest point to a given coordinate. The goal of creating this class is that you will have a alternative, albeit slower, solution that you can use to easily verify if the result of your k-d tree’s  <code class="language-plaintext highlighter-rouge">nearest</code> is correct. Create a class called <code class="language-plaintext highlighter-rouge">NaivePointSet</code> The declaration on your class should be:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">NaivePointSet</span> <span class="kd">implements</span> <span class="nc">PointSet</span> <span class="o">{</span>
+        <span class="o">...</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Your <code class="language-plaintext highlighter-rouge">NaivePointSet</code> should have the following constructor and method:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public NaivePointSet(List&lt;Point&gt; points)</code>: You can assume <code class="language-plaintext highlighter-rouge">points</code> has at least size 1.</li>
+  <li><code class="language-plaintext highlighter-rouge">public Point nearest(double x, double y)</code>: Returns the closest point to the inputted coordinates. This should take \(\Theta(N)\) time where \(N\) is the number of points.</li>
+</ul>
+
+<p>Note that your <code class="language-plaintext highlighter-rouge">NaivePointSet</code> class should be immutable, meaning that you cannot add or or remove points from it. You do not need to do anything special to guarantee this.</p>
+
+<h4 id="example-usage">Example Usage</h4>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nc">Point</span> <span class="n">p1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mf">1.1</span><span class="o">,</span> <span class="mf">2.2</span><span class="o">);</span> <span class="c1">// constructs a Point with x = 1.1, y = 2.2</span>
+    <span class="nc">Point</span> <span class="n">p2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(</span><span class="mf">3.3</span><span class="o">,</span> <span class="mf">4.4</span><span class="o">);</span>
+    <span class="nc">Point</span> <span class="n">p3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Point</span><span class="o">(-</span><span class="mf">2.9</span><span class="o">,</span> <span class="mf">4.2</span><span class="o">);</span>
+    
+    <span class="nc">NaivePointSet</span> <span class="n">nn</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NaivePointSet</span><span class="o">(</span><span class="nc">List</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">p1</span><span class="o">,</span> <span class="n">p2</span><span class="o">,</span> <span class="n">p3</span><span class="o">));</span>
+    <span class="nc">Point</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="na">nearest</span><span class="o">(</span><span class="mf">3.0</span><span class="o">,</span> <span class="mf">4.0</span><span class="o">);</span> <span class="c1">// returns p2</span>
+    <span class="n">ret</span><span class="o">.</span><span class="na">getX</span><span class="o">();</span> <span class="c1">// evaluates to 3.3</span>
+    <span class="n">ret</span><span class="o">.</span><span class="na">getY</span><span class="o">();</span> <span class="c1">// evaluates to 4.4</span>
+</code></pre></div></div>
+<h3 id="part-2-k-d-tree">Part 2: K-d Tree</h3>
+
+<p>Now, create the class <code class="language-plaintext highlighter-rouge">KDTree</code> class. Your <code class="language-plaintext highlighter-rouge">KDTree</code> should have the following constructor and method:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public KDTree(List&lt;Point&gt; points)</code>: You can assume <code class="language-plaintext highlighter-rouge">points</code> has at least size 1.</li>
+  <li><code class="language-plaintext highlighter-rouge">public Point nearest(double x, double y)</code>: Returns the closest point to the inputted coordinates. This should take \(O(\log N)\) time on average, where \(N\) is the number of points.</li>
+</ul>
+
+<p>As with <code class="language-plaintext highlighter-rouge">NaivePointSet</code>, your <code class="language-plaintext highlighter-rouge">KDTree</code> class should be immutable. Also note that while k-d trees can theoretically work for any number of dimensions, your implementation only has to work for the 2-dimensional case, i.e. when our points have only x and y coordinates.</p>
+
+<p><strong>For <code class="language-plaintext highlighter-rouge">nearest</code>, we recommend that you write a simple version and verify that it works before adding in the various optimizations from the pseudocode.</strong> For example, you might start by writing a <code class="language-plaintext highlighter-rouge">nearest</code> method that simply traverses your entire tree. Then, you might add code so that it always visits the “good” child before the “bad” child. Then after verifying that this works, you might try writing code that prunes the bad side. By doing things this way, you’re testing smaller ideas at once.</p>
+
+<h3 id="testing">Testing</h3>
+
+<p>There are a number of different ways that you can construct tests for this part of the project, but we will go over our recommended approach.</p>
+
+<p><strong>It’s imporant to note that the <code class="language-plaintext highlighter-rouge">Point</code>s that your <code class="language-plaintext highlighter-rouge">KDTree</code> and <code class="language-plaintext highlighter-rouge">NaivePointSet</code>’s return do not need to be exactly the same:</strong> instead, you should check that the distance
+from the goal <code class="language-plaintext highlighter-rouge">Point</code> to each of the <code class="language-plaintext highlighter-rouge">Point</code>s that your <code class="language-plaintext highlighter-rouge">KDTree</code> and <code class="language-plaintext highlighter-rouge">NaivePointSet</code> finds are equal. If you’re using JUnit (which you should be), then you
+should read the <a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html#assertEquals(double,%20double,%20double)">JUnit javadoc</a> for
+the <code class="language-plaintext highlighter-rouge">assertEquals</code> method for <code class="language-plaintext highlighter-rouge">double</code> values. You’ll see that you actually need to pass in a third argument which you should think of as a threshold. Use a very
+small threshold like <code class="language-plaintext highlighter-rouge">0.00000001</code>.</p>
+
+<h4 id="basic-sanity-checks">Basic Sanity Checks</h4>
+
+<p>After you are confident in your partial implementation (the constructor or unoptimized <code class="language-plaintext highlighter-rouge">nearest</code>, for example), in a <code class="language-plaintext highlighter-rouge">main</code> method, construct the k-d tree from lecture 19, and verify with the Java Visualizer that you are able to construct the tree correctly, and return the right <code class="language-plaintext highlighter-rouge">Point</code> for a particular <code class="language-plaintext highlighter-rouge">nearest</code> query. You are likely to gain some confidence in your implementation through this exercise, and also discover some bugs. When you are done with your sanity checks, you can move forward to more rigorous randomized testing.</p>
+
+<h4 id="randomized-testing">Randomized Testing</h4>
+
+<p>One approach to testing this method would be to create a bunch of hand-curated datasets to pass to the constructor and calls to <code class="language-plaintext highlighter-rouge">nearest</code> that try to verify various edge cases. To avoid thinking about all possible strange edge cases, we can turn towards techniques other than creating specific, deterministic tests to cover all of the possible errors.</p>
+
+<p>Our suggestion is to use the lab 5 approach of using <a href="../../lab/lab5/lab5.html#randomized-comparison-tests">randomized comparison tests</a> which will allow you to test your code on a large sample of points which should encompass most if not all possible edge cases.</p>
+
+<p>As in lab 5, we recommend generating a large number of random points to be in your tree, as well as a large number of points to query using the <code class="language-plaintext highlighter-rouge">nearest</code> function. To verify the correctness of the results you should be able to compare the results of your <code class="language-plaintext highlighter-rouge">KDTree</code>’s <code class="language-plaintext highlighter-rouge">nearest</code> function to the results to the <code class="language-plaintext highlighter-rouge">NaivePointSet</code>’s <code class="language-plaintext highlighter-rouge">nearest</code> function. If we test a large number of queries without error we can be fairly confident in the correctness of our data structure and algorithm.</p>
+
+<p>An issue is that randomized tests are not deterministic. This mean if we run the tests again and again, different points will be generated each time which will make debugging nearly impossible because we do not have any ability to replicate the failure cases. However, randomness in computers is almost never true randomness and is instead generated by <a href="https://www.wikiwand.com/en/Pseudorandom_number_generator">pseudorandom number generators</a> (PRNGs). Tests can be made deterministic by seeding the PRNG, where we are essentially initializing the PRNG to start in a specific state such that the random numbers generated will be the same each time. We suggest you use the class <code class="language-plaintext highlighter-rouge">Random</code> which will allow you to generate random coordinate values as well as provide the seed for the PRNG. More can be found about the specifications of this class in the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Random.html">online documentation</a>.</p>
+
+<p>Please put any tests you write in <code class="language-plaintext highlighter-rouge">KDTreeTest.java</code>. <strong>You cannot share your tests with other students</strong>, but you are free to discuss testing strategies with them. <strong>Even if your tests are very similar to the ones I write in my video, YOU MAY STILL NOT SHARE YOUR CODE!</strong></p>
+
+<p>Note: Our autograder will test points that have x and y coordinates whose magnitudes are less than 1000. We recommend your tests also consider points over this range.</p>
+
+<h4 id="timing-tests">Timing Tests</h4>
+
+<p>You will also be required to verify the speed of your k-d tree.</p>
+
+<p>It should be possible to build a k-d tree of a million random points in a reasonable amount of time (less than 20 seconds). For example, our <code class="language-plaintext highlighter-rouge">KDTree</code> consruction timing table is displayed below. Note, this was running on a fairly fast computer, so your times may be longer. If you can hit 1,000,000 points in less than 20 seconds, you’re in good shape. Don’t worry about worst case inputs (i.e. your code should not gracefully handle a very spindly k-d tree, this requires a much more sophisticated approach, e.g. a k-d-b-tree). Note that “# ops” here refers to the number of points added to the table, and doesn’t actually represent the count of any specific method calls.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for Kd-Tree Construction
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+       31250         0.03        31250         1.02
+       62500         0.05        62500         0.78
+      125000         0.10       125000         0.82
+      250000         0.23       250000         0.90
+      500000         0.63       500000         1.26
+     1000000         1.25      1000000         1.25
+     2000000         3.14      2000000         1.57
+</code></pre></div></div>
+
+<p>Your <code class="language-plaintext highlighter-rouge">KDTree</code>’s <code class="language-plaintext highlighter-rouge">nearest</code> method should also be MUCH faster than your NaivePointSet. For example, our timing table for 1,000,000 queries on a NaivePointSet with N points is given below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for Naive Nearest
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+         125         0.30      1000000         0.30
+         250         0.47      1000000         0.47
+         500         0.80      1000000         0.80
+        1000         1.66      1000000         1.66
+</code></pre></div></div>
+
+<p>And for our <code class="language-plaintext highlighter-rouge">KDTree</code> below. Note that our <code class="language-plaintext highlighter-rouge">KDTree</code> was able to handle <code class="language-plaintext highlighter-rouge">PointSet</code>s that were 1,000 times as large as a a naive implementation.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for Kd-Tree Nearest
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+       31250         0.93      1000000         0.93
+       62500         0.86      1000000         0.86
+      125000         1.03      1000000         1.03
+      250000         1.34      1000000         1.34
+      500000         2.09      1000000         2.09
+     1000000         2.38      1000000         2.38
+</code></pre></div></div>
+
+<p>Note: To use the Stopwatch class you’ll need to <code class="language-plaintext highlighter-rouge">import edu.princeton.cs.algs4.Stopwatch;</code>.</p>
+
+<h3 id="external-resources">External Resources</h3>
+
+<p>If you don’t like our presentation of the k-d tree, you are free to reference pseudocode from course slides and other websites (use the @source tag to annotate your sources), but all code you write must be your own. We strongly recommend that you use the approach described in CS 61B, as it is simpler than described elsewhere.</p>
+
+<p>You are welcome to look at source code for existing implementations of a k-d tree, though of course you should not be looking at solutions to this specific CS 61B project. Make sure to cite any sources you use with the @source tag somewhere in your code. <strong>As always you should not use other student’s solutions to this project as a source</strong>, e.g. roommate’s code, something you found on pastebin, github, etc.</p>
+
+<h2 id="proj2a-submission--grading">Proj2A Submission &amp; Grading</h2>
+
+<h3 id="required-files-for-proj2a">Required Files for Proj2A</h3>
+
+<p>You are required to submit the following files:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">NaivePointSet.java</code>: your complete naive solution as described above.</li>
+  <li><code class="language-plaintext highlighter-rouge">KDTree.java</code> : your complete correct k-d tree implementation as described above.</li>
+  <li><code class="language-plaintext highlighter-rouge">KDTreeTest.java</code>: any tests you write for your k-d tree implementation. If you do not write any tests, you should still submit this file.</li>
+</ul>
+
+<p>You are also welcome to submit other files.</p>
+
+<p><strong>You will not get results from our full correctness and efficiency tests on your code when you submit on Gradescope.</strong></p>
+
+<h3 id="grading">Grading</h3>
+
+<h4 id="naivepointset-1">NaivePointSet</h4>
+
+<p>We will only test your <code class="language-plaintext highlighter-rouge">NaivePointSet</code> for correctness, not efficiency.</p>
+
+<h4 id="k-d-tree">K-d Tree</h4>
+
+<p>We will test your <code class="language-plaintext highlighter-rouge">KDTree</code> for correctness and efficiency. Correctness tests will be very similar to the randomized testing described in the Testing section, where we will compare your <code class="language-plaintext highlighter-rouge">KDTree</code>’s <code class="language-plaintext highlighter-rouge">nearest</code> results against our staff solution’s results (using the distance metric as described above). We will not be grading these based on efficiency, but please ensure that the method call completes in a reasonable about of time.</p>
+
+<p>Efficiency tests will be similar to the correctness tests and will still require correctness, but they will also see how your solution performs with a very large number of points (hundreds of thousands) and many queries to <code class="language-plaintext highlighter-rouge">nearest</code> (tens of thousands). Your <code class="language-plaintext highlighter-rouge">KDTree</code>’s runtime will be compared to our staff <code class="language-plaintext highlighter-rouge">KDTree</code>’s runtime, and we will assign points based on that. If you implement the k-d tree correctly (similar to how you learn in lecture) and do not have repeated, redundant, or unnecessary function calls, you should be fine for these tests. For reference, our <code class="language-plaintext highlighter-rouge">KDTree</code>’s runtime while making 10,000 queries with 100,000 points is about 65-85x faster than our <code class="language-plaintext highlighter-rouge">NaivePointSet</code>’s runtime for the same points and queries. In addition, we will have a test that ensures your constructor is at most 10x slower than our staff <code class="language-plaintext highlighter-rouge">KDTree</code>’s constructor. This should not be a strict test as our constructor is relatively naive and doesn’t do anything fancier than what you learned in class.</p>
+
+<h5 id="k-d-tree-tests">K-d Tree Tests</h5>
+
+<p>You should also submit your tests, but we will not be testing your tests with an autograder.</p>
+
+<h3 id="provided-tests">Provided Tests</h3>
+
+<p>Since we are not releasing results of your submission on our full autograder, we will provide you with some very basic sanity checks to make sure your code will run with our full autograder once we run it. These will include:</p>
+
+<ul>
+  <li>File, API, compilation, style, and dependency checks.</li>
+  <li>Two small correctness checks for your <code class="language-plaintext highlighter-rouge">NaivePointSet</code> and <code class="language-plaintext highlighter-rouge">KDTree</code> classes’ <code class="language-plaintext highlighter-rouge">nearest</code> functions tested with one query on ten points each.</li>
+  <li>One speed check for <code class="language-plaintext highlighter-rouge">KDTree</code>. We will run your solution on many points and many queries. If your solution takes 15 times as long as the staff solution or faster, you will pass this test. This test will be the exact same as the lowest tier (easiest) of our speed tests, except that it will <strong>not test for correctness</strong>.</li>
+</ul>
+
+<p>These tests are by no means a good indicator of how well you will do on our full suite of tests, so make sure you write your own tests as well. Your Gradescope submission may show that you receive full points for this assignment if you pass all these tests, but <strong>this score is not your final score.</strong></p>
+
+<h3 id="point-distribution">Point Distribution</h3>
+
+<p>The point distribution for this project will be:</p>
+
+<ul>
+  <li>~5%: <code class="language-plaintext highlighter-rouge">NaivePointSet</code> correctness.</li>
+  <li>~55%: <code class="language-plaintext highlighter-rouge">KDTree</code> correctness.</li>
+  <li>~16%: <code class="language-plaintext highlighter-rouge">KDTree</code> constructor efficiency.</li>
+  <li>~24%: <code class="language-plaintext highlighter-rouge">KdTree</code> nearest efficiency (only eligible if implementation passes correctness tests).</li>
+</ul>
+
+<h2 id="proj2b---extrinsic-minpq">Proj2B - Extrinsic MinPQ</h2>
+
+<p>In project 2B, you will build another data structure. Like project 2A, you will have to verify the timing and correctness of your code yourself, i.e. the autograder won’t give you very much information. Unlike 2A, where we told you exactly which algorithm to implement the steps you should take to complete it, in 2B you will have to design your own solution to the problem at hand.</p>
+
+<p>A quick video overview can be found <a href="https://youtu.be/8FnBJLO55G8">at this link</a>. Note that this video is from Spring 2019, so some small details may be different (e.g. Extrinsic MinPQ was project 2A in spring 2019).</p>
+
+<p>For this part of the project, you will build an implementation of the <code class="language-plaintext highlighter-rouge">ExtrinsicMinPQ</code> interface. Ultimately, this will be useful for implementing the <code class="language-plaintext highlighter-rouge">AStarSolver</code> class that will be described in the Proj2C spec.</p>
+
+<p><strong>If you’re not familiar with how heaps and priority queues work, please see Lecture 21 before proceeding. It is absolutely imperative that you do this before starting this assignment.</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ExtrinsicMinPQ</code> interface quite similar to the <code class="language-plaintext highlighter-rouge">MinPQ</code> interface that we discussed in lecture 21. The operations are described below:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public boolean contains(T item)</code>: Returns true if the PQ contains the given item.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void add(T item, double priority)</code>: Adds an item of type <code class="language-plaintext highlighter-rouge">T</code> with the given priority. If the item already exists, throw an <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code>. You may assume that <code class="language-plaintext highlighter-rouge">item</code> is never null.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T getSmallest()</code>: Returns the item with smallest priority. If no items exist, throw a <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public T removeSmallest()</code>: Removes and returns the item with smallest priority. If no items exist, throw a <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">public int size()</code>: Returns the number of items.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void changePriority(T item, double priority)</code>: Sets the priority of the given item to the given value. If the item does not exist, throw a <code class="language-plaintext highlighter-rouge">NoSuchElementException</code>.</li>
+</ul>
+
+<p>There are four key differences between this abstract data structure and the MinPQ ADT described in lecture 21.</p>
+<ul>
+  <li>The priority is extrinsic to the object. That is, rather than relying on some sort of comparison function to decide which item is less than another, we simply assign a priority value using the <code class="language-plaintext highlighter-rouge">add</code> or <code class="language-plaintext highlighter-rouge">changePriority</code> functions.</li>
+  <li>There is an additional <code class="language-plaintext highlighter-rouge">changePriority</code> function that allows us to set the extrinsic priority of an item after it has been added.</li>
+  <li>There is a <code class="language-plaintext highlighter-rouge">contains</code> method that returns true if the given item exists in the PQ.</li>
+  <li>There may only be one copy of a given item in the priority queue at any time. To be more precise, if you try to add an
+ item that is equal to another according to <code class="language-plaintext highlighter-rouge">.equals</code>, the PQ should
+ throw an exception.</li>
+  <li>If there are 2 items with the same priority, you may break ties arbitrarily.</li>
+</ul>
+
+<h3 id="provided-files-1">Provided Files</h3>
+
+<p>We have provided a <code class="language-plaintext highlighter-rouge">NaiveMinPQ</code>, which is a slow but correct implementation of this interface. <code class="language-plaintext highlighter-rouge">contains</code>, <code class="language-plaintext highlighter-rouge">getSmallest</code> and <code class="language-plaintext highlighter-rouge">removeSmallest</code> use built-in <code class="language-plaintext highlighter-rouge">ArrayList</code> or <code class="language-plaintext highlighter-rouge">Collections</code> methods to do a brute-force search over the entire PQ. This takes time proportional to the size of the PQ, or <code class="language-plaintext highlighter-rouge">O(n)</code>. This implementation does not throw the correct exception for the <code class="language-plaintext highlighter-rouge">add</code> method. This is because this exception would make this class too slow to be usable for comparing runtimes with an optimized implementation.</p>
+
+<p>We have also provided a class called <code class="language-plaintext highlighter-rouge">PrintHeapDemo.java</code> that can print out an array as a nice heap drawing. You’re welcome to adapt this code for your own use. It might be useful for debugging.</p>
+
+<h3 id="arrayheapminpq">ArrayHeapMinPQ</h3>
+
+<p>Your job for this part of the project is to create the <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> class, which must implement the <code class="language-plaintext highlighter-rouge">ExtrinsicMinPQ</code> interface.</p>
+
+<p>Your <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> is subject to the following rules:</p>
+<ul>
+  <li><strong>One of your instance variables must be a min heap, and this min heap must be represented as either an array or a <code class="language-plaintext highlighter-rouge">java.util.ArrayList</code></strong>, as described in lecture 21 (tree representation 3 or 3b). It is OK to have additional private variables. If you choose to use a <code class="language-plaintext highlighter-rouge">java.util.ArrayList</code>, you’ll find the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html#set(int,%20E)">set</a> method useful.</li>
+  <li>You may only import from the <code class="language-plaintext highlighter-rouge">java.util</code> and <code class="language-plaintext highlighter-rouge">org.junit</code> libraries. In addition, you may also import the <code class="language-plaintext highlighter-rouge">Stopwatch</code> and <code class="language-plaintext highlighter-rouge">StdRandom</code> classes from the Princeton libraries. You’re not required to import anything.</li>
+  <li>Your <code class="language-plaintext highlighter-rouge">getSmallest</code>, <code class="language-plaintext highlighter-rouge">contains</code>, <code class="language-plaintext highlighter-rouge">size</code> and <code class="language-plaintext highlighter-rouge">changePriority</code> methods must run in <code class="language-plaintext highlighter-rouge">O(log(n))</code> time. Your <code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">removeSmallest</code> must run in <code class="language-plaintext highlighter-rouge">O(log(n))</code> average time, i.e. they should be logarithmic, except for the rare resize operation. For reference, when making 1000 queries on a heap of size 1,000,000, our solution is about <code class="language-plaintext highlighter-rouge">300x</code> faster than the naive solution. Iterating over your entire min heap array (or <code class="language-plaintext highlighter-rouge">ArrayList</code>) for any of these methods will be linear time and thus too slow!</li>
+  <li>If using an array representation for your min heap, make sure to increase the array size by a multiplicative factor when resizing, otherwise <code class="language-plaintext highlighter-rouge">add</code> will be linear time on average, not log time. If using a heap ordered <code class="language-plaintext highlighter-rouge">ArrayList</code>, you don’t need to worry about this requirement as <code class="language-plaintext highlighter-rouge">ArrayLists</code> automatically resize their underlying array.</li>
+  <li>If using an array representation for your min heap, it should never be more than <strong>approximately</strong> 3/4s empty. If using a heap ordered <code class="language-plaintext highlighter-rouge">ArrayList</code>, you don’t need to worry about this requirement as <code class="language-plaintext highlighter-rouge">ArrayLists</code> automatically resize their underlying array.</li>
+  <li>You may not add additional public methods. Private methods or “package private” methods are fine. See the testing section below for a description of what “package private” means.</li>
+</ul>
+
+<p>Note: We have not discussed how you should implement the <code class="language-plaintext highlighter-rouge">changePriority</code> method in lecture. You’ll have to invent this yourself. You may discuss your approach at a high level with other students (e.g. drawing out diagrams), but you should not share or look at each other’s code, nor should you work closely enough that your code may resemble each other’s.</p>
+
+<h3 id="testing-proj2b">Testing Proj2B</h3>
+
+<p>As in Proj2A, we will not provide any skeleton tests nor autograder messages (beyond a basic sanity check) for this project. You will be responsible for writing your own tests and ensuring the correctness of your code. <strong>You may not share tests with any other students - please ensure that all code in your possession, including tests, was written by you.</strong></p>
+
+<p>You should write your tests in a file called <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQTest.java</code>. This file should be part of the <code class="language-plaintext highlighter-rouge">bearmaps</code> package.</p>
+
+<p>If you’re not sure how to start writing tests, some tips follow.</p>
+
+<ol>
+  <li>
+    <p>We encourage you to primarily write tests that evaluate correctness based on the outputs of methods that provide output (e.g. <code class="language-plaintext highlighter-rouge">getSmallest</code> and <code class="language-plaintext highlighter-rouge">removeSmallest</code>). This is in contrast to trying to directly test the states of instance variables (see tip #3 below). For example, to test <code class="language-plaintext highlighter-rouge">changePriority</code>, you might use a sequence of <code class="language-plaintext highlighter-rouge">add</code> operations, a <code class="language-plaintext highlighter-rouge">changePriority</code> call, and then finally check the output of a <code class="language-plaintext highlighter-rouge">removeSmallest</code> call. This is (usually) a better idea than iterating over your private variables to see if <code class="language-plaintext highlighter-rouge">changePriority</code> is setting some specific instance variable.</p>
+  </li>
+  <li>
+    <p>Write tests for functions in the order that you write them. You might even find it helpful to write the tests first. Since each function may call previously written functions, this helps ensure that you are building a solid foundation.</p>
+  </li>
+  <li>
+    <p>If you want to write tests that require looking at your <code class="language-plaintext highlighter-rouge">private</code> instance variables, these tests should be part of the <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> class itself. For example, if you want to write a test that only calls the <code class="language-plaintext highlighter-rouge">add</code> method, there’s no way to write it in the manner suggested in tip #1 in <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQTest</code>. Suppose that you want to verify that your array is <code class="language-plaintext highlighter-rouge">[1, 2, 4, 5, 3]</code> after inserting 5, 4, 3, 2, 1. In this case, a hypothetical <code class="language-plaintext highlighter-rouge">testAdd54321</code> method would need to be part of the <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> class since the <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQTest</code> should not be able to access the private instance variables. It’s debatable whether you should even write such tests, since tests of type #1 should ideally catch any errors. Follow your heart.</p>
+  </li>
+  <li>
+    <p>One annoying issue in Java is testing of private helper methods. For example, suppose you have a <code class="language-plaintext highlighter-rouge">leftChild</code> method in <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> that you’d like to test in <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQTest</code>. If this method is private, then the test file will be unable to call the method. For this project, if you have helper methods you’d like to test, you can either include the tests in <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code>, or you should make those helper methods “package private”. To do this, simply remove the access modifier completely. That is, rather than saying <code class="language-plaintext highlighter-rouge">public</code> or <code class="language-plaintext highlighter-rouge">private</code>, you should add no access modifier at all. This will make this method accessible only to other classes in the package. You can think of package private as a level of access control in between public (anybody can use it) and private (only this class can use it).</p>
+  </li>
+  <li>
+    <p>Don’t forget edge cases - consider how the heap could look before inserting or removing items, and ensure that your code handles all possible cases (for example, sinking a node when its priority is greater than both of its children).</p>
+  </li>
+  <li>
+    <p>Rather than thinking about all possible edge cases, feel free to perform randomized tests by comparing the outputs of your data structure and the provided <code class="language-plaintext highlighter-rouge">NaiveMinPQ</code>, similar to what you did in Project 2A.</p>
+  </li>
+  <li>
+    <p>To test the runtime of your code, you should use the <code class="language-plaintext highlighter-rouge">System.currentTimeMillis</code> method or the <code class="language-plaintext highlighter-rouge">edu.princeton.cs.algs4.Stopwatch</code> class, similarly to what you did in Lab 5 and Project 2A. Keep in mind that calling the <code class="language-plaintext highlighter-rouge">add</code> method <code class="language-plaintext highlighter-rouge">N</code> times will take <code class="language-plaintext highlighter-rouge">O(Nlog(N))</code> <em>total</em> time if each <code class="language-plaintext highlighter-rouge">add</code> call is <code class="language-plaintext highlighter-rouge">O(log(N))</code> time. Also, keep in mind that if you call the <code class="language-plaintext highlighter-rouge">contains</code> method <code class="language-plaintext highlighter-rouge">N</code> times on a data structure of size <code class="language-plaintext highlighter-rouge">N</code>, you’d again expect <em>total</em> runtime to grow as <code class="language-plaintext highlighter-rouge">O(Nlog(N))</code>. Note: If you attempt to fit a log function using some sort of fancy software, you will probably be disappointed. Timing tests are likely to be too noisy for such fitting tools to work well. If you’re expect <code class="language-plaintext highlighter-rouge">O(Nlog(N))</code> and you’re getting something that looks linear, then you’re in good shape.</p>
+  </li>
+  <li>
+    <p>To test that your code throws the proper exceptions, you should leverage JUnit’s power. Read <a href="https://stackoverflow.com/questions/156503/how-do-you-assert-that-a-certain-exception-is-thrown-in-junit-4-tests">this</a> post to see how to do that. Note that as soon as your code throws some type of <code class="language-plaintext highlighter-rouge">Exception</code>, it will not complete the rest of the lines in that testcase. So, if you have multiple cases that should each throw an exception, you should write multiple testcases: one for each case.</p>
+  </li>
+</ol>
+
+<h3 id="external-resources-1">External Resources</h3>
+
+<p>You are welcome to look at source code for existing priority queue implementations. Make sure to cite any sources you use with the @source tag somewhere in your code. <strong>As always you should not use other student’s solutions to this project as a source</strong>, e.g. roommate’s code, something you found on pastebin, github, etc.</p>
+
+<p>You might find the <a href="https://algs4.cs.princeton.edu/24pq/MinPQ.java.html">MinPQ implementation</a> from the optional textbook to be a helpful reference. However, you <em>should not copy and paste</em> <code class="language-plaintext highlighter-rouge">MinPQ.java</code> into your implementation and then try to figure out how to bend it to match our spec. While it might seem like this will save you time and effort, it will end up generating more work than just building everything yourself from scratch. Many students tried doing something similar with <code class="language-plaintext highlighter-rouge">AList.java</code> from lecture and <code class="language-plaintext highlighter-rouge">ArrayDeque.java</code> from Project 1A, and the results were generally very bad.</p>
+
+<h2 id="project-2a-faq">Project 2A FAQ</h2>
+
+<p><strong>Q: How do I create a <code class="language-plaintext highlighter-rouge">Node[]</code> if my <code class="language-plaintext highlighter-rouge">Node</code> class stores objects of generic type <code class="language-plaintext highlighter-rouge">T</code>? If I try <code class="language-plaintext highlighter-rouge">(Node[]) new Object[10]</code>, I get a <code class="language-plaintext highlighter-rouge">classCastException</code> at runtime, but if I try <code class="language-plaintext highlighter-rouge">new Node[10]</code>, I get a generic array creation error at compile time.</strong> 
+This is one particularly annoying issue with Java generics. Without going into the details, the easy fix is that you can simply say <code class="language-plaintext highlighter-rouge">new ArrayHeapMinPQ.Node[10]</code> and it will work. See <a href="https://stackoverflow.com/questions/27969228/generic-array-creation-of-inner-class">this stack overflow post</a> for more details.</p>
+
+<p><strong>Q: When I make a test for <code class="language-plaintext highlighter-rouge">changePriority</code> and test <code class="language-plaintext highlighter-rouge">NaiveMinPQ</code> against <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code>, the runtime for <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> isn’t substantially better.</strong> 
+Let’s consider how <code class="language-plaintext highlighter-rouge">NaiveMinPQ</code> stores items. It stores them in a list, left to right. So if I insert items 0-1,000,000, it would have item <code class="language-plaintext highlighter-rouge">0</code> at the 0th index, <code class="language-plaintext highlighter-rouge">1</code> at the 1st index, and so on. Now, when it changes the priority of an item, it has to scan this list from left to right looking for this item. If my test were to insert items 0-1,000,000, then change the priority of items 0-1,000, this is actually the best case input for <code class="language-plaintext highlighter-rouge">NaiveMinPQ::changePriority</code>, since these are the closest items it can find. We recommend changing your test to <em>randomly</em> select 1000 items in the heap and change their priority.</p>
+
+<h2 id="project-2b-submission--grading">Project 2B Submission &amp; Grading</h2>
+
+<h3 id="required-files-for-proj2a-1">Required Files for Proj2A</h3>
+
+<p>Your Project 2B submission must contain the following files:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ.java</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ArrayHeapMinPQTest.java</code> (should contain tests)</li>
+</ul>
+
+<p>You can also include other files that you create, e.g. <code class="language-plaintext highlighter-rouge">TestNaiveMinPQ.java</code>.</p>
+
+<h3 id="grading-1">Grading</h3>
+
+<h4 id="arrayheapminpq-1">ArrayHeapMinPQ</h4>
+
+<p>We will test your <code class="language-plaintext highlighter-rouge">ArrayMinHeapPQ</code> for correctness and efficiency. Correctness tests will be very similar to the randomized testing described in the Randomized Testing section of the Proj2A spec above, where we will compare your <code class="language-plaintext highlighter-rouge">ArrayMinHeapPQ</code>’s <code class="language-plaintext highlighter-rouge">getSmallest</code>, <code class="language-plaintext highlighter-rouge">removeSmallest</code>, <code class="language-plaintext highlighter-rouge">add</code>, and <code class="language-plaintext highlighter-rouge">changePriority</code> results against our staff solution’s results.</p>
+
+<p>Efficiency tests will be similar to the correctness tests and will still require correctness, but they will also see how your solution performs with a very large number of items (millions) and many queries to <code class="language-plaintext highlighter-rouge">changePriority</code> (thousands). Your <code class="language-plaintext highlighter-rouge">changePriority</code> runtime will be compared to the staff solution’s <code class="language-plaintext highlighter-rouge">changePriority</code> runtime, and we will assign points based on that. If you implement <code class="language-plaintext highlighter-rouge">changePriority</code> correctly (<code class="language-plaintext highlighter-rouge">O(log(n))</code>)  and do not have repeated, redundant, or unnecessary function calls, your runtime should be fine for these tests.</p>
+
+<h4 id="arrayheapminpqtest">ArrayHeapMinPQTest</h4>
+
+<p>You must submit your tests. However, unlike Project 1B, your tests will not be tested with an autograder.</p>
+
+<h3 id="point-distribution-1">Point Distribution</h3>
+
+<ul>
+  <li>~75%: <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> correctness.</li>
+  <li>~12.5%: <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> constructor efficiency.</li>
+  <li>~12.5%: <code class="language-plaintext highlighter-rouge">changePriority</code> efficiency (only eligible if implementation passes correctness tests).</li>
+</ul>
+
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

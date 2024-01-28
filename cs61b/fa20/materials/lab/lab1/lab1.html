@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 1: javac, java, git | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 1: javac, java, git</header><ul id="markdown-toc">
+  <li><a href="lab1.html#before-you-begin" id="markdown-toc-before-you-begin">Before You Begin</a></li>
+  <li><a href="lab1.html#github-and-beacon" id="markdown-toc-github-and-beacon">GitHub and Beacon</a>    <ul>
+      <li><a href="lab1.html#more-details-about-your-repository" id="markdown-toc-more-details-about-your-repository">More details about your repository</a></li>
+    </ul>
+  </li>
+  <li><a href="lab1.html#a-java-compilation--development" id="markdown-toc-a-java-compilation--development">A. Java Compilation &amp; Development</a>    <ul>
+      <li><a href="lab1.html#introduction-to-java" id="markdown-toc-introduction-to-java">Introduction to Java</a></li>
+    </ul>
+  </li>
+  <li><a href="lab1.html#b-git--local-repos" id="markdown-toc-b-git--local-repos">B. Git &amp; Local Repos</a></li>
+  <li><a href="lab1.html#c-git-exercise" id="markdown-toc-c-git-exercise">C. Git Exercise</a></li>
+  <li><a href="lab1.html#d-git--remote-repos" id="markdown-toc-d-git--remote-repos">D. Git &amp; Remote Repos</a>    <ul>
+      <li><a href="lab1.html#working-on-the-skeleton" id="markdown-toc-working-on-the-skeleton">Working on the Skeleton</a></li>
+    </ul>
+  </li>
+  <li><a href="lab1.html#e-leap-year" id="markdown-toc-e-leap-year">E. Leap Year</a></li>
+  <li><a href="lab1.html#f-submitting-lab-1" id="markdown-toc-f-submitting-lab-1">F. Submitting Lab 1</a></li>
+  <li><a href="lab1.html#recap" id="markdown-toc-recap">Recap</a></li>
+</ul>
+
+<h2 id="before-you-begin">Before You Begin</h2>
+<ul>
+  <li>Before beginning this lab, complete
+  <a href="https://fa20.datastructur.es/materials/lab/lab1setup/lab1setup">lab1setup</a> to install software required for 61B.</li>
+  <li>Be aware that there are a large number of setup steps this first week.
+  <strong>Don’t be discouraged</strong>, and make sure to ask for help if you’re stuck! 
+<!--* Project 0 will allow pair-partnerships subject to [these
+  rules](../../guides/partnerships). Lab might be a good place to meet a
+  partner -- but make sure you both have the same Java background and are
+  willing to work together in the same room (see partnership rules for
+  details)! We will also have a thread on Ed Discussion to help you find partners.--></li>
+  <li>
+    <p class="redtext">For those of you who have been working ahead, do not use
+  IntelliJ  (from Lab 2) today. For today's lab, please work from the command
+  line to compile and run your code.</p>
+  </li>
+  <li>Warning: This lab runs a little long, and it’s normal if you do not finish during your lab period, especially if you end up having a tricky setup issue that requires a lot of assistance.</li>
+  <li>It’s OK to talk to other students while you work on this lab (or any other), but you should ultimately do all the typing/programming/entering-of-commands yourself. There’s a lot of important setup information in this lab that you need to have done independently of anyone else.</li>
+</ul>
+
+<!--
+## Lab Goals
+
+In this lab, you'll:
+1. Learn how to set up your GitHub repository.
+1. Learn how to compile files from the command line.
+1. Complete a short programming problem (HelloNumbers.java).
+1. Learn some basic commands for the Git version control software. 
+1. Demonstrate your knowledge of these basic Git commands using a checkoff.
+1. Learn how to get the starter files for assignments in 61B using Git.
+1. Complete another short programming problem (LeapYear.java).
+1. Learn how to submit your work for autograding on Gradescope.
+-->
+
+<!-- #### Find A Partner ####
+
+Recal
+
+Introduce yourself to someone you don't know who has the same operating system to collaborate with you as you complete the setup steps for today's lab. Try to find someone who has similar programming experience -- you're encouraged to partner up for Project 0!
+-->
+
+<h2 id="github-and-beacon">GitHub and Beacon</h2>
+
+<p>Instead of bCourses, CS61B uses an in-house system for centralizing your grades and student information called Beacon.</p>
+
+<p>In this section, we’ll set up your Beacon account as well as your CS 61B GitHub repository (“repo”), which you will need to submit all coding assignments.</p>
+
+<ol>
+  <li>Create an account at <a href="https://github.com/">GitHub.com</a>. If you already have an account, you do not need to create a new one.</li>
+  <li>Go to <a href="https://fa20.beacon.datastructur.es/register/">the Beacon website</a> and you’ll be guided through a few steps to complete your GitHub repository registration. Please follow them carefully! You must be logged in to your Berkeley account to complete the Google Form quiz. If any errors occur while you’re working through the steps, please let your TA know immediately.</li>
+  <li>After completing all of the steps, you should receive an email inviting you to collaborate on your course GitHub repository, accept the email invitation and you should be good to go. Hooray! <strong>Don’t follow the instructions that GitHub says you might want to do</strong> – instead, follow the instructions given later in this lab.</li>
+</ol>
+
+<h3 id="more-details-about-your-repository">More details about your repository</h3>
+<p>Your repository will have a name containing a number that is unique to you! For instance, if your repo is called “fa20-s42”, you’ll be able to visit your private repository at https://github.com/Berkeley-CS61B-Student/fa20-s42 (when logged into GitHub).</p>
+
+<p>Additionally, the instructors, TAs, and tutors will be able to view your repository. This means you can (and should!) link to your code when asking private debugging questions on Ed. No other students will be able to view your repository. As a reminder, you may not post code from this course publicly, even after completing the course. Doing so is a violation of our course policies and you might be subject to disciplinary action.</p>
+
+<p>When you work with your lab partner, you’ll also receive a separate shared repository that you should use for labs. More details will be provided later.</p>
+
+<p>Additionally, after registering with Beacon, you will be invited to collaborate on another repo of the form “snaps-fa20-sXXX” - don’t worry about what this repo is for now, just accept the invitation so you have access to it. We will have more information about these “snaps” repositories in lab2!</p>
+
+<h2 id="a-java-compilation--development">A. Java Compilation &amp; Development</h2>
+<p>Before proceeding, make sure you’ve installed Java on your computer as described in the lab 1 setup linked above.</p>
+
+<h4 id="introduction-to-java">Introduction to Java</h4>
+
+<p>Complete exercises 1.1.1 and 1.1.2 from the <a href="https://joshhug.gitbooks.io/hug61b/content/chap1/chap11.html">Hug61B
+textbook</a>. Also consider reading Chapter 1.1 as a review of what you’ve already seen in lecture. Note that the videos embedded in the textbook are just the lecture videos, so there’s no need to watch them again. When you’re done, you should have a <code class="language-plaintext highlighter-rouge">HelloWorld.java</code> and <code class="language-plaintext highlighter-rouge">HelloNumbers.java</code> file.</p>
+
+<p>For this lab, you should use the command line,
+not an IDE like IntelliJ or Eclipse (see Lab 2). Don’t worry about submitting
+your work yet, we’ll cover how to do that later in this lab.</p>
+
+<h2 id="b-git--local-repos">B. Git &amp; Local Repos</h2>
+
+<p>In 61B, you’ll be required to use the Git version control system, which is wildly
+popular out in the real world. Unfortunately, the abstractions behind it are
+fairly tricky to understand, so it is likely that you will encounter significant
+frustration at some point as you learn to use Git.</p>
+
+<p>Before you proceed, read sections A-C of Sarah Kim’s <a href="../../guides/using-git.html">Using Git
+Guide</a></p>
+
+<div class="redtext">STOP! Do not proceed until you have read sections A
+through C of the Using Git Guide.</div>
+<p>You do not need to read section D or later.</p>
+
+<h2 id="c-git-exercise">C. Git Exercise</h2>
+
+<p>Now that you’ve read the first 3 sections of the Using Git Guide, you’re now ready to
+start using Git! <!--As part of your lab checkoff, you will be working through a
+small Git workflow by setting up a Git repository and making a couple commits
+to the repository. An academic intern or TA will look at the Git repository during
+checkoff to ensure that it is in a good state.--> 
+If you’re stuck on a step at any point, don’t hesitate to ask a TA or an 
+academic intern for help!</p>
+
+<p>If you need help with creating directories, creating files, changing
+directories, etc., see section B of <a href="https://fa20.datastructur.es/materials/lab/lab1setup/lab1setup.html">lab1setup</a>.</p>
+<ol>
+  <li>
+    <p>First, tell Git your name and email address so that your commits are correctly
+attributed to you. Run the following commands:</p>
+
+    <p>Replace “Your Name” with your name, and “you@berkeley.edu” with your email address.
+You should use the email address that you used to sign up for GitHub with.
+If that’s not your “@berkeley.edu” email address, that’s okay.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>git config <span class="nt">--global</span> user.email <span class="s2">"you@berkeley.edu"</span>
+ <span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Create a directory called lab1-exercise.</strong> You should put this folder
+on your desktop.</li>
+  <li>Move into the lab1-exercise directory using the <code class="language-plaintext highlighter-rouge">cd</code> command, and initialize a Git repository in
+ this directory. <strong>Make sure you are in the lab1-exercise folder before initializing the repository.</strong>.</li>
+  <li>Create a file called <code class="language-plaintext highlighter-rouge">61b.txt</code> in any way you’d like. In this .txt file, add
+ the text “61b version 1” into it.</li>
+  <li>Create another file called <code class="language-plaintext highlighter-rouge">61c.txt</code> in any way you’d like. In this .txt
+ file, add the text “61c version 1” into it.</li>
+  <li>Begin tracking only <code class="language-plaintext highlighter-rouge">61b.txt</code>, and create a new commit containing just this
+ file, with the following commit message: “Add 61b.txt”.</li>
+  <li>Make a modification in <code class="language-plaintext highlighter-rouge">61b.txt</code> by changing the text in the file to:
+ “61b changed to version 2”.</li>
+  <li>Make another commit, this time containing both <code class="language-plaintext highlighter-rouge">61b.txt</code> and <code class="language-plaintext highlighter-rouge">61c.txt</code>. The
+ commit message should be: “Update 61b.txt and add 61c.txt”.</li>
+  <li>Finally, make one more modification to <code class="language-plaintext highlighter-rouge">61b.txt</code> by changing the text in the
+ file to: “61b changed to version 3”. Don’t commit this version.</li>
+  <li>
+    <p>Type in <code class="language-plaintext highlighter-rouge">git status</code>, and you shuold see something similar to below:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/lab1-exercise $ git status
+On branch master
+Changes not staged for commit:
+    (use "git add &lt;file&gt;..." to update what will be committed)
+    (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+    modified:   61b.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Now try <code class="language-plaintext highlighter-rouge">git log</code>, and you should see something like:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/lab1-exercise $ git log
+commit 273f3c4ed84df2c8f8accd1b807b9f3744779e95 (HEAD -&gt; master)
+Author: Eli Lipsitz &lt;eli.lipsitz@berkeley.edu&gt;
+Date:   Fri Jan 11 17:27:52 2019 -0600
+
+    Update 61b.txt and add 61c.txt
+
+commit d1f0d2b0423d0b88fe6474d4d821ec873f1c376b
+Author: Eli Lipsitz &lt;eli.lipsitz@berkeley.edu&gt;
+Date:   Fri Jan 11 17:27:26 2019 -0600
+
+    Add 61b.txt
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Use the <code class="language-plaintext highlighter-rouge">git checkout</code> command to revert your 61b.txt back to the original commit, i.e. the one where 61b.txt says “61b version 1”. Note: Be careful when using the <em>checkout</em> command, as your repo might end up
+in an unexpected state. Specifically, if you see something about
+your repository being in a detached HEAD state as a result of a checkout
+command, that is something we don’t want. Read
+<a href="https://fa20.datastructur.es/materials/guides/git-wtfs.html#head-detached-at--">here</a> for more on what it is
+and how to fix it.</p>
+  </li>
+  <li>
+    <p>Verify that your checkout command from the previous step actually caused the 61b.txt to be reverted.</p>
+  </li>
+  <li>Perform <code class="language-plaintext highlighter-rouge">git add 61b.txt</code> and <code class="language-plaintext highlighter-rouge">git commit</code> with a message that says something like “revert 61B back to its original form.”</li>
+</ol>
+
+<!--
+Be sure to save this repository and directory until you get checked-off by an
+academic intern or TA. See section E for more information on getting credit for
+the lab checkoff. **Along with other short conceptual questions involving
+Git, you will be asked to revert 61b.txt back to the version in the most recent
+commit, as well as back to the earliest version of the file, so make sure
+you know how to do this!** Hint: Look into the *checkout* command.-->
+
+<h2 id="d-git--remote-repos">D. Git &amp; Remote Repos</h2>
+
+<p>We’re now ready to finish off the lab. But first…</p>
+
+<p class="redtext">STOP! Before you proceed, read section D of the Using Git Guide</p>
+<p><a href="../../guides/using-git.html#d-remote-repositories">Here</a> is the link to the guide. There is no need
+to read sections E or later. Those are for your later reference, and do not
+need to be read during this lab.</p>
+
+<p>In 61B, you’ll be required to submit your code to your personal GitHub
+repository. This is for several reasons:</p>
+
+<ul>
+  <li>To spare you the incredible agony of losing your files.</li>
+  <li>To provide frequent checkpoints of your work so that you can go back to an earlier version if you find you’ve somehow broken your code.</li>
+  <li>To submit your work for grading and to get results back from the autograder.</li>
+  <li>To ensure that we have easy access to your code so that we can help if you’re
+  stuck.</li>
+  <li><strong>To dissuade you from posting your solutions on the web in a public GitHub
+  repository</strong>. This is a major violation of course policy!</li>
+  <li>To expose you to a realistic workflow that is common on every major project
+  you’ll ever work on again.</li>
+  <li>To enable safer, more equitable partner collaborations.</li>
+</ul>
+
+<p><strong>Note</strong>: If you use multiple computers in this course, you’ll need to repeat the steps below on every computer that you use.</p>
+
+<ol>
+  <li>
+    <p>Clone your <a href="https://github.com/Berkeley-CS61B-Student">Berkeley-CS61B-Student
+organization</a> repository.</p>
+
+    <ul>
+      <li>Navigate to the spot in your folders on your computer where you’d like to
+ start your repository. In the example below, I’m assuming you want all your stuff in a folder named cs61b, but you can pick a different name if you’d like.
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span><span class="nb">cd </span>cs61b
+</code></pre></div>        </div>
+      </li>
+      <li>Enter the following command to clone your GitHub repo. Make sure to
+ replace the <code class="language-plaintext highlighter-rouge">s**</code> with the class id you were given when you registered for your repo.
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git clone https://github.com/Berkeley-CS61B-Student/fa20-s<span class="k">**</span>.git
+</code></pre></div>        </div>
+        <p>If you’d like to use SSH instead of HTTPS (and <a href="https://help.github.com/articles/generating-ssh-keys/">set up your own SSH
+ key</a>), feel free
+ to also do that instead. If you don’t know what any of this means, just use the command above.
+ The advantage of SSH is that you won’t have to type in
+ your GitHub password every time you use your repository.</p>
+      </li>
+      <li>Move into your newly created repo! (Make sure you do this part, or the
+ rest of the steps below will not work correctly.)
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span><span class="nb">cd </span>fa20-s<span class="k">**</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Add the <code class="language-plaintext highlighter-rouge">skeleton</code> remote repository. You will pull from this remote
+repository to get starter code for assignments. (Make sure that you are
+within the newly created repository folder when the continue with these
+commands.)</p>
+    <ul>
+      <li>Enter the following command to add the <code class="language-plaintext highlighter-rouge">skeleton</code> remote.
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git remote add skeleton https://github.com/Berkeley-CS61B/skeleton-fa20.git
+</code></pre></div>        </div>
+      </li>
+      <li>Listing the remotes should now show both the <code class="language-plaintext highlighter-rouge">origin</code> and <code class="language-plaintext highlighter-rouge">skeleton</code>
+ remotes.
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git remote <span class="nt">-v</span>
+</code></pre></div>        </div>
+      </li>
+      <li>If you get an error that says “Not a git repository”, make sure you’re in the <code class="language-plaintext highlighter-rouge">fa20-s**</code> directory.</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="working-on-the-skeleton">Working on the Skeleton</h4>
+
+<ol>
+  <li>You must now pull from the <code class="language-plaintext highlighter-rouge">skeleton</code> remote in order to get the starter code
+for Lab 1. You will also do this when new projects and assignments are
+released. To do this, use the spookiest command in the whole git toolbox:
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git pull skeleton master
+</code></pre></div>    </div>
+    <p>What this does is grab all remote files from the repo named <code class="language-plaintext highlighter-rouge">skeleton</code>
+ (which is located at <code class="language-plaintext highlighter-rouge">https://github.com/Berkeley-CS61B/skeleton-fa20.git</code>)
+ and copies them into your current folder.</p>
+
+    <p>If you get an error similar to “fatal: refusing to merge unrelated histories”, you probably ran
+ GitHub’s suggested commands when you created your repository. To fix this, you can instead run:</p>
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git pull <span class="nt">--rebase</span> <span class="nt">--allow-unrelated-histories</span> skeleton master
+</code></pre></div>    </div>
+    <p>this time only.</p>
+  </li>
+  <li>
+    <p>If you list the files in your current directory, you’ll see that there are now many folders including one named <code class="language-plaintext highlighter-rouge">lab1</code> Look in the <code class="language-plaintext highlighter-rouge">lab1</code> folder and you’ll see a file called <code class="language-plaintext highlighter-rouge">LeapYear.java</code>  that you’ll work with in later parts of this lab.</p>
+  </li>
+  <li>
+    <p>Move the <code class="language-plaintext highlighter-rouge">HelloWorld.java</code> and <code class="language-plaintext highlighter-rouge">HelloNumbers.java</code> that you previously
+created into the <code class="language-plaintext highlighter-rouge">lab1</code> directory. If you didn’t create <code class="language-plaintext highlighter-rouge">HelloNumbers.java</code>,
+go back and do Exercise 1.1.2 (see part A of this lab).</p>
+  </li>
+  <li>Stage and commit <code class="language-plaintext highlighter-rouge">HelloWorld.java</code> and <code class="language-plaintext highlighter-rouge">HelloNumbers.java</code>.
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git add lab1/<span class="k">*</span>
+<span class="gp"> $</span><span class="w"> </span>git commit <span class="nt">-m</span> <span class="s2">"completed first part of lab1"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Push these changes to the <code class="language-plaintext highlighter-rouge">master</code> branch on the <code class="language-plaintext highlighter-rouge">origin</code> remote repo.
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git push origin master
+</code></pre></div>    </div>
+    <p>You can verify that this has been successful by viewing your repo on
+ <a href="https://github.com">github.com</a>. For example, if your repo were <code class="language-plaintext highlighter-rouge">fa20-s42</code>, you’d go to <a href="https://github.com/Berkeley-CS61B-Student/fa20-s42">https://github.com/Berkeley-CS61B-Student/fa20-s42</a>.</p>
+
+    <p>If you get an error similar to “Updates were rejected because the tip of your current branch is behind its remote counterpart”,
+ and you had to use the “–allow-unrelated-histories” flag in the first step, add the <code class="language-plaintext highlighter-rouge">-f</code> (force) flag to your <code class="language-plaintext highlighter-rouge">git push</code>
+ command <strong>this time, and this time only</strong>:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp"> $</span><span class="w"> </span>git push <span class="nt">-f</span> origin master
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<!-- E. Git Checkoff
+
+Once you've verified that your code was pushed to GitHub, put your name down on the lab whiteboard to get your Git exercise (from Part C) checked off. The TA or lab
+assistant, upon completion of the lab checkoff, will tell you what to put into the magic word file in order to pass the autograder. If there's a wait, feel free to move on to part F until your name is called.
+
+-->
+
+<h2 id="e-leap-year">E. Leap Year</h2>
+
+<p>In the lab1 folder, you should see a file called <code class="language-plaintext highlighter-rouge">LeapYear.java</code>. This program is supposed to test whether or not a given year is a Leap Year. The user will
+give a year as a command line parameter (examples given below), and then print out whether or not that year is a leap year, e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ java LeapYear 2000
+2000 is a leap year.
+$ java LeapYear 1999
+1999 is not a leap year.
+$ java LeapYear 2004
+2004 is a leap year.
+$ java LeapYear 2100
+2100 is not a leap year.
+</code></pre></div></div>
+
+<p>A leap year is either:</p>
+
+<ul>
+  <li>divisible by 400 or</li>
+  <li>divisible by 4 and not by 100.</li>
+</ul>
+
+<p>For example, 2000 and 2004 are leap years. 1900, 2003, and 2100 are not leap years.</p>
+
+<p>Your code must declare a method as follows: <code class="language-plaintext highlighter-rouge">public static boolean
+isLeapYear(int year)</code>. This method will be tested by the Gradescope autograder. Make sure to provide a description of the method as a comment. Your description should be contained by <code class="language-plaintext highlighter-rouge">/**</code> and <code class="language-plaintext highlighter-rouge">*/</code>. Comments contained by <code class="language-plaintext highlighter-rouge">/**</code> and <code class="language-plaintext highlighter-rouge">*/</code> are also called “Javadoc comments” or just “Javadocs”. These comments can span multiple lines if they need the extra space, e.g. the <code class="language-plaintext highlighter-rouge">checkLeapYear</code> Javadocs.</p>
+
+<p>Javadocs may contain optional tags, e.g. <code class="language-plaintext highlighter-rouge">@param</code>. We do not require you to use any tags like this in 61B except the <code class="language-plaintext highlighter-rouge">@source</code> tag. Use the <code class="language-plaintext highlighter-rouge">@source</code> tag any time you receive significant help on a project. The <code class="language-plaintext highlighter-rouge">@source</code> tag is not required for HW or lab, though we recommend it anyway, since it’s a good scholarly and professional habit to cite your sources.</p>
+
+<p>Some Java tips:</p>
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">%</code> operator implements remainder. Thus, the value of <code class="language-plaintext highlighter-rouge">year % 4</code> will be
+ <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">2</code>, or <code class="language-plaintext highlighter-rouge">3</code>.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">!=</code> operator compares two values for inequality. The code fragment <code class="language-plaintext highlighter-rouge">if
+ (year % 4 != 0)</code> reads as “if the remainder when dividing year by 4 is not
+ equal to 0.”</li>
+  <li>When one of the arguments of the <code class="language-plaintext highlighter-rouge">+</code> operator is a String, the arguments are
+ concatenated as Strings. For example, <code class="language-plaintext highlighter-rouge">"horse"</code> + <code class="language-plaintext highlighter-rouge">"babies"</code> would return
+ <code class="language-plaintext highlighter-rouge">"horsebabies"</code></li>
+</ul>
+
+<h2 id="f-submitting-lab-1">F. Submitting Lab 1</h2>
+
+<p>The last step is to submit your work with Gradescope. Gradescope is the site that you’ll use to
+submit homework, lab, and project assignments. To sign up for Gradescope (if you haven’t already),
+head to <a href="http://gradescope.com">gradescope.com</a> and click on the white “Sign up for
+free” button in the middle. You should use your Berkeley email. You should have already been enrolled
+in our Gradescope page with your Berkeley email.</p>
+
+<!--
+**NOTE (as of 8/3/2020)**
+If you are completing this lab well before the start of the semester, and you are not enrolled
+in our Gradescope, it is likely because you are not officially enrolled (or waitlisted) in the course
+yet. If this is the case, please do not post on Ed asking us to enroll you. Instead, you can use our public
+Gradescope page (enrollment code MB7ZPY) to test your code before being enrolled into our real Gradescope.-->
+
+<p>Once you’re enrolled in the class on Gradescope, click on “Lab 1: Welcome to Java” to 
+submit your code.</p>
+
+<p>After clicking this button, you’ll be taken to a screen where you select your
+repository and branch (shown below). The first time you do this, you’ll have to link
+your GitHub account to Gradescope (similar to what you did on the registration website).
+Click the “Connect to GitHub” button and follow the instructions.</p>
+
+<p>Now select your repository and branch. If your repository is “fa20-s1”, you’ll select
+“fa20-s1” in the top box, and in the bottom box you’ll pick “master”.</p>
+
+<p>Later, you can create your own “branches” (as described in the advanced part of the Git Guide) if you want those graded instead,
+though that won’t be required in 61B.</p>
+
+<p><img src="img/github_repo_and_branch_selection.png" alt="Github Repo and Branch Selection" /></p>
+
+<p>Now press “Upload” to submit!</p>
+
+<p>Please report any issues you may have to Ed. Entire error messages
+and/or screenshots are welcome.</p>
+
+<p><strong><em>Important:</em></strong> <em>We HIGHLY encourage you to make frequent commits!</em> <strong>Lack of
+proper version control will not be considered an excuse for lost work,
+particularly after the first few weeks.</strong></p>
+
+<h2 id="recap">Recap</h2>
+
+<ol>
+  <li>
+    <p>Java is a compiled language. You can use <code class="language-plaintext highlighter-rouge">javac</code> and <code class="language-plaintext highlighter-rouge">java</code> to compile and
+run your code.</p>
+  </li>
+  <li>
+    <p>Java is an object-oriented language. Every Java file must contain either a
+class, interface, or enum.</p>
+  </li>
+  <li>
+    <p>When running a Java program, the <code class="language-plaintext highlighter-rouge">main</code> method runs. This <code class="language-plaintext highlighter-rouge">main</code> method
+can call other methods/classes in the program.</p>
+  </li>
+  <li>
+    <p>Git is a version control system that tracks the history of a set of files in
+the form of commits.</p>
+  </li>
+  <li>
+    <p>Commit often and use informative commit messages.</p>
+  </li>
+  <li>
+    <p>Pull from the <code class="language-plaintext highlighter-rouge">skeleton</code> remote repository to get or update starter code for
+assignments.</p>
+  </li>
+  <li>
+    <p>Use Gradescope to submit homework, labs, and projects.</p>
+  </li>
+</ol>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

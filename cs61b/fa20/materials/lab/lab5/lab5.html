@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 5: Randomized Comparison Tests and Timing Tests | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="http://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="../../../assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="../../../assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 5: Randomized Comparison Tests and Timing Tests</header><ul id="markdown-toc">
+  <li><a href="lab5.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab5.html#timing-tests-for-list61b" id="markdown-toc-timing-tests-for-list61b">Timing Tests for List61B</a>    <ul>
+      <li><a href="lab5.html#timing-the-construction-of-an-alist-with-a-bad-resize-strategy" id="markdown-toc-timing-the-construction-of-an-alist-with-a-bad-resize-strategy">Timing the construction of an AList with a bad resize strategy</a></li>
+      <li><a href="lab5.html#timing-the-construction-of-an-alist-with-a-good-resize-strategy" id="markdown-toc-timing-the-construction-of-an-alist-with-a-good-resize-strategy">Timing the construction of an AList with a good resize strategy</a></li>
+      <li><a href="lab5.html#timing-the-getlast-method-of-sllist" id="markdown-toc-timing-the-getlast-method-of-sllist">Timing the getLast method of SLList</a></li>
+    </ul>
+  </li>
+  <li><a href="lab5.html#randomized-comparison-tests" id="markdown-toc-randomized-comparison-tests">Randomized Comparison Tests</a>    <ul>
+      <li><a href="lab5.html#implementing-alistfloorset-optional" id="markdown-toc-implementing-alistfloorset-optional">Implementing AListFloorSet (Optional)</a></li>
+      <li><a href="lab5.html#using-alistfloorset-to-verify-redblackfloorset-correctness" id="markdown-toc-using-alistfloorset-to-verify-redblackfloorset-correctness">Using AListFloorSet to verify RedBlackFloorSet correctness</a></li>
+    </ul>
+  </li>
+  <li><a href="lab5.html#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+  <li><a href="lab5.html#submission" id="markdown-toc-submission">Submission</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>In this lab, you’ll create a timing test for the <code class="language-plaintext highlighter-rouge">SLList</code> and <code class="language-plaintext highlighter-rouge">AList</code> implementations of the <code class="language-plaintext highlighter-rouge">List61B</code> interface. You’ll also create a randomized comparison test for a new interface called a <code class="language-plaintext highlighter-rouge">Lab5FloorSet</code>.</p>
+
+<p>The ideas in this lab will be very important for when we get to project 2a and project 2b in mid October. These two projects will be similar to proj1a, except that we will not be providing an autograder! That is, you’ll be responsible for verifying the correctness and speed of your code.</p>
+
+<h2 id="timing-tests-for-list61b">Timing Tests for List61B</h2>
+
+<p>For project 1A, you were given a suite of extensive autograder tests that validated your code’s accuracy and speed. However, in the real world, you’ll be responsible for ensuring the correctness and efficiency of your code. While we’ve seen some correctness testing (in the testing lecture, lab, and in the optional gold points for project 1), we have not yet discussed timing tests.</p>
+
+<h3 id="timing-the-construction-of-an-alist-with-a-bad-resize-strategy">Timing the construction of an AList with a bad resize strategy</h3>
+
+<p>As discussed <a href="https://docs.google.com/presentation/d/1xNOQqaazj_Qgzryc9KQegKyMds7msyWYAGXoQaXq02Q/edit#slide=id.g625dc7e36_0943">in lecture</a>, a multiplicative resizing strategy will result in fast add operations / good performance, whereas an additive resizing strategy will result in slow add operations / bad performance.</p>
+
+<p>For this lab, we’ve provided the <code class="language-plaintext highlighter-rouge">AList</code> class created in lecture with the bad resizing strategy below:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addLast</span><span class="o">(</span><span class="nc">Item</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">items</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">resize</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="n">items</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Your goal for this part of the lab is to write code that tabulates the amount of time needed to create a <code class="language-plaintext highlighter-rouge">AList</code> of various sizes using the <code class="language-plaintext highlighter-rouge">addLast</code> method above. The output of this timing test will look something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for addLast
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+        1000         0.00         1000         0.20
+        2000         0.01         2000         0.20
+        4000         0.01         4000         1.20
+        8000         0.04         8000         4.30
+       16000         0.10        16000        10.00
+       32000         0.50        32000        49.70
+       64000         1.15        64000       114.80
+      128000         3.74       128000       374.30
+</code></pre></div></div>
+
+<p>The first column <code class="language-plaintext highlighter-rouge">N</code> gives the size of the data structure (how many elements it contains). The second column <code class="language-plaintext highlighter-rouge">time (s)</code> gives the time required to complete all operations. The third column <code class="language-plaintext highlighter-rouge"># ops</code> gives the number of calls to <code class="language-plaintext highlighter-rouge">addLast</code> made during the timing experiment. And finally the fourth column <code class="language-plaintext highlighter-rouge">microsec/op</code> gives the number of microseconds it took on average to complete each call to <code class="language-plaintext highlighter-rouge">addLast</code>. Note that for this experiment, <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge"># ops</code> is redundant, since the result of making 128,000 calls to <code class="language-plaintext highlighter-rouge">addLast</code> will result in an <code class="language-plaintext highlighter-rouge">N</code> of 128,000.</p>
+
+<p>The important thing to notice here is that <code class="language-plaintext highlighter-rouge">addLast</code> is not “constant time”. That is, the time to takes each <code class="language-plaintext highlighter-rouge">addLast</code> call to complete varies significantly with the size of the list: 374.30 microseconds when the list is long, and only 0.20 microseconds when the list is short. This is essentially how our autograder tests worked for your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and <code class="language-plaintext highlighter-rouge">ArrayDeque</code> classes, i.e. we made sure that the time was constant for operations that should have been constant.</p>
+
+<p>You might notice that the time per <code class="language-plaintext highlighter-rouge">addLast</code> operation is the same for N = 1000 and N = 2000. This is common for timing tests. For small inputs, results are unreliable for two reasons: The variance in runtime is high (due to issues like caching, process switching, branch prediction, etc. which you’ll learn about if you take 61C), and the accuracy of our timer (milliseconds) is insufficient to resolve the difference between N = 1000 and N = 2000. This can even lead to the timing of N = 1000 being greater than that of N = 2000.</p>
+
+<p>Now that you understand the table above, add a function <code class="language-plaintext highlighter-rouge">public void timeAListConstruction</code> to the class <code class="language-plaintext highlighter-rouge">TimeAList</code> that generates the table above for an <code class="language-plaintext highlighter-rouge">AList</code>. Note: If your computer is a little slow, you might want to stop at 64,000 instead of 128,000. Make sure to add a function call to <code class="language-plaintext highlighter-rouge">timeAListConstruction</code> to the <code class="language-plaintext highlighter-rouge">main</code> method of <code class="language-plaintext highlighter-rouge">TimeAList</code> class.</p>
+
+<p>For your convenience, we’ve provided a method called <code class="language-plaintext highlighter-rouge">printTimingTable(List&lt;Integer&gt; Ns, List&lt;Double&gt; times, List&lt;Integer&gt; opCounts)</code> that will print the table above, where <code class="language-plaintext highlighter-rouge">Ns</code> is the first column, <code class="language-plaintext highlighter-rouge">times</code> is the second column, and <code class="language-plaintext highlighter-rouge">opCounts</code> is the third column. The fourth column (<code class="language-plaintext highlighter-rouge">microsec/op</code>) is automatically computed for you. Your times should be in seconds. You should use the <code class="language-plaintext highlighter-rouge">Stopwatch</code> class. See <code class="language-plaintext highlighter-rouge">stopwatchDemo</code> for an example.</p>
+
+<h3 id="timing-the-construction-of-an-alist-with-a-good-resize-strategy">Timing the construction of an AList with a good resize strategy</h3>
+
+<p>Now modify the <code class="language-plaintext highlighter-rouge">AList</code>  class so that the resize strategy is multiplicative instead of additive and rerun <code class="language-plaintext highlighter-rouge">timeAListConstruction</code>. Your <code class="language-plaintext highlighter-rouge">AList</code> objects should now be constructed nearly instantly, even for N = 128,000, and each add operation should only take a fraction of a microsecond.</p>
+
+<p>Optional: Try increasing the maximum N to larger values, e.g. 10 million. You should see that the time per add operation remains constant.</p>
+
+<p>Optional: Try experimenting with different resizing factors and see how the runtimes change. For example, if you resize by a factor of 1.01, you should still get constant time addLast operations!</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">addLast</span><span class="o">(</span><span class="nc">Item</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">size</span> <span class="o">==</span> <span class="n">items</span><span class="o">.</span><span class="na">length</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">resize</span><span class="o">((</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">size</span> <span class="o">*</span> <span class="mf">1.01</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="n">items</span><span class="o">[</span><span class="n">size</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="timing-the-getlast-method-of-sllist">Timing the getLast method of SLList</h3>
+
+<p>In your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code>, you were supposed to have <code class="language-plaintext highlighter-rouge">addLast</code> operations that were fast, or as the spec put it: “<code class="language-plaintext highlighter-rouge">add</code> and <code class="language-plaintext highlighter-rouge">remove</code> operations must not involve any looping or recursion. A single such operation must take “constant time”, i.e. execution time should not depend on the size of the deque. This means that you cannot use loops that go over all/most elements of the deque.”</p>
+
+<p>Above, we showed how we can time the construction of a data structure. It is also common to compute the time per operation on a data structure that is pre-built before the test begins. That is, suppose we want to compute the time per operation for <code class="language-plaintext highlighter-rouge">getLast</code> for an <code class="language-plaintext highlighter-rouge">SLList</code> and want to know how this runtime depends on N. To do this, we need to follow the procedure below:</p>
+
+<ol>
+  <li>Create an <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li>Add N items to the <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li>Start the timer.</li>
+  <li>Perform M getLast operations on the <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li>Check the timer. This gives the total time to complete all M operations.</li>
+</ol>
+
+<p>It’s important that we do not start the timer until after step 2 has been completed. Otherwise the timing test is including something other than the <code class="language-plaintext highlighter-rouge">getLast</code> operations.</p>
+
+<p>In the <code class="language-plaintext highlighter-rouge">TimeSLList</code> class, edit the function <code class="language-plaintext highlighter-rouge">timeGetLast</code> to perform the procedure above, and generate a table similar to the one shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Timing table for getLast
+           N     time (s)        # ops  microsec/op
+------------------------------------------------------------
+        1000         0.02        10000         1.70
+        2000         0.03        10000         3.10
+        4000         0.06        10000         6.20
+        8000         0.13        10000        12.50
+       16000         0.25        10000        25.00
+       32000         0.53        10000        52.80
+       64000         1.35        10000       135.30
+      128000         2.57        10000       257.30
+</code></pre></div></div>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge"># ops</code> columns are no longer the same. This is because we are always calling <code class="language-plaintext highlighter-rouge">getLast</code> the same number of times regardless of the size of the list, i.e. <code class="language-plaintext highlighter-rouge">M = 10000</code> for step 4 of the procedure described above.</p>
+
+<p>Note that the operations are again not constant time! This means that as the list gets bigger, the <code class="language-plaintext highlighter-rouge">getLast</code> operation becomes slower. This would be a serious problem in a real world application. For example, suppose the list is of ATM transactions, and the <code class="language-plaintext highlighter-rouge">getLast</code> operation was being called in order to get the most recent transaction to print a receipt. Every time the ATM is used, the next receipt would take a little bit longer to print. Eventually over many months or years, the list would become so large that the <code class="language-plaintext highlighter-rouge">getLast</code> operation would be unusably slow. While this is a contrived example, similar problems have plagued real world systems!</p>
+
+<p>Optional question to ponder: Why is <code class="language-plaintext highlighter-rouge">getLast</code> so slow? Was your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> <code class="language-plaintext highlighter-rouge">getLast</code> function also slow?</p>
+
+<h2 id="randomized-comparison-tests">Randomized Comparison Tests</h2>
+
+<p>For many interfaces, we’ll often find that there are two extremes:</p>
+<ol>
+  <li>A simple but inefficient implementation.</li>
+  <li>A complex but efficient implementation.</li>
+</ol>
+
+<p>For example, building an <code class="language-plaintext highlighter-rouge">ArrayDeque</code> where the list is always stored as an array of length corresponding to the items in the list would be easy, but very slow, whereas what you did in project 1a was much more complex, but also very fast.</p>
+
+<p>For example, the slow but simple way would store <code class="language-plaintext highlighter-rouge">[9, 15, 31, 35]</code> as a length 4 array containing only <code class="language-plaintext highlighter-rouge">[9, 15, 31, 35]</code>. Your approach project 1A might have stored this list as <code class="language-plaintext highlighter-rouge">[0, 0, 9, 15, 31, 35, 0, 0]</code>, <code class="language-plaintext highlighter-rouge">nextFirst = 1</code>, <code class="language-plaintext highlighter-rouge">nextLast = 6</code>.</p>
+
+<p>One way you might have tested your code if you were doing this in a real world setting would be to first implement a <code class="language-plaintext highlighter-rouge">SlowArrayDeque</code> and then <code class="language-plaintext highlighter-rouge">ArrayDeque</code>, and then compare the output of the two after applying random operations to make sure your <code class="language-plaintext highlighter-rouge">ArrayDeque</code> was correct.</p>
+
+<p>For this part of the lab, we’ll try to validate an implementation of a new interface called <code class="language-plaintext highlighter-rouge">Lab5FloorSet</code> class, which has two methods:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">add(double x)</code> adds x to the set. If x is already present, it has no effect.</li>
+  <li><code class="language-plaintext highlighter-rouge">floor(double x)</code> gives the largest value in the set that is less than or equal to x. If no values are smaller than x, it should return negative infinity (<code class="language-plaintext highlighter-rouge">Double.NEGATIVE_INFINITY</code>).</li>
+</ul>
+
+<p>For example, if we call <code class="language-plaintext highlighter-rouge">add(2.5)</code>, <code class="language-plaintext highlighter-rouge">add(10.0)</code>, and <code class="language-plaintext highlighter-rouge">add(11.2)</code>, then <code class="language-plaintext highlighter-rouge">floor(9)</code> would return 2.5, since 2.5 is the largest value in the list that is smaller than  9. <code class="language-plaintext highlighter-rouge">floor(0)</code> would return negative infinity.</p>
+
+<p>We’ve provided an implementation <code class="language-plaintext highlighter-rouge">RedBlackFloorSet</code>. Your goal in this part of this lab will be to first write a correct but inefficient solution, then to use a randomized test to determine whether or not <code class="language-plaintext highlighter-rouge">RedBlackFloorSet</code> is correct. You can use the <code class="language-plaintext highlighter-rouge">StdRandom</code> class in order to get random numbers.</p>
+
+<h4 id="implementing-alistfloorset-optional">Implementing AListFloorSet (Optional)</h4>
+
+<p>Create a simple but correct implementation of <code class="language-plaintext highlighter-rouge">Lab5FloorSet</code> called <code class="language-plaintext highlighter-rouge">AListFloorSet</code>. Your <code class="language-plaintext highlighter-rouge">AListFloorSet</code> should have exactly one instance variable: an <code class="language-plaintext highlighter-rouge">AList</code>. Do not modify the <code class="language-plaintext highlighter-rouge">AList</code> class.</p>
+
+<p>Or if you’d rather skip this exercise, you can find the solution <a href="AListFloorSet.java">here</a>.</p>
+
+<h4 id="using-alistfloorset-to-verify-redblackfloorset-correctness">Using AListFloorSet to verify RedBlackFloorSet correctness</h4>
+
+<p>There is a bug somewhere in <code class="language-plaintext highlighter-rouge">RedBlackFloorSet</code>. <strong>You don’t need to understand this implementation of RedBlackFloorSet</strong>. To show that this bug exists, fill in the JUnit test in the <code class="language-plaintext highlighter-rouge">TestRedBlackFloorSet</code> file so that it follows the following procedure:</p>
+
+<ol>
+  <li>Generate 1,000,000 random doubles between -5000 and 5000, and add them to both an <code class="language-plaintext highlighter-rouge">AListFloorSet</code> and a <code class="language-plaintext highlighter-rouge">RedBlackFloorSet</code>.</li>
+  <li>Repeats the same random call 100,000 times to the <code class="language-plaintext highlighter-rouge">floor</code> method of the <code class="language-plaintext highlighter-rouge">AListFloorSet</code> and <code class="language-plaintext highlighter-rouge">RedBlackFloorSet</code>. Use <code class="language-plaintext highlighter-rouge">assertEquals</code> to compare the results. Note that since we’re using doubles, you’ll need to specify a tolerance, e.g. if you pick <code class="language-plaintext highlighter-rouge">0.000001</code>, then two doubles will be considered equal so long as they are within <code class="language-plaintext highlighter-rouge">0.000001</code> of each other.</li>
+</ol>
+
+<p>To generate a random number between a and b, use <code class="language-plaintext highlighter-rouge">StdRandom.uniform(a, b)</code>.</p>
+
+<p>Note: Since your <code class="language-plaintext highlighter-rouge">AListFloorSet</code> provides the expected output, make sure to use this as your left argument to <code class="language-plaintext highlighter-rouge">assertEquals</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Now that you’ve run timing tests and randomized tests, you are ready to use these tools when you do project 2a and 2b. In the real world, both of these methods are used very often since there is no autograder usually available with the ground truth solution. Time tests are important on larger scale projects since most real world software is expected to run on a large scale, making up to billions of calls at a time. Randomized testing is very useful in finding out whether an unlikely series of calls breaks your program. When you write your randomizwed tests for a larger project, its a good idea to save a log of the calls made somewhere so that when the program makes, you are able to trace it back (otherwise you won’t know what errored).</p>
+
+<h2 id="submission">Submission</h2>
+
+<p>To summarize, here’s what you need to submit to the autograder:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">TimeAList.java</code> - With a <code class="language-plaintext highlighter-rouge">timeAListConstruction()</code> function that should generate a time table for <code class="language-plaintext highlighter-rouge">addLast</code> operations on <code class="language-plaintext highlighter-rouge">AList</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">AList.java</code> - With a better resize strategy than what is given.</li>
+  <li><code class="language-plaintext highlighter-rouge">TimeSLList.java</code> - With a <code class="language-plaintext highlighter-rouge">timeGetLast()</code> function that should generate a time table for <code class="language-plaintext highlighter-rouge">getLast</code> operations on <code class="language-plaintext highlighter-rouge">SLList</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">TestRedBlackFloorSet.java</code> - With a <code class="language-plaintext highlighter-rouge">randomizedTest()</code> function that executes randomized operations to check that <code class="language-plaintext highlighter-rouge">RedBlackFloorSet</code> matches <code class="language-plaintext highlighter-rouge">AListFloorSet</code>.
+This lab is very dependent on random numbers (your computer’s load, the random numbers you generate), so if you fail a test with a number that is close to the bound try resubmitting once before looking at your code.</li>
+</ul>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 2C: Bear Maps (Heroku), version 4.0 | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 2C: Bear Maps (Heroku), version 4.0</header><ul id="markdown-toc">
+  <li><a href="heroku.html#deploying-on-heroku" id="markdown-toc-deploying-on-heroku">Deploying on <strong>Heroku</strong></a></li>
+  <li><a href="heroku.html#creation-of-a-jar-with-dependencies" id="markdown-toc-creation-of-a-jar-with-dependencies">Creation of a JAR with dependencies</a>    <ul>
+      <li><a href="heroku.html#1-configuring-jar" id="markdown-toc-1-configuring-jar">1. Configuring JAR</a></li>
+      <li><a href="heroku.html#2-configuring-your-code" id="markdown-toc-2-configuring-your-code">2. Configuring your code</a>        <ul>
+          <li><a href="heroku.html#21-editing-paths" id="markdown-toc-21-editing-paths">2.1 Editing Paths</a></li>
+          <li><a href="heroku.html#22-reading-files" id="markdown-toc-22-reading-files">2.2 Reading files</a></li>
+          <li><a href="heroku.html#22-configuring-port" id="markdown-toc-22-configuring-port">2.2 Configuring port</a></li>
+        </ul>
+      </li>
+      <li><a href="heroku.html#building-jar" id="markdown-toc-building-jar">Building JAR</a></li>
+      <li><a href="heroku.html#testing-your-jar" id="markdown-toc-testing-your-jar">Testing your JAR</a></li>
+    </ul>
+  </li>
+  <li><a href="heroku.html#heroku-deployment" id="markdown-toc-heroku-deployment">Heroku Deployment</a>    <ul>
+      <li><a href="heroku.html#onetime-setup-steps" id="markdown-toc-onetime-setup-steps">Onetime setup steps</a></li>
+      <li><a href="heroku.html#deploying" id="markdown-toc-deploying">Deploying</a></li>
+    </ul>
+  </li>
+  <li><a href="heroku.html#faq" id="markdown-toc-faq">FAQ</a>    <ul>
+      <li><a href="heroku.html#unable-to-read-image-andor-xml-files" id="markdown-toc-unable-to-read-image-andor-xml-files">Unable to read image and/or xml files.</a></li>
+      <li><a href="heroku.html#the-changes-in-code-are-not-reflected-on-heroku" id="markdown-toc-the-changes-in-code-are-not-reflected-on-heroku">The changes in code are not reflected on Heroku.</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="deploying-on-heroku">Deploying on <strong>Heroku</strong></h2>
+
+<h2 id="creation-of-a-jar-with-dependencies">Creation of a JAR with dependencies</h2>
+
+<p>A JAR with dependencies is a type of JAR that includes all your code from the external libraries (dependencies) used in the project. When we deploy an application on external server we need this kind of JAR which is self-sufficient(does not depend on anything else) and is enough to run the entire code.</p>
+
+<p>An important step for this is to package all the resources, i.e, static data files (images, etc in our case) within this JAR itself.</p>
+
+<h3 id="1-configuring-jar">1. Configuring JAR</h3>
+<ul>
+  <li>Go to <code class="language-plaintext highlighter-rouge">File</code> -&gt; <code class="language-plaintext highlighter-rouge">Project Structure</code> -&gt; <code class="language-plaintext highlighter-rouge">Artifacts</code> -&gt; <code class="language-plaintext highlighter-rouge">+</code> -&gt; <code class="language-plaintext highlighter-rouge">JAR</code> -&gt; <code class="language-plaintext highlighter-rouge">from modules with dependencies</code></li>
+  <li>Your current module will be selected</li>
+  <li>In the <code class="language-plaintext highlighter-rouge">Main Class</code> field click on the folder icon on the right end and select <code class="language-plaintext highlighter-rouge">MapServer.java</code></li>
+  <li>Next select the option <code class="language-plaintext highlighter-rouge">extract to the target JAR</code></li>
+</ul>
+
+<p><img src="proj2c-heroku-1.png" alt="Configuring jar" /></p>
+<ul>
+  <li>The field <code class="language-plaintext highlighter-rouge">Directory for META-INF/MANIFEST.MF</code>  would be populated. Ensure that the path given here is only upto the base(proj2c) directly.</li>
+  <li>In the <code class="language-plaintext highlighter-rouge">Output Layout</code> tab, click <code class="language-plaintext highlighter-rouge">+</code>, select <code class="language-plaintext highlighter-rouge">Directory Content</code> and select the <code class="language-plaintext highlighter-rouge">library-fa20</code> directory. This will place the contents of <code class="language-plaintext highlighter-rouge">library-fa20</code> into the jar</li>
+</ul>
+
+<p><img src="proj2c-heroku-2.png" alt="Adding sources 1" /></p>
+
+<p><img src="proj2c-heroku-3.png" alt="Adding sources 2" /></p>
+<ul>
+  <li>Select <code class="language-plaintext highlighter-rouge">Apply</code> and  <code class="language-plaintext highlighter-rouge">Ok</code>.</li>
+</ul>
+
+<h3 id="2-configuring-your-code">2. Configuring your code</h3>
+
+<h4 id="21-editing-paths">2.1 Editing Paths</h4>
+<p>Since we have placed the data directory in the jar itself, we need to change the file paths of our images and other xml files.</p>
+<ul>
+  <li>Replace all occurences of paths starting with <code class="language-plaintext highlighter-rouge">../library-fa20/data</code> to <code class="language-plaintext highlighter-rouge">data/</code>. You might find the <code class="language-plaintext highlighter-rouge">Replace in Path</code> option helpful to do this.(<code class="language-plaintext highlighter-rouge">Edit</code> -&gt; <code class="language-plaintext highlighter-rouge">Find</code> -&gt; <code class="language-plaintext highlighter-rouge">Replace in Path</code>).</li>
+</ul>
+
+<p><img src="proj2c-heroku-3-1.png" alt="Changing paths" /></p>
+
+<h4 id="22-reading-files">2.2 Reading files</h4>
+<p>Since the files are present in the JAR now, we need to change the way we read them in <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code> and <code class="language-plaintext highlighter-rouge">StreetMapGraph</code>. To read files from jar we make use of <code class="language-plaintext highlighter-rouge">Thread.currentThread().getContextClassLoader().getResource(filePath)</code> and <code class="language-plaintext highlighter-rouge">Thread.currentThread().getContextClassLoader().getResource(filePath)</code> functions. These functions help us access content from our resources root.</p>
+<ul>
+  <li>This is how the code for reading an image in <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code> should look like</li>
+</ul>
+
+<p><img src="proj2c-heroku-4.png" alt="RasterAPIHandler" /></p>
+<ul>
+  <li>This is how the code for reading an image in <code class="language-plaintext highlighter-rouge">StreetMapGraph</code> should look like</li>
+</ul>
+
+<p><img src="proj2c-heroku-5.png" alt="StreetMapGraph" /></p>
+
+<h4 id="22-configuring-port">2.2 Configuring port</h4>
+<p>Since we are deploying our application on an external server we need to configure the port we want our application to run on.</p>
+<ul>
+  <li>Add the following function to <code class="language-plaintext highlighter-rouge">MapServerInitializer</code>. This function returns the appropriate port to be used by the application. It sets the default to 4567.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private static int getHerokuAssignedPort() {
+      ProcessBuilder processBuilder = new ProcessBuilder();
+      if (processBuilder.environment().get("PORT") != null) {
+          return Integer.parseInt(processBuilder.environment().get("PORT"));
+      }
+      return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+  }
+</code></pre></div>    </div>
+  </li>
+  <li>Call the above method in first line of the <code class="language-plaintext highlighter-rouge">initializeServer</code> function using <code class="language-plaintext highlighter-rouge">port(getHerokuAssignedPort());</code></li>
+  <li>This is how it looks like</li>
+</ul>
+
+<p><img src="proj2c-heroku-6.png" alt="MapServerInitializer" /></p>
+
+<h3 id="building-jar">Building JAR</h3>
+<ul>
+  <li>Go to <code class="language-plaintext highlighter-rouge">Build</code> -&gt; <code class="language-plaintext highlighter-rouge">Build Artifacts...</code></li>
+  <li>After this you will be able to see the JAR file created in your base project directory(proj2c) under the path <code class="language-plaintext highlighter-rouge">out/artifacts/&lt;base-project-directory-name&gt;_jar/&lt;base-project-directory-name&gt;.jar</code>. This is JAR with dependencies.</li>
+</ul>
+
+<h3 id="testing-your-jar">Testing your JAR</h3>
+
+<p>On the terminal, navigate to the path where the JAR was created and run <code class="language-plaintext highlighter-rouge">java -jar &lt;jar-name&gt;.jar</code>. Your application should start running and work as it worked when you ran it from IntelliJ. Now we are ready to deploy this on Heroku</p>
+
+<h2 id="heroku-deployment">Heroku Deployment</h2>
+
+<h4 id="onetime-setup-steps">Onetime setup steps</h4>
+
+<p><strong>Please do not execute these everytime you want to deploy</strong></p>
+
+<ol>
+  <li>Setup your free Heroku account here <a href="https://signup.heroku.com/dc">https://signup.heroku.com/dc</a></li>
+  <li>Install and setup Heroku Command Line Interface (CLI) at <a href="https://devcenter.heroku.com/articles/getting-started-with-java#set-up">https://devcenter.heroku.com/articles/getting-started-with-java#set-up</a></li>
+  <li>Make sure you have completed log-in steps to Heroku cli using the command <code class="language-plaintext highlighter-rouge">heroku login</code></li>
+  <li>Run command <code class="language-plaintext highlighter-rouge">heroku create bearmaps-&lt;repo-id</code>(For example, bearmaps-fa20-s9999)  in the base project directory(proj2c). This will create a Heroku app with the name <code class="language-plaintext highlighter-rouge">bearmaps-&lt;repo-id&gt;</code> and would be visible in your Dashboard at <a href="https://dashboard.heroku.com/apps">https://dashboard.heroku.com/apps</a></li>
+</ol>
+
+<p><img src="proj2c-heroku-7.png" alt="Creating app" /></p>
+<ol>
+  <li>Install Heroku deploy plugin using <code class="language-plaintext highlighter-rouge">heroku plugins:install heroku-cli-deploy</code></li>
+</ol>
+
+<h4 id="deploying">Deploying</h4>
+<ul>
+  <li>Deploy your JAR using the following Command
+<code class="language-plaintext highlighter-rouge">heroku deploy:jar &lt;path-to-JAR-file&gt;.jar --app bearmaps-&lt;repo-id&gt; --jdk 11</code></li>
+</ul>
+
+<p><img src="proj2c-heroku-8.png" alt="Deploying app" /></p>
+<ul>
+  <li>Your App will be deployed at http://bearmaps-<repo-id>.herokuapp.com/map.html . **Please make sure to use only http and not https**</repo-id></li>
+  <li>You can go to Heroku dashboard and explore different features. Click on <code class="language-plaintext highlighter-rouge">More</code> to see logs of your app.</li>
+</ul>
+
+<p><img src="proj2c-heroku-9.png" alt="Checking logs" /></p>
+
+<p>For more information use the following link:</p>
+<ul>
+  <li><a href="https://github.com/heroku/heroku-cli-deploy">https://github.com/heroku/heroku-cli-deploy</a></li>
+</ul>
+
+<h2 id="faq">FAQ</h2>
+
+<h4 id="unable-to-read-image-andor-xml-files">Unable to read image and/or xml files.</h4>
+
+<p>Make sure that the paths are changed correctly and you have included the contents of <code class="language-plaintext highlighter-rouge">library-fa20</code> folder in the jar output, while configuring artifact.</p>
+
+<h4 id="the-changes-in-code-are-not-reflected-on-heroku">The changes in code are not reflected on Heroku.</h4>
+
+<p>Make sure you rebuild the artifact(jar) and redeploy it.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 1B: Applying and Testing Data Structures version 1.0 | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 1B: Applying and Testing Data Structures version 1.0</header><ul id="markdown-toc">
+  <li><a href="proj1b.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="proj1b.html#set-up" id="markdown-toc-set-up">Set Up</a>    <ul>
+      <li><a href="proj1b.html#snaps-backups" id="markdown-toc-snaps-backups">Snaps Backups</a></li>
+      <li><a href="proj1b.html#skeleton-files" id="markdown-toc-skeleton-files">Skeleton Files</a></li>
+      <li><a href="proj1b.html#setting-up-via-intellij" id="markdown-toc-setting-up-via-intellij">Setting up via Intellij</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1b.html#task-1-deque-interface" id="markdown-toc-task-1-deque-interface">Task 1: Deque Interface</a></li>
+  <li><a href="proj1b.html#task-2-wordtodeque" id="markdown-toc-task-2-wordtodeque">Task 2: wordToDeque</a>    <ul>
+      <li><a href="proj1b.html#tips" id="markdown-toc-tips">Tips</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1b.html#task-3-ispalindrome" id="markdown-toc-task-3-ispalindrome">Task 3: isPalindrome</a>    <ul>
+      <li><a href="proj1b.html#ispalindrome-testing" id="markdown-toc-ispalindrome-testing">isPalindrome Testing</a>        <ul>
+          <li><a href="proj1b.html#tips-1" id="markdown-toc-tips-1">Tips</a></li>
+        </ul>
+      </li>
+      <li><a href="proj1b.html#writing-ispalindrome" id="markdown-toc-writing-ispalindrome">Writing isPalindrome</a>        <ul>
+          <li><a href="proj1b.html#tips-2" id="markdown-toc-tips-2">Tips</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="proj1b.html#task-4-generalized-palindrome-and-offbyone" id="markdown-toc-task-4-generalized-palindrome-and-offbyone">Task 4: Generalized Palindrome and OffByOne</a>    <ul>
+      <li><a href="proj1b.html#tips-3" id="markdown-toc-tips-3">Tips</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1b.html#task-5-offbyn" id="markdown-toc-task-5-offbyn">Task 5: OffByN</a></li>
+  <li><a href="proj1b.html#frequently-asked-questions" id="markdown-toc-frequently-asked-questions">Frequently Asked Questions</a>    <ul>
+      <li><a href="proj1b.html#i-cant-get-the-provided-linkedlistdeque-solution-to-compile" id="markdown-toc-i-cant-get-the-provided-linkedlistdeque-solution-to-compile">I can’t get the provided LinkedListDeque solution to compile.</a></li>
+      <li><a href="proj1b.html#my-implementation-of-linkedlistdeque-or-arraydeque-wont-compile" id="markdown-toc-my-implementation-of-linkedlistdeque-or-arraydeque-wont-compile">My implementation of LinkedListDeque or ArrayDeque won’t compile.</a></li>
+      <li><a href="proj1b.html#my-code-passes-all-my-tests-but-fails-some-autograder-tests" id="markdown-toc-my-code-passes-all-my-tests-but-fails-some-autograder-tests">My code passes all my tests, but fails some autograder tests.</a></li>
+      <li><a href="proj1b.html#the-autograder-doesnt-like-my-tests" id="markdown-toc-the-autograder-doesnt-like-my-tests">The Autograder doesn’t like my tests.</a></li>
+      <li><a href="proj1b.html#only-my-tests-are-failing-what-tests-am-i-missing" id="markdown-toc-only-my-tests-are-failing-what-tests-am-i-missing">Only my tests are failing. What tests am I missing?</a></li>
+      <li><a href="proj1b.html#im-failing-the-testpalindrome-or-testoffbyone-tests-but-i-feel-like-my-tests-are-good" id="markdown-toc-im-failing-the-testpalindrome-or-testoffbyone-tests-but-i-feel-like-my-tests-are-good">I’m failing the TestPalindrome or TestOffByOne tests but I feel like my tests are good.</a></li>
+      <li><a href="proj1b.html#whats-with-the-weird-static-palindrome-palindrome--new-palindrome-stuff" id="markdown-toc-whats-with-the-weird-static-palindrome-palindrome--new-palindrome-stuff">What’s with the weird static Palindrome palindrome = new Palindrome(); stuff?</a></li>
+    </ul>
+  </li>
+  <li><a href="proj1b.html#deliverables" id="markdown-toc-deliverables">Deliverables</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<!--Introductory video: ([Youtube](https://youtu.be/0pgLtTiuRWA))-->
+
+<p>In most of your prior programming assignments, you’ve relied on some external
+source of truth to tell you that your code was correct.</p>
+
+<p>In this project, you’ll use your one of your deques from project 1A to solve a real world problem. 
+Specifically, you will write a class with methods that decide if a given a word is 
+a palindrome, a word that can be read the same forward and backward. For example, 
+the words “noon”, “racecar”, and “mom” are palindromes. You will then expand the functionality of this class 
+by giving it the ability to find generalized palindromes. For example, the word “flake” is an off-by-one palindrome. 
+If we forgive differences between characters that are 1 away in the alphabet, it reads the same when 
+read forward and backward (‘f’ and ‘e’, and ‘k’ and ‘l’ are one away from each other).</p>
+
+<p>Along the way in this project, you’ll also write tests of your application to convince yourself that
+everything works correctly.</p>
+
+<p>Unlike Project 1A, this project will be more highly scaffolded to reduce the
+workload in anticipation of the midterm.</p>
+
+<p><strong>Warning:</strong> The autograder output for this project is going to be terse and unhelpful.
+This is because we want you to use your own tests to build confidence in your
+code. <strong>You will not be able to rely on the autograder for correctness</strong>.</p>
+
+<h2 id="set-up">Set Up</h2>
+
+<h3 id="snaps-backups">Snaps Backups</h3>
+
+<p>The snaps repository you set up in lab 2 saves frequent backups of your work to your local computer. To make these backups available on Github, you can push them by following the directions below.
+If you’re OK with staff taking an early look at your snaps repo fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLScV7RNl59ZJYJtbtEgaFwLClOKwAANTWWzXRspcyiFTi_Iy3Q/viewform?usp=sf_link">form</a>. Otherwise, we won’t look at your snaps repo as described in <a href="https://us.edstem.org/courses/979/discussion/119202">Josh’s post</a>.</p>
+
+<p>To push your snaps backups to Github, open a new terminal window (Git Bash on Windows), and run the following commands, one by one:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd $SNAPS_DIR
+git push
+</code></pre></div></div>
+<p>That’s it! You can close the terminal window and continue working on this project!</p>
+
+<h3 id="skeleton-files">Skeleton Files</h3>
+
+<p>Pull the skeleton using the command <code class="language-plaintext highlighter-rouge">git pull skeleton master</code>.</p>
+
+<p>In the skeleton, we have provided the following files:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">PalindromeFinder.java</code>: A class that helps identify generalized palindromes in
+English.</li>
+  <li><code class="language-plaintext highlighter-rouge">CharacterComparator.java</code>: An interface specifying behavior for comparing characters.</li>
+  <li><code class="language-plaintext highlighter-rouge">TestPalindrome.java</code>: A class containing JUnit tests for <code class="language-plaintext highlighter-rouge">Palindrome</code> (a class you will create).</li>
+  <li><code class="language-plaintext highlighter-rouge">TestOffByOne.java</code>: A class containing JUnit tests for <code class="language-plaintext highlighter-rouge">OffByOne</code> (a class you will create).</li>
+</ul>
+
+<p>We also made a file for you, <code class="language-plaintext highlighter-rouge">words.txt</code>, with tens of thousands of English words that will 
+help you test your program. To get it, run the following when in your <code class="language-plaintext highlighter-rouge">fa20-s***</code> repo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd library-fa20
+git pull origin master
+</code></pre></div></div>
+
+<p>If <code class="language-plaintext highlighter-rouge">git pull origin master</code> didn’t work, try <code class="language-plaintext highlighter-rouge">git submodule update --recursive --remote</code> from your <code class="language-plaintext highlighter-rouge">fa20-s***</code> repo.</p>
+
+<p>Note: We’ve set up your git repository so that it will reject <code class="language-plaintext highlighter-rouge">words.txt</code> by default, since it is too large 
+to upload to the grader. So, don’t try to move it outside of the <code class="language-plaintext highlighter-rouge">library-fa20</code> folder.
+Please don’t use the <code class="language-plaintext highlighter-rouge">-f</code> command to force
+this large file into your repo. It will slow down the autograder.</p>
+
+<p>For this assignment, you’ll also need a correct <code class="language-plaintext highlighter-rouge">Deque</code> implementation. You are
+welcome to use your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> or your <code class="language-plaintext highlighter-rouge">ArrayDeque</code> from Project 1A. To do this,<br />
+simply copy over one of your implementations to the <code class="language-plaintext highlighter-rouge">proj1b</code> folder. This can be done 
+by running the following command, when you are in your <code class="language-plaintext highlighter-rouge">fa20-s***</code> repo:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp proj1a/ArrayDeque.java proj1b/
+</code></pre></div></div>
+
+<p>You can replace <code class="language-plaintext highlighter-rouge">ArrayDeque.java</code> with <code class="language-plaintext highlighter-rouge">LinkedListDeque.java</code> if you prefer to use 
+that implementation.</p>
+
+<p>If you’re not
+sure if your solution to Project 1A is correct, or you just didn’t finish,
+you may download a correct implementation of <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> by left clicking on
+<a href="http://joshh.ug/LinkedListDeque.html">this link</a>. In your proj1b folder make a new file called <code class="language-plaintext highlighter-rouge">LinkedListDeque.java</code> and manually copy and paste
+the displayed code.</p>
+
+<h3 id="setting-up-via-intellij">Setting up via Intellij</h3>
+
+<p>You can open the <code class="language-plaintext highlighter-rouge">proj1b</code> folder in Intellij as normal. However, we’ve seen a few issues with students’ Intellij not recognizing the code as Java because most of it is commented out. If it seems ilke your class files have red circles near them, there are a few fixes to this issue:</p>
+
+<ol>
+  <li>Mark the source directory (<code class="language-plaintext highlighter-rouge">proj1b</code>) as “Sources Root”. You can right click the <code class="language-plaintext highlighter-rouge">proj1b</code> directory in Intellij → Mark Directory as → Sources Root.</li>
+  <li>Uncomment <code class="language-plaintext highlighter-rouge">TestPalindrome.java</code> and <code class="language-plaintext highlighter-rouge">TestOffByOne.java</code>, and try reimporting again.</li>
+</ol>
+
+<h2 id="task-1-deque-interface">Task 1: Deque Interface</h2>
+
+<p>In this project you will find palindromes using a Double Ended Queue structure. Recall 
+that we defined the <code class="language-plaintext highlighter-rouge">Deque</code> API, or behavior, by the following methods:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">addFirst</span><span class="o">(</span><span class="no">T</span> <span class="n">item</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addLast</span><span class="o">(</span><span class="no">T</span> <span class="n">item</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">printDeque</span><span class="o">()</span>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">removeFirst</span><span class="o">()</span>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">removeLast</span><span class="o">()</span>
+<span class="kd">public</span> <span class="no">T</span> <span class="nf">get</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">)</span> 
+</code></pre></div></div>
+
+<p>Since your program will rely on this behavior, it shouldn’t matter to it what <code class="language-plaintext highlighter-rouge">Deque</code> 
+implementation it is provided, <code class="language-plaintext highlighter-rouge">ArrayDeque</code> or <code class="language-plaintext highlighter-rouge">LinkedListDeque</code>, and should 
+work for both. To achieve this, we will use the power of interfaces.</p>
+
+<p>This first task is going to be a little tedious, but it won’t take long.</p>
+
+<p>Create an interface in a new file named <code class="language-plaintext highlighter-rouge">Deque.java</code> that contains all of the
+methods above.
+In IntelliJ, use “New → Java Class”. IntelliJ will assume you want a class, so make
+sure to replace the <code class="language-plaintext highlighter-rouge">class</code> keyword with <code class="language-plaintext highlighter-rouge">interface</code>.</p>
+
+<p>Modify your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and/or <code class="language-plaintext highlighter-rouge">ArrayDeque</code> so that they implement the <code class="language-plaintext highlighter-rouge">Deque</code>
+interface by adding <code class="language-plaintext highlighter-rouge">implements Deque&lt;T&gt;</code> to the line declaring the existence of the
+class. If you used something other than <code class="language-plaintext highlighter-rouge">T</code> for your generic type parameter, use
+that instead. Add <code class="language-plaintext highlighter-rouge">@Override</code> tags to each method that overrides a <code class="language-plaintext highlighter-rouge">Deque</code> method.</p>
+
+<p>Note: If you’re using the provided solution for <code class="language-plaintext highlighter-rouge">LinkedListDeque</code>, which relies on
+some inheritance black magic, your class definition should look like</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LinkedListDeque</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">LinkedList</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Deque</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Now, in the <code class="language-plaintext highlighter-rouge">Deque</code> interface,give <code class="language-plaintext highlighter-rouge">isEmpty()</code> a <code class="language-plaintext highlighter-rouge">default</code> implementation, which returns <code class="language-plaintext highlighter-rouge">true</code> if the <code class="language-plaintext highlighter-rouge">size()</code> is <code class="language-plaintext highlighter-rouge">0</code>.
+Since your <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and/or <code class="language-plaintext highlighter-rouge">ArrayDeque</code> implement the <code class="language-plaintext highlighter-rouge">Deque</code> interface, given the default 
+<code class="language-plaintext highlighter-rouge">isEmpty()</code> implementation, you can remove that method from the <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> and/or <code class="language-plaintext highlighter-rouge">ArrayDeque</code> that 
+you copied over to the proj1b folder.</p>
+
+<h2 id="task-2-wordtodeque">Task 2: wordToDeque</h2>
+
+<p>Create a new file called <code class="language-plaintext highlighter-rouge">Palindrome.java</code>. In our final program, we will use a <code class="language-plaintext highlighter-rouge">Palindrome</code> 
+object to help us decide whether certain English words are palindromes (or generalized palindromes). 
+But first, we will add a helper function that given a <code class="language-plaintext highlighter-rouge">String</code>, <code class="language-plaintext highlighter-rouge">wordToDeque</code> should return a <code class="language-plaintext highlighter-rouge">Deque</code> where the characters appear
+in the same order as in the String. For example, if the word is “persiflage”, then
+the returned <code class="language-plaintext highlighter-rouge">Deque</code> should have ‘p’ at the front, followed by ‘e’, and so forth.</p>
+
+<p>In <code class="language-plaintext highlighter-rouge">Palindrome.java</code>, add a method with the signature shown below:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">Deque</span><span class="o">&lt;</span><span class="nc">Character</span><span class="o">&gt;</span> <span class="nf">wordToDeque</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><strong>Don’t write any code yet for this method.</strong></p>
+
+<p>For now, just have it return <code class="language-plaintext highlighter-rouge">null</code> so that <code class="language-plaintext highlighter-rouge">Palindrome.java</code> can compile.</p>
+
+<p>Uncomment the code in <code class="language-plaintext highlighter-rouge">TestPalindrome</code> and run the test contained in the file. You should fail
+the provided test. This makes sense. The JUnit test in this class checks that your <br />
+<code class="language-plaintext highlighter-rouge">wordToDeque</code> implementation is correct, but you have not written it yet.</p>
+
+<p>While it may seem strange, this is the recommended way to go about writing code. 
+Especially when writing big programs. You should first write a test that checks<br />
+that your implementation is correct, carefully thinking about all edge cases you need 
+to check for. This will help you organize your thoughts and be aware of cases 
+you need to account for when you actually get to writing your method.</p>
+
+<p>Notice line 7 in this class:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">static</span> <span class="nc">Palindrome</span> <span class="n">palindrome</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Palindrome</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><strong>Make sure to not alter this line. If you do, the autograder may not work for you</strong>.</p>
+
+<p>The first thing that may seem strange is that this code compiles even though 
+we never defined a <code class="language-plaintext highlighter-rouge">Palindrome</code> constructor. Turns out that all classes in Java have 
+a <strong>default</strong> constructor. Thinking about our beloved environment diagrams, this constructor 
+will make an empty “object box” of type <code class="language-plaintext highlighter-rouge">Palindrome</code> and save a reference to it in the <code class="language-plaintext highlighter-rouge">static</code> variable 
+<code class="language-plaintext highlighter-rouge">palindrome</code>. The <code class="language-plaintext highlighter-rouge">Palindrome</code> class is not going to define any instance variables, and we really 
+only need <code class="language-plaintext highlighter-rouge">Palindrome</code> instances to call the instance methods you will define in this class (one of which is <code class="language-plaintext highlighter-rouge">wordToDeque</code>). 
+So, the default constructor suffices here.</p>
+
+<p>You’d notice that this <code class="language-plaintext highlighter-rouge">static</code> variable is missing an access modifier, such as <code class="language-plaintext highlighter-rouge">public</code> or <code class="language-plaintext highlighter-rouge">private</code>. When no access modifiers are specified Java gives the variable or method the default “package private” modifier. It means that any class in the same package will have access to these components. We will learn more about packages soon, and will even work with them in HW1. For now, you can assume that any class in the proj1b folder will have access to this <code class="language-plaintext highlighter-rouge">static</code> variable.</p>
+
+<p>Throughout this project, the testing classes will follow the same layout of this one. Do not instantiate objects (using <code class="language-plaintext highlighter-rouge">new</code>) in your 
+JUnit test methods. Instead, instantiate objects are instantiated in <code class="language-plaintext highlighter-rouge">static</code> variables of the testing class. This will ensure 
+you can use them across all your testing methods. This is mostly to allow our grader to test your tests. When you write JUnit tests in the future you can definitely instantiate objects inside your JUnit tests.</p>
+
+<p>Your goal is to now pass this test by correctly implementing
+<code class="language-plaintext highlighter-rouge">wordToDeque</code>. Once you’ve passed the test, move on to the next part of this
+assignment.</p>
+
+<h3 id="tips">Tips</h3>
+
+<ul>
+  <li>Search the web to see how to get the <code class="language-plaintext highlighter-rouge">i</code>th character in a String.</li>
+  <li>Inserting <code class="language-plaintext highlighter-rouge">char</code>s into a <code class="language-plaintext highlighter-rouge">Deque&lt;Character&gt;</code> is just like inserting <code class="language-plaintext highlighter-rouge">int</code>s into
+a <code class="language-plaintext highlighter-rouge">LinkedListDeque&lt;Integer&gt;</code>.</li>
+  <li>Note: The careful reader of <code class="language-plaintext highlighter-rouge">testWordToDeque</code> might wonder why we didn’t just
+create a correct <code class="language-plaintext highlighter-rouge">Deque</code> and then call <code class="language-plaintext highlighter-rouge">assertEquals</code>. The reason is that our
+<code class="language-plaintext highlighter-rouge">Deque</code> class does not provide an <code class="language-plaintext highlighter-rouge">equals</code> method and thus it won’t work the way
+you expect. We’ll be talking about this in class soon.</li>
+  <li><strong>If you’re failing your own test and can’t figure why, remember you have a
+debugger. Use it! Don’t just stare at your code looking for the bug. That’s too
+slow and tedious.</strong></li>
+</ul>
+
+<h2 id="task-3-ispalindrome">Task 3: isPalindrome</h2>
+
+<p>Now that you’re passing the test and getting to enjoy the nice green glow of the
+success bar, let’s break things again.</p>
+
+<p>Modify your <code class="language-plaintext highlighter-rouge">Palindrome.java</code> so that it now has a second method with the signature
+below.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>For now, have it return a dummy value, some arbitrary thing
+you select, i.e. either true or false, that will allow the code to compile. Before we write the method itself, we’re
+going to write a test. Let’s start by discussing what <code class="language-plaintext highlighter-rouge">isPalindrome</code> is supposed to
+do.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">isPalindrome</code> method should return <code class="language-plaintext highlighter-rouge">true</code> if the given word is a palindrome,
+and <code class="language-plaintext highlighter-rouge">false</code> otherwise. A palindrome is defined as a word that is the same whether
+it is read forward or backward. For example, “a”, “racecar”, and “noon” are
+all palindromes. “horse”, “rancor”, and “aaaaab” are not palindromes. <em>Any word
+of length 1 or 0 is a palindrome.</em> If the argument <code class="language-plaintext highlighter-rouge">word</code> is <code class="language-plaintext highlighter-rouge">null</code>, the method should return <code class="language-plaintext highlighter-rouge">false</code>.</p>
+
+<p>‘A’ and ‘a’ should not be considered equal. However, you can assume we will only be working with lower case characters in this project.</p>
+
+<h3 id="ispalindrome-testing">isPalindrome Testing</h3>
+
+<p>Add JUnit tests to <code class="language-plaintext highlighter-rouge">TestPalindrome</code>, testing the <code class="language-plaintext highlighter-rouge">isPalindrome</code> method.
+You’ll probably find the <code class="language-plaintext highlighter-rouge">assertTrue</code> and <code class="language-plaintext highlighter-rouge">assertFalse</code> methods to be useful.
+You’re also welcome to use any other methods in the
+<a href="http://junit.sourceforge.net/javadoc/org/junit/Assert.html">JUnit documentation</a>. It’s
+ok to have multiple asserts in one test, though don’t go too wild. Make sure to
+annotate your tests with <code class="language-plaintext highlighter-rouge">@Test</code>, otherwise JUnit won’t run your tests.</p>
+
+<p>At the very least, you should have
+at least one test that checks that some word is a palindrome, and one that checks
+that some word is not a palindrome, as well as two interesting corner cases.</p>
+
+<p>When you run <code class="language-plaintext highlighter-rouge">TestPalindrome</code> again, your code should fail your tests.</p>
+
+<h4 id="tips-1">Tips</h4>
+
+<ul>
+  <li>As an example, <code class="language-plaintext highlighter-rouge">assertFalse(palindrome.isPalindrome("cat"))</code> tests 
+that “cat” is not considered a palindrome.</li>
+  <li>If you’re looking for more interesting things to test, read the <code class="language-plaintext highlighter-rouge">isPalindrome</code> method description above
+carefully for any interesting corner cases, and ensure that your tests check those
+corner cases.</li>
+</ul>
+
+<h3 id="writing-ispalindrome">Writing isPalindrome</h3>
+
+<p>Now that you have a failing test, implement the <code class="language-plaintext highlighter-rouge">isPalindrome</code> method. Use your
+<code class="language-plaintext highlighter-rouge">wordToDeque</code> method to make this task easier for yourself. While you can technically not
+use a <code class="language-plaintext highlighter-rouge">Deque</code> at all to solve this problem, we hope that this exercise will demonstrate how your choice of data structures (in this case, <code class="language-plaintext highlighter-rouge">Deque</code>) will have
+a profound effect on how you write your code.</p>
+
+<p>Once you’ve passed your own tests, you’re ready to move on. Keep in mind that our
+autograder is going to be very quiet, so you’ll want to make sure your tests are
+thorough, so you can feel good about your code.</p>
+
+<h4 id="tips-2">Tips</h4>
+
+<ul>
+  <li>Consider using recursion. There’s a really beautiful solution that uses recursion.
+You’ll need to create a private helper method for this to work.</li>
+  <li>Don’t use the <code class="language-plaintext highlighter-rouge">get</code> method from <code class="language-plaintext highlighter-rouge">Deque</code>. It will just make things unnecessarily
+complicated.</li>
+  <li>Just for fun: When you’re done, uncomment the code in the provided <code class="language-plaintext highlighter-rouge">PalindromeFinder.java</code>
+class and you’ll get a list of all palindromes of length 4 or more in English
+(assuming you also downloaded the provided words file).</li>
+  <li><strong>If you’re failing your own test and can’t figure why, remember you have a
+debugger. Use it! Don’t just stare at your code looking for the bug. That’s too
+slow and tedious</strong>.</li>
+</ul>
+
+<h2 id="task-4-generalized-palindrome-and-offbyone">Task 4: Generalized Palindrome and OffByOne</h2>
+
+<p>However, you’re welcome to do them in any order you choose. For this task, rather than
+carefully enumerating everything you’re supposed to do, as in the tasks above,
+we will simply give a general description of your goal.</p>
+
+<p>In this task, your ultimate goal is to add a third public method to your <code class="language-plaintext highlighter-rouge">Palindrome</code> class with the
+following signature:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">,</span> <span class="nc">CharacterComparator</span> <span class="n">cc</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>The method will return <code class="language-plaintext highlighter-rouge">true</code> if the word is a palindrome according to the
+character comparison test provided by the <code class="language-plaintext highlighter-rouge">CharacterComparator</code> object passed in as the
+argument <code class="language-plaintext highlighter-rouge">cc</code>. A <code class="language-plaintext highlighter-rouge">CharacterComparator</code> is defined by the interface:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CharacterComparator</span> <span class="o">{</span>
+
+    <span class="cm">/** Returns true if characters are equal by the rules of the implementing class. */</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equalChars</span><span class="o">(</span><span class="kt">char</span> <span class="n">x</span><span class="o">,</span> <span class="kt">char</span> <span class="n">y</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>For this task, you’ll create a class called <code class="language-plaintext highlighter-rouge">OffByOne.java</code>, which should implement
+<code class="language-plaintext highlighter-rouge">CharacterComparator</code> such that <code class="language-plaintext highlighter-rouge">equalChars</code> returns <code class="language-plaintext highlighter-rouge">true</code> for characters that are off by one from each other. For example, the following calls to <code class="language-plaintext highlighter-rouge">equalChars</code> should
+return <code class="language-plaintext highlighter-rouge">true</code>. Note that characters are delineated in Java by single quotes, in
+contrast to Strings, which are delineated by double quotes.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">OffByOne</span> <span class="n">obo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OffByOne</span><span class="o">();</span>
+<span class="n">obo</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'a'</span><span class="o">,</span> <span class="sc">'b'</span><span class="o">);</span>  <span class="c1">// true</span>
+<span class="n">obo</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'r'</span><span class="o">,</span> <span class="sc">'q'</span><span class="o">);</span>  <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>However, the three calls below should return <code class="language-plaintext highlighter-rouge">false</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">OffByOne</span> <span class="n">obo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OffByOne</span><span class="o">();</span>
+<span class="n">obo</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'a'</span><span class="o">,</span> <span class="sc">'e'</span><span class="o">);</span>  <span class="c1">// false</span>
+<span class="n">obo</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'z'</span><span class="o">,</span> <span class="sc">'a'</span><span class="o">);</span>  <span class="c1">// false</span>
+<span class="n">obo</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'a'</span><span class="o">,</span> <span class="sc">'a'</span><span class="o">);</span>  <span class="c1">// false</span>
+</code></pre></div></div>
+
+<p>Note: Every <code class="language-plaintext highlighter-rouge">char</code> in Java has an associated integer. For example, “under the hood” <code class="language-plaintext highlighter-rouge">'a'</code> is 97. Convince yourself 
+that this is true by running variants of the following (either in a <code class="language-plaintext highlighter-rouge">main</code> method in a class of your choosing, or the <a href="https://cscircles.cemc.uwaterloo.ca/java_visualize/">Java Visualizer</a>)</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="err">`</span><span class="n">a</span><span class="err">`</span><span class="o">;</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">x</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>For this reason, you can perform arithmetic operations on characters, so <code class="language-plaintext highlighter-rouge">'b'-'a'</code> will evaluate to 1.</p>
+
+<p>Characters in Java include non-alphabetical characters. These also have integer values 
+associated with them. For example, <code class="language-plaintext highlighter-rouge">'%''</code> is 37 and <code class="language-plaintext highlighter-rouge">'&amp;''</code> is 38. So, 
+<code class="language-plaintext highlighter-rouge">'%''</code> and <code class="language-plaintext highlighter-rouge">'&amp;''</code> are off by one, and the following should reutrn <code class="language-plaintext highlighter-rouge">true</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">OffByOne</span> <span class="n">obo</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OffByOne</span><span class="o">();</span>
+<span class="n">obo</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'&amp;'</span><span class="o">,</span> <span class="sc">'%'</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>You should add the method signature to <code class="language-plaintext highlighter-rouge">OffByOne</code> and have it return a dummy value. Then only proceed to completing it after you have written tests in <code class="language-plaintext highlighter-rouge">TestOffByOne</code>.</p>
+
+<p>After you are done writing your <code class="language-plaintext highlighter-rouge">OffByOne</code> class, implement the overloading <code class="language-plaintext highlighter-rouge">isPalindrome</code> in your <code class="language-plaintext highlighter-rouge">Palindrome</code> class and have it return a dummy value for now.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isPalindrome</span><span class="o">(</span><span class="nc">String</span> <span class="n">word</span><span class="o">,</span> <span class="nc">CharacterComparator</span> <span class="n">cc</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>In your <code class="language-plaintext highlighter-rouge">TestPalindrome</code> add a JUnit test for this method, sending in an <code class="language-plaintext highlighter-rouge">OffByOne</code> object as the <code class="language-plaintext highlighter-rouge">CharacterComparator</code> argument. You are allowed to instantiate new <code class="language-plaintext highlighter-rouge">OffByOne</code> objects in JUnit tests in <code class="language-plaintext highlighter-rouge">TestPalindrome</code>.
+Once you feel you have a high quality test, you can complete the method and verify that it is correct using your test.</p>
+
+<p><strong>To allow for odd length palindromes, we do not check the middle character for
+equality with itself.</strong> So “flake” is an off-by-1 palindrome, even though ‘a’
+is not one character off from itself.</p>
+
+<p>As with our earlier <code class="language-plaintext highlighter-rouge">isPalindrome</code> method, any zero or 1 character word is considered an off-by-one palindrome. 
+Additionally, if <code class="language-plaintext highlighter-rouge">word</code> is null, the method should return <code class="language-plaintext highlighter-rouge">false</code>. If no <code class="language-plaintext highlighter-rouge">CharacterComparator</code> is provided (<code class="language-plaintext highlighter-rouge">cc</code> is null) but <code class="language-plaintext highlighter-rouge">word</code> is provided, the method should resort to the behavior of <code class="language-plaintext highlighter-rouge">isPalindrome(String word)</code>.</p>
+
+<h3 id="tips-3">Tips</h3>
+
+<ul>
+  <li>Tip: Make sure to include <code class="language-plaintext highlighter-rouge">@Override</code> when implementing <code class="language-plaintext highlighter-rouge">equalChars</code>. While it
+has no effect on the function of your program, it’s a good habit for the
+reasons detailed in <a href="https://docs.google.com/presentation/d/1b-Ue_mWWMI2CeHfaU_GO6PWhIpAr_SyZge9JQJQFpXc/edit#slide=id.g1c5d63f7bc_0_0">lecture</a>.</li>
+  <li>Tip: To calculate the difference between two chars, simply compute their
+difference in java. For example <code class="language-plaintext highlighter-rouge">'d' - 'a';</code> evaluates to 3.</li>
+  <li><strong>If you’re failing your own test and can’t figure why, remember you have a
+debugger. Use it! Don’t just stare at your code looking for the bug. That’s
+too slow and tedious</strong>.</li>
+</ul>
+
+<p>Just for fun: Try printing out all off-by-one palindromes of length 4 or more
+in English (assuming you also downloaded the provided dictionary) by modifying
+<code class="language-plaintext highlighter-rouge">PalindromeFinder.java</code>.</p>
+
+<h2 id="task-5-offbyn">Task 5: OffByN</h2>
+
+<p>In this last part, you will add another class, <code class="language-plaintext highlighter-rouge">OffByN</code>, that implements <code class="language-plaintext highlighter-rouge">CharacterComparator</code>. 
+The <code class="language-plaintext highlighter-rouge">equalChars(char x, char y)</code> method of <code class="language-plaintext highlighter-rouge">OffByN</code> objects, will say that <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> are equal if they are off by <code class="language-plaintext highlighter-rouge">N</code> from each other. 
+Each <code class="language-plaintext highlighter-rouge">OffByN</code> object may have a different <code class="language-plaintext highlighter-rouge">N</code>. Thus, this class should define a constructor that takes in an <code class="language-plaintext highlighter-rouge">N</code> as an argument and saves it as an instance variable of the object.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">OffByN</span> <span class="n">offBy5</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OffByN</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="n">offBy5</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'a'</span><span class="o">,</span> <span class="sc">'f'</span><span class="o">);</span>  <span class="c1">// true</span>
+<span class="n">offBy5</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'f'</span><span class="o">,</span> <span class="sc">'a'</span><span class="o">);</span>  <span class="c1">// true</span>
+<span class="n">offBy5</span><span class="o">.</span><span class="na">equalChars</span><span class="o">(</span><span class="sc">'f'</span><span class="o">,</span> <span class="sc">'h'</span><span class="o">);</span>  <span class="c1">// false</span>
+</code></pre></div></div>
+
+<p>You are not required to write tests for this class, but hopefully by now you are convinced that you should! If you choose to write tests, you’ll need to make your own test file. Make
+sure to include the appropriate <code class="language-plaintext highlighter-rouge">import</code> statements, which you can copy and paste from
+our two provided test files.</p>
+
+<p>Just-for-fun: Try modifying <code class="language-plaintext highlighter-rouge">PalindromeFinder.java</code> so that it outputs a list of
+off-by-N palindromes for the <code class="language-plaintext highlighter-rouge">N</code> of your choosing.</p>
+
+<p>Just-for-more-fun: For what <code class="language-plaintext highlighter-rouge">N</code> are there the most palindromes in English? What
+is the longest off-by-N palindrome for any <code class="language-plaintext highlighter-rouge">N</code>?</p>
+
+<h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
+
+<h4 id="i-cant-get-the-provided-linkedlistdeque-solution-to-compile">I can’t get the provided LinkedListDeque solution to compile.</h4>
+
+<p>Make sure your class definition is<br />
+<code class="language-plaintext highlighter-rouge">public class LinkedListDeque&lt;Item&gt; extends LinkedList&lt;Item&gt; implements Deque&lt;Item&gt;</code>.</p>
+
+<h4 id="my-implementation-of-linkedlistdeque-or-arraydeque-wont-compile">My implementation of LinkedListDeque or ArrayDeque won’t compile.</h4>
+
+<p>Make sure your class definition ends with <code class="language-plaintext highlighter-rouge">implements Deque&lt;Item&gt;</code>, or if your code
+doesn’t use <code class="language-plaintext highlighter-rouge">Item</code>, replace this with whatever generic parameter type variable you used.</p>
+
+<h4 id="my-code-passes-all-my-tests-but-fails-some-autograder-tests">My code passes all my tests, but fails some autograder tests.</h4>
+
+<p>Try to think about corner cases that you may not be covering. Re-read the corresponding
+section of the spec carefully to identify them. Then write your own tests
+that check these corner cases, and ensure your code passes them.</p>
+
+<h4 id="the-autograder-doesnt-like-my-tests">The Autograder doesn’t like my tests.</h4>
+
+<p>Make sure that you’re not using <code class="language-plaintext highlighter-rouge">words.txt</code> anywhere in your tests. The autograder does
+not have access to this file.</p>
+
+<h4 id="only-my-tests-are-failing-what-tests-am-i-missing">Only my tests are failing. What tests am I missing?</h4>
+
+<p>Probably corner cases.</p>
+
+<h4 id="im-failing-the-testpalindrome-or-testoffbyone-tests-but-i-feel-like-my-tests-are-good">I’m failing the TestPalindrome or TestOffByOne tests but I feel like my tests are good.</h4>
+
+<p>Make sure your <code class="language-plaintext highlighter-rouge">TestPalindrome</code> does not say <code class="language-plaintext highlighter-rouge">new Palindrome</code> anywhere other than the lines we provided. Similarly, make
+sure your <code class="language-plaintext highlighter-rouge">TestOffByOne</code> does not say <code class="language-plaintext highlighter-rouge">new OffByOne</code> anywhere.</p>
+
+<h4 id="whats-with-the-weird-static-palindrome-palindrome--new-palindrome-stuff">What’s with the weird static Palindrome palindrome = new Palindrome(); stuff?</h4>
+
+<p>In order to create JUnit tests for your JUnit tests, we had to resort to some clever
+hacks, and the easiest way involved this weird stuff. Sorry. Luckily in <code class="language-plaintext highlighter-rouge">TestOffByN</code> you
+don’t have to worry about it.</p>
+
+<h2 id="deliverables">Deliverables</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Deque.java</code> (created by you)</li>
+  <li><code class="language-plaintext highlighter-rouge">Palindrome.java</code> (created by you)</li>
+  <li><code class="language-plaintext highlighter-rouge">OffByOne.java</code> (created by you)</li>
+  <li><code class="language-plaintext highlighter-rouge">OffByN.java</code> (created by you)</li>
+  <li><code class="language-plaintext highlighter-rouge">TestPalindrome.java</code></li>
+  <li><code class="language-plaintext highlighter-rouge">TestOffByOne.java</code></li>
+</ul>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 2 setup: Setting Up IntelliJ | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 2 setup: Setting Up IntelliJ</header><ul id="markdown-toc">
+  <li><a href="lab2setup.html#prerequisites" id="markdown-toc-prerequisites">Prerequisites</a></li>
+  <li><a href="lab2setup.html#install-intellij-on-your-computer" id="markdown-toc-install-intellij-on-your-computer">Install IntelliJ on Your Computer</a></li>
+  <li><a href="lab2setup.html#installing-the-intellij-cs-61b-plugins" id="markdown-toc-installing-the-intellij-cs-61b-plugins">Installing the IntelliJ CS 61B Plugins</a></li>
+  <li><a href="lab2setup.html#project-setup" id="markdown-toc-project-setup">Project Setup</a></li>
+  <li><a href="lab2setup.html#getting-java-libraries" id="markdown-toc-getting-java-libraries">Getting Java Libraries</a></li>
+  <li><a href="lab2setup.html#importing-libraries-and-running-code" id="markdown-toc-importing-libraries-and-running-code">Importing Libraries and Running Code</a></li>
+  <li><a href="lab2setup.html#cs-61b-snaps" id="markdown-toc-cs-61b-snaps">CS 61B Snaps</a>    <ul>
+      <li><a href="lab2setup.html#getting-the-snaps-repo" id="markdown-toc-getting-the-snaps-repo">Getting the Snaps Repo</a></li>
+      <li><a href="lab2setup.html#setting-up-environment-variables" id="markdown-toc-setting-up-environment-variables">Setting Up Environment Variables</a>        <ul>
+          <li><a href="lab2setup.html#test-your-environment-variables" id="markdown-toc-test-your-environment-variables">Test Your Environment Variables</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="lab2setup.html#josh-hugs-color-scheme-optional" id="markdown-toc-josh-hugs-color-scheme-optional">Josh Hug’s Color Scheme (Optional)</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+  <li>Java 14 - You finished <a href="https://fa20.datastructur.es/materials/lab/lab1setup/lab1setup">Lab 1 setup</a>.</li>
+  <li>You have successfully created your local repo for the class on your own
+machine. This is the <code class="language-plaintext highlighter-rouge">fa20-s**</code> directory you created and set up in Lab 1.</li>
+  <li>You have pulled from skeleton master, and you have a <code class="language-plaintext highlighter-rouge">lab2setup</code> directory in
+the same directory as your <code class="language-plaintext highlighter-rouge">lab1</code> folder.</li>
+  <li>Be mentally prepared to use a real world software development package. It
+will seem very complicated for a while, but we’ll lead you down the narrow
+path to success. <strong>Ask for help if you are stuck!</strong> It can be very hard to
+guess the right thing to do in IntelliJ.</li>
+</ol>
+
+<h2 id="install-intellij-on-your-computer">Install IntelliJ on Your Computer</h2>
+
+<ol>
+  <li>
+    <p>You’ll need to install the Community Edition of IntelliJ from the
+<a href="https://www.jetbrains.com/idea/download/">JetBrains</a> website.</p>
+  </li>
+  <li>
+    <p>After selecting the appropriate version for your OS (Windows), click download and wait a few minutes for the file to finish downloading.</p>
+  </li>
+  <li>
+    <p>Run the installer. If you have an older version of IntelliJ, you should uninstall it at this time and replace it with this newer version. You can use all of the default installation options, with one exception, if <strong>you are on Windows</strong>, make sure you check the box “Add launchers dir to the PATH”. If you accidentally missed it, the easiest fix is to uninstall intelliJ, and running the installer again, making sure you check that box the second time around. <strong>The image below only applies to Windows.</strong></p>
+  </li>
+</ol>
+
+<p><img src="https://fa20.datastructur.es/materials/lab/lab2setup/img4/path.png" alt="Path" /></p>
+
+<h2 id="installing-the-intellij-cs-61b-plugins">Installing the IntelliJ CS 61B Plugins</h2>
+
+<p>Begin the setup process by starting up IntelliJ. Then follow the steps below.</p>
+
+<p><strong>Make sure you’re running IntelliJ Version 2020.2.1 or later before continuing.</strong> Older versions may also work but we haven’t tried them ourselves.</p>
+
+<ol>
+  <li>
+    <p>In the <em>Welcome</em> window, click the <strong>“Configure” → “Plugins”</strong> button on the
+bottom right of the window.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img2/plugin_setup1.png" alt="Configure Plugin" /></p>
+  </li>
+  <li>
+    <p>On the window that appears, click “Marketplace” and enter “CS 61B” in the
+search bar at the top. The CS 61B plugin entry should appear.
+If you click the autocomplete suggestion, a slightly different window
+from what is shown below may appear – this is okay.</p>
+  </li>
+  <li>
+    <p>Click the green <strong>Install</strong> button, and wait for the plugin to download and install.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img2/plugin_setup2.png" alt="Search CS 61B" /></p>
+  </li>
+  <li>
+    <p>Now, search for “Java Visualizer”, and click the green <strong>Install</strong> button to
+install the plugin.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img2/plugin_setup3.png" alt="Search Java Visualizer" /></p>
+  </li>
+  <li>
+    <p>If it appears, click the green <strong>Restart IDE</strong> button to finalize the installation. If you don’t see a <strong>Restart IDE</strong> button, just continue.</p>
+  </li>
+</ol>
+
+<p>For more information on using the plugins, read <a href="https://fa20.datastructur.es/materials/guides/plugin.html#using-the-plugins">the plugin
+guide</a>. You don’t have to read this
+right now.</p>
+
+<p><strong>Only move on once you have installed <em>both</em> plugins.</strong></p>
+
+<h2 id="project-setup">Project Setup</h2>
+<p>IntelliJ is an IDE (Integrated Development Environment). It includes a text
+editor as well as a whole lot of extra features to make writing code easier. Let’s
+try it out first on our lab1 folder.</p>
+
+<ol>
+  <li>
+    <p>Upon opening IntelliJ, click on the “open or import” option.
+ <img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/intellij_start_menu.png" alt="IntelliJ Start Menu" /></p>
+  </li>
+  <li>
+    <p>Find and choose your lab1 directory, then press the OK button.
+Once you’ve pressed finish, you should see something really similar to the
+following image. You may need to click the little triangle next to <code class="language-plaintext highlighter-rouge">lab1</code>
+in the top left to get the source files (<code class="language-plaintext highlighter-rouge">HelloWorld.java</code>, <code class="language-plaintext highlighter-rouge">HelloNumbers.java</code>
+and <code class="language-plaintext highlighter-rouge">LeapYear.java</code>) to show up. If you don’t see the sidebar, go to <strong>View → Tool
+Windows → Project</strong>, or select <strong>“Project”</strong> on the left toolbar.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done_lab1.png" alt="IntelliJ with lab 1 open" /></p>
+  </li>
+</ol>
+
+<p>Note: The first time you start up IntelliJ it might take some time indexing
+files. This may take a few minutes. There should be a little progress bar in the
+bottom right. Some steps might not work until this is done.</p>
+
+<ol>
+  <li>
+    <p>Double click on HelloNumbers and you’ll see your HelloNumbers code appear. Your
+color scheme won’t look like what is shown in the picture below (which is the official
+Josh Hug approved color scheme, called Sunburst). If you think you’d like to use
+Sunburst instead, see the very end of this lab for an optional setup. There should be no errors 
+(code highlighted in red). If
+you see any errors, please post to Ed or ask your lab TA.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done_lab1_HelloNumbers_open.png" alt="IntelliJ with HelloNumbers open" /></p>
+  </li>
+  <li>
+    <p>Next, let’s run your HelloNumbers. To do this, click “Run”, then click the “Run…” option.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done_lab1_HelloNumbers_run_run.png" alt="Preparing to run HelloNumbers" /></p>
+  </li>
+  <li>
+    <p>This will bring up two choices, one called “Edit Configuration”, and one called
+“HelloNumbers”. IntelliJ supports all sorts of complicated configuration options for 
+running Java programs, but we’re happy with the default here, so let’s just click on the
+one that says “HelloNumbers”.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done_lab1_HelloNumbers_run_run_after_click.png" alt="Picking a run option" /></p>
+  </li>
+  <li>
+    <p>After clicking, you’ll see your code run, as shown below. Notice the output of your
+program is given in the little black and white window at the bottom of the screen.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done_lab1_HelloNumbers_after_running.png" alt="Picking a run option" /></p>
+  </li>
+  <li>
+    <p>From now on, you can also just run the green triangle button next to the class name.
+This is because Java has created a default run configuration for this class. Note that
+you’ll need to do the Run → Run… thing for any new class that you create or import.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done_lab1_HelloNumbers_play_button.png" alt="Green run button" /></p>
+  </li>
+  <li>
+    <p>Now click “File → Close Project”, and you should find yourself back at the main
+IntelliJ screen. This time use “Open or Import” and choose your lab2setup directory, then press the OK button.
+Once you’ve pressed finish, you should see something really similar to the
+following image. Again, you may need to click the little triangle next to <code class="language-plaintext highlighter-rouge">lab2setup</code>
+in the top left to get the source files (<code class="language-plaintext highlighter-rouge">Dog.java</code> and <code class="language-plaintext highlighter-rouge">DogTest.java</code>) for
+<code class="language-plaintext highlighter-rouge">lab2setup</code> to show up. If you don’t see the sidebar, go to <strong>View → Tool
+Windows → Project</strong>, or select <strong>“Project”</strong> on the left toolbar.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_done.png" alt="Main Screen When Done" /></p>
+  </li>
+  <li>
+    <p>Double click on Dog.java, and you should see something like the screen below.
+There should be no errors (given in red). If
+you see any errors, please post to Ed or ask your lab TA.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_dog_open.png" alt="After Opening Dog" /></p>
+  </li>
+  <li>
+    <p>Now double click on DogTest.java, and you should see something like the screen
+below. Notice that there are now lots of errors, shown in red.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_dogtest_open.png" alt="After Opening DogTest" /></p>
+  </li>
+  <li>
+    <p>Hover over one of the red pieces of code. You’ll see that the problem is that
+Java cannot “resolve” something. This is because we haven’t downloaded the official
+61B libraries. We’ll be doing this in the next section of this lab.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/main_screen_when_dogtest_open_hover.png" alt="After Opening DogTest Hover" /></p>
+  </li>
+</ol>
+
+<h2 id="getting-java-libraries">Getting Java Libraries</h2>
+<p>We are now going to download some Java libraries that you’ll need to complete future assignments (including this one).</p>
+
+<ol>
+  <li>First, open up a terminal window and <code class="language-plaintext highlighter-rouge">cd</code> into your <code class="language-plaintext highlighter-rouge">fa20-s**</code> repository.</li>
+  <li>Run
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git submodule update <span class="nt">--init</span>
+</code></pre></div>    </div>
+    <p>You should get output like this:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Submodule <span class="s1">'library-fa20'</span> <span class="o">(</span>https://github.com/Berkeley-CS61B/library-fa20<span class="o">)</span> registered <span class="k">for </span>path <span class="s1">'./'</span>
+Cloning into <span class="s1">'/Users/Connor/Downloads/fa20-s1/library-fa20'</span>...
+Submodule path <span class="s1">'./'</span>: checked out <span class="s1">'1fbc26d69f044b48346849989aeeff9761b00abf'</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Ta-da! You now have libraries!
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls </span>library-fa20/
+data/
+javalib/
+</code></pre></div>    </div>
+    <p>Below is shown the directory structure of <code class="language-plaintext highlighter-rouge">library-fa20</code>. Look inside the folder and make sure you see the seven .jar files listed below. If you’re using your operating system’s file explorer the ‘jar’ part might not show up in the filenames, and that’s OK.</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library-fa20/
+└── javalib
+ ├── algs4.jar
+ ├── hamcrest-core-1.3.jar
+ ├── jh61b.jar
+ ├── junit-4.12.jar
+ ├── stdlib-package.jar
+ ├── stdlib.jar
+ └── xchart-3.5.1.jar
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="importing-libraries-and-running-code">Importing Libraries and Running Code</h2>
+<p>Now it’s time to get rid of the errors in DogTest.java.</p>
+
+<p>Click <strong>“File” → “Project Structure”</strong> in the top left of IntelliJ. A window should
+pop up, and you should click <strong>Libraries</strong> on the left panel of this window. Then click the
+plus sign at the top left of the window and you should see an option pop up that says “Java”,
+“From Maven”, and “Kotlin/JS” as shown below.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/add_libs1.png" alt="add libraries step 1" /></p>
+
+<p>Click on the word Java, and navigate to the
+<code class="language-plaintext highlighter-rouge">javalib</code> folder (which is in <code class="language-plaintext highlighter-rouge">library-fa20</code>). With the library-fa20 fold highlighted,
+press OK. Then press OK at the next window again.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/add_libs2.png" alt="add libraries step 2" /></p>
+
+<p>If you did everything correctly, you should see something similar to the screen below.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/add_libs3.png" alt="add libraries step 3" /></p>
+
+<p>Press OK one more time, and you’ll find yourself looking at DogTest.java again.
+This time, the red text should be gone. <strong>Note: You’ll need to import the library-fa20
+folder every time you open a new hw, lab, or project in 61B!</strong></p>
+
+<p>Try running the code by clicking <strong>“Run” → “Run…“</strong>, as shown below.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/run_run.png" alt="run -&gt; run" /></p>
+
+<p>This will probably pop up a very small dialog window like the one shown.
+Basically IntelliJ is saying that it isn’t quite sure what you mean by running
+the program and is giving you three choices (yours may look slightly different).</p>
+<ul>
+  <li>Option 0 is to edit the configuration before running the program (which we won’t do).</li>
+  <li>Option 2 is to run the tests in the DogTest class.</li>
+  <li>Option 3 is ALSO to run the tests in the DogTest class.
+<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/run_dialog.png" alt="run -&gt; run dialog" /></li>
+</ul>
+
+<p>Click on either of the DogTest options and a green bar should appear with the message “Tests passed: 2 of 2 tests” as shown below.
+	<img src="https://fa20.datastructur.es/materials/lab/lab2setup/img3/tests_passed.png" alt="tests passed" /></p>
+
+<p>As happened earlier with HelloNumbers, You’ll notice after running your code that the green play and green bug icons in
+the upper right are now green; this is because when you clicked “2.”, IntelliJ
+memorized what you meant by Run for this project and you can now click this
+button to run your program. You’ll learn more about this over time as we use
+more advanced features of IntelliJ.</p>
+
+<p>In case you’re curious why there were two <code class="language-plaintext highlighter-rouge">DogTest</code> icons above, it’s because one
+of them runs the tests as if it is designed for the Android operating system (the little alien)
+and the other (red and green triangles) runs the test as if it is just plain old Java. For our class,
+these two choices will always do the exact same thing.</p>
+
+<h2 id="cs-61b-snaps">CS 61B Snaps</h2>
+<p>The Snaps plugin keeps frequent snapshots of your work and saves them to a repository. This will act as a safe backup of your work. The plugin will also provide a record of how you arrived at your solution. With your explicit written permission (details later), we will later be conducting a research project to study the various paths taken by students to solve problems, and to understand how the total time spent varies with respect to demographic factors like prior programing experience.</p>
+
+<h3 id="getting-the-snaps-repo">Getting the Snaps Repo</h3>
+
+<p>In lab1, you should have gotten and accepted an invitation to collaborate on a <code class="language-plaintext highlighter-rouge">snaps-fa20-s***</code> repo. If you have not accepted it, please do not proceed until you do. If you can’t find the invitation in your email inbox, please post on Ed or come to lab, so we can help you.</p>
+
+<p><strong>NOTE</strong>: You may have accidentally received an invite for a repo that looks like <code class="language-plaintext highlighter-rouge">fa20-snaps-s***</code> (note the ‘fa20’ in the front) - you can just ignore this repo, but please make sure you have access to your <code class="language-plaintext highlighter-rouge">snaps-fa20-s***</code> repo</p>
+
+<p>First, we will clone the snaps repo to your computer. In your terminal (Git Bash on Windows), navigate to your home directory: <code class="language-plaintext highlighter-rouge">cd ~</code>. Then, run the following command, replacing *** with your repo number:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Berkeley-CS61B-Student/snaps-fa20-s***
+</code></pre></div></div>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">ls</code>, you should now see the <code class="language-plaintext highlighter-rouge">snaps-fa20-s***</code> folder.</p>
+
+<p><strong>IMPORTANT:</strong> Never complete assignments in this folder. Gradescope tests will always fail if you submit code from the snaps folder. You should only interact with your fa20-s*** folder.</p>
+
+<h3 id="setting-up-environment-variables">Setting Up Environment Variables</h3>
+
+<p>Next you’ll need to set up some environment variables. The precise steps to take depend on your operating system.</p>
+
+<p>If you are a Mac user, verify what Mac OS version you are running. Click on the Apple logo at the top left corner of your screen. Then, click on “About This Mac”. If you are running Mac OS Catalina, choose that option below.</p>
+
+<ul>
+  <li><a href="https://fa20.datastructur.es/materials/lab/lab2setup/lab2setupWindows.html">Windows instructions</a></li>
+  <li><a href="https://fa20.datastructur.es/materials/lab/lab2setup/lab2setupMacAndLinux.html">macOS and Linux instructions</a></li>
+</ul>
+
+<p>Once you’ve completed the steps in the appropriate instructions above, then continue on to “Test Your Environment Variables” below.</p>
+
+<h4 id="test-your-environment-variables">Test Your Environment Variables</h4>
+
+<p>After setting up the environment variables above, restart IntelliJ, and all terminal windows (close them and open a new one), so the variables can take effect.</p>
+
+<p>After reopening IntelliJ, make sure the lab2setup folder is open in IntelliJ. Verify that you set the environment variables correctly by opening <code class="language-plaintext highlighter-rouge">CheckLabConfig</code>. Then click Run and go down to the option that says “Run…”.</p>
+
+<p><img src="https://fa20.datastructur.es/materials/lab/lab2setup/img4/windows_about_to_run_checklabconfig.png" alt="about to run check lab config" /></p>
+
+<p>Now click on the option that contains <code class="language-plaintext highlighter-rouge">CheckLabConfig</code>:</p>
+
+<p><img src="https://fa20.datastructur.es/materials/lab/lab2setup/img4/windows_check_lab_config_option.png" alt="the check lab config option" /></p>
+
+<p>This should run the main method of our <code class="language-plaintext highlighter-rouge">CheckLabConfig</code> class. If everything is working, you should see something like the image shown below:</p>
+
+<p><img src="https://fa20.datastructur.es/materials/lab/lab2setup/img4/windows_checklabconfig_everything_configured_correctly.png" alt="output when properly configured" /></p>
+
+<p>You’re now done with lab 2 setup!</p>
+
+<!--
+Embedded Terminal (Optional)
+----
+
+IntelliJ has the cool feature that you can have a working terminal in the
+workspace so you don't have to constantly switch between having IntelliJ and
+your terminal, if that becomes necessary for whatever reason.
+
+Windows users will
+likely have to put in a little leg work. This setup assumes you are a Windows
+user and you have Git Bash installed.
+
+First, go to File &rarr; Settings (Or use Ctrl + Alt + S)
+![Settings](/materials/lab/lab2setup/img4/intellij_settings.png)
+
+Type in "terminal" in the search bar. Once there, type in:
+
+`"C:\Program Files\Git\bin\sh.exe" --login -i`
+
+into the "Shell path" field. Click ok.
+
+![Terminal](/materials/lab/lab2setup/img4/terminal_settings_window.png)
+
+To test if you've properly set this up, click on the button that says "Terminal"
+on the bottom toolbar of the main IntelliJ window. The bottom third of your
+screen should now be a terminal, the equivalent of having Git Bash right there.
+
+![Terminal Test](/materials/lab/lab2setup/img4/select_terminal.png)
+
+Try typing something in! If you're able to run basic commands like `ls` or `cd`
+or `echo 'Hello world'` you've done it!
+
+FA20 note: Deprecated since I want them to use the Windows terminal instead and its a GUI app.
+
+We can share this as an optional feature for Mac and Linux later.
+-->
+
+<h2 id="josh-hugs-color-scheme-optional">Josh Hug’s Color Scheme (Optional)</h2>
+
+<p>I’m not a big fan of the default IntelliJ colors, so I made my own color scheme, which is a very close imitation of the extremely good Sunburst theme for Sublime. To use my theme, download <a href="https://fa20.datastructur.es/materials/lab/lab2setup/hug_sunburst.jar">hug_sunburst</a>, and import it using the “File→Manage IDE Settings→Import Settings” option in IntelliJ. You might end up with large text, which I use for recording videos. To adjust the size of the font in Intellij to your liking, see <a href="https://www.jetbrains.com/help/idea/configuring-colors-and-fonts.html">this link</a>.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

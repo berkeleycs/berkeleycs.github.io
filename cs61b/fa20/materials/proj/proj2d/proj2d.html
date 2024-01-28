@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 2D: Bear Maps, version 4.0 | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 2D: Bear Maps, version 4.0</header><ul id="markdown-toc">
+  <li><a href="proj2d.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="proj2d.html#basic-setup" id="markdown-toc-basic-setup">Basic Setup</a>    <ul>
+      <li><a href="proj2d.html#getting-the-skeleton-files" id="markdown-toc-getting-the-skeleton-files">Getting the Skeleton Files</a></li>
+      <li><a href="proj2d.html#project-2d-setup" id="markdown-toc-project-2d-setup">Project 2D Setup</a>        <ul>
+          <li><a href="proj2d.html#importing-the-project-2d-folder" id="markdown-toc-importing-the-project-2d-folder">Importing the Project 2D Folder</a></li>
+          <li><a href="proj2d.html#marking-the-static-directory" id="markdown-toc-marking-the-static-directory">Marking the static Directory</a></li>
+        </ul>
+      </li>
+      <li><a href="proj2d.html#verifying-project-2d-setup" id="markdown-toc-verifying-project-2d-setup">Verifying Project 2D Setup</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2d.html#overview" id="markdown-toc-overview">Overview</a>    <ul>
+      <li><a href="proj2d.html#application-structure" id="markdown-toc-application-structure">Application Structure</a></li>
+      <li><a href="proj2d.html#parts-of-this-project" id="markdown-toc-parts-of-this-project">Parts of this Project</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2d.html#map-rastering-part-i-overview" id="markdown-toc-map-rastering-part-i-overview">Map Rastering (Part I Overview)</a></li>
+  <li><a href="proj2d.html#image-file-layout-and-bounding-boxes" id="markdown-toc-image-file-layout-and-bounding-boxes">Image File Layout and “Bounding Boxes”</a></li>
+  <li><a href="proj2d.html#map-rastering-api" id="markdown-toc-map-rastering-api">Map Rastering (API)</a>    <ul>
+      <li><a href="proj2d.html#corner-cases" id="markdown-toc-corner-cases">Corner Cases</a>        <ul>
+          <li><a href="proj2d.html#corner-case-1-partial-coverage" id="markdown-toc-corner-case-1-partial-coverage">Corner Case 1: Partial Coverage</a></li>
+          <li><a href="proj2d.html#corner-case-2-no-coverage" id="markdown-toc-corner-case-2-no-coverage">Corner Case 2: No Coverage</a></li>
+          <li><a href="proj2d.html#runtime" id="markdown-toc-runtime">Runtime</a></li>
+          <li><a href="proj2d.html#warning" id="markdown-toc-warning">Warning</a></li>
+        </ul>
+      </li>
+      <li><a href="proj2d.html#testing" id="markdown-toc-testing">Testing</a>        <ul>
+          <li><a href="proj2d.html#java-tests" id="markdown-toc-java-tests">Java Tests</a></li>
+          <li><a href="proj2d.html#map-tests" id="markdown-toc-map-tests">Map Tests</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="proj2d.html#routing--location-data-part-ii" id="markdown-toc-routing--location-data-part-ii">Routing &amp; Location Data (Part II)</a>    <ul>
+      <li><a href="proj2d.html#semanticstreetmapgraph" id="markdown-toc-semanticstreetmapgraph">SemanticStreetMapGraph</a></li>
+      <li><a href="proj2d.html#long-closestdouble-lon-double-lat" id="markdown-toc-long-closestdouble-lon-double-lat"><code class="language-plaintext highlighter-rouge">long closest(double lon, double lat)</code></a></li>
+      <li><a href="proj2d.html#shortestpath" id="markdown-toc-shortestpath">shortestPath</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2d.html#autocomplete-and-search-part-iii" id="markdown-toc-autocomplete-and-search-part-iii">Autocomplete and Search (Part III)</a>    <ul>
+      <li><a href="proj2d.html#autocomplete" id="markdown-toc-autocomplete">Autocomplete</a>        <ul>
+          <li><a href="proj2d.html#runtime-1" id="markdown-toc-runtime-1">Runtime</a></li>
+        </ul>
+      </li>
+      <li><a href="proj2d.html#search" id="markdown-toc-search">Search</a>        <ul>
+          <li><a href="proj2d.html#runtime-2" id="markdown-toc-runtime-2">Runtime</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="proj2d.html#turn-by-turn-navigation-part-iv" id="markdown-toc-turn-by-turn-navigation-part-iv">Turn-by-turn Navigation (Part IV)</a></li>
+  <li><a href="proj2d.html#going-even-further-part-v" id="markdown-toc-going-even-further-part-v">Going Even Further (Part V)</a></li>
+  <li><a href="proj2d.html#heroku-deployment" id="markdown-toc-heroku-deployment">Heroku Deployment</a></li>
+  <li><a href="proj2d.html#faq" id="markdown-toc-faq">FAQ</a>    <ul>
+      <li><a href="proj2d.html#i-provided-the-correct-string-output-but-it-doesnt-show-up" id="markdown-toc-i-provided-the-correct-string-output-but-it-doesnt-show-up">I provided the correct String[][] output but it doesn’t show up!</a></li>
+      <li><a href="proj2d.html#i-checked-every-element-of-map-i-return-with-rasterapihandlerprocessrequest-and-theyre-all-correct-but-still-nothing-is-appearing" id="markdown-toc-i-checked-every-element-of-map-i-return-with-rasterapihandlerprocessrequest-and-theyre-all-correct-but-still-nothing-is-appearing">I checked every element of map I return with RasterAPIHandler.processRequest and they’re all correct, but still nothing is appearing.</a></li>
+      <li><a href="proj2d.html#my-initial-map-doesnt-fill-up-the-screen" id="markdown-toc-my-initial-map-doesnt-fill-up-the-screen">My initial map doesn’t fill up the screen!</a></li>
+      <li><a href="proj2d.html#i-dont-draw-the-entire-query-box-on-some-inputs-because-i-dont-intersect-enough-tiles" id="markdown-toc-i-dont-draw-the-entire-query-box-on-some-inputs-because-i-dont-intersect-enough-tiles">I don’t draw the entire query box on some inputs because I don’t intersect enough tiles.</a></li>
+      <li><a href="proj2d.html#im-getting-funky-behavior-with-moving-the-map-around-my-image-isnt-large-enough-at-initial-load-after-the-initial-load-i-cant-move-the-map-or-after-the-initial-load-i-start-getting-nan-as-input-params" id="markdown-toc-im-getting-funky-behavior-with-moving-the-map-around-my-image-isnt-large-enough-at-initial-load-after-the-initial-load-i-cant-move-the-map-or-after-the-initial-load-i-start-getting-nan-as-input-params">I’m getting funky behavior with moving the map around, my image isn’t large enough at initial load, after the initial load, I can’t move the map, or after the initial load, I start getting NaN as input params.</a></li>
+      <li><a href="proj2d.html#im-failing-the-local-router-tests-and-i-dont-know-why-it-says-javalangassertionerror-the-test-says-expected-760706748-3178363987--but-actual" id="markdown-toc-im-failing-the-local-router-tests-and-i-dont-know-why-it-says-javalangassertionerror-the-test-says-expected-760706748-3178363987--but-actual">I’m failing the local router tests and I don’t know why. It says java.lang.AssertionError: The test says: Expected: [760706748, 3178363987, …], but Actual:[]</a></li>
+      <li><a href="proj2d.html#i-sometimes-pass-the-timing-tests-when-i-submit-but-not-consistently" id="markdown-toc-i-sometimes-pass-the-timing-tests-when-i-submit-but-not-consistently">I sometimes pass the timing tests when I submit, but not consistently.</a></li>
+      <li><a href="proj2d.html#how-do-query-boxes-or-bounding-boxes-make-sense-on-a-round-world" id="markdown-toc-how-do-query-boxes-or-bounding-boxes-make-sense-on-a-round-world">How do query boxes or bounding boxes make sense on a round world?</a></li>
+      <li><a href="proj2d.html#im-missing-xml-files-andor-library-fa20-is-not-updated" id="markdown-toc-im-missing-xml-files-andor-library-fa20-is-not-updated">I’m missing xml files and/or library-fa20 is not updated.</a></li>
+      <li><a href="proj2d.html#my-getlocations-method-works-fine-and-i-get-markers-on-the-map-when-i-click-on-a-search-result-but-the-autograder-test-for-getlocations-method-fails" id="markdown-toc-my-getlocations-method-works-fine-and-i-get-markers-on-the-map-when-i-click-on-a-search-result-but-the-autograder-test-for-getlocations-method-fails">My getLocations method works fine and I get markers on the map when I click on a search result but the Autograder test for getLocations method fails.</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2d.html#common-bugs" id="markdown-toc-common-bugs">Common Bugs</a></li>
+  <li><a href="proj2d.html#office-hours" id="markdown-toc-office-hours">Office Hours</a></li>
+  <li><a href="proj2d.html#submission" id="markdown-toc-submission">Submission</a></li>
+  <li><a href="proj2d.html#resources" id="markdown-toc-resources">Resources</a></li>
+  <li><a href="proj2d.html#acknowledgements" id="markdown-toc-acknowledgements">Acknowledgements</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This project was originally created by former TA <a href="https://www.linkedin.com/in/alanyao">Alan Yao</a> (now at AirBNB). It is a web mapping application inspired by Alan’s time on the Google Maps team and the <a href="http://www.openstreetmap.org/">OpenStreetMap</a> project, from which the tile images and map feature data for this project was downloaded.</p>
+
+<p>In this project, you’ll build the “smart” pieces of a web-browser based Google Maps clone. You’ve actually already done much of this work in part A, B, and C of Project 2.</p>
+
+<p>Unlike prior CS 61B projects, you’ll start with a gigantic code base that somebody else wrote. This is typical in real world programming, where you don’t have the luxury and freedom that comes with starting from totally blank files. As a result, you’ll need to spend some time getting to know the provided code, so that you can complete the parts that need completing.</p>
+
+<p>By the end of this project, with some extra work, you can even host your application as a publicly available web app. More details will be provided at the end of this spec.</p>
+
+<!--You are working with real-world mapping data here that is freely available - after you've finished this project, you can even extend your code to support a wider range of features. You will be writing the back end - the web server that powers the API that the front end makes requests to. -->
+
+<p>The <a href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD5b9eP_PZommgQyvl4sjuWp">project 2D video playlist</a> starts with an introductory video that should help you get started. The slides used in the Project 2D video playlist are <a href="https://docs.google.com/presentation/d/1tkHQzv0S9AAIEwjqpOnHpQW9TRGUf_MMJCZ4fMwdOIg/edit?usp=sharing">available here</a> (note that this project was called Project 3 in previous semesters).</p>
+
+<h2 id="basic-setup">Basic Setup</h2>
+
+<p>There is a lot of setup for this project. Take it slowly.</p>
+
+<h3 id="getting-the-skeleton-files">Getting the Skeleton Files</h3>
+
+<p>Pull the skeleton using the command <code class="language-plaintext highlighter-rouge">git pull skeleton master</code>.</p>
+
+<p>Then, go into the library-fa20 directory and do <code class="language-plaintext highlighter-rouge">git pull</code>. This may take a long time because there are 20,000+ files to download.</p>
+
+<p>After doing this, check that the following are true:</p>
+<ul>
+  <li>You should have a <code class="language-plaintext highlighter-rouge">proj2d</code> directory in the same place as all the usual skeleton code.</li>
+  <li>There should be <code class="language-plaintext highlighter-rouge">library-fa20/data/proj2d_imgs</code>, <code class="language-plaintext highlighter-rouge">library-fa20/data/proj2d_xml</code>, and <code class="language-plaintext highlighter-rouge">library-fa20/data/proj2d_test_inputs</code> folders.</li>
+  <li>There should be a <code class="language-plaintext highlighter-rouge">library-fa20/javalib/proj2d</code> folder.</li>
+</ul>
+
+<p>If any of the folders in library-fa20 directory (e.g. <code class="language-plaintext highlighter-rouge">data/proj2d_imgs</code>) are missing, go into the library-fa20 directory and try the commands <code class="language-plaintext highlighter-rouge">git submodule update --init</code> followed by <code class="language-plaintext highlighter-rouge">git checkout master</code>. You might have to run <code class="language-plaintext highlighter-rouge">git pull</code> again if you do this.</p>
+
+<h3 id="project-2d-setup">Project 2D Setup</h3>
+
+<h4 id="importing-the-project-2d-folder">Importing the Project 2D Folder</h4>
+
+<p>Start by opening the project as usual (using “Open or Import” in IntelliJ’s welcome window).</p>
+
+<p>Next, we’ll need to import the special proj2d libraries that are in the <code class="language-plaintext highlighter-rouge">javalib/proj2d</code> folder.</p>
+
+<p>To do this, click “File” → “Project Structure”, then click “Libraries” on the screen that pops up. You should see something like what is shown in the figure below. 
+The next step is to click the plus sign at the top of the screen, then click “Java” from the list of options.</p>
+
+<p><a href="import1.png"><img src="import1.png" alt="import1" /></a></p>
+
+<p>Navigate to the library-fa20 folder and click on the proj2d folder.</p>
+
+<p><a href="import3.png"><img src="import3.png" alt="import3" /></a></p>
+
+<p>Click OK and a message should pop up saying “Library ‘proj2d’ will be added to the selected modules: proj2d”</p>
+
+<p>Click OK again. You may be prompted to click OK one more time.</p>
+
+<p>You should also import the libraries you usually do for all other assignments.</p>
+
+<h4 id="marking-the-static-directory">Marking the static Directory</h4>
+
+<p>Make sure your “static” folder is marked as the “Sources Root”. The folder 
+should be highlighted in blue if it is already marked as the “Sources Root”.</p>
+
+<p><a href="good-sources.png"><img src="good-sources.png" alt="Static marked" /></a></p>
+
+<p>If this is not the case for you, go to “Project Structure” → “Modules” →. Right click on the 
+“static” folder and choose “Sources” → “OK”. The “static” folder should now be highlighted in blue.</p>
+
+<h3 id="verifying-project-2d-setup">Verifying Project 2D Setup</h3>
+
+<p>To finally verify that everything is working correctly, open in intelliJ class called <code class="language-plaintext highlighter-rouge">MapServer</code> and run its main method as you usually would.</p>
+
+<p>It should start running, and in the console, you should see something similar to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Thread-0] INFO org.eclipse.jetty.util.log - Logging initialized @1869ms to org.eclipse.jetty.util.log.Slf4jLog
+[Thread-0] WARN org.eclipse.jetty.server.AbstractConnector - Ignoring deprecated socket close linger time
+[Thread-0] INFO spark.webserver.JettySparkServer - == Spark has ignited ...
+[Thread-0] INFO spark.webserver.JettySparkServer - &gt;&gt; Listening on 0.0.0.0:4567
+[Thread-0] INFO org.eclipse.jetty.server.Server - jetty-9.4.15.v20190215; built: 2019-02-15T16:53:49.381Z; git: eb70b240169fcf1abbd86af36482d1c49826fa0b; jvm 11.0.2+9-LTS
+[Thread-0] INFO org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+[Thread-0] INFO org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+[Thread-0] INFO org.eclipse.jetty.server.session - node0 Scavenging every 660000ms
+[Thread-0] INFO org.eclipse.jetty.server.AbstractConnector - Started ServerConnector@3405d917{HTTP/1.1,[http/1.1]}{0.0.0.0:4567}
+[Thread-0] INFO org.eclipse.jetty.server.Server - Started @2235ms
+</code></pre></div></div>
+
+<p>Note: If you’re using Windows, a popup might appear saying “Windows Defender Firewall has blocked some features of this app.” If this happens, you should allow access (though I think it’ll work fine even if you don’t).</p>
+
+<p>What’s happening here is that your computer is now acting as a web server, with your Java code ready to respond to web requests. Let’s see it in action.</p>
+
+<p>Go to the file navigation panel on the left side of intellij and look for <code class="language-plaintext highlighter-rouge">static.page</code> towards the bottom of your project directory. Expand it, and you should see <code class="language-plaintext highlighter-rouge">map.html</code>. Right click on this file, then go to “Open in Browser”, similar to shown below. We recommend Chrome.</p>
+
+<p><a href="openbrowser.png"><img src="openbrowser.png" alt="openbrowser" /></a></p>
+
+<p>Once you’ve opened map.html, you should see something like the window below, where the front end makes a request to the back end to provide image data. Since you haven’t implemented the back end, this data will never arrive. Sad for your web browser.</p>
+
+<p><a href="startup.png"><img src="startup.png" alt="startup" /></a></p>
+
+<p>You’ll also notice that in the console, opening up <code class="language-plaintext highlighter-rouge">map.html</code> in the web browser did something. Specifically you should see the message below.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Since you haven't implemented RasterAPIHandler.processRequest, nothing is displayed in your browser.
+Your rastering result is missing the render_grid field.
+</code></pre></div></div>
+
+<p>Let’s try one more thing: Go to the <code class="language-plaintext highlighter-rouge">processRequest</code> method of the <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code> method of the <code class="language-plaintext highlighter-rouge">bearmaps.proj2d.server.handler.impl</code> package. You’ll see this print method statement. Try uncommenting the two print statements in the file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>System.out.println("yo, wanna know the parameters given by the web browser? They are:");
+System.out.println(requestParams);
+</code></pre></div></div>
+
+<p>Stop (using the red stop button in IntelliJ, or using the method of your choice) the MapServer program and restart it. Then refresh the page in your web browser and you should see:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yo, wanna know the parameters given by the web browser? They are:
+{lrlon=-122.19016181945801, ullon=-122.27625, w=2006.0, h=1008.0, ullat=37.88, lrlat=37.84584557684252}
+Since you haven't implemented RasterAPIHandler.processRequest, nothing is displayed in your browser.
+Your rastering result is missing the render_grid field.
+</code></pre></div></div>
+
+<p>Pretty cool! Your web browser is trying to communicate with your Java program! In this project, you’ll be modifying your Java code so that it is able to talk to the browser and display mapping data.</p>
+
+<p>Phew! That’s all the setup we need. Now we can get started on the project itself.</p>
+
+<p><strong>Note: Absolutely make sure to end your instance of <code class="language-plaintext highlighter-rouge">MapServer</code> before re-running or starting another up.</strong> Not doing so will cause a <code class="language-plaintext highlighter-rouge">java.net.BindException: Address already in use</code>. If you end up getting into a situation where you computer insists the address is already in use, either figure out how to kill all java processes running on your machine (using Stack Overflow or similar) or just reboot your computer.</p>
+
+<h2 id="overview">Overview</h2>
+
+<!--
+For a video introduction to this assignment, see [this playlist](https://www.youtube.com/playlist?list=PL8FaHk7qbOD6xsQBRCY5Su-vbkf0X4gq8). These videos are completely optional, but give some tips and visual motivation for some of the things you're doing in this assignment. The getting started slides for these videos are available [at this link](https://docs.google.com/presentation/d/1ggqEZJdNX4Rif99997PqwwOYnfzEe6NUa6qg76joC3w/edit?usp=sharing).-->
+
+<h3 id="application-structure">Application Structure</h3>
+
+<p>Your job for this project is to implement the back end of a web server. To use your program, a user will open an HTML file in their web browser that displays a map of the city of Berkeley, and the interface will support scrolling, zooming, and route finding (similar to Google Maps). We’ve provided all of the <a href="https://en.wikipedia.org/wiki/Front_and_back_ends">front end</a> code. Your code will be the <em>back end</em> which does all the hard work of figuring out what data to display in the web browser.</p>
+
+<p>At its heart, the project works like this: The user’s web browser provides a URL to your Java program, and your Java program will take this URL and generate the appropriate output, which will be displayed in the browser. For example, suppose your program were running at bloopblorpmaps.com, the URL might be:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bloopblorpmaps.com/raster&amp;ullat=37.89&amp;ullon=-122.29&amp;lrlat=37.83&amp;lrlon=-122.22&amp;w=700&amp;h=300
+</code></pre></div></div>
+
+<p>The job of the back end server (i.e. your code) is take this URL and generate an image corresponding to a map of the region specified inside the URL (more on how regions are specified later). This image will be passed back to the front end for display in the web browser.</p>
+
+<p>You’ll notice the web address that we saw in the setup instructions is strange, starting with <code class="language-plaintext highlighter-rouge">localhost:63365</code> (or similar) instead of something like <code class="language-plaintext highlighter-rouge">www.eecs.berkeley.edu</code>. <code class="language-plaintext highlighter-rouge">localhost</code> means that the website is on your own computer, and the “63365” refers to a port number, something that you’ll learn about in a future class.</p>
+
+<p>The CS 61B staff has will be providing the front end (in the form of HTML and Javascript files which you will not need to open or modify), but we’ll also provide a great deal of starter code (in the form of Java files) for the back end. This starter code will handle all URL parsing and communication for the front end. This code uses the <a href="http://sparkjava.com/documentation.html#getting-started">Java Spark</a> as the server framework. You don’t need to worry about the internals of this as our code handles all the messy translation between the web browser mechanics and your Java programs.</p>
+
+<p>If you do go exploring, you’ll notice that the structure of the skeleton code for this project is significantly more complex than anything you’ve probably seen in a class. This is because we’ve built something that more closely resembles what you might see in a real world project, with tons of different packages interacting with each other in various ways. <strong>You’re not required to understand all of this in order to complete the project, though you’re welcome to explore. The next section of this spec will explain what pieces you absolutely have to look at.</strong></p>
+
+<!--
+We are also providing you with a file, `map.html`, in `src/static/page`, which implements a basic front-end user interface. This basic Javascript application makes the necessary API calls to render a map that can be navigated around and can show routes and locations. -->
+
+<h3 id="parts-of-this-project">Parts of this Project</h3>
+
+<p>There are 5 parts of this project. The first two are required, the third is gold points, and the last two are completely optional. The parts are as follows:</p>
+
+<ul>
+  <li>Part I, <strong>Map Rastering</strong>: Given coordinates of a rectangular region of the world and the size of the web browser window, provide images of appropriate resolution that cover that region.</li>
+  <li>Part II, <strong>Routing</strong>: Given a start and destination latitude and longitude, provide street directions between those points.</li>
+  <li>Part III, <strong>Autocomplete</strong>: Given a string, find all locations that match that string. Useful for finding, e.g. all the Top Dogs in Berkeley.</li>
+  <li>Part IV, <strong>Written Directions</strong>: Augment the routing from Part II to include written driving directions.</li>
+  <li>Part V, <strong>Above and Beyond</strong>: Do anything else that seems fun.</li>
+</ul>
+
+<p>Of the two required parts, Part I is much longer that Part II. It is not as difficult as other programming projects you’ve done in the past, but it may take you several hours to understand what to do and how to get started. Once you understand what you’re supposed to do (see next section), as a rough estimate, I’d guess the coding is somewhat easier than Project 2B.</p>
+
+<p>Part II is relatively straightforward once you have a good idea figured out.</p>
+
+<p>Parts III is similar in difficulty to part II and part IV is very hard, and minimal guidance will be provided.</p>
+
+<h2 id="map-rastering-part-i-overview">Map Rastering (Part I Overview)</h2>
+
+<p>Rastering is the job of converting information into a pixel-by-pixel image. In the <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code> class, you will take a user’s desired viewing rectangle and generate an image for them.</p>
+
+<p>The user’s desired input will be provided to you as a <code class="language-plaintext highlighter-rouge">Map&lt;String, Double&gt; params</code>, where the key-value pairs specify the user’s desired viewing rectangle, and the main goal of your rastering code will be to create a <code class="language-plaintext highlighter-rouge">String[][]</code> that contains the name of the files that should be displayed in response to this query.</p>
+
+<p>As a specific example (given as “testTwelveImages.html” in the skeleton files), the user might specify that they want the following information:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{lrlon=-122.2104604264636, ullon=-122.30410170759153, w=1085.0, h=566.0, ullat=37.870213571328854, lrlat=37.8318576119893}
+</code></pre></div></div>
+
+<p>This means that the user wants the area of earth delineated by the rectangle between longitudes <strong>-122.2104604264636</strong> and <strong>-122.30410170759153</strong> and latitudes <strong>37.870213571328854</strong> and <strong>37.8318576119893</strong>, and that they’d like them displayed in a window roughly <strong>1085</strong> x <strong>566</strong> pixels in size (width x height). We call the user’s desired display location on earth the <strong>query box</strong>.</p>
+
+<p>To display the requested information, you need street map pictures, which we have provided in <code class="language-plaintext highlighter-rouge">library-fa20</code>. All the images provided are 256 x 256 pixels. Each image is at various levels of zoom. For example, the file <code class="language-plaintext highlighter-rouge">d0_x0_y0.png</code> is the entire map, and covers the entire region. The files <code class="language-plaintext highlighter-rouge">d1_x0_y0.png</code>, <code class="language-plaintext highlighter-rouge">d1_x0_y1.png</code>, <code class="language-plaintext highlighter-rouge">d1_x1_y0.png</code>, and <code class="language-plaintext highlighter-rouge">d1_x1_y1.png</code> are also the entire map, but at double the resolution, i.e. <code class="language-plaintext highlighter-rouge">d1_x0_y0</code> is the northwest corner of the map, <code class="language-plaintext highlighter-rouge">d1_x1_y0</code> is the northeast corner, <code class="language-plaintext highlighter-rouge">d1_x0_y1</code> is the southwest corner, and <code class="language-plaintext highlighter-rouge">d1_x1_y1</code> is the southeast corner.</p>
+
+<p>More generally, at the $D$th level of zoom, there are $4^D$ images, with names ranging from <code class="language-plaintext highlighter-rouge">dD_x0_y0</code> to <code class="language-plaintext highlighter-rouge">dD_xk_yk</code>, where <code class="language-plaintext highlighter-rouge">k</code> is $2^D-1$. As <code class="language-plaintext highlighter-rouge">x</code> increases from 0 to <code class="language-plaintext highlighter-rouge">k</code>, we move eastwards, and as y increases from 0 to k, we move southwards.</p>
+
+<p>The job of your rasterer class is decide, given a user’s query, which files to serve up. For the example above, your code should return the following 2D array of strings:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[d2_x0_y1.png, d2_x1_y1.png, d2_x2_y1.png, d2_x3_y1.png],
+[d2_x0_y2.png, d2_x1_y2.png, d2_x2_y2.png, d2_x3_y2.png],
+[d2_x0_y3.png, d2_x1_y3.png, d2_x2_y3.png, d2_x3_y3.png]]
+</code></pre></div></div>
+
+<p>This means that the browser should display <code class="language-plaintext highlighter-rouge">d2_x0_y1.png</code> in the top left, then <code class="language-plaintext highlighter-rouge">d2_x1_y1.png</code> to the right of <code class="language-plaintext highlighter-rouge">d2_x0_y1.png</code>, and so forth. Thus our “rastered” image is actually a combination of 12 images arranged in 3 rows of 4 images each.</p>
+
+<p>Our code will take your 2D array of strings and display the appropriate image in the browser. If you’re curious how this works, see <code class="language-plaintext highlighter-rouge">writeImagesToOutputStream</code> in <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code>.</p>
+
+<p>Since each image is 256 x 256 pixels, the overall image given above will be 1024 x 768 pixels. Note that there are many combinations of images that cover the same query box. For example, we could instead use higher resolution images of the exact same areas of Berkeley; instead of using <code class="language-plaintext highlighter-rouge">d2_x0_y1.png</code>, we could have used <code class="language-plaintext highlighter-rouge">d3_x0_y2.png</code>, <code class="language-plaintext highlighter-rouge">d3_x1_y2.png</code>, <code class="language-plaintext highlighter-rouge">d3_x0_y3.png</code>, <code class="language-plaintext highlighter-rouge">d3_x1_y3.png</code> while also substituting <code class="language-plaintext highlighter-rouge">d2_x1_y1.png</code> by <code class="language-plaintext highlighter-rouge">d3_x2_y2.png</code>, <code class="language-plaintext highlighter-rouge">d3_x3_y2.png</code>, etc. The result would be total of 48 images arranged in 6 rows of 8 images each (make sure this makes sense!). This would result in a 2048 x 1536 pixel image.</p>
+
+<p>You might be tempted to say that a 2048 x 1536 image is more appropriate than a 1024 x 768 image. After all, the user requested 1085 x 556 pixels and 1024 x 768 is too small to cover the request in the width direction. However, we don’t choose the images to display based on the pixel counts.</p>
+
+<p>Instead, to rigorously determine which images to use, we will define the <strong>longitudinal distance per pixel (LonDPP)</strong> as follows: Given a query box or image, the LonDPP of that box or image is</p>
+
+<p>$\text{LonDPP} = \frac{\text{lower right longitude} - \text{upper left longitude}}{\text{width of the image (or box) in pixels}}$</p>
+
+<p>For example, for the query box in the example in this section, the LonDPP is (-122.2104604264636 + 122.30410170759153) / (1085) or 0.00008630532 units of longitude per pixel. At Berkeley’s latitude, this is very roughly 25 feet of distance per pixel.</p>
+
+<p>Note that the longitudinal (horizontal) distance per pixel is not the same as the latidudinal (vertical) distance per pixel. This is because the earth is curved. <strong>If you use latDPP, you will have incorrect results.</strong></p>
+
+<p>The images that you return as a <code class="language-plaintext highlighter-rouge">String[][]</code> when rastering must be those that:</p>
+<ul>
+  <li>Include any region of the query box.</li>
+  <li>Have the greatest LonDPP that is less than or equal to the LonDPP of the query box (as zoomed out as possible). If the requested LonDPP is less than what is available in the data files, you should use the lowest LonDPP available instead (i.e. depth 7 images).</li>
+</ul>
+
+<p>For image depth 1 (e.g. <code class="language-plaintext highlighter-rouge">d1_x0_y0</code>), every tile has LonDPP equal to <code class="language-plaintext highlighter-rouge">0.000171661376953125</code> (for an explanation of why, see the next section) which is greater than the LonDPP of the query box, and is thus unusable. This makes intuitive sense: If the user wants an image which covers roughly 25 feet per pixel, we shouldn’t use an image that covers ~50 feet per pixel because the resolution is too poor. For image depth 2 (e.g. <code class="language-plaintext highlighter-rouge">d2_x0_y1</code>), the LonDPP is 0.0000858306884765625, which is better (i.e. smaller) than the user requested, so this is fine to use. For depth 3 tiles (e.g. <code class="language-plaintext highlighter-rouge">d3_x0_y2.png</code>), the LonDPP is 0.00004291534423828125. This is also smaller than the desired LonDPP, but using it is overkill since depth 2 tiles (e.g. <code class="language-plaintext highlighter-rouge">d2_x0_y1</code>) are already good enough. In my head, I find it useful to think of LonDPP as “blurriness”, i.e. the <code class="language-plaintext highlighter-rouge">d0</code> image is the blurriest (most zoomed out/highest LonDPP), and the <code class="language-plaintext highlighter-rouge">d7</code> images are the sharpest (most zoomed in, lowest LonDPP).</p>
+
+<p>As an example of an intersection query, consider the image below, which summarizes key parameter names and concepts. In this example search, the query box intersects 9 of the 16 tiles at depth 2.</p>
+
+<p><img src="rastering_example.png" alt="rastering_example" /></p>
+
+<p>For an interactive demo of how the provided images are arranged, see this <a href="FileDisplayDemo.html">FileDisplayDemo</a>. Try typing in a filename (.png extension is optional), and it will show what region of the map this file corresponds to, as well as the exact coordinates of its corners, in addition to the LonDPP in both longitude units per pixel and feet per pixel.</p>
+
+<p>Note: We do not take into account the curvature of the earth for rastering. The effect is too small to matter. That is, we assume the LonDPP is the same for all values of y. In an industrial strength mapping application, we would need to keep in mind that the LonDPP per tile varies as we move with respect to the equator.</p>
+
+<p>One natural question is: Why not use the best quality images available (i.e. smallest LonDPP, e.g. depth 7 images like <code class="language-plaintext highlighter-rouge">d7_x0_y0.png</code>)? The answer is that the front end doesn’t do any rescaling, so if we used ultra low LonDPPs for all queries, we’d end up with absolutely gigantic images displayed in our web browser.</p>
+
+<h2 id="image-file-layout-and-bounding-boxes">Image File Layout and “Bounding Boxes”</h2>
+
+<p>There are four constants that define the coordinates of the world map, all given in the <code class="language-plaintext highlighter-rouge">bearmaps.utils.Constants.java</code> class. The first is <code class="language-plaintext highlighter-rouge">ROOT_ULLAT</code>, which tells us the latitude of the upper left corner of the map. The second is <code class="language-plaintext highlighter-rouge">ROOT_ULLON</code>, which tells us the longitude of the upper left corner of the map. Similarly, <code class="language-plaintext highlighter-rouge">ROOT_LRLAT</code> and <code class="language-plaintext highlighter-rouge">ROOT_LRLON</code> give the latitude and longitude of the lower right corner of the map. All of the coordinates covered by a given tile are called the “bounding box” of that tile. So for example, the single depth 0 image <code class="language-plaintext highlighter-rouge">d0_x0_y0</code> covers the coordinates given by <code class="language-plaintext highlighter-rouge">ROOT_ULLAT</code>, <code class="language-plaintext highlighter-rouge">ROOT_ULLON</code>, <code class="language-plaintext highlighter-rouge">ROOT_LRLAT</code>, and <code class="language-plaintext highlighter-rouge">ROOT_LRLON</code>.</p>
+
+<p>Recommended exercise: Try opening <code class="language-plaintext highlighter-rouge">d0_x0_y0.png</code>. Then try using Google Maps to show the point given by <code class="language-plaintext highlighter-rouge">ROOT_ULLAT</code>, <code class="language-plaintext highlighter-rouge">ROOT_ULLON</code>. You should see that this point is the same as the top left corner of <code class="language-plaintext highlighter-rouge">d0_x0_y0.png</code>.</p>
+
+<p>Another important constant in <code class="language-plaintext highlighter-rouge">bearmaps.utils.Constants.java</code> is <code class="language-plaintext highlighter-rouge">TILE_SIZE</code>. This is important because we need this to compute the LonDPP of an image file. For the depth 0 tile, the LonDPP is just <code class="language-plaintext highlighter-rouge">(ROOT_LRLON - ROOT_ULLON)/TILE_SIZE</code>, i.e. the number of units of longitude divided by the number of pixels.</p>
+
+<p>All levels in the image library cover the exact same area. So for example, <code class="language-plaintext highlighter-rouge">d1_x0_y0.png</code>, <code class="language-plaintext highlighter-rouge">d1_x1_y0.png</code>, <code class="language-plaintext highlighter-rouge">d1_x0_y1.png</code>, and <code class="language-plaintext highlighter-rouge">d1_x1_y1.png</code> comprise the northwest, northeast, southwest, and southeast corners of the entire world map with coordinates given by the <code class="language-plaintext highlighter-rouge">ROOT_ULLAT</code>, <code class="language-plaintext highlighter-rouge">ROOT_ULLON</code>, <code class="language-plaintext highlighter-rouge">ROOT_LRLAT</code>, and <code class="language-plaintext highlighter-rouge">ROOT_LRLON</code> parameters.</p>
+
+<p>The bounding box given by an image can be mathematically computed using the information above. For example, suppose we want to know the region of the world that <code class="language-plaintext highlighter-rouge">d1_x1_y1.png</code> covers. We take advantage of the fact that we know that <code class="language-plaintext highlighter-rouge">d0_x0_y0.png</code> covers the region between longitudes <strong>-122.29980468</strong> and <strong>-122.21191406</strong> and between latitudes <strong>37.82280243</strong> and <strong>37.89219554</strong>. Since <code class="language-plaintext highlighter-rouge">d1_x1_y1.png</code> is just the southeastern quarter of this region, we know that it covers the region between longitudes <strong>-122.25585937</strong> and <strong>-122.21191406</strong> and between latitudes <strong>37.82280243</strong> and <strong>37.85749898</strong>.</p>
+
+<p>Similarly, we can compute the LonDPP in a similar way. Since <code class="language-plaintext highlighter-rouge">d1_x1_y1.png</code> is 256 x 256 pixels (as are all image tiles), the LonDPP is <code class="language-plaintext highlighter-rouge">(-122.21191406 - -122.25585937)/256</code> or 0.00017166.</p>
+
+<p>If you’ve fully digested the information described in the spec so far, you now know enough to figure out which files to provide given a particular query box.</p>
+
+<p>Note: If someone is helping you who took 61B in Spring 2017 or earlier, they might suggest using a Quadtree, which was the previously recommended way of solving the tile identification problem. You’re welcome to attempt this approach, but the project has changed enough that Quadtrees are no longer necessary nor desirable as a solution.</p>
+
+<h2 id="map-rastering-api">Map Rastering (API)</h2>
+
+<p>In Java, you will implement the <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code> by filling in a single method:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public Map&lt;String, Object&gt; processRequest(Map&lt;String, Double&gt; requestParams, Response response)
+</code></pre></div></div>
+
+<p>The given params are described in the skeleton code. An example is provided in the “Map Rastering (Overview)” section above, and you can always try opening up one of our provided html files and simply printing out <code class="language-plaintext highlighter-rouge">params</code> when this method is called to see what you’re given.</p>
+
+<p>Your code should return a <code class="language-plaintext highlighter-rouge">Map&lt;String, Object&gt;</code> as described in the Javadocs (the /** */ comments in the skeleton code). We do this as a way to hack around the fact that Java methods can only return one value. This map includes not just the two dimensional array of strings, but also a variety of other useful information that will be used by your web browser to display the image nicely (e.g. “raster_width” and “raster_height”). See the comments in the source code for more details. We will not explain these in the spec.</p>
+
+<h3 id="corner-cases">Corner Cases</h3>
+
+<!--
+When the client makes a call to `/raster` with the required parameters, the request handler will validate that all the required parameters are present (as declared in `REQUIRED_RASTER_REQUEST_PARAMS`. Then, in the Map `params`, those parameters are keys that you will be able to get the value of: for example, if I wanted to know the upper left point's longitude of the query rectangle, I could call `params.get("ullon")`.
+
+The query window shown above corresponds to the viewing window in the client. Although you are returning a full image, it will be translated (with parts off the window) appropriately by the client.-->
+
+<!-- There is one edge case that you may want to consider (although if you write your code naturally, it may not need to be explicitly handled): your query window in pixels may not be perfectly proportional to your query window in world-space distance (lat and lon). However, you only care about the pixels for dpp and lat and lon for intersection. -->
+
+<h4 id="corner-case-1-partial-coverage">Corner Case 1: Partial Coverage</h4>
+
+<p>For some queries, it may not be possible to find images to cover the entire query box. This is OK. This can happen in two ways:</p>
+<ul>
+  <li>If the user goes to the edge of the map beyond where data is available.</li>
+  <li>If the query box is so zoomed out that it includes the entire dataset.</li>
+</ul>
+
+<p>In these cases, simply return what data you do have available.</p>
+
+<h4 id="corner-case-2-no-coverage">Corner Case 2: No Coverage</h4>
+
+<p>You can also imagine that the user might provide query box for a location that is completely outside of the root longitude/latitudes. In this case, there is nothing to raster, so <code class="language-plaintext highlighter-rouge">raster_ullon</code>, <code class="language-plaintext highlighter-rouge">raster_ullat</code>, etc. are arbitrary, and you should set <code class="language-plaintext highlighter-rouge">query_success: false</code>. If the server receives a query box that doesn’t make any sense, eg. <code class="language-plaintext highlighter-rouge">ullon, ullat</code> is located to the right of <code class="language-plaintext highlighter-rouge">lrlon, lrlat</code>, you should also ensure <code class="language-plaintext highlighter-rouge">query_success</code> is set to false.</p>
+
+<h4 id="runtime">Runtime</h4>
+<p>Your constructor should take time linear in the number of tiles that match the query.</p>
+
+<p>You may not iterate through / explore all tiles to search for intersections with the query box. Suppose there are <strong>k</strong> tiles intersecting a query box, and <strong>n</strong> tiles total. Your entire query should run in <strong>O(k)</strong> time. Your algorithm should not run in <strong>Θ(n)</strong> time. This is not for performance reasons, since n is going to be pretty small in the real world (less than tens of thousands), but rather because the Θ(n) algorithm is inelegant.</p>
+
+<p>The autograder is not smart enough to tell the difference, so if you really insist, you can do the <strong>Θ(n)</strong> algorithm. But we encourage you to try to figure out something better.</p>
+
+<h4 id="warning">Warning</h4>
+
+<p>You will very likely get latitude and longitude or x and y mixed up at least once. You may also likely mix up which way is up vs. down for y. Make sure to check for that!</p>
+
+<h3 id="testing">Testing</h3>
+
+<h4 id="java-tests">Java Tests</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">src/test/java</code> file contains four test files. For the purposes of testing Part I, you should try out <code class="language-plaintext highlighter-rouge">TestRasterAPIHandler</code>. We also provide <code class="language-plaintext highlighter-rouge">TestRouter</code> and <code class="language-plaintext highlighter-rouge">TestRouterTiny</code> for Part II, and <code class="language-plaintext highlighter-rouge">TestDirections</code> for part IV.</p>
+
+<p>These tests are here to help save you time. In an ideal world, we’d have more time to get you to write these tests yourself so that you’d deeply understand them, but we’re giving them to you for free. You should avoid leaning too heavily on these tests unless you really understand them! The staff will not explain individual test failures that are covered elsewhere in the spec, and you are expected to be able to resolve test failures using the skills you’ve been learning all semester to effectively debug.</p>
+
+<p>Ineffective/inappropriate strategies for debugging: running the JUnit tests over and over again while making small changes each time, staring at the error messages and then posting on Ed asking what they mean rather than carefully reading the message and working to understand it.</p>
+
+<p>Effective strategies include: using the debugger; reproducing the buggy inputs in a simpler file that you write yourself; <a href="https://en.wikipedia.org/wiki/Rubber_duck_debugging">rubber ducky debugging</a>, etc.</p>
+
+<!-- You can feel free to modify these files however you want. We will not be testing your code on the same data as is given to you for your local testing - thus, if you pass all the tests in this file, you are not guaranteed to pass all the tests on the actual autograder.-->
+
+<h4 id="map-tests">Map Tests</h4>
+
+<p>It can be hard to use the provided <code class="language-plaintext highlighter-rouge">map.html</code> file to debug, since it involves user input and is generally complicated.</p>
+
+<p>Thus, we’ve also provided HTML test files in the <code class="language-plaintext highlighter-rouge">static/simple</code> folder. These are <code class="language-plaintext highlighter-rouge">test.html</code>, <code class="language-plaintext highlighter-rouge">testTwelveImages.html</code>, and <code class="language-plaintext highlighter-rouge">test1234.html</code> that you can use to test your project without using the front-end. Whereas <code class="language-plaintext highlighter-rouge">map.html</code> is a fully featured interactive website, these special test html files make a hard-coded call to your <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code>. You can modify the query parameters in these files. These files allow you to make a specific call easily.</p>
+
+<p>If you decide you want to debug using the fully featured <code class="language-plaintext highlighter-rouge">map.html</code>, you may find your browser’s Javascript console handy: on Windows, in Chrome you can press F12 to open up the developer tools, click the network tab, and all calls to your <code class="language-plaintext highlighter-rouge">MapServer</code> should be listed under type xhr, and if you mouse-over one of these xhr lines, you should see the full query appear, for example (click for higher resolution):
+<a href="js_console_network_tab.png"><img src="js_console_network_tab.png" alt="Console" /></a></p>
+
+<p>You can also see the replies from your <code class="language-plaintext highlighter-rouge">MapServer</code> in the console tab, e.g. (click for higher resolution)
+<a href="js_console_console_tab.png"><img src="js_console_console_tab.png" alt="Console" /></a></p>
+
+<h2 id="routing--location-data-part-ii">Routing &amp; Location Data (Part II)</h2>
+
+<p>In this part of the project, you’ll use the data structures and algorithms that you built in proj2ab and proj2c to provide street directions.</p>
+
+<p>This part of the project will be fairly short. If you still want an additional challenge, try the gold points (Part III).</p>
+
+<p>In Part I, you wrote the <code class="language-plaintext highlighter-rouge">processRequest</code> method of the <code class="language-plaintext highlighter-rouge">RasterAPIHandler</code> class. That is, you took direct communications from the web browser, and provided a result directly back to it.</p>
+
+<p>For Part II, you’ll go a level of abstraction deeper. That is, you’re going to fill out a helper class so that <code class="language-plaintext highlighter-rouge">RoutingAPIHandler.processRequest</code> can do its job.</p>
+
+<p>First, you’ll start by giving functionality to the <code class="language-plaintext highlighter-rouge">AugmentedStretMapGraph</code> class. Secondly, you’ll uncomment the (three line) <code class="language-plaintext highlighter-rouge">shortestPath</code> method in the <code class="language-plaintext highlighter-rouge">Router</code> class.</p>
+
+<h3 id="semanticstreetmapgraph">SemanticStreetMapGraph</h3>
+
+<p>The provided <code class="language-plaintext highlighter-rouge">AugmentedStreetMapGraph</code> is an extension of the provided <code class="language-plaintext highlighter-rouge">StreetMapGraph</code> class. In turn, the <code class="language-plaintext highlighter-rouge">StreetMapGraph</code> is an <code class="language-plaintext highlighter-rouge">AStarGraph&lt;Long&gt;</code>. Listed below are the methods provided by <code class="language-plaintext highlighter-rouge">StreetMapGraph</code>.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">WeightedEdge</span><span class="o">&lt;</span><span class="nc">Long</span><span class="o">&gt;&gt;</span> <span class="nf">neighbors</span><span class="o">(</span><span class="nc">Long</span> <span class="n">v</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">double</span> <span class="nf">estimatedDistanceToGoal</span><span class="o">(</span><span class="nc">Long</span> <span class="n">s</span><span class="o">,</span> <span class="nc">Long</span> <span class="n">goal</span><span class="o">);</span>
+<span class="kt">void</span> <span class="nf">addNode</span><span class="o">(</span><span class="nc">Node</span> <span class="n">node</span><span class="o">);</span>
+<span class="kt">void</span> <span class="nf">addWeightedEdge</span><span class="o">(</span><span class="kt">long</span> <span class="n">fromID</span><span class="o">,</span> <span class="kt">long</span> <span class="n">toID</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">double</span> <span class="nf">lon</span><span class="o">(</span><span class="kt">long</span> <span class="n">v</span><span class="o">);</span>
+<span class="kd">public</span> <span class="kt">double</span> <span class="nf">lat</span><span class="o">(</span><span class="kt">long</span> <span class="n">v</span><span class="o">);</span>
+<span class="kd">public</span> <span class="nc">String</span> <span class="nf">name</span><span class="o">(</span><span class="kt">long</span> <span class="n">v</span><span class="o">);</span>
+<span class="kd">protected</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Node</span><span class="o">&gt;</span> <span class="nf">getNodes</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p>Note that the in the graph we are working with here, each vertex is a <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">Long</a> corresponding to a physical location in Berkeley. Each has a latitude, longitude, and optionally, a name. Each vertex represents either a named place (e.g. Bongo Burger, vertex #318886222) or a spot along a road (e.g. <a href="https://www.google.com/maps/place/37%C2%B052'34.1%22N+122%C2%B015'34.5%22W/@37.8758944,-122.2599948,19.11z/data=!4m5!3m4!1s0x0:0x0!8m2!3d37.876131!4d-122.259577">this spot on Ridge street</a>, vertex #318886232). Not all vertices have names, e.g. the spot on Ridge street above. And many vertices don’t have edges, specifically those that correspond to places rather than spots along a road. So for example, <code class="language-plaintext highlighter-rouge">neighbors(318886222)</code> would return an empty list, since Bongo Burger is a place.</p>
+
+<p>Note that 5 of these methods are public, 2 of them are package-private (can only be used by other classes in the same package), and 1 is “protected.” Protected is a new access modifier we’re introducing in this project, which means that subclasses, even from another package, are able to access the variable.</p>
+
+<p>As you’ll see, <code class="language-plaintext highlighter-rouge">AugmentedStreetMapGraph</code> will be a subtype of the <code class="language-plaintext highlighter-rouge">StreetMapGraph</code> that will make use of this method.</p>
+
+<p>An <code class="language-plaintext highlighter-rouge">AugmentedStreetMapGraph</code> will have additional methods that make it more useful for efficiently handling routing (and autocomplete) queries. Specifically, it will have:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public long closest(double lon, double lat)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">public List&lt;String&gt; getLocationsByPrefix(String prefix)</code></li>
+  <li><code class="language-plaintext highlighter-rouge">public List&lt;Map&lt;String, Object&gt;&gt; getLocations(String locationName)</code></li>
+</ul>
+
+<p>These methods exist, but it’s your job to fill them in for parts II and III.</p>
+
+<h3 id="long-closestdouble-lon-double-lat"><code class="language-plaintext highlighter-rouge">long closest(double lon, double lat)</code></h3>
+
+<p>For some point on the map, whose longitude and latitude we are given, find the graph vertex that is closest to this point.</p>
+
+<p>Since closest will be used for finding street routes, you should only consider vertices that have neighbors. For example, if a user clicks at position (37.875613, -122.26009), the closest method should return 1281866063, which has position (<a href="https://www.google.com/maps/place/37°52'32.2&quot;N+122°15'36.9&quot;W/@37.8755691,-122.2605297">37.8756072, -122.2602582</a>), rather than 318886222, which has position (<a href="https://www.google.com/maps/place/37%C2%B052'32.2%22N+122%C2%B015'36.4%22W/@37.875613">37.875613, -122.260097</a>), even though the haversine distance to 1281866063 is greater than to 318886222. This is because vertex 318886222 has no neighbors. The reason it has no neighbors is because it is the restaurant Bongo Burger, and not a place along a road.</p>
+
+<p>This method must complete in <code class="language-plaintext highlighter-rouge">log(N)</code> time, where N is the number of nodes in the graph.</p>
+
+<p>To achieve this runtime, you’ll need to use a <code class="language-plaintext highlighter-rouge">KdTree</code> or a <code class="language-plaintext highlighter-rouge">WeirdPointSet</code>, both of which implement the <code class="language-plaintext highlighter-rouge">PointSet</code> interface.</p>
+
+<p>Note that <code class="language-plaintext highlighter-rouge">Node</code> objects are not <code class="language-plaintext highlighter-rouge">Point</code> objects, so you won’t be able to make a <code class="language-plaintext highlighter-rouge">KdTree</code> of nodes. You’ll need to do something a little more clever. There are many possibilities:</p>
+<ul>
+  <li>Using a map to go between Nodes and Points.</li>
+  <li>Making KdTree take a generic type (a little more difficult and less elegant, IMO).</li>
+</ul>
+
+<h3 id="shortestpath">shortestPath</h3>
+
+<p>Your last task is to implement the <code class="language-plaintext highlighter-rouge">shortestPath</code> method of the <code class="language-plaintext highlighter-rouge">Router</code> class. This will be very easy. Simply uncomment the given lines. Feel free to use either the given <code class="language-plaintext highlighter-rouge">WeirdSolver</code> or your <code class="language-plaintext highlighter-rouge">AStarSolver</code> from Project 2C.</p>
+
+<h2 id="autocomplete-and-search-part-iii">Autocomplete and Search (Part III)</h2>
+
+<p>This part of the project is optional, and can be completed for 48 gold points.</p>
+
+<h3 id="autocomplete">Autocomplete</h3>
+
+<p>We would like to implement an Autocomplete system where a user types in a partial query string, like “Mont”, and is returned a list of locations that have “Mont” as a prefix. To do this, implement <code class="language-plaintext highlighter-rouge">getLocationsByPrefix</code> in <code class="language-plaintext highlighter-rouge">AugmentedStreetMapGraph.java</code>, where the prefix is the partial query string. The prefix will be a <em>cleaned</em> name for search that is: (1) everything except characters A through Z and spaces removed, and (2) everything is lowercased. The method will return a list containing the <em>full names</em> of all locations whose cleaned names share the cleaned query string prefix, without duplicates.</p>
+
+<p><img src="autocomplete.png" alt="Autocomplete" /></p>
+
+<h5 id="runtime-1">Runtime</h5>
+
+<p>Assuming that the lengths of the names are bounded by some constant, querying for prefix of length <code class="language-plaintext highlighter-rouge">s</code> should take <code class="language-plaintext highlighter-rouge">O(k)</code> time where <code class="language-plaintext highlighter-rouge">k</code> is the number of words sharing the prefix. As with Part II, you’ll need to add some sort of additional data structure as an instance variable to your <code class="language-plaintext highlighter-rouge">AugmentedStreetMapGraph</code> in order to support this operation efficiently.</p>
+
+<h3 id="search">Search</h3>
+
+<p>The user should also be able to search for places of interest. Implement <code class="language-plaintext highlighter-rouge">AugmentedStreetMapGraph.getLocations</code> which collects a <code class="language-plaintext highlighter-rouge">List</code> of <code class="language-plaintext highlighter-rouge">Map</code>s containing information about the matching locations - that is, locations whose cleaned name match the cleaned query string exactly. This is <em>not</em> a unique list and should contain duplicates if multiple locations share the same name (i.e. Top Dog, Bongo Burger). See the Javadocs for the information each <code class="language-plaintext highlighter-rouge">Map</code> should contain.</p>
+
+<p><img src="selection.png" alt="Selection" /></p>
+
+<p>Implementing this method correctly will allow the web application to draw red dot markers on each of the matching locations. Note that because the location data is not very accurate, the markers may be a bit off from their real location. For example, the west side top dog is on the wrong side of the street!</p>
+
+<h5 id="runtime-2">Runtime</h5>
+
+<p>Suppose there are <code class="language-plaintext highlighter-rouge">k</code> results. Your query should run in <code class="language-plaintext highlighter-rouge">O(k)</code> time.</p>
+
+<h2 id="turn-by-turn-navigation-part-iv">Turn-by-turn Navigation (Part IV)</h2>
+
+<p>As an optional extra-challanging feature that is not for credit, you can use your A* search route to generate a sequence of navigation instructions that the server will then be able to display when you
+create a route. To do this, implement the additional method <code class="language-plaintext highlighter-rouge">routeDirections</code> in your <code class="language-plaintext highlighter-rouge">Router</code> class. This part of the project is not worth any points (even gold points), but it is awfully cool.</p>
+
+<p>To save effort, you’ll want to use various methods in the <code class="language-plaintext highlighter-rouge">NavigationDirections</code> class, for example <code class="language-plaintext highlighter-rouge">Bearing</code>.</p>
+
+<p>How we will represent these navigation directions will be with the NavigationDirection object defined within <code class="language-plaintext highlighter-rouge">Router.java</code>. A direction will follow the format of “DIRECTION on WAY for DISTANCE miles”. Note that DIRECTION is an <code class="language-plaintext highlighter-rouge">int</code> that will correspond to a defined <code class="language-plaintext highlighter-rouge">String</code> direction in the <code class="language-plaintext highlighter-rouge">directions</code> map, which has 8 possible options:</p>
+
+<ul>
+  <li>“Start”</li>
+  <li>“Continue straight”</li>
+  <li>“Slight left/right”</li>
+  <li>“Turn left/right”</li>
+  <li>“Sharp left/right”</li>
+</ul>
+
+<p>What direction a given NavigationDirection should have will be dependent on your previous node and your current node along the computed route. Specifically, the direction will
+depend on the <a href="https://en.wikipedia.org/wiki/Bearing_(navigation)">relative bearing</a> between the previous node and the current node, and should be as followed:</p>
+
+<ul>
+  <li>Between -15 and 15 degrees the direction should be “Continue straight”.</li>
+  <li>Beyond -15 and 15 degrees but between -30 and 30 degrees the direction should be “Slight left/right”.</li>
+  <li>Beyond -30 and 30 degrees but between -100 and 100 degrees the direction should be “Turn left/right”.</li>
+  <li>Beyond -100 and 100 degrees the direction should be “Sharp left/right”.</li>
+</ul>
+
+<p>The navigation will be a bit complicated due to the fact that the previous and current node at a given point on your route may not necessarily represent a change in the “way” that you’re currently on, where a way is the name of a street or path that you’re currently travelling along. That is, if your route is from vertex 38623 to 2398471 to 1239871, these might all be the same street, and driving directions aren’t useful if they keep saying “Go straight on Shattuck. Go Straight on Shattuck. Go straight on Shattuck.” As a result, what you will need to do as you iterate through your route is keep track of when you actually change ways, and if so generate the correct distance for the NavigationDirection representing the way you were previously on, add it to the list, and continue. If you happen to change ways to one without a name, it’s way should be set to the constant “unknown road”.</p>
+
+<p>As an example, suppose when calling <code class="language-plaintext highlighter-rouge">routeDirections</code> for a given route, the first node you remove is on the way “Shattuck Avenue”. You should create a NavigationDirection where the direction corresponds to “Start”, and as you iterate through the rest of the nodes, keep track of the distance along this way you travel.
+When you finally get to a node that is not on “Shattuck Avenue”, you should make sure NavigationDirection should have the correct total distance travelled along the previous way to get there (suppose this is 0.5 miles).
+As a result, the very first NavigationDirection in your returned list should represent the direction “Start on Shattuck Avenue for 0.5 miles.”. From there, your next NavigationDirection should have the name of the way your current node is on, the direction should be calculated via the relative bearing, and you should continue calculating its distance like the first one.</p>
+
+<p>After you have implemented this properly you should be able to view your directions on the server by plotting a route and clicking on the button on the top right corner of the screen.</p>
+
+<p><img src="navigation.png" alt="Navigation" /></p>
+
+<h2 id="going-even-further-part-v">Going Even Further (Part V)</h2>
+
+<p>You’re welcome to go even further. If you come up with something cool, let us know.</p>
+
+<h2 id="heroku-deployment">Heroku Deployment</h2>
+
+<p>You will be able to deploy your street mapping application to the web.</p>
+
+<p>For instructions on deploying on Heroku click <a href="heroku.html">here</a></p>
+
+<h2 id="faq">FAQ</h2>
+
+<h4 id="i-provided-the-correct-string-output-but-it-doesnt-show-up">I provided the correct String[][] output but it doesn’t show up!</h4>
+
+<p>In order for something to show up on test.html, you need to set query_success to true, and in order for something to show up on map.html all the parameters must be set.</p>
+
+<h4 id="i-checked-every-element-of-map-i-return-with-rasterapihandlerprocessrequest-and-theyre-all-correct-but-still-nothing-is-appearing">I checked every element of map I return with RasterAPIHandler.processRequest and they’re all correct, but still nothing is appearing.</h4>
+
+<p>If you’re using notation that you learned somewhere that looks like {{}} to initialize your map, you should not be doing so. Double-braces notation is an unintended “feature” of Java that is actually a terrible plan <a href="https://blog.jooq.org/2014/12/08/dont-be-clever-the-double-curly-braces-anti-pattern/">for a number of reasons</a>.</p>
+
+<h4 id="my-initial-map-doesnt-fill-up-the-screen">My initial map doesn’t fill up the screen!</h4>
+
+<p>If your monitor resolution is high &amp; the window is fullscreen, this can happen. Refer to the reference solution to see if yours looks similar.</p>
+
+<h4 id="i-dont-draw-the-entire-query-box-on-some-inputs-because-i-dont-intersect-enough-tiles">I don’t draw the entire query box on some inputs because I don’t intersect enough tiles.</h4>
+
+<p>That’s fine, that’ll happen when you go way to the edge of the map. For example, if you go too far west, you’ll never reach the bay because it does not exist.</p>
+
+<h4 id="im-getting-funky-behavior-with-moving-the-map-around-my-image-isnt-large-enough-at-initial-load-after-the-initial-load-i-cant-move-the-map-or-after-the-initial-load-i-start-getting-nan-as-input-params">I’m getting funky behavior with moving the map around, my image isn’t large enough at initial load, after the initial load, I can’t move the map, or after the initial load, I start getting NaN as input params.</h4>
+
+<p>These all have to do with your returned parameters being incorrect. Make sure you’re returning the exact parameters as given in the project 3 slides or the test html files.</p>
+
+<h4 id="im-failing-the-local-router-tests-and-i-dont-know-why-it-says-javalangassertionerror-the-test-says-expected-760706748-3178363987--but-actual">I’m failing the local router tests and I don’t know why. It says java.lang.AssertionError: The test says: Expected: [760706748, 3178363987, …], but Actual:[]</h4>
+
+<p>This is probably because you are including locations of places like Bongo Burger in your KdTree (or WeirdPointSet). As noted in the spec above, when handling a call to <code class="language-plaintext highlighter-rouge">closest</code>, you should only include vertices that have neighbors, otherwise closest may a return a node with no neighbors, which is trivially unable to act as a useful starting or ending node (since it literally cannot be reached).</p>
+
+<h4 id="i-sometimes-pass-the-timing-tests-when-i-submit-but-not-consistently">I sometimes pass the timing tests when I submit, but not consistently.</h4>
+
+<p>If you have a efficient solution: it will always pass. I have yet to fail the timing test with either my solution or any of the other staff’s solutions over a lot of attempts to check for timing volatility.</p>
+
+<p>If you have a borderline-efficient solution:  it will sometimes pass. That’s just how it is, and there really isn’t any way around this if we want the autograder to run in a reasonable amount of time.</p>
+
+<h4 id="how-do-query-boxes-or-bounding-boxes-make-sense-on-a-round-world">How do query boxes or bounding boxes make sense on a round world?</h4>
+
+<p>For the rastering part of the project, we assume the world is effectively flat on the scale of the map you’re looking at. In truth, each image doesn’t cover a rectangular area, but rather a “spherical cap”.</p>
+
+<h4 id="im-missing-xml-files-andor-library-fa20-is-not-updated">I’m missing xml files and/or library-fa20 is not updated.</h4>
+
+<p>Go into the library-fa20 directory and try the commands <code class="language-plaintext highlighter-rouge">git submodule update --init</code> followed by <code class="language-plaintext highlighter-rouge">git checkout master</code>.</p>
+
+<h4 id="my-getlocations-method-works-fine-and-i-get-markers-on-the-map-when-i-click-on-a-search-result-but-the-autograder-test-for-getlocations-method-fails">My getLocations method works fine and I get markers on the map when I click on a search result but the Autograder test for getLocations method fails.</h4>
+
+<p>Try verifying that your getLocations method works for the cleaned strings as well other than the unclean strings</p>
+
+<h2 id="common-bugs">Common Bugs</h2>
+
+<p><b> I pass all the local tests, but I’m getting a NoSuchElementException in the autograder:</b> The autograder uses randomized sources and targets. Some targets may not be reachable from all sources. In these cases, you can do anything you want (e.g. return an empty list of longs) except let your program crash.</p>
+
+<h2 id="office-hours">Office Hours</h2>
+<p>For office hours debugging, we will be implementing a procedure to keep time usage reasonable.</p>
+<ul>
+  <li>Course staff will spend at most ~10 minutes per student.</li>
+  <li>
+    <p>You must provide a useful description of your question, or the staff may choose to help another
+person on the queue that does have one.</p>
+  </li>
+  <li>
+    <p>Your code must be well documented,
+ including all methods you write, according to the
+ <a href="../../guides/style-guide.html#comments">style guide</a>.
+ This is to minimize time spent verbally explaining what each method does.</p>
+  </li>
+  <li>
+    <p>If your question is for debugging help, you must be prepared to explain the error that is being caused
+and have a test or input that can easily reproduce
+the bug for ease of debugging. If you come to us saying something does not work, but have not written any tests or attempted to use the debugger, we will not help you.</p>
+  </li>
+  <li>When we do provide debugging help, it may be at a high level, where we suggest ways to
+ reorganize your code in order to make clarity and debugging easier. It is not a good use of
+ your time or the TAs’ time to try to find bugs in something that is disorganized and brittle.</li>
+</ul>
+
+<h2 id="submission">Submission</h2>
+<p>The autograder will be released on Wednesday 11/04/2020.</p>
+
+<p>Note: We have your git configured to avoid pushing all the extra stuff we don’t care about, e.g. html files <strong>DO NOT submit or upload to git any xml or png files</strong>. Attempting to do so will eat your internet bandwidth and possibly even crash your computer.</p>
+
+<h2 id="resources">Resources</h2>
+
+<p><a href="https://www.youtube.com/playlist?list=PL8FaHk7qbOD5b9eP_PZommgQyvl4sjuWp">Project 2 video playlist</a></p>
+
+<p><a href="https://docs.google.com/presentation/d/1tkHQzv0S9AAIEwjqpOnHpQW9TRGUf_MMJCZ4fMwdOIg/edit?usp=sharing">Project 2 slides</a></p>
+
+<p>FileDisplayDemo: <a href="FileDisplayDemo.html">FileDisplayDemo.html</a></p>
+
+<p><a href="https://fa20.datastructur.es/about.html#policy-on-collaboration-and-cheating">Course collaboration policy</a></p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Data made available by OSM under the <a href="https://fa20.datastructur.es/materials/proj/proj2d/www.openstreetmap.org/copyright">Open Database License</a>.
+JavaSpark web framework and Google Gson library.</p>
+
+<p>Alan Yao for creating the original version of this project. Colby Yuan and Eli Lipsitz for substantial refactoring of the front end. Rahul Nangia for substantial refactoring of the back end.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

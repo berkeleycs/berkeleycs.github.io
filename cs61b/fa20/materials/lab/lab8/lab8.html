@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 8: HashMap | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 8: HashMap</header><ul id="markdown-toc">
+  <li><a href="lab8.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab8.html#myhashmap" id="markdown-toc-myhashmap">MyHashMap</a></li>
+  <li><a href="lab8.html#so-how-fast-is-it-redux" id="markdown-toc-so-how-fast-is-it-redux">So… How Fast Is It (Redux)?</a></li>
+  <li><a href="lab8.html#optional-exercises" id="markdown-toc-optional-exercises">Optional Exercises</a></li>
+  <li><a href="lab8.html#lab-debrief-and-submission" id="markdown-toc-lab-debrief-and-submission">Lab Debrief and Submission</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this lab, you’ll create <strong>MyHashMap</strong>, an implementation of the Map61B interface, which represents a hash map. This will be very similar to Lab 7, except this time we’re building a Hash Map rather than a Tree Map.</p>
+
+<p>After you’ve completed your implementation, you’ll compare the performance of your implementation to a list-based Map implementation <code class="language-plaintext highlighter-rouge">ULLMap</code> as well as the built-in Java <code class="language-plaintext highlighter-rouge">HashMap</code> class (which also uses a hash table).</p>
+
+<h2 id="myhashmap">MyHashMap</h2>
+
+<p>Create a class <strong>MyHashMap</strong> that implements the <strong>Map61B</strong> interface. You must do this in a file named <code class="language-plaintext highlighter-rouge">MyHashMap.java</code>. Your implementation is required to implement all of the methods given in <strong>Map61B</strong> <em>except</em> for <code class="language-plaintext highlighter-rouge">remove</code>. For this method you should throw an <code class="language-plaintext highlighter-rouge">UnsupportedOperationException</code>. Note that you should implement <code class="language-plaintext highlighter-rouge">keySet</code> and <code class="language-plaintext highlighter-rouge">iterator</code> this time, where <code class="language-plaintext highlighter-rouge">iterator</code> returns an Iterator that iterates over the stored keys (and both of these functions may return the keys in any order). For these methods, we recommend you simply create a <code class="language-plaintext highlighter-rouge">HashSet</code> instance variable that holds all your keys.</p>
+
+<p>Additionally, you should implement the following constructors:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public MyHashMap();
+public MyHashMap(int initialSize);
+public MyHashMap(int initialSize, double loadFactor);
+</code></pre></div></div>
+
+<p>Your MyHashMap should initially have a number of buckets equal to initialSize. You should increase the size of your MyHashMap when the load factor exceeds the set <code class="language-plaintext highlighter-rouge">loadFactor</code>. If <code class="language-plaintext highlighter-rouge">initialSize</code> and <code class="language-plaintext highlighter-rouge">loadFactor</code> aren’t given, you should set defaults <code class="language-plaintext highlighter-rouge">initialSize = 16</code> and <code class="language-plaintext highlighter-rouge">loadFactor = 0.75</code> (as Java’s <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/HashMap.html#%3Cinit%3E()">built-in <strong>HashMap</strong></a> does). When resizing, make sure to multiplicatively increase the size, not additively (e.g. multiply by 2, don’t add 100 or something). You are not required to resize down. Your MyHashMap operations should all be constant amortized time, assuming that the hashCode of any objects inserted spread things out nicely (hint: every Object in Java has its own hashCode method).</p>
+
+<p>If the same key is inserted more than once, the value should be updated each time. You can assume <code class="language-plaintext highlighter-rouge">null</code> keys will never be inserted.</p>
+
+<p>You should handle collisions with separate chaining. You may not import any libraries other than <code class="language-plaintext highlighter-rouge">ArrayList</code>, <code class="language-plaintext highlighter-rouge">LinkedList</code>, <code class="language-plaintext highlighter-rouge">HashSet</code>, <code class="language-plaintext highlighter-rouge">iterator</code> and <code class="language-plaintext highlighter-rouge">Set</code>.</p>
+
+<p>You can test your implementation using <code class="language-plaintext highlighter-rouge">TestMyHashMap.java</code>.</p>
+
+<p>You may find the following resources useful:</p>
+
+<ul>
+  <li>HashMap code from pages 136 and 137 of <a href="http://www-inst.eecs.berkeley.edu/~cs61b/fa14/book2/data-structures.pdf">Data Structures Into Java</a>, from our course references page.</li>
+  <li><a href="https://algs4.cs.princeton.edu/34hash">Chapter 3.4</a> of our optional Algorithms textbook.</li>
+  <li><a href="http://algs4.cs.princeton.edu/34hash/SeparateChainingHashST.java.html">HashTable code code</a> from our optional textbook.</li>
+  <li><code class="language-plaintext highlighter-rouge">ULLMap.java</code> (provided), a working unordered linked list based <strong>Map61B</strong> implementation.</li>
+  <li>Lecture 19 <a href="https://docs.google.com/presentation/d/1QevjelsyVO8Ea375VRhIf-o--MIMDYB83OxBbXnbQZU/edit?usp=sharing">slides</a>.</li>
+</ul>
+
+<p>One thing to note before getting started is that because of a problem similar to the one you saw when writing ArrayDeque, you will need to initialize your buckets as something like <code class="language-plaintext highlighter-rouge">(List&lt;T&gt;[]) new ArrayList[size]</code> if you want to create an array of lists since Java has some weird restrictions around generic types.</p>
+
+<h2 id="so-how-fast-is-it-redux">So… How Fast Is It (Redux)?</h2>
+
+<p>There are two interactive speed tests provided in <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest.java</code> and <code class="language-plaintext highlighter-rouge">InsertInOrderSpeedTest.java</code>. Do not attempt to run these tests before you’ve completed <strong>MyHashMap</strong>. Once you’re ready, you can run the tests in IntelliJ.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest</code> class performs tests on element-insertion speed of your <strong>MyHashMap</strong>, <strong>ULLMap</strong> (provided), and Java’s built-in <strong>HashMap</strong>. It works by asking the user for an input size <code class="language-plaintext highlighter-rouge">N</code>, then generates <code class="language-plaintext highlighter-rouge">N</code> Strings of length 10 and inserts them into the maps as &lt;String, Integer&gt; pairs.</p>
+
+<p>Try it out and see how your data structure scales with <code class="language-plaintext highlighter-rouge">N</code> compared to the naive and industrial-strength implementations. Record your results in a file named <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>. There is no standard format required for your results, and there is no required number of data points.</p>
+
+<p>Now try running <code class="language-plaintext highlighter-rouge">InsertInOrderSpeedTest</code>, which behaves similarly to <code class="language-plaintext highlighter-rouge">InsertRandomSpeedTest</code>, except this time the Strings in <code class="language-plaintext highlighter-rouge">&lt;String, Integer&gt;</code> key-value pairs are inserted in <a href="http://en.wikipedia.org/wiki/Lexicographical_order">lexicographically-increasing order</a>. Note that unlike lab7, your code should be in the rough ballpark of Java’s built in solution – say within a factor of 10 or so. What this tells us is that state-of-the-art HashMaps are relatively easy to implement compared to state-of-the-art TreeMaps. When would it be better to use a BSTMap/TreeMap instead of a HashMap? Discuss this with your labmates, and add your answer to <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>.</p>
+
+<h2 id="optional-exercises">Optional Exercises</h2>
+
+<p>This will not be graded, but you can still receive feedback on the autograder.</p>
+
+<p>Implement the methods <code class="language-plaintext highlighter-rouge">remove(K key)</code> and <code class="language-plaintext highlighter-rouge">remove(K key, V value)</code>, in your <strong>MyHashMap</strong> class. For an extra challenge, implement <code class="language-plaintext highlighter-rouge">keySet()</code> and <code class="language-plaintext highlighter-rouge">iterator</code> without using a second instance variable to store the set of keys.</p>
+
+<p>For <code class="language-plaintext highlighter-rouge">remove</code>, you should return null if the argument key does not exist in the <strong>MyHashMap</strong>.
+Otherwise, delete the key-value pair (key, value) and return value.</p>
+
+<h2 id="lab-debrief-and-submission">Lab Debrief and Submission</h2>
+
+<p>At the end of lab, your TA will go over the reference solution. This will be helpful if you haven’t finished the lab, since we don’t want you to be stuck working on lab too much outside of lab. (This is also an incentive for you to go to lab!)</p>
+
+<p>Make sure to submit your completed <code class="language-plaintext highlighter-rouge">MyHashMap.java</code> and <code class="language-plaintext highlighter-rouge">speedTestResults.txt</code>, and submit through git and Gradescope as usual.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

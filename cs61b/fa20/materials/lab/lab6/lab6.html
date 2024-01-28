@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 6: Disjoint Sets | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Lab 6: Disjoint Sets</header><ul id="markdown-toc">
+  <li><a href="lab6.html#reminder-about-queueing-up-for-labs" id="markdown-toc-reminder-about-queueing-up-for-labs">Reminder about queueing up for labs</a></li>
+  <li><a href="lab6.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="lab6.html#weighted-quick-union" id="markdown-toc-weighted-quick-union">Weighted Quick Union</a></li>
+  <li><a href="lab6.html#optional-questions--exercises" id="markdown-toc-optional-questions--exercises">Optional Questions / Exercises</a>    <ul>
+      <li><a href="lab6.html#quick-find" id="markdown-toc-quick-find">Quick Find</a></li>
+      <li><a href="lab6.html#weighted-quick-union-1" id="markdown-toc-weighted-quick-union-1">Weighted Quick Union</a></li>
+    </ul>
+  </li>
+  <li><a href="lab6.html#ta-overview" id="markdown-toc-ta-overview">TA Overview</a></li>
+  <li><a href="lab6.html#submission-and-recap" id="markdown-toc-submission-and-recap">Submission and Recap</a></li>
+</ul>
+
+<h2 id="reminder-about-queueing-up-for-labs">Reminder about queueing up for labs</h2>
+<p>Recall from <a href="https://us.edstem.org/courses/979/discussion/135760">this weeks weekly announcements</a> that you will no longer see lab locations on <a href="https://oh.datastructur.es/">oh.datastructur.es</a>. Instead, as the post outlines, we will be conducting lab help queues on Discord. This way, you’ll have a lot less tabs open and we’ll be able to help students out a lot quicker. Make sure to always include your room number in your message!</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Here are the <a href="https://docs.google.com/presentation/d/1xjJvrb4coslHuDP4BTfjhKQSiwqS--jE9nXm2aDCpSo/edit?usp=sharing">slides</a> for this lab.</p>
+
+<p>In this lab, you’ll create <code class="language-plaintext highlighter-rouge">UnionFind</code> which will be used to solve the dynamic connectivity problem. As mentioned in discussion “Union Find” is a synonym for “Disjoint Sets”.</p>
+
+<p>Your implementation of the Union Find data structure will be the most advanced version from lecture, namely Weighted Quick Union. For more information about this please reference the <a href="https://docs.google.com/presentation/d/1TQVF5vHJQb-Qp4h1RanhR8863QQJO-jO0R7GFTArrYo/edit?usp=sharing">slides from lecture</a>. The version from lecture has one major difference from our implementation: Ours will not keep a seperate size array. Instead, we will be using an approach that uses a negative value to indicate both that the element is a root and the size of its set. To better visualize and help you understand the operations on disjoint sets check out <a href="https://www.cs.usfca.edu/~galles/visualization/DisjointSets.html">this online datastructure visualizer</a>. Be sure to turn on Union by Rank where Rank = # of nodes (Union by Rank is just another way of saying “Weighted Quick Union”).</p>
+
+<p>Optionally, you may also implement path compression. If you do so, make sure to enable Path Compression in the visualizer linked above.</p>
+
+<h2 id="weighted-quick-union">Weighted Quick Union</h2>
+<p>A skeleton will be provided in which you will have to fill in the following methods to complete the data structure:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">public UnionFind(int n):</code> Creates a UnionFind data structure holding <code class="language-plaintext highlighter-rouge">n</code> vertices, in the set {0, …, n-1}. Initially, all vertices are in disjoint sets.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void validate(int v1)</code>: Throws an <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code> if <code class="language-plaintext highlighter-rouge">v1</code> is not a valid vertex.</li>
+  <li><code class="language-plaintext highlighter-rouge">public int sizeOf(int v1)</code>: Returns the size of the set <code class="language-plaintext highlighter-rouge">v1</code> belongs to.</li>
+  <li><code class="language-plaintext highlighter-rouge">public int parent(int v1)</code>: Returns the parent of <code class="language-plaintext highlighter-rouge">v1</code>. If <code class="language-plaintext highlighter-rouge">v1</code> is the root of a tree, returns the negative size of the tree for which <code class="language-plaintext highlighter-rouge">v1</code> is the root.</li>
+  <li><code class="language-plaintext highlighter-rouge">public boolean isConnected(int v1, int v2)</code>: Returns true if nodes <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code> are connected.</li>
+  <li><code class="language-plaintext highlighter-rouge">public void connect(int v1, int v2)</code>: Connects two elements <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code> together. <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code> can be any valid elements, and a union-by-size heuristic is used. <strong>If the sizes of the sets are equal, tie break by making <code class="language-plaintext highlighter-rouge">v2</code>’s root the root of the combined set.</strong> Connecting a vertex with itself or vertices that are already connected should not change the sets, but it may alter the internal structure of the data structure.</li>
+  <li><code class="language-plaintext highlighter-rouge">public int find(int v1)</code>: Returns the root of the set <code class="language-plaintext highlighter-rouge">v1</code> belongs to. Optionally, path-compression can be employed allowing for fast search-time.</li>
+</ul>
+
+<p>For the above functions you should also correctly handle faulty inputs, e.g if invalid vertices are passed into the above functions, throw an IllegalArgumentException.</p>
+
+<p>When implementing <code class="language-plaintext highlighter-rouge">UnionFind</code> feel free to either follow the above order or any other order which makes sense to you. Please note that that these methods are not independent from one another, and some methods might be useful as helper methods for others.</p>
+
+<p>You are free to write your own tests for this assignment if you want to ensure that your implementation is right without running it through the autograder, but we will not be grading any tests.</p>
+
+<h2 id="optional-questions--exercises">Optional Questions / Exercises</h2>
+
+<p>Below are a number of exercises that deal with Quick Find, Weighted Quick Union, and some variants of them. These questions are not required, but will serve as good practice in thinking about the differences between these differing implementations. <strong>The answers are displayed in white text, so if you want to check what you think highlight the line to reveal the text.</strong></p>
+
+<h3 id="quick-find">Quick Find</h3>
+<ol>
+  <li>
+    <p>Using the Quick Find algorithm with $N$ items, what is the worst-case runtime for the find operation?</p>
+
+    <p>Answer: <span style="color:white">The worst case runtime is $\Theta(1)$</span></p>
+  </li>
+  <li>
+    <p>Using the Quick Find algorithm with $N$ items, what is the worst-case runtime for the union operation?</p>
+
+    <p>Answer: <span style="color:white">The worst case runtime is $\Theta(N)$.</span></p>
+  </li>
+</ol>
+
+<h3 id="weighted-quick-union-1">Weighted Quick Union</h3>
+
+<p>Define a <em>fully</em> connected <code class="language-plaintext highlighter-rouge">DisjointSets</code> object as one in which connected returns true for any arguments, due to prior calls to <code class="language-plaintext highlighter-rouge">union</code>. Suppose we have a fully connected <code class="language-plaintext highlighter-rouge">DisjointSets</code> object with 6 items. Give the best and worst case height for the two implementations below. We define height as the number of links from the root to the deepest leaf, so a tree with 1 element has a height of 0. Give your answer as an exact value. Assume <code class="language-plaintext highlighter-rouge">HeightedQuickUnion</code> is like <code class="language-plaintext highlighter-rouge">WeightedQuickUnion</code>, except uses height instead of size/weight to determine which subtree is the new root. <em>Hint:</em> Try drawing out a few disjoint set trees and think about the different possible sequences of union operations that will result in the maximum height vs. the minimum height tree.</p>
+<ol>
+  <li>
+    <p>What is the best-case height for a <code class="language-plaintext highlighter-rouge">WeightedQuickUnion</code> containing 6 items?</p>
+
+    <p>Answer: <span style="color:white">The best case height is 1.</span></p>
+  </li>
+  <li>
+    <p>What is the worst-case height for a <code class="language-plaintext highlighter-rouge">WeightedQuickUnion</code> containing 6 items?</p>
+
+    <p>Answer: <span style="color:white">The worst case height is 2.</span></p>
+  </li>
+  <li>
+    <p>What is the best-case height for a <code class="language-plaintext highlighter-rouge">HeightedQuickUnion</code> containing 6 items?</p>
+
+    <p>Answer: <span style="color:white">The best case height is 1.</span></p>
+  </li>
+  <li>
+    <p>What is the worst-case height for a <code class="language-plaintext highlighter-rouge">HeightedQuickUnion</code> containing 6 items?</p>
+
+    <p>Answer: <span style="color:white">The worse case height is 2.</span></p>
+  </li>
+</ol>
+
+<h2 id="ta-overview">TA Overview</h2>
+<p>At the end of lab, your TA will go over the reference solution to <code class="language-plaintext highlighter-rouge">UnionFind</code>. This will be helpful if you haven’t finished the lab, since we don’t want you to be stuck working on lab too much outside of lab. (This is also an incentive for you to go to lab!)</p>
+
+<h2 id="submission-and-recap">Submission and Recap</h2>
+<p>In this lab we covered the implementation of Weighted Quick Union, optionally with path compression. You already know the drill, but just to remind you, make sure to push your code to GitHub and submit to Gradescope to get credit for this lab. We will only be grading the code you have written in <code class="language-plaintext highlighter-rouge">UnionFind</code>.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

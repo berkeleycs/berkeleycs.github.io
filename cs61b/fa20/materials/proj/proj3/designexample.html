@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BearMaps Design Document | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">BearMaps Design Document</header><h2 id="classes-and-data-structures">Classes and Data Structures</h2>
+
+<h3 id="rasterapihandler">RasterAPIHandler</h3>
+
+<p>This class provides <code class="language-plaintext highlighter-rouge">static</code> methods that allow processing requests from the web browser for map images. These images will be rastered into one large image to be displayed to the user.</p>
+
+<p>This class does not have any instance variables.</p>
+
+<h3 id="point">Point</h3>
+
+<p>Represents a point on the map.</p>
+
+<h4 id="instance-variables">Instance Variables</h4>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">x</code> - the x-axis (or equivalent) coordinate of a point.</li>
+  <li><code class="language-plaintext highlighter-rouge">y</code> - the y-axis (or equivalent) coordinate of a point.</li>
+</ol>
+
+<h3 id="augmentedstreetmapgraph">AugmentedStreetMapGraph</h3>
+
+<p>An augmented graph that is more powerful than a standard StreetMapGraph.
+Specifically, it supports the following additional operations such as finding a node in the graph whose associated <code class="language-plaintext highlighter-rouge">(lon, lat)</code> coordinates are closest to some given coordinates.</p>
+
+<h4 id="instance-variables-1">Instance Variables</h4>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">HashMap&lt;Point, Node&gt; nodePointMap</code> - a map keeping track what graph <code class="language-plaintext highlighter-rouge">Node</code> is associated with a certain <code class="language-plaintext highlighter-rouge">Point</code> on the map.</li>
+  <li><code class="language-plaintext highlighter-rouge">WeirdPointSet pointSet</code> - a set of all the points associated with the reachable <code class="language-plaintext highlighter-rouge">Node</code>s in this graph.</li>
+</ol>
+
+<h2 id="algorithms">Algorithms</h2>
+
+<h3 id="augmentedstreetmapgraph-1">AugmentedStreetMapGraph</h3>
+
+<h4 id="closest">closest</h4>
+<p>The <code class="language-plaintext highlighter-rouge">closest</code> method takes in map coordinates, <code class="language-plaintext highlighter-rouge">(lon, lat)</code>, and returns the <code class="language-plaintext highlighter-rouge">id</code> of the graph <code class="language-plaintext highlighter-rouge">Node</code>, whose associated 
+map <code class="language-plaintext highlighter-rouge">Point</code>, is closest to the given coordinates. We pass the given coordinates into our <code class="language-plaintext highlighter-rouge">pointSet</code>’s <code class="language-plaintext highlighter-rouge">nearest</code> method to get the nearest <code class="language-plaintext highlighter-rouge">Point</code>. We then use the <code class="language-plaintext highlighter-rouge">nodePoint</code> map to find the graph <code class="language-plaintext highlighter-rouge">Node</code> associated with the returned <code class="language-plaintext highlighter-rouge">Point</code>.</p>
+
+<h2 id="persistence">Persistence</h2>
+
+<p><strong>Note:</strong> This section was not required for Project 2, but is necessary for Project 3. <!--For the purposes of demonstrating how you might fill this section in your own design document, imagine that Project 2, you were required to save all the shortest paths found by the `Router` class, so we can load them into the map later, even after we shut down the `MapServer`.--></p>
+
+<!--
+In our `proj3` directory we have a subdirectory called `savedPaths`. Every time a shortest-path is computed by an `AStarSolver` object, 
+we use the `solution()` method to get the list of nodes along the path. We make a new text file with the name of the path in the `savedPaths` folder. For example, if the path was from Soda Hall to Top Dog, the file would be called `SodaHall_TopDog.txt`. We then write into the text file the `id` of each node in the aforementioned list in a new line. When a user wants to load a path from Soda Hall to Top Dog, we look for a file 
+named `SodaHall_TopDog.txt` in our `savedPaths` folder. If we find it, we read each line from the text file to get all the nodes in that path.
+-->
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

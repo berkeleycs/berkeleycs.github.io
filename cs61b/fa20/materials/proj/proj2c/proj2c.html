@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 2C: AStarSolver | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 2C: AStarSolver</header><ul id="markdown-toc">
+  <li><a href="proj2c.html#setup-and-getting-the-skeleton-files" id="markdown-toc-setup-and-getting-the-skeleton-files">Setup and Getting the Skeleton Files</a></li>
+  <li><a href="proj2c.html#introduction" id="markdown-toc-introduction">Introduction</a>    <ul>
+      <li><a href="proj2c.html#astargraph" id="markdown-toc-astargraph">AStarGraph</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2c.html#the-a-algorithm" id="markdown-toc-the-a-algorithm">The A* Algorithm</a>    <ul>
+      <li><a href="proj2c.html#memory-optimizing-a" id="markdown-toc-memory-optimizing-a">Memory-Optimizing A*</a>        <ul>
+          <li><a href="proj2c.html#algorithm-pseudocode" id="markdown-toc-algorithm-pseudocode">Algorithm Pseudocode</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="proj2c.html#implementation" id="markdown-toc-implementation">Implementation</a></li>
+  <li><a href="proj2c.html#testing-out-your-solver" id="markdown-toc-testing-out-your-solver">Testing Out Your Solver</a>    <ul>
+      <li><a href="proj2c.html#bearmapsproj2clectureexample" id="markdown-toc-bearmapsproj2clectureexample">bearmaps.proj2c.lectureexample</a></li>
+      <li><a href="proj2c.html#bearmapsproj2cintegerhoppuzzle" id="markdown-toc-bearmapsproj2cintegerhoppuzzle">bearmaps.proj2c.integerhoppuzzle</a></li>
+      <li><a href="proj2c.html#bearmapsproj2cwordladderpuzzle" id="markdown-toc-bearmapsproj2cwordladderpuzzle">bearmaps.proj2c.wordladderpuzzle</a></li>
+      <li><a href="proj2c.html#bearmapsproj2cslidingpuzzle" id="markdown-toc-bearmapsproj2cslidingpuzzle">bearmaps.proj2c.slidingpuzzle</a></li>
+      <li><a href="proj2c.html#bearmapsproj2cstreetmap" id="markdown-toc-bearmapsproj2cstreetmap">bearmaps.proj2c.streetmap</a></li>
+      <li><a href="proj2c.html#challenge-going-beyond-our-graph-examples" id="markdown-toc-challenge-going-beyond-our-graph-examples">Challenge: Going Beyond Our Graph Examples</a></li>
+    </ul>
+  </li>
+  <li><a href="proj2c.html#faq" id="markdown-toc-faq">FAQ</a>    <ul>
+      <li><a href="proj2c.html#the-ag-is-reporting-a-bug-involving-access-or-some-kind-of-null-pointer-exception-whats-going-on" id="markdown-toc-the-ag-is-reporting-a-bug-involving-access-or-some-kind-of-null-pointer-exception-whats-going-on">The AG is reporting a bug involving access or some kind of null pointer exception. What’s going on?</a></li>
+      <li><a href="proj2c.html#it-seems-wasteful-to-store-the-edge-and-distance-to-every-vertex-ive-ever-seen-when-i-really-just-care-about-the-path-to-the-goal-should-i-try-to-optimize-around-this" id="markdown-toc-it-seems-wasteful-to-store-the-edge-and-distance-to-every-vertex-ive-ever-seen-when-i-really-just-care-about-the-path-to-the-goal-should-i-try-to-optimize-around-this">It seems wasteful to store the edge and distance to every vertex I’ve ever seen when I really just care about the path to the goal. Should I try to optimize around this?</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="setup-and-getting-the-skeleton-files">Setup and Getting the Skeleton Files</h2>
+
+<p>As usual, run <code class="language-plaintext highlighter-rouge">git pull skeleton master</code> to get the skeleton files.</p>
+
+<p>For this project, you’ll need some kind of <code class="language-plaintext highlighter-rouge">ExtrinsicMinPQ</code>. We recommend using your <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> from project 2B, but we provide an alternative <code class="language-plaintext highlighter-rouge">DoubleMapPQ</code> that you can use instead.</p>
+
+<p>To do this, after getting the skeleton files and importing the project, copy over your <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> into the bearmaps/proj2ab folder. You’ll see that IntelliJ complains that the package declaration is wrong. Go to the top of <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> and change the package declaration to <code class="language-plaintext highlighter-rouge">package bearmaps.proj2ab</code>. If you don’t feel confident in your <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code>, then you can ignore this entirely, and just use the provided <code class="language-plaintext highlighter-rouge">DoubleMapPQ</code> instead.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this assignment, we’ll be building an artificial intelligence that can solve arbitrary state space traversal problems. Specifically, given a graph of possible states, your AI will find the optimal route from the start state to a goal state.</p>
+
+<p>This AI will be able to solve a wide variety of problems, including finding driving directions, solving a <a href="https://en.wikipedia.org/wiki/15_puzzle">15 puzzle</a>, and finding <a href="https://en.wikipedia.org/wiki/Word_ladder">word ladders</a>.</p>
+
+<p>Your AI will use the technique from lecture called A*.</p>
+
+<h3 id="astargraph">AStarGraph</h3>
+
+<p>Problems to be solved by your AI will be provided in the form of a graph. More specifically, they will be given as a class that implements <code class="language-plaintext highlighter-rouge">AStarGraph</code>. This simple interface is given below.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">bearmaps.proj2c</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">interface</span> <span class="nc">AStarGraph</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="cm">/** Provides a list of all edges that go out from v to its neighbors. */</span>
+    <span class="nc">List</span><span class="o">&lt;</span><span class="nc">WeightedEdge</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;&gt;</span> <span class="nf">neighbors</span><span class="o">(</span><span class="nc">Vertex</span> <span class="n">v</span><span class="o">);</span>
+
+    <span class="cm">/** Provides an estimate of the number of moves to reach the goal from
+     *  the start position. For results to be correct, this estimate must 
+     *  be less than or equal to the correct distance. */</span>
+    <span class="kt">double</span> <span class="nf">estimatedDistanceToGoal</span><span class="o">(</span><span class="nc">Vertex</span> <span class="n">s</span><span class="o">,</span> <span class="nc">Vertex</span> <span class="n">goal</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Perhaps surprisingly, this simple interface captures a huge swath of real world problems, including all the problems described in the introduction.</p>
+
+<p>In turn, the <code class="language-plaintext highlighter-rouge">WeightedEdge&lt;Vertex&gt;</code> class represents a directed edge from an object of type <code class="language-plaintext highlighter-rouge">Vertex</code> to another object of type <code class="language-plaintext highlighter-rouge">Vertex</code>. The <code class="language-plaintext highlighter-rouge">WeightedEdge</code> class has the API below:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">bearmaps.proj2c</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">WeightedEdge</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="cm">/** The source of this edge. */</span>
+    <span class="kd">public</span> <span class="nc">Vertex</span> <span class="nf">from</span><span class="o">()</span>
+
+    <span class="cm">/** The destination of this edge. */</span>
+    <span class="kd">public</span> <span class="nc">Vertex</span> <span class="nf">to</span><span class="o">()</span>
+
+    <span class="cm">/** The weight of this edge. */</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">weight</span><span class="o">()</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>As seen above, every <code class="language-plaintext highlighter-rouge">AStarGraph</code> object must be able to return a list of all edges that point out from a given vertex (<code class="language-plaintext highlighter-rouge">neighbors</code>), and it must have a method to return the estimated distance between any two vertices. This estimate was called a heuristic in lecture.</p>
+
+<p>As an example, if we were solving the graph from the example given in lecture (<a href="https://docs.google.com/presentation/d/177bRUTdCa60fjExdr9eO04NHm0MRfPtCzvEup1iMccM/edit">link</a>), then <code class="language-plaintext highlighter-rouge">neighbors(4)</code> would return a list of three edges. These three edges would have:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">from():</code> 4, <code class="language-plaintext highlighter-rouge">to():</code> 2, <code class="language-plaintext highlighter-rouge">weight()</code> 1</li>
+  <li><code class="language-plaintext highlighter-rouge">from():</code> 4, <code class="language-plaintext highlighter-rouge">to():</code> 5, <code class="language-plaintext highlighter-rouge">weight()</code> 4</li>
+  <li><code class="language-plaintext highlighter-rouge">from():</code> 4, <code class="language-plaintext highlighter-rouge">to():</code> 6, <code class="language-plaintext highlighter-rouge">weight()</code> 5</li>
+</ul>
+
+<p>For this same example, <code class="language-plaintext highlighter-rouge">estimatedDistanceToGoal(2, 6)</code> would yield 15.</p>
+
+<h2 id="the-a-algorithm">The A* Algorithm</h2>
+
+<h3 id="memory-optimizing-a">Memory-Optimizing A*</h3>
+
+<p>This spec will not describe the A* algorithm in sufficient detail for you to be able to complete this assignment. <strong>Make sure you understand how A* works as described in lecture before reading further.</strong> For your convenience, see <a href="https://docs.google.com/presentation/d/1_x9UraVHfARN3aVX--yMZ3TSx6oW21lzGcqzQxzcoHU/edit#slide=id.g409413421_0637">this link</a>.</p>
+
+<p>In theory, the version of A* that we described in lecture will work. Recall that this algorithm requires that we <em>start with a priority queue that contains every possible vertex</em>. This is often impossible in practice due to the memory limits of real computers. For example, suppose our graph corresponds to every state in a <a href="https://en.wikipedia.org/wiki/15_puzzle">15 puzzle</a>. There are trillions of possible configurations for a 15 possible, so we cannot explicitly build such a graph.</p>
+
+<p>To save memory, we will implement a different version of A* with one fundamental difference: <em>Instead of starting with all vertices in the PQ, we’ll start with only the start vertex in the PQ.</em></p>
+
+<p>This necessitates that we also change our relaxation operation. In the version from lecture, a successful relaxation operation updated the priority of the target vertex, but never added anything new. Now that the PQ starts off mostly empty, a successful relaxation must add the target vertex if it is not already in the PQ.</p>
+
+<p>We will also make a third but less important change: If the algorithm takes longer than some timeout value to find the goal vertex, it will stop running and report that a solution was unable to be found. This is done because some A* problems are so hard that they can take e.g. billions of years and terabytes amounts of memory (due to a large PQ) to solve.</p>
+
+<p>To summarize, our three differences from the lecture version are:</p>
+<ul>
+  <li>The algorithm starts with only the start vertex in the PQ.</li>
+  <li>When relaxing an edge, if the relaxation is successful and the target vertex is not in the PQ, add it.</li>
+  <li>If the algorithm takes longer than some timeout value, it stops running.</li>
+</ul>
+
+<h4 id="algorithm-pseudocode">Algorithm Pseudocode</h4>
+
+<p>In pseudocode, this memory optimized version of A* is given below:</p>
+<ul>
+  <li>Create a PQ where each vertex <code class="language-plaintext highlighter-rouge">v</code> will have priority <code class="language-plaintext highlighter-rouge">p</code> equal to the sum of <code class="language-plaintext highlighter-rouge">v</code>’s distance from the source plus the heuristic estimate from <code class="language-plaintext highlighter-rouge">v</code> to the goal.</li>
+  <li>Insert the source vertex into the PQ.</li>
+  <li>Repeat until the PQ is empty, <code class="language-plaintext highlighter-rouge">PQ.getSmallest()</code> is the goal, or timeout is exceeded:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">p = PQ.removeSmallest()</code></li>
+      <li>relax all edges outgoing from <code class="language-plaintext highlighter-rouge">p</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p>And where the relax method pseudocode is given as below:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">relax(e)</code>:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">p = e.from()</code>, <code class="language-plaintext highlighter-rouge">q = e.to()</code>, <code class="language-plaintext highlighter-rouge">w = e.weight()</code></li>
+      <li>if <code class="language-plaintext highlighter-rouge">distTo[p] + w &lt; distTo[q]</code>:
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">distTo[q] = distTo[p] + w</code></li>
+          <li>if <code class="language-plaintext highlighter-rouge">q</code> is in the PQ: <code class="language-plaintext highlighter-rouge">changePriority(q, distTo[q] + h(q, goal))</code></li>
+          <li>if <code class="language-plaintext highlighter-rouge">q</code> is not in PQ: <code class="language-plaintext highlighter-rouge">add(q, distTo[q] + h(q, goal))</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>A demo of this algorithm running can be found at <a href="https://docs.google.com/presentation/d/1pZIfnsuyXMQEwrq4SFPDaXk7hGL6bGAhxgd3NOV4WSE/edit?usp=sharing">this link</a>.</p>
+
+<p>A demo showing A* from lecture running side-by-side with memory optimized A* can be found at <a href="https://docs.google.com/presentation/d/1-vl-FdO1SegLvluvIGe0j__AiGmVrhTmtrZ-yswN8PI/edit?usp=sharing">this link</a>. This example is also run on a more interesting graph than the earlier example.</p>
+
+<p>Some interesting consequences of these changes:</p>
+<ul>
+  <li>In the lecture version, once a vertex was removed from the PQ, it was gone forever. This meant that each vertex was visited at most one time. In this new version of A*, the algorithm can theoretically revisit the same vertex many times.</li>
+  <li>Beyond the scope of our course: As a side effect of the consequence above, admissibility is a sufficient condition for correctness for the memory optimized version of A*. For the version in lecture, we needed a stronger criterion for our heuristic called consistency. Take CS 188 if you’d like to learn more. You are not expected to know about admissibility and consistency on the exams (though we might still have problems that cover them, we’ll just make sure to re-introduce the terms from scratch if we do so).</li>
+</ul>
+
+<p><strong>Note:</strong> One additional optimization we can make is to avoid storing the best known distance and edge to every vertex. In this case, rather than “relaxing” edges, we’d blindly add all discovered vertices to our PQ. This is the equivalent of treating every edge relaxation as successful. This requires the addition of an “already visited set” to keep memory from getting out of hand. This implementation of A* will be described in CS 188.</p>
+
+<p>For this CS 61B assignment, however, you should maintain some sort of instance variables that track the best known distance (i.e. <code class="language-plaintext highlighter-rouge">distTo</code>) to every vertex that you’ve seen (i.e. that has been on the result of a call to <code class="language-plaintext highlighter-rouge">to()</code> on a <code class="language-plaintext highlighter-rouge">WeightedEdge</code>).</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>Create an <code class="language-plaintext highlighter-rouge">AStarSolver</code> class with the following API:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">AStarSolver</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">ShortestPathsSolver</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="nf">AStarSolver</span><span class="o">(</span><span class="nc">AStarGraph</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;</span> <span class="n">input</span><span class="o">,</span> <span class="nc">Vertex</span> <span class="n">start</span><span class="o">,</span> <span class="nc">Vertex</span> <span class="n">end</span><span class="o">,</span> <span class="kt">double</span> <span class="n">timeout</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">SolverOutcome</span> <span class="nf">outcome</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Vertex</span><span class="o">&gt;</span> <span class="nf">solution</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">solutionWeight</span><span class="o">()</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">numStatesExplored</span><span class="o">()</span> 
+    <span class="kd">public</span> <span class="kt">double</span> <span class="nf">explorationTime</span><span class="o">()</span>  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>where the constructor and methods work as follows:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">AStarSolver</code>: Constructor which finds the solution, computing
+               everything necessary for all other methods to return
+               their results in constant time. Note that the <code class="language-plaintext highlighter-rouge">timeout</code> 
+               passed in is in seconds.</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">outcome</code>:           Returns one of <code class="language-plaintext highlighter-rouge">SolverOutcome.SOLVED</code>, <code class="language-plaintext highlighter-rouge">SolverOutcome.TIMEOUT</code>, or <code class="language-plaintext highlighter-rouge">SolverOutcome.UNSOLVABLE</code>. Should be
+               <code class="language-plaintext highlighter-rouge">SOLVED</code> if the <code class="language-plaintext highlighter-rouge">AStarSolver</code> was able to complete all work in
+               the time given. <code class="language-plaintext highlighter-rouge">UNSOLVABLE</code> if the priority queue became empty.
+               <code class="language-plaintext highlighter-rouge">TIMEOUT</code> if the solver ran out of time. You should check to see 
+               if you have run out of time every time you dequeue.</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">solution</code>:         A list of vertices corresponding to a solution.
+               Should be empty if result was <code class="language-plaintext highlighter-rouge">TIMEOUT</code> or <code class="language-plaintext highlighter-rouge">UNSOLVABLE</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">solutionWeight</code>:   The total weight of the given solution, taking into account
+               edge weights. Should be 0 if result was <code class="language-plaintext highlighter-rouge">TIMEOUT</code> or <code class="language-plaintext highlighter-rouge">UNSOLVABLE</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">numStatesExplored</code>: The total number of priority queue dequeue operations.</li>
+  <li><code class="language-plaintext highlighter-rouge">explorationTime</code>:  The total time spent in seconds by the constructor.</li>
+</ul>
+
+<p><strong>Note:</strong> Since <code class="language-plaintext highlighter-rouge">AStarGraph&lt;Vertex&gt;</code> uses a generic type for vertices, the input graph’s vertices may be a reference type. Thus, make sure to use the <code class="language-plaintext highlighter-rouge">equals</code> method whenever you want to compare two vertices for equality.</p>
+
+<p>Note that the result class returns an object of type <code class="language-plaintext highlighter-rouge">SolverOutcome</code>. If you open this file, you’ll see that this is a special entity known as an <code class="language-plaintext highlighter-rouge">enum</code> which is very similar to a <code class="language-plaintext highlighter-rouge">class</code>. For more details, see <a href="https://www.w3schools.com/java/java_enums.asp">this link</a>. Basically, an <code class="language-plaintext highlighter-rouge">enum</code> is just a type that stores exactly one of several possible constants, and has no methods.</p>
+
+<p>If you did not complete Project 2B, or you just aren’t sure if your <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code> works correctly, you may use our provided <code class="language-plaintext highlighter-rouge">DoubleMapPQ</code>, which also implements <code class="language-plaintext highlighter-rouge">ExtrinsicMinPQ</code>. Note that <code class="language-plaintext highlighter-rouge">DoubleMapPQ</code> is slower and more memory hungry than <code class="language-plaintext highlighter-rouge">ArrayHeapMinPQ</code>, but it still has log time operations, so will still be good enough for this project.</p>
+
+<p>An example solver is given as <code class="language-plaintext highlighter-rouge">LazySolver.java</code>. This solver simply tries the first edge it sees and if that edge doesn’t lead to the solution, it (incorrectly) claims that the puzzle is unsolvable. You might find <code class="language-plaintext highlighter-rouge">LazySolver</code> helpful as a reference.</p>
+
+<p><strong>DO NOT COPY AND PASTE <code class="language-plaintext highlighter-rouge">LazySolver</code> INTO <code class="language-plaintext highlighter-rouge">AStarSolver</code> AND TRY TO ADAPT IT</strong>. This is likely only going to make you miserable later when you try to debug something that you didn’t write yourself and don’t understand. If you do this, and ask us questions at office hours, we will be sad. Some of you tried to do <code class="language-plaintext highlighter-rouge">LinkedListDeque</code> by copying <code class="language-plaintext highlighter-rouge">SLList</code> and trying to adapt it, and the results were not pretty.</p>
+
+<h2 id="testing-out-your-solver">Testing Out Your Solver</h2>
+
+<p>Unlike Project 2A and 2B, there <strong>is</strong> an autograder for this project. However, it’s a lot easier to debug on your own computer. We’ve provided five different implementations of the <code class="language-plaintext highlighter-rouge">AStarGraph</code> interface that you can try out. They are described below. Some implementations contain optional challenges for you to experiment with; they are ungraded.</p>
+
+<h3 id="bearmapsproj2clectureexample">bearmaps.proj2c.lectureexample</h3>
+
+<p>The example from lecture is given in <code class="language-plaintext highlighter-rouge">DemoLectureExampleSolution</code>. This class uses the <code class="language-plaintext highlighter-rouge">WeightedDirectedGraph</code>, which represents, as the name suggests, a weighted directed graph.</p>
+
+<p>If you edit the <code class="language-plaintext highlighter-rouge">DemoLectureExmapleSolution</code> to use your <code class="language-plaintext highlighter-rouge">AStarSolver</code> and run the <code class="language-plaintext highlighter-rouge">DemoLectureExampleSolution</code> file, you should get the following output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total states explored in 0.001s: 3
+Search was successful.
+Solution was of length 4, and had total weight 10.0:
+0 =&gt; 1 =&gt; 4 =&gt; 6
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">DemoAlternateExampleSolution</code> file provides the graph from the side-by-side demo of A* and the memory optimized A* (<a href="https://docs.google.com/presentation/d/1-vl-FdO1SegLvluvIGe0j__AiGmVrhTmtrZ-yswN8PI/edit?usp=sharing">link for your convenience</a>).</p>
+
+<h3 id="bearmapsproj2cintegerhoppuzzle">bearmaps.proj2c.integerhoppuzzle</h3>
+
+<p>In an “Integer Hop Puzzle” (a thing I made up), the goal is to get from a starting integer to a goal integer at a minimum cost.</p>
+
+<p>Possible transitions are as follows:</p>
+<ul>
+  <li>Add or subtract 1. This costs 1 (i.e. has weight 1).</li>
+  <li>Multiple or divide by 2. This costs 5.</li>
+  <li>Square the number. This costs 10.</li>
+</ul>
+
+<p>So for example, if we start at 1 and want to get to 5, the lowest cost path is 1 → 2 → 3 → 4 → 5, with a total cost of 4.</p>
+
+<p>As another example, if we start at 1 and want to get to 20, the lowest cost path is 1 → 2 → 3 → 4 → 5 → 20, with a total cost of 14.</p>
+
+<p>As a last example, if we start at 17 and want to get to 111, the lowest cost path is 17 → 16 → 15 → 225 → 112 → 111, with total cost 18.</p>
+
+<p>If you edit the <code class="language-plaintext highlighter-rouge">DemoIntegerHopPuzzleSolution</code> to use your <code class="language-plaintext highlighter-rouge">AStarSolver</code> and run the <code class="language-plaintext highlighter-rouge">DemoIntegerHopPuzzleSolution</code> file, you should get something similar to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total states explored in 0.018s: 338
+Search was successful.
+Solution was of length 6, and had total weight 18.0:
+17 =&gt; 16 =&gt; 15 =&gt; 225 =&gt; 112 =&gt; 111
+</code></pre></div></div>
+
+<p>Note that the exact number of states explored may vary if your priority queue breaks ties differently than ours.</p>
+
+<p><strong>Explore:</strong> Try some different starting and goal points. Sometimes some pretty surprising results can occur, e.g. s = 258, goal = 4. You might also consider changing the weights of various moves or even adding new ones (by editing <code class="language-plaintext highlighter-rouge">IntegerHopGraph</code>).</p>
+
+<p><strong>Difficult challenge:</strong> For this graph, the heuristic simply returns 0. As a difficult challenge, try to write a heuristic that significantly reduces the number of states explored. Note: Your heuristic must always underestimate the correct distance to the goal in order to guarantee correctness for A*. That is, it must be “admissible”. For example, the heuristic that simply computes <code class="language-plaintext highlighter-rouge">goal - s</code> would be admissible if the only possible moves were add and subtract. However, this heuristic overestimates for many cases, e.g. s = 17, goal = 111.</p>
+
+<h3 id="bearmapsproj2cwordladderpuzzle">bearmaps.proj2c.wordladderpuzzle</h3>
+
+<p>In a Word Ladder puzzle, we try to convert one word in English
+to another by either changing, adding, or removing letters such that every
+transition results in a valid English word. Suppose we start with the word
+“horse” and we want to turn it into “nurse”. To do this, we could perform the
+following transitions: horse → hose → hole → cole → core → cure → pure →
+purse → nurse, for a total word ladder length of 9 words.</p>
+
+<p>For this graph, each edge has weight 1. The provided heuristic computes the “<a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein edit distance</a>”, which is the number of single character edits (replacements, insertions, or deletions) needed to get from one string to another.</p>
+
+<p>If you run this program you’ll see:</p>
+
+<p>“Exception in thread “main” java.lang.IllegalArgumentException: Could not open words10000.txt”</p>
+
+<p>To correct this, go to the “Edit Configurations” option under the Run menu of IntelliJ. Change the working directory to point to the folder that ends with <code class="language-plaintext highlighter-rouge">bearmaps/proj2c/input</code> on your computer.</p>
+
+<p>Running the demo for this graph with your <code class="language-plaintext highlighter-rouge">AStarSolver</code> should yield an answer like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Total states explored in 0.874s: 198
+Search was successful.
+Solution was of length 9, and had total weight 8.0:
+horse-&gt;hose-&gt;home-&gt;come-&gt;core-&gt;cure-&gt;pure-&gt;purse-&gt;nurse
+</code></pre></div></div>
+
+<p>As before, the exact number of states explored may differ if your priority queue breaks ties differently.</p>
+
+<p><strong>Explore:</strong> Try out different starting and ending words.</p>
+
+<p><strong>Extra challenge:</strong> The <code class="language-plaintext highlighter-rouge">neighbors</code> method for the <code class="language-plaintext highlighter-rouge">WordGraph</code> class runs in linear time in the size of the entire list of words. Try to improve it to be faster.</p>
+
+<h3 id="bearmapsproj2cslidingpuzzle">bearmaps.proj2c.slidingpuzzle</h3>
+
+<p>The <a href="https://en.wikipedia.org/wiki/15_puzzle">15 puzzle</a> is a puzzle
+invented and popularized by Noyes Palmer Chapman in the 1870s (though bizarrely, the famous puzzle creator <a href="https://en.wikipedia.org/wiki/Sam_Loyd">Sam Loyd</a> falsely claimed to have invented it, along with other scams). The original version is played on a
+4-by-4 grid with 15 square tiles labeled 1 through 15 and a blank square, though there are also 2-by-2 and 4-by-4 variants. The goal of this puzzle is to rearrange the tiles so that they are in order, using as
+few moves as possible. The player is permitted to slide tiles horizontally or
+vertically into the blank square.</p>
+
+<p>You can play this game yourself at <a href="http://lorecioni.github.io/fifteen-puzzle-game/">this link</a>. Personally, I hate playing this game, so it’s very satisfying to build an AI to solve it for me. If you’ve created <code class="language-plaintext highlighter-rouge">AStarSolver</code>, then you’ve already built an AI that can do this.</p>
+
+<p>As an example of a solution, the following shows a sequence of legal moves
+from an initial board (left) to the goal board (right) on the 3-by-3 version.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1  3        1     3        1  2  3        1  2  3        1  2  3
+4  2  5   =&gt;   4  2  5   =&gt;   4     5   =&gt;   4  5      =&gt;   4  5  6
+7  8  6        7  8  6        7  8  6        7  8  6        7  8
+
+initial        1 left          2 up          5 left          goal
+</code></pre></div></div>
+
+<p>This is also just a graph, where each possible state of the board has up to 4 neighbors corresponding to sliding the left, top, right, or bottom neighbor of the blank into the blank. As with word ladders, every edge has weight equal to 1. In the provided code, the heuristic just returns 0. That is, your AI is just running Dijkstra’s. If you’d like to do better, see the <strong>Challenge</strong> or <strong>High Difficulty Challenge</strong> below.</p>
+
+<p>Similar to <code class="language-plaintext highlighter-rouge">wordLadderPuzzle</code>, if you run this program you’ll see an <code class="language-plaintext highlighter-rouge">IllegalArgumentException</code>.</p>
+
+<p>To correct this, go to the “Edit Configurations” option under the Run menu of IntelliJ. Change the working directory to point to the folder that ends with <code class="language-plaintext highlighter-rouge">bearmaps/proj2c/input</code> on your computer.</p>
+
+<p>Now, try running <code class="language-plaintext highlighter-rouge">DemoSlidingPuzzleSolution</code> and <code class="language-plaintext highlighter-rouge">DemoRunSeveralPuzzles</code>, and your code should be able to successfully solve the <code class="language-plaintext highlighter-rouge">BasicPuzzle</code>s.</p>
+
+<p><strong>Explore:</strong> Open <code class="language-plaintext highlighter-rouge">BasicPuzzle1.txt</code> through <code class="language-plaintext highlighter-rouge">BasicPuzzle4.txt</code> and compare the length of the solution that your code provides vs. ours. This length should be exactly correct.</p>
+
+<p>For example <code class="language-plaintext highlighter-rouge">BasicPuzzle4.txt</code> says:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 6  0  5 
+ 8  7  4 
+ 3  2  1 
+solution length: 30
+difficulty: Easy++
+dijkstra states explored: 181404
+manhattan states explored: 4831
+</code></pre></div></div>
+
+<p>Thus, if you look at the results of running <code class="language-plaintext highlighter-rouge">BasicPuzzle4</code> using your implementation of <code class="language-plaintext highlighter-rouge">AStar</code>, it should yield a solution of length 30, and explore roughly 180,000 states. The exact number of states may vary depending on how your PQ breaks ties.</p>
+
+<p>You’ll also see a line about “manhattan states explored”. This refers to the number of states explored if we use a heuristic called the “manhattan distance”. You’ll see that the number of states explored is dramatically less!</p>
+
+<p>This is essentially what we saw in the demo from <a href="https://qiao.github.io/PathFinding.js/visual/">https://qiao.github.io/PathFinding.js/visual/</a> during lecture comparing traversal of a space with walls using Dijkstra’s vs. A*.</p>
+
+<p>Dijkstra’s just blindly explores every direction.</p>
+
+<p><img src="images/dijkstra.png" alt="dijkstras" /></p>
+
+<p>… whereas A* tries to be smart about which direction to go.</p>
+
+<p><img src="images/astar.png" alt="astar" /></p>
+
+<p>In the case of the provided puzzle files, “manhattan” refers to using the manhattan distance heuristic. If you’re curious about what this means, see the challenge below. It’s not particularly tough, but is entirely optional.</p>
+
+<p><strong>Challenge:</strong> As noted above, right now the heuristic for the <code class="language-plaintext highlighter-rouge">BoardGraph</code> class simply returns 0; your A* implementation is just running Dijkstra’s algorithm. The challenge is to implement a better heuristic for the <code class="language-plaintext highlighter-rouge">BoardGraph</code> class. Two natural heuristics are the Hamming distance and the Manhattan distance. The Hamming distance is simply the number of spaces which do not match in the two boards. Don’t count the blank square. The Manhattan distance is the sum of the total x distance + the total y distance between all pairs of numbers, again ignoring the blank square.</p>
+
+<p>For example, the Manhattan distance between the two boards below is 5. This is because Manhatan(1) = 2, Manhattan(2) = 0, Manhattan(3) = 0, Manhattan(4) = 1, Manhattan(5) = 1, Manhattan(6) = 0, Manhattan(7) = 1, and Manhattan(8) = 4.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8 2 3    1 2 3
+5 4 6    4 5 6
+1 7      7   8
+</code></pre></div></div>
+
+<p>Try running a puzzle again with the Hamming or Manhattan distance. You should see a dramatic improvement. If you implement Manhattan distance, you should be able to solve <code class="language-plaintext highlighter-rouge">HardPuzzle1.txt</code> through <code class="language-plaintext highlighter-rouge">HardPuzzle3.txt</code>, though if you’re using the <code class="language-plaintext highlighter-rouge">DoubleMapPQ</code>, it might not complete <code class="language-plaintext highlighter-rouge">HardPuzzle3</code> because of the slower PQ. If you pick a big enough timeout, you might even be able to solve <code class="language-plaintext highlighter-rouge">ElitePuzzle1.txt</code>.</p>
+
+<p><strong>High Difficulty Challenge:</strong> Try to implement a better heuristic or a better search algorithm (e.g. IDA*). If you manage to solve <code class="language-plaintext highlighter-rouge">ElitePuzzle3.txt</code>, email Josh or drop by office hours and let him know how you did it.</p>
+
+<h3 id="bearmapsproj2cstreetmap">bearmaps.proj2c.streetmap</h3>
+
+<p>A street map of the area near UC Berkeley has been implemented in the bearmaps.proj2c.streetmap package. This information was collected from the <a href="https://en.wikipedia.org/wiki/OpenStreetMap">Open Street Map Project</a> project. Each vertex corresponds to a specific latitude and longitude (often but not always intersections), and each edge corresponds to a segment of street that connects to vertices. Each edge has weight proportional to the length of the corresponding segment of street.</p>
+
+<p>Try running <code class="language-plaintext highlighter-rouge">DemoStreetDirections</code> and it will provide directions from 2793619975 to 2793619967. You’ll notice that they aren’t very interesting! What good is it to know that you need to go from node 2793619975 to node 2793619973 to node 2793619972 to node 2793619970 to node 57872683 to node 2793619967?</p>
+
+<p>In project 2D, you’ll bring these paths to life, by overlaying them as driving/walking/biking directions on a web-browser based mapping application.</p>
+
+<h3 id="challenge-going-beyond-our-graph-examples">Challenge: Going Beyond Our Graph Examples</h3>
+
+<p>You might find it interesting to try to implement your own <code class="language-plaintext highlighter-rouge">AStarGraph</code> problem. Examples include maze traversals, solving a Rubik’s cube, and more. Share anything interesting you build with Josh at office hours or with your mentor TA.</p>
+
+<h2 id="faq">FAQ</h2>
+
+<h4 id="the-ag-is-reporting-a-bug-involving-access-or-some-kind-of-null-pointer-exception-whats-going-on">The AG is reporting a bug involving access or some kind of null pointer exception. What’s going on?</h4>
+
+<p>It’s important that your <code class="language-plaintext highlighter-rouge">AStarSolver</code> methods work no matter the
+order in which they are called, and no matter how many times they are called. Only the constructor should make any changes to the instance variables of the <code class="language-plaintext highlighter-rouge">AStarSolver</code> class.</p>
+
+<h4 id="it-seems-wasteful-to-store-the-edge-and-distance-to-every-vertex-ive-ever-seen-when-i-really-just-care-about-the-path-to-the-goal-should-i-try-to-optimize-around-this">It seems wasteful to store the edge and distance to every vertex I’ve ever seen when I really just care about the path to the goal. Should I try to optimize around this?</h4>
+
+<p>You can try. However, you’ll still need to at least mark whether a vertex has already been visited. For example, you can create a <code class="language-plaintext highlighter-rouge">HashSet&lt;Vertex&gt;</code> to record all marked vertices. It is possible to do this, but be warned: this is beyond the scope for CS 61B, so it’s going to feel very hand-wavy.</p>
+
+<p>The key issue is that you shouldn’t consider a state to be “used” until it is <strong>dequeued</strong>.</p>
+
+<p>In other words, if you DO attempt to do this, you should only <strong>“mark” a vertex when it is dequeued from the PQ</strong>, not when it is enqueued! The reason for this is beyond the scope of CS 61B (see CS 188 for more!), but the rough intuition behind this is as follows: If you’re at the end of a sequence of edges that ends at vertex X and you see that vertex G is one of X’s neighbors, it’s not safe to assume that this is the best path, and therefore it’s not safe to enqueue X → G and then subsequently disallow all other paths that end in G.</p>
+
+<p>As a crude analogy, imagine trying to compute driving directions to the Eiffel Tower by looking at a bunch of pictures taken from various locations: Just because you can see the Eiffel Tower from a picture of location X doesn’t mean that location X is along the best route to your destination, so you can’t just give up the first time you see the Eiffel Tower in a picture.</p>
+
+<p><strong>Note:</strong> If you take CS 188, you’ll learn that this version of A* is called <code class="language-plaintext highlighter-rouge">A* Graph
+Search</code>, whereas the version given in the spec is called <code class="language-plaintext highlighter-rouge">A* Tree Search</code>. The version presented in lecture (where all vertices start off enqueued) is also <code class="language-plaintext highlighter-rouge">A* Graph Search</code>.</p>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>

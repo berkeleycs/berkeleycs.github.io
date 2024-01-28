@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <link rel="shortcut icon" type="image/x-icon" href="http://fa20.datastructur.es/materials/lab/lab2setup/assets/img/favicon.ico">
+  <head>
+  <title>Setting Up Environment Variables in Mac OS and Linux | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="http://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../assets/css/sunburst.css">
+
+  <script src="../../../assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../../assets/js/script.js" type="text/javascript"></script>
+  <script src="../../../assets/js/cheet.min.js" type="text/javascript"></script>
+  
+  
+</head>
+
+  <body>
+    
+    <div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="../../../index.html"><div class="navitem">Main</div></a>
+        <a href="../../../about.html"><div class="navitem">Course Info</div></a>
+        <a href="../../../staff.html"><div class="navitem">Staff</div></a>
+        <a href="../../../resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+
+    
+    <a href="lab2setupMacAndLinux.html#" id="back-to-top" style="display: none;"><span></span></a>
+    <div id="coursename">
+      <a href="../../../index.html"><span id="courseid">CS 61B</span> Data Structures, Fall 2020</a>
+    </div>
+    <div id="courseinfo">
+      Instructor: Josh Hug<br>
+      Lecture: <a href="https://berkeley.zoom.us/j/91525870214?pwd=VHpQWThPdDNnSTF4OHhmR3JpcThmQT09">Zoom link</a>
+    </div>
+    <div id="content" class="">
+      <h3 id="setting-up-environment-variables-in-mac-os-and-linux">Setting Up Environment Variables in Mac OS and Linux</h3>
+
+<p>In IntelliJ, open the <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code> class. The first few lines should look like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//  Fill in the path to your fa20-s*** folder between the quotes
+public static String REPO_DIR = "";
+
+//  Fill in the path to your snaps-fa20-s*** folder between the quotes
+public static String SNAPS_DIR = "";
+</code></pre></div></div>
+
+<h5 id="repo_dir">REPO_DIR</h5>
+
+<p>In your terminal, navigate to your <code class="language-plaintext highlighter-rouge">fa20-s***</code> folder. For example, if your repo number is 123, and you put it on your desktop, you would type:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/Desktop/fa20-s123/
+</code></pre></div></div>
+
+<p>Now enter <code class="language-plaintext highlighter-rouge">pwd</code>. This command outputs the “present working directory” (so, it tells you where you are in your machine). Copy the output, and paste it in your <code class="language-plaintext highlighter-rouge">getEnvironmentVariables</code> between the empty quotes here <code class="language-plaintext highlighter-rouge">REPO_DIR = "";</code>. For the example above, <code class="language-plaintext highlighter-rouge">pwd</code> will output something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Users/&lt;your name&gt;/Desktop/fa20-123
+</code></pre></div></div>
+<p>And when pasted in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String REPO_DIR = "Users/&lt;your name&gt;/Desktop/fa20-123";
+</code></pre></div></div>
+
+<h5 id="snaps_dir">SNAPS_DIR</h5>
+
+<p>In your terminal, navigate to your <code class="language-plaintext highlighter-rouge">snaps-fa20-s***</code> folder. For example, if your repo number is 123, and you followed the instructions from the spec, you would type:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/snaps-fa20-s123/
+</code></pre></div></div>
+
+<p>Now enter <code class="language-plaintext highlighter-rouge">pwd</code>. Copy the output, and paste it in your <code class="language-plaintext highlighter-rouge">getEnvironmentVariables</code> between the empty quotes here <code class="language-plaintext highlighter-rouge">SNAPS_DIR = "";</code>. For the example above, <code class="language-plaintext highlighter-rouge">pwd</code> will output something like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Users/&lt;your name&gt;/snaps-fa20-123
+</code></pre></div></div>
+<p>And when pasted in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public static String SNAPS_DIR = "Users/&lt;your name&gt;/snaps-fa20-123";
+</code></pre></div></div>
+
+<h4 id="wrapping-up">Wrapping Up</h4>
+
+<p>UPDATE 09/02, 4:00 PM: If you got the skeleton code for the lab before this time, please run <code class="language-plaintext highlighter-rouge">git pull skeleton master</code> in your <code class="language-plaintext highlighter-rouge">lab2setup</code> directory again.</p>
+
+<p>Great job! Now it’s time to introduce these environment variables to your machine.
+Run the code in <code class="language-plaintext highlighter-rouge">GetEnvironmentVariables</code>. You can do so, by clicking the little play button near line 9, and then choosing <code class="language-plaintext highlighter-rouge">Run 'GetEnvironmentVariables.main()''</code>.</p>
+
+<p><img src="http://fa20.datastructur.es/materials/lab/lab2setup/img4/run_shortcut.png" alt="run shortcut" /></p>
+
+<p>For the examples above, you would get an output that looks like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Keep reading the spec to know what to do with this output
+----------------------------------------------------------
+echo 'export REPO_DIR=Users/&lt;your name&gt;/Desktop/fa20-123' &gt;&gt; ~/.bash_profile
+echo 'export SNAPS_DIR=Users/&lt;your name&gt;/snaps-fa20-123' &gt;&gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">bash_profile</code> may be replaced by some other file name, depending on your operating system and its version.</p>
+
+<p>Copy and paste these lines in your terminal <strong>one by one</strong>. After you paste each line, hit enter. There should be no output. When you are done, close your terminal, and open it again.</p>
+
+<h2 id="launching-intellij-from-the-terminal">Launching IntelliJ from the Terminal</h2>
+
+<p>In intelliJ, go to the top bar menu and choose “Tools” → “Create Command-Line Launcher…”.</p>
+
+<p>In the pop-up window, click “OK”. You should now be able to launch intelliJ from your terminal. Open a new terminal window and run</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>idea
+</code></pre></div></div>
+<p>Verify that intelliJ launches.</p>
+
+<p>You may now return back to the lab 2 setup page.</p>
+
+      <div id="build_time"><em>Last built: 2020-12-17 03:49 UTC</em></div>
+    </div>
+    <script src="http://fa20.datastructur.es/assets/js/top.js" type="text/javascript"></script>
+  </body>
+</html>

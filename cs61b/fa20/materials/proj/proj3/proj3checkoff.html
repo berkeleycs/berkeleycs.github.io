@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project 3 Lab Demo Checkoff Script | CS 61B Fall 2020</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="Computer Science 61B: Data Structures">
+  <meta name="keywords" content="CS61B, Computer Science, CS, 61B, Data Structures, Josh Hug, Berkeley, EECS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="https://fa20.datastructur.es/assets/images/josh4.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/common.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/sunburst.css">
+
+  <script src="https://fa20.datastructur.es/assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/script.js" type="text/javascript"></script>
+  <script src="https://fa20.datastructur.es/assets/js/cheet.min.js" type="text/javascript"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://fa20.datastructur.es/assets/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://fa20.datastructur.es/assets/css/lab.css">
+
+  
+</head>
+
+<body>
+<div id="navbar" class="navbar-top">
+	<div id="navitems">
+        <a href="https://fa20.datastructur.es/index.html"><div class="navitem">Main</div></a>
+        <a href="https://fa20.datastructur.es/about.html"><div class="navitem">Course Info</div></a>
+        <a href="https://fa20.datastructur.es/staff.html"><div class="navitem">Staff</div></a>
+        <a href="https://fa20.datastructur.es/resources.html"><div class="navitem">Resources</div></a>
+	<!--<a href="https://beacon.datastructur.es" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+        <!--<a href="" target="_blank"><div class="navitem">Piazza <i class="fa fa-external-link" aria-hidden="true"></i></div></a>-->
+
+        <a href="http://beacon.datastructur.es/" target="_blank"><div class="navitem">Beacon <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://us.edstem.org/courses/979/discussion/" target="_blank"><div class="navitem">Ed <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+        <a href="https://oh.datastructur.es" target="_blank"><div class="navitem">OH Queue <i class="fa fa-external-link" aria-hidden="true"></i></div></a>
+    </div>
+</div>
+<div id="content-container" class="content-spacer"><main id="content">
+            <header class="title">Project 3 Lab Demo Checkoff Script</header><p>**Before starting the checkoff, the student presenting the demo on their machine should have Intellij open with their project code and the BYOW main menu displayed. The student should also have a termnial open in the proj3 directory, checked out to the commit containing the code they wish to demo. <code class="language-plaintext highlighter-rouge">git status</code> should be at a clean state (no changes to commit). The student should also have an on-screen keyboard displayed. **</p>
+
+<ul>
+  <li>The Instructor will first check that the code open in IntelliJ is opened from their local repo.</li>
+  <li>Then the Instructor will check the local Git history to see if it matches the Github history, and to make sure the selected commit is before the due date.
+    <ul>
+      <li>The due date is the same as the due date for Phase 2 on Gradescope</li>
+      <li>If the date for the selected commit is late, the student receives a 50% point deduction on the lab demo checkoff grade.</li>
+    </ul>
+  </li>
+  <li>Each requirement can either be evaluated as full points, half points, or zero points</li>
+</ul>
+
+<h3 id="basic-world-functionality-156-points-total">Basic World Functionality (156 points total)</h3>
+
+<ul>
+  <li>The Instructor will ask the student to run their project and will check for the following features
+    <ul>
+      <li>The world has a main menu screen with a New World, Load, and Quit option (4 points)</li>
+      <li>The Instructor should hit “n” or “N” and check that the world prompts for a seed (4 points)</li>
+      <li>The Instructor should type in a few random numbers and hit “s” or “S” which should immediately start the world (8 points)</li>
+    </ul>
+  </li>
+  <li>At this point the program should be running and there should be a visible world
+    <ul>
+      <li>World has visually distinct walls and floors (8 points)</li>
+      <li>World has hallways which are 1 or 2 tiles wide with at least 1 containing a turn in it (12 points)</li>
+      <li>World has some number of rooms that are connected via hallways (24 points)</li>
+    </ul>
+  </li>
+  <li>The Instructor will now try the basic commands that should be available during gameplay
+    <ul>
+      <li>Instructor should hit WASD randomly and check the player movement is consistent with the key pressed (8 points)</li>
+      <li>Instructor should hover over 3 different tiles and make sure their names show up somewhere on screen and that the names make sense (20 points)</li>
+      <li>Instructor should move into a wall and make sure the player stops at the wall instead of moving into it (8 points)</li>
+      <li>Instructor should type “:q” or “:Q” which should quit the world and close the program. Instructor should remember the world layout at this point (8 points)</li>
+    </ul>
+  </li>
+  <li>The program is now closed and we will test the load feature
+    <ul>
+      <li>Student should run the world again after it has been closed and the main menu should appear</li>
+      <li>Instructor should hit “l” or “L” and the world should immediately start (8 points)</li>
+      <li>Instructor should check that the world layout is exactly as it was before closing the world (12 points)</li>
+      <li>Instructor will run through the basic commands again (listed above) to make sure the world still works (10 points)</li>
+      <li>Instrcutor will quit and load again and make sure that the basic commands work (12 points).</li>
+      <li>Instructor will check that “q” or “Q” alone does not quit the game (10 points).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="randomness-84-points-total">Randomness (84 points total)</h3>
+
+<ul>
+  <li>The Instructor should close the world again and will begin testing to see if worlds are randomly generated.</li>
+  <li>The student should explain to the Instructor where they are making use of randomness and make mention of any pieces of their world which is consistent across all seeds
+    <ul>
+      <li>Instructor should check that the use of randomness does not lead to a severe limitation on the variety of worlds (ie. randomly choosing a world layout from a finite set of worlds)</li>
+    </ul>
+  </li>
+  <li>The Instructor should open the world 3-5 times, making sure to use a different seed each time
+    <ul>
+      <li>The Instructor will be looking for your world’s ability to generate variety in both world structure and player experience while exploring that world. What this means is when two different seeds are used to generate new worlds, these worlds should not feel identical (or close to identical).</li>
+    </ul>
+  </li>
+  <li>The grading breakdown is as follows:
+    <ul>
+      <li>84 points: The worlds are mainly randomly, as described by the above section.</li>
+      <li>42 points: The world exhibits a few random elements, but generally looks the same</li>
+      <li>0 points: The world contains no random elements.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="ambition-points-80-points-max">Ambition Points (80 points max)</h3>
+<ul>
+  <li>The student should state and demonstrate the features that are in the Ambition category
+    <ul>
+      <li>In the space below, the Instructor should write in the features the student successfully demonstrated and their point values based on the spec</li>
+      <li>The list of possible ambition points can be found <a href="proj3.html#ambition-score">here</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+  <li>The Instructor will then ask the student to run <code class="language-plaintext highlighter-rouge">git checkout master</code> in the student’s local repository.</li>
+</ul>
+</main>
+    </div>
+</body>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript"
+   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  $("#markdown-toc").insertBefore("#content");
+</script>
+</html>
