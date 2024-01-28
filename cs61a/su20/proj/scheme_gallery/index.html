@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Chae Park, Kavi Gupta, Ryan Moughan" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+<link href="../../assets/css/project.css" rel="stylesheet" type="text/css">
+<style>
+  img {
+    max-height:500px;
+  }
+</style>
+
+
+    <title>
+Scheme Art Gallery | CS 61A Summer 2020
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor.html">Instructors</a></li>
+                <li><a href="../../TAs.html">TAs</a></li>
+                <li><a href="../../tutors.html">Tutors</a></li>
+                <!-- <li><a href="/~cs61a/su20/academic-interns.html">Academic Interns</a></li> -->
+              </ul>
+            </li>
+            <li><a href="../../resources.html">Resources</a></li>
+            <li><a href="../../articles/about.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/summer2020/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://denero.org/feedback.html" target="_blank">Feedback</a></li>
+            <li><a href="https://edge.edx.org/courses/course-v1:BerkeleyX+CSW61A+2020_SP">EdX</a></li>
+            <!-- <li><a href="https://scheme.cs61a.org">Scheme</a></li> -->
+            <!-- <li><a href="https://sql.cs61a.org">SQL</a></li> -->
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">Tutor</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Scheme Art Gallery
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="https://inst.eecs.berkeley.edu/~cs61a/su20/proj/scheme_gallery/scheme_gallery.zip" class="label label-outline">scheme_gallery.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+<div class="haiku">
+  <blockquote><cite>
+The output is art,<br>
+But what about its source code?<br>
+It's just as abstract.
+
+</cite></blockquote>
+</div>
+
+    
+<p>Please vote for your favorite entry in this semester's CS 61A Scheme Art
+Contest. The winner should exemplify the principles of elegance, beauty, and
+abstraction that are prized in the Berkeley computer science curriculum. As an
+academic community, we should strive to recognize and reward merit and
+achievement (in other words, please don't just vote for your friends).</p>
+
+<p><a href="https://forms.gle/tx3HnwtkBGZVMQsA7">Cast your vote by submitting this form</a>. Voting is due <strong>11:59 PM
+on Friday, 8/14</strong>.</p>
+
+
+<h1 id="featherweight-division">Featherweight Division</h1>
+
+
+
+<h2 id="golden-ratio-in-a-bear-parenthesis">Golden Ratio in a Bear Parenthesis</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/00d9eda3/artwork.png">
+  <blockquote>A shape in cool Parenthesis<br>The shape even cooler<br>bin shift?</blockquote>
+  <p>Tokens: 281</p>
+</div>
+
+<a class="btn" href="entries/00d9eda3/contest.scm">View Code</a>
+
+
+<h2 id="coding-40-hours-a-day">Coding 40 Hours A Day</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/18af1ea6/artwork.png">
+  <blockquote>If you can code it slowly <br> You can code it fast <br> Unless you can't</blockquote>
+  <p>Tokens: 0</p>
+</div>
+
+<a class="btn" href="entries/18af1ea6/contest.scm">View Code</a>
+
+
+<h2 id="python-ok">Python Ok?</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/23200c31/artwork.png">
+  <blockquote>We python ok<br> but when does python ask us<br> if we are ok?</blockquote>
+  <p>Tokens: 505</p>
+</div>
+
+<a class="btn" href="entries/23200c31/contest.scm">View Code</a>
+
+
+<h2 id="dubai">Dubai</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/23b998b1/artwork.png">
+  <blockquote>Stuck at home this fall; <br> I'm 8000 miles from Cal. <br> Sunset's quite nice though.</blockquote>
+  <p>Tokens: 508</p>
+</div>
+
+<a class="btn" href="entries/23b998b1/contest.scm">View Code</a>
+
+
+<h2 id="the-fractal-tree">The Fractal Tree</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/42763471/artwork.png">
+  <blockquote>A fractal's answer <br> is between the finite's lie <br> and infinite truth</blockquote>
+  <p>Tokens: 378</p>
+</div>
+
+<a class="btn" href="entries/42763471/contest.scm">View Code</a>
+
+
+<h2 id="even-sasuke-has-everyday-problems">Even Sasuke Has Everyday Problems</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/85ce3002/artwork.png">
+  <blockquote>Enduring eyelashes in my eye was my greatest Pain, <br> until CS61A distressed my brain.<br> ( ͡°( ͡° ͜ʖ( ͡ʘʖ̯ ͡ʘ)ʖ ͡°) ͡°)</blockquote>
+  <p>Tokens: 217</p>
+</div>
+
+<a class="btn" href="entries/85ce3002/contest.scm">View Code</a>
+
+
+<h2 id="folks-i-really-bombed-the-midterm-help">Folks, I really bombed the midterm. Help.</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/8bd3fe68/artwork.png">
+  <blockquote>forward ain't easy <br> but don't ever give up k? <br> makes total sense ngl</blockquote>
+  <p>Tokens: 50</p>
+</div>
+
+<a class="btn" href="entries/8bd3fe68/contest.scm">View Code</a>
+
+
+<h2 id="an-instructor-has-endorsed-this-entry">~ An instructor has endorsed this entry ~</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/8e0a3ca2/artwork.png">
+  <blockquote>~ sometimes we are slow ~ <br> ~ and epa does not go brrr ~ <br> ~ sometimes we are fast ~ <br> ~ and epa does go brrr ~</blockquote>
+  <p>Tokens: 144</p>
+</div>
+
+<a class="btn" href="entries/8e0a3ca2/contest.scm">View Code</a>
+
+
+<h2 id="noice-julia-set">Noice Julia Set</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/9c52ec3c/artwork.png">
+  <blockquote>Universe expands<br>But these galaxy bros meet<br>Thiccccccccccccccccccccness synthesized</blockquote>
+  <p>Tokens: 355</p>
+</div>
+
+<a class="btn" href="entries/9c52ec3c/contest.scm">View Code</a>
+
+
+<h2 id="starry-nile">Starry 'nile</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/abe121d9/artwork.png">
+  <blockquote>you and i gazing<br>at stars beyond our windows<br>alone, together</blockquote>
+  <p>Tokens: 487</p>
+</div>
+
+<a class="btn" href="entries/abe121d9/contest.scm">View Code</a>
+
+
+<h2 id="pastel-dreams-and-summer-memories">pastel dreams and summer memories</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/ba50592a/artwork.png">
+  <blockquote>lillypad lotus<br>have the feeling of summer<br>in a pastel sea</blockquote>
+  <p>Tokens: 402</p>
+</div>
+
+<a class="btn" href="entries/ba50592a/contest.scm">View Code</a>
+
+
+<h2 id="death-star-explosion-chain">Death Star Explosion Chain</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/d533fed8/artwork.png">
+  <blockquote>Where are the rebels? <br> You may fire when ready <br> Alderaan is gone</blockquote>
+  <p>Tokens: 326</p>
+</div>
+
+<a class="btn" href="entries/d533fed8/contest.scm">View Code</a>
+
+
+<h2 id="me-peech">me peech</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/ec140cfc/artwork.png">
+  <blockquote>The final has come, <br><br>Procrastinate with this peach, <br><br>the end is in reach!</blockquote>
+  <p>Tokens: 40</p>
+</div>
+
+<a class="btn" href="entries/ec140cfc/contest.scm">View Code</a>
+
+
+<h1 id="heavyweight-division">Heavyweight Division</h1>
+
+
+
+<h2 id="b-l-m">B L M .</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/3c2eef28/artwork.png">
+  <blockquote>Black lives, they matter. <br> Centuries of injustice, <br> Now, it's up to us.</blockquote>
+  <p>Tokens: 985</p>
+</div>
+
+<a class="btn" href="entries/3c2eef28/contest.scm">View Code</a>
+
+
+<h2 id="okay-google">Okay Google</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/602b74d1/artwork.png">
+  <blockquote>Okay google, what<br>should I have to eat today<br>Forty two pancakes</blockquote>
+  <p>Tokens: 1981</p>
+</div>
+
+<a class="btn" href="entries/602b74d1/contest.scm">View Code</a>
+
+
+<h2 id="denero-s-devilish-scheme">DeNero's Devilish Scheme</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/8f6a1839/artwork.png">
+  <blockquote>`(The Scheme is unveiled)<br>`(it's all linked, like a Linked List)<br>(+ grade_bins 20)</blockquote>
+  <p>Tokens: 2669</p>
+</div>
+
+<a class="btn" href="entries/8f6a1839/contest.scm">View Code</a>
+
+
+<h2 id="menlo-w-resolution-font">Menlo[w] Resolution Font</h2>
+
+
+<div class="haiku">
+  <img class="img-responsive center-block" src="entries/f4cc70d5/artwork.png">
+  <blockquote>9 by 5 not enough,<br>should've anti-aliased.<br>utf-8 next.</blockquote>
+  <p>Tokens: 1205</p>
+</div>
+
+<a class="btn" href="entries/f4cc70d5/contest.scm">View Code</a>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#featherweight-division">Featherweight Division</a></li>
+  <ul>
+    <li><a href="index.html#golden-ratio-in-a-bear-parenthesis">Golden Ratio in a Bear Parenthesis</a></li>
+    <li><a href="index.html#coding-40-hours-a-day">Coding 40 Hours A Day</a></li>
+    <li><a href="index.html#python-ok">Python Ok?</a></li>
+    <li><a href="index.html#dubai">Dubai</a></li>
+    <li><a href="index.html#the-fractal-tree">The Fractal Tree</a></li>
+    <li><a href="index.html#even-sasuke-has-everyday-problems">Even Sasuke Has Everyday Problems</a></li>
+    <li><a href="index.html#folks-i-really-bombed-the-midterm-help">Folks, I really bombed the midterm. Help.</a></li>
+    <li><a href="index.html#an-instructor-has-endorsed-this-entry">~ An instructor has endorsed this entry ~</a></li>
+    <li><a href="index.html#noice-julia-set">Noice Julia Set</a></li>
+    <li><a href="index.html#starry-nile">Starry 'nile</a></li>
+    <li><a href="index.html#pastel-dreams-and-summer-memories">pastel dreams and summer memories</a></li>
+    <li><a href="index.html#death-star-explosion-chain">Death Star Explosion Chain</a></li>
+    <li><a href="index.html#me-peech">me peech</a></li>
+  </ul>
+  <li><a href="index.html#heavyweight-division">Heavyweight Division</a></li>
+  <ul>
+    <li><a href="index.html#b-l-m">B L M .</a></li>
+    <li><a href="index.html#okay-google">Okay Google</a></li>
+    <li><a href="index.html#denero-s-devilish-scheme">DeNero's Devilish Scheme</a></li>
+    <li><a href="index.html#menlo-w-resolution-font">Menlo[w] Resolution Font</a></li>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours.html">Office Hours</a></li>
+            <li><a href="../../staff.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition.html">Composition Guide</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about.html#exams">Exams</a></li>
+            <li><a href="../../articles/about.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    console.log(target);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      // window.scrollTo(0, 0);
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

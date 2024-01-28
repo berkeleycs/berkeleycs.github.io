@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Chae Park, Kavi Gupta, Ryan Moughan" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+    <title>
+Lab 12: Macros, Streams | CS 61A Summer 2020
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor.html">Instructors</a></li>
+                <li><a href="../../TAs.html">TAs</a></li>
+                <li><a href="../../tutors.html">Tutors</a></li>
+                <!-- <li><a href="/~cs61a/su20/academic-interns.html">Academic Interns</a></li> -->
+              </ul>
+            </li>
+            <li><a href="../../resources.html">Resources</a></li>
+            <li><a href="../../articles/about.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/summer2020/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://denero.org/feedback.html" target="_blank">Feedback</a></li>
+            <li><a href="https://edge.edx.org/courses/course-v1:BerkeleyX+CSW61A+2020_SP">EdX</a></li>
+            <!-- <li><a href="https://scheme.cs61a.org">Scheme</a></li> -->
+            <!-- <li><a href="https://sql.cs61a.org">SQL</a></li> -->
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">Tutor</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Lab 12: Macros, Streams
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="lab12.zip" class="label label-outline">lab12.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<p><i>Due by 11:59pm on Wednesday, August 5.</i></p>
+
+
+
+
+<h2 id='starter-files'>Starter Files</h2>
+
+<p>Download <a href="lab12.zip">lab12.zip</a>.
+Inside the archive, you will find starter files for the questions in this lab,
+  along with a copy of the <a href="ok.html">Ok</a> autograder.</p>
+
+
+<h2 id='submission'>Submission</h2>
+
+<p>By the end of this lab, you should have submitted the lab with
+<code>python3 ok --submit</code>. You may submit more than once before the
+deadline; only the final submission will be graded.
+Check that you have successfully submitted your code on
+<a href="https://okpy.org/">okpy.org</a>.</p>
+
+
+
+
+
+    
+<h1 id="topics">Topics</h1>
+
+
+<p>Consult this section if you need a refresher on the material for this lab. It's
+okay to skip directly to <a href="index.html#required-questions">the questions</a> and refer back
+here should you get stuck.</p>
+
+
+        <button id='toggle-1' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Macros<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-1">
+<!-- This is a copy of <code>disc/topics/macros/text/introduction.tex</code> but adapted for web -->
+
+<p>So far we've been able to define our own procedures in Scheme using the
+<code>define</code> special form. When we call these procedures, we have to follow
+the rules for evaluating call expressions, which involve evaluating all the
+operands.</p>
+
+<p>We know that special form expressions do not follow the evaluation rules of
+call expressions. Instead, each special form has its own rules of evaluation,
+which may include not evaluating all the operands.  Wouldn't it be cool if we
+could define our own special forms where we decide which operands are
+evaluated?  Consider the following example where we attempt to write a function
+that evaluates a given expression twice:</p>
+
+<pre><code class="scheme">scm&gt; (define (twice f) (begin f f))
+twice
+scm&gt; (twice (print &#x27;woof))
+woof</code></pre>
+
+
+
+<p>Since <code>twice</code> is a regular procedure, a call to <code>twice</code> will
+follow the same rules of evaluation as regular call expressions; first we
+evaluate the operator and then we evaluate the operands.  That means that
+<code>woof</code> was printed when we evaluated the operand <code>(print &#x27;woof)</code>.
+Inside the body of <code>twice</code>, the name <code>f</code> is bound to the value
+<code>undefined</code>, so the expression <code>(begin f f)</code> does nothing at all!</p>
+
+<p>The problem here is clear: we need to prevent the given expression from
+evaluating until we're inside the body of the procedure. This is where the
+<code>define&#x2d;macro</code> special form, which has identical syntax to the regular
+<code>define</code> form, comes in:</p>
+
+<pre><code class="scheme">scm&gt; (define&#x2d;macro (twice f) (list &#x27;begin f f))
+twice</code></pre>
+
+
+
+<p><code>define&#x2d;macro</code> allows us to define what's known as a <code>macro</code>,
+which is simply a way for us to combine unevaluated input expressions together
+into another expression. When we call macros, the operands are not evaluated,
+but rather are treated as Scheme data. This means that any operands that are
+call expressions or special form expression are treated like lists.</p>
+
+<p>If we call <code>(twice (print &#x27;woof))</code>, <code>f</code> will actually be bound to
+the list <code>(print &#x27;woof)</code> instead of the value <code>undefined</code>.
+Inside the body of <code>define&#x2d;macro</code>, we can insert these expressions into
+a larger Scheme expression. In our case, we would want a <code>begin</code>
+expression that looks like the following:</p>
+
+<pre><code>(begin (print &#x27;woof) (print &#x27;woof))</code></pre>
+
+<p>As Scheme data, this expression is really just a list containing three
+elements: <code>begin</code> and <code>(print &#x27;woof)</code> twice, which is exactly
+what <code>(list &#x27;begin f f)</code> returns.  Now, when we call <code>twice</code>,
+this list is evaluated as an expression and <code>(print &#x27;woof)</code> is evaluated
+twice.</p>
+
+<pre><code class="scheme">scm&gt; (twice (print &#x27;woof))
+woof
+woof</code></pre>
+
+
+
+<p>To recap, macros are called similarly to regular procedures, but the rules for
+evaluating them are different. We evaluated lambda procedures in the following
+way:</p>
+
+<ul>
+  <li>Evaluate operator</li>
+  <li>Evaluate operands</li>
+  <li>Apply operator to operands, evaluating the body of the procedure</li>
+</ul>
+
+<p>However, the rules for evaluating calls to macro procedures are:</p>
+
+<ul>
+  <li>Evaluate operator</li>
+  <li>Apply operator to unevaluated operands</li>
+  <li>Evaluate the expression returned by the macro in the frame it was called in.
+  </div></li>
+</ul>
+
+
+        <button id='toggle-2' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Quasiquotes<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-2">
+
+<p>Recall that the <code>quote</code> special form prevents the Scheme interpreter
+from executing a following expression. We saw that this helps us create complex
+lists more easily than repeatedly calling <code>cons</code> or trying to get the
+structure right with <code>list</code>. It seems like this form would come in handy
+if we are trying to construct complex Scheme expressions with many nested
+lists.</p>
+
+<p>Consider that we rewrite the <code>twice</code> macro as follows:</p>
+
+<pre><code>(define&#x2d;macro (twice f)
+  &#x27;(begin f f))</code></pre>
+
+<p>This seems like it would have the same effect, but since the <code>quote</code>
+form prevents any evaluation, the resulting expression we create would actually
+be <code>(begin f f)</code>, which is not what we want.</p>
+
+<p>The <strong>quasiquote</strong> allows us to construct literal lists in a similar way
+as quote, but also lets us specify if any sub-expression within the list should be
+evaluated.</p>
+
+<p>At first glance, the quasiquote (which can be invoked with the backtick <code>`</code> or
+the <code>quasiquote</code> special form) behaves exactly the same as <code>&#x27;</code> or
+<code>quote</code>.  However, using quasiquotes gives you the ability to
+<strong>unquote</strong> (which can be invoked with the comma <code>,</code> or the
+<code>unquote</code> special form). This removes an expression from the quoted
+context, evaluates it, and places it back in.</p>
+
+<p>By combining quasiquotes and unquoting, we can often save ourselves a lot
+of trouble when building macro expressions.</p>
+
+<p>Here is how we could use quasiquoting to rewrite our previous example:</p>
+
+<pre><code>(define&#x2d;macro (twice f)
+  `(begin ,f ,f))</code></pre>
+
+<blockquote><p>Important Note: quasiquoting isn't necessarily related to macros, in
+fact it can be used in any situation where you want to build lists
+non-recursively and you know the structure ahead of time. For example,
+instead of writing <code>(list x y z)</code> you can write <code>`(,x ,y ,z)</code> for
+100% equivalent behavior
+</div></p></blockquote>
+
+
+        <button id='toggle-3' class='btn btn-outline btn-lg alwaystoggle toggle'>
+        Streams<noscript> (enable JavaScript)</noscript>
+        </button>
+        <div class="solution toggle-3">
+A stream is an example of a lazy sequence. Specifically, it is a lazily
+evaluated Scheme list. In other words, the stream's elements (except for the
+first element) are only evaluated when the values are needed.  In addition,
+streams are <em>memoized</em>: the elements that have already been computed are saved!
+
+<p>Because a stream is simply a lazy list, the rest of a stream is also a stream
+(just like the rest of a list is also a list). In addition, <code>nil</code> can also
+serve as an empty stream. To check if a stream is empty, we can use the
+built-in procedure <code>null?</code>.</p>
+
+<p>The procedures involved for working with streams are as follows:</p>
+
+<ul>
+  <li><code>(cons&#x2d;stream first rest)</code>: A special form that constructs a stream by
+  evaluating the first operand <code>first</code> and storing its value as the first
+  element in the stream, and storing the second operand <code>rest</code>, unevaluated, to
+  be evaluated later.</li>
+  <li><code>(car s)</code>: A procedure that works on streams the same way it does on lists. It
+  returns the first element of the stream, which had already been computed on
+  construction of the stream.</li>
+  <li><code>(cdr&#x2d;stream s)</code>: A procedure that returns the rest of the stream by evaluating
+  the <code>rest</code> expression that was stored on construction of the stream. It then
+  stores the value of this expression so that on subsequent calls to <code>cdr&#x2d;stream</code>
+  on this stream, <code>rest</code> no longer has to be evaluated.</li>
+</ul>
+
+<p>Now we are ready to look at a simple example. This stream is an
+infinite stream where each element is 1.</p>
+
+<pre><code class="scheme">scm&gt; (define ones (cons&#x2d;stream 1 ones))
+ones
+scm&gt; (car ones)
+1
+scm&gt; (cdr&#x2d;stream ones)
+(1 . #[promise (forced)])</code></pre>
+
+
+
+<p>The reason we are able to recursively reference this object without causing an
+error is because the second operand to <code>cons&#x2d;stream</code> is not evaluated. Instead,
+it is stored until <code>cdr&#x2d;stream</code> is called, at which point the expression will
+be evaluated and the resulting value will be stored.</p>
+
+<p>Next, here's one way to build a stream of the natural numbers starting at <code>n</code>.</p>
+
+<pre><code class="scheme">scm&gt; (define (naturals (n))
+       (cons&#x2d;stream n (naturals (+ n 1))))
+naturals
+scm&gt; (define nat (naturals 0))
+nat
+scm&gt; (car nat)
+0
+scm&gt; (car (cdr&#x2d;stream nat))
+1
+scm&gt; (car (cdr&#x2d;stream (cdr&#x2d;stream nat)))
+2</code></pre>
+
+
+
+<p>Here, the expression that is stored is a recursive call to <code>naturals</code>. When we
+evaluate this call, we get another stream whose first element is one greater
+than the previous number in the sequence. The second element of this stream is
+uncomputed until <code>cdr&#x2d;stream</code> is called on it, which will activate yet another
+call to <code>naturals</code>.  Hence, we effectively get an infinite stream of integers,
+where each integer is computed one at a time. This is almost like infinite
+recursion, but one which can be viewed one step at a time, so it does not
+crash.
+</div></p>
+
+
+<h1 id="required-questions">Required Questions</h1>
+
+
+
+<h2 id="what-would-scheme-display">What Would Scheme Display?</h2>
+
+
+<h3 class="question" id="q1">Q1: WWSD: Macros</h3>
+
+<p>One thing to keep in mind when doing this question, builtins get rendered as such:</p>
+
+<pre><code class="scheme">scm&gt; +
+#[+]
+scm&gt; list
+#[list]</code></pre>
+
+
+
+<blockquote><p>If evaluating an expression causes an error, type <code>SchemeError</code>. If nothing is
+displayed, type <code>Nothing</code>.</p>
+
+<p>Use Ok to test your knowledge with the following "What Would Scheme Display?"
+questions:</p>
+
+<pre><code>python3 ok &#x2d;q wwsd&#x2d;macros &#x2d;u</code></pre></blockquote>
+
+</question>
+
+<pre><code>scm&gt; +
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x23;&#x5b;&#x2b;&#x5d;</div>
+scm&gt; list
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x23;&#x5b;&#x6c;&#x69;&#x73;&#x74;&#x5d;</div>
+scm&gt; (define&#x2d;macro (f x) (car x))
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x66;</div>
+scm&gt; (f (2 3 4)) ; type SchemeError for error, or Nothing for nothing
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x32;</div>
+scm&gt; (f (+ 2 3))
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x23;&#x5b;&#x2b;&#x5d;</div>
+scm&gt; (define x 2000)
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x78;</div>
+scm&gt; (f (x y z))
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x32;&#x30;&#x30;&#x30;</div>
+scm&gt; (f (list 2 3 4))
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x23;&#x5b;&#x6c;&#x69;&#x73;&#x74;&#x5d;</div>
+scm&gt; (f (quote (2 3 4)))
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x53;&#x63;&#x68;&#x65;&#x6d;&#x65;&#x45;&#x72;&#x72;&#x6f;&#x72;</div>
+scm&gt; (define quote 7000)
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x71;&#x75;&#x6f;&#x74;&#x65;</div>
+scm&gt; (f (quote (2 3 4)))
+<div class="alt prompt-1">______</div><div class="solution prompt-1">&#x37;&#x30;&#x30;&#x30;</div></code></pre>
+        <button id='prompt-1' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+<pre><code>scm&gt; (define&#x2d;macro (g x) (+ x 2))
+<div class="alt prompt-2">______</div><div class="solution prompt-2">&#x67;</div>
+scm&gt; (g 2)
+<div class="alt prompt-2">______</div><div class="solution prompt-2">&#x34;</div>
+scm&gt; (g (+ 2 3))
+<div class="alt prompt-2">______</div><div class="solution prompt-2">&#x53;&#x63;&#x68;&#x65;&#x6d;&#x65;&#x45;&#x72;&#x72;&#x6f;&#x72;</div>
+scm&gt; (define&#x2d;macro (h x) (list &#x27;+ x 2))
+<div class="alt prompt-2">______</div><div class="solution prompt-2">&#x68;</div>
+scm&gt; (h (+ 2 3))
+<div class="alt prompt-2">______</div><div class="solution prompt-2">&#x37;</div></code></pre>
+        <button id='prompt-2' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+<pre><code>scm&gt; (define&#x2d;macro (if&#x2d;else&#x2d;5 condition consequent) `(if ,condition ,consequent 5))
+<div class="alt prompt-3">______</div><div class="solution prompt-3">&#x69;&#x66;&#x2d;&#x65;&#x6c;&#x73;&#x65;&#x2d;&#x35;</div>
+scm&gt; (if&#x2d;else&#x2d;5 #t 2)
+<div class="alt prompt-3">______</div><div class="solution prompt-3">&#x32;</div>
+scm&gt; (if&#x2d;else&#x2d;5 #f 3)
+<div class="alt prompt-3">______</div><div class="solution prompt-3">&#x35;</div>
+scm&gt; (if&#x2d;else&#x2d;5 #t (/ 1 0))
+<div class="alt prompt-3">______</div><div class="solution prompt-3">&#x53;&#x63;&#x68;&#x65;&#x6d;&#x65;&#x45;&#x72;&#x72;&#x6f;&#x72;</div>
+scm&gt; (if&#x2d;else&#x2d;5 #f (/ 1 0))
+<div class="alt prompt-3">______</div><div class="solution prompt-3">&#x35;</div>
+scm&gt; (if&#x2d;else&#x2d;5 (= 1 1) 2)
+<div class="alt prompt-3">______</div><div class="solution prompt-3">&#x32;</div></code></pre>
+        <button id='prompt-3' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+<h3 class="question" id="q2">Q2: WWSD: Quasiquote</h3>
+
+<blockquote><p>Use Ok to test your knowledge with the following "What Would Scheme Display?"
+questions:</p>
+
+<pre><code>python3 ok &#x2d;q wwsd&#x2d;quasiquote &#x2d;u</code></pre></blockquote>
+
+</question>
+
+<pre><code>scm&gt; &#x27;(1 x 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x78;&#x20;&#x33;&#x29;</div>
+scm&gt; (define x 2)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x78;</div>
+scm&gt; `(1 x 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x78;&#x20;&#x33;&#x29;</div>
+scm&gt; `(1 ,x 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x32;&#x20;&#x33;&#x29;</div>
+scm&gt; &#x27;(1 ,x 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x28;&#x75;&#x6e;&#x71;&#x75;&#x6f;&#x74;&#x65;&#x20;&#x78;&#x29;&#x20;&#x33;&#x29;</div>
+scm&gt; `(,1 x 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x78;&#x20;&#x33;&#x29;</div>
+scm&gt; `,(+ 1 x 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x36;</div>
+scm&gt; `(1 (,x) 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x28;&#x32;&#x29;&#x20;&#x33;&#x29;</div>
+scm&gt; `(1 ,(+ x 2) 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x34;&#x20;&#x33;&#x29;</div>
+scm&gt; (define y 3)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x79;</div>
+scm&gt; `(x ,(* y x) y)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x78;&#x20;&#x36;&#x20;&#x79;&#x29;</div>
+scm&gt; `(1 ,(cons x (list y 4)) 5)
+<div class="alt prompt-4">______</div><div class="solution prompt-4">&#x28;&#x31;&#x20;&#x28;&#x32;&#x20;&#x33;&#x20;&#x34;&#x29;&#x20;&#x35;&#x29;</div></code></pre>
+        <button id='prompt-4' class='btn btn-outline btn-lg solutiontoggle prompt'>
+        Toggle Solution<noscript> (enable JavaScript)</noscript>
+        </button>
+        
+
+
+<h2 id="macros">Macros</h2>
+
+
+<h3 class="question" id="q3">Q3: Scheme def</h3>
+
+<p>Implement <code>def</code>, which simulates a python <code>def</code> statement, allowing you to write code like
+<code>(def f(x y) (+ x y))</code>.</p>
+
+<p>The above expression should create a function with parameters <code>x</code> and <code>y</code>, and
+body <code>(+ x y)</code>, then bind it to the name <code>f</code> in the current frame.</p>
+
+<blockquote><p>Note: the previous is equivalent to <code>(def f (x y) (+ x y))</code>.</p>
+
+<p><strong>Hint:</strong> We <em>strongly</em> suggest doing the WWPD questions on macros first as
+understanding the rules of macro evaluation is key in writing macros.</p></blockquote>
+
+<solution>
+
+<pre><code class="scheme">
+(define&#x2d;macro (def func args body)
+    &#x27;YOUR&#x2d;CODE&#x2d;HERE)
+</code></pre>
+
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q scheme-def</code></pre>
+
+
+<h2 id="streams">Streams</h2>
+
+
+<h3 class="question" id="q4">Q4: Multiples of 3</h3>
+
+<p>Define implicitly an infinite stream <code>all&#x2d;three&#x2d;multiples</code> that contains
+all the multiples of 3, starting at 3. For example, the first 5 elements should be:
+(3 6 9 12 15)</p>
+
+<p>You may use the <code>map&#x2d;stream</code> function defined below. <code>map&#x2d;stream</code> takes in
+a one-argument function <code>f</code> and a stream <code>s</code> and returns a new stream containing
+the elements of <code>s</code> with <code>f</code> applied.</p>
+
+<pre><code>(define (map&#x2d;stream f s)
+	(if (null? s)
+		nil
+		(cons&#x2d;stream (f (car s)) (map&#x2d;stream f (cdr&#x2d;stream s)))))</code></pre>
+
+<p><strong>Do not define any other helper functions.</strong></p>
+
+<solution>
+
+<pre><code class="scheme">(define (map&#x2d;stream f s)
+    (if (null? s)
+    	nil
+    	(cons&#x2d;stream (f (car s)) (map&#x2d;stream f (cdr&#x2d;stream s)))))
+
+(define all&#x2d;three&#x2d;multiples
+  'YOUR-CODE-HERE
+)</code></pre>
+
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q multiples_3</code></pre>
+
+
+<h2 id="submit">Submit</h2>
+
+
+<p>Make sure to submit this assignment by running:</p>
+
+<pre><code>python3 ok &#x2d;&#x2d;submit</code></pre>
+
+
+<h1 id="optional-questions">Optional Questions</h1>
+
+
+
+<h2 id="scheme-basics">Scheme Basics</h2>
+
+
+<h3 class="question" id="q5">Q5: Compose All</h3>
+
+<p>Implement <code>compose&#x2d;all</code>, which takes a list of one-argument functions and
+returns a one-argument function that applies each function in that list in turn
+to its argument. For example, if <code>func</code> is the result of calling <code>compose&#x2d;all</code>
+on a list of functions <code>(f g h)</code>, then <code>(func x)</code> should be equivalent to the
+result of calling <code>(h (g (f x)))</code>.</p>
+
+<pre><code class="scheme">scm&gt; (define (square x) (* x x))
+square
+scm&gt; (define (add&#x2d;one x) (+ x 1))
+add&#x2d;one
+scm&gt; (define (double x) (* x 2))
+double
+scm&gt; (define composed (compose&#x2d;all (list double square add&#x2d;one)))
+composed
+scm&gt; (composed 1)
+5
+scm&gt; (composed 2)
+17</code></pre>
+
+
+
+<solution>
+
+<pre><code class="scheme">(define (compose&#x2d;all funcs)
+  'YOUR-CODE-HERE
+)</code></pre>
+
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q compose-all</code></pre>
+
+
+<h2 id="streams">Streams</h2>
+
+
+<h3 class="question" id="q6">Q6: Partial sums</h3>
+
+<p>Define a function <code>partial&#x2d;sums</code>, which takes in a stream with elements</p>
+
+<pre><code>a1, a2, a3, ...</code></pre>
+
+<p>and outputs the stream</p>
+
+<pre><code>a1, a1 + a2, a1 + a2 + a3, ...</code></pre>
+
+<p>If the input is a finite stream of length <em>n</em>, the output should be a
+finite stream of length <em>n</em>. If the input is an infinite stream, the
+output should also be an infinite stream.</p>
+
+<solution>
+
+<pre><code class="scheme">(define (partial&#x2d;sums stream)
+  'YOUR-CODE-HERE
+  (helper 0 stream)
+)</code></pre>
+
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q partial-sums</code></pre>
+<script>
+    $('.alwaystoggle').css('display', 'inline-block');
+    $('.alwaystoggle').click(function() {
+      var solution_id = $(this).attr('id');
+      $('div.' + solution_id).slideToggle(600);
+    });
+</script>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#topics">Topics</a></li>
+  <li><a href="index.html#required-questions">Required Questions</a></li>
+  <ul>
+    <li><a href="index.html#what-would-scheme-display">What Would Scheme Display?</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: WWSD: Macros</a></li>
+      <li><a href="index.html#q2">Q2: WWSD: Quasiquote</a></li>
+    </ul>
+    <li><a href="index.html#macros">Macros</a></li>
+    <ul>
+      <li><a href="index.html#q3">Q3: Scheme def</a></li>
+    </ul>
+    <li><a href="index.html#streams">Streams</a></li>
+    <ul>
+      <li><a href="index.html#q4">Q4: Multiples of 3</a></li>
+    </ul>
+    <li><a href="index.html#submit">Submit</a></li>
+  </ul>
+  <li><a href="index.html#optional-questions">Optional Questions</a></li>
+  <ul>
+    <li><a href="index.html#scheme-basics">Scheme Basics</a></li>
+    <ul>
+      <li><a href="index.html#q5">Q5: Compose All</a></li>
+    </ul>
+    <li><a href="index.html#streams">Streams</a></li>
+    <ul>
+      <li><a href="index.html#q6">Q6: Partial sums</a></li>
+    </ul>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours.html">Office Hours</a></li>
+            <li><a href="../../staff.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition.html">Composition Guide</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about.html#exams">Exams</a></li>
+            <li><a href="../../articles/about.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    console.log(target);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      // window.scrollTo(0, 0);
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

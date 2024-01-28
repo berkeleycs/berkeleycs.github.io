@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Chae Park, Kavi Gupta, Ryan Moughan" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/mono-blue.css">
+    <link rel="icon" href="../../assets/images/favicon.ico">
+
+    
+
+    <title>
+Lab 7: Midterm Review | CS 61A Summer 2020
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="index.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../../instructor.html">Instructors</a></li>
+                <li><a href="../../TAs.html">TAs</a></li>
+                <li><a href="../../tutors.html">Tutors</a></li>
+                <!-- <li><a href="/~cs61a/su20/academic-interns.html">Academic Interns</a></li> -->
+              </ul>
+            </li>
+            <li><a href="../../resources.html">Resources</a></li>
+            <li><a href="../../articles/about.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/summer2020/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://denero.org/feedback.html" target="_blank">Feedback</a></li>
+            <li><a href="https://edge.edx.org/courses/course-v1:BerkeleyX+CSW61A+2020_SP">EdX</a></li>
+            <!-- <li><a href="https://scheme.cs61a.org">Scheme</a></li> -->
+            <!-- <li><a href="https://sql.cs61a.org">SQL</a></li> -->
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">Tutor</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>
+        
+Lab 7: Midterm Review
+
+        
+        
+        <ul class="inline-block list-inline">
+          <li><a href="lab07.zip" class="label label-outline">lab07.zip</a></li>
+        </ul>
+        
+        
+      </h1>
+    </header>
+    
+
+<p><i>Due by 11:59pm on Friday, July 17.</i></p>
+
+
+
+
+<h2 id='starter-files'>Starter Files</h2>
+
+<p>Download <a href="lab07.zip">lab07.zip</a>.
+Inside the archive, you will find starter files for the questions in this lab,
+  along with a copy of the <a href="ok.html">Ok</a> autograder.</p>
+
+
+<h2 id='submission'>Submission</h2>
+
+<p>By the end of this lab, you should have submitted the lab with
+<code>python3 ok --submit</code>. You may submit more than once before the
+deadline; only the final submission will be graded.
+Check that you have successfully submitted your code on
+<a href="https://okpy.org/">okpy.org</a>.</p>
+
+<blockquote><p>In order to facilitate midterm studying, solutions to this lab were released with the lab. However, we still encourage you to try out the problems and struggle for a while before looking at the solutions, and submit the lab as usual!</p></blockquote>
+
+
+
+    
+<h1 id="required-questions">Required Questions</h1>
+
+
+
+<h2 id="recursion-and-tree-recursion">Recursion and Tree Recursion</h2>
+
+
+<h3 class="question" id="q1">Q1: Subsequences</h3>
+
+<p>A subsequence of a sequence <code>S</code> is a sequence of elements from <code>S</code>, in the same
+order they appear in <code>S</code>, but possibly with elements missing.  Thus, the lists
+<code>[]</code>, <code>[1, 3]</code>, <code>[2]</code>, and <code>[1, 2, 3]</code> are some (but not all) of the
+subsequences of <code>[1, 2, 3]</code>. Write a function that takes a list and returns a
+list of lists, for which each individual list is a subsequence of the original
+input.</p>
+
+<p>In order to accomplish this, you might first want to write a function <code>insert_into_all</code>
+that takes an item and a list of lists, adds the item to the beginning of nested list,
+and returns the resulting list.</p>
+
+<solution>
+
+<pre><code>def insert_into_all(item, nested_list):
+    &quot;&quot;&quot;Assuming that nested_list is a list of lists, return a new list
+    consisting of all the lists in nested_list, but with item added to
+    the front of each.
+
+    &gt;&gt;&gt; nl = [[], [1, 2], [3]]
+    &gt;&gt;&gt; insert_into_all(0, nl)
+    [[0], [0, 1, 2], [0, 3]]
+    &quot;&quot;&quot;
+    return ______________________________
+
+def subseqs(s):
+    &quot;&quot;&quot;Assuming that S is a list, return a nested list of all subsequences
+    of S (a list of lists). The subsequences can appear in any order.
+
+    &gt;&gt;&gt; seqs = subseqs([1, 2, 3])
+    &gt;&gt;&gt; sorted(seqs)
+    [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
+    &gt;&gt;&gt; subseqs([])
+    [[]]
+    &quot;&quot;&quot;
+    if ________________:
+        ________________
+    else:
+        ________________
+        ________________
+</code></pre>
+
+</solution>
+
+<br />
+
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/OwRa5a--dbY"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q subseqs</code></pre>
+
+<h3 class="question" id="q2">Q2: Increasing Subsequences</h3>
+
+<p>Just like the last question, we want to write a function that takes a list and
+returns a list of lists, where each individual list is a subsequence of the
+original input.</p>
+
+<p>This time we have another condition: we only want the subsequences for which
+consecutive elements are <em>nondecreasing</em>.  For example, <code>[1, 3, 2]</code> is a
+subsequence of <code>[1, 3, 2, 4]</code>, but since 2 &lt; 3, this subsequence would <em>not</em>
+be included in our result.</p>
+
+<p><strong>Fill in the blanks</strong> to complete the implementation of the <code>inc_subseqs</code>
+function. You may assume that the input list contains no negative elements.</p>
+
+<p>You may use the provided helper function <code>insert_into_all</code>, which takes in an
+<code>item</code> and a list of lists and inserts the <code>item</code> to the front of each list.</p>
+
+<solution>
+
+<pre><code>def inc_subseqs(s):
+    &quot;&quot;&quot;Assuming that S is a list, return a nested list of all subsequences
+    of S (a list of lists) for which the elements of the subsequence
+    are strictly nondecreasing. The subsequences can appear in any order.
+
+    &gt;&gt;&gt; seqs = inc_subseqs([1, 3, 2])
+    &gt;&gt;&gt; sorted(seqs)
+    [[], [1], [1, 2], [1, 3], [2], [3]]
+    &gt;&gt;&gt; inc_subseqs([])
+    [[]]
+    &gt;&gt;&gt; seqs2 = inc_subseqs([1, 1, 2])
+    &gt;&gt;&gt; sorted(seqs2)
+    [[], [1], [1], [1, 1], [1, 1, 2], [1, 2], [1, 2], [2]]
+    &quot;&quot;&quot;
+    def subseq_helper(s, prev):
+        if not s:
+            return ____________________
+        elif s[0] &lt; prev:
+            return ____________________
+        else:
+            a = ______________________
+            b = ______________________
+            return insert_into_all(________, ______________) + ________________
+    return subseq_helper(____, ____)
+</code></pre>
+
+</solution>
+
+<br />
+
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/hz7dHw3c5fc"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q inc_subseqs</code></pre>
+
+
+<h2 id="mutable-lists">Mutable Lists</h2>
+
+<h3 class="question" id="q3">Q3: Trade</h3>
+
+<p>In the integer market, each participant has a list of positive integers to
+trade. When two participants meet, they trade the smallest non-empty prefix of
+their list of integers. A prefix is a slice that starts at index
+0.</p>
+
+<p>Write a function <code>trade</code> that exchanges the first <code>m</code> elements of list <code>first</code>
+with the first <code>n</code> elements of list <code>second</code>, such that the sums of those
+elements are equal, and the sum is as small as possible. If no such prefix
+exists, return the string <code>&#x27;No deal!&#x27;</code> and do not change either list. Otherwise
+change both lists and return <code>&#x27;Deal!&#x27;</code>. A partial implementation is provided.</p>
+
+<blockquote><p><strong>Hint:</strong> You can mutate a slice of a list using <em>slice assignment</em>. To do so, specify
+a slice of the list <code>[i:j]</code> on the left-hand side of an assignment statement
+and another list on the right-hand side of the assignment statement. The
+operation will replace the entire given slice of the list from <code>i</code> inclusive
+to <code>j</code> exclusive with the elements from the given list. The slice and the
+given list need not be the same length.</p>
+
+<pre><code>&gt;&gt;&gt; a = [1, 2, 3, 4, 5, 6]
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; a[2:5] = [10, 11, 12, 13]
+&gt;&gt;&gt; a
+[1, 2, 10, 11, 12, 13, 6]
+&gt;&gt;&gt; b
+[1, 2, 10, 11, 12, 13, 6]</code></pre>
+
+<p>Additionally, recall that the starting and ending indices for a slice can be left out
+and Python will use a default value. <code>lst[i:]</code> is the same as <code>lst[i:len(lst)]</code>, and
+<code>lst[:j]</code> is the same as <code>lst[0:j]</code>.</p></blockquote>
+
+<solution>
+
+<pre><code>def trade(first, second):
+    &quot;&quot;&quot;Exchange the smallest prefixes of first and second that have equal sum.
+
+    &gt;&gt;&gt; a = [1, 1, 3, 2, 1, 1, 4]
+    &gt;&gt;&gt; b = [4, 3, 2, 7]
+    &gt;&gt;&gt; trade(a, b) # Trades 1+1+3+2=7 for 4+3=7
+    &#x27;Deal!&#x27;
+    &gt;&gt;&gt; a
+    [4, 3, 1, 1, 4]
+    &gt;&gt;&gt; b
+    [1, 1, 3, 2, 2, 7]
+    &gt;&gt;&gt; c = [3, 3, 2, 4, 1]
+    &gt;&gt;&gt; trade(b, c)
+    &#x27;No deal!&#x27;
+    &gt;&gt;&gt; b
+    [1, 1, 3, 2, 2, 7]
+    &gt;&gt;&gt; c
+    [3, 3, 2, 4, 1]
+    &gt;&gt;&gt; trade(a, c)
+    &#x27;Deal!&#x27;
+    &gt;&gt;&gt; a
+    [3, 3, 2, 1, 4]
+    &gt;&gt;&gt; b
+    [1, 1, 3, 2, 2, 7]
+    &gt;&gt;&gt; c
+    [4, 3, 1, 4, 1]
+    &quot;&quot;&quot;
+    m, n = 1, 1
+
+    equal_prefix = lambda: ______________________
+    while _______________________________:
+        if __________________:
+            m += 1
+        else:
+            n += 1
+
+    if equal_prefix():
+        first[:m], second[:n] = second[:n], first[:m]
+        return &#x27;Deal!&#x27;
+    else:
+        return &#x27;No deal!&#x27;</code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q trade</code></pre>
+
+<h3 class="question" id="q4">Q4: Reverse</h3>
+
+<p>Write a function that reverses the given list. Be sure to mutate the original list.
+This is practice, so don't use the built-in <code>reverse</code> function!</p>
+
+<blockquote><p><strong>Hint:</strong> You may notice that this problem appears similar to Reverse in Lab 5.
+However, unlike the implementations in Lab5, this function should NOT return anything.
+This is to emphasize that this function should utilize mutability.</p></blockquote>
+
+<solution>
+
+<pre><code>def reverse(lst):
+    &quot;&quot;&quot;Reverses lst using mutation.
+
+    &gt;&gt;&gt; original_list = [5, &#x2d;1, 29, 0]
+    &gt;&gt;&gt; reverse(original_list)
+    &gt;&gt;&gt; original_list
+    [0, 29, &#x2d;1, 5]
+    &gt;&gt;&gt; odd_list = [42, 72, &#x2d;8]
+    &gt;&gt;&gt; reverse(odd_list)
+    &gt;&gt;&gt; odd_list
+    [&#x2d;8, 72, 42]
+    &quot;&quot;&quot;
+    "*** YOUR CODE HERE ***"
+</code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q reverse</code></pre>
+
+
+<h2 id="nonlocal">Nonlocal</h2>
+
+
+<h3 class="question" id="q5">Q5: Glookup</h3>
+
+<p>Now we will be making our own version of <code>glookup</code>, which keeps track of one's
+current grade out of the assignments completed so far (you can use this
+to keep track of your points throughout the rest of the semester!)</p>
+
+<p><code>glookup</code> takes in the following dictionary of assignment names mapped
+to their total point values:</p>
+
+<pre><code>cs61a = {
+    &quot;Homework&quot;: 2,
+    &quot;Lab&quot;: 1,
+    &quot;Exam&quot;: 50,
+    &quot;Final&quot;: 80,
+    &quot;PJ1&quot;: 20,
+    &quot;PJ2&quot;: 15,
+    &quot;PJ3&quot;: 25,
+    &quot;PJ4&quot;: 30,
+    &quot;Extra credit&quot;: 0
+}</code></pre>
+
+<p><code>glookup</code> then returns a function which takes in an assignment keyword
+and the points earned on that particular assignment. It returns the
+current grade percentage out of what assignments have been entered so
+far.</p>
+
+<p>Make sure you read the doctests and understand them fully before you
+start writing code.</p>
+
+<solution>
+
+<pre><code>cs61a = {
+    &quot;Homework&quot;: 2,
+    &quot;Lab&quot;: 1,
+    &quot;Exam&quot;: 50,
+    &quot;Final&quot;: 80,
+    &quot;PJ1&quot;: 20,
+    &quot;PJ2&quot;: 15,
+    &quot;PJ3&quot;: 25,
+    &quot;PJ4&quot;: 30,
+    &quot;Extra credit&quot;: 0
+}
+
+def make_glookup(class_assignments):
+    &quot;&quot;&quot; Returns a function which calculates and returns the current
+    grade out of what assignments have been entered so far.
+
+    &gt;&gt;&gt; student1 = make_glookup(cs61a) # cs61a is the above dictionary
+    &gt;&gt;&gt; student1(&quot;Homework&quot;, 1.5)
+    0.75
+    &gt;&gt;&gt; student1(&quot;Lab&quot;, 1)
+    0.8333333333333334
+    &gt;&gt;&gt; student1(&quot;PJ1&quot;, 18)
+    0.8913043478260869
+    &quot;&quot;&quot;
+    "*** YOUR CODE HERE ***"
+</code></pre>
+
+</solution>
+
+<br />
+
+
+            <iframe width="560" height="315" src="https://youtube.com/embed/UQ4cRd3Y0mg"
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+
+<br />
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q make_glookup</code></pre>
+
+
+<h2 id="submit">Submit</h2>
+
+
+<p>Make sure to submit this assignment by running:</p>
+
+<pre><code>python3 ok &#x2d;&#x2d;submit</code></pre>
+
+
+<h1 id="suggested-questions">Suggested Questions</h1>
+
+
+
+<h2 id="recursion-tree-recursion">Recursion / Tree Recursion</h2>
+
+<h3 class="question" id="q6">Q6: Number of Trees</h3>
+
+<p>How many different possible full binary tree (each node has 2
+branches or 0, but never 1) structures exist that have exactly n
+leaves?</p>
+
+<p>For those interested in combinatorics, this problem does have a <a href="http://en.wikipedia.org/wiki/Catalan_number">closed
+form solution</a>):</p>
+
+<solution>
+
+<pre><code>def num_trees(n):
+    &quot;&quot;&quot;How many full binary trees have exactly n leaves? E.g.,
+
+    1   2        3       3    ...
+    *   *        *       *
+       / \      / \     / \
+      *   *    *   *   *   *
+              / \         / \
+             *   *       *   *
+
+    &gt;&gt;&gt; num_trees(1)
+    1
+    &gt;&gt;&gt; num_trees(2)
+    1
+    &gt;&gt;&gt; num_trees(3)
+    2
+    &gt;&gt;&gt; num_trees(8)
+    429
+
+    &quot;&quot;&quot;
+    if ____________________:
+        return _______________
+    return _______________
+</code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q num_trees</code></pre>
+
+
+<h2 id="nonlocal">Nonlocal</h2>
+
+
+<h3 class="question" id="q7">Q7: Advanced Counter</h3>
+
+<p>Complete the definition of <code>make_advanced_counter_maker</code>,
+which creates a function that creates counters. These counters can not
+only update their personal count, but also a shared count for all
+counters.  They can also reset either count.</p>
+
+<solution>
+
+<pre><code>def make_advanced_counter_maker():
+    &quot;&quot;&quot;Makes a function that makes counters that understands the
+    messages &quot;count&quot;, &quot;global&#x2d;count&quot;, &quot;reset&quot;, and &quot;global&#x2d;reset&quot;.
+    See the examples below:
+
+    &gt;&gt;&gt; make_counter = make_advanced_counter_maker()
+    &gt;&gt;&gt; tom_counter = make_counter()
+    &gt;&gt;&gt; tom_counter(&#x27;count&#x27;)
+    1
+    &gt;&gt;&gt; tom_counter(&#x27;count&#x27;)
+    2
+    &gt;&gt;&gt; tom_counter(&#x27;global&#x2d;count&#x27;)
+    1
+    &gt;&gt;&gt; jon_counter = make_counter()
+    &gt;&gt;&gt; jon_counter(&#x27;global&#x2d;count&#x27;)
+    2
+    &gt;&gt;&gt; jon_counter(&#x27;count&#x27;)
+    1
+    &gt;&gt;&gt; jon_counter(&#x27;reset&#x27;)
+    &gt;&gt;&gt; jon_counter(&#x27;count&#x27;)
+    1
+    &gt;&gt;&gt; tom_counter(&#x27;count&#x27;)
+    3
+    &gt;&gt;&gt; jon_counter(&#x27;global&#x2d;count&#x27;)
+    3
+    &gt;&gt;&gt; jon_counter(&#x27;global&#x2d;reset&#x27;)
+    &gt;&gt;&gt; tom_counter(&#x27;global&#x2d;count&#x27;)
+    1
+    &quot;&quot;&quot;
+    ________________
+    def ____________(__________):
+        ________________
+        def ____________(__________):
+            ________________
+            "*** YOUR CODE HERE ***"
+            # as many lines as you want
+        ________________
+    ________________
+</code></pre>
+
+</solution>
+
+<p>Use Ok to test your code:</p><pre><code class="nohighlight">python3 ok -q make_advanced_counter_maker</code></pre>
+<script>
+    $('.alwaystoggle').css('display', 'inline-block');
+    $('.alwaystoggle').click(function() {
+      var solution_id = $(this).attr('id');
+      $('div.' + solution_id).slideToggle(600);
+    });
+</script>
+
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="index.html#required-questions">Required Questions</a></li>
+  <ul>
+    <li><a href="index.html#recursion-and-tree-recursion">Recursion and Tree Recursion</a></li>
+    <ul>
+      <li><a href="index.html#q1">Q1: Subsequences</a></li>
+      <li><a href="index.html#q2">Q2: Increasing Subsequences</a></li>
+    </ul>
+    <li><a href="index.html#mutable-lists">Mutable Lists</a></li>
+    <ul>
+      <li><a href="index.html#q3">Q3: Trade</a></li>
+      <li><a href="index.html#q4">Q4: Reverse</a></li>
+    </ul>
+    <li><a href="index.html#nonlocal">Nonlocal</a></li>
+    <ul>
+      <li><a href="index.html#q5">Q5: Glookup</a></li>
+    </ul>
+    <li><a href="index.html#submit">Submit</a></li>
+  </ul>
+  <li><a href="index.html#suggested-questions">Suggested Questions</a></li>
+  <ul>
+    <li><a href="index.html#recursion-tree-recursion">Recursion / Tree Recursion</a></li>
+    <ul>
+      <li><a href="index.html#q6">Q6: Number of Trees</a></li>
+    </ul>
+    <li><a href="index.html#nonlocal">Nonlocal</a></li>
+    <ul>
+      <li><a href="index.html#q7">Q7: Advanced Counter</a></li>
+    </ul>
+  </ul>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../../office-hours.html">Office Hours</a></li>
+            <li><a href="../../staff.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../resources.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/studying.html">Studying Guide</a></li>
+            <li><a href="../../articles/debugging.html">Debugging Guide</a></li>
+            <li><a href="../../articles/composition.html">Composition Guide</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../../articles/about.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../../articles/about.html#assignments">Assignments</a></li>
+            <li><a href="../../articles/about.html#exams">Exams</a></li>
+            <li><a href="../../articles/about.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+
+  function goToId(id) {
+    var target = $(id);
+    console.log(target);
+    target.parent().show();
+    $('html,body').animate({
+      scrollTop: target.offset().top,
+    }, 100);
+    $("body").scrollspy('refresh');
+  }
+
+  if (location.hash) {
+    setTimeout(function() {
+      // window.scrollTo(0, 0);
+      if (location.hash) {
+        goToId(location.hash);
+      }
+    }, 1);
+  }
+
+  $("a").click(function(event) {
+    var urlBeforeHashRegEx = new RegExp("^"+window.location.href.split("#")[0]);
+    if (/^#/.test(this.hash) && urlBeforeHashRegEx.test(this.href)) {
+      event.preventDefault();
+      goToId(this.hash);
+      document.location.hash = this.hash;
+    }
+  });
+</script>
+
+  </body>
+</html>

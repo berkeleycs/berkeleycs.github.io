@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content ="CS 61A: Structure and Interpretation of Computer Programs" />
+    <meta name="keywords" content ="CS 61A, Computer Science, CS, 61A, Programming, John DeNero, Berkeley, EECS" />
+    <meta name="author" content ="Chae Park, Kavi Gupta, Ryan Moughan" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../assets/js/hl.js"></script>
+    <script>
+        // we aren't registering builtins since
+        //      (1) they don't render differently in the current CSS from other names
+        //      (2) it's a mess to list all of them. You can extract from the site but that takes effort
+        // if (1) ceases to be true, (2) might be worth the effort. For now, we're leaving as is
+        hljsRegister({
+            'keyword': "define if cond and or let begin lambda mu quote delay cons-stream set! quasiquote unquote unquote-splicing define-macro"
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <script src="../assets/js/dark-mode.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Roboto:300,400,500|Work+Sans:400,700">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/mono-blue.css">
+    <link rel="icon" href="../assets/images/favicon.ico">
+
+    
+
+    <title>
+Course Information | CS 61A Summer 2020
+</title>
+  </head>
+
+  <body id="index" class="home">
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container noselect">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-section">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">
+            <img style="max-width:60px; margin-top: -20px;" class="logo" src="../assets/images/logo.png"/>
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../office-hours.html">Office Hours</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="about.html#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Staff
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a href="../instructor.html">Instructors</a></li>
+                <li><a href="../TAs.html">TAs</a></li>
+                <li><a href="../tutors.html">Tutors</a></li>
+                <!-- <li><a href="/~cs61a/su20/academic-interns.html">Academic Interns</a></li> -->
+              </ul>
+            </li>
+            <li><a href="../resources.html">Resources</a></li>
+            <li><a href="about.html">Syllabus</a></li>
+            <li><a href="https://piazza.com/berkeley/summer2020/cs61a" target="_blank">Piazza</a></li>
+            <li><a href="https://denero.org/feedback.html" target="_blank">Feedback</a></li>
+            <li><a href="https://edge.edx.org/courses/course-v1:BerkeleyX+CSW61A+2020_SP">EdX</a></li>
+            <!-- <li><a href="https://scheme.cs61a.org">Scheme</a></li> -->
+            <!-- <li><a href="https://sql.cs61a.org">SQL</a></li> -->
+            <li><a href="https://code.cs61a.org">Code</a></li>
+            <li><a href="http://tutor.cs61a.org">Tutor</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main id="content" class="container">
+      
+<div class='row'>
+  <div class='col-md-9'>
+    <header>
+      <h1>Course Information</h1>
+    </header>
+     <h2 id="overview">Overview</h2>
+
+
+<p>This page covers the course policies for CS 61A.</p>
+
+<p>The CS 61 series is an introduction to computer science, with particular
+emphasis on software and on machines from a programmer's point of view.</p>
+
+<ol>
+  <li>CS 61A concentrates on the idea of abstraction, allowing the programmer to
+  think in terms appropriate to the problem rather than in low-level
+  operations dictated by the computer hardware.</li>
+  <li>CS 61B deals with the more advanced engineering aspects of software, such
+  as constructing and analyzing large programs.</li>
+  <li>CS 61C focuses on machines and how they execute programs.</li>
+</ol>
+
+<p>In CS 61A, we are interested in teaching you about programming, not about how
+to use one particular programming language. We consider a series of techniques
+for controlling program complexity, such as functional programming, data
+abstraction, and object-oriented programming.</p>
+
+<p>CS 61A primarily uses the Python 3 programming language. Python is a popular
+language in both industry and academia. It is also particularly well-suited to
+the task of exploring the topics taught in this course. It is an open-source
+language developed by a large volunteer community that prides itself on the
+diversity of its contributors. We will also use two other languages in the
+latter half of the course: the Scheme programming language and the Structured
+Query Language (SQL).</p>
+
+<p>Mastery of a particular programming language is a very useful side effect of CS
+61A. However, our goal is not to dictate what language you use in your future
+endeavors. Instead, our hope is that once you have learned the concepts involved
+in programming, you will find that picking up a new programming language is but
+a few days' work.</p>
+
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+
+<p>There are no formal programming-related prerequisites for admission to CS 61A,
+but it's not the right first course for all students. Many CS 61A students have
+had significant prior programming experience, including prior coursework. Some
+students take the course without any prior programming experience, but they
+typically must work substantially harder to master the material, perhaps simply
+because they have less practice working with programs. If you have limited prior
+experience and you find it challenging to complete all of the required
+coursework in the first three weeks, you should seriously consider taking
+another course first. You'll likely have a better experience taking 61A later,
+and you won't fall behind in any meaningful way by taking one of the
+alternatives below prior to taking 61A.</p>
+
+
+<h3 id="alternatives">Alternatives</h3>
+
+
+<p>If you want to build programming experience before taking CS 61A, we recommend
+that you take one of these courses first. Both are offered this summer.
+You can always take CS 61A in a future semester.</p>
+
+
+<h4 id="cs-10">CS 10</h4>
+
+
+<p><a href="http://cs10.org">CS 10: The Beauty and Joy of Computing</a> provides a bird's-eye
+view of the field of computer science. The course teaches students how to
+program using Snap (based on Scratch), one of the friendliest programming
+languages ever invented, as well as Python, the same language used in 61A. But
+the course is far more than just learning to program! You'll also learn about
+some big ideas of computing, such as abstraction, design, recursion,
+concurrency, simulations, and the limits of computation. You'll also see some
+beautiful applications of computing that have changed the world, as well as
+talk about the history of computing and where it will go in the future.</p>
+
+
+<h4 id="data-8">Data 8</h4>
+
+
+<p><a href="http://data8.org/">Data 8: The Foundations of Data Science</a> is an introduction
+to data science designed to be accessible and useful for all Berkeley students,
+and built for students without prior programming experience.  The course teaches
+students to program in Python 3, but covers a much smaller subset of the
+language than CS 61A. Most of the course focuses on data processing and
+statistical techniques that are central to using computers to answer questions
+about the world. The overlap between Data 8 and CS 61A is small (perhaps 25%),
+but the programming skill you will acquire in Data 8 will help you maintain the
+faster pace of CS 61A.</p>
+
+
+<h2 id="course-format">Course Format</h2>
+
+
+<p>The course includes many events and opportunities for learning: lecture, discussion,
+office hours, and group mentoring. We understand that everyone learns differently,
+so not all of these events are required. However, it is recommended that you at least
+try everything out to figure out what combination of these events works best for you.</p>
+
+
+<h3 id="lecture">Lecture</h3>
+
+
+<p>There are four 80-minute lectures per week. Given that the course is online this summer,
+all lecture content will be released as videos, and the slides will be posted with each lecture.
+During the regular lecture time, there will be weekly supplementary live lectures that are optional.</p>
+
+<p>This course moves very fast, so you should always watch lecture before your section that day.
+The TAs will assume that all of their students have watched that day's lecture.</p>
+
+
+<h3 id="section">Section</h3>
+
+
+<p>There are two discussion sections each week. These sections are
+run by an amazing group of teaching assistants who have been carefully
+selected for their ability, enthusiasm, and dedication to learning.
+Getting to know your TA is an excellent way to succeed in this course. Participation in
+discussion determines your discussion participation score for the course.
+You also may be able to receive points according to the <a href="about.html#epa">EPA policy</a></p>
+
+
+<h3 id="office-hours">Office Hours</h3>
+
+
+<p>🚧 Office hour schedule will be released during week 1 🚧</p>
+
+<p>Attending office hours is another excellent way to succeed in this course. You
+can ask questions about the material, receive guidance on assignments, work
+with peers and course staff in a small group setting, find project partners,
+and learn about computer science at Berkeley. We will post the office hour
+schedule <a href="../office-hours.html">here</a>.</p>
+
+<p>In additional to our regular office hours, we will have a limited number
+of conceptual office hours. We will not take any questions about assignments
+at these office hours, but they will be chance for you to ask questions
+about the material in lecture or discussion or to get additional practice
+with the concepts presented in class.</p>
+
+
+<h3 id="group-mentoring-sections">Group Mentoring Sections</h3>
+
+
+<p>Optional group mentoring sections are held each week. Each section features
+worksheets that review topics covered in discussion section. These sections
+of at most 5 or 6 students meet twice a week and are here to create a stronger
+feeling of community in the class and reinforce conceptual understanding
+of course material. These will be recurring sections which will have the same
+group of students, and sign-ups for these sections will open the first week of classes.</p>
+
+
+<h2 id="assignments">Assignments</h2>
+
+
+<p>Each week, there will be problems assigned for you to work on, most of which
+will involve writing, debugging, and discussing programs. These assignments
+come in three categories: lab exercises, homework assignments, and projects.</p>
+
+
+<h3 id="labs">Labs</h3>
+
+
+<p>Lab exercises are designed to introduce a new topic.</p>
+
+<p>Lab exercises are due Wednesdays and Fridays and are scored on correct completion.
+To receive credit, you must complete all of the problems that are not marked as
+optional and pass all tests.</p>
+
+<p>We expect for there to be 14 lab exercises, including two ungraded exam review labs.
+The two lowest lab grades are dropped. As such, You will only have to complete 10 labs
+to get full credit for lab exercises.</p>
+
+
+<h3 id="homework">Homework</h3>
+
+
+<p>Homeworks are weekly assignments meant to help you apply the concepts learned
+in lecture and section on more challenging problems. They will usually be
+released on Wednesday and be due the following Tuesday night.</p>
+
+
+<h4 id="collaboration">Collaboration</h4>
+
+
+<p>You are encouraged to discuss the homework with other students, as long as you write
+your own code and submit your own work. Finding a study group is a great idea.
+The purpose of homework is for you to learn the course material, not to prove that
+you already know it. Therefore, you can expect to receive substantial assistance
+from the course staff. You're welcome to help others once you solve a problem.</p>
+
+<p><strong>If you are stuck on a problem, come get help instead of copying the answer from someone else
+or the Internet; you'll still get credit and won't be flagged for cheating.</strong></p>
+
+
+<h4 id="partial-credit">Partial Credit</h4>
+
+
+<p>There is partial credit, with every incorrect answer losing you one point on the homework (up till 0).
+Usually, homeworks are out of 3.</p>
+
+
+<h4 id="homework-recovery-policy">Homework Recovery Policy</h4>
+
+
+<p>You can recover one incorrect question per homework by going through either of the homework recovery processes:</p>
+
+<ol>
+  <li>Attend a group homework recovery session. The schedule will be released by a staff member
+   after each homework. For the duration of the session when the question you wish to recover
+   is being reviewed, you will be required to be present and actively participating.</li>
+  <li>Make an appointment for Office Hour and go over the solution with a staff member.</li>
+</ol>
+
+
+<h3 id="projects">Projects</h3>
+
+
+<p>Projects are larger assignments intended to combine ideas from the course in
+interesting ways. Some projects can be completed in pairs. When working in
+pairs, you should work together to ensure that both of you understand the
+complete results. We recommend finding a project partner in your section. Your
+TA will help. You may also work alone on all projects, although partners are
+recommended for the paired projects. Projects are graded on both correctness and
+<a href="composition.html">composition</a>.</p>
+
+
+<h3 id="epa">EPA</h3>
+
+
+<p>EPA stands for Effort, Participation and Altruism. This can help boost you over
+a grade boundary if you’re close to one. Scoring will remain confidential.</p>
+
+<ul>
+  <li>Effort = {Office hours, doing every single lab, hw, reading Piazza pages, etc.}</li>
+  <li>Participation = {Raising hand in discussion, asking Piazza questions, etc.}</li>
+  <li>Altruism = {Helping other students in lab, answering Piazza or Office Hour questions}</li>
+</ul>
+
+
+<h2 id="exams">Exams</h2>
+
+
+<p>The diagnostic quiz will be held on <strong>July 2nd</strong>.</p>
+
+<p>The diagnostic quiz is <strong>graded on completion</strong>. It is meant to be both a basic
+knowledge check to let you know where you're at with the material as well as a
+technical check with the new online format of the exams. It should be 1-2 hours.</p>
+
+<p>The first midterm exam will be held on <strong>July 16th</strong>.</p>
+
+<p>It will be a 3 hour individual exam taken on your computer.</p>
+
+<blockquote><p>We will allow alternate midterms only for time zone conflicts or conflicts with UC Berkeley exams.
+For students with another valid excuse for missing a midterm, notify us <em>before</em>
+the exam in question and we will weight your final to account for the missing exam.
+Note that missing the midterm will mean that the final will account for
+about 45% of your grade.</p></blockquote>
+
+<p>The final exam will be held on <strong>August 13th</strong>.</p>
+
+<p>It will be a 3 hour individual exam taken on your computer</p>
+
+<blockquote><p>If you have a direct conflict with another final exam or if you live in a timezone
+that is far off from PDT, we will allow you to take an alternate final.
+We will not provide final alternates for any other reason. We will release a
+form to account for exam conflicts.</p></blockquote>
+
+<p>This alternate exams will take place at a 12 hour offset from the regular exams.</p>
+
+<p>As long as you do not communicate with anyone other than course staff during
+the entire duration of the exam, you will be allowed to use any resources you have
+from the course to complete your exam.</p>
+
+<p>In the case we suspect academic dishonesty, we reserve the right to give an
+oral exam after the exam.</p>
+
+
+<h2 id="resources">Resources</h2>
+
+
+
+<h3 id="textbook">Textbook</h3>
+
+
+<p>The online textbook for the course is <a href="http://composingprograms.com/">Composing
+Programs</a>, which was created specifically for
+this course. Readings for each lecture appear in the course schedule.</p>
+
+
+<h2 id="grading">Grading</h2>
+
+
+<p>Your course grade is computed using a point system with a total of 300 points.</p>
+
+<ul>
+  <li>The Diagnostic Quiz, worth 5 points.</li>
+  <li>The midterm, worth 55 points.</li>
+  <li>The final exam, worth 80 points.</li>
+  <li>Homework, worth 24 points.</li>
+  <li>Four projects, worth 106 points.</li>
+  <li>Lab Assignments, worth 20 points.</li>
+  <li>Discussion participation, worth 10 points.</li>
+</ul>
+
+<p>There will be no drops for homework assignments, but of the mandatory
+(non-review) labs, only 10 contribute to your score.</p>
+
+<p>There are a handful extra credit points available throughout the semester,
+perhaps around 10, that are available to everyone.</p>
+
+<p>Each letter grade for the course corresponds to a range of scores:</p>
+
+<pre><code>A+  ≥ 300    A  ≥ 285    A&#x2d;  ≥ 270
+B+  ≥ 255    B  ≥ 230    B&#x2d;  ≥ 215
+C+  ≥ 200    C  ≥ 190    C&#x2d;  ≥ 180
+D+  ≥ 175    D  ≥ 170    D&#x2d;  ≥ 165</code></pre>
+
+<p>Your final score will be rounded to the nearest integer before being converted
+to a letter grade. 0.5 rounds up to 1, but 0.49 rounds down to 0.</p>
+
+<p>There is no curve; your grade will depend only on how well you do, and not on
+how well everyone else does. Score thresholds are based on how students
+performed in previous semesters. It is possible that the instructors will adjust
+the thresholds in your favor, for example if exam scores are abnormally low, but
+that scenario is unlikely. More likely, these are the exact thresholds that will
+be used at the end of the course to assign grades (contrary to popular rumor).</p>
+
+<p>Incomplete grades will be granted only for dire medical or personal emergencies
+that cause you to miss the final, and only if your work up to that point has
+been satisfactory. You must complete all coursework before the drop deadline to
+be considered for an incomplete grade.</p>
+
+
+<h3 id="discussion-participation">Discussion Participation</h3>
+
+
+<p>Attending a discussion section will earn you one discussion participation credit.
+We expect there to be about 12 discussion sections for points across the semester,
+and you need to attend at least 10 in order to receive full points.</p>
+
+
+<h3 id="class-participation">Class Participation</h3>
+
+
+<p>Class participation does not directly count towards the original 300 points.
+There will be different opportunities for students to earn class participation credits
+throughout the summer: filling out weekly surveys, completing practice exams,
+attending more than 10 discussion sections and so on.</p>
+
+<p>Earning more than 5 class participation credits will contribute to recovery points on the midterm.
+A total of 10 class participation credits can be used for exam recovery.</p>
+
+<p>We calculate your exam recovery using the following logic, where <code>participation</code>
+is the number of class participation credits you earn (out of 10):</p>
+
+<pre><code>def exam_recovery(your_exam_score, participation, max_exam_score, recovery_cap=10):
+    half_score = max_exam_score / 2
+    max_recovery = max(0, (half_score &#x2d; your_exam_score) / 2)
+    recovery_ratio = min(participation, recovery_cap) / recovery_cap
+    return max_recovery * recovery_ratio</code></pre>
+
+<p>According to this formula, if you receive more than half the available points on
+each exam, then you don't recover any points. If you score just below half the
+points, you will recover a few points. If you score far below half the points,
+you will recover many points. The more recovery credits you earn, the more exam
+points will be recovered.</p>
+
+<p>Additionally, what matters for exam recovery is the percentage of the total class
+class participation credits you receive, not the absolute number of class participation credits.</p>
+
+<p>The purpose of this policy is to ensure that students who continue to invest
+time in the course througout the semester are able to pass.</p>
+
+<div class="form-horizontal">
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Your Exam Score</label>
+    <div class="col-sm-9">
+      <input id="calc-score" class="form-control" type="text" value="0">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Participation Credits</label>
+    <div class="col-sm-9">
+      <input id="calc-attnd" class="form-control" type="text" value="0">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" id="calc-btn" class="btn btn-outline btn-lg">Calculate</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Points Recovered</label>
+    <div class="col-sm-9">
+      <p id="calc-recovery" class="form-control-static"></p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">Adjusted Exam Score</label>
+    <div class="col-sm-9">
+      <p id="calc-new-score" class="form-control-static"></p>
+    </div>
+  </div>
+
+  <div id="calc-graph" class="hidden-xs"></div>
+
+  <script defer src="https://cdn.plot.ly/plotly-1.30.0.min.js"></script>
+  <script defer>
+    $("#calc-btn").click(function() {
+      var max_exam_score = 55;
+      var recovery_cap = 10;
+
+      var exam_score = parseFloat($("#calc-score").val());
+      var participation_points = parseInt($("#calc-attnd").val());
+
+      var half_score = max_exam_score / 2;
+      var max_recovery = Math.max(0, (half_score - exam_score) / 2);
+      var exam_recovery;
+      if (participation_points < 6) {
+        exam_recovery = 0;
+      } else {
+        var recovery_points = participation_points;
+        var recovery_factor = Math.min(recovery_points, recovery_cap) / recovery_cap;
+        exam_recovery = max_recovery * recovery_factor;
+      }
+
+      $("#calc-recovery").text(exam_recovery);
+      $("#calc-new-score").text(exam_score + exam_recovery);
+
+      var series = [
+        {
+          x: [0, max_exam_score],
+          y: [0, max_exam_score],
+          mode: 'lines',
+          name: 'Raw Exam Score',
+        },
+      ];
+
+      var cusp = max_exam_score / 2;
+      for (var i = 0; i <= recovery_cap; i += 5) {
+        var intercept = (max_exam_score / 4) * i / recovery_cap;
+        series.push({
+          x: [0, cusp],
+          y: [intercept, cusp],
+          mode: 'lines',
+          name: i + ' Recovery Point' + (i == 1 ? '' : 's'),
+        });
+      }
+
+      series.push({
+        x: [exam_score],
+        y: [exam_score + exam_recovery],
+        mode: 'markers',
+        name: 'Your Exam Score',
+        marker: {
+          size: 12,
+        },
+      })
+
+      var graph = $("#calc-graph");
+      graph.height(graph.width() * 0.75);
+      Plotly.newPlot('calc-graph', series, {
+        title: "Midterm",
+        xaxis: {
+          title: 'Raw Exam Score',
+          range: [0, max_exam_score],
+          tick0: 0,
+          dtick: 5,
+        },
+        yaxis: {
+          title: 'Adjusted Exam Score',
+          range: [0, max_exam_score],
+          tick0: 0,
+          dtick: 5,
+        },
+        legend: {
+          x: 0,
+          y: 1,
+        },
+      }, {staticPlot: true});
+    });
+  </script>
+</div>
+
+
+<h3 id="late-policy">Late Policy</h3>
+
+
+<p>If you cannot turn in an assignment on time, contact your TA and partner as
+early as possible. Depending on the circumstance, we may grant extensions.</p>
+
+<ul>
+  <li><strong>Labs</strong>: We very rarely accept late lab submissions. There is no partial credit.</li>
+  <li><strong>Homework</strong>: We very rarely accept late homework submissions. There is no partial credit.</li>
+  <li><strong>Projects</strong>: Submissions within 24 hours after the deadline will receive
+  75% of the earned score. Submissions that are 24 hours or more after the
+  deadline will receive 0 points. Each question is worth some points, so it is
+  possible to earn partial credit on a project.</li>
+</ul>
+
+
+<h2 id="learning-cooperatively">Learning Cooperatively</h2>
+
+
+<p>With the obvious exception of exams, we encourage you to discuss course
+activities with your friends and classmates as you are working on them. You
+will definitely learn more in this class if you work with others than if you do
+not. Ask questions, answer questions, and share ideas liberally.</p>
+
+<p>Learning cooperatively is different from sharing answers. You shouldn't be
+showing your code to other students, except to your project partner or to
+someone who has already submitted the assignment and is helping you finish. If
+you are helping another student, don't just tell them the answer; they will
+learn very little and run into trouble on exams. Instead, try to guide them
+toward discovering the solution on their own. Problem solving practice is the
+key to progress in computer science.</p>
+
+<p>Since you're working collaboratively, keep your project partner and TA
+informed. If some medical or personal emergency takes you away from the course
+for an extended period, or if you decide to drop the course for any reason,
+please don't just disappear silently! You should inform your project partner,
+so that nobody is depending on you to do something you can't finish.</p>
+
+
+<h3 id="online-forum">Online Forum</h3>
+
+
+<p>If you have any questions, please post them to
+<a href="http://www.piazza.com/berkeley/summer2020/cs61a">Piazza</a>, the course discussion
+forum. Piazza allows you to learn from questions your fellow students have
+asked. We encourage you to answer each others' questions!</p>
+
+<p>Piazza is the best and most reliable way to contact the course staff. You are
+also welcome to email cs61a+su20@berkeley.edu, an instructor, or your TA directly.</p>
+
+
+<h3 id="academic-honesty">Academic Honesty</h3>
+
+
+<p>Cooperation has a limit, and in CS 61A that limit is sharing code. You are free
+to discuss the problems with others beforehand, but you must write your own
+solutions. The only students with whom you can share code are your project
+partner and students who have finished the problem you are working on.</p>
+
+<p>Since this may be your first computer science class, exactly what constitutes
+as cheating might be unclear. If you are unsure if what you are doing is
+cheating, please clarify with the instructors or TAs. The following is a list
+of things you should NOT do. This list is not exhaustive, but covers most of
+the big offenses:</p>
+
+<ul>
+  <li>Do not copy code from any student who is not your partner for the current assignment.
+  This includes direct verbal walkthroughs.</li>
+  <li>Do not allow any student other than your partner to copy code from you.</li>
+  <li>Do not copy solutions from online sources such as Stack Overflow, Pastebin,
+  and public repositories on GitHub.</li>
+  <li>Do not post your solutions publicly during or after the semester.</li>
+</ul>
+
+<p>If you find a solution online, please <a href="https://goo.gl/forms/nL2yOj1Z81HcQYDi2">submit a link to that solution
+anonymously</a>. When we find an online
+solution, we ask the author to remove it. We also record the solution and use it
+to check for copying. By reporting online solutions, you help keep the course
+fair for everyone.</p>
+
+<p>In summary, we expect you to hand in your own work, take your own tests, and
+complete your own projects. The assignments and evaluations are structured to
+help you learn, which is why you are here. The course staff works hard to put
+together this course, and we ask in return that you respect the integrity of
+the course by not misrepresenting your work.</p>
+
+<p>Rather than copying someone else's work, ask for help. You are not alone in
+this course! The entire staff is here to help you succeed. If you invest the
+time to learn the material and complete the projects, you won't need to copy
+any answers.</p>
+
+
+<h2 id="a-parting-thought">A Parting Thought</h2>
+
+
+<p>Grades and penalties aren't the purpose of this course. We really just want you
+to learn. The entire staff is very excited to be teaching CS 61A this semester
+and we're looking forward to meeting such a large and enthusiastic group of
+students. We want all of you to be successful here. Welcome to CS 61A!</p>
+  </div>
+
+  <div class='col-md-3 sticky'>
+    <nav class='hidden-print hidden-sm hidden-xs sidebar'>
+      <ul>
+  <li><a href="about.html#overview">Overview</a></li>
+  <ul>
+    <li><a href="about.html#prerequisites">Prerequisites</a></li>
+    <li><a href="about.html#alternatives">Alternatives</a></li>
+    <ul>
+      <li><a href="about.html#cs-10">CS 10</a></li>
+      <li><a href="about.html#data-8">Data 8</a></li>
+    </ul>
+  </ul>
+  <li><a href="about.html#course-format">Course Format</a></li>
+  <ul>
+    <li><a href="about.html#lecture">Lecture</a></li>
+    <li><a href="about.html#section">Section</a></li>
+    <li><a href="about.html#office-hours">Office Hours</a></li>
+    <li><a href="about.html#group-mentoring-sections">Group Mentoring Sections</a></li>
+  </ul>
+  <li><a href="about.html#assignments">Assignments</a></li>
+  <ul>
+    <li><a href="about.html#labs">Labs</a></li>
+    <li><a href="about.html#homework">Homework</a></li>
+    <ul>
+      <li><a href="about.html#collaboration">Collaboration</a></li>
+      <li><a href="about.html#partial-credit">Partial Credit</a></li>
+      <li><a href="about.html#homework-recovery-policy">Homework Recovery Policy</a></li>
+    </ul>
+    <li><a href="about.html#projects">Projects</a></li>
+    <li><a href="about.html#epa">EPA</a></li>
+  </ul>
+  <li><a href="about.html#exams">Exams</a></li>
+  <li><a href="about.html#resources">Resources</a></li>
+  <ul>
+    <li><a href="about.html#textbook">Textbook</a></li>
+  </ul>
+  <li><a href="about.html#grading">Grading</a></li>
+  <ul>
+    <li><a href="about.html#discussion-participation">Discussion Participation</a></li>
+    <li><a href="about.html#class-participation">Class Participation</a></li>
+    <li><a href="about.html#late-policy">Late Policy</a></li>
+  </ul>
+  <li><a href="about.html#learning-cooperatively">Learning Cooperatively</a></li>
+  <ul>
+    <li><a href="about.html#online-forum">Online Forum</a></li>
+    <li><a href="about.html#academic-honesty">Academic Honesty</a></li>
+  </ul>
+  <li><a href="about.html#a-parting-thought">A Parting Thought</a></li>
+</ul>
+    </nav>
+  </div>
+</div>
+
+    </main>
+
+    <footer class="container">
+      <div class="row text-center">
+        <div class="col col-sm-4">
+          <h3><a href="../index.html">CS 61A</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="../weekly.html">Weekly Schedule</a></li>
+            <li><a href="../office-hours.html">Office Hours</a></li>
+            <li><a href="../staff.html">Staff</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="../resources.html">Resources</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="studying.html">Studying Guide</a></li>
+            <li><a href="debugging.html">Debugging Guide</a></li>
+            <li><a href="composition.html">Composition Guide</a></li>
+          </ul>
+        </div>
+        <div class="col col-sm-4">
+          <h3><a href="about.html">Policies</a></h3>
+          <ul class="nav nav-pills nav-stacked">
+            <li><a href="about.html#assignments">Assignments</a></li>
+            <li><a href="about.html#exams">Exams</a></li>
+            <li><a href="about.html#grading">Grading</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    
+
+<script>
+  $('.sidebar ul').addClass('nav nav-stacked noselect');
+  $('body').scrollspy({
+    target: '.sidebar',
+    offset: 40
+  });
+</script>
+
+  </body>
+</html>
