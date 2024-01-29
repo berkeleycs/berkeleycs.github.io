@@ -1,0 +1,1096 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+  
+
+  
+    <script src="../../assets/js/vendor/lunr.min.js"></script>
+  
+
+  
+
+  <script src="../../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Python Basics | CS 188 Fall 2022</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="Python Basics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Python basics." />
+<meta property="og:description" content="Python basics." />
+<link rel="canonical" href="python-basics.html" />
+<meta property="og:url" content="https://inst.eecs.berkeley.edu/~cs188/fa22/projects/proj0/python-basics/" />
+<meta property="og:site_name" content="CS 188 Fall 2022" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Python Basics" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Python basics.","headline":"Python Basics","url":"https://inst.eecs.berkeley.edu/~cs188/fa22/projects/proj0/python-basics/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link rel="preload" href="../../assets/css/just-the-docs-dark.css" as="style" />
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link id="jtdThemeCSS" rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function() {
+    var cssFileHref = (document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  }
+
+  jtd.setTheme = function(theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  }
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+  };
+
+  /* Read local storage state. */
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<script defer src="../../assets/katex/katex.min.js"></script>
+<script>
+function renderKaTeX() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true},
+    ],
+  });
+}
+</script>
+<script defer src="../../assets/katex/contrib/auto-render.min.js" onload="renderKaTeX();"></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="python-basics.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+    <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  </svg>
+
+  <div class="side-bar">
+    <div class="site-header">
+      <a href="../../index.html" class="site-title lh-tight">
+  CS 188 Fall 2022
+
+</a>
+      <a href="python-basics.html#" id="menu-button" class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+    <nav aria-label="Main" id="site-nav" class="site-nav">
+      
+      
+        <ul class="nav-list"><li class="nav-list-item"><a href="../../exam.html" class="nav-list-link">Exam Logistics</a></li><li class="nav-list-item"><a href="../../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><a href="../../policies/index.html" class="nav-list-link">Policies</a></li><li class="nav-list-item"><a href="../../resources/index.html" class="nav-list-link">Resources</a></li><li class="nav-list-item"><a href="../../staff/index.html" class="nav-list-link">Staff</a></li><li class="nav-list-item active"><a href="python-basics.html#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../index.html" class="nav-list-link">Projects</a><ul class="nav-list "><li class="nav-list-item  active"><a href="../proj0.html" class="nav-list-link">Project 0</a><ul class="nav-list"></ul>
+            </li><li class="nav-list-item "><a href="../proj1.html" class="nav-list-link">Project 1</a>
+            </li><li class="nav-list-item "><a href="../proj2.html" class="nav-list-link">Project 2</a>
+            </li><li class="nav-list-item "><a href="../proj3.html" class="nav-list-link">Project 3</a>
+            </li><li class="nav-list-item "><a href="../proj4.html" class="nav-list-link">Project 4</a>
+            </li><li class="nav-list-item "><a href="../proj5/index.html" class="nav-list-link">Project 5</a>
+            </li><li class="nav-list-item "><a href="../minicontest1.html" class="nav-list-link">Mini-Contest 1</a>
+            </li></ul></li></ul>
+      
+      
+    </nav>
+
+    
+    
+      <footer class="site-footer">
+        This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+      </footer>
+    
+  </div>
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+      
+
+        
+
+        <div class="search">
+          <div class="search-input-wrap">
+            <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 188 Fall 2022" aria-label="Search CS 188 Fall 2022" autocomplete="off">
+            <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      
+      
+      
+        <nav aria-label="Auxiliary" class="aux-nav">
+          <ul class="aux-nav-list">
+            
+              <li class="aux-nav-list-item">
+                <a href="python-basics.html#" class="site-button"
+                  
+                >
+                  Dark Mode
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://edstem.org/us/courses/25272" class="site-button"
+                  
+                >
+                  Ed
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://cs188-oh.apps.cs61a.org/" class="site-button"
+                  
+                >
+                  OH Queue
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMadNLFJlZJWTxm8F2bGUD997A4lGfMW5DgxgPkMLcd7Rmww/viewform" class="site-button"
+                  
+                >
+                  Extensions Form
+                </a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+    </div>
+    <div id="main-content-wrap" class="main-content-wrap">
+      
+        
+          <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+            <ol class="breadcrumb-nav-list">
+              
+                <li class="breadcrumb-nav-list-item"><a href="../index.html">Projects</a></li>
+                <li class="breadcrumb-nav-list-item"><a href="../proj0.html">Project 0</a></li>
+              
+              <li class="breadcrumb-nav-list-item"><span>Python Basics</span></li>
+            </ol>
+          </nav>
+        
+      
+      <div id="main-content" class="main-content" role="main">
+        
+          <h1 class="no_toc" id="python-basics">
+        
+        
+          <a href="python-basics.html#python-basics" class="anchor-heading" aria-labelledby="python-basics"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Python Basics
+        
+        
+      </h1>
+    
+      <h2 class="no_toc text-delta" id="table-of-contents">
+        
+        
+          <a href="python-basics.html#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of contents
+        
+        
+      </h2>
+    
+
+<ul id="markdown-toc">
+  <li><a href="python-basics.html#required-files" id="markdown-toc-required-files">Required Files</a></li>
+  <li><a href="python-basics.html#invoking-the-interpreter" id="markdown-toc-invoking-the-interpreter">Invoking the Interpreter</a></li>
+  <li><a href="python-basics.html#operators" id="markdown-toc-operators">Operators</a></li>
+  <li><a href="python-basics.html#strings" id="markdown-toc-strings">Strings</a></li>
+  <li><a href="python-basics.html#built-in-data-structures" id="markdown-toc-built-in-data-structures">Built-in Data Structures</a>    <ul>
+      <li><a href="python-basics.html#lists" id="markdown-toc-lists">Lists</a></li>
+      <li><a href="python-basics.html#tuples" id="markdown-toc-tuples">Tuples</a></li>
+      <li><a href="python-basics.html#sets" id="markdown-toc-sets">Sets</a></li>
+      <li><a href="python-basics.html#dictionaries" id="markdown-toc-dictionaries">Dictionaries</a></li>
+    </ul>
+  </li>
+  <li><a href="python-basics.html#writing-scripts" id="markdown-toc-writing-scripts">Writing Scripts</a></li>
+  <li><a href="python-basics.html#beware-of-indendation" id="markdown-toc-beware-of-indendation">Beware of Indendation!</a></li>
+  <li><a href="python-basics.html#tabs-vs-spaces" id="markdown-toc-tabs-vs-spaces">Tabs vs Spaces</a></li>
+  <li><a href="python-basics.html#writing-functions" id="markdown-toc-writing-functions">Writing Functions</a></li>
+  <li><a href="python-basics.html#object-basics" id="markdown-toc-object-basics">Object Basics</a>    <ul>
+      <li><a href="python-basics.html#defining-classes" id="markdown-toc-defining-classes">Defining Classes</a></li>
+      <li><a href="python-basics.html#using-objects" id="markdown-toc-using-objects">Using Objects</a></li>
+      <li><a href="python-basics.html#static-vs-instance-variables" id="markdown-toc-static-vs-instance-variables">Static vs Instance Variables</a></li>
+    </ul>
+  </li>
+  <li><a href="python-basics.html#more-python-tips-and-tricks" id="markdown-toc-more-python-tips-and-tricks">More Python Tips and Tricks</a></li>
+  <li><a href="python-basics.html#troubleshooting" id="markdown-toc-troubleshooting">Troubleshooting</a></li>
+</ul>
+      <h2 id="required-files">
+        
+        
+          <a href="python-basics.html#required-files" class="anchor-heading" aria-labelledby="required-files"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Required Files
+        
+        
+      </h2>
+    
+
+<p>You can download all of the files associated with the Python mini-tutorial as a zip archive: <a href="../../assets/projects/python_basics.zip">python_basics.zip</a>. If you did the unix tutorial in the previous tab, you’ve already downloaded and unzipped this file.</p>
+
+<p>If you are rusty or don’t have experience with Python, you are encouraged to do this exercise. Otherwise, you can navigate using the Table of Contents above to look at the things you want to read about, although the entire section would still be a good review.</p>
+
+<p>The programming assignments in this course will be written in <a href="http://www.python.org/about/">Python</a>, an interpreted, object-oriented language that shares some features with both Java and Scheme. This tutorial will walk through the primary syntactic constructions in Python, using short examples.</p>
+
+<p>We encourage you to type all python shown in the tutorial onto your own machine. Make sure it responds the same way.</p>
+
+<p>You may find the Troubleshooting section helpful if you run into problems. It contains a list of the frequent problems previous CS188 students have encountered when following this tutorial.</p>
+      <h2 id="invoking-the-interpreter">
+        
+        
+          <a href="python-basics.html#invoking-the-interpreter" class="anchor-heading" aria-labelledby="invoking-the-interpreter"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Invoking the Interpreter
+        
+        
+      </h2>
+    
+
+<p>Python can be run in one of two modes. It can either be used interactively, via an interpeter, or it can be called from the command line to execute a <em>script</em>. We will first use the Python interpreter interactively.</p>
+
+<p>You invoke the interpreter using the command <code class="language-plaintext highlighter-rouge">python</code> at the Unix command prompt; or if you are using Windows that doesn’t work for you in Git Bash, using <code class="language-plaintext highlighter-rouge">python -i</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>cs188<span class="o">)</span> <span class="o">[</span>cs188-ta@nova ~]<span class="nv">$ </span>python
+Python 3.6.6 |Anaconda, Inc.| <span class="o">(</span>default, Jun 28 2018, 11:07:29<span class="o">)</span>
+<span class="o">[</span>GCC 4.2.1 Compatible Clang 4.0.1 <span class="o">(</span>tags/RELEASE_401/final<span class="o">)]</span> on darwin
+Type <span class="s2">"help"</span>, <span class="s2">"copyright"</span>, <span class="s2">"credits"</span> or <span class="s2">"license"</span> <span class="k">for </span>more information.
+<span class="o">&gt;&gt;&gt;</span>
+</code></pre></div></div>
+      <h2 id="operators">
+        
+        
+          <a href="python-basics.html#operators" class="anchor-heading" aria-labelledby="operators"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Operators
+        
+        
+      </h2>
+    
+
+<p>The Python interpreter can be used to evaluate expressions, for example simple arithmetic expressions. If you enter such expressions at the prompt (<code class="language-plaintext highlighter-rouge">&gt;&gt;&gt;</code>) they will be evaluated and the result will be returned on the next line.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="mi">6</span>
+</code></pre></div></div>
+
+<p>Boolean operators also exist in Python to manipulate the primitive True and False values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+<span class="bp">True</span>
+</code></pre></div></div>
+      <h2 id="strings">
+        
+        
+          <a href="python-basics.html#strings" class="anchor-heading" aria-labelledby="strings"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Strings
+        
+        
+      </h2>
+    
+
+<p>Like Java, Python has a built in string type. The <code class="language-plaintext highlighter-rouge">+</code> operator is overloaded to do string concatenation on string values.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'artificial'</span> <span class="o">+</span> <span class="s">"intelligence"</span>
+<span class="s">'artificialintelligence'</span>
+</code></pre></div></div>
+
+<p>There are many built-in methods which allow you to manipulate strings.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="s">'artificial'</span><span class="p">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="s">'ARTIFICIAL'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'HELP'</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="s">'help'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="s">'Help'</span><span class="p">)</span>
+<span class="mi">4</span>
+</code></pre></div></div>
+
+<p>Notice that we can use either single quotes <code class="language-plaintext highlighter-rouge">' '</code> or double quotes <code class="language-plaintext highlighter-rouge">" "</code> to surround string. This allows for easy nesting of strings.</p>
+
+<p>We can also store expressions into variables.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="s">'hello world'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">hello</span> <span class="n">world</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="s">'HELLO WORLD'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="mi">11</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">num</span> <span class="o">=</span> <span class="mf">8.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">num</span> <span class="o">+=</span> <span class="mf">2.5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="mf">10.5</span>
+</code></pre></div></div>
+
+<p>In Python, you do not have declare variables before you assign to them.</p>
+
+<p><strong>Exercise</strong>: Learn about the methods Python provides for strings. To see what methods Python provides for a datatype, use the <code class="language-plaintext highlighter-rouge">dir</code> and <code class="language-plaintext highlighter-rouge">help</code> commands:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="s">'abc'</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'__add__'</span><span class="p">,</span> <span class="s">'__class__'</span><span class="p">,</span> <span class="s">'__contains__'</span><span class="p">,</span> <span class="s">'__delattr__'</span><span class="p">,</span> <span class="s">'__doc__'</span><span class="p">,</span> <span class="s">'__eq__'</span><span class="p">,</span> <span class="s">'__ge__'</span><span class="p">,</span> <span class="s">'__getattribute__'</span><span class="p">,</span> <span class="s">'__getitem__'</span><span class="p">,</span> <span class="s">'__getnewargs__'</span><span class="p">,</span> <span class="s">'__getslice__'</span><span class="p">,</span> <span class="s">'__gt__'</span><span class="p">,</span> <span class="s">'__hash__'</span><span class="p">,</span> <span class="s">'__init__'</span><span class="p">,</span> <span class="s">'__le__'</span><span class="p">,</span> <span class="s">'__len__'</span><span class="p">,</span> <span class="s">'__lt__'</span><span class="p">,</span> <span class="s">'__mod__'</span><span class="p">,</span> <span class="s">'__mul__'</span><span class="p">,</span> <span class="s">'__ne__'</span><span class="p">,</span> <span class="s">'__new__'</span><span class="p">,</span> <span class="s">'__reduce__'</span><span class="p">,</span> <span class="s">'__reduce_ex__'</span><span class="p">,</span> <span class="s">'__repr__'</span><span class="p">,</span> <span class="s">'__rmod__'</span><span class="p">,</span> <span class="s">'__rmul__'</span><span class="p">,</span> <span class="s">'__setattr__'</span><span class="p">,</span> <span class="s">'__str__'</span><span class="p">,</span> <span class="s">'capitalize'</span><span class="p">,</span> <span class="s">'center'</span><span class="p">,</span> <span class="s">'count'</span><span class="p">,</span> <span class="s">'decode'</span><span class="p">,</span> <span class="s">'encode'</span><span class="p">,</span> <span class="s">'endswith'</span><span class="p">,</span> <span class="s">'expandtabs'</span><span class="p">,</span> <span class="s">'find'</span><span class="p">,</span> <span class="s">'index'</span><span class="p">,</span> <span class="s">'isalnum'</span><span class="p">,</span> <span class="s">'isalpha'</span><span class="p">,</span> <span class="s">'isdigit'</span><span class="p">,</span> <span class="s">'islower'</span><span class="p">,</span> <span class="s">'isspace'</span><span class="p">,</span> <span class="s">'istitle'</span><span class="p">,</span> <span class="s">'isupper'</span><span class="p">,</span> <span class="s">'join'</span><span class="p">,</span> <span class="s">'ljust'</span><span class="p">,</span> <span class="s">'lower'</span><span class="p">,</span> <span class="s">'lstrip'</span><span class="p">,</span> <span class="s">'replace'</span><span class="p">,</span> <span class="s">'rfind'</span><span class="p">,</span> <span class="s">'rindex'</span><span class="p">,</span> <span class="s">'rjust'</span><span class="p">,</span> <span class="s">'rsplit'</span><span class="p">,</span> <span class="s">'rstrip'</span><span class="p">,</span> <span class="s">'split'</span><span class="p">,</span> <span class="s">'splitlines'</span><span class="p">,</span> <span class="s">'startswith'</span><span class="p">,</span> <span class="s">'strip'</span><span class="p">,</span> <span class="s">'swapcase'</span><span class="p">,</span> <span class="s">'title'</span><span class="p">,</span> <span class="s">'translate'</span><span class="p">,</span> <span class="s">'upper'</span><span class="p">,</span> <span class="s">'zfill'</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">)</span>
+<span class="s">"""
+Help on built-in function find:
+
+find(...) method of builtins.str instance
+    S.find(sub[, start[, end]]) -&gt; int
+
+    Return the lowest index in S where substring sub is found,
+    such that sub is contained within S[start:end].  Optional
+    arguments start and end are interpreted as in slice notation.
+
+    Return -1 on failure.
+"""</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'b'</span><span class="p">)</span>
+<span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Try out some of the string functions listed in <code class="language-plaintext highlighter-rouge">dir</code> (ignore those with underscores <code class="language-plaintext highlighter-rouge">_</code> around the method name).</p>
+
+<p>Note: Ignore functions with underscores <code class="language-plaintext highlighter-rouge">_</code> around the names; these are private helper methods. Press <code class="language-plaintext highlighter-rouge">q</code> to back out of a help screen.</p>
+      <h2 id="built-in-data-structures">
+        
+        
+          <a href="python-basics.html#built-in-data-structures" class="anchor-heading" aria-labelledby="built-in-data-structures"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Built-in Data Structures
+        
+        
+      </h2>
+    
+
+<p>Python comes equipped with some useful built-in data structures, broadly similar to Java’s collections package.</p>
+      <h3 id="lists">
+        
+        
+          <a href="python-basics.html#lists" class="anchor-heading" aria-labelledby="lists"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Lists
+        
+        
+      </h3>
+    
+
+<p><em>Lists</em> store a sequence of mutable items:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'pear'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="s">'apple'</span>
+</code></pre></div></div>
+
+<p>We can use the <code class="language-plaintext highlighter-rouge">+</code> operator to do list concatenation:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">otherFruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">'kiwi'</span><span class="p">,</span> <span class="s">'strawberry'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span> <span class="o">+</span> <span class="n">otherFruits</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'pear'</span><span class="p">,</span> <span class="s">'banana'</span><span class="p">,</span> <span class="s">'kiwi'</span><span class="p">,</span> <span class="s">'strawberry'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Python also allows negative-indexing from the back of the list. For instance, <code class="language-plaintext highlighter-rouge">fruits[-1]</code> will access the last element <code class="language-plaintext highlighter-rouge">'banana'</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="s">'pear'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="s">'banana'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span>
+<span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'pear'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'grapefruit'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span>
+<span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'pear'</span><span class="p">,</span> <span class="s">'grapefruit'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s">'pineapple'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span>
+<span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'pear'</span><span class="p">,</span> <span class="s">'pineapple'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>We can also index multiple adjacent elements using the slice operator. For instance, <code class="language-plaintext highlighter-rouge">fruits[1:3]</code>, returns a list containing the elements at position 1 and 2. In general <code class="language-plaintext highlighter-rouge">fruits[start:stop]</code> will get the elements in <code class="language-plaintext highlighter-rouge">start, start+1, ..., stop-1</code>. We can also do <code class="language-plaintext highlighter-rouge">fruits[start:]</code> which returns all elements starting from the start index. Also <code class="language-plaintext highlighter-rouge">fruits[:end]</code> will return all elements before the element at position <code class="language-plaintext highlighter-rouge">end</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'apple'</span><span class="p">,</span> <span class="s">'orange'</span><span class="p">,</span> <span class="s">'pear'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+<span class="p">[</span><span class="s">'pear'</span><span class="p">,</span> <span class="s">'pineapple'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span>
+<span class="mi">4</span>
+</code></pre></div></div>
+
+<p>The items stored in lists can be any Python data type. So for instance we can have lists of lists:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">lstOfLsts</span> <span class="o">=</span> <span class="p">[[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span> <span class="s">'three'</span><span class="p">]]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lstOfLsts</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lstOfLsts</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">pop</span><span class="p">()</span>
+<span class="s">'c'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lstOfLsts</span>
+<span class="p">[[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span> <span class="s">'three'</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p><strong>Exercise</strong>: Play with some of the list functions. You can find the methods you can call on an object via the dir and get information about them via the <code class="language-plaintext highlighter-rouge">help</code> command:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">dir</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+<span class="p">[</span><span class="s">'__add__'</span><span class="p">,</span> <span class="s">'__class__'</span><span class="p">,</span> <span class="s">'__contains__'</span><span class="p">,</span> <span class="s">'__delattr__'</span><span class="p">,</span> <span class="s">'__delitem__'</span><span class="p">,</span>
+<span class="s">'__delslice__'</span><span class="p">,</span> <span class="s">'__doc__'</span><span class="p">,</span> <span class="s">'__eq__'</span><span class="p">,</span> <span class="s">'__ge__'</span><span class="p">,</span> <span class="s">'__getattribute__'</span><span class="p">,</span>
+<span class="s">'__getitem__'</span><span class="p">,</span> <span class="s">'__getslice__'</span><span class="p">,</span> <span class="s">'__gt__'</span><span class="p">,</span> <span class="s">'__hash__'</span><span class="p">,</span> <span class="s">'__iadd__'</span><span class="p">,</span> <span class="s">'__imul__'</span><span class="p">,</span>
+<span class="s">'__init__'</span><span class="p">,</span> <span class="s">'__iter__'</span><span class="p">,</span> <span class="s">'__le__'</span><span class="p">,</span> <span class="s">'__len__'</span><span class="p">,</span> <span class="s">'__lt__'</span><span class="p">,</span> <span class="s">'__mul__'</span><span class="p">,</span> <span class="s">'__ne__'</span><span class="p">,</span>
+<span class="s">'__new__'</span><span class="p">,</span> <span class="s">'__reduce__'</span><span class="p">,</span> <span class="s">'__reduce_ex__'</span><span class="p">,</span> <span class="s">'__repr__'</span><span class="p">,</span> <span class="s">'__reversed__'</span><span class="p">,</span>
+<span class="s">'__rmul__'</span><span class="p">,</span> <span class="s">'__setattr__'</span><span class="p">,</span> <span class="s">'__setitem__'</span><span class="p">,</span> <span class="s">'__setslice__'</span><span class="p">,</span> <span class="s">'__str__'</span><span class="p">,</span>
+<span class="s">'append'</span><span class="p">,</span> <span class="s">'count'</span><span class="p">,</span> <span class="s">'extend'</span><span class="p">,</span> <span class="s">'index'</span><span class="p">,</span> <span class="s">'insert'</span><span class="p">,</span> <span class="s">'pop'</span><span class="p">,</span> <span class="s">'remove'</span><span class="p">,</span> <span class="s">'reverse'</span><span class="p">,</span>
+<span class="s">'sort'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="nb">list</span><span class="p">.</span><span class="n">reverse</span><span class="p">)</span>
+        <span class="s">"""
+        Help on built-in function reverse:
+
+        reverse(...)
+        L.reverse() -- reverse \*IN PLACE\*
+        """</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lst</span><span class="p">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="s">'c'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">]</span><span class="err">`</span>
+
+</code></pre></div></div>
+      <h3 id="tuples">
+        
+        
+          <a href="python-basics.html#tuples" class="anchor-heading" aria-labelledby="tuples"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Tuples
+        
+        
+      </h3>
+    
+
+<p>A data structure similar to the list is the <em>tuple</em>, which is like a list except that it is immutable once it is created (i.e. you cannot change its content once created). Note that tuples are surrounded with parentheses while lists have square brackets.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">pair</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pair</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pair</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="mi">3</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span>
+<span class="mi">5</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="nb">TypeError</span><span class="p">:</span> <span class="nb">object</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">item</span> <span class="n">assignment</span>
+</code></pre></div></div>
+
+<p>The attempt to modify an immutable structure raised an exception. Exceptions indicate errors: index out of bounds errors, type errors, and so on will all report exceptions in this way.</p>
+      <h3 id="sets">
+        
+        
+          <a href="python-basics.html#sets" class="anchor-heading" aria-labelledby="sets"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Sets
+        
+        
+      </h3>
+    
+
+<p>A <em>set</em> is another data structure that serves as an unordered list with no duplicate items. Below, we show how to create a set:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="s">'circle'</span><span class="p">,</span> <span class="s">'square'</span><span class="p">,</span> <span class="s">'triangle'</span><span class="p">,</span> <span class="s">'circle'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">shapes</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Another way of creating a set is shown below:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span> <span class="o">=</span> <span class="p">{</span><span class="err">‘</span><span class="n">circle</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">square</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">triangle</span><span class="err">’</span><span class="p">,</span> <span class="err">‘</span><span class="n">circle</span><span class="err">’</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>Next, we show how to add things to the set, test if an item is in the set, and perform common set operations (difference, intersection, union):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">'circle'</span><span class="p">,</span> <span class="s">'square'</span><span class="p">,</span> <span class="s">'triangle'</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">'polygon'</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">'circle'</span><span class="p">,</span> <span class="s">'square'</span><span class="p">,</span> <span class="s">'triangle'</span><span class="p">,</span> <span class="s">'polygon'</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'circle'</span> <span class="ow">in</span> <span class="n">setOfShapes</span>
+<span class="bp">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="s">'rhombus'</span> <span class="ow">in</span> <span class="n">setOfShapes</span>
+<span class="bp">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">favoriteShapes</span> <span class="o">=</span> <span class="p">[</span><span class="s">'circle'</span><span class="p">,</span> <span class="s">'triangle'</span><span class="p">,</span> <span class="s">'hexagon'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfFavoriteShapes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">favoriteShapes</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span> <span class="o">-</span> <span class="n">setOfFavoriteShapes</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">'square'</span><span class="p">,</span> <span class="s">'polygon'</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span> <span class="o">&amp;</span> <span class="n">setOfFavoriteShapes</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">'circle'</span><span class="p">,</span> <span class="s">'triangle'</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">setOfShapes</span> <span class="o">|</span> <span class="n">setOfFavoriteShapes</span>
+<span class="nb">set</span><span class="p">([</span><span class="s">'circle'</span><span class="p">,</span> <span class="s">'square'</span><span class="p">,</span> <span class="s">'triangle'</span><span class="p">,</span> <span class="s">'polygon'</span><span class="p">,</span> <span class="s">'hexagon'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Note that the objects in the set are unordered; you cannot assume that their traversal or print order will be the same across machines!</p>
+      <h3 id="dictionaries">
+        
+        
+          <a href="python-basics.html#dictionaries" class="anchor-heading" aria-labelledby="dictionaries"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Dictionaries
+        
+        
+      </h3>
+    
+
+<p>The last built-in data structure is the <em>dictionary</em> which stores a map from one type of object (the key) to another (the value). The key must be an immutable type (string, number, or tuple). The value can be any Python data type.</p>
+
+<p>Note: In the example below, the printed order of the keys returned by Python could be different than shown below. The reason is that unlike lists which have a fixed ordering, a dictionary is simply a hash table for which there is no fixed ordering of the keys (like HashMaps in Java). The order of the keys depends on how exactly the hashing algorithm maps keys to buckets, and will usually seem arbitrary. Your code should not rely on key ordering, and you should not be surprised if even a small modification to how your code uses a dictionary results in a new key ordering.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span> <span class="o">=</span> <span class="p">{</span><span class="s">'knuth'</span><span class="p">:</span> <span class="mf">42.0</span><span class="p">,</span> <span class="s">'turing'</span><span class="p">:</span> <span class="mf">56.0</span><span class="p">,</span> <span class="s">'nash'</span><span class="p">:</span> <span class="mf">92.0</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span><span class="p">[</span><span class="s">'turing'</span><span class="p">]</span>
+<span class="mf">56.0</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span><span class="p">[</span><span class="s">'nash'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'ninety-two'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span>
+<span class="p">{</span><span class="s">'knuth'</span><span class="p">:</span> <span class="mf">42.0</span><span class="p">,</span> <span class="s">'turing'</span><span class="p">:</span> <span class="mf">56.0</span><span class="p">,</span> <span class="s">'nash'</span><span class="p">:</span> <span class="s">'ninety-two'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">del</span> <span class="n">studentIds</span><span class="p">[</span><span class="s">'knuth'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span>
+<span class="p">{</span><span class="s">'turing'</span><span class="p">:</span> <span class="mf">56.0</span><span class="p">,</span> <span class="s">'nash'</span><span class="p">:</span> <span class="s">'ninety-two'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span><span class="p">[</span><span class="s">'knuth'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">42.0</span><span class="p">,</span> <span class="s">'forty-two'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span>
+<span class="p">{</span><span class="s">'knuth'</span><span class="p">:</span> <span class="p">[</span><span class="mf">42.0</span><span class="p">,</span> <span class="s">'forty-two'</span><span class="p">],</span> <span class="s">'turing'</span><span class="p">:</span> <span class="mf">56.0</span><span class="p">,</span> <span class="s">'nash'</span><span class="p">:</span> <span class="s">'ninety-two'</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="p">[</span><span class="s">'knuth'</span><span class="p">,</span> <span class="s">'turing'</span><span class="p">,</span> <span class="s">'nash'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span><span class="p">.</span><span class="n">values</span><span class="p">()</span>
+<span class="p">[[</span><span class="mf">42.0</span><span class="p">,</span> <span class="s">'forty-two'</span><span class="p">],</span> <span class="mf">56.0</span><span class="p">,</span> <span class="s">'ninety-two'</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">studentIds</span><span class="p">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">[(</span><span class="s">'knuth'</span><span class="p">,</span> <span class="p">[</span><span class="mf">42.0</span><span class="p">,</span> <span class="s">'forty-two'</span><span class="p">]),</span> <span class="p">(</span><span class="s">'turing'</span><span class="p">,</span><span class="mf">56.0</span><span class="p">),</span> <span class="p">(</span><span class="s">'nash'</span><span class="p">,</span> <span class="s">'ninety-two'</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">studentIds</span><span class="p">)</span>
+<span class="mi">3</span>
+</code></pre></div></div>
+
+<p>As with nested lists, you can also create dictionaries of dictionaries.</p>
+
+<p><strong>Exercise</strong>: Use <code class="language-plaintext highlighter-rouge">dir</code> and <code class="language-plaintext highlighter-rouge">help</code> to learn about the functions you can call on dictionaries.</p>
+      <h2 id="writing-scripts">
+        
+        
+          <a href="python-basics.html#writing-scripts" class="anchor-heading" aria-labelledby="writing-scripts"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Writing Scripts
+        
+        
+      </h2>
+    
+
+<p>Now that you’ve got a handle on using Python interactively, let’s write a simple Python script that demonstrates Python’s <code class="language-plaintext highlighter-rouge">for</code> loop. Open the file called <code class="language-plaintext highlighter-rouge">foreach.py</code>, which should contain the following code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This is what a comment looks like
+</span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">'apples'</span><span class="p">,</span> <span class="s">'oranges'</span><span class="p">,</span> <span class="s">'pears'</span><span class="p">,</span> <span class="s">'bananas'</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">fruit</span> <span class="ow">in</span> <span class="n">fruits</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">fruit</span> <span class="o">+</span> <span class="s">' for sale'</span><span class="p">)</span>
+
+<span class="n">fruitPrices</span> <span class="o">=</span> <span class="p">{</span><span class="s">'apples'</span><span class="p">:</span> <span class="mf">2.00</span><span class="p">,</span> <span class="s">'oranges'</span><span class="p">:</span> <span class="mf">1.50</span><span class="p">,</span> <span class="s">'pears'</span><span class="p">:</span> <span class="mf">1.75</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">fruitPrices</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">price</span> <span class="o">&lt;</span> <span class="mf">2.00</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'%s cost %f a pound'</span> <span class="o">%</span> <span class="p">(</span><span class="n">fruit</span><span class="p">,</span> <span class="n">price</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">fruit</span> <span class="o">+</span> <span class="s">' are too expensive!'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>At the command line, use the following command in the directory containing foreach.py:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cs188-ta@nova ~/tutorial]<span class="nv">$ </span>python foreach.py
+apples <span class="k">for </span>sale
+oranges <span class="k">for </span>sale
+pears <span class="k">for </span>sale
+bananas <span class="k">for </span>sale
+apples are too expensive!
+oranges cost 1.500000 a pound
+pears cost 1.750000 a pound
+</code></pre></div></div>
+
+<p>Remember that the print statements listing the costs may be in a different order on your screen than in this tutorial; that’s due to the fact that we’re looping over dictionary keys, which are unordered. To learn more about control structures (e.g., <code class="language-plaintext highlighter-rouge">if</code> and <code class="language-plaintext highlighter-rouge">else</code>) in Python, check out the official <a href="https://docs.python.org/3.6/tutorial/">Python tutorial section on this topic</a>.</p>
+
+<p>If you like functional programming you might also like <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">filter</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>The next snippet of code demonstrates Python’s <em>list comprehension</em> construction:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plusOneNums</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">]</span>
+<span class="n">oddNums</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">oddNums</span><span class="p">)</span>
+<span class="n">oddNumsPlusOne</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">nums</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">oddNumsPlusOne</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This code is in a file called <code class="language-plaintext highlighter-rouge">listcomp.py</code>, which you can run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cs188-ta@nova ~]<span class="nv">$ </span>python listcomp.py
+<span class="o">[</span>1, 3, 5]
+<span class="o">[</span>2, 4, 6]
+</code></pre></div></div>
+
+<p><strong>Exercise</strong>: Write a list comprehension which, from a list, generates a lowercased version of each string that has length greater than five. You can find the solution in <code class="language-plaintext highlighter-rouge">listcomp2.py</code>.</p>
+      <h2 id="beware-of-indendation">
+        
+        
+          <a href="python-basics.html#beware-of-indendation" class="anchor-heading" aria-labelledby="beware-of-indendation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Beware of Indendation!
+        
+        
+      </h2>
+    
+
+<p>Unlike many other languages, Python uses the indentation in the source code for interpretation. So for instance, for the following script:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'We are in a world of arithmetic pain'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Thank you for playing'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>will output: <code class="language-plaintext highlighter-rouge">Thank you for playing</code></p>
+
+<p>But if we had written the script as</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'We are in a world of arithmetic pain'</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Thank you for playing'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>there would be no output. The moral of the story: be careful how you indent! It’s best to use four spaces for indentation – that’s what the course code uses.</p>
+      <h2 id="tabs-vs-spaces">
+        
+        
+          <a href="python-basics.html#tabs-vs-spaces" class="anchor-heading" aria-labelledby="tabs-vs-spaces"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Tabs vs Spaces
+        
+        
+      </h2>
+    
+
+<p>Because Python uses indentation for code evaluation, it needs to keep track of the level of indentation across code blocks. This means that if your Python file switches from using tabs as indentation to spaces as indentation, the Python interpreter will not be able to resolve the ambiguity of the indentation level and throw an exception. Even though the code can be lined up visually in your text editor, Python “sees” a change in indentation and most likely will throw an exception (or rarely, produce unexpected behavior).</p>
+
+<p>This most commonly happens when opening up a Python file that uses an indentation scheme that is opposite from what your text editor uses (aka, your text editor uses spaces and the file uses tabs). When you write new lines in a code block, there will be a mix of tabs and spaces, even though the whitespace is aligned. For a longer discussion on tabs vs spaces, see <a href="http://stackoverflow.com/questions/119562/tabs-versus-spaces-in-python-programming">this discussion on StackOverflow</a>.</p>
+      <h2 id="writing-functions">
+        
+        
+          <a href="python-basics.html#writing-functions" class="anchor-heading" aria-labelledby="writing-functions"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Writing Functions
+        
+        
+      </h2>
+    
+
+<p>As in Java, in Python you can define your own functions:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fruitPrices</span> <span class="o">=</span> <span class="p">{</span><span class="s">'apples'</span><span class="p">:</span> <span class="mf">2.00</span><span class="p">,</span> <span class="s">'oranges'</span><span class="p">:</span> <span class="mf">1.50</span><span class="p">,</span> <span class="s">'pears'</span><span class="p">:</span> <span class="mf">1.75</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">buyFruit</span><span class="p">(</span><span class="n">fruit</span><span class="p">,</span> <span class="n">numPounds</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">fruit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fruitPrices</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Sorry we don't have %s"</span> <span class="o">%</span> <span class="p">(</span><span class="n">fruit</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="n">fruitPrices</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span> <span class="o">*</span> <span class="n">numPounds</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"That'll be %f please"</span> <span class="o">%</span> <span class="p">(</span><span class="n">cost</span><span class="p">))</span>
+
+<span class="c1"># Main Function
+</span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    <span class="n">buyFruit</span><span class="p">(</span><span class="s">'apples'</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">)</span>
+    <span class="n">buyFruit</span><span class="p">(</span><span class="s">'coconuts'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Rather than having a <code class="language-plaintext highlighter-rouge">main</code> function as in Java, the <code class="language-plaintext highlighter-rouge">__name__ == '__main__'</code> check is used to delimit expressions which are executed when the file is called as a script from the command line. The code after the main check is thus the same sort of code you would put in a <code class="language-plaintext highlighter-rouge">main</code> function in Java.</p>
+
+<p>Save this script as <em>fruit.py</em> and run it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>cs188<span class="o">)</span> <span class="o">[</span>cs188-ta@nova ~]<span class="nv">$ </span>python fruit.py
+That<span class="s1">'ll be 4.800000 please
+Sorry we don'</span>t have coconuts
+</code></pre></div></div>
+
+<p><strong>Advanced exercise</strong>: Write a <code class="language-plaintext highlighter-rouge">quickSort</code> function in Python using list comprehensions. Use the first element as the pivot. You can find the solution in <code class="language-plaintext highlighter-rouge">quickSort.py</code>.</p>
+      <h2 id="object-basics">
+        
+        
+          <a href="python-basics.html#object-basics" class="anchor-heading" aria-labelledby="object-basics"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Object Basics
+        
+        
+      </h2>
+    
+
+<p>Although this isn’t a class in object-oriented programming, you’ll have to use some objects in the programming projects, and so it’s worth covering the basics of objects in Python. An object encapsulates data and provides functions for interacting with that data.</p>
+      <h3 id="defining-classes">
+        
+        
+          <a href="python-basics.html#defining-classes" class="anchor-heading" aria-labelledby="defining-classes"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Defining Classes
+        
+        
+      </h3>
+    
+
+<p>Here’s an example of defining a class named FruitShop:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FruitShop</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">fruitPrices</span><span class="p">):</span>
+        <span class="s">"""
+            name: Name of the fruit shop
+
+            fruitPrices: Dictionary with keys as fruit
+            strings and prices for values e.g.
+            {'apples': 2.00, 'oranges': 1.50, 'pears': 1.75}
+        """</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fruitPrices</span> <span class="o">=</span> <span class="n">fruitPrices</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Welcome to %s fruit shop'</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">getCostPerPound</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fruit</span><span class="p">):</span>
+        <span class="s">"""
+            fruit: Fruit string
+        Returns cost of 'fruit', assuming 'fruit'
+        is in our inventory or None otherwise
+        """</span>
+        <span class="k">if</span> <span class="n">fruit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">fruitPrices</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">fruitPrices</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">getPriceOfOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orderList</span><span class="p">):</span>
+        <span class="s">"""
+            orderList: List of (fruit, numPounds) tuples
+
+        Returns cost of orderList, only including the values of
+        fruits that this fruit shop has.
+        """</span>
+        <span class="n">totalCost</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">numPounds</span> <span class="ow">in</span> <span class="n">orderList</span><span class="p">:</span>
+            <span class="n">costPerPound</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">getCostPerPound</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">costPerPound</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">totalCost</span> <span class="o">+=</span> <span class="n">numPounds</span> <span class="o">*</span> <span class="n">costPerPound</span>
+        <span class="k">return</span> <span class="n">totalCost</span>
+
+    <span class="k">def</span> <span class="nf">getName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">name</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">FruitShop</code> class has some data, the name of the shop and the prices per pound of some fruit, and it provides functions, or methods, on this data. What advantage is there to wrapping this data in a class?</p>
+
+<ol>
+  <li>Encapsulating the data prevents it from being altered or used inappropriately,</li>
+  <li>The abstraction that objects provide make it easier to write general-purpose code.</li>
+</ol>
+      <h3 id="using-objects">
+        
+        
+          <a href="python-basics.html#using-objects" class="anchor-heading" aria-labelledby="using-objects"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Using Objects
+        
+        
+      </h3>
+    
+
+<p>So how do we make an object and use it? Make sure you have the <code class="language-plaintext highlighter-rouge">FruitShop</code> implementation in <code class="language-plaintext highlighter-rouge">shop.py</code>. We then import the code from this file (making it accessible to other scripts) using <code class="language-plaintext highlighter-rouge">import shop</code>, since <code class="language-plaintext highlighter-rouge">shop.py</code> is the name of the file. Then, we can create <code class="language-plaintext highlighter-rouge">FruitShop</code> objects as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">shop</span>
+
+<span class="n">shopName</span> <span class="o">=</span> <span class="s">'the Berkeley Bowl'</span>
+<span class="n">fruitPrices</span> <span class="o">=</span> <span class="p">{</span><span class="s">'apples'</span><span class="p">:</span> <span class="mf">1.00</span><span class="p">,</span> <span class="s">'oranges'</span><span class="p">:</span> <span class="mf">1.50</span><span class="p">,</span> <span class="s">'pears'</span><span class="p">:</span> <span class="mf">1.75</span><span class="p">}</span>
+<span class="n">berkeleyShop</span> <span class="o">=</span> <span class="n">shop</span><span class="p">.</span><span class="n">FruitShop</span><span class="p">(</span><span class="n">shopName</span><span class="p">,</span> <span class="n">fruitPrices</span><span class="p">)</span>
+<span class="n">applePrice</span> <span class="o">=</span> <span class="n">berkeleyShop</span><span class="p">.</span><span class="n">getCostPerPound</span><span class="p">(</span><span class="s">'apples'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">applePrice</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Apples cost $%.2f at %s.'</span> <span class="o">%</span> <span class="p">(</span><span class="n">applePrice</span><span class="p">,</span> <span class="n">shopName</span><span class="p">))</span>
+
+<span class="n">otherName</span> <span class="o">=</span> <span class="s">'the Stanford Mall'</span>
+<span class="n">otherFruitPrices</span> <span class="o">=</span> <span class="p">{</span><span class="s">'kiwis'</span><span class="p">:</span> <span class="mf">6.00</span><span class="p">,</span> <span class="s">'apples'</span><span class="p">:</span> <span class="mf">4.50</span><span class="p">,</span> <span class="s">'peaches'</span><span class="p">:</span> <span class="mf">8.75</span><span class="p">}</span>
+<span class="n">otherFruitShop</span> <span class="o">=</span> <span class="n">shop</span><span class="p">.</span><span class="n">FruitShop</span><span class="p">(</span><span class="n">otherName</span><span class="p">,</span> <span class="n">otherFruitPrices</span><span class="p">)</span>
+<span class="n">otherPrice</span> <span class="o">=</span> <span class="n">otherFruitShop</span><span class="p">.</span><span class="n">getCostPerPound</span><span class="p">(</span><span class="s">'apples'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">otherPrice</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Apples cost $%.2f at %s.'</span> <span class="o">%</span> <span class="p">(</span><span class="n">otherPrice</span><span class="p">,</span> <span class="n">otherName</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"My, that's expensive!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This code is in <code class="language-plaintext highlighter-rouge">shopTest.py</code>; you can run it like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cs188-ta@nova ~]<span class="nv">$ </span>python shopTest.py
+Welcome to the Berkeley Bowl fruit shop
+1.0
+Apples cost <span class="nv">$1</span>.00 at the Berkeley Bowl.
+Welcome to the Stanford Mall fruit shop
+4.5
+Apples cost <span class="nv">$4</span>.50 at the Stanford Mall.
+My, that<span class="s1">'s expensive!
+</span></code></pre></div></div>
+
+<p>So what just happended? The <code class="language-plaintext highlighter-rouge">import shop</code> statement told Python to load all of the functions and classes in <code class="language-plaintext highlighter-rouge">shop.py</code>. The line <code class="language-plaintext highlighter-rouge">berkeleyShop = shop.FruitShop(shopName, fruitPrices)</code> constructs an <em>instance</em> of the <code class="language-plaintext highlighter-rouge">FruitShop</code> class defined in <code class="language-plaintext highlighter-rouge">shop.py</code>, by calling the <code class="language-plaintext highlighter-rouge">__init__</code> function in that class. Note that we only passed two arguments in, while <code class="language-plaintext highlighter-rouge">__init__</code> seems to take three arguments: <code class="language-plaintext highlighter-rouge">(self, name, fruitPrices)</code>. The reason for this is that all methods in a class have <code class="language-plaintext highlighter-rouge">self</code> as the first argument. The <code class="language-plaintext highlighter-rouge">self</code> variable’s value is automatically set to the object itself; when calling a method, you only supply the remaining arguments. The <code class="language-plaintext highlighter-rouge">self</code> variable contains all the data (<code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">fruitPrices</code>) for the current specific instance (similar to <code class="language-plaintext highlighter-rouge">this</code> in Java). The print statements use the substitution operator (described in the <a href="https://docs.python.org/2/library/stdtypes.html#string-formatting">Python docs</a> if you’re curious).</p>
+      <h3 id="static-vs-instance-variables">
+        
+        
+          <a href="python-basics.html#static-vs-instance-variables" class="anchor-heading" aria-labelledby="static-vs-instance-variables"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Static vs Instance Variables
+        
+        
+      </h3>
+    
+
+<p>The following example illustrates how to use static and instance variables in Python.</p>
+
+<p>Create the <code class="language-plaintext highlighter-rouge">person_class.py</code> containing the following code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="n">population</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">myAge</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">myAge</span>
+        <span class="n">Person</span><span class="p">.</span><span class="n">population</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">get_population</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Person</span><span class="p">.</span><span class="n">population</span>
+
+    <span class="k">def</span> <span class="nf">get_age</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">age</span>
+</code></pre></div></div>
+
+<p>We first compile the script:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>cs188-ta@nova ~]<span class="nv">$ </span>python person_class.py
+</code></pre></div></div>
+
+<p>Now use the class as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">person_class</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">person_class</span><span class="p">.</span><span class="n">Person</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p1</span><span class="p">.</span><span class="n">get_population</span><span class="p">()</span>
+<span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">person_class</span><span class="p">.</span><span class="n">Person</span><span class="p">(</span><span class="mi">63</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p1</span><span class="p">.</span><span class="n">get_population</span><span class="p">()</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p2</span><span class="p">.</span><span class="n">get_population</span><span class="p">()</span>
+<span class="mi">2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p1</span><span class="p">.</span><span class="n">get_age</span><span class="p">()</span>
+<span class="mi">12</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">p2</span><span class="p">.</span><span class="n">get_age</span><span class="p">()</span>
+<span class="mi">63</span>
+</code></pre></div></div>
+
+<p>In the code above, <code class="language-plaintext highlighter-rouge">age</code> is an instance variable and <code class="language-plaintext highlighter-rouge">population</code> is a static variable. <code class="language-plaintext highlighter-rouge">population</code> is shared by all instances of the <code class="language-plaintext highlighter-rouge">Person</code> class whereas each instance has its own <code class="language-plaintext highlighter-rouge">age</code> variable.</p>
+      <h2 id="more-python-tips-and-tricks">
+        
+        
+          <a href="python-basics.html#more-python-tips-and-tricks" class="anchor-heading" aria-labelledby="more-python-tips-and-tricks"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> More Python Tips and Tricks
+        
+        
+      </h2>
+    
+
+<p>This tutorial has briefly touched on some major aspects of Python that will be relevant to the course. Here are some more useful tidbits:</p>
+
+<ul>
+  <li>Use range to generate a sequence of integers, useful for generating traditional indexed for loops:
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+      <span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+</code></pre></div>    </div>
+  </li>
+  <li>After importing a file, if you edit a source file, the changes will not be immediately propagated in the interpreter. For this, use the reload command:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &gt;&gt;&gt; reload(shop)
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>More references:</p>
+<ul>
+  <li>The place to go for more Python information: www.python.org</li>
+  <li>A good reference book: Learning Python (From the UCB campus, you can read the whole book online)</li>
+</ul>
+      <h2 id="troubleshooting">
+        
+        
+          <a href="python-basics.html#troubleshooting" class="anchor-heading" aria-labelledby="troubleshooting"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Troubleshooting
+        
+        
+      </h2>
+    
+
+<p>These are some problems (and their solutions) that new Python learners commonly encounter.</p>
+
+<ul>
+  <li>
+    <p><strong>Problem</strong>: ImportError: No module named py</p>
+
+    <p><strong>Solution</strong>: For import statements with <code class="language-plaintext highlighter-rouge">import &lt;package-name&gt;</code>, do <em>not</em> include the file extension (i.e. the <code class="language-plaintext highlighter-rouge">.py</code> string). For example, you should use: <code class="language-plaintext highlighter-rouge">import shop</code> NOT: <code class="language-plaintext highlighter-rouge">import shop.py</code></p>
+  </li>
+  <li>
+    <p><strong>Problem</strong>: NameError: name ‘MY VARIABLE’ is not defined Even after importing you may see this.</p>
+
+    <p><strong>Solution</strong>: To access a member of a module, you have to type <code class="language-plaintext highlighter-rouge">MODULE NAME.MEMBER NAME</code>, where <code class="language-plaintext highlighter-rouge">MODULE NAME</code> is the name of the <code class="language-plaintext highlighter-rouge">.py</code> file, and <code class="language-plaintext highlighter-rouge">MEMBER NAME</code> is the name of the variable (or function) you are trying to access.</p>
+  </li>
+  <li>
+    <p><strong>Problem</strong>: TypeError: ‘dict’ object is not callable</p>
+
+    <p><strong>Solution</strong>: Dictionary looks up are done using square brackets: [ and ]. NOT parenthesis: ( and ).</p>
+  </li>
+  <li>
+    <p><strong>Problem</strong>: ValueError: too many values to unpack</p>
+
+    <p>Solution: Make sure the number of variables you are assigning in a for loop matches the number of elements in each item of the list. Similarly for working with tuples.</p>
+
+    <p>For example, if pair is a tuple of two elements (e.g. <code class="language-plaintext highlighter-rouge">pair =('apple', 2.0)</code>) then the following code would cause the “too many values to unpack error”:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">(a, b, c) = pair</code></p>
+
+    <p>Here is a problematic scenario involving a for loop:</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">pairList</span> <span class="o">=</span> <span class="p">[(</span><span class="s">'apples'</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">),</span> <span class="p">(</span><span class="s">'oranges'</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">),</span> <span class="p">(</span><span class="s">'pears'</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">fruit</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">pairList</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'%s fruit costs %f and is the color %s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">fruit</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Problem: AttributeError: ‘list’ object has no attribute ‘length’ (or something similar)</p>
+
+    <p>Solution: Finding length of lists is done using <code class="language-plaintext highlighter-rouge">len(NAME OF LIST)</code>.</p>
+  </li>
+  <li>
+    <p>Problem: Changes to a file are not taking effect.</p>
+
+    <p>Solution:</p>
+
+    <ol>
+      <li>Make sure you are saving all your files after any changes.</li>
+      <li>If you are editing a file in a window different from the one you are using to execute python, make sure you <code class="language-plaintext highlighter-rouge">reload(_YOUR_MODULE_)</code> to guarantee your changes are being reflected. <code class="language-plaintext highlighter-rouge">reload</code> works similarly to <code class="language-plaintext highlighter-rouge">import</code>.</li>
+    </ol>
+  </li>
+</ul>
+
+        
+
+        
+
+        
+        
+          <hr>
+          <footer>
+            
+
+            <script>
+(function() {
+  var navList = document.querySelector('.aux-nav-list');
+  if (!navList || !navList.firstElementChild) return;
+  var darkToggle = navList.firstElementChild;
+  darkToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleDark();
+  });
+})();
+</script>
+
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/clipboard.min.js"></script>
+<script>
+// adapted from https://stackoverflow.com/a/48078807/1217368
+// Waiting for https://github.com/just-the-docs/just-the-docs/pull/945
+$(document).ready(function () {
+  $('pre.highlight').each(function (i) {
+    // create an id for the current code section
+    var currentId = 'codeBlock' + i
+
+    // find the code section and add the id to it
+    var codeSection = $(this).find('code')
+    codeSection.attr('id', currentId)
+
+    // now create the button, setting the clipboard target to the id
+    var btn = document.createElement('a')
+    btn.setAttribute('type', 'btn')
+    btn.setAttribute('class', 'badge badge-light btn-copy-code')
+    btn.setAttribute('data-clipboard-target', '#' + currentId)
+    btn.innerHTML = '<i class="fal fa-copy"></i> Copy'
+    $(this).after(btn)
+  })
+
+  new ClipboardJS('.btn-copy-code')
+})
+</script>
+
+<script src="../../assets/js/tocbot.min.js"></script>
+<script>
+// Tries to mirror the HTML TOC
+tocbot.init({
+  tocSelector: '.js-toc',
+  contentSelector: '.main-content',
+  headingSelector: 'h2, h3',
+  ignoreSelector: '.no_toc',
+  hasInnerContainers: true,
+  linkClass: 'nav-list-link',
+  activeLinkClass: 'active',
+  listClass: 'nav-list',
+  listItemClass: 'nav-list-item',
+  activeListItemClass: 'active',
+  collapseDepth: 3,
+  scrollSmooth: false,
+});
+</script>
+
+
+            
+          </footer>
+        
+
+      </div>
+    </div>
+
+    
+      
+
+      <div class="search-overlay"></div>
+    
+  </div>
+
+  
+</body>
+</html>
+

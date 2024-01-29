@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+
+
+  <link rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+  
+
+  
+    <script src="../../assets/js/vendor/lunr.min.js"></script>
+  
+
+  
+
+  <script src="../../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Project 5 | CS 188 Fall 2022</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="Project 5" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Project 5 spec." />
+<meta property="og:description" content="Project 5 spec." />
+<link rel="canonical" href="index.html" />
+<meta property="og:url" content="https://inst.eecs.berkeley.edu/~cs188/fa22/projects/proj5/" />
+<meta property="og:site_name" content="CS 188 Fall 2022" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Project 5" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Project 5 spec.","headline":"Project 5","url":"https://inst.eecs.berkeley.edu/~cs188/fa22/projects/proj5/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link rel="preload" href="../../assets/css/just-the-docs-dark.css" as="style" />
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link id="jtdThemeCSS" rel="stylesheet" href="../../assets/css/just-the-docs-default.css">
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function() {
+    var cssFileHref = (document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  }
+
+  jtd.setTheme = function(theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  }
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+  };
+
+  /* Read local storage state. */
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link rel="stylesheet" href="../../assets/katex/katex.min.css">
+<script defer src="../../assets/katex/katex.min.js"></script>
+<script>
+function renderKaTeX() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true},
+    ],
+  });
+}
+</script>
+<script defer src="../../assets/katex/contrib/auto-render.min.js" onload="renderKaTeX();"></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="index.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+    <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  </svg>
+
+  <div class="side-bar">
+    <div class="site-header">
+      <a href="../../index.html" class="site-title lh-tight">
+  CS 188 Fall 2022
+
+</a>
+      <a href="index.html#" id="menu-button" class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+    <nav aria-label="Main" id="site-nav" class="site-nav">
+      
+      
+        <ul class="nav-list"><li class="nav-list-item"><a href="../../exam.html" class="nav-list-link">Exam Logistics</a></li><li class="nav-list-item"><a href="../../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><a href="../../policies/index.html" class="nav-list-link">Policies</a></li><li class="nav-list-item"><a href="../../resources/index.html" class="nav-list-link">Resources</a></li><li class="nav-list-item"><a href="../../staff/index.html" class="nav-list-link">Staff</a></li><li class="nav-list-item active"><a href="index.html#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../index.html" class="nav-list-link">Projects</a><ul class="nav-list "><li class="nav-list-item "><a href="../proj0.html" class="nav-list-link">Project 0</a><ul class="nav-list"></ul>
+            </li><li class="nav-list-item "><a href="../proj1.html" class="nav-list-link">Project 1</a>
+            </li><li class="nav-list-item "><a href="../proj2.html" class="nav-list-link">Project 2</a>
+            </li><li class="nav-list-item "><a href="../proj3.html" class="nav-list-link">Project 3</a>
+            </li><li class="nav-list-item "><a href="../proj4.html" class="nav-list-link">Project 4</a>
+            </li><li class="nav-list-item  active">
+                <a href="index.html#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="index.html" class="nav-list-link active">Project 5</a>
+                <ul class="nav-list js-toc"><li class="nav-list-item"><a href="index.html#introduction" class="nav-list-link">Introduction</a></li><li class="nav-list-item"><a href="index.html#installation" class="nav-list-link">Installation</a></li><li class="nav-list-item"><a href="index.html#provided-code-part-i" class="nav-list-link">Provided Code (Part I)</a></li><li class="nav-list-item"><a href="index.html#question-1-6-points-perceptron" class="nav-list-link">Question 1 (6 points): Perceptron</a></li><li class="nav-list-item"><a href="index.html#neural-network-tips" class="nav-list-link">Neural Network Tips</a><ul><li class="nav-list-item"><a href="index.html#building-neural-nets" class="nav-list-link">Building Neural Nets</a></li><li class="nav-list-item"><a href="index.html#batching" class="nav-list-link">Batching</a></li><li class="nav-list-item"><a href="index.html#randomness" class="nav-list-link">Randomness</a></li><li class="nav-list-item"><a href="index.html#designing-architecture" class="nav-list-link">Designing Architecture</a></li></ul></li><li class="nav-list-item"><a href="index.html#provided-code-part-ii" class="nav-list-link">Provided Code (Part II)</a></li><li class="nav-list-item"><a href="index.html#example-linear-regression" class="nav-list-link">Example: Linear Regression</a></li><li class="nav-list-item"><a href="index.html#question-2-6-points-non-linear-regression" class="nav-list-link">Question 2 (6 points): Non-linear Regression</a></li><li class="nav-list-item"><a href="index.html#question-3-6-points-digit-classification" class="nav-list-link">Question 3 (6 points): Digit Classification</a></li><li class="nav-list-item"><a href="index.html#question-4-7-points-language-identification" class="nav-list-link">Question 4 (7 points): Language Identification</a><ul><li class="nav-list-item"><a href="index.html#batching-1" class="nav-list-link">Batching</a></li><li class="nav-list-item"><a href="index.html#design-tips" class="nav-list-link">Design Tips</a></li><li class="nav-list-item"><a href="index.html#your-task" class="nav-list-link">Your task</a></li></ul></li><li class="nav-list-item"><a href="index.html#submission" class="nav-list-link">Submission</a></li></ul>
+              
+            </li><li class="nav-list-item "><a href="../minicontest1.html" class="nav-list-link">Mini-Contest 1</a>
+            </li></ul></li></ul>
+      
+      
+    </nav>
+
+    
+    
+      <footer class="site-footer">
+        This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+      </footer>
+    
+  </div>
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+      
+
+        
+
+        <div class="search">
+          <div class="search-input-wrap">
+            <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 188 Fall 2022" aria-label="Search CS 188 Fall 2022" autocomplete="off">
+            <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      
+      
+      
+        <nav aria-label="Auxiliary" class="aux-nav">
+          <ul class="aux-nav-list">
+            
+              <li class="aux-nav-list-item">
+                <a href="index.html#" class="site-button"
+                  
+                >
+                  Dark Mode
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://edstem.org/us/courses/25272" class="site-button"
+                  
+                >
+                  Ed
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://cs188-oh.apps.cs61a.org/" class="site-button"
+                  
+                >
+                  OH Queue
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMadNLFJlZJWTxm8F2bGUD997A4lGfMW5DgxgPkMLcd7Rmww/viewform" class="site-button"
+                  
+                >
+                  Extensions Form
+                </a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+    </div>
+    <div id="main-content-wrap" class="main-content-wrap">
+      
+        
+          <nav aria-label="Breadcrumb" class="breadcrumb-nav">
+            <ol class="breadcrumb-nav-list">
+              
+                <li class="breadcrumb-nav-list-item"><a href="../index.html">Projects</a></li>
+              
+              <li class="breadcrumb-nav-list-item"><span>Project 5</span></li>
+            </ol>
+          </nav>
+        
+      
+      <div id="main-content" class="main-content" role="main">
+        
+          <h1 class="no_toc" id="project-5-machine-learning">
+        
+        
+          <a href="index.html#project-5-machine-learning" class="anchor-heading" aria-labelledby="project-5-machine-learning"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 5: Machine Learning
+        
+        
+      </h1>
+    
+
+<div style="text-align:center;">
+Due: <b>Tuesday, November 29, 11:59 PM PT</b>.
+</div><hr />
+
+<p><img style="display:block;margin-left:auto;margin-right:auto;width:800px" src="../../assets/projects/ml_project_teaser.png" /></p><hr />
+      <h2 class="no_toc text-delta" id="table-of-contents">
+        
+        
+          <a href="index.html#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of contents
+        
+        
+      </h2>
+    
+
+<ul id="markdown-toc">
+  <li><a href="index.html#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="index.html#installation" id="markdown-toc-installation">Installation</a></li>
+  <li><a href="index.html#provided-code-part-i" id="markdown-toc-provided-code-part-i">Provided Code (Part I)</a></li>
+  <li><a href="index.html#question-1-6-points-perceptron" id="markdown-toc-question-1-6-points-perceptron">Question 1 (6 points): Perceptron</a></li>
+  <li><a href="index.html#neural-network-tips" id="markdown-toc-neural-network-tips">Neural Network Tips</a>    <ul>
+      <li><a href="index.html#building-neural-nets" id="markdown-toc-building-neural-nets">Building Neural Nets</a></li>
+      <li><a href="index.html#batching" id="markdown-toc-batching">Batching</a></li>
+      <li><a href="index.html#randomness" id="markdown-toc-randomness">Randomness</a></li>
+      <li><a href="index.html#designing-architecture" id="markdown-toc-designing-architecture">Designing Architecture</a></li>
+    </ul>
+  </li>
+  <li><a href="index.html#provided-code-part-ii" id="markdown-toc-provided-code-part-ii">Provided Code (Part II)</a></li>
+  <li><a href="index.html#example-linear-regression" id="markdown-toc-example-linear-regression">Example: Linear Regression</a></li>
+  <li><a href="index.html#question-2-6-points-non-linear-regression" id="markdown-toc-question-2-6-points-non-linear-regression">Question 2 (6 points): Non-linear Regression</a></li>
+  <li><a href="index.html#question-3-6-points-digit-classification" id="markdown-toc-question-3-6-points-digit-classification">Question 3 (6 points): Digit Classification</a></li>
+  <li><a href="index.html#question-4-7-points-language-identification" id="markdown-toc-question-4-7-points-language-identification">Question 4 (7 points): Language Identification</a>    <ul>
+      <li><a href="index.html#batching-1" id="markdown-toc-batching-1">Batching</a></li>
+      <li><a href="index.html#design-tips" id="markdown-toc-design-tips">Design Tips</a></li>
+      <li><a href="index.html#your-task" id="markdown-toc-your-task">Your task</a></li>
+    </ul>
+  </li>
+  <li><a href="index.html#submission" id="markdown-toc-submission">Submission</a></li>
+</ul><hr />
+      <h2 id="introduction">
+        
+        
+          <a href="index.html#introduction" class="anchor-heading" aria-labelledby="introduction"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Introduction
+        
+        
+      </h2>
+    
+
+<p>This project will be an introduction to machine learning; you will build a neural network to classify digits, and more!</p>
+
+<p>The code for this project contains the following files, available as a <a href="../../assets/projects/machinelearning.zip">zip archive</a>.</p>
+
+<div class="table-wrapper"><table>
+    <tbody>
+      <tr>
+        <td colspan="2"><b>Files you'll edit:</b></td>
+      </tr>
+      <tr>
+        <td><code>models.py</code></td>
+        <td>Perceptron and neural network models for a variety of applications.</td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>Files you might want to look at:</b></td>
+      </tr>
+      <tr>
+        <td><code>nn.py</code></td>
+        <td>Neural network mini-library.</td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>Supporting files you can ignore:</b></td>
+      </tr>
+      <tr>
+        <td><code>autograder.py</code></td>
+        <td>Project autograder.</td>
+      </tr>
+      <tr>
+        <td><code>backend.py</code></td>
+        <td>Backend code for various machine learning tasks.</td>
+      </tr>
+      <tr>
+        <td><code>data</code></td>
+        <td>Datasets for digit classification and language identification.</td>
+      </tr>
+      <tr>
+        <td><code>submission_autograder.py</code></td>
+        <td>Submission autograder (generates tokens for submission).</td>
+      </tr>
+    </tbody>
+</table></div>
+
+<p><strong>Files to Edit and Submit</strong>: You will fill in portions of <code class="language-plaintext highlighter-rouge">models.py</code> during the assignment. Once you have completed the assignment, you will submit a token generated by <code class="language-plaintext highlighter-rouge">submission_autograder.py</code>. Please do not change the other files in this distribution or submit any of our original files other than this file.</p>
+
+<p><strong>Evaluation</strong>: Your code will be autograded for technical correctness. Please do not change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation – not the autograder’s judgements – will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.</p>
+
+<p><strong>Academic Dishonesty</strong>: We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else’s code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don’t try. We trust you all to submit your own work only; please don’t let us down. If you do, we will pursue the strongest consequences available to us.</p>
+
+<p><strong>Getting Help</strong>: You are not alone! If you find yourself stuck on something, contact the course staff for help. Office hours, section, and the discussion forum are there for your support; please use them. If you can’t make our office hours, let us know and we will schedule more. We want these projects to be rewarding and instructional, not frustrating and demoralizing. But, we don’t know when or how to help unless you ask.</p>
+
+<p><strong>Discussion</strong>: Please be careful not to post spoilers.</p><hr />
+      <h2 id="installation">
+        
+        
+          <a href="index.html#installation" class="anchor-heading" aria-labelledby="installation"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Installation
+        
+        
+      </h2>
+    
+
+<p>If the following runs and you see the below window pop up where a line segment spins in a circle, you can skip this section. You should use the conda environment for this since conda comes with the libraries we need.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">--check-dependencies</span>
+</code></pre></div></div>
+
+<p><img style="display:block;margin-left:auto;margin-right:auto;width:600px" src="../../assets/projects/ml_check_dependencies.png" /></p>
+
+<p>For this project, you will need to install the following two libraries:</p>
+
+<ul>
+  <li><a href="https://numpy.org/">numpy</a>, which provides support for fast, large multi-dimensional arrays.</li>
+  <li><a href="https://matplotlib.org/">matplotlib</a>, a 2D plotting library.</li>
+</ul>
+
+<p>If you have a conda environment, you can install both packages on the command line by running:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate <span class="o">[</span>your environment name]
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>numpy
+pip <span class="nb">install </span>matplotlib
+</code></pre></div></div>
+
+<p>You will not be using these libraries directly, but they are required in order to run the provided code and autograder.</p>
+
+<p>If your setup is different, you can refer to numpy and matplotlib installation instructions. You can use either <code class="language-plaintext highlighter-rouge">pip</code> or <code class="language-plaintext highlighter-rouge">conda</code> to install the packages; <code class="language-plaintext highlighter-rouge">pip</code> works both inside and outside of conda environments.</p>
+
+<p>After installing, try the dependency check.</p><hr />
+      <h2 id="provided-code-part-i">
+        
+        
+          <a href="index.html#provided-code-part-i" class="anchor-heading" aria-labelledby="provided-code-part-i"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Provided Code (Part I)
+        
+        
+      </h2>
+    
+
+<p>For this project, you have been provided with a neural network mini-library (<code class="language-plaintext highlighter-rouge">nn.py</code>) and a collection of datasets (<code class="language-plaintext highlighter-rouge">backend.py</code>).</p>
+
+<p>The library in <code class="language-plaintext highlighter-rouge">nn.py</code> defines a collection of node objects. Each node represents a real number or a matrix of real numbers. Operations on node objects are optimized to work faster than using Python’s built-in types (such as lists).</p>
+
+<p>Here are a few of the provided node types:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nn.Constant</code> represents a matrix (2D array) of floating point numbers. It is typically used to represent input features or target outputs/labels. Instances of this type will be provided to you by other functions in the API; you will not need to construct them directly.</li>
+  <li><code class="language-plaintext highlighter-rouge">nn.Parameter</code> represents a trainable parameter of a perceptron or neural network.</li>
+  <li><code class="language-plaintext highlighter-rouge">nn.DotProduct</code> computes a dot product between its inputs.
+Additional provided functions:</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">nn.as_scalar</code> can extract a Python floating-point number from a node.
+When training a perceptron or neural network, you will be passed a dataset object. You can retrieve batches of training examples by calling <code class="language-plaintext highlighter-rouge">dataset.iterate_once(batch_size)</code>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">.</span><span class="n">iterate_once</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+    <span class="p">...</span>
+</code></pre></div></div>
+
+<p>For example, let’s extract a batch of size 1 (i.e., a single training example) from the perceptron training data:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">.</span><span class="n">iterate_once</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+<span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="p">...</span>     <span class="k">break</span>
+<span class="p">...</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x3</span> <span class="n">at</span> <span class="mh">0x11a8856a0</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a89efd0</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>The input features <code class="language-plaintext highlighter-rouge">x</code> and the correct label <code class="language-plaintext highlighter-rouge">y</code> are provided in the form of <code class="language-plaintext highlighter-rouge">nn.Constant</code> nodes. The shape of <code class="language-plaintext highlighter-rouge">x</code> will be <code class="language-plaintext highlighter-rouge">batch_size x num_features</code>, and the shape of <code class="language-plaintext highlighter-rouge">y</code> is <code class="language-plaintext highlighter-rouge">batch_size x num_outputs</code>. So, each row of <code class="language-plaintext highlighter-rouge">x</code> is a point/ sample, and a column is the same feature of some samples. Here is an example of computing a dot product of <code class="language-plaintext highlighter-rouge">x</code> with itself, first as a node and then as a Python number.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">nn</span><span class="p">.</span><span class="n">DotProduct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">DotProduct</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a89edd8</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">nn</span><span class="p">.</span><span class="n">as_scalar</span><span class="p">(</span><span class="n">nn</span><span class="p">.</span><span class="n">DotProduct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="mf">1.9756581717465536</span>
+</code></pre></div></div>
+
+<p>Finally, here are some formulations of matrix multiplication (you can do some examples by hand to verify this). Let \(\mathbf A\) be an \(m \times n\) matrix and \(\mathbf B\) be \(n \times p\); matrix multiplication works as follows:</p>
+
+\[\mathbf A\mathbf B=\begin{bmatrix} \vec A_0^T  \\ \vec A_1^T \\ \cdots \\ \vec A_{m-1}^T \end{bmatrix} \mathbf B
+    =\begin{bmatrix} \vec A_0^T \mathbf B \\ \vec A_1^T \mathbf B \\ \cdots \\ \vec A_{m-1}^T \mathbf B \end{bmatrix}
+  \qquad
+  \mathbf A\mathbf B=\mathbf A\begin{bmatrix} \vec B_0 &amp; \vec B_1 &amp; \cdots &amp; \vec B_{p-1} \end{bmatrix}
+    =\begin{bmatrix} \mathbf A\vec B_0 &amp; \mathbf A\vec B_1 &amp; \cdots &amp; \mathbf A\vec B_{p-1} \end{bmatrix}\]
+
+<ul>
+  <li>As a sanity check, the dimensions are what we expect them to be, and the inner dimension of \(n\) is preserved for any remaining matrix multiplications.</li>
+  <li>This is useful to see what happens when we multiply a batch matrix \(X\) by a weight matrix \(W\), we are just multiplying each sample one at a time by the entire weight matrix via the first formulation. Within each sample times weights, we are just getting different linear combinations of the sample to go to each result column via the second formulation. Note that as long as the dimensiosn match, \(A\) can be a row vector and \(B\) a column vector.</li>
+</ul><hr />
+      <h2 id="question-1-6-points-perceptron">
+        
+        
+          <a href="index.html#question-1-6-points-perceptron" class="anchor-heading" aria-labelledby="question-1-6-points-perceptron"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Question 1 (6 points): Perceptron
+        
+        
+      </h2>
+    
+
+<p>Before starting this part, be sure you have <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code> installed!</p>
+
+<p>In this part, you will implement a binary perceptron. Your task will be to complete the implementation of the <code class="language-plaintext highlighter-rouge">PerceptronModel</code> class in <code class="language-plaintext highlighter-rouge">models.py</code>.</p>
+
+<p>For the perceptron, the output labels will be either <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">−1</code>, meaning that data points <code class="language-plaintext highlighter-rouge">(x, y)</code> from the dataset will have <code class="language-plaintext highlighter-rouge">y</code> be a <code class="language-plaintext highlighter-rouge">nn.Constant</code> node that contains either <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">−1</code> as its entries.</p>
+
+<p>We have already initialized the perceptron weights <code class="language-plaintext highlighter-rouge">self.w</code> to be a <code class="language-plaintext highlighter-rouge">1</code> by <code class="language-plaintext highlighter-rouge">dimensions</code> parameter node. The provided code will include a bias feature inside <code class="language-plaintext highlighter-rouge">x</code> when needed, so you will not need a separate parameter for the bias.</p>
+
+<p>Your tasks are to:</p>
+
+<ul>
+  <li>Implement the <code class="language-plaintext highlighter-rouge">run(self, x)</code> method. This should compute the dot product of the stored weight vector and the given input, returning an <code class="language-plaintext highlighter-rouge">nn.DotProduct</code> object.</li>
+  <li>Implement <code class="language-plaintext highlighter-rouge">get_prediction(self, x)</code>, which should return <code class="language-plaintext highlighter-rouge">1</code> if the dot product is non-negative or <code class="language-plaintext highlighter-rouge">−1</code> otherwise. You should use <code class="language-plaintext highlighter-rouge">nn.as_scalar</code> to convert a scalar <code class="language-plaintext highlighter-rouge">Node</code> into a Python floating-point number.</li>
+  <li>Write the <code class="language-plaintext highlighter-rouge">train(self)</code> method. This should repeatedly loop over the data set and make updates on examples that are misclassified. Use the <code class="language-plaintext highlighter-rouge">update</code> method of the <code class="language-plaintext highlighter-rouge">nn.Parameter</code> class to update the weights. When an entire pass over the data set is completed without making any mistakes, 100% training accuracy has been achieved, and training can terminate.</li>
+  <li>In this project, the only way to change the value of a parameter is by calling <code class="language-plaintext highlighter-rouge">parameter.update(direction, multiplier)</code>, which will perform the update to the weights:</li>
+</ul>
+
+\[\text{weights} \leftarrow \text{weights} + \text{direction} \cdot \text{multiplier}\]
+
+<p>The <code class="language-plaintext highlighter-rouge">direction</code> argument is a <code class="language-plaintext highlighter-rouge">Node</code> with the same shape as the parameter, and the <code class="language-plaintext highlighter-rouge">multiplier</code> argument is a Python scalar. Additionally, use <code class="language-plaintext highlighter-rouge">iterate_once</code> to loop over the dataset; see <a href="index.html#provided-code-part-i">Provided Code (Part I)</a> for usage.</p>
+
+<p>To test your implementation, run the autograder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q1
+</code></pre></div></div>
+
+<p><strong>Note</strong>: the autograder should take at most 20 seconds or so to run for a correct implementation. If the autograder is taking forever to run, your code probably has a bug.</p><hr />
+      <h2 id="neural-network-tips">
+        
+        
+          <a href="index.html#neural-network-tips" class="anchor-heading" aria-labelledby="neural-network-tips"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Neural Network Tips
+        
+        
+      </h2>
+    
+
+<p>In the remaining parts of the project, you will implement the following models:</p>
+
+<ul>
+  <li><a href="index.html#question-2-6-points-non-linear-regression">Q2: Non-linear Regression</a></li>
+  <li><a href="index.html#question-3-6-points-digit-classification">Q3: Handwritten Digit Classification</a></li>
+  <li><a href="index.html#question-4-7-points-language-identification">Q4: Language Identification</a></li>
+</ul>
+      <h3 id="building-neural-nets">
+        
+        
+          <a href="index.html#building-neural-nets" class="anchor-heading" aria-labelledby="building-neural-nets"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Building Neural Nets
+        
+        
+      </h3>
+    
+
+<p>Throughout the applications portion of the project, you’ll use the framework provided in <code class="language-plaintext highlighter-rouge">nn.py</code> to create neural networks to solve a variety of machine learning problems. A simple neural network has linear layers, where each linear layer performs a linear operation (just like perceptron). Linear layers are separated by a <em>non-linearity</em>, which allows the network to approximate general functions. We’ll use the ReLU operation for our non-linearity, defined as \(\text{relu}(x)=\max(x,0)\). For example, a simple one hidden layer/ two linear layers neural network for mapping an input row vector \(\mathbf x\) to an output vector \(\mathbf f(\mathbf x)\) would be given by the function:</p>
+
+\[\mathbf f(\mathbf x)=\text{relu}(\mathbf x \cdot \mathbf{W_1}+\mathbf{b_1}) \cdot \mathbf{W_2} + \mathbf{b_2}\]
+
+<p>where we have parameter matrices \(\mathbf{W_1}\) and \(\mathbf{W_2}\) and parameter vectors \(\mathbf{b_1}\) and \(\mathbf{b_2}\) to learn during gradient descent. \(\mathbf{W_1}\) will be an \(i \times h\) matrix, where \(i\) is the dimension of our input vectors \(\mathbf{x}\), and \(h\) is the hidden layer size. \(\mathbf{b_1}\) will be a size \(h\) vector. We are free to choose any value we want for the hidden size (we will just need to make sure the dimensions of the other matrices and vectors agree so that we can perform the operations). Using a larger hidden size will usually make the network more powerful (able to fit more training data), but can make the network harder to train (since it adds more parameters to all the matrices and vectors we need to learn), or can lead to overfitting on the training data.</p>
+
+<p>We can also create deeper networks by adding more layers, for example a three-linear-layer net:</p>
+
+\[\mathbf{\hat y} = \mathbf{f}(\mathbf{x}) = \mathbf{\text{relu}(\mathbf{\text{relu}(\mathbf{x} \cdot \mathbf{W_1} + \mathbf{b_1})} \cdot \mathbf{W_2} + \mathbf{b_2})} \cdot \mathbf{W_3} + \mathbf{b_3}\]
+
+<p>Or, we can decompose the above and explicitly note the 2 hidden layers:</p>
+
+\[\mathbf{h_1} = \mathbf{f_1}(\mathbf{x}) = \text{relu}(\mathbf{x} \cdot \mathbf{W_1} + \mathbf{b_1})\]
+
+\[\mathbf{h_2} = \mathbf{f_2}(\mathbf{h_1}) = \text{relu}(\mathbf{h_1} \cdot \mathbf{W_2} + \mathbf{b_2})\]
+
+\[\mathbf{\hat y} = \mathbf{f_3}(\mathbf{h_2}) = \mathbf{h_2} \cdot \mathbf{W_3} + \mathbf{b_3}\]
+
+<p>Note that we don’t have a \(\text{relu}\) at the end because we want to be able to output negative numbers, and because the point of having \(\text{relu}\) in the first place is to have non-linear transformations, and having the output be an affine linear transformation of some non-linear intermediate can be very sensible.</p>
+      <h3 id="batching">
+        
+        
+          <a href="index.html#batching" class="anchor-heading" aria-labelledby="batching"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Batching
+        
+        
+      </h3>
+    
+<p>For efficiency, you will be required to process whole batches of data at once rather than a single example at a time. This means that instead of a single input row vector \(\mathbf{x}\) with size \(i\), you will be presented with a batch of \(b\) inputs represented as a \(b \times i\) matrix \(\mathbf{X}\). We provide an example for linear regression to demonstrate how a linear layer can be implemented in the batched setting.</p>
+      <h3 id="randomness">
+        
+        
+          <a href="index.html#randomness" class="anchor-heading" aria-labelledby="randomness"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Randomness
+        
+        
+      </h3>
+    
+<p>The parameters of your neural network will be randomly initialized, and data in some tasks will be presented in shuffled order. Due to this randomness, it’s possible that you will still occasionally fail some tasks even with a strong architecture – this is the problem of local optima! This should happen very rarely, though – if when testing your code you fail the autograder twice in a row for a question, you should explore other architectures.</p>
+      <h3 id="designing-architecture">
+        
+        
+          <a href="index.html#designing-architecture" class="anchor-heading" aria-labelledby="designing-architecture"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Designing Architecture
+        
+        
+      </h3>
+    
+<p>Designing neural nets can take some trial and error. Here are some tips to help you along the way:</p>
+
+<ul>
+  <li>Be systematic. Keep a log of every architecture you’ve tried, what the hyperparameters (layer sizes, learning rate, etc.) were, and what the resulting performance was. As you try more things, you can start seeing patterns about which parameters matter. If you find a bug in your code, be sure to cross out past results that are invalid due to the bug.</li>
+  <li>Start with a shallow network (just one hidden layer, i.e. one non-linearity). Deeper networks have exponentially more hyperparameter combinations, and getting even a single one wrong can ruin your performance. Use the small network to find a good learning rate and layer size; afterwards you can consider adding more layers of similar size.</li>
+  <li>If your learning rate is wrong, none of your other hyperparameter choices matter. You can take a state-of-the-art model from a research paper, and change the learning rate such that it performs no better than random. A learning rate too low will result in the model learning too slowly, and a learning rate too high may cause loss to diverge to infinity. Begin by trying different learning rates while looking at how the loss decreases over time.</li>
+  <li>Smaller batches require lower learning rates. When experimenting with different batch sizes, be aware that the best learning rate may be different depending on the batch size.</li>
+  <li>Refrain from making the network too wide (hidden layer sizes too large) If you keep making the network wider accuracy will gradually decline, and computation time will increase quadratically in the layer size – you’re likely to give up due to excessive slowness long before the accuracy falls too much. The full autograder for all parts of the project takes 2-12 minutes to run with staff solutions; if your code is taking much longer you should check it for efficiency.</li>
+  <li>If your model is returning <code class="language-plaintext highlighter-rouge">Infinity</code> or <code class="language-plaintext highlighter-rouge">NaN</code>, your learning rate is probably too high for your current architecture.</li>
+  <li>Recommended values for your hyperparameters:
+    <ul>
+      <li>Hidden layer sizes: between 10 and 400.</li>
+      <li>Batch size: between 1 and the size of the dataset. For Q2 and Q3, we require that total size of the dataset be evenly divisible by the batch size.</li>
+      <li>Learning rate: between 0.001 and 1.0.</li>
+      <li>Number of hidden layers: between 1 and 3.</li>
+    </ul>
+  </li>
+</ul><hr />
+      <h2 id="provided-code-part-ii">
+        
+        
+          <a href="index.html#provided-code-part-ii" class="anchor-heading" aria-labelledby="provided-code-part-ii"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Provided Code (Part II)
+        
+        
+      </h2>
+    
+
+<p>Here is a full list of nodes available in <code class="language-plaintext highlighter-rouge">nn.py</code>. You will make use of these in the remaining parts of the assignment:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nn.Constant</code> represents a matrix (2D array) of floating point numbers. It is typically used to represent input features or target outputs/labels. Instances of this type will be provided to you by other functions in the API; you will not need to construct them directly.</li>
+  <li><code class="language-plaintext highlighter-rouge">nn.Parameter</code> represents a trainable parameter of a perceptron or neural network. All parameters must be 2-dimensional.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.Parameter(n, m)</code> constructs a parameter with shape <code class="language-plaintext highlighter-rouge">n</code> by <code class="language-plaintext highlighter-rouge">m</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.Add</code> adds matrices element-wise.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.Add(x, y)</code> accepts two nodes of shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_features</code> and constructs a node that also has shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_features</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.AddBias</code> adds a bias vector to each feature vector. <strong>Note</strong>: it automatically broadcasts the <code class="language-plaintext highlighter-rouge">bias</code> to add the same vector to every row of <code class="language-plaintext highlighter-rouge">features</code>.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.AddBias(features, bias)</code> accepts <code class="language-plaintext highlighter-rouge">features</code> of shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_features</code> and <code class="language-plaintext highlighter-rouge">bias</code> of shape <code class="language-plaintext highlighter-rouge">1</code> by <code class="language-plaintext highlighter-rouge">num_features</code>, and constructs a node that has shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_features</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.Linear</code> applies a linear transformation (matrix multiplication) to the input.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.Linear(features, weights)</code> accepts <code class="language-plaintext highlighter-rouge">features</code> of shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_input_features</code> and <code class="language-plaintext highlighter-rouge">weights</code> of shape <code class="language-plaintext highlighter-rouge">num_input_features</code> by <code class="language-plaintext highlighter-rouge">num_output_features</code>, and constructs a node that has shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_output_features</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.ReLU</code> applies the element-wise Rectified Linear Unit nonlinearity \(\text{relu}(x)=\max(x,0)\). This nonlinearity replaces all negative entries in its input with zeros.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.ReLU(features)</code>, which returns a node with the same shape as the input.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.SquareLoss</code> computes a batched square loss, used for regression problems.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.SquareLoss(a, b)</code>, where <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> both have shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_outputs</code>.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.SoftmaxLoss</code> computes a batched softmax loss, used for classification problems.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.SoftmaxLoss(logits, labels)</code>, where <code class="language-plaintext highlighter-rouge">logits</code> and <code class="language-plaintext highlighter-rouge">labels</code> both have shape <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">num_classes</code>. The term “logits” refers to scores produced by a model, where each entry can be an arbitrary real number. The labels, however, must be non-negative and have each row sum to 1. Be sure not to swap the order of the arguments!</li>
+    </ul>
+  </li>
+  <li>Do not use <code class="language-plaintext highlighter-rouge">nn.DotProduct</code> for any model other than the perceptron.</li>
+</ul>
+
+<p>The following methods are available in <code class="language-plaintext highlighter-rouge">nn.py</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">nn.gradients</code> computes gradients of a loss with respect to provided parameters.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.gradients(loss, [parameter_1, parameter_2, ..., parameter_n])</code> will return a list <code class="language-plaintext highlighter-rouge">[gradient_1, gradient_2, ..., gradient_n]</code>, where each element is an <code class="language-plaintext highlighter-rouge">nn.Constant</code> containing the gradient of the loss with respect to a parameter.</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">nn.as_scalar</code> can extract a Python floating-point number from a loss node. This can be useful to determine when to stop training.
+    <ul>
+      <li>Usage: <code class="language-plaintext highlighter-rouge">nn.as_scalar(node)</code>, where node is either a loss node or has shape (1,1).</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The datasets provided also have two additional methods:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dataset.iterate_forever(batch_size)</code> yields an infinite sequences of batches of examples.</li>
+  <li><code class="language-plaintext highlighter-rouge">dataset.get_validation_accuracy()</code> returns the accuracy of your model on the validation set. This can be useful to determine when to stop training.</li>
+</ul><hr />
+      <h2 id="example-linear-regression">
+        
+        
+          <a href="index.html#example-linear-regression" class="anchor-heading" aria-labelledby="example-linear-regression"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Example: Linear Regression
+        
+        
+      </h2>
+    
+
+<p>As an example of how the neural network framework works, let’s fit a line to a set of data points. We’ll start four points of training data constructed using the function \(y=7x_0+8x_1+3\). In batched form, our data is:</p>
+
+\[\mathbf X=\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 1 \\ 1 &amp; 0 \\ 1 &amp; 1 \end{bmatrix} \qquad \mathbf Y = \begin{bmatrix} 3 \\ 11 \\ 10 \\ 18 \end{bmatrix}\]
+
+<p>Suppose the data is provided to us in the form of <code class="language-plaintext highlighter-rouge">nn.Constant</code> nodes:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">x</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x2</span> <span class="n">at</span> <span class="mh">0x10a30fe80</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">y</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x10a30fef0</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Let’s construct and train a model of the form \(f(\mathbf x)=x_0\cdot m_0+x_1 \cdot m_1+b\). If done correctly, we should be able to learn that \(m_0=7\), \(m_1=8\), and \(b=3\).</p>
+
+<p>First, we create our trainable parameters. In matrix form, these are:</p>
+
+\[\mathbf M = \begin{bmatrix} m_0 \\ m_1 \end{bmatrix} \qquad \mathbf B = \begin{bmatrix} b \end{bmatrix}\]
+
+<p>Which corresponds to the following code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Printing them gives:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">m</span>
+<span class="o">&lt;</span><span class="n">Parameter</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x112b8b208</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span>
+<span class="o">&lt;</span><span class="n">Parameter</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x112b8beb8</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Next, we compute our model’s predictions for \(y\):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">xm</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+<span class="n">predicted_y</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">AddBias</span><span class="p">(</span><span class="n">xm</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Our goal is to have the predicted \(y\)-values match the provided data. In linear regression we do this by minimizing the square loss:</p>
+
+\[\mathcal{L} = \frac{1}{2N}\sum_{(\mathbf x,y)}(y-f(\mathbf x))^2\]
+
+<p>We construct a loss node:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">SquareLoss</span><span class="p">(</span><span class="n">predicted_y</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In our framework, we provide a method that will return the gradients of the loss with respect to the parameters:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">grad_wrt_m</span><span class="p">,</span> <span class="n">grad_wrt_b</span> <span class="o">=</span> <span class="n">nn</span><span class="p">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>Printing the nodes used gives:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">xm</span>
+<span class="o">&lt;</span><span class="n">Linear</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a869588</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">predicted_y</span>
+<span class="o">&lt;</span><span class="n">AddBias</span> <span class="n">shape</span><span class="o">=</span><span class="mi">4</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11c23aa90</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">loss</span>
+<span class="o">&lt;</span><span class="n">SquareLoss</span> <span class="n">shape</span><span class="o">=</span><span class="p">()</span> <span class="n">at</span> <span class="mh">0x11c23a240</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">grad_wrt_m</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">2</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a8cb160</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">grad_wrt_b</span>
+<span class="o">&lt;</span><span class="n">Constant</span> <span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="n">x1</span> <span class="n">at</span> <span class="mh">0x11a8cb588</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>We can then use the <code class="language-plaintext highlighter-rouge">update</code> method to update our parameters. Here is an update for <code class="language-plaintext highlighter-rouge">m</code>, assuming we have already initialized a <code class="language-plaintext highlighter-rouge">multiplier</code> variable based on a suitable learning rate of our choosing:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">m</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">grad_wrt_m</span><span class="p">,</span> <span class="n">multiplier</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>If we also include an update for <code class="language-plaintext highlighter-rouge">b</code> and add a loop to repeatedly perform gradient updates, we will have the full training procedure for linear regression.</p><hr />
+      <h2 id="question-2-6-points-non-linear-regression">
+        
+        
+          <a href="index.html#question-2-6-points-non-linear-regression" class="anchor-heading" aria-labelledby="question-2-6-points-non-linear-regression"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Question 2 (6 points): Non-linear Regression
+        
+        
+      </h2>
+    
+
+<p>For this question, you will train a neural network to approximate \(\sin(x)\) over \([-2\pi, 2\pi]\).</p>
+
+<p>You will need to complete the implementation of the <code class="language-plaintext highlighter-rouge">RegressionModel</code> class in <code class="language-plaintext highlighter-rouge">models.py</code>. For this problem, a relatively simple architecture should suffice (see <a href="index.html#neural-network-tips">Neural Network Tips</a> for architecture tips). Use <code class="language-plaintext highlighter-rouge">nn.SquareLoss</code> as your loss.</p>
+
+<p>Your tasks are to:</p>
+
+<ul>
+  <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.__init__</code> with any needed initialization.</li>
+  <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.run</code> to return a <code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">1</code> node that represents your model’s prediction.</li>
+  <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.get_loss</code> to return a loss for given inputs and target outputs.</li>
+  <li>Implement <code class="language-plaintext highlighter-rouge">RegressionModel.train</code>, which should train your model using gradient-based updates.</li>
+</ul>
+
+<p>There is only a single dataset split for this task (i.e., there is only training data and no validation data or test set). Your implementation will receive full points if it gets a loss of 0.02 or better, averaged across all examples in the dataset. You may use the training loss to determine when to stop training (use <code class="language-plaintext highlighter-rouge">nn.as_scalar</code> to convert a loss node to a Python number). Note that it should take the model a few minutes to train.</p>
+
+<p><strong>Suggested network architecture</strong> (added 2022/11/28): Normally, you would need to use trial-and-error to find working hyperparameters. Below is a set of hyperparameters that worked for us (took less than a minute to train on the hive machines), but feel free to experiment and use your own.</p>
+<ul>
+  <li>Hidden layer size 512</li>
+  <li>Batch size 200</li>
+  <li>Learning rate 0.05</li>
+  <li>One hidden layer (2 linear layers in total)</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q2
+</code></pre></div></div><hr />
+      <h2 id="question-3-6-points-digit-classification">
+        
+        
+          <a href="index.html#question-3-6-points-digit-classification" class="anchor-heading" aria-labelledby="question-3-6-points-digit-classification"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Question 3 (6 points): Digit Classification
+        
+        
+      </h2>
+    
+
+<p>For this question, you will train a network to classify handwritten digits from the MNIST dataset.</p>
+
+<p>Each digit is of size <code class="language-plaintext highlighter-rouge">28</code> by <code class="language-plaintext highlighter-rouge">28</code> pixels, the values of which are stored in a <code class="language-plaintext highlighter-rouge">784</code>-dimensional vector of floating point numbers. Each output we provide is a <code class="language-plaintext highlighter-rouge">10</code>-dimensional vector which has zeros in all positions, except for a one in the position corresponding to the correct class of the digit.</p>
+
+<p>Complete the implementation of the <code class="language-plaintext highlighter-rouge">DigitClassificationModel</code> class in <code class="language-plaintext highlighter-rouge">models.py</code>. The return value from <code class="language-plaintext highlighter-rouge">DigitClassificationModel.run()</code> should be a 
+<code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">10</code> node containing scores, where higher scores indicate a higher probability of a digit belonging to a particular class (0-9). You should use <code class="language-plaintext highlighter-rouge">nn.SoftmaxLoss</code> as your loss. Do not put a ReLU activation in the last linear layer of the network.</p>
+
+<p>For both this question and Q4, in addition to training data, there is also validation data and a test set. You can use <code class="language-plaintext highlighter-rouge">dataset.get_validation_accuracy()</code> to compute validation accuracy for your model, which can be useful when deciding whether to stop training. The test set will be used by the autograder.</p>
+
+<p>To receive points for this question, your model should achieve an accuracy of at least 97% on the test set. For reference, our staff implementation consistently achieves an accuracy of 98% on the validation data after training for around 5 epochs. Note that the test grades you on test accuracy, while you only have access to validation accuracy – so if your validation accuracy meets the 97% threshold, you may still fail the test if your test accuracy does not meet the threshold. Therefore, it may help to set a slightly higher stopping threshold on validation accuracy, such as 97.5% or 98%.</p>
+
+<p><strong>Suggested network architecture</strong> (added 2022/11/28): Normally, you would need to use trial-and-error to find working hyperparameters. Below is a set of hyperparameters that worked for us (took less than a minute to train on the hive machines), but feel free to experiment and use your own.</p>
+<ul>
+  <li>Hidden layer size 200</li>
+  <li>Batch size 100</li>
+  <li>Learning rate 0.5</li>
+  <li>One hidden layer (2 linear layers in total)</li>
+</ul>
+
+<p>To test your implementation, run the autograder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q3
+</code></pre></div></div><hr />
+      <h2 id="question-4-7-points-language-identification">
+        
+        
+          <a href="index.html#question-4-7-points-language-identification" class="anchor-heading" aria-labelledby="question-4-7-points-language-identification"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Question 4 (7 points): Language Identification
+        
+        
+      </h2>
+    
+
+<p>Language identification is the task of figuring out, given a piece of text, what language the text is written in. For example, your browser might be able to detect if you’ve visited a page in a foreign language and offer to translate it for you. Here is an example from Chrome (which uses a neural network to implement this feature):</p>
+
+<p><img style="display:block;margin-left:auto;margin-right:auto;width:400px" src="../../assets/projects/ml_chrome_translate.png" /></p>
+
+<p>In this project, we’re going to build a smaller neural network model that identifies language for one word at a time. Our dataset consists of words in five languages, such as the table below:</p>
+
+<div class="table-wrapper"><table>
+    <tbody>
+      <tr>
+        <td><b>Word</b></td>
+        <td><b>Language</b></td>
+      </tr>
+      <tr>
+        <td>discussed</td>
+        <td>English</td>
+      </tr>
+      <tr>
+        <td>eternidad</td>
+        <td>Spanish</td>
+      </tr>
+      <tr>
+        <td>itseänne</td>
+        <td>Finnish</td>
+      </tr>
+      <tr>
+        <td>paleis</td>
+        <td>Dutch</td>
+      </tr>
+      <tr>
+        <td>mieszkać</td>
+        <td>Polish</td>
+      </tr>
+    </tbody>
+</table></div>
+
+<p>Different words consist of different numbers of letters, so our model needs to have an architecture that can handle variable-length inputs. Instead of a single input \(x\) (like in the previous questions), we’ll have a separate input for each character in the word: \(x_0,x_1,\cdots,x_{L-1}\) where \(L\) is the length of the word. We’ll start by applying a network \(f_{\text{initial}}\) that is just like the networks in the previous problems. It accepts its input \(x_0\) and computes an output vector \(h_1\) of dimensionality \(d\):</p>
+
+\[h_1 = f_{\text{initial}}(x_0)\]
+
+<p>Next, we’ll combine the output of the previous step with the next letter in the word, generating a vector summary of the the first two letters of the word. To do this, we’ll apply a sub-network that accepts a letter and outputs a hidden state, but now also depends on the previous hidden state \(h_1\). We denote this sub-network as \(f\).</p>
+
+\[h_2 = f(h_1, x_1)\]
+
+<p>This pattern continues for all letters in the input word, where the hidden state at each step summarizes all the letters the network has processed thus far:</p>
+
+\[h_3 = f(h_2, x_2) \\ \vdots\]
+
+<p>Throughout these computations, the function \(f(\cdot, \cdot)\) is the same piece of neural network and uses the same trainable parameters; \(f_{\text{initial}}\) will also share some of the same parameters as \(f(\cdot, \cdot)\). In this way, the parameters used when processing words of different length are all shared. You can implement this using a for loop over the provided inputs <code class="language-plaintext highlighter-rouge">xs</code>, where each iteration of the loop computes either \(f_{\text{initial}}\) or \(f\).</p>
+
+<p>The technique described above is called a Recurrent Neural Network (RNN). A schematic diagram of the RNN is shown below:</p>
+
+<p><img style="display:block;margin-left:auto;margin-right:auto;width:400px" src="../../assets/projects/ml_rnn.png" /></p>
+
+<p>Here, an RNN is used to encode the word “cat” into a fixed-size vector \(h_3\).</p>
+
+<p>After the RNN has processed the full length of the input, it has encoded the arbitrary-length input word into a fixed-size vector \(h_L\), where \(L\) is the length of the word. This vector summary of the input word can now be fed through additional output transformation layers to generate classification scores for the word’s language identity.</p>
+      <h3 id="batching-1">
+        
+        
+          <a href="index.html#batching-1" class="anchor-heading" aria-labelledby="batching-1"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Batching
+        
+        
+      </h3>
+    
+
+<p>Although the above equations are in terms of a single word, in practice you must use batches of words for efficiency. For simplicity, our code in the project ensures that all words within a single batch have the same length. In batched form, a hidden state \(h_i\) is replaced with the matrix \(H_i\) of dimensionality 
+<code class="language-plaintext highlighter-rouge">batch_size</code> by <code class="language-plaintext highlighter-rouge">d</code>.</p>
+      <h3 id="design-tips">
+        
+        
+          <a href="index.html#design-tips" class="anchor-heading" aria-labelledby="design-tips"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Design Tips
+        
+        
+      </h3>
+    
+
+<p>The design of the recurrent function \(f(\cdot, \cdot)\) is the primary challenge for this task. Here are some tips:</p>
+
+<ul>
+  <li>Start with an architecture \(f_{\text{initial}}(x)\) of your choice similar to the previous questions, as long as it has at least one non-linearity.</li>
+  <li>You should use the following method of constructing \(f(\cdot, \cdot)\) given \(f_{\text{initial}}(x)\). The first transformation layer of \(f_{\text{initial}}\) will begin by multiplying the vector \(x_0\) by some weight matrix \(\mathbf{W_x}\) to produce \(z_0 = x_0 \cdot \mathbf{W_x}\). For subsequent letters, you should replace this computation with \(z_i=x_i \cdot \mathbf{W_x} + h_i \cdot \mathbf{W_{\text{hidden}}}\) using an <code class="language-plaintext highlighter-rouge">nn.Add</code> operation. In other words, you should replace a computation of the form <code class="language-plaintext highlighter-rouge">z0 = nn.Linear(x, W)</code> with a computation of the form <code class="language-plaintext highlighter-rouge">z = nn.Add(nn.Linear(x, W), nn.Linear(h, W_hidden))</code>.</li>
+  <li>If done correctly, the resulting function \(f(x_i, h_i) = g(z_i) = g(z_{x_i, h_i})\) will be non-linear in both \(x\) and \(h\).</li>
+  <li>The hidden size <code class="language-plaintext highlighter-rouge">d</code> should be sufficiently large.</li>
+  <li>Start with a shallow network for \(f\), and figure out good values for the hidden size and learning rate before you make the network deeper. If you start with a deep network right away you will have exponentially more hyperparameter combinations, and getting any single hyperparameter wrong can cause your performance to suffer dramatically.</li>
+</ul>
+      <h3 id="your-task">
+        
+        
+          <a href="index.html#your-task" class="anchor-heading" aria-labelledby="your-task"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Your task
+        
+        
+      </h3>
+    
+<p>Complete the implementation of the <code class="language-plaintext highlighter-rouge">LanguageIDModel</code> class.</p>
+
+<p>To receive full points on this problem, your architecture should be able to achieve an accuracy of at least 81% on the test set.</p>
+
+<p>To test your implementation, run the autograder:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q4
+</code></pre></div></div>
+
+<p><strong>Disclaimer</strong>: This dataset was generated using automated text processing. It may contain errors. It has also not been filtered for profanity. However, our reference implementation can still correctly classify over 89% of the validation set despite the limitations of the data. Our reference implementation takes 10-20 epochs to train.</p><hr />
+      <h2 id="submission">
+        
+        
+          <a href="index.html#submission" class="anchor-heading" aria-labelledby="submission"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Submission
+        
+        
+      </h2>
+    
+
+<p>Submit <code class="language-plaintext highlighter-rouge">machinelearning.token</code>, generated by running <code class="language-plaintext highlighter-rouge">submission_autograder.py</code>, to Project 5 on Gradescope.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python submission_autograder.py
+</code></pre></div></div>
+
+<p>The full project autograder takes 2-12 minutes to run for the staff reference solutions to the project. If your code takes significantly longer, consider checking your implementations for efficiency.</p>
+
+<p>Please specify any partner you may have worked with and verify that both you and your partner are associated with the submission after submitting.</p>
+
+<p><em>Congratulations! This was the last project for the semester!</em></p>
+
+        
+
+        
+
+        
+        
+          <hr>
+          <footer>
+            
+
+            <script>
+(function() {
+  var navList = document.querySelector('.aux-nav-list');
+  if (!navList || !navList.firstElementChild) return;
+  var darkToggle = navList.firstElementChild;
+  darkToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleDark();
+  });
+})();
+</script>
+
+<script src="../../assets/js/jquery.min.js"></script>
+<script src="../../assets/js/clipboard.min.js"></script>
+<script>
+// adapted from https://stackoverflow.com/a/48078807/1217368
+// Waiting for https://github.com/just-the-docs/just-the-docs/pull/945
+$(document).ready(function () {
+  $('pre.highlight').each(function (i) {
+    // create an id for the current code section
+    var currentId = 'codeBlock' + i
+
+    // find the code section and add the id to it
+    var codeSection = $(this).find('code')
+    codeSection.attr('id', currentId)
+
+    // now create the button, setting the clipboard target to the id
+    var btn = document.createElement('a')
+    btn.setAttribute('type', 'btn')
+    btn.setAttribute('class', 'badge badge-light btn-copy-code')
+    btn.setAttribute('data-clipboard-target', '#' + currentId)
+    btn.innerHTML = '<i class="fal fa-copy"></i> Copy'
+    $(this).after(btn)
+  })
+
+  new ClipboardJS('.btn-copy-code')
+})
+</script>
+
+<script src="../../assets/js/tocbot.min.js"></script>
+<script>
+// Tries to mirror the HTML TOC
+tocbot.init({
+  tocSelector: '.js-toc',
+  contentSelector: '.main-content',
+  headingSelector: 'h2, h3',
+  ignoreSelector: '.no_toc',
+  hasInnerContainers: true,
+  linkClass: 'nav-list-link',
+  activeLinkClass: 'active',
+  listClass: 'nav-list',
+  listItemClass: 'nav-list-item',
+  activeListItemClass: 'active',
+  collapseDepth: 3,
+  scrollSmooth: false,
+});
+</script>
+
+
+            
+          </footer>
+        
+
+      </div>
+    </div>
+
+    
+      
+
+      <div class="search-overlay"></div>
+    
+  </div>
+
+  
+</body>
+</html>
+

@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+  
+
+  <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+
+
+  <link rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+  
+
+  
+    <script src="../assets/js/vendor/lunr.min.js"></script>
+  
+
+  
+
+  <script src="../assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Projects | CS 188 Fall 2022</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="Projects" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Introduction to Artificial Intelligence at UC Berkeley" />
+<meta property="og:description" content="Introduction to Artificial Intelligence at UC Berkeley" />
+<link rel="canonical" href="index.html" />
+<meta property="og:url" content="https://inst.eecs.berkeley.edu/~cs188/fa22/projects/" />
+<meta property="og:site_name" content="CS 188 Fall 2022" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Projects" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Introduction to Artificial Intelligence at UC Berkeley","headline":"Projects","url":"https://inst.eecs.berkeley.edu/~cs188/fa22/projects/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <link rel="preload" href="../assets/css/just-the-docs-dark.css" as="style" />
+
+<!-- Intentionally duplicates the default theme stylesheet so there's a fallback when changing themes -->
+<link id="jtdThemeCSS" rel="stylesheet" href="../assets/css/just-the-docs-default.css">
+
+<script>
+  /* Script to enable persistent dark mode. */
+
+  jtd.getTheme = function() {
+    var cssFileHref = (document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]')).getAttribute('href');
+    return cssFileHref.substring(cssFileHref.lastIndexOf('-') + 1, cssFileHref.length - 4);
+  }
+
+  jtd.setTheme = function(theme) {
+    var cssFile = document.getElementById('jtdThemeCSS') || document.querySelector('[rel="stylesheet"]');
+    cssFile.setAttribute('href', cssFile.getAttribute('href').replace(jtd.getTheme(), theme));
+  }
+
+  let toggleDark = () => {
+    let setDark = jtd.getTheme() !== 'dark';
+    jtd.setTheme(setDark ? 'dark' : 'default');
+    localStorage.setItem('darkMode', String(setDark));
+  };
+
+  /* Read local storage state. */
+  if (localStorage.getItem('darkMode') === 'true') {
+    toggleDark();
+  }
+</script>
+
+<!-- Script for LaTeX rendering. -->
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<script defer src="../assets/katex/katex.min.js"></script>
+<script>
+function renderKaTeX() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false},
+      {left: '\\[', right: '\\]', display: true},
+    ],
+  });
+}
+</script>
+<script defer src="../assets/katex/contrib/auto-render.min.js" onload="renderKaTeX();"></script>
+
+
+</head>
+
+<body>
+  <a class="skip-to-main" href="index.html#main-content">Skip to main content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="svg-link" viewBox="0 0 24 24">
+      <title>Link</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+      </svg>
+    </symbol>
+    <symbol id="svg-search" viewBox="0 0 24 24">
+      <title>Search</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
+        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-menu" viewBox="0 0 24 24">
+      <title>Menu</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </symbol>
+    <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+      <title>Expand</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </symbol>
+    <symbol id="svg-doc" viewBox="0 0 24 24">
+      <title>Document</title>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline>
+      </svg>
+    </symbol>
+    <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE -->
+<symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link">
+  <title id="svg-external-link-title">(external link)</title>
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
+</symbol>
+
+  </svg>
+
+  <div class="side-bar">
+    <div class="site-header">
+      <a href="../index.html" class="site-title lh-tight">
+  CS 188 Fall 2022
+
+</a>
+      <a href="index.html#" id="menu-button" class="site-button">
+        <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg>
+      </a>
+    </div>
+    <nav aria-label="Main" id="site-nav" class="site-nav">
+      
+      
+        <ul class="nav-list"><li class="nav-list-item"><a href="../exam.html" class="nav-list-link">Exam Logistics</a></li><li class="nav-list-item"><a href="../calendar.html" class="nav-list-link">Calendar</a></li><li class="nav-list-item"><a href="../policies/index.html" class="nav-list-link">Policies</a></li><li class="nav-list-item"><a href="../resources/index.html" class="nav-list-link">Resources</a></li><li class="nav-list-item"><a href="../staff/index.html" class="nav-list-link">Staff</a></li><li class="nav-list-item active"><a href="index.html#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="index.html" class="nav-list-link active">Projects</a><ul class="nav-list "><li class="nav-list-item "><a href="proj0.html" class="nav-list-link">Project 0</a><ul class="nav-list"></ul>
+            </li><li class="nav-list-item "><a href="proj1.html" class="nav-list-link">Project 1</a>
+            </li><li class="nav-list-item "><a href="proj2.html" class="nav-list-link">Project 2</a>
+            </li><li class="nav-list-item "><a href="proj3.html" class="nav-list-link">Project 3</a>
+            </li><li class="nav-list-item "><a href="proj4.html" class="nav-list-link">Project 4</a>
+            </li><li class="nav-list-item "><a href="proj5/index.html" class="nav-list-link">Project 5</a>
+            </li><li class="nav-list-item "><a href="minicontest1.html" class="nav-list-link">Mini-Contest 1</a>
+            </li></ul></li></ul>
+      
+      
+    </nav>
+
+    
+    
+      <footer class="site-footer">
+        This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.
+      </footer>
+    
+  </div>
+  <div class="main" id="top">
+    <div id="main-header" class="main-header">
+      
+
+        
+
+        <div class="search">
+          <div class="search-input-wrap">
+            <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search CS 188 Fall 2022" aria-label="Search CS 188 Fall 2022" autocomplete="off">
+            <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label>
+          </div>
+          <div id="search-results" class="search-results"></div>
+        </div>
+      
+      
+      
+        <nav aria-label="Auxiliary" class="aux-nav">
+          <ul class="aux-nav-list">
+            
+              <li class="aux-nav-list-item">
+                <a href="index.html#" class="site-button"
+                  
+                >
+                  Dark Mode
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://edstem.org/us/courses/25272" class="site-button"
+                  
+                >
+                  Ed
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://cs188-oh.apps.cs61a.org/" class="site-button"
+                  
+                >
+                  OH Queue
+                </a>
+              </li>
+            
+              <li class="aux-nav-list-item">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMadNLFJlZJWTxm8F2bGUD997A4lGfMW5DgxgPkMLcd7Rmww/viewform" class="site-button"
+                  
+                >
+                  Extensions Form
+                </a>
+              </li>
+            
+          </ul>
+        </nav>
+      
+    </div>
+    <div id="main-content-wrap" class="main-content-wrap">
+      
+        
+      
+      <div id="main-content" class="main-content" role="main">
+        
+          <h1 id="the-pac-man-projects">
+        
+        
+          <a href="index.html#the-pac-man-projects" class="anchor-heading" aria-labelledby="the-pac-man-projects"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> The Pac-Man Projects
+        
+        
+      </h1>
+    
+
+<p><img style="display:block;margin-left:auto;margin-right:auto" src="../assets/images/pacman_game.gif" /></p>
+      <h2 class="no_toc" id="overview">
+        
+        
+          <a href="index.html#overview" class="anchor-heading" aria-labelledby="overview"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Overview
+        
+        
+      </h2>
+    
+
+<p>The Pac-Man projects were developed for CS 188. They apply an array of AI techniques to playing Pac-Man. However, these projects don’t focus on building AI for video games. Instead, they teach foundational AI concepts, such as informed state-space search, probabilistic inference, and reinforcement learning. These concepts underly real-world application areas such as natural language processing, computer vision, and robotics.</p>
+
+<p>We designed these projects with three goals in mind. The projects allow you to visualize the results of the techniques you implement. They also contain code examples and clear directions, but do not force you to wade through undue amounts of scaffolding. Finally, Pac-Man provides a challenging problem environment that demands creative solutions; real-world AI problems are challenging, and Pac-Man is too.</p>
+      <h2 id="projects-overview">
+        
+        
+          <a href="index.html#projects-overview" class="anchor-heading" aria-labelledby="projects-overview"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Projects Overview
+        
+        
+      </h2>
+    
+      <h3 id="project-0-python-setup--autograder-tutorial">
+        
+        
+          <a href="index.html#project-0-python-setup--autograder-tutorial" class="anchor-heading" aria-labelledby="project-0-python-setup--autograder-tutorial"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 0: Python, Setup, &amp; Autograder Tutorial
+        
+        
+      </h3>
+    
+
+<p>This short tutorial introduces students to conda environments, setup examples, the <a href="http://www.python.org/">Python</a> programming language, and the autograder system.</p>
+      <h3 id="project-1-search">
+        
+        
+          <a href="index.html#project-1-search" class="anchor-heading" aria-labelledby="project-1-search"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 1: Search
+        
+        
+      </h3>
+    
+
+<p>Students implement depth-first, breadth-first, uniform cost, and A* search algorithms. These algorithms are used to solve navigation and traveling salesman problems in the Pacman world.</p>
+      <h3 id="project-2-multiagent-search">
+        
+        
+          <a href="index.html#project-2-multiagent-search" class="anchor-heading" aria-labelledby="project-2-multiagent-search"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 2: Multiagent Search
+        
+        
+      </h3>
+    
+
+<p>Classic Pacman is modeled as both an adversarial and a stochastic search problem. Students implement multiagent minimax and expectimax algorithms, as well as designing evaluation functions.</p>
+      <h3 id="project-3-reinforcement-learning">
+        
+        
+          <a href="index.html#project-3-reinforcement-learning" class="anchor-heading" aria-labelledby="project-3-reinforcement-learning"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 3: Reinforcement Learning
+        
+        
+      </h3>
+    
+
+<p>Students implement Value Function, Q learning, and Approximate Q learning to help pacman and crawler agents learn rational policies.</p>
+      <h3 id="project-4-bayes-nets-and-hmms">
+        
+        
+          <a href="index.html#project-4-bayes-nets-and-hmms" class="anchor-heading" aria-labelledby="project-4-bayes-nets-and-hmms"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 4: Bayes Nets and HMMs
+        
+        
+      </h3>
+    
+
+<p>Pacman uses probabilistic inference on Bayes Nets and the forward algorithm and particle sampling in a Hidden Markov Model to find ghosts given noisy readings of distances to them.</p>
+      <h3 id="project-5-machine-learning">
+        
+        
+          <a href="index.html#project-5-machine-learning" class="anchor-heading" aria-labelledby="project-5-machine-learning"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Project 5: Machine Learning
+        
+        
+      </h3>
+    
+
+<p>Students implement the perceptron algorithm, neural network, and recurrent nn models, and apply the models to several tasks including digit classification and language identification.</p>
+      <h2 id="technical-notes">
+        
+        
+          <a href="index.html#technical-notes" class="anchor-heading" aria-labelledby="technical-notes"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Technical Notes
+        
+        
+      </h2>
+    
+
+<p>The Pac-Man projects are written in pure Python 3.6 and do not depend on any packages external to a standard Python distribution.</p>
+      <h2 id="support">
+        
+        
+          <a href="index.html#support" class="anchor-heading" aria-labelledby="support"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Support
+        
+        
+      </h2>
+    
+
+<p>This project was supported by the National Science foundation under CAREER grant 0643742. Any opinions, findings and conclusions or recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the National Science Foundation (NSF).</p>
+      <h2 id="credits">
+        
+        
+          <a href="index.html#credits" class="anchor-heading" aria-labelledby="credits"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Credits
+        
+        
+      </h2>
+    
+
+<p>The projects were developed by John DeNero, Dan Klein, Pieter Abbeel, and many others.</p>
+
+        
+
+        
+          <hr>
+          <h2 class="text-delta">Table of contents</h2>
+
+          <ul>
+            
+              <li>
+                <a href="proj0.html">Project 0</a>
+              </li>
+            
+              <li>
+                <a href="proj1.html">Project 1</a>
+              </li>
+            
+              <li>
+                <a href="proj2.html">Project 2</a>
+              </li>
+            
+              <li>
+                <a href="proj3.html">Project 3</a>
+              </li>
+            
+              <li>
+                <a href="proj4.html">Project 4</a>
+              </li>
+            
+              <li>
+                <a href="proj5/index.html">Project 5</a>
+              </li>
+            
+              <li>
+                <a href="minicontest1.html">Mini-Contest 1</a>
+              </li>
+            
+          </ul>
+        
+
+        
+        
+          <hr>
+          <footer>
+            
+
+            <script>
+(function() {
+  var navList = document.querySelector('.aux-nav-list');
+  if (!navList || !navList.firstElementChild) return;
+  var darkToggle = navList.firstElementChild;
+  darkToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleDark();
+  });
+})();
+</script>
+
+<script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/clipboard.min.js"></script>
+<script>
+// adapted from https://stackoverflow.com/a/48078807/1217368
+// Waiting for https://github.com/just-the-docs/just-the-docs/pull/945
+$(document).ready(function () {
+  $('pre.highlight').each(function (i) {
+    // create an id for the current code section
+    var currentId = 'codeBlock' + i
+
+    // find the code section and add the id to it
+    var codeSection = $(this).find('code')
+    codeSection.attr('id', currentId)
+
+    // now create the button, setting the clipboard target to the id
+    var btn = document.createElement('a')
+    btn.setAttribute('type', 'btn')
+    btn.setAttribute('class', 'badge badge-light btn-copy-code')
+    btn.setAttribute('data-clipboard-target', '#' + currentId)
+    btn.innerHTML = '<i class="fal fa-copy"></i> Copy'
+    $(this).after(btn)
+  })
+
+  new ClipboardJS('.btn-copy-code')
+})
+</script>
+
+<script src="../assets/js/tocbot.min.js"></script>
+<script>
+// Tries to mirror the HTML TOC
+tocbot.init({
+  tocSelector: '.js-toc',
+  contentSelector: '.main-content',
+  headingSelector: 'h2, h3',
+  ignoreSelector: '.no_toc',
+  hasInnerContainers: true,
+  linkClass: 'nav-list-link',
+  activeLinkClass: 'active',
+  listClass: 'nav-list',
+  listItemClass: 'nav-list-item',
+  activeListItemClass: 'active',
+  collapseDepth: 3,
+  scrollSmooth: false,
+});
+</script>
+
+
+            
+          </footer>
+        
+
+      </div>
+    </div>
+
+    
+      
+
+      <div class="search-overlay"></div>
+    
+  </div>
+
+  
+</body>
+</html>
+
