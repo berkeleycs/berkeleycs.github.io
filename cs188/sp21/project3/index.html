@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="https://inst.eecs.berkeley.edu/~cs188/sp21/site.webmanifest">
+  <link rel="mask-icon" href="https://inst.eecs.berkeley.edu/~cs188/sp21/safari-pinned-tab.svg" color="#fdb515">
+  <meta name="apple-mobile-web-app-title" content="CS 188">
+  <meta name="application-name" content="CS 188">
+  <meta name="msapplication-TileColor" content="#3b7ea1">
+  <meta name="msapplication-TileImage" content="/~cs188/sp21/mstile-144x144.png">
+  <meta name="theme-color" content="#3b7ea1">
+
+  <title>
+    
+      Project 3 - Logic and Classical Planning - CS 188: Introduction to Artificial Intelligence, Spring 2021
+    
+  </title>
+
+  <link rel="stylesheet" href="../assets/css/main.css" type="text/css">
+
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="../assets/js/bootstrap-toc.min.js"></script>
+
+
+  <script src="../assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+  <script src="../assets/js/moment.min.js"></script>
+  <script src="../assets/js/fullcalendar.min.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+     SVG: {
+       linebreaks: { automatic: true },
+       scale: 90,
+       preferredFont: "Latin Modern"
+     }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+  <div id="navscroll">
+  <nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html" style="color: #000;"><strong>CS 188</strong> | Spring 2021</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent" >
+        <ul class="navbar-nav ml-auto">
+          
+          
+          
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../index.html" class="nav-link">Syllabus</a></li>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../policies/index.html" class="nav-link">Policies</a></li>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../projects/index.html" class="nav-link">Projects</a></li>
+    
+  
+
+  
+    
+      <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Schedule</a></li>
+    
+  
+
+  
+    
+      <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a></li>
+    
+  
+
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://piazza.com/class/jza9erz2ojy3qr">Piazza
+              <i class="fal fa-link"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+<script>
+  // ===== Scroll to Top ====
+  $(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+      $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+      $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+  });
+  $('#return-to-top').click(function() {  // When arrow is clicked
+    $('body,html').animate({
+      scrollTop : 0                       // Scroll to top of body
+    }, 500);
+  });
+</script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>var $j = jQuery.noConflict(true);</script>
+<script>
+  $(document).ready(function(){
+    console.log($().jquery); // this prints v1.11.0
+    console.log($j().jquery); // this prints v3.1.0
+  });
+</script>
+<script src="../assets/js/parallax.min.js"></script>
+
+<script src="../assets/js/main.min.js"></script>
+
+
+  <div class='container'>
+
+<script>
+  // $('.toast').toast('show')
+  document.getElementById('announcementTime').innerHTML = moment([2019, 5, 25, 21, 35]).fromNow()
+</script>
+
+    <div class="row">
+      <div class="col-sm-3">
+  <nav id="toc" data-toggle="toc" class="sticky-top" style="top: 40px; margin-bottom: 40px"></nav>
+</div>
+
+      <div class="col-sm-9">
+          <h1 class="mt-0 center">Project 3: Logic and Classical Planning</h1>
+
+<center> Version 1.00 Last Updated: 03/02/2021 </center>
+
+<p class="center">Due: <b>Monday 3/15 at 11:59 pm</b></p>
+
+<hr />
+
+	  <p><img src="../assets/images/LogicalPacman.png" alt="Logical Pacman" class="center-image mb-3 img-fluid" width='400px'/></p>
+
+<center>Logical Pacman,</center>
+<center>Food is good AND ghosts are bad,</center>
+<center>Spock would be so proud</center>
+
+
+      <div id="intro">
+          <h3>Introduction</h3>
+            <p>In this project, you will use/write simple Python functions that generate logical sentences describing Pacman physics, aka pacphysics. Then you will use a SAT solver, pycosat, to solve the logical inference tasks associated with planning (generating action sequences to reach goal locations and eat all the dots), localization (finding oneself in a map, given a local sensor model), mapping (building the map from scratch), and SLAM (simultaneous localization and mapping).</p>
+<!-- <p>In this project, you will write code that generates logic sentences that describe the physics of Pacman, which we can pass to a SAT solver to solve problems such as planning, where your Pacman agent will logically plan his way 
+            to the goal. You will also use logical inference to solve the problem of localization (where pacman knows the map but doesn't know his location) and planning (where pacman knows his location but does not know where the walls are). In the final question on this project, you will combine both tasks together in SLAM, and pacman will attempt to figure out both his location and the wall locations simultaneously.</p>
+          <p>In this project, you will implement two different planning 
+frameworks. In the first, your Pacman agent will logically plan his way 
+to the goal. You will write software that generates the logical 
+sentences that describe moving around the board and eating food. You will 
+encode initial states and goals and use logical inference to find action
+ sequences that are consistent with these sentences. In the second framework, your
+ Pacman agent will use GraphPlan to find its way to the goal. You will 
+again encode initial and goal states, and you will write the action 
+operators that Pacman will use to move and eat his way towards his 
+goal.</p> -->
+          <!-- <p>These diagrams outline the different steps of the 
+propositional logic and classical planning processes. Notice that the 
+process is the same but the representation of states and actions are 
+different.</p>
+          <div class="container" style="text-align: center">
+            <img src="assets/images/logic_project_diagram.png" height="320">
+            <img src="assets/images/graph_project_diagram.png" height="320">
+          </div> -->
+          
+          <p style="margin-top: 20px;">As in previous programming 
+assignments, this assignment includes an autograder for you to grade 
+your answers on your machine. This can be run with the command:</p>
+          <pre>python autograder.py</pre>
+          <p>See the autograder tutorial in Project 0 for more information about using the autograder.</p>
+          <p>The code for this project consists of several Python files,
+ some of which you will need to read and understand in order to complete
+ the assignment, and some of which you can ignore. You can download all 
+the code and supporting files as a <a href="../assets/files/logic.zip">zip archive</a><span style="color: #000000;">.</span></p>
+          <p></p>
+
+          <h4>Files you will edit</h4>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><code>logicPlan.py</code></td>
+                <td>Where you will put your code for the various logical agents.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Files you might want to look at</h4>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><code>logic.py</code></td>
+                <td>Propsitional logic code originally from 
+https://code.google.com/p/aima-python/ with modifications for our 
+project. There are several useful utility functions for working with 
+logic in here.</td>
+              </tr>
+              <tr>
+                <td><code>logicAgents.py</code></td>
+                <td>The file that defines in logical planning form the two specific problems that Pacman will encounter in this project.</td>
+              </tr>
+<!--              <tr>
+                <td><code>patrollingGhostAgents.py</code></td>
+                <td>Specific GhostAgents used for question 5.</td>
+              </tr>-->
+              <tr>
+                <td><code>pycosat_test.py</code></td>
+                <td>Quick test main function that checks that the pycosat module is installed correctly.</td>
+              </tr>
+              <tr>
+                <td><code>game.py</code></td>
+                <td>The internal simulator code for the Pacman world. The only thing you might want to look at in here is the Grid class.</td>
+              </tr>
+              <tr>
+                <td><code>test_cases/</code></td>
+                <td>Directory containing the test cases for each question</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Files you will not edit</h4>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><code>pacman.py</code></td>
+                <td>The main file that runs Pacman games.</td>
+              </tr>
+              <tr>
+                <td><code>logic_util.py</code></td>
+                <td>Utility functions for logic.py</td>
+              </tr>
+              <tr>
+                <td><code>util.py</code></td>
+                <td>Utility functions primarily for other projects.</td>
+              </tr>
+              <tr>
+                <td><code>logic_planTestClasses.py</code></td>
+                <td>Project specific autograding test classes</td>
+              </tr>
+              <tr>
+                <td><code>graphicsDisplay.py</code></td>
+                <td>Graphics for Pacman</td>
+              </tr>
+              <tr>
+                <td><code>graphicsUtils.py</code></td>
+                <td>Support for Pacman graphics</td>
+              </tr>
+              <tr>
+                <td><code>textDisplay.py</code></td>
+                <td>ASCII graphics for Pacman</td>
+              </tr>
+              <tr>
+                <td><code>ghostAgents.py</code></td>
+                <td>Agents to control ghosts</td>
+              </tr>
+              <tr>
+                <td><code>keyboardAgents.py</code></td>
+                <td>Keyboard interfaces to control Pacman</td>
+              </tr>
+              <tr>
+                <td><code>layout.py</code></td>
+                <td>Code for reading layout files and storing their contents</td>
+              </tr>
+              <tr>
+                <td><code>autograder.py</code></td>
+                <td>Project autograder</td>
+              </tr>
+              <tr>
+                <td><code>testParser.py</code></td>
+                <td>Parses autograder test and solution files</td>
+              </tr>
+              <tr>
+                <td><code>testClasses.py</code></td>
+                <td>General autograding test classes</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p></p>
+          <p><strong>Files to Edit and Submit:</strong> You will fill in portions of <code>logicPlan.py</code> during the assignment. You should submit these files with your code and comments. Please <em>do not</em> change the other files in this distribution or submit any of our original files other than these files.</p>
+          <p><strong>Evaluation:</strong> Your code will be autograded for technical correctness. Please <em>do not</em>
+ change the names of any provided functions or classes within the code, 
+or you will wreak havoc on the autograder. However, the correctness of 
+your implementation -- not the autograder's judgements -- will be the 
+final judge of your score. If necessary, we will review and grade 
+assignments individually to ensure that you receive due credit for your 
+work.</p>
+          <p><strong>Academic Dishonesty:</strong> We will be checking 
+your code against other submissions in the class for logical redundancy.
+ If you copy someone else's code and submit it with minor changes, we 
+will know. These cheat detectors are quite hard to fool, so please don't
+ try. We trust you all to submit your own work only; <em>please</em> don't let us down. If you do, we will pursue the strongest consequences available to us.</p>
+          <p><strong>Getting Help:</strong> You are not alone! If you 
+find yourself stuck on something, contact the course staff for help. 
+Office hours, section, and the discussion forum are there for your 
+support; please use them. If you can't make our office hours, let us 
+know and we will schedule more. We want these projects to be rewarding 
+and instructional, not frustrating and demoralizing. But, we don't know 
+when or how to help unless you ask.</p>
+          <p><strong>Discussion:</strong> Please be careful not to post spoilers.</p>
+      </div>
+    <!--</div>-->
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="expr">
+        <h3>The Expr Class</h3>
+        <p>In the first part of this project, you will be working with the <code>Expr</code> class defined in <code>logic.py</code> to build propositional logic sentences. An <code>Expr</code> object is implemented as a tree with logical operators (&and;, &or;, &not;, &rarr;, &harr;) at each node and with literals (A, B, C) at the leaves. The sentence</p>
+        <center><p>(A &and; B) &harr; (&not; C &or; D)</p></center>
+        <p>would be represented as the tree</p>
+        <center><img src="../assets/images/logic_tree.png" alt="Example logic tree." height="300"></center>
+        <p>To instantiate a symbol named 'A', call the constructor like this:</p>
+        <p><code>A = Expr('A')</code></p>
+        <p>The <code>Expr</code> class allows you to use Python 
+operators to build up these expressions. The following are the available
+ Python operators and their meanings:</p>
+        
+        <ul>
+          <li><code>~A</code>: &not; A</li>
+          <li><code>A &amp; B</code>: A &and; B</li>
+          <li><code>A | B</code>: A &or; B</li>
+          <li><code>A &gt;&gt; B</code>: A &rarr; B</li>
+          <li><code>A % B</code>: A &harr; B</li>
+        </ul>
+
+        <p>So to build the expression A &and; B, you would type this:</p>
+        <p><code>A = Expr('A')</code></p>
+        <p><code>B = Expr('B')</code></p>
+        <p><code>a_and_b = A &amp; B</code></p>
+        <p>(Note that <code>A</code> to the left of the assignment operator in that example is just a Python variable name, i.e. <code>symbol1 = Expr('A')</code> would have worked just as well.)</p>
+        <p>One last important thing to note is that typing in <code>A &amp; B &amp; C</code> will give the expression <code>((A &amp; B) &amp; C)</code>. If instead you want <code>(A &amp; B &amp; C)</code>, as you will for these problems, use <code>conjoin</code>, which takes a list of expressions as input and returns one expression that is the conjunction of all the inputs. Even though both expressions are logically equivalent, it is generally neater to use <code>conjoin</code> everywhere you can, because it is easier to read your knowledge base for debugging when your expression tree is more flat and does not have many layers of nested parentheses. The <code>&amp;</code> operator in Python is a binary operator and builds an unbalanced binary tree if you chain it several times, whereas <code>conjoin</code> builds a tree that is one level deep with all the inputs extending directly from the <code>&amp;</code> operator at the root. <code>disjoin</code> is similarly defined for <code>|</code>. The autograder for Question 1 will require that you use <code>conjoin</code> and <code>disjoin</code> wherever possible, instead of chaining several <code>&amp;</code> operators or several <code>|</code>
+ operators. If you keep with this convention for later problems, it will
+ help with debugging because you will get more readable expressions.</p>
+
+        <p>There is additional, more detailed documentation for the <code>Expr</code> class in <code>logic.py</code>.</p>
+        <h3>Tips</h3>
+        <ul>
+          <li>When creating a symbol with <code>Expr</code>, it must start with an upper case character. You will get non-obvious errors later if you don't follow this convention.
+          </li>
+          <li>Be careful creating and combining <code>Expr</code> instances. For example, if you intend to create the expression <code>x = Expr('A') &amp; Expr('B')</code>, you don't want to accidentally type <code>x = Expr('A &amp; B')</code>. The former will be a logical expression of the symbol 'A' and the symbol 'B', while the latter will be a single symbol (<code>Expr</code>) named 'A &amp; B'.</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="sat">
+        <h3>SAT Solver Setup</h3>
+            <p>A SAT (satisfiability) solver takes a logic expression 
+which encodes the rules of the world and returns a model (true and false
+ assignments to logic symbols) that satisfies that expression if such a 
+model exists. To efficiently find a possible model from an expression, 
+we take advantage of the <a href="https://pypi.python.org/pypi/pycosat">pycosat</a> module, which is a Python wrapper around the <a href="http://fmv.jku.at/picosat/">picoSAT library</a>.</p>
+        <p>Unfortunately, this requires installing this module/library on each machine.</p>
+        <p>To install this software on your conda env, please follow these steps:
+        </p><ol>
+        <!--<li>Install pip3 (if you don't have it installed on your system already). See <a href="http://pip.readthedocs.org/en/latest/installing/" target="[object Object]">pip installation instructions</a> (Note: may require super-user (sudo) permissions)</li>-->
+        <li>Activate your conda env: <code>conda activate cs188</code> (if your env is called <code>cs188</code>)
+        <li>Install pycosat: On command line run: <code>pip install pycosat</code>. (Note: you may need to run: <code><strong>sudo</strong> pip3 install pycosat</code>.) If you get errors, try instead <code>conda install -c anaconda pycosat</code>.</li>
+        </ol>
+        <p></p>
+        <p><span style="line-height: 1.6;">Testing pycosat installation:</span></p>
+        <p><span style="line-height: 1.6;">After unzipping the project code and changing to the </span><span style="line-height: 1.6;">project code</span><span style="line-height: 1.6;"> directory, run:</span></p>
+        <pre>python pycosat_test.py</pre>
+        <p><span style="line-height: 1.6;">This should output: </span></p>
+        <p><span style="font-family: 'courier new', courier;">[1, -2, -3, -4, 5]</span><span style="line-height: 1.6;">.</span></p>
+        <p>Please let us know if you have issues with this setup. This 
+is critical to completing the project, and we don't want you to spend 
+your time fighting with this installation process.</p>
+      </div>
+    </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q1">
+        <h3>Question 1 (2 points): Logic Warm-up</h3>
+        <p>This question will give you practice working with the <code>Expr</code> data type used in the project to represent propositional logic sentences. You will implement the following functions in <code>logicPlan.py</code>:</p>
+        <ul style="font-size: 14px;">
+          <li><code>sentence1()</code>: Create one <code>Expr</code> instance that represents that the following three sentences are true. Do not do any logical simplification, just put them in a list in this order, and return the list conjoined. Each element of your list should correspond to each of the three sentences.</li>
+            <center><p>A &or; B</p></center>
+            <center><p>&not; A &harr; (&not; B &or; C)</p></center>
+            <center><p>&not; A &or; &not; B &or; C</p></center>
+          <li><code>sentence2()</code>: Create one <code>Expr</code> instance that represents that the following four sentences are true. Again, do not do any logical simplification, just put them in a list in this order, and return the list conjoined.</li>
+            <center><p>C &harr; (B &or; D)</p></center>
+            <center><p>A &rarr; (&not; B &and; &not; D)</p></center>
+            <center><p>&not; (B &and; &not; C) &rarr; A</p></center>
+            <center><p>&not; D &rarr; C</p></center>
+          <li><code>sentence3()</code>: Using the <code>PropSymbolExpr</code> constructor, create symbols <code>PacmanAlive[0]</code>, <code>PacmanAlive[1]</code>, <code>PacmanBorn[0]</code>, and <code>PacmanKilled[0]</code> (see below for an example <code>PropSymbolExpr</code> instantiation), and create one <code>Expr</code> instance which encodes the following three <em>English</em> sentences as propositional logic in this order without any simplification:</li>
+            <ol>
+              <li>Pacman is alive at time 1 if and only if he was alive at time 0 and he was not killed at time 0 or he was not alive at time 0 and he was born at time 0.</li>
+              <li>At time 0, Pacman cannot both be alive and be born.</li>
+              <li>Pacman is born at time 0.</li>
+            </ol>
+          <li><code>findModel(sentence)</code>: Use <code>to_cnf</code> to convert the input sentence into Conjunctive Normal Form (the form required by the SAT solver). Then pass it to the SAT solver using <code>pycoSAT</code> to find a satisfying assignment to the symbols in <code>sentence</code>, i.e., a model. A model is a dictionary of the symbols in your expression and a corresponding assignment of True or False. You can test your code on <code>sentence1()</code>, <code>sentence2()</code>, and <code>sentence3()</code> by opening an interactive session in Python and running <code>findModel(sentence1())</code> and similar queries for the other two. Do they match what you thought?</li>
+        </ul>
+        <p>For the later problems in the project, we will have symbols with names like P[3, 4, 2], which represents Pacman being at position (3, 4) at time 2, and we will use them in logic expressions like the above in place of A, B, C, D. The <code>PropSymbolExpr</code> constructor is a useful tool for creating symbols like P[3, 4, 2] that have numerical information encoded in their name. For example, to obtain the symbol P[3,4,2], you would type <code>PropSymbolExpr('P', 3, 4, 2).</code></p>
+    
+        <p>Are <code>sentence1()</code>, <code>sentence2()</code>, and <code>sentence3()</code> satisfiable? If so, try to find a satisfying assignment. (This is not graded, but is a good self-check to make sure you understand what's happening here.)</p>
+        <p>Before you continue, try instantiating a small sentence, e.g. A &and; B &rarr; C, and call <code>to_cnf</code> on it. Inspect the output and make sure you understand it (refer to AIMA section 7.5.2 for details on the algorithm <code>to_cnf</code> implements).</p>
+        <p>To test and debug your code run:</p>
+        <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q1</code></pre></div></div>
+        
+      </div>
+    </div>
+    
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q2">
+        <h3>Question 2 (2 points): Logic Workout</h3>
+        <p>Implement the following three logic expressions in <code>logicPlan.py</code>:</p>
+  	<ul style="font-size: 14px;">
+  	  <li><code>atLeastOne(literals)</code>: Return a single expression 
+(Expr) in CNF that is true only if at least one expression in the input 
+list is true. Each input expression will be a literal.</li>
+      <li><code>atMostOne(literals)</code>: Return a single expression 
+(Expr) in CNF that is true only if at most one expression in the input 
+list is true. Each input expression will be a literal. HINT: Use <code>itertools.combinations</code>. If you have `n` literals, and at most one is true, your resulting CNF expression should be a conjunction of $n \choose 2$ clauses.</li>
+  	  <li><code>exactlyOne(literals)</code>: Return a single expression 
+(Expr) in CNF that is true only if exactly one expression in the input 
+list is true. Each input expression will be a literal. If you decide to call your previously implemented <code>atLeastOne</code> and <code>atMostOne</code>, call <code>atLeastOne</code> first to pass our autograder for q3.</li>
+  	</ul>
+        <p>Each of these methods takes a list of <code>Expr</code> literals and returns a single <code>Expr</code>
+ expression that represents the appropriate logical relationship between
+ the expressions in the input list. An additional requirement is that 
+the returned Expr must be in CNF (conjunctive normal form). <strong>You may NOT use the <code>to_cnf</code> function in your method implementations (or any of the helper functions <code>logic.eliminate_implications</code>, <code>logic.move_not_inwards</code>, and <code>logic.distribute_and_over_or</code>).</strong></p>
+        <p>When implementing your planning agents in the later 
+questions, you will not have to worry about CNF until right before 
+sending your expression to the SAT solver (at which point you can use <code>findModel</code>from question 1). <code>to_cnf</code>
+ implements the algorithm from section 7.5 in AIMA. However, on certain 
+worst-case inputs, the direct implementation of this algorithm can 
+result in an exponentially sized sentences. In fact, a certain non-CNF 
+implementation of <code>atMostOne</code> is one such worst case. 
+So if you find yourself needing the functionality of <code>atLeastOne</code>, <code>atMostOne</code>, or <code>exactlyOne</code>
+ for a later question, make sure to use the functions you've already 
+implemented here to avoid accidentally coming up with that non-CNF 
+alternative and passing it to <code>to_cnf</code>. If you do this, your code will be so slow that you can't even solve a 3x3 maze with no walls.</p>
+        <p></p>
+        <p>You may utilize the <code>logic.pl_true</code> function to test the output of your expressions. <code>pl_true</code> takes an expression and a model and returns True if and only if the expression is true given the model. </p>
+        <p>To test and debug your code run:</p>
+        <pre>python autograder.py -q q2</pre>
+      </div>
+      </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q3">
+        <h3>Question 3 (3 points): Pacphysics and Satisfiability</h3>
+        <p>In this question, you will implement the basic pacphysics logical expressions, as well as learn how to prove where pacman is and isn’t by building an appropriate knowledge base (KB) of logical expressions.</p>
+        <p>Implement the following functions in <code>logicPlan.py</code>:</p>
+        <ul style="font-size: 14px;">
+          <li><code>pacphysics_axioms</code>: Here, you will add the following axioms to <code>pacphysics_sentences</code>. For a given timestep t:</li>
+            <ul>
+              <li>For all (x, y) in <code>all_coords</code>, add the following implication (if-then form): if a wall is at (x, y), then Pacman is not at (x, y, t)</li>
+              <li>Pacman is at exactly one of the <code>non_outer_wall_coords</code> at timestep t.</li>
+              <li>Pacman takes exactly one of the four actions in <code>DIRECTIONS</code> at timestep t.</li>
+              <li>Add each of the sentences above to <code>pacphysics_sentences</code>.</li>
+            </ul>
+          <li><code>check_location_satisfiability</code>: Given a transition (<code>x0_y0, action0, x1_y1, action1</code>) and a <code>problem</code>, you will write a function that will return a tuple of two models <code>(model1, model2)</code>.
+            <ul>
+              <li><code>model1</code> will attempt to prove that given <code>x0_y0, action0, action1</code>, Pacman is at (x1, y1) at time t = 1.</li>
+              <li><code>model2</code> will attempt to prove that given <code>x0_y0, action0, action1</code>, Pacman is NOT at (x1, y1) at time t = 1.</li>
+              <li>To implement this problem, you will need to add the following expressions to your KB in order:</li>
+                <ul>
+                  <li>At t = 0:</li>
+                    <ul>
+                      <li>Add to KB: Pacman’s current location (x0, y0)</li>
+                      <li>Add to KB: <code>pacphysics_axioms(...)</code></li>
+                      <li>Add to KB: Pacman takes <code>action0</code></li>
+                      <li>Add to KB: <code>allLegalSuccessorAxioms(t+1, ...)</code></li>
+                    </ul>
+                  <li>At t = 1:</li>
+                    <ul>
+                      <li>Add to KB: <code>pacphysics_axioms(...)</code></li>
+                      <li>Add to KB: Pacman takes <code>action1</code></li>
+                    </ul>
+                </ul>
+            </ul>
+        </ul>
+        <p>If you are stuck on <code>check_location_satisfiability</code>, think back to WHW2 about how to prove a knowledge base entails some query q: we prove that KB &and; &not; q is unsatisfiable. Likewise, to prove some query q is false given a knowledge base, we prove KB &and; q is unsatisfiable. Thus, your two models should both call <code>findModel</code>, but one on KB &and; (Pacman at (x1, y1)), and the other on KB &and; &not; (Pacman at (x1, y1)).</p>
+        <p><strong>Prop Symbol Names (Important!)</strong>: For the rest of the project, please use the following variable naming conventions:</p>
+          <ul>
+            <li><code>PropSymbolExpr(pacman_str, x, y, t)</code>: whether or not Pacman is at (x, y) at time t</li>
+            <li><code>PropSymbolExpr(wall_str, x, y)</code>: whether or not a wall is at (x, y)</li>
+            <li><code>PropSymbolExpr(action, t)</code>: whether or not pacman takes action <code>action</code> at time t, where <code>action</code> is an element of <code>DIRECTIONS</code></li>
+          </ul>
+For the variable that encodes whether or not Pacman is at (x, y) at time t, write the code <code>PropSymbolExpr(pacman_str, x, y, t)</code>. For the variable that encodes whether or not a wall is at (x, y), write the code <code>PropSymbolExpr(wall_str, x, y)</code>.</p>
+        <p><strong>Transition Models</strong>: In this project, we will use two different transition models:</p>
+          <ul>
+            <li><code>allLegalSuccessorAxioms</code>: This transition model assumes that all actions taken are valid (no action brings pacman onto a square with walls). We will use this function to generate our successor axioms for most of the project, because it is lightweight and improves runtime.</li>
+            <li><code>SLAMSuccessorAxioms</code>: This transition model does not assume all actions taken are valid, which adds a lot of computational overhead. We will use this function to generate successor axioms only for the SLAM problem.</li>
+          </ul>
+        <p>Something to keep in mind for the rest of the project: in the localization and mapping problems later in the project, we will use a 4-bit sensor (which indicates whether there is or isn’t a wall in the NSEW directions of Pacman) with <code>allLegalSuccessorAxioms</code>. However for SLAM, we will use a weaker sensor (that only tells us the number of walls adjacent to Pacman) with <code>SLAMSuccessorAxioms</code>.</p>
+        <p>To test and debug your code run:</p>
+        <pre>python autograder.py -q q3</pre>
+      </div>
+      </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q4">
+        <h3>Question 4 (4 points): Path Planning with Logic</h3>
+      <p>Pacman is trying to find the end of the maze (the goal 
+position). Implement the following method using propositional logic to 
+plan Pacman's sequence of actions leading him to the goal:</p>
+      <ul>
+      <li><code>positionLogicPlan(problem)</code>: Given an instance of <code>logicPlan.PlanningProblem</code>, returns a sequence of action strings for the Pacman agent to execute.</li>
+      </ul>
+      <p>You will not be implementing a search algorithm, but creating 
+expressions that represent pacphysics for all possible 
+positions at each time step. This means that at each time step, you 
+should be adding general rules for all possible locations on the grid, where the rules do not assume anything about Pacman's current position.</p>
+      <p>You will need to code up the following sentences for your knowledge base, in the following pseudocode form:</p>
+        <ul>
+          <li>Add to KB: Initial knowledge: Pacman's initial location at timestep 0</li>
+          <li>for t in range(50) [Autograder will not test on layouts requiring `ge` 50 timesteps]</li>
+            <ul>
+              <li>Add to KB: Initial knowledge: Pacman can only be at <code>exactlyOne</code> of the locations in <code>non_wall_coords</code> at timestep t.</li>
+              <li>Is there a satisfying assignment for the variables given the knowledge base so far? Use <code>findModel</code> and pass in the Goal Assertion and <code>KB</code>.</li>
+                <ul>
+                  <li>If there is, return a sequence of actions from start to goal using <code>extractActionSequence</code>.</li>
+                  <li>Here, Goal Assertion is the expression asserting that Pacman is at the goal at timestep t.</li>
+                </ul>
+              <li>Add to KB: Pacman takes exactly one action per timestep.</li>
+              <li>Add to KB: Transition Model sentences: call <code>pacmanSuccessorStateAxioms(...)</code> for all possible pacman positions in <code>non_wall_coords</code>.</li>
+            </ul>
+        </ul>
+
+      <p>Test your code on smaller mazes using:</p>
+      <pre>python pacman.py -l maze2x2 -p LogicAgent -a fn=plp</pre>
+      <pre>python pacman.py -l tinyMaze -p LogicAgent -a fn=plp</pre>
+      <p>To test and debug your code run:</p>
+      <pre>python autograder.py -q q4</pre>
+      <p>Note that with the way we have Pacman's grid laid out, the 
+leftmost, bottommost space occupiable by Pacman (assuming there isn't a 
+wall there) is <b>(1, 1)</b>, as shown below (<b>not (0, 0)</b>).</p>
+      <center><img src="../assets/images/grid.png" style="margin:10px 0 20px 0" height="200"></center>
+      <p>Hint: If you are stuck, try re-reading AIMA chapter 7.7, "Agents Based on Propositional Logic." The pacphysics are also laid out in Lecture 11.</p>
+      <p>Debugging hints:</p>
+      <ul>
+        <li>If you're finding a length-0 or a length-1 solution: is it 
+enough to simply have axioms for where Pacman is at a given time? What's
+ to prevent him from also being in other places?</li>
+        <li>Coming up with some of these plans can take a long time. 
+It's useful to have a print statement in your main loop so you can 
+monitor your progress while it's computing.</li>
+        <li>If your solution is taking more than a couple minutes to finish running, you may want to revisit implementation of <code>exactlyOne</code> and <code>atMostOne</code> (if you rely on those), and ensure that you're using as few clauses as possible.</li>
+      </ul>
+
+      </div>
+    </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q5">
+        <h3>Question 5 (3 points): Eating All the Food</h3>
+          <p>Pacman is trying to eat all of the food on the board. Implement the following method using propositional logic to plan Pacman's sequence of actions leading him to the goal.</p>
+            <ul>
+              <li><code>foodLogicPlan(problem)</code>: Given an instance of <code>logicPlan.PlanningProblem</code>, returns a sequence of action strings for the Pacman agent to execute.</li>
+            </ul>
+          <p>This question has the same general format as question 4. The notes and hints from question 4 apply to this question as well. You are responsible for implementing whichever successor state axioms are necessary that were not implemented in previous questions.</p>
+          <p>What you will change from the previous question:</p>
+            <ul>
+              <li>Initialize Food[x,y,t] variables with the code <code>PropSymbolExpr(food_str, x, y, t)</code>, where each variable is true iff there is a food at (x, y) at time t.</li>
+              <li>Change the goal assertion: Your goal assertion sentence must be true iff all of the food have been eaten. This happens when all Food[x,y,t] are false at time t.</li>
+              <li>Add a food successor axiom: What is the relation between Food[x,y,t+1] and Food[x,y,t] and Pacman[x,y,t]? The food successor axiom should only involve these three variables, for any given (x, y, t). Think about what the transition model for the food variables looks like, and add these sentences to your knowledge base at each timestep.</li>
+            </ul>
+          <p>Test your code using:</p>
+            <pre>python pacman.py -l testSearch -p LogicAgent -a fn=flp,prob=FoodPlanningProblem</pre>
+          <p>We will not test your code on any layouts that require more than 50 time steps.</p>
+          <p>To test and debug your code run:</p>
+          <pre>python autograder.py -q q5</pre>
+      </div>
+    </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="helper_fns_loc_map">
+        <h3>Helper Functions for the rest of the Project</h3>
+          <p>For the remaining questions, we will rely on the following helper functions, which will be referenced by the pseudocode for localization, mapping, and SLAM.</p>
+          <h4>Add pacphysics, action, sensor, and percept information to KB</h4>
+            <ul>
+              <li>Add to KB: <code>pacphysics_axioms(...)</code>, which you wrote in q3.</li>
+              <li>Add to KB: Pacman takes action prescribed by <code>agent.actions[t]</code></li>
+              <li>Add to KB: either <code>sensorAxioms(...)</code> for localization and mapping, or <code>SLAMSensorAxioms(...)</code> for SLAM.</li>
+              <li>Get the percepts by calling <code>agent.getPercepts()</code> and pass the percepts to <code>four_bit_percept_rules(...)</code> for localization and mapping, or <code>num_adj_walls_percept_rules(...)</code> for SLAM. Add the resulting percept_rules to <code>KB</code>.</li>
+            </ul>
+          <h4>Find possible pacman locations with updated KB</h4>
+            <ul>
+              <li><code>possible_locations_t = []</code></li>
+              <li>Iterate over <code>non_outer_wall_coords</code>.</li>
+                <ul>
+                  <li>Can we prove whether Pacman is at (x, y)? Can we prove whether Pacman is not at (x, y)? Use <code>findModel</code> and the <code>KB</code>. Think about how you did this in question 3.</li>
+                  <li>If there exists a satisfying assignment where Pacman is at (x, y) at time t, add (x, y) to <code>possible_locations_t</code>.</li>
+                  <li>Add to KB: (x, y) locations where Pacman is provably at, at time t.</li>
+                  <li>Add to KB: (x, y) locations where Pacman is provably not at, at time t.</li>
+                </ul>
+              <li>Append <code>possible_locations_t</code> to <code>possible_locs_by_timestep</code>.</li>
+            </ul>
+          <h4>Find provable wall locations with updated KB</h4>
+            <ul>
+              <li>Iterate over <code>non_outer_wall_coords</code>.</li>
+                <ul>
+                  <li>Can we prove whether a wall is at (x, y)? Can we prove whether a wall is not at (x, y)? Use <code>findModel</code> and the <code>KB</code>. Think about how you did this in question 3.</li>
+                  <li>Add to KB and update <code>known_map</code>: (x, y) locations where there is provably a wall.</li>
+                  <li>Add to KB and update <code>known_map</code>: (x, y) locations where there is provably not a wall.</li>
+                </ul>
+              <li>Append <code>copy.deepcopy(known_map)</code> to <code>known_map_by_timestep</code>.</li>
+            </ul>
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q6">
+        <h3>Question 6 (4 points): Localization</h3>
+          <p>Pacman starts with a known map, but unknown starting location. It has a 4-bit sensor that returns whether there is a wall in its NSEW directions. (For example, 1001 means there is a wall to pacman's North and West directions, and these 4-bits are represented using a list with 4 booleans.) By keeping track of these sensor readings and the action it took at each timestep, Pacman is able to pinpoint its location. You will code up the sentences that help Pacman determine the possible locations it can be at each timestep by implementing:</p>
+            <ul>
+              <li><code>localization(problem, agent)</code>: Given an instance of <code>logicPlan.LocalizationProblem</code> and an instance of <code>logicAgents.LocalizationLogicAgent</code>, returns a list of lists: [[(x_0_0, y_0_0), (x_1_0, y_1_0), ...], [...], ...], where [(x_i_t, y_i_t), ...] is a list of possible pacman locations (x_i, y_i) at time t.</li>
+            </ul>
+            <p>For Pacman to make use of sensor information during localization, you will use two methods already implemented for you: <code>sensorAxioms</code>, which are the axioms listed won slide 4 of <a href="../assets/slides/lec10.pdf">lecture 10</a>, and <code>four_bit_percept_rules</code>, which translate the percepts at time t into logic sentences.</p>
+            <p>To pass the autograder, please implement the function according to our pseudocode:</p>
+<ul>
+<li>Add to <code>KB</code>: where the walls are (<code>walls_list</code>) and aren't (not in <code>walls_list</code>).</li>
+<li>for t in <code>range(agent.num_timesteps)</code>:</li>
+    <ul>
+    <li><a href="index.html#add-pacphysics-action-sensor-and-percept-information-to-kb">Add pacphysics, action, sensor, and percept information to KB.</a></li>
+    <li><a href="index.html#find-possible-pacman-locations-with-updated-kb">Find possible pacman locations with updated KB.</a></li>
+    <li>Call <code>agent.moveToNextState(...)</code> on the current agent action at timestep t.</li>
+    <li>Add to <code>KB</code>: <code>allLegalSuccessorAxioms(...)</code>.</li>
+    </ul>
+<li>return <code>possible_locs_by_timestep</code></li>
+</ul>
+    <p>Note (i): We take this step because adding unit literals to the KB help speed up future inferences.</p>
+
+    <p>If you are stuck on the "Find possible pacman locations with updated KB" step, think about what you did in the satisfiability function in question 3.</p>
+          <p>To test and debug your code run:</p>
+          <pre>python autograder.py -q q6</pre>
+      </div>
+    </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q7">
+        <h3>Question 7 (3 points): Mapping</h3>
+          <p>Pacman now knows his starting location, but does not know where the walls are (other than the fact that the border of outer coordinates are walls). Similar to localization, it has a 4-bit sensor that returns whether there is a wall in its NSEW directions. You will code up the sentences that help Pacman determine the location of the walls by implementing:</p>
+            <ul>
+              <li><code>mapping(problem, agent)</code>: Given an instance of <code>logicPlan.MappingProblem</code> and an instance of <code>logicAgents.MappingLogicAgent</code>, returns <code>known_maps_by_timestep</code>, a list of <code>known_map</code>s of format [known_map_0, known_map_1, ...], where:
+                <ul>
+                  <li>known_map_t is a 2D-array (list of lists) of size (problem.getWidth()+2, problem.getHeight()+2)</li>
+                  <li>Each entry of known_map_t is 1 if (x, y) is guaranteed to be a wall at timestep t, 0 if (x, y) is guaranteed to not be a wall, and -1 if (x, y) is still ambiguous at timestep t</li>
+                  <li>Ambiguity results when one cannot prove that (x, y) is a wall and one cannot prove that (x, y) is not a wall.</li>
+                </ul>
+            </ul>
+
+            <p>To pass the autograder, please implement the function according to our pseudocode:</p>
+<ul>
+<li>Get initial location <code>(pac_x_0, pac_y_0)</code> of Pacman, and add this to <code>KB</code>.</li>
+<li>for t in <code>range(agent.num_timesteps)</code>:</li>
+    <ul>
+    <li><a href="index.html#add-pacphysics-action-sensor-and-percept-information-to-kb">Add pacphysics, action, sensor, and percept information to KB.</a></li>
+    <li><a href="index.html#find-provable-wall-locations-with-updated-kb">Find provable wall locations with updated KB</a></li>
+    <li>Call <code>agent.moveToNextState(...)</code> on the current agent action at timestep t.</li>
+    <li>Add to <code>KB</code>: <code>allLegalSuccessorAxioms(...)</code>.</li>
+    </ul>
+<li>return <code>known_map_by_timestep</code></li>
+</ul>
+
+          <p>To test and debug your code run:</p>
+          <pre>python autograder.py -q q7</pre>
+      </div>
+    </div>
+
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="q8">
+        <h3>Question 8 (4 points): SLAM</h3>
+          <p>Sometimes Pacman is just really lost and in the dark at the same time. In SLAM (Simultaneous Localization and Mapping), Pacman knows his initial coordinates, but does not know where the walls are. In SLAM, Pacman may inadvertently take illegal actions (for example, going North when there is a wall blocking that action), which will add to the uncertainty of Pacman's location over time. Additionally, in our setup of SLAM, Pacman no longer has a 4 bit sensor that tells us whether there is a wall in the four directions, but only has a 3-bit sensor that reveals the number of walls he is adjacent to. (This is sort of like wifi signal-strength bars; 000 = not adjacent to any wall; 100 = adjacent to exactly 1 wall; 110 = adjacent to exactly 2 walls; 111 = adjacent to exactly 3 walls. These 3 bits are represented by a list of 3 booleans.) Thus, instead of using <code>sensorAxioms</code> and <code>four_bit_percept_rules</code>, you will use <code>SLAMSensorAxioms</code> and <code>num_adj_walls_percept_rules</code>. You will code up the sentences that help Pacman determine (1) his possible locations at each timestep, and (2) the location of the walls, by implementing:</p>
+            <ul>
+              <li><code>slam(problem, agent)</code>: Given an instance of <code>logicPlan.SLAMProblem</code> and <code>logicAgents.SLAMLogicAgent</code>, returns a tuple of two items:
+                <ul>
+                  <li>list of known_maps per timestep (of the same format as in question 6 (mapping))</li>
+                  <li>list of possible pacman locations per timestep (of the same format as in question 5 (localization))</li>
+                </ul>
+            </ul>
+
+            <p>To pass the autograder, please implement the function according to our pseudocode:</p>
+<ul>
+<li>Get initial location <code>(pac_x_0, pac_y_0)</code> of Pacman, and add this to <code>KB</code>.</li>
+<li>for t in <code>range(agent.num_timesteps)</code>:</li>
+    <ul>
+    <li><a href="index.html#add-pacphysics-action-sensor-and-percept-information-to-kb">Add pacphysics, action, sensor, and percept information to KB.</a></li>
+    <li><a href="index.html#find-provable-wall-locations-with-updated-kb">Find provable wall locations with updated KB</a></li>
+    <li><a href="index.html#find-possible-pacman-locations-with-updated-kb">Find possible pacman locations with updated KB.</a></li>
+    <li>Call <code>agent.moveToNextState(...)</code> on the current agent action at timestep t.</li>
+    <li>Add to <code>KB</code>: <code>SLAMSuccessorAxioms(...)</code>.</li>
+    </ul>
+<li>return <code>known_map_by_timestep, possible_locs_by_timestep</code></li>
+</ul>
+
+          <p>To test and debug your code run:</p>
+          <pre>python autograder.py -q q8</pre>
+      </div>
+    </div>
+    <div class="row col-lg-10 col-lg-offset-1">
+      <div id="submit">
+        <h3>Submission</h3>
+        <p>In order to submit your project, run <code class="highlighter-rouge">python submission_autograder.py</code> and submit the generated token file <code class="highlighter-rouge">logic.token</code> to the <code class="highlighter-rouge">Project 3</code> assignment on Gradescope.</p>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <br><br><br><br><br>
+
+  <script src="https://inst.eecs.berkeley.edu/~cs188/sp21/project3/logic_and_classical_planning_files/jquery_002.js"></script>
+  <script src="https://inst.eecs.berkeley.edu/~cs188/sp21/project3/logic_and_classical_planning_files/jquery.js"></script>
+
+  <script>
+  $(function() {
+    $('#myNavbar').bind('click', 'ul li a', function(event) {
+      $.scrollTo(event.target.hash, 250);
+    });
+  });
+  </script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+
+</body></html>

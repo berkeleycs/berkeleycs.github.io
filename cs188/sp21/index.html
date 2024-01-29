@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="https://inst.eecs.berkeley.edu/~cs188/sp21/site.webmanifest">
+  <link rel="mask-icon" href="https://inst.eecs.berkeley.edu/~cs188/sp21/safari-pinned-tab.svg" color="#fdb515">
+  <meta name="apple-mobile-web-app-title" content="CS 188">
+  <meta name="application-name" content="CS 188">
+  <meta name="msapplication-TileColor" content="#3b7ea1">
+  <meta name="msapplication-TileImage" content="/~cs188/sp21/mstile-144x144.png">
+  <meta name="theme-color" content="#3b7ea1">
+
+  <title>
+    
+      CS 188: Introduction to Artificial Intelligence, Spring 2021
+    
+  </title>
+
+  <link rel="stylesheet" href="assets/css/main.css" type="text/css">
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="assets/js/bootstrap-toc.min.js"></script>
+
+
+  <script src="assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+  <script src="assets/js/moment.min.js"></script>
+  <script src="assets/js/fullcalendar.min.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+     SVG: {
+       linebreaks: { automatic: true },
+       scale: 90,
+       preferredFont: "Latin Modern"
+     }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+
+<body data-spy="scroll" data-target="#toc">
+
+  <div id="navscroll">
+  <nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+    <div class="container">
+      <a class="navbar-brand" href="index.html" style="color: #000;"><strong>CS 188</strong> | Spring 2021</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent" >
+        <ul class="navbar-nav ml-auto">
+      <li class="nav-item active"><a href="index.html" class="nav-link active">Syllabus</a></li>
+      <li class="nav-item"><a href="policies/index.html" class="nav-link">Policies</a></li>
+      <li class="nav-item"><a href="projects/index.html" class="nav-link">Projects</a></li>
+      <li class="nav-item"><a href="schedule/index.html" class="nav-link">Schedule</a></li>
+      <li class="nav-item"><a href="staff/index.html" class="nav-link">Staff</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://piazza.com/class/kjvxxnu0l1t5w4">Piazza
+              <i class="fal fa-link"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+<script>
+  // ===== Scroll to Top ====
+  $(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+      $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+      $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+  });
+  $('#return-to-top').click(function() {  // When arrow is clicked
+    $('body,html').animate({
+      scrollTop : 0                       // Scroll to top of body
+    }, 500);
+  });
+</script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>var $j = jQuery.noConflict(true);</script>
+<script>
+  $(document).ready(function(){
+    console.log($().jquery); // this prints v1.11.0
+    console.log($j().jquery); // this prints v3.1.0
+  });
+</script>
+<script src="assets/js/parallax.min.js"></script>
+
+<script src="assets/js/main.min.js"></script>
+
+
+  <div class='container'>
+    <!-- <div class="alert alert-info">
+  <i class="far fa-exclamation-triangle"></i>
+  <strong>IMPORTANT ANNOUNCEMENT: Please go to DWINELLE 155 for lecture starting from WED Jun 26, 2021)!!!</strong>
+</div> -->
+
+<!--
+<div class="alert alert-warning">
+  <i class="far fa-exclamation-triangle"></i>
+  <strong>Warning: Spring 2021 website is under construction.</strong> There may be misleading information from past semesters on this website, which may be different from the Spring 2021 offering of the course. We will remove this warning when the information on this website is accurate.
+</div>
+-->
+
+<!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3800" style="float: left; top: 5em; position: absolute; z-index: 1000">
+  <div class="toast-header">
+    <i class="fal fa-bell"></i>
+    <strong class="mr-auto pl-1">Announcement</strong>
+    <small class="text-white" id="announcementTime"></small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    <b>Lecture venue for changed AGAIN! Wednesday's (6/26) and future lectures will be held at DWINELLE 155.</b>
+  </div>
+</div> -->
+
+<script>
+  // $('.toast').toast('show')
+  document.getElementById('announcementTime').innerHTML = moment([2021, 5, 25, 21, 35]).fromNow()
+</script>
+
+
+    <div class='row p-0'>
+  <div class='col-md-8'>
+    <h1 style="margin: 0px">
+      <strong>CS 188</strong>
+      | Introduction to Artificial Intelligence</h1>
+    <h2 style="margin: 0">Spring 2021</h2>
+    <h3 class="mt-3">Lectures: Mon/Wed/Fri 3:00–3:59 pm, Online</h3>
+  </div>
+  <div class='col-md-4'>
+    <img class="center-image pt-2" alt="CS188 Robot Waving" src='assets/images/cs188_bot.png' width='250px'/>
+  </div>
+</div>
+
+<!-- Insert front page content here -->
+<!-- Test CircleCI Works -->
+
+<h1>Description</h1>
+<p>This course will introduce the basic ideas and techniques underlying the design of intelligent computer systems. A specific emphasis will be on the statistical and decision-theoretic modeling paradigm.</p>
+
+<p>By the end of this course, you will have built autonomous agents that efficiently make decisions in fully informed, partially observable and adversarial settings. Your agents will draw inferences in uncertain environments and optimize actions for arbitrary reward structures. Your machine learning algorithms will classify handwritten digits and photographs. The techniques you learn in this course apply to a wide variety of artificial intelligence problems and will serve as the foundation for further study in any application area you choose to pursue.</p>
+
+<p>See the syllabus for slides, deadlines, and the lecture schedule. Readings refer to
+  <a href="http://aima.cs.berkeley.edu/">fourth edition of AIMA</a>
+  unless otherwise specified.</p>
+
+<h1>Recordings</h1>
+<p>We make lecture and Q&amp;A recordings available as links to Google Drive, which you can find posted together with other materials on the Syllabus page of this website shortly after the lecture. These links will work only if you are signed into your UC Berkeley Google account. The recordings are also available on <a href="https://kaltura.berkeley.edu">Kaltura</a>, which is a service that UC Berkeley partners with that facilitates the cloud recordings of Zoom meetings. All recordings on Kaltura have automatically-generated captions available by default alongside some other useful controls, such as playback speed adjustment.</p>
+
+<p>To access the channel with recordings for this course, please go to this website and create an account if you don’t have one already: <a href="https://kaltura.berkeley.edu">https://kaltura.berkeley.edu</a></p>
+
+<p>Once you have the account, you should be able to access and subscribe to videos in the channel by following <a href="https://kaltura.berkeley.edu/channel/CS188+Spring+2021/198717353/subscribe">this link</a>.</p>
+
+
+<hr/>
+
+<div>
+
+  <a class="anchor" id="syllabus"></a>
+
+  <h1>Syllabus</h1>
+
+  <!--Slides from previous semesters (denoted archive) are available before lectures - official slides will be uploaded following each lecture.-->
+
+  <div class="table-responsive card">
+    
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr class="center">
+      <th class="col-xs fit">
+        <b>W</b>
+      </th>
+      <th class="col-xs center fit">
+        <b>Date</b>
+      </th>
+      <th class="col-lg-4" style="width: 35%">
+        <b>Lecture Topic</b>
+      </th>
+      <th class="col-lg-2" style="width: 15%">
+        <b>Readings</b>
+      </th>
+      <th class="col-lg-2" style="width: 10%">
+        <b>Section</b>
+      </th>
+      <th class="col-lg-2" style="width: 15%">
+        <b>Homework</b>
+      </th>
+      <th class="col-lg-2" style="width: 15%">
+        <b>Project</b>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody id='announcement'></tbody>
+
+  
+<tbody id="wk0">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">0</td>
+<td class="center" style="height: 67px;">W 1/20</td>
+<td style="height: 67px;">Intro to AI <a href="assets/slides/lec01.pdf">[pdf]</a> <a href="assets/slides/lec01.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1tIX1DWlBENO4z9horm8PfBXBozr5_Ncm/view">[lecture]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 1<br /> </td>
+<td class="fit" style="height: 202px;" rowspan="3"> N/A </td>
+
+<td style="height: 292px;" rowspan="5">HW0 - Math, diagnostic
+<br /> <a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/953224/submissions/new">Electronic</a> <br /> due 1/25 10:59 pm
+</td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project0/index.html">Project 0</a> <br /> due 1/22 11:59pm</td>
+</tr>
+
+
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 1/22</td>
+<td style="height: 90px;">Agents + Environments, part 1 <a href="assets/slides/lec02.pdf">[pdf]</a> <a href="assets/slides/lec02.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1p1Y2ikXOA8CEcno8-_f9YwyTXSZyYSsY/view">[lecture]</a> <a href="https://drive.google.com/file/d/1tLMezMBY1y3kWvzExCosq0453L1aYU5B/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 2</td>
+</tr>
+</tbody>
+
+<tbody id="wk1">
+
+
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">1</td>
+<td class="center" style="height: 67px;">M 1/25</td>
+<td style="height: 67px;">Agents + Environments, part 2  <a href="assets/slides/lec03.pdf">[pdf]</a> <a href="assets/slides/lec03.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1raMSJ8_bvCev141qLBzJjg_MAV1Lve6V/view">[lecture]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 2<br /> </td>
+<td class="fit" style="height: 202px;" rowspan="3"> <a href="assets/section/section01.pdf">Section 1</a>, <a href="assets/section/section01_solution.pdf">solutions</a>,<br /> <a href="https://www.youtube.com/watch?v=zVvFY5hAw4c">recording</a><br /> <a href="assets/section/examprep01.pdf">Exam prep 1</a>, <a href="assets/section/examprep01_solution.pdf">solutions</a>,<br /> <a href="https://www.youtube.com/watch?v=WTxtitr7S5Y">recording</a></td>
+
+<td style="height: 292px;" rowspan="5">HW1 - Uninformed search<br /> <a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/965517/submissions/new">Electronic</a> <br /> due 2/1 10:59 pm <br /><br />Written HW1 - Probability, uninformed search, and heuristics<br /> <a href="https://d1b10bmlvqabco.cloudfront.net/paste/jl5s5f2j4znr1/dda8d91eaed20e9f446f6d6fe904b207b3a452abc79d87f723a74d2fbd8a91f2/CS_188_Spring_2021_Written_Homework_1_(1).pdf">PDF</a> <br />due 2/10 10:59 pm on <a href="https://www.gradescope.com/courses/228308/assignments/974895/submissions/new">gradescope</a>. <br /><br /><a href="https://piazza.com/class/kjvxxnu0l1t5w4?cid=246">Piazza post on WHW1 self-grading</a>, due 2/22 10:59 pm. <a href="https://www.gradescope.com/courses/228308/assignments/1032365/submissions/new">Gradescope link</a>.</td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project1/index.html">Project 1</a> <br /> due 2/5 11:59 pm</td>
+</tr>
+
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 1/27</td>
+<td style="height: 45px;">Uninformed Search <a href="assets/slides/lec04.pdf">[pdf]</a> <a href="assets/slides/lec04.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1SyvwGH92frxJkItUcom68p9zNs-WZQgL/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1agmY3MoS6yJTKq9rzVwfyjCaPigf39yq/view?usp=sharing">[supplementary lecture]</a> <a href="https://drive.google.com/file/d/14q78bNTO_mDqjgfeRV-mKLtiM93Iat3d/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td>Ch. 3.1-4</td> <!-- 3.1-4 is for uninformed search -->
+</tr>
+
+
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 1/29</td>
+<td style="height: 90px;">Informed Search <a href="assets/slides/lec05.pdf">[pdf]</a> <a href="assets/slides/lec05.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1QAys508_wy8fsK1LiiDMzvtFG6F-AToM/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1ATuYoKYYXQ6qUP9tMuZNRYWSfMjALNTt/view?usp=sharing">[supplementary lecture]</a> <a href="https://drive.google.com/file/d/1QGSx2RdKRjlpDrq5d6yW-ahlgRZMw6rW/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 3.5-6<br /><a class="badge badge-link" href="assets/notes/note01.pdf"> Note 1 </a></td> <!-- 3.5 is A*, 3.6 is heuristics -->
+</tr>
+</tbody>
+
+<tbody id="wk1">
+
+
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">2</td>
+<td class="center" style="height: 67px;">M 2/1</td>
+<td style="height: 67px;">Local Search <a href="assets/slides/lec06.pdf">[pdf]</a> <a href="assets/slides/lec06.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1Dz27uUjW2plHD7EXrART48coSom1JNxQ/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1MNyfkpmmisiySVwn8a1C_M2FaPLl0Ucu/view?usp=sharing">[supplementary lecture]</a> <a href="https://drive.google.com/file/d/1l0p2SH-hCVSBk1I0nvlAhz8zp0SFmxRC/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 4.1-2<br /></td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section02.pdf">Section 2</a>, <a href="assets/section/section02_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/9baABn8JA2s">recording</a> <br /><a href="assets/section/examprep02.pdf">Exam prep 2</a>, <a href="assets/section/examprep02_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/tT8TtMI317Q">recording</a></td>
+
+<td style="height: 292px;" rowspan="5">HW2 - Informed search and game trees<br /> <a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/966335/submissions/new">Electronic</a> <br /> due 2/8 10:59 pm</td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 2/3</td>
+<td style="height: 45px;">Games: minimax, alpha-beta <a href="assets/slides/lec07.pdf">[pdf]</a> <a href="assets/slides/lec07.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/16CZT38qK7U9GizIThnZT0wrea9kK-Hlx/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1p-M5BWcf-EX7U0WM6PP0kGex5cweBMFw/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td>Ch. 5.1-3</td>
+</tr>
+
+
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 2/5</td>
+<td style="height: 90px;">Games: MCTS, chance <a href="assets/slides/lec08.pdf">[pdf]</a> <a href="assets/slides/lec08.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1tWOD79ry85aJIUAXouZ4bHYVSG6ZPV2N/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1ioluuzJZ43IGCI3lUyhBpYBjBA9FGW4m/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 5.4-5<br /><a class="badge badge-link" href="assets/notes/note02.pdf"> Note 2 </a></td>
+</tr>
+</tbody>
+
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">3</td>
+<td class="center" style="height: 67px;">M 2/8</td>
+<td style="height: 67px;">Propositional Logic <a href="assets/slides/lec09.pdf">[pdf]</a> <a href="assets/slides/lec09.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1MJrwIgxW6X-96MM9dNYrqUA1ucKxMKCe/view">[lecture]</a> <a href="https://drive.google.com/file/d/1O0-zGIU2SapCYr96fTNvmgV5GhwwelIW/view">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 7.1-4<br /></td>
+<td class="fit" style="height: 202px;" rowspan="3"> <a href="assets/section/section03.pdf">Section 3</a>, <a href="assets/section/section03_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/rUeVfbtmyOI">recording</a><br /><a href="assets/section/examprep03.pdf">Exam prep 3</a>, <a href="assets/section/examprep03_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/N1I-VOJzfSg">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW3 - Propositional logic and local search<br /> <a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/985713/submissions/new">Electronic</a> <br /> due 2/16 10:59 pm<br /><a href="assets/assignments/ehw3.pdf">PDF</a><br /><br />Written HW2 - Games and logic<br /><a href="https://cdn-uploads.piazza.com/paste/jl5s5f2j4znr1/d4b68da0b6bc9c1e42fb8e421680912c5db6a60c6940dc4109d711073c0faaea/WHW2.pdf">PDF</a><br/>due 2/24 10:59 pm on <a href="https://www.gradescope.com/courses/228308/assignments/1020729/submissions/new">gradescope</a>. <br /><br /><a href="https://piazza.com/class/kjvxxnu0l1t5w4?cid=317">Piazza post on WHW2 self-grading</a>, due 3/8 10:59 pm. <!-- <a href="https://www.gradescope.com/courses/228308/assignments/1068585/submissions/new">Gradescope link</a>. --></td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project2/index.html">Project 2</a> <br /> due 2/19 11:59 pm</td>
+</tr>
+
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 2/10</td>
+<td style="height: 45px;">Logical Inference: theorem proving, model checking <a href="assets/slides/lec10.pdf">[pdf]</a> <a href="assets/slides/lec10.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1zyovP2xp79owiq908WTJ589j_SKJMmFv/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1dsKxzFClnnb6akjlA8mYRkiebESFaov2/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td>Ch. 7.5-6</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 2/12</td>
+<td style="height: 90px;">Propositional Planning <a href="assets/slides/lec11.pdf">[pdf]</a> <a href="assets/slides/lec11.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1Ekj-mf8Mkykh8swF6adlPZRSRsO5mdyI/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1E82TT4oKUGe6tJX9jKygJgsGlatqP9R2/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 7.7</td>
+</tr>
+</tbody>
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">4</td>
+<td class="center" style="height: 67px;">M 2/15</td>
+<td style="height: 67px;">Presidents' Day
+</td>
+<td class="fit" style="height: 67px;"></td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section04.pdf">Section 4</a>, <a href="assets/section/section04_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/GOlD-zYgdjk">recording</a><br /><a href="assets/section/examprep04.pdf">Exam prep 4</a>, <a href="assets/section/examprep04_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/33SSnB40RnQ">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW4 - First order logic and probability <br /> <a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1003534/submissions/new">Electronic</a><br />due 2/22 10:59 pm<br> <a href="assets/assignments/ehw4.pdf">PDF</a></td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 2/17</td>
+<td style="height: 45px;">FOL: Syntax, Semantics, Inference <a href="assets/slides/lec12.pdf">[pdf]</a> <a href="assets/slides/lec12.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/10PFpfgpDiFqmrgySUZaLHxxHDbrfxM1B/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1nNffO5NSrlZ6_fpkfsWyBsuQWy-U-G5U/view?usp=sharing">[q&amp;a]</a></td>
+<td class="fit" style="height: 90px;">Ch. 8.1-2, skim 9.1-4<br /><a class="badge badge-link" href="assets/notes/note03.pdf"> Note 3 </a></td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 2/19</td>
+<td style="height: 90px;">Probability, Independence, Naive Bayes <a href="assets/slides/lec13.pdf">[pdf]</a> <a href="assets/slides/lec13.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1DItWHdEWyh1toebg3hYL1cD7ZaOd9lZV/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1kYAXclStxdb_7p4NHnquvNlrx7IhMh-S/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 12.1-6</td>
+</tr>
+</tbody>
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">5</td>
+<td class="center" style="height: 67px;">M 2/22</td>
+<td style="height: 67px;">Bayes nets: syntax, semantics, examples <a href="assets/slides/lec14.pdf">[pdf]</a> <a href="assets/slides/lec14.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1OZ9OksXNmjWgpAbm6X2a0T5OiqMJ8HCp/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/18FnpP_nKIx9EfwXoQBcQrHWNqlkbWUhp/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 13.1-2</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section05.pdf">Section 5</a>, <a href="assets/section/section05_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/nZjpuktqbLE">recording</a><br /><a href="assets/section/examprep05.pdf">Exam prep 5</a>, <a href="assets/section/examprep05_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/6LOcysqsu3o">recording</a></td>
+  <td style="height: 292px;" rowspan="5">HW5 - Probability and Bayes Nets<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1048276/submissions/new">Electronic</a><br />due 3/2 10:59 pm<br /><a href="assets/assignments/ehw5.pdf">PDF</a></td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 2/24</td>
+<td style="height: 45px;">Bayes nets: exact inference <a href="assets/slides/lec15.pdf">[pdf]</a> <a href="assets/slides/lec15.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1fO0SZ5J293QibhwuDYsmK3YyHZKuY4EC/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/12CZYYNILVRgdsm3XEnCdlDQMF2bwk7Vk/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td>Ch. 13.3</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 2/26</td>
+<td style="height: 90px;">Bayes nets: stochastic inference (rejection, importance) <a href="assets/slides/lec16.pdf">[pdf]</a> <a href="assets/slides/lec16.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1G5uLChPf-qf7VYCRFXPNY1VXW8gd5cHL/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1H9e6xIxPdr9q06r5D9sxuqJQH8Pj_9O8/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 13.4</td>
+</tr>
+</tbody>
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">6</td>
+<td class="center" style="height: 67px;">M 3/1</td>
+<td style="height: 67px;">Bayes nets: stochastic inference (Gibbs) <a href="assets/slides/lec17.pdf">[pdf]</a> <a href="assets/slides/lec17.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1tvw7aM4FRdP09kCJn0U-Gjr_unbIyDn2/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1OM-wl0DwNVctFJlc2lQSF3pw6J18F2lP/view?usp=sharing">[q&amp;a]</a> <a href="assets/slides/lec17b.pdf">[supp lecture pdf]</a> <a href="assets/slides/lec17b.pptx">[supp lecture pptx]</a> <a href="https://drive.google.com/file/d/1S7LNtnP4g6DpWc2UMIdzsYzczl3xrnMu/view?usp=sharing">[supp lecture recording]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 13.4<br /><a class="badge badge-link" href="assets/notes/note04.pdf">Note 4</a></td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section06.pdf">Section 6</a>, <a href="assets/section/section06_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/5_Q1K4cB2ko">recording</a><br /><a href="assets/section/examprep06.pdf">Exam prep 6</a>, <a href="assets/section/examprep06_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/VfjkUCBuqyU">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW6 - Bayes Net Sampling and HMMs<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1027927/submissions/new">Electronic</a><br />due 3/8 10:59 pm<br /><a href="assets/assignments/ehw6.pdf">PDF</a><br /><br />Written HW3 - Bayes nets and HMMs<br /><a href="assets/assignments/written3.pdf">PDF</a><br />due 3/19 10:59 pm on gradescope: links for <a href="https://www.gradescope.com/courses/228308/assignments/1078459/submissions/new">written component</a> and <a href="https://www.gradescope.com/courses/228308/assignments/1078460/submissions/new">coding component</a>.<br /><br /><a href="https://piazza.com/class/kjvxxnu0l1t5w4?cid=787">Piazza post on WHW3 self-grading</a>, due 4/5 10:59 pm.</td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project3/index.html">Project 3</a> <br /> due 3/15 11:59 pm</td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 3/3</td>
+<td style="height: 45px;">Markov models and filtering <a href="assets/slides/lec18.pdf">[pdf]</a> <a href="assets/slides/lec18.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1n7qynW50q0s7geoR9Ft6-eLicpdO-ndH/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1WBjGFKcklpBm8UYyUExL2I1KFDkHYPtL/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td>Ch. 14.1-2</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 3/5</td>
+<td style="height: 90px;">Inference in Markov models <a href="assets/slides/lec19.pdf">[pdf]</a> <a href="assets/slides/lec19.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1ieuXOAeQm0Da2xqUtEWysip1gaIM2Ip9/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1bQHCNfXnSIEFwj1uoZcbCUdPOLH5MZj9/view?usp=sharing">[q&amp;a]</a>
+ </td>
+<td class="fit" style="height: 90px;">Ch. 14.3<br /><a class="badge badge-link" href="assets/notes/note05.pdf">Note 5</a></td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">7</td>
+<td class="center" style="height: 67px;">M 3/8</td>
+<td style="height: 67px;">DBNs, particle filtering <a href="assets/slides/lec20.pdf">[pdf]</a> <a href="assets/slides/lec20.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1G7iJqY_77hppu0tDKfwtC7WRZbnFJ77O/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1jILPWh9a--TMTX8yNZZD9K_o2agM9ttN/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 14.5</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/midterm_review_search.pdf">Search review</a>, <a href="assets/section/midterm_review_search_sol.pdf">solutions</a>,<br /><a href="assets/section/midterm_review_games.pdf">Games review</a>, <a href="assets/section/midterm_review_games_sol.pdf">solutions</a>,<br /><a href="assets/section/midterm_review_logic.pdf">Logic review</a>, <a href="assets/section/midterm_review_logic_sol.pdf">solutions</a>,<br /><a href="assets/section/midterm_review_bayes_nets.pdf">Bayes nets review</a>, <a href="assets/section/midterm_review_bayes_nets_sol.pdf">solutions</a>,<br /><a href="assets/section/midterm_review_hmm.pdf">HMMs review</a>, <a href="assets/section/midterm_review_hmm_sol.pdf">solutions</a>.<br /><br /><A href="https://piazza.com/class/kjvxxnu0l1t5w4?cid=414">Piazza post with recordings of review sessions</a></td>
+<td style="height: 292px;" rowspan="5"></td>
+<td style="height: 274px;" rowspan="4"> </td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 3/10</td>
+<td style="height: 45px;">Midterm 5-7 pm PT
+</td>
+<td>&nbsp;</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 3/12</td>
+<td style="height: 90px;">Rationality, utility theory <a href="assets/slides/lec21.pdf">[pdf]</a> <a href="assets/slides/lec21.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1ZjcE_fISDgEtDQpMpPBe-Y70ZB9Z9Qab/view?usp=sharing">[lecture]</a>
+ </td>
+<td class="fit" style="height: 90px;">Ch. 16.1-3</td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">8</td>
+<td class="center" style="height: 67px;">M 3/15</td>
+<td style="height: 67px;">Decision nets, VPI, unknown preferences <a href="assets/slides/lec22.pdf">[pdf]</a> <a href="assets/slides/lec22.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/106N3irQRLUaDorV91syMYRtDCK7FQjiV/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 16.5-7<br/><a class="badge badge-link" href="assets/notes/note06.pdf">Note 6</a></td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section08.pdf">Section 8</a>, <a href="assets/section/section08_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/dTq8tw2XKZQ">recording</a><br /><a href="assets/section/examprep08.pdf">Exam prep 8</a>, <a href="assets/section/examprep08_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/bc35jLXYDWI">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW7 - Utility theory and HMMs<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1068530/submissions/new">Electronic</a><br />due 3/30 10:59 pm<br /><a href="https://cdn-uploads.piazza.com/paste/j6mh6ezamgc4hy/92844cb87ee00bcdd5aca8a6cf7ffff44a2773e2abfc4239b6e5f15e3801f99e/ehw7.pdf">PDF</a></td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project4/index.html">Project 4</a> <br /> due 4/2 11:59 pm</td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 3/17</td>
+<td style="height: 90px;">MDPs: V/Q/pi <a href="assets/slides/lec23.pdf">[pdf]<a> <a href="assets/slides/lec23.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1gsbR1iNRkYiDsOAdPwfiVvAu5lezefSw/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 17.1</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 3/19</td>
+<td style="height: 90px;">MDPs: Value/Policy Iter (part 1) <a href="assets/slides/lec24.pdf">[pdf]</a> <a href="assets/slides/lec24.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1jTohRj0mP3o9oac5yMOQei03C4u2QcPR/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 17.2</td>
+</tr>
+
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">9</td>
+<td class="center" style="height: 67px;">M 3/22</td>
+<td style="height: 45px;">Spring Break</td>
+<td class="fit" style="height: 90px;"></td>
+<td class="fit" style="height: 202px;" rowspan="3"> </td>
+<td style="height: 292px;" rowspan="5"></td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 3/24</td>
+<td style="height: 45px;">Spring Break</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 3/26</td>
+<td style="height: 90px;">Spring Break</td>
+<td class="fit" style="height: 90px;">&nbsp;</td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">10</td>
+<td class="center" style="height: 67px;">M 3/29</td>
+<td style="height: 67px;">MDPs: Value/Policy Iter (part 2) <a href="assets/slides/lec25.pdf">[pdf]</a> <a href="assets/slides/lec25.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1N7Isj1EiVtj6lP38SrrTlUnHQoK57B9F/view?usp=sharing">[lecture]</a></td>
+<td class="fit" style="height: 67px;">Ch. 17.2<br/><a class="badge badge-link" href="assets/notes/note07.pdf">Note 7</a></td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section09.pdf">Section 9</a>, <a href="assets/section/section09_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/_jqEcfWPX3U">recording</a><br /><a href="assets/section/examprep09.pdf">Exam prep 9</a>, <a href="assets/section/examprep09_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/rhkirdRhYXY">recording</a>
+</td>
+<td style="height: 292px;" rowspan="5">HW8 - MDPs<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1140404/submissions/new">Electronic</a><br />due 4/5 10:59 pm<br /><a href="https://cdn-uploads.piazza.com/paste/j6mh6ezamgc4hy/a1b95b65e23910821eb7a7c2fcc3dd816763a83fc9549eb9e9bb37cd78181f67/ehw8.pdf">PDF</a></td>
+<td style="height: 274px;" rowspan="4"> </td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 3/31</td>
+<td style="height: 45px;"> ML: Decision Trees (1) <a href="assets/slides/lec26.pdf">[pdf]</a> <a href="assets/slides/lec26.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1BVOLw0bgmmMTw52TsEtRefbRPI2oNocN/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 19.1-3</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 4/2</td>
+<td style="height: 90px;">ML: Decision Trees (2) <a href="assets/slides/lec27.pdf">[pdf]</a> <a href="assets/slides/lec27.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/10uv4jVpMUnmTmRrebGPe1V_ow-8WncZg/view?usp=sharing">[lecture]</a></td>
+<td class="fit" style="height: 90px;">Ch. 19.1-3</td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">11</td>
+<td class="center" style="height: 67px;">M 4/5</td>
+<td style="height: 90px;">ML: Linear Regression and Perceptrons <a href="assets/slides/lec28.pdf">[pdf]</a> <a href="assets/slides/lec28.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1pESc3qzkV-3jZQybuhG_FFCf063D68sG/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 19.6</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section10.pdf">Section 10</a>, <a href="assets/section/section10_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/pHi-O_duvvg">recording</a><br /><a href="assets/section/examprep10.pdf">Exam prep 10</a>, <a href="assets/section/examprep10_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/u7jJCU6aZIk">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW9 - Machine learning<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1154742/submissions/new">Electronic</a><br />due 4/13 10:59 pm<br /><a href="https://cdn-uploads.piazza.com/paste/j6mh6ezamgc4hy/d6d2a431388c607767a60bdb01aa7dffc5fbf07e45982335170e134cffe12f01/ehw9.pdf">PDF</a></td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project5/index.html">Project 5</a> <br /> due 4/16 11:59 pm</td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 4/7</td>
+<td style="height: 90px;">ML: Statistical Learning, Na&iuml;ve Bayes <a href="assets/slides/lec29.pdf">[pdf]</a> <a href="assets/slides/lec29.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1UMBBB0Oyogll1pf2qBuzuhFF7EBwjCWW/view?usp=sharing">[lecture]</a>
+</td>
+  <td class="fit" style="height: 90px;">Ch. 20.1-2<br /><a class="badge badge-link" href="assets/notes/note08.pdf">Note 8</a></td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 4/9</td>
+<td style="height: 45px;">No lecture
+</td>
+<td class="fit" style="height: 67px;"></td>
+</tr>
+</tbody>
+<tbody id="wk1">
+
+
+
+
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">12</td>
+<td class="center" style="height: 67px;">M 4/12</td>
+<td style="height: 67px;">ML: Neural Networks (Part 1) <a href="assets/slides/lec30.pdf">[pdf]</a> <a href="assets/slides/lec30.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1_qHrzpfEWR4qtO_VKghzDn_Wus9-QHXF/view?usp=sharing">[lecture]</a></td>
+<td class="fit" style="height: 90px;">Ch. 21.1-5</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section11.pdf">Section 11</a>, <a href="assets/section/section11_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/4Irb-_kBjRY">recording</a><br /><a href="assets/section/examprep11.pdf">Exam prep 11</a>, <a href="assets/section/examprep11_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/0VuiyH3TbZY">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW10 - Gradient descent and reinforcement learning<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1154747/submissions/new">Electronic</a><br />due 4/22 10:59 pm<br /><a href="https://cdn-uploads.piazza.com/paste/j6mh6ezamgc4hy/c8929d5243b26587741bfe46ffc31c09e3e5ae3b339358b8383201cbb1b3c1ec/ehw10.pdf">PDF</a><br /><br />Written HW4 - Machine learning and reinforcement learning<br /><a href="assets/assignments/written4.pdf">PDF</a><br />due 4/28 10:59 pm on gradescope: links for <a href="https://www.gradescope.com/courses/228308/assignments/1168132/submissions/new">written component</a> and <a href="https://www.gradescope.com/courses/228308/assignments/1168153/submissions/new">coding component</a>.<br /><br /><a href="https://piazza.com/class/kjvxxnu0l1t5w4?cid=987">Piazza post on WHW4 self-grading</a>, due 5/5 10:59 pm</td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 4/14</td>
+<td style="height: 90px;">ML: Neural Networks (Part 2) <a href="assets/slides/lec31.pdf">[pdf]</a> <a href="assets/slides/lec31.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1YzPb9hOE6anQ_L1ipPiVDYPO9oZMfNYX/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 21.1-5<br /><a href="assets/notes/note09.pdf" class="badge badge-link">Note 9</a></td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 4/16</td>
+<td style="height: 67px;">No lecture
+</td>
+<td class="fit" style="height: 90px;"></td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">13</td>
+<td class="center" style="height: 67px;">M 4/19</td>
+<td style="height: 45px;">Reinforcement Learning I <a href="assets/slides/lec32.pdf">[pdf]</a> <a href="assets/slides/lec32.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1Q7rlK9giYPhUBOJAffP5Kfdp4xjL7KeY/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 67px;">Ch. 22.1-3</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section12.pdf">Section 12</a>, <a href="assets/section/section12_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/KcB1kI8qBA4">recording</a><br /><a href="assets/section/examprep12.pdf">Exam prep 12</a>, <a href="assets/section/examprep12_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/AfvoFJoBTRM">recording</a></td>
+<td style="height: 292px;" rowspan="5">HW11 - Reinforcement learning<br /><a class="badge badge-link" href="https://www.gradescope.com/courses/228308/assignments/1175077/submissions/new">Electronic</a><br />due 4/27 10:59 pm<br /><a href="https://cdn-uploads.piazza.com/paste/j6mh6ezamgc4hy/4de1a324a3fe1f67f21a09c464deea59e8dffa51a9be3ca8de683b1748718a58/ehw11.pdf">PDF</a></td>
+<td style="height: 274px;" rowspan="4"><a class="badge badge-link" href="project6/index.html">Project 6</a> <br /> due 4/30 11:59 pm</td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 4/21</td>
+<td style="height: 90px;">Reinforcement Learning II <a href="assets/slides/lec33.pdf">[pdf]</a> <a href="assets/slides/lec33.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/1TJebhXJV35TukCvsqiceYgZFS6gmjgdA/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 90px;">Ch. 22.5, 22.7<br /><a class="badge badge-link" href="assets/notes/note10.pdf">Note 10</a></td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 4/23</td>
+<td style="height: 67px;">Advanced topics I - Nicholas Carlini on Adversarial Machine Learning <a href="assets/slides/adv_i_adversarial.pdf">[pdf]</a> <a href="https://drive.google.com/file/d/1l0xTFI8UNpAiDFL1Guei6BCRrIBHopBa/view?usp=sharing">[lecture]</a> <a href="https://drive.google.com/file/d/1u8XlzGqTD_hiY9QEoAI3_YOZqKB09v0m/view?usp=sharing">[q&amp;a]</a>
+</td>
+<td class="fit" style="height: 90px;"></td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">14</td>
+<td class="center" style="height: 67px;">M 4/26</td>
+<td style="height: 67px;">Advanced topics II - Moritz Hardt on Fairness and Machine Learning: Limitations and Opportunities <a href="assets/slides/adv_ii_fairness.pdf">[pdf]</a> <a href="assets/slides/adv_ii_fairness.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/14FRRh7GDfxBfplTnt97av6tGw2scctxT/view?usp=sharing">[lecture]</a> <a href="https://www.youtube.com/watch?v=Igq_S_7IfOU">[full presentation]</a>
+</td>
+<td class="fit" style="height: 67px;">&nbsp;</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/section13.pdf">Section 13</a>, <a href="assets/section/section13_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/II7pDI6B6lI">recording</a><br /><a href="assets/section/examprep13.pdf">Exam prep 13</a>, <a href="assets/section/examprep13_solution.pdf">solutions</a>,<br /><a href="https://youtu.be/EvPKsoKM9GQ">recording</a></td>
+<td style="height: 292px;" rowspan="5"> </td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 4/28</td>
+<td style="height: 67px;">Advanced topics III - Jong Wook Kim on CLIP: Learning Transferrable Vision Models from Natural Language Supervision <a href="assets/slides/adv_iii_clip.pdf">[pdf]</a> <a href="https://drive.google.com/file/d/1YqDWP_A7kPurqLyNjuZFq9EJyUIRDzZB/view?usp=sharing">[lecture]</a>
+</td>
+<td style="height: 45px;">&nbsp;</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 4/30</td>
+<td style="height: 90px;">Future + wrapup <a href="assets/slides/final_lecture.pdf">[pdf]</a> <a href="assets/slides/final_lecture.pptx">[pptx]</a> <a href="https://drive.google.com/file/d/12MTQLqFRez4T5h1X3mYaha9PO-P4T74U/view?usp=sharing">[lecture]</a>
+</td>
+<td class="fit" style="height: 90px;">&nbsp;</td>
+</tr>
+</tbody>
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">15</td>
+<td class="center" style="height: 67px;">M 5/3</td>
+<td style="height: 67px;">RRR</td>
+<td class="fit" style="height: 67px;">&nbsp;</td>
+<td class="fit" style="height: 202px;" rowspan="3"><a href="assets/section/final_review_search.pdf">Search review</a>, <a href="assets/section/final_review_search_sol.pdf">solutions</a>,<br /><a href="assets/section/final_review_games.pdf">Games review</a>, <a href="assets/section/final_review_games_sol.pdf">solutions</a>,<br /><a href="assets/section/final_review_logic.pdf">Logic review</a>, <a href="assets/section/final_review_logic_sol.pdf">solutions</a>,<br /><a href="assets/section/final_review_bayes_nets.pdf">Bayes nets review</a>, <a href="assets/section/final_review_bayes_nets_sol.pdf">solutions</a>,<br /><a href="assets/section/final_review_hmm_vpi.pdf">HMMs/VPI review</a>, <a href="assets/section/final_review_hmm_vpi_sol.pdf">solutions</a>,<br /><a href="assets/section/final_review_mdp_rl.pdf">MDPs/RL review</a>, <a href="assets/section/final_review_mdp_rl_sol.pdf">solutions</a>,<br /><a href="assets/section/final_review_ml.pdf">Machine learning review</a>, <a href="assets/section/final_review_ml_sol.pdf">solutions</a><br /><br /><a href="https://piazza.com/class/kjvxxnu0l1t5w4?cid=982">Piazza post with recordings of review sessions</a></td>
+<td style="height: 292px;" rowspan="5"> </td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 5/5</td>
+<td style="height: 45px;">RRR</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 5/7</td>
+<td style="height: 90px;">RRR</td>
+<td class="fit" style="height: 90px;">&nbsp;</td>
+</tr>
+</tbody>
+
+
+
+<tbody id="wk1">
+<tr style="height: 67px;">
+<td class="center align-middle" style="height: 274px;" rowspan="4">16</td>
+<td class="center" style="height: 67px;">M 5/10</td>
+<td style="height: 67px;">&nbsp;</td>
+<td class="fit" style="height: 67px;">&nbsp;</td>
+<td class="fit" style="height: 202px;" rowspan="3"> </td>
+<td style="height: 292px;" rowspan="5"> </td>
+<td style="height: 274px;" rowspan="4"></td>
+</tr>
+<tr style="height: 45px;">
+<td class="center" style="height: 45px;">W 5/12</td>
+<td style="height: 45px;">Final 7-10 pm PT</td>
+</tr>
+<tr style="height: 90px;">
+<td class="center" style="height: 90px;">F 5/14</td>
+<td style="height: 90px;">&nbsp;</td>
+<td class="fit" style="height: 90px;">&nbsp;</td>
+</tr>
+</tbody>
+
+    
+  </table>
+
+  </div>
+  </div>
+
+
+    <footer class="py-4 container">
+  <div class="row text-center">
+    <div class="col-md-6 col-sm-12">
+      <h3 data-toc-skip><a href="javascript:void(0)">CS 188</a></h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a href="schedule/index.html" class="nav-link">Weekly Schedule</a>
+        </li>
+        <li class="nav-item"><a href="schedule/index.html" class="nav-link">Office Hours</a>
+        </li>
+        <li class="nav-item"><a href="staff/index.html" class="nav-link">Staff</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <h3 data-toc-skip><a href="policies/index.html">Policies</a></h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a href="policies/index.html#Assignments" class="nav-link">Assignments</a>
+        </li>
+        <li class="nav-item"><a href="policies/index.html#Exams" class="nav-link">Exams</a>
+        </li>
+        <li class="nav-item"><a href="policies/index.html#Grading" class="nav-link">Grading</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="assets/js/clipboard.min.js"></script>
+  <script src="assets/js/codeselect.js"></script>
+</footer>
+
+  </div>
+
+</body>
+
+<!-- <script>w3.includeHTML();</script> -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>

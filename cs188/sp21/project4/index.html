@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="https://inst.eecs.berkeley.edu/~cs188/sp21/site.webmanifest">
+  <link rel="mask-icon" href="https://inst.eecs.berkeley.edu/~cs188/sp21/safari-pinned-tab.svg" color="#fdb515">
+  <meta name="apple-mobile-web-app-title" content="CS 188">
+  <meta name="application-name" content="CS 188">
+  <meta name="msapplication-TileColor" content="#3b7ea1">
+  <meta name="msapplication-TileImage" content="/~cs188/sp21/mstile-144x144.png">
+  <meta name="theme-color" content="#3b7ea1">
+
+  <title>
+    
+      Project 4 - Inference in Bayes Nets - CS 188: Introduction to Artificial Intelligence, Spring 2021
+    
+  </title>
+
+  <link rel="stylesheet" href="../assets/css/main.css" type="text/css">
+
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="../assets/js/bootstrap-toc.min.js"></script>
+
+
+  <script src="../assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+  <script src="../assets/js/moment.min.js"></script>
+  <script src="../assets/js/fullcalendar.min.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+     SVG: {
+       linebreaks: { automatic: true },
+       scale: 90,
+       preferredFont: "Latin Modern"
+     }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+  <div id="navscroll">
+  <nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html" style="color: #000;"><strong>CS 188</strong> | Spring 2021</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent" >
+        <ul class="navbar-nav ml-auto">
+          
+          
+          
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../index.html" class="nav-link">Syllabus</a></li>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../policies/index.html" class="nav-link">Policies</a></li>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../projects/index.html" class="nav-link">Projects</a></li>
+    
+  
+
+  
+    
+      <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Schedule</a></li>
+    
+  
+
+  
+    
+      <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a></li>
+    
+  
+
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://piazza.com/class/jza9erz2ojy3qr">Piazza
+              <i class="fal fa-link"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+<script>
+  // ===== Scroll to Top ====
+  $(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+      $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+      $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+  });
+  $('#return-to-top').click(function() {  // When arrow is clicked
+    $('body,html').animate({
+      scrollTop : 0                       // Scroll to top of body
+    }, 500);
+  });
+</script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>var $j = jQuery.noConflict(true);</script>
+<script>
+  $(document).ready(function(){
+    console.log($().jquery); // this prints v1.11.0
+    console.log($j().jquery); // this prints v3.1.0
+  });
+</script>
+<script src="../assets/js/parallax.min.js"></script>
+
+<script src="../assets/js/main.min.js"></script>
+
+
+  <div class='container'>
+
+<!-- <div class="alert alert-warning">
+  <i class="far fa-exclamation-triangle"></i>
+  <strong>Warning: Spring 2021 website is under construction.</strong> There may be misleading information from past semesters on this website, which may be different from the Fall 2020 offering of the course. We will remove this warning when the information on this website is accurate.
+</div> -->
+
+<script>
+  // $('.toast').toast('show')
+  document.getElementById('announcementTime').innerHTML = moment([2019, 5, 25, 21, 35]).fromNow()
+</script>
+
+
+    <div class="row">
+      <div class="col-sm-3">
+  <nav id="toc" data-toggle="toc" class="sticky-top" style="top: 40px; margin-bottom: 40px"></nav>
+</div>
+
+      <div class="col-sm-9">
+          <h1 class="mt-0 center">Project 4: Inference in Bayes Nets</h1>
+
+<center> Version 3.0. Last Updated: 03/16/2021 </center>
+
+<p class="center">Due: <b>Friday 4/2</b> at <b>11:59pm</b></p>
+
+<hr />
+
+<p><img src="../assets/images/treasure_hunting_pacman.png" alt="Treasure-hunting Pacman" class="center-image mb-3 img-fluid" style="width: 400px;" /></p>
+
+<center>Much truth is unseen.</center>
+<center>How will Pacman become sure?</center>
+<center>Bayes Net Inference</center>
+
+<p>And now, after such a pompous poem, let's dig into our project.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In this project, you will implement inference algorithms for Bayes Nets, specifically variable elimination and value-of-perfect-information computations. These inference algorithms will allow you to reason about the existence of invisible pellets and ghosts.</p>
+
+<p>You can run the autograder for particular tests by commands of the form:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -t test_cases/q4/1-simple-eliminate
+</code></pre></div></div>
+
+<p>The code for this project contains the following files, available as a <a href="../assets/files/bayesNets.zip">zip archive</a>.</p>
+
+<table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td colspan="2"><b>Files you'll edit:</b></td>
+      </tr>
+      <tr>
+        <td><code>factorOperations.py</code></td>
+        <td>Operations on Factors (join, eliminate, normalize).</td>
+      </tr>
+      <tr>
+        <td><code>inference.py</code></td>
+        <td>Inference algorithms (enumeration, variable elimination, likelihood weighting).</td>
+      </tr>
+      <tr>
+        <td><code>bayesAgents.py</code></td>
+        <td>Pacman agents that reason under uncertainty.</td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>Files you should read but NOT edit:</b></td>
+      </tr>
+      <tr>
+        <td><code>bayesNet.py</code></td>
+        <td>The BayesNet and Factor classes.</td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>Files you can ignore:</b></td>
+      </tr>
+      <tr>
+        <td><code>graphicsDisplay.py</code></td>
+        <td>Graphics for Pacman</td>
+      </tr>
+      <tr>
+        <td><code>graphicsUtils.py</code></td>
+        <td>Support for Pacman graphics</td>
+      </tr>
+      <tr>
+        <td><code>textDisplay.py</code></td>
+        <td>ASCII graphics for Pacman</td>
+      </tr>
+      <tr>
+        <td><code>ghostAgents.py</code></td>
+        <td>Agents to control ghosts</td>
+      </tr>
+      <tr>
+        <td><code>keyboardAgents.py</code></td>
+        <td>Keyboard interfaces to control Pacman</td>
+      </tr>
+      <tr>
+        <td><code>layout.py</code></td>
+        <td>Code for reading layout files and storing their contents</td>
+      </tr>
+      <tr>
+        <td><code>autograder.py</code></td>
+        <td>Project autograder</td>
+      </tr>
+      <tr>
+        <td><code>testParser.py</code></td>
+        <td>Parses autograder test and solution files</td>
+      </tr>
+      <tr>
+        <td><code>testClasses.py</code></td>
+        <td>General autograding test classes</td>
+      </tr>
+      <tr>
+        <td><code>test_cases/</code></td>
+        <td>Directory containing the test cases for each question</td>
+      </tr>
+      <tr>
+        <td class="fit"><code>bayesNets2TestClasses.py</code></td>
+        <td>Project 4 specific autograding test classes</td>
+      </tr>
+    </tbody>
+  </table>
+
+<p><strong>Files to Edit and Submit:</strong> You will fill in portions of <code class="highlighter-rouge">factorOperations.py</code>, <code class="highlighter-rouge">inference.py</code>, and <code class="highlighter-rouge">bayesAgents.py</code> during the assignment. Once you have completed the assignment, you will submit a token generated by <code class="highlighter-rouge">submission_autograder.py</code>. Please <em>do not</em> change the other files in this distribution or submit any of our original files other than this file.</p>
+
+<p><strong>Evaluation:</strong> Your code will be autograded for technical correctness. Please <em>do not</em> change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation – not the autograder’s judgements – will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.</p>
+
+<p><strong>Academic Dishonesty:</strong> We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else’s code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don’t try. We trust you all to submit your own work only; <em>please</em> don’t let us down. If you do, we will pursue the strongest consequences available to us.</p>
+
+<p><strong>Getting Help:</strong> You are not alone! If you find yourself stuck on something, contact the course staff for help. Office hours, section, and the discussion forum are there for your support; please use them. If you can’t make our office hours, let us know and we will schedule more. We want these projects to be rewarding and instructional, not frustrating and demoralizing. But, we don’t know when or how to help unless you ask.</p>
+
+<p><strong>Discussion:</strong> Please be careful not to post spoilers.</p>
+
+<hr />
+
+<h2 id="treasure-hunting-pacman">Treasure-Hunting Pacman</h2>
+
+<p>Pacman has entered a world of mystery. Initially, the entire map is invisible. As he explores it, he learns information about neighboring cells. The map contains two houses: a ghost house, which is probably mostly red, and a food house, which is probably mostly blue. Pacman's goal is to enter the food house while avoiding the ghost house.</p>
+
+<p>Pacman will reason about which house is which based on his observations, and reason about the tradeoff between taking a chance or gathering more evidence. To enable this, you'll implement probabilistic inference using Bayes nets.</p>
+
+<p>To play for yourself, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python hunters.py -p KeyboardAgent -r
+</code></pre></div></div>
+
+<h3 id="bayes-nets-and-factors">Bayes Nets and Factors</h3>
+
+<p>First, take a look at <code class="highlighter-rouge">bayesNet.py</code> to see the classes you'll be working with - <code class="highlighter-rouge">BayesNet</code> and <code class="highlighter-rouge">Factor</code>. You can also run this file to see an example <code class="highlighter-rouge">BayesNet</code> and associated <code class="highlighter-rouge">Factors</code>: <code class="highlighter-rouge">python bayesNet.py</code></p>
+
+<p>You should look at the <code class="highlighter-rouge">printStarterBayesNet</code> function - there are helpful comments that can make your life <em>much</em> easier later on.</p>
+
+<p>The Bayes Net created in this function is shown below:</p>
+
+<p>(Raining --> Traffic <-- Ballgame)</p>
+
+<p>A summary of the terminology is given below:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Bayes Net</code>: This is a representation of a probabilistic model as a directed acyclic graph and a set of conditional probability tables, one for each variable, as shown in lecture. The Traffic Bayes Net above is an example.</li>
+  <li><code class="highlighter-rouge">Factor</code>: This stores a table of probabilities, although the sum of the entries in the table is not necessarily 1. A factor is of the general form $P(X_1, ... X_m, y_1, ..., y_n | Z_1, ..., Z_p, w_1, ..., w_q)$. Recall that lower case variables have already been assigned. For each possible assignment of values to the $X_i$ and $Z_j$ variables, the factor stores a single number. The $Z_j, w_k$ variables are said to be conditioned while the $X_i, y_l$ variables are unconditioned.</li>
+  <li>Conditional Probability Table (CPT): This is a factor satisfying two properties:
+    <ol>
+      <li>Its entries must sum to 1 for each assignment of the conditional variables</li>
+      <li>There is exactly one unconditioned variable</li>
+    </ol>
+  </li>
+</ul>
+
+<p>The Traffic Bayes Net stores the following CPTs: $P(Raining)$, $P(Ballgame)$, $P(Traffic|Ballgame, Raining)$.</p>
+
+<hr />
+
+<h2 id="question-1-3-points-bayes-net-structure">Question 1 (3 points): Bayes Net Structure</h2>
+
+<p>Implement the <code class="highlighter-rouge">constructBayesNet</code> function in <code class="highlighter-rouge">BayesAgents.py</code>. It constructs an empty Bayes net with the structure described below. (We'll specify the actual factors in the next question.)</p>
+
+<p>The treasure hunting world is generated according to the following Bayes net:</p>
+
+<p><img src="../assets/images/bayes_net_diagram.png" alt="Bayes net diagram" class="center-image mb-3 img-fluid" style="width: 600px;" /></p>
+
+<p>Don't worry if this looks complicated! We'll take it step by step. As described in the code for <code>constructBayesNet</code>, we build the empty structure by listing all of the variables, their values, and the edges between them. This figure shows the variables and the edges, but what about their values?</p>
+
+<ul>
+  <li>X positions determine which house goes on which side of the board. It is either food-left or ghost-left.</li>
+  <li>Y positions determine how the houses are vertically oriented. It models the vertical positions of both houses simultaneously, and has one of four values: both-top, both-bottom, left-top, and left-bottom. "left-top" is as the name suggests: the house on the left side of the board is on top, and the house on the right side of the board is on the bottom.</li>
+  <li>Food house and ghost house specify the actual positions of the two houses. They are both deterministic functions of "X positions" and "Y positions".</li>
+  <li>The observations are measurements that Pacman makes while traveling around the board. Note that there are many of these nodes---one for every board position that might be the wall of a house. If there is no house in a given location, the corresponding observation is none; otherwise it is either red or blue, with the precise distribution of colors depending on the kind of house.</li>
+</ul>
+
+<p><em>Grading:</em> To test and debug your code, run
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -q q1</code></pre></div></div></p>
+
+<hr />
+
+<h2 id="question-2-3-points-bayes-net-probabilities">Question 2 (1 point): Bayes Net Probabilities</h2>
+
+<p>Implement the <code>fillYCPT</code> function in <code>bayesAgents.py</code>. These take the Bayes net you constructed in the previous problem, and specify the factors governing the Y position variables. (We've already filled in the X position, house, and observation factors for you.)</p>
+
+<p>Here's the structure of the Bayes net again:</p>
+
+<p><img src="../assets/images/bayes_net_diagram.png" alt="Bayes net diagram" class="center-image mb-3 img-fluid" style="width: 600px;" /></p>
+
+<p>For an example of how to construct factors, look at the implementation of the factor for X positions in <code>fillXCPT</code>.</p>
+
+<p>The Y positions are given by values <code>BOTH_TOP_VAL, BOTH_BOTTOM_VAL, LEFT_TOP_VAL, LEFT_BOTTOM_VAL</code>. These variables, and their associated probabilities <code>PROB_BOTH_TOP, PROB_BOTH_BOTTOM, PROB_ONLY_LEFT_TOP, PROB_ONLY_LEFT_BOTTOM</code>, are provided by constants at the top of the file.</p>
+
+<p>If you're interested, you can look at the computation for house positions. All you need to remember is that each house can be in one of four positions: top-left, top-right, bottom-left, or bottom-right.</p>
+
+<!--
+<p>Observations are more interesting. Every possible observation position is adjacent to a possible center for a house. Pacman might observe that position to contain a red wall, a blue wall, or no wall. These outcomes occur with the following probabilities (again defined in terms of constants at the top of the file):</p>
+
+<ul>
+  <li>If the adjacent house center is occupied by neither the ghost house or the food house, an observation is none with certainty (probability 1).</li>
+  <li>If the adjacent house center is occupied by the ghost house, it is red with probability <code>PROB_GHOST_RED</code> and blue otherwise.</li>
+  <li>If the adjacent house center is occupied by the food house, it is red with probability <code>PROB_FOOD_RED</code> and blue otherwise.</li>
+</ul>
+
+<p><em>Important note:</em> The structure of the Bayes Net means that the food house and ghost house might be assigned to the same position. This will never occur in practice. But the observation CPT needs to be a proper distribution for every possible set of parents. In this case, you should use the food house distribution.</p>
+-->
+<p><em>Hint:</em> There are only four entries in the Y position factor, so you can specify each of those by hand. <!--You'll have to be cleverer for the observation variables. You'll find it easiest to first loop over possible house positions, then over possible walls for each house, and finally over assignments to (wall color, ghost house position, food house position) triples. Remember to create a separate factor for every one of the 4&times;7=28 possible observation positions.--></p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q2
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="question-3-5-points-join-factors">Question 3 (5 points): Join Factors</h2>
+
+<p>Implement the <code>joinFactors</code> function in <code>factorOperations.py</code>. It takes in a list of <code>Factor</code>s and returns a new <code>Factor</code> whose probability entries are the product of the corresponding rows of the input <code>Factor</code>s.</p>
+
+<p><code>joinFactors</code> can be used as the product rule, for example, if we have a factor of the form $P(X|Y)$ and another factor of the form $P(Y)$, then joining these factors will yield $P(X,Y)$. So, <code>joinFactors</code> allows us to incorporate probabilities for conditioned variables (in this case, Y). However, you should not assume that <code>joinFactors</code> is called on probability tables -- it is possible to call <code>joinFactors</code> on <code>Factors</code>whose rows do not sum to 1.</p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q3
+</code></pre></div></div>
+
+<p>It may be useful to run specific tests during debugging, to see only one set of factors print out. For example, to only run the first test, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -t test_cases/q3/1-product-rule</code></pre></div></div>
+
+<p><em>Hints and Observations:</em></p>
+<ul>
+  <li>Your <code>joinFactors</code> should return a <em>new</em> <code>Factor</code>.</li>
+  <li>Here are some examples of what <code>joinFactors</code> can do:
+    <ul>
+      <li>joinFactors($P(X|Y)$, $P(Y)$) = $P(X, Y)$</li>
+      <li>joinFactors($P(V, W|X,Y,Z)$, $P(X,Y|Z)$) = $P(V,W,X,Y|Z)$</li>
+      <li>joinFactors($P(X|Y,Z)$, $P(Y)$) = $P(X,Y|Z)$</li>
+      <li>joinFactors($P(V|W)$, $P(X|Y)$, $P(Z)$) = $P(V,X,Z|W,Y)$</li>
+    </ul>
+  </li>
+  <li>For a general <code>joinFactors</code> operation, which variables are unconditioned in the returned Factor? Which variables are conditioned?</li>
+  <li>Factors store a <code>variableDomainsDict</code>, which maps each variable to a list of values that it can take on (its domain). A <code>Factor</code> gets its <code>variableDomainsDict</code> from the <code>BayesNet</code> from which it was instantiated. As a result, it contains all the variables of the <code>BayesNet</code>, <em>not</em> only the unconditioned and conditioned variables used in the <code>Factor</code>. For this problem, you may assume that all the input <code>Factor</code>s have come from the same <code>BayesNet</code>, and so their <code>variableDomainsDicts</code> are all the same.</li>
+</ul>
+
+<hr />
+
+<h2 id="question-4-4-points-eliminate">Question 4 (4 points): Eliminate</h2>
+
+<p>Implement the <code>eliminate</code> function in <code>factorOperations.py</code>. It takes a <code>Factor</code> and a variable to eliminate and returns a new <code>Factor</code> that does not contain that variable. This corresponds to summing all of the entries in the <code>Factor</code> which only differ in the value of the variable being eliminated.</p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q4
+</code></pre></div></div>
+
+<p>It may be useful to run specific tests during debugging, to see only one set of factors print out. For example, to only run the first test, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -t test_cases/q4/1-simple-eliminate</code></pre></div></div>
+
+<p><em>Hints and Observations:</em></p>
+
+<ul>
+  <li>Your <code>eliminate</code> should return a <em>new</em> <code>Factor</code>.</li>
+  <li><code>eliminate</code> can be used to marginalize variables from probability tables. For example:
+    <ul>
+      <li>eliminate($P(X,Y|Z)$, $Y$) = $P(X|Z)$</li>
+      <li>eliminate($P(X,Y|Z)$, $X$) = $P(Y|Z)$</li>
+    </ul>
+  </li>
+  <li>For a general eliminate operation, which variables are unconditioned in the returned Factor? Which variables are conditioned?</li>
+  <li>Remember that <code>Factor</code>s store the <code>variableDomainsDict</code> of the original <code>BayesNet</code>, and <em>not</em> only the unconditioned and conditioned variables that they use. As a result, the returned <code>Factor</code> should have the same <code>variableDomainsDict</code> as the input <code>Factor</code>.</li>
+</ul>      
+<hr />
+
+<h2 id="question-5-4-points-normalize">Question 5 (4 points): Normalize</h2>
+
+<p>Implement the <code>normalize</code> function in <code>factorOperations.py</code>. It takes a <code>Factor</code> as input and normalizes it, that is, it scales all of the entries in the <code>Factor</code> such that the sum of the entries in the <code>Factor</code> is 1. If the sum of probabilities in the input factor is 0, you should return <code>None</code>.</p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q5
+</code></pre></div></div>
+
+<p>It may be useful to run specific tests during debugging, to see only one set of factors print out. For example, to only run the first test, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -t test_cases/q5/1-preNormalized</code></pre></div></div>
+
+<p><em>Hints and Observations:</em></p>
+
+<ul>
+  <li>Your <code>normalize</code> should return a <em>new</em> <code>Factor</code>.</li>
+  <li><code>normalize</code> does not affect probability distributions (since probability distributions must already sum to 1).</li>
+  <li>For a general <code>normalize</code> operation, which variables are unconditioned in the returned <code>Factor</code>? Which variables are conditioned? Make sure to read the docstring of <code>normalize</code> for more instructions. In particular, pay attention to the treatment of unconditioned variables with exactly one entry in their domain.</li>
+  <li>Remember that <code>Factors</code> store the <code>variableDomainsDict</code> of the original BayesNet, and <em>not</em> only the unconditioned and conditioned variables that they use. As a result, the returned <code>Factor</code> should have the same <code>variableDomainsDict</code> as the input <code>Factor</code>.</li>
+</ul>
+
+<hr />
+
+<h2 id="question-6-4-points-variable-elimination">Question 6 (4 points): Variable Elimination</h2>
+
+<p>Implement the <code>inferenceByVariableElimination</code> function in <code>inference.py</code>. It answers a probabilistic query, which is represented using a BayesNet, a list of query variables, and the evidence.</p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q6
+</code></pre></div></div>
+
+<p>It may be useful to run specific tests during debugging, to see only one set of factors print out. For example, to only run the first test, run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py -t test_cases/q6/1-disconnected-eliminate</code></pre></div></div>
+
+<p><em>Hints and Observations:</em></p>
+
+<ul>
+  <li>The algorithm should iterate over hidden variables in elimination order, performing joining over and eliminating that variable, until the only the query and evidence variables remain.</li>
+  <li>The sum of the probabilities in your output factor should sum to 1 (so that it is a true conditional probability, conditioned on the evidence).</li>
+  <li>Look at the <code>inferenceByEnumeration</code> function in inference.py for an example on how to use the desired functions. (Reminder: Inference by enumeration first joins over all the variables and then eliminates all the hidden variables. In contrast, variable elimination interleaves join and eliminate by iterating over all the hidden variables and perform a join and eliminate on a single hidden variable before moving on to the next hidden variable.)</li>
+  <li>You will need to take care of the special case where a factor you have joined only has one unconditioned variable (the docstring specifies what to do in greater detail).</li>
+</ul>
+
+<hr />
+
+<h2 id="question-7-1-point-marginal-inference">Question 7 (1 point): Marginal Inference</h2>
+
+<p>Inside <code>bayesAgents.py</code>, use the <code>inference.inferenceByVariableElimination</code> function you just wrote to complete the function <code>getMostLikelyFoodHousePosition</code>. This function should compute the marginal distribution over positions of the food house, then return the most likely position. The return value should be a dictionary containing a single key-value pair, <code>{FOOD_HOUSE_VAR: best_house_val}</code>, where <code>best_house_val</code> is the most likely position from <code>HOUSE_VALS</code>. This is used by <strong><em>Bayesian Pacman</em></strong>, who wanders around randomly collecting information for a fixed number of timesteps, then heads directly to the house most likely to contain food.</p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q7
+</code></pre></div></div>
+
+<p><em>Hint</em>: You may find <code>Factor.getProbability(...)</code> and <code>Factor.getAllPossibleAssignmentDicts(...)</code> to be useful.</p>
+<hr />
+
+<h2 id="question-8-4-points-value-of-perfect-information">Question 8 (3 points): Value of Perfect Information</h2>
+
+<p>Bayesian Pacman spends a lot of time wandering around randomly, even when further exploration doesn't provide any additional value. Can we do something smarter?</p>
+
+<p>We'll evaluate <strong><em>VPI Pacman</em></strong> in a more restricted setting: everything in the world has been observed, except for the colors of one of the houses' walls. VPI Pacman has three choices:</p>
+  
+<ol>
+  <li>immediately enter the already-explored house</li>
+  <li>immediately enter the hidden house</li>
+  <li>explore the outside of the hidden house, and then make a decision about where to go</li>
+</ol>
+
+<h3 id="question-8-part-a">Part (a)</h3>
+
+  <p>First look at <code>computeEnterValues</code>. This function computes the expected value of entering the top left and top right houses. Again, you can run the inference function you already wrote, on the bayes net <code>self.BayesNet</code> to do all the heavy lifting here. First compute p(foodHouse = topLeft and ghostHouse = topRight | evidence) and p(foodHouse = topRight and ghostHouse = topLeft | evidence). Then use these two probabilities to compute expected rewards for entering the top left or top right houses. Use <code>WON_GAME_REWARD</code> and <code>GHOST_COLLISION_REWARD</code> as the reward for entering the foodHouse and ghostHouse, respectively.</p>
+
+<h3 id="question-8-part-b">Part (b)</h3>
+
+<p>Next look at <code>computeExploreValue</code>. This function computes the expected value of exploring all of the hidden cells, and then making a decision. We've provided a helper method, <code>getExplorationProbsAndOutcomes</code>, which returns a list of future observations Pacman might make, and the probability of each. To calculate the value of the extra information Pacman will gain, you can use the following formula:</p>
+
+<p>$E[\text{value of exploration}] = \sum p(\text{evidence}) \max_{\text{actions}} E[\text{value of action} | \text{evidence}]$</p>
+
+<p>Note that $E[\text{value of action} | \text{evidence}]$ is exactly the quantity computed by <code>computeEnterVals</code>, so to compute the value of exploration, you can call <code>computeEnterValues</code> again with the hypothetical evidence provided by <code>getExplorationProbsAndOutcomes</code>.</p>
+
+<p><em>Grading:</em> To test and debug your code, run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q8
+</code></pre></div></div>
+
+<p><em>Hint:</em></p>
+
+<p>After exploring, Pacman will again need to compute the expected value of entering the left and right houses. Fortunately, you've already written a function to do this! Your solution to <code>computeExploreValue</code> can rely on your solution to <code>computeEnterValues</code> to determine the value of future observations.</p>
+
+<hr />
+
+<h2 id="submission">Submission</h2>
+
+<p>In order to submit your project, run <code class="highlighter-rouge">python submission_autograder.py</code> and submit the generated token file <code class="highlighter-rouge">bayesnet.token</code> to the <code class="highlighter-rouge">Project 4</code> assignment on Gradescope.</p>
+
+      </div>
+    </div>
+    <footer class="py-4 container">
+  <div class="row text-center">
+    <div class="col-md-6 col-sm-12">
+      <h3 data-toc-skip><a href="javascript:void(0)">CS 188</a></h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Weekly Schedule</a>
+        </li>
+        <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Office Hours</a>
+        </li>
+        <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <h3 data-toc-skip><a href="../policies/index.html">Policies</a></h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a href="../policies/index.html#Assignments" class="nav-link">Assignments</a>
+        </li>
+        <li class="nav-item"><a href="../policies/index.html#Exams" class="nav-link">Exams</a>
+        </li>
+        <li class="nav-item"><a href="../policies/index.html#Grading" class="nav-link">Grading</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/clipboard.min.js"></script>
+  <script src="../assets/js/codeselect.js"></script>
+</footer>
+
+  </div>
+
+</body>
+
+<!-- <script>w3.includeHTML();</script> -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>
