@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest.html">
+    <link rel="mask-icon" href="https://inst.eecs.berkeley.edu/~cs188/fa21/safari-pinned-tab.svg" color="#fdb515">
+    <meta name="apple-mobile-web-app-title" content="CS 188">
+    <meta name="application-name" content="CS 188">
+    <meta name="msapplication-TileColor" content="#3b7ea1">
+    <meta name="msapplication-TileImage" content="/~cs188/fa21/mstile-144x144.png">
+    <meta name="theme-color" content="#3b7ea1">
+
+    <title>
+      
+      Staff - CS 188: Introduction to Artificial Intelligence, Fall 2021
+      
+    </title>
+
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css">
+
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../assets/js/bootstrap-toc.min.js"></script>
+
+
+    <script src="../assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+    <script src="../assets/js/moment.min.js"></script>
+    <script src="../assets/js/fullcalendar.min.js"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      SVG: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      }
+      });
+    </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+
+
+  <body data-spy="scroll" data-target="#toc">
+
+    <div id="navscroll">
+      <nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+	<div class="container">
+	  <a class="navbar-brand" href="../index.html" style="color: #000;"><strong>CS 188</strong> | Fall 2021</a>
+	  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav ml-auto">
+	      <li class="nav-item"><a href="../index.html" class="nav-link">Syllabus</a></li>
+	      <li class="nav-item"><a href="../policies/index.html" class="nav-link">Policies</a></li>
+	      <li class="nav-item"><a href="../projects/index.html" class="nav-link">Projects</a></li>
+	      <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Schedule</a></li>
+	      <li class="nav-item active"><a href="index.html" class="nav-link active">Staff</a></li>
+              <li class="nav-item">
+		<a class="nav-link" href="https://piazza.com/class/kscn4bxn5in2sn">Piazza
+		  <i class="fal fa-link"></i>
+		</a>
+              </li>
+            </ul>
+	  </div>
+	</div>
+      </nav>
+    </div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <script>
+      // ===== Scroll to Top ====
+      $(window).scroll(function() {
+      if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+      $('#return-to-top').fadeIn(200);    // Fade in the arrow
+      } else {
+      $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+      }
+      });
+      $('#return-to-top').click(function() {  // When arrow is clicked
+      $('body,html').animate({
+      scrollTop : 0                       // Scroll to top of body
+      }, 500);
+      });
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+    <script>var $j = jQuery.noConflict(true);</script>
+    <script>
+      $(document).ready(function(){
+      console.log($().jquery); // this prints v1.11.0
+      console.log($j().jquery); // this prints v3.1.0
+      });
+    </script>
+    <script src="../assets/js/parallax.min.js"></script>
+
+    <script src="../assets/js/main.min.js"></script>
+
+
+    <div class='container'>
+      <!-- <div class="alert alert-info">
+	   <i class="far fa-exclamation-triangle"></i>
+	   <strong>IMPORTANT ANNOUNCEMENT: Please go to DWINELLE 155 for lecture starting from WED Jun 26, 2019)!!!</strong>
+      </div> -->
+
+      <!-- <div class="alert alert-warning"> -->
+      <!-- 	<i class="far fa-exclamation-triangle"></i> -->
+      <!-- 	<strong>Warning: Fall 2021 website is under construction.</strong> There may be misleading information from past semesters on this website, which may be different from the Fall 2021 offering of the course. We will remove this warning when the information on this website is accurate. -->
+      <!-- </div> -->
+
+      <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3800" style="float: left; top: 5em; position: absolute; z-index: 1000">
+	   <div class="toast-header">
+	     <i class="fal fa-bell"></i>
+	     <strong class="mr-auto pl-1">Announcement</strong>
+	     <small class="text-white" id="announcementTime"></small>
+	     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	       <span aria-hidden="true">&times;</span>
+	     </button>
+	   </div>
+	   <div class="toast-body">
+	     <b>Lecture venue for changed AGAIN! Wednesday's (6/26) and future lectures will be held at DWINELLE 155.</b>
+	   </div>
+      </div> -->
+
+      <script>
+	// $('.toast').toast('show')
+	document.getElementById('announcementTime').innerHTML = moment([2019, 5, 25, 21, 35]).fromNow()
+      </script>
+
+
+      <div>
+	<a class="anchor" id="staff"></a>
+	<h1>Course Staff</h1>
+
+	The best way to contact the staff is through <a href="https://piazza.com/class/kscn4bxn5in2sn">Piazza</a>. If you need to contact the course staff via email, we can be reached at <a href="mailto:cs188@berkeley.edu">cs188@berkeley.edu</a>.  You may contact the professors or GSIs directly, but the staff list will produce the fastest response. All emails end with <b>berkeley.edu</b>
+	<hr/>
+
+	<h2>Instructors</h2>
+	<div class="container">
+	  
+	  <div class="row">
+
+	    <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	      <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/anca_dragan.jpg" alt="Headshot of Anca Dragan"/>
+
+	    </div>
+	    <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	      <h3 class="mb-3">
+
+		Anca Dragan
+
+	      </h3>
+
+	      <span><p>Note: Please do not email logistics questions about enrollment, etc, to the professors. Please direct these questions to piazza or cs188@.</p><p>Office hours: Th 9-10am online (during lecturing weeks).</p><b>Email: </b><a href="javascript:copyEmailAddress('#dragan_email')" id="dragan_email">anca@</a></span>
+
+	      <ul class="pt-2">
+
+		<li class="section bio">
+
+		</li>
+	      </ul>
+	    </div>
+
+	    <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	      <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/pieter_abbeel.jpg" alt="Headshot of Pieter Abbeel"/>
+
+	    </div>
+	    <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	      <h3 class="mb-3">
+
+		Pieter Abbeel
+
+	      </h3>
+
+	      <span><p>Note: Please do not email logistics questions about enrollment, etc, to the professors. Please direct these questions to piazza or cs188@.</p><p>Office hours: Th 9-10am online (during lecturing weeks).</p><b>Email: </b><a href="javascript:copyEmailAddress('#abbeel_email')" id="abbeel_email">pabbeel@</a></span>
+
+	      <ul class="pt-2">
+
+		<li class="section bio">
+
+		</li>
+	      </ul>
+	    </div>
+
+
+
+
+
+            <div class="col-sm"></div>
+
+	  </div>
+	  
+	</div>
+	
+
+
+
+      </div>
+
+
+      <h2>GSIs</h2>
+      <div class="container">
+	
+	<div class="row">
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/kai_pin_ryan_koh.png" alt="Headshot of Ryan Koh"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Ryan Koh
+	      
+	    </h3>
+	    
+	    <span><b>Head TA</b></span><br/>
+	    
+	    <span><b>Email: </b>Admin <a href="javascript:copyEmailAddress('#admin_email')" id="admin_email">cs188@</a>, Personal <a href="javascript:copyEmailAddress('#ryan_koh_email')" id="ryan_koh_email">ryan_koh@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi, I’m a CS student from SoCal, looking forward to meeting you all this semester! CS188 is a great class, where you not only learn about AI, but also develop a love-hate relationship with Pacman. Feel free to reach out about anything, and let’s have a great semester! We stan robots <3 (Website: <a href="https://kaipinryankoh.github.io">kaipinryankoh.github.io</a>)
+																																					       </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/alina_trinh.png" alt="Headshot of Alina Trinh"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Alina Trinh
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#alina_trinh_email')" id="alina_trinh_email">tutrinh@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi y'all! I’m Alina and I'm a rising third-year studying EECS and business admin. My academic interests lie in NLP and autonomous vehicles. In my free time, I like to go hiking, play piano, read, and binge watch shows. Looking forward to a great semester!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+	  
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/angela_liu.jpg" alt="Headshot of Angela Liu"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Angela Liu
+	      
+	    </h3>
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#angela_liu_email')" id="angela_liu_email">aliu917@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hey! I’m Angela and currently a fourth year studying CS. I’ve lived in the Bay Area my entire life and I love it here! When I’m not studying, I like to read, play golf, travel, and eat Asian desserts. I'm really excited to be teaching 188 again and hope you all have a great semester!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/ayush_kamat.jpg" alt="Headshot of Ayush Kamat"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Ayush Kamat
+	      
+	    </h3>
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#ayush_kamat_email')" id="ayush_kamat_email">akamat@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi there! I'm a senior CS and Math major from the Los Angeles area. Outside of school I love to listen to and play music, and I also love to cook and make food! I'm super excited to teach y'all and I'm looking forward to a great semester!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+          <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/daniel_filan.jpg" alt="Headshot of Daniel Filan"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Daniel Filan
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#daniel_filan_email')" id="daniel_filan_email">daniel_filan@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi! I'm Daniel, a 6th year PhD student in CS. After growing up in Australia, I moved to the US to work with Stuart Russell and the Center for Human-Compatible AI, and now I work on trying to understand neural networks by breaking them into pieces. My hobbies include playing go and going on walks. I look forward to helping you all learn about AI this semester!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+          <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/dimitris_papadimitriou.jpg" alt="Headshot of Dimitris Papadimitriou"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Dimitris Papadimitriou
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#dimitris_papadimitriou_email')" id="dimitris_papadimitriou_email">dimitri@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi everyone, my name is Dimitri. I am a PhD student and this is my second time being a TA for CS188. In my free time I pretend to know how to swim and take nice photos. Feel free to contact me regarding the course or anything else. I hope we all have a great semester. Cheers.
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+          <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/hamza_qadeer.jpg" alt="Headshot of Hamza Qadeer"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Hamza Qadeer
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#hamza_qadeer_email')" id="hamza_qadeer_email">hamza.qadeer@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi! I'm a fourth-year CS/Stats major interested in ML and systems. In my free time, I like watching shows and exploring new neighborhoods/cities/places on foot (or, sometimes, on Google Maps). Looking forward to a fun semester :) 
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->  
+
+          <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/jason_wang.jpg" alt="Headshot of Jason Wang"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Jason Wang
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#jason_wang_email')" id="jason_wang_email">jasonw-sy@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi everyone! I'm a Junior student majoring in CS. This is my second semester TAing CS 188, and I'm very excited to get to know you all. I sometimes (RaReLY) play guitar and make music, and have a taste of making weird <a href="https://github.com/blahBlahhhJ/stress-buster-ar">projects</a>. Looking forward to this amazing semester!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->  
+	  
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/jeffrey_tao.jpg" alt="Headshot of Jeffrey Tao"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Jeffrey Tao
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#jeffrey_tao_email')" id="jeffrey_tao_email">jtao@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi, I'm Jeffrey! Feel free to talk to me if you're interested in RL research.
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/jim_wang.jpg" alt="Headshot of Jim Wang"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Jim Wang
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#jim_wang_email')" id="jim_wang_email">wangjim19@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		I’m Jim, a third year EECS major. I do some ML for Launchpad and BAIR. Outside of school, I love watching anime and kdrama, going to cool places with friends, singing, and playing the piano when I can find one! I’m also a hella foodie :))
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+          <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/jocelyn_chen.jpg" alt="Headshot of Jocelyn Chen"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Jocelyn Chen
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#jocelyn_chen_email')" id="jocelyn_chen_email">jocelynchen1246@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hello! I'm Jocelyn, a fourth year CS major from the Bay Area. In my free time, I like to dance, watch Netflix, and play video games (mostly genshin and league). Feel free to reach out to me to talk about anything. I’m looking forward to a great semester!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+          <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/jonathan_yang.jpg" alt="Headshot of Jonathan Yang"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Jonathan Yang
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#jonathan_yang_email')" id="jonathan_yang_email">jy2370@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi everyone! I am a 4th year EECS undergrad who loves artificial intelligence. My research is in reusing large, past datasets in order to enable efficient generalization and lifelong learning in robotics. My hobbies include tinkering with drones, playing clarinet in a wind ensemble, and watching good tv shows/anime. I'm excited to get to know all of you!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/lexy_li.jpg" alt="Headshot of Lexy Li"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Lexy Li
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#lexy_li_email')" id="lexy_li_email">lexyyxl@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hey! I am a Senior studying Computer Science and Data Science. CS188 has been my favorite class at Cal; hope you enjoy it as well! Other than AI/ML, I'm also interested in font-end design/engineering. Outside of school, I like going out on photo shoots and exploring coffee shops. Looking forward to meeting you all : )
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/regina_wang.jpg" alt="Headshot of Regina Wang"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Regina Wang
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#regina_wang_email')" id="regina_wang_email">rlwang@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		I'm a fourth year majoring in CS and minoring in Political Economy, and I absolutely love CS188 (taking it and teaching it). I'm also super excited to meet all of you this term! My current research interest is in human-robot interaction and in my free time, I love baking, playing tennis, and clicking around Wikipedia. Feel free to reach out to talk about anything!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/reina_wang.jpg" alt="Headshot of Reina Wang"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Reina Wang
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#regina_wang_email')" id="regina_wang_email">reinawa1012@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi! I'm a junior studying EECS. In my spare time, I like exploring new restaurants, binge-watching singing competitions, and huddling up in a comfortable beanbag with a mug of hot cocoa and a good sci-fi novel.
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+	  
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/saagar_sanghavi.jpg" alt="Headshot of Saagar Sanghavi"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Saagar Sanghavi
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#saagar_sanghavi_email')" id="saagar_sanghavi_email">ssanghavi404@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		I like puzzles. All of life is just one giant puzzle to solve. Let's solve <a href="https://drive.google.com/file/d/1OIzzKbZiFhsKNZZfdocQWALWZfbaMgqO/view?usp=sharing">some</a> <a href="https://drive.google.com/file/d/1uc6h5vZNsV9A8FXyekYKtvRWK-rnSMes/view">fun</a> <a href="https://drive.google.com/file/d/1s6QKD0dYk01iBAhhKxGzWxoHqcGQYKsf/view?usp=sharing">puzzles</a> together this semester :)
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/srishti_agarwal.png" alt="Headshot of Srishti Agarwal"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Srishti Agarwal
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#srishti_agarwal_email')" id="srishti_agarwal_email">srishti@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi everyone! I’m a senior majoring in EECS. This is my second time teaching CS188. Within EECS, I’m interested in Machine Learning and Robotics, and I’m currently working at a start up on enhancing an NLP report generation model. I’m also a foodie, love watching TV shows and movies, playing board games and dancing. Feel free to drop by my OH to drop movie recs/discuss anything ML or AI related! I’m super excited to get know you all!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+	  
+	  <!-- GSI DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/yanlai_yang.jpg" alt="Headshot of Yanlai Yang"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+              Yanlai Yang
+	      
+	    </h3>
+	    
+	    <!-- <span><b>Head TA</b></span><br/> -->
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#yanlai_yang_email')" id="yanlai_yang_email">yyang22@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hello! I’m a fourth-year CS and applied math major from Shanghai. My research is currently focused on robot learning. This is my fourth time being a TA for this course and I am really excited to meet everyone! Outside of work, I love to play card games (especially contract bridge) and watch Formula races.
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END GSI DIVIDER-->
+	  
+          <div class="col-sm"></div>
+	  
+	</div>
+      </div>
+      
+      <h2>Reader</h2>
+      <div class="container">
+	<div class="row">
+
+	  <!-- READER DIVIDER-->
+	  <div class="col-xs-12 col-sm-4 col-lg-2 staffer-img">
+	    
+	    <img class="img-fluid rounded-circle mx-auto" src="../assets/headshots/evgeny_pobachienko.jpg" alt="Headshot of Evgeny Pobachienko"/>
+	    
+	  </div>
+	  <div class="col-xs-12 col-sm-8 col-lg-4 staffer">
+	    <h3 class="mb-3">
+	      
+	      Evgeny Pobachienko
+	      
+	    </h3>
+	    
+	    <span><b>Email: </b><a href="javascript:copyEmailAddress('#evgeny_pobachienko_email')" id="evgeny_pobachienko_email">evgenyp@</a></span>
+	    
+	    <ul class="pt-2">
+	      
+	      <li class="section bio">
+		Hi! I’m a sophomore majoring in CS. I really enjoyed CS 188, especially the fun projects, and I’m excited to help teach it. Besides CS, I like going on longish runs, hiking, and playing video games (Elden Ring hype). I look forward to meeting you (in person now :) )!
+	      </li>
+	    </ul>
+	  </div>
+	  <!-- END READER DIVIDER-->
+
+	  
+	</div>
+      </div>
+
+    </div>
+
+    
+    <footer class="py-4 container">
+      <div class="row text-center">
+	<div class="col-md-6 col-sm-12">
+	  <h3 data-toc-skip><a href="javascript:void(0)">CS 188</a></h3>
+	  <ul class="nav nav-pills flex-column">
+            <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Weekly Schedule</a>
+            </li>
+            <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Office Hours</a>
+            </li>
+            <li class="nav-item"><a href="index.html" class="nav-link">Staff</a>
+            </li>
+	  </ul>
+	</div>
+
+	<div class="col-md-6 col-sm-12">
+	  <h3 data-toc-skip><a href="../policies/index.html">Policies</a></h3>
+	  <ul class="nav nav-pills flex-column">
+            <li class="nav-item"><a href="../policies/index.html#Assignments" class="nav-link">Assignments</a>
+            </li>
+            <li class="nav-item"><a href="../policies/index.html#Exams" class="nav-link">Exams</a>
+            </li>
+            <li class="nav-item"><a href="../policies/index.html#Grading" class="nav-link">Grading</a>
+            </li>
+	  </ul>
+	</div>
+      </div>
+
+      <script src="../assets/js/clipboard.min.js"></script>
+      <script src="../assets/js/codeselect.js"></script>
+    </footer>
+
+</div>
+
+</body>
+
+<!-- <script>w3.includeHTML();</script> -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>

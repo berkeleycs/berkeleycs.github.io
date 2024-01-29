@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="manifest" href="../site.webmanifest.html">
+  <link rel="mask-icon" href="https://inst.eecs.berkeley.edu/~cs188/fa21/safari-pinned-tab.svg" color="#fdb515">
+  <meta name="apple-mobile-web-app-title" content="CS 188">
+  <meta name="application-name" content="CS 188">
+  <meta name="msapplication-TileColor" content="#3b7ea1">
+  <meta name="msapplication-TileImage" content="/~cs188/fa21/mstile-144x144.png">
+  <meta name="theme-color" content="#3b7ea1">
+
+  <title>
+    
+      Project 4 - Ghostbusters - CS 188: Introduction to Artificial Intelligence, Fall 2021
+    
+  </title>
+
+  <link rel="stylesheet" href="../assets/css/main.css" type="text/css">
+
+  <script src="../assets/js/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="../assets/js/bootstrap-toc.min.js"></script>
+
+
+  <script src="../assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+  <script src="../assets/js/moment.min.js"></script>
+  <script src="../assets/js/fullcalendar.min.js"></script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+        linebreaks: { automatic: true },
+        scale: 90,
+        preferredFont: "Latin Modern"
+      },
+     SVG: {
+       linebreaks: { automatic: true },
+       scale: 90,
+       preferredFont: "Latin Modern"
+     }
+    });
+  </script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+  <div id="navscroll">
+  <nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html" style="color: #000;"><strong>CS 188</strong> | Fall 2021</a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent" >
+        <ul class="navbar-nav ml-auto">
+          
+          
+          
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../index.html" class="nav-link">Syllabus</a></li>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../policies/index.html" class="nav-link">Policies</a></li>
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+      <li class="nav-item"><a href="../projects/index.html" class="nav-link">Projects</a></li>
+    
+  
+
+  
+    
+      <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Schedule</a></li>
+    
+  
+
+  
+    
+      <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a></li>
+    
+  
+
+
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="https://piazza.com/class/jza9erz2ojy3qr">Piazza
+              <i class="fal fa-link"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<!-- Return to Top -->
+<a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+<script>
+  // ===== Scroll to Top ====
+  $(window).scroll(function() {
+    if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+      $('#return-to-top').fadeIn(200);    // Fade in the arrow
+    } else {
+      $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+    }
+  });
+  $('#return-to-top').click(function() {  // When arrow is clicked
+    $('body,html').animate({
+      scrollTop : 0                       // Scroll to top of body
+    }, 500);
+  });
+</script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>var $j = jQuery.noConflict(true);</script>
+<script>
+  $(document).ready(function(){
+    console.log($().jquery); // this prints v1.11.0
+    console.log($j().jquery); // this prints v3.1.0
+  });
+</script>
+<script src="../assets/js/parallax.min.js"></script>
+
+<script src="../assets/js/main.min.js"></script>
+
+
+  <div class='container'>
+    <!-- <div class="alert alert-info">
+  <i class="far fa-exclamation-triangle"></i>
+  <strong>IMPORTANT ANNOUNCEMENT: Please go to DWINELLE 155 for lecture starting from WED Jun 26, 2019)!!!</strong>
+</div> -->
+
+<!-- <div class="alert alert-warning">
+  <i class="far fa-exclamation-triangle"></i>
+  <strong>Warning: Fall 2020 website is under construction.</strong> There may be misleading information from past semesters on this website, which may be different from the Fall 2020 offering of the course. We will remove this warning when the information on this website is accurate.
+</div> -->
+
+<!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3800" style="float: left; top: 5em; position: absolute; z-index: 1000">
+  <div class="toast-header">
+    <i class="fal fa-bell"></i>
+    <strong class="mr-auto pl-1">Announcement</strong>
+    <small class="text-white" id="announcementTime"></small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    <b>Lecture venue for changed AGAIN! Wednesday's (6/26) and future lectures will be held at DWINELLE 155.</b>
+  </div>
+</div> -->
+
+<script>
+  // $('.toast').toast('show')
+  document.getElementById('announcementTime').innerHTML = moment([2019, 5, 25, 21, 35]).fromNow()
+</script>
+
+
+    <div class="row">
+      <div class="col-sm-3">
+  <nav id="toc" data-toggle="toc" class="sticky-top" style="top: 40px; margin-bottom: 40px"></nav>
+</div>
+
+      <div class="col-sm-9">
+          <h1 class="mt-0 center" id="project-4-ghostbusters">Project 4: Ghostbusters</h1>
+
+<center>Version 1.007. Last Updated: 10/25/2021</center>
+
+<p class="center">Due: <b>Friday 11/12</b> at <b>10:59 pm</b></p>
+
+<p><img src="../assets/images/busters.png" alt="GHOSTBUSTERS" class="img-fluid center-image" style="width: 400px;" /></p>
+
+<center>I can hear you, ghost.</center>
+<center>Running won't save you from my</center>
+<center>Particle filter!</center>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Pacman spends his life running from ghosts, but things were not always so. Legend has it that many years ago, Pacman’s great grandfather Grandpac learned to hunt ghosts for sport. However, he was blinded by his power and could only track ghosts by their banging and clanging.</p>
+
+<p>In this project, you will design Pacman agents that use sensors to locate and eat invisible ghosts. You’ll advance from locating single, stationary ghosts to hunting packs of multiple moving ghosts with ruthless efficiency.</p>
+
+<p>The code for this project contains the following files, available as a <a href="../assets/files/tracking.zip">zip archive</a>.</p>
+
+<p><em>Note:</em> <strong>In this project you only need to submit the token generated by <code class="highlighter-rouge">submission_autograder.py</code>.</strong> See <a href="index.html#Submission">Submission</a> for details.</p>
+
+<table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td colspan="2"><b>Files you'll edit:</b></td>
+              </tr>
+              <tr>
+                <td><code>bustersAgents.py</code></td>
+                <td>Agents for playing the Ghostbusters variant of Pacman.</td>
+              </tr>
+              <tr>
+                <td><code>inference.py</code></td>
+                <td>Code for tracking ghosts over time using their sounds.</td>
+              </tr>
+              <tr>
+                <td colspan="2"><b>Files you will not edit:</b></td>
+              </tr>
+              <tr>
+                <td><code>busters.py</code></td>
+                <td>The main entry to Ghostbusters (replacing Pacman.py)</td>
+              </tr>
+              <tr>
+                <td><code>bustersGhostAgents.py</code></td>
+                <td>New ghost agents for Ghostbusters</td>
+              </tr>
+              <tr>
+                <td><code>distanceCalculator.py</code></td>
+                <td>Computes maze distances</td>
+              </tr>
+              <tr>
+                <td><code>game.py</code></td>
+                <td>Inner workings and helper classes for Pacman</td>
+              </tr>
+              <tr>
+                <td><code>ghostAgents.py</code></td>
+                <td>Agents to control ghosts</td>
+              </tr>
+              <tr>
+                <td><code>graphicsDisplay.py</code></td>
+                <td>Graphics for Pacman</td>
+              </tr>
+              <tr>
+                <td><code>graphicsUtils.py</code></td>
+                <td>Support for Pacman graphics</td>
+              </tr>
+              <tr>
+                <td><code>keyboardAgents.py</code></td>
+                <td>Keyboard interfaces to control Pacman</td>
+              </tr>
+              <tr>
+                <td><code>layout.py</code></td>
+                <td>Code for reading layout files and storing their contents</td>
+              </tr>
+              <tr>
+                <td><code>util.py</code></td>
+                <td>Utility functions</td>
+              </tr>
+            </tbody>
+          </table>
+
+<p><strong>Files to Edit and Submit:</strong> You will fill in portions of <code class="highlighter-rouge">bustersAgents.py</code> and <code class="highlighter-rouge">inference.py</code> during the assignment. Please <em>do not</em> change the other files in this distribution.</p>
+
+<p><em>Note:</em> <strong>You only need to submit <code class="highlighter-rouge">tracking.token</code>, generated by running <code class="highlighter-rouge">submission_autograder.py</code>.</strong> It contains the evaluation results from your local autograder, and a copy of all your code. You do not need to submit any other files.</p>
+
+<p><strong>Evaluation:</strong> Your code will be autograded for technical correctness. Please <em>do not</em> change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder. However, the correctness of your implementation – not the autograder’s judgements – will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.</p>
+
+<p><strong>Academic Dishonesty:</strong> We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else’s code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don’t try. We trust you all to submit your own work only; <em>please</em> don’t let us down. If you do, we will pursue the strongest consequences available to us.</p>
+
+<p><strong>Getting Help:</strong> You are not alone! If you find yourself stuck on something, contact the course staff for help. Office hours, section, and the discussion forum are there for your support; please use them. If you can’t make our office hours, let us know and we will schedule more. We want these projects to be rewarding and instructional, not frustrating and demoralizing. But, we don’t know when or how to help unless you ask.</p>
+
+<p><strong>Discussion:</strong> Please be careful not to post spoilers.</p>
+
+<hr />
+
+<h2 id="ghostbusters-and-bns">Ghostbusters and BNs</h2>
+
+<p>In the CS 188 version of Ghostbusters, the goal is to hunt down scared but invisible ghosts. Pacman, ever resourceful, is equipped with sonar (ears) that provides noisy readings of the Manhattan distance to each ghost. The game ends when Pacman has eaten all the ghosts. To start, try playing a game yourself using the keyboard.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python busters.py
+</code></pre></div></div>
+
+<p>The blocks of color indicate where the each ghost could possibly be, given the noisy distance readings provided to Pacman. The noisy distances at the bottom of the display are always non-negative, and always within 7 of the true distance. The probability of a distance reading decreases exponentially with its difference from the true distance.</p>
+
+<p>Your primary task in this project is to implement inference to track the ghosts. For the keyboard based game above, a crude form of inference was implemented for you by default: all squares in which a ghost could possibly be are shaded by the color of the ghost. Naturally, we want a better estimate of the ghost’s position. Fortunately, Bayes Nets provide us with powerful tools for making the most of the information we have. Throughout the rest of this project, you will implement algorithms for performing both exact and approximate inference using Bayes Nets. The project is challenging, so we do encouarge you to start early and seek help when necessary.</p>
+
+<p>While watching and debugging your code with the autograder, it will be helpful to have some understanding of what the autograder is doing. There are 2 types of tests in this project, as differentiated by their <code class="highlighter-rouge">.test</code> files found in the subdirectories of the <code class="highlighter-rouge">test_cases</code> folder. For tests of class <code class="highlighter-rouge">DoubleInferenceAgentTest</code>, you will see visualizations of the inference distributions generated by your code, but all Pacman actions will be pre-selected according to the actions of the staff implementation. This is necessary to allow comparision of your distributions with the staff’s distributions. The second type of test is <code class="highlighter-rouge">GameScoreTest</code>, in which your <code class="highlighter-rouge">BustersAgent</code> will actually select actions for Pacman and you will watch your Pacman play and win games.</p>
+
+<p>As you implement and debug your code, you may find it useful to run a single test at a time. In order to do this you will need to use the <code class="highlighter-rouge">-t</code> flag with the autograder. For example if you only want to run the first test of question 1, use:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-t</span> test_cases/q1/1-ObsProb
+</code></pre></div></div>
+<p>In general, all test cases can be found inside <code class="highlighter-rouge">test_cases/q*</code>.</p>
+
+<p>For this project, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-0-0-points-discretedistribution-class">Question 0 (0 points): <code class="highlighter-rouge">DiscreteDistribution</code> Class</h2>
+
+<p>Throughout this project, we will be using the <code class="highlighter-rouge">DiscreteDistribution</code> class defined in <code class="highlighter-rouge">inference.py</code> to model belief distributions and weight distributions. This class is an extension of the built-in Python dictionary class, where the keys are the different discrete elements of our distribution, and the corresponding values are proportional to the belief or weight that the distribution assigns that element. This question asks you to fill in the missing parts of this class, which will be crucial for later questions (even though this question itself is worth no points).</p>
+
+<p>First, fill in the <code class="highlighter-rouge">normalize</code> method, which normalizes the values in the distribution to sum to one, but keeps the proportions of the values the same. Use the <code class="highlighter-rouge">total</code> method to find the sum of the values in the distribution. For an empty distribution or a distribution where all of the values are zero, do nothing. Note that this method modifies the distribution directly, rather than returning a new distribution.</p>
+
+<p>Second, fill in the <code class="highlighter-rouge">sample</code> method, which draws a sample from the distribution, where the probability that a key is sampled is proportional to its corresponding value. Assume that the distribution is not empty, and not all of the values are zero. Note that the distribution does not necessarily have to be normalized prior to calling this method. You may find Python’s built-in <code class="highlighter-rouge">random.random()</code> function useful for this question.</p>
+
+<p>There are no autograder tests for this question, but the correctness of your implementation can be easily checked. We have provided <a href="https://docs.python.org/2/library/doctest.html">Python doctests</a> as a starting point, and you can feel free to add more and implement other tests of your own. You can run the doctests using:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> doctest <span class="nt">-v</span> inference.py
+</code></pre></div></div>
+
+<p>Note that, depending on the implementation details of the <code class="highlighter-rouge">sample</code> method, some correct implementations may not pass the doctests that are provided. To thoroughly check the correctness of your <code class="highlighter-rouge">sample</code> method, you should instead draw many samples and see if the frequency of each key converges to be proportional of its corresponding value.</p>
+
+<hr />
+
+<h2 id="question-1-2-points-observation-probability">Question 1 (2 points): Observation Probability</h2>
+
+<p>In this question, you will implement the <code class="highlighter-rouge">getObservationProb</code> method in the <code class="highlighter-rouge">InferenceModule</code> base class in <code class="highlighter-rouge">inference.py</code>. This method takes in an observation (which is a noisy reading of the distance to the ghost), Pacman’s position, the ghost’s position, and the position of the ghost’s jail, and returns the probability of the noisy distance reading given Pacman’s position and the ghost’s position. In other words, we want to return <code class="highlighter-rouge">P(noisyDistance | pacmanPosition, ghostPosition)</code>.</p>
+
+<p>The distance sensor has a probability distribution over distance readings given the true distance from Pacman to the ghost. This distribution is modeled by the function <code class="highlighter-rouge">busters.getObservationProbability(noisyDistance, trueDistance)</code>, which returns <code class="highlighter-rouge">P(noisyDistance | trueDistance)</code> and is provided for you. You should use this function to help you solve the problem, and use the provided <code class="highlighter-rouge">manhattanDistance</code> function to find the distance between Pacman’s location and the ghost’s location.</p>
+
+<p>However, there is the special case of jail that we have to handle as well. Specifically, when we capture a ghost and send it to the jail location, our distance sensor deterministically returns <code class="highlighter-rouge">None</code>, and nothing else. So, if the ghost’s position is the jail position, then the observation is <code class="highlighter-rouge">None</code> with probability 1, and everything else with probability 0. Conversely, if the distance reading is not <code class="highlighter-rouge">None</code>, then the ghost is in jail with probability 0. If the distance reading is <code class="highlighter-rouge">None</code> then the ghost is in jail with probability 1. Make sure you handle this special case in your implementation.</p>
+
+<p>To test your code and run the autograder for this question:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q1
+</code></pre></div></div>
+
+<p>As a general note, it is possible for some of the autograder tests to take a long time to run for this project, and you will have to exercise patience. As long as the autograder doesn’t time out, you should be fine (provided that you actually pass the tests).</p>
+
+<hr />
+
+<h2 id="question-2-3-points-exact-inference-observation">Question 2 (3 points): Exact Inference Observation</h2>
+
+<p>In this question, you will implement the <code class="highlighter-rouge">observeUpdate</code> method in <code class="highlighter-rouge">ExactInference</code> class of <code class="highlighter-rouge">inference.py</code> to correctly update the agent’s belief distribution over ghost positions given an observation from Pacman’s sensors. You are implementing the online belief update for observing new evidence. The <code class="highlighter-rouge">observeUpdate</code> method should, for this problem, update the belief at every position on the map after receiving a sensor reading. You should iterate your updates over the variable <code class="highlighter-rouge">self.allPositions</code> which includes all legal positions plus the special jail position. Beliefs represent the probability that the ghost is at a particular location, and are stored as a <code class="highlighter-rouge">DiscreteDistribution</code> object in a field called <code class="highlighter-rouge">self.beliefs</code>, which you should update.</p>
+
+<p>Before typing any code, write down the equation of the inference problem you are trying to solve. You should use the function <code class="highlighter-rouge">self.getObservationProb</code> that you wrote in the last question, which returns the probability of an observation given Pacman’s position, a potential ghost position, and the jail position. You can obtain Pacman’s position using <code class="highlighter-rouge">gameState.getPacmanPosition()</code>, and the jail position using <code class="highlighter-rouge">self.getJailPosition()</code>.</p>
+
+<p>In the Pacman display, high posterior beliefs are represented by bright colors, while low beliefs are represented by dim colors. You should start with a large cloud of belief that shrinks over time as more evidence accumulates. As you watch the test cases, be sure that you understand how the squares converge to their final coloring.</p>
+
+<p><em>Note:</em> your busters agents have a separate inference module for each ghost they are tracking. That’s why if you print an observation inside the <code class="highlighter-rouge">observeUpdate</code> function, you’ll only see a single number even though there may be multiple ghosts on the board.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q2
+</code></pre></div></div>
+
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q2 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-3-3-points-exact-inference-with-time-elapse">Question 3 (3 points): Exact Inference with Time Elapse</h2>
+
+<p>In the previous question you implemented belief updates for Pacman based on his observations. Fortunately, Pacman’s observations are not his only source of knowledge about where a ghost may be. Pacman also has knowledge about the ways that a ghost may move; namely that the ghost can not move through a wall or more than one space in one time step.</p>
+
+<p>To understand why this is useful to Pacman, consider the following scenario in which there is Pacman and one Ghost. Pacman receives many observations which indicate the ghost is very near, but then one which indicates the ghost is very far. The reading indicating the ghost is very far is likely to be the result of a buggy sensor. Pacman’s prior knowledge of how the ghost may move will decrease the impact of this reading since Pacman knows the ghost could not move so far in only one move.</p>
+
+<p>In this question, you will implement the <code class="highlighter-rouge">elapseTime</code> method in <code class="highlighter-rouge">ExactInference</code>. The <code class="highlighter-rouge">elapseTime</code> step should, for this problem, update the belief at every position on the map after one time step elapsing. Your agent has access to the action distribution for the ghost through <code class="highlighter-rouge">self.getPositionDistribution</code>. In order to obtain the distribution over new positions for the ghost, given its previous position, use this line of code:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newPosDist <span class="o">=</span> self.getPositionDistribution<span class="o">(</span>gameState, oldPos<span class="o">)</span>
+</code></pre></div></div>
+<p>Where <code class="highlighter-rouge">oldPos</code> refers to the previous ghost position. <code class="highlighter-rouge">newPosDist</code> is a <code class="highlighter-rouge">DiscreteDistribution</code> object, where for each position <code class="highlighter-rouge">p</code> in <code class="highlighter-rouge">self.allPositions</code>, <code class="highlighter-rouge">newPosDist[p]</code> is the probability that the ghost is at position <code class="highlighter-rouge">p</code> at time <code class="highlighter-rouge">t + 1</code>, given that the ghost is at position <code class="highlighter-rouge">oldPos</code> at time <code class="highlighter-rouge">t</code>. Note that this call can be fairly expensive, so if your code is timing out, one thing to think about is whether or not you can reduce the number of calls to <code class="highlighter-rouge">self.getPositionDistribution</code>.</p>
+
+<p>Before typing any code, write down the equation of the inference problem you are trying to solve. In order to test your predict implementation separately from your update implementation in the previous question, this question will not make use of your update implementation.</p>
+
+<p>Since Pacman is not observing the ghost, this means the ghost’s actions will not impact Pacman’s beliefs. Over time, Pacman’s beliefs will come to reflect places on the board where he believes ghosts are most likely to be given the geometry of the board and what Pacman already knows about their valid movements.</p>
+
+<p>For the tests in this question we will sometimes use a ghost with random movements and other times we will use the <code class="highlighter-rouge">GoSouthGhost</code>. This ghost tends to move south so over time, and without any observations, Pacman’s belief distribution should begin to focus around the bottom of the board. To see which ghost is used for each test case you can look in the <code class="highlighter-rouge">.test</code> files.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q3
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q3 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<p>As you watch the autograder output, remember that lighter squares indicate that pacman believes a ghost is more likely to occupy that location, and darker squares indicate a ghost is less likely to occupy that location. For which of the test cases do you notice differences emerging in the shading of the squares? Can you explain why some squares get lighter and some squares get darker?</p>
+
+<hr />
+
+<h2 id="question-4-2-points-exact-inference-full-test">Question 4 (2 points): Exact Inference Full Test</h2>
+
+<p>Now that Pacman knows how to use both his prior knowledge and his observations when figuring out where a ghost is, he is ready to hunt down ghosts on his own. This question will use your <code class="highlighter-rouge">observeUpdate</code> and <code class="highlighter-rouge">elapseTime</code> implementations together, along with a simple greedy hunting strategy which you will implement for this question. In the simple greedy strategy, Pacman assumes that each ghost is in its most likely position according to his beliefs, then moves toward the closest ghost. Up to this point, Pacman has moved by randomly selecting a valid action.</p>
+
+<p>Implement the <code class="highlighter-rouge">chooseAction</code> method in <code class="highlighter-rouge">GreedyBustersAgent</code> in <code class="highlighter-rouge">bustersAgents.py</code>. Your agent should first find the most likely position of each remaining uncaptured ghost, then choose an action that minimizes the maze distance to the closest ghost.</p>
+
+<p>To find the maze distance between any two positions <code class="highlighter-rouge">pos1</code> and <code class="highlighter-rouge">pos2</code>, use <code class="highlighter-rouge">self.distancer.getDistance(pos1, pos2)</code>. To find the successor position of a position after an action:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>successorPosition <span class="o">=</span> Actions.getSuccessor<span class="o">(</span>position, action<span class="o">)</span>
+</code></pre></div></div>
+<p>You are provided with <code class="highlighter-rouge">livingGhostPositionDistributions</code>, a list of <code class="highlighter-rouge">DiscreteDistribution</code> objects representing the position belief distributions for each of the ghosts that are still uncaptured.</p>
+
+<p>If correctly implemented, your agent should win the game in <code class="highlighter-rouge">q4/3-gameScoreTest</code> with a score greater than 700 at least 8 out of 10 times. Note: the autograder will also check the correctness of your inference directly, but the outcome of games is a reasonable sanity check.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q4
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q4 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-5-2-points-approximate-inference-initialization-and-beliefs">Question 5 (2 points): Approximate Inference Initialization and Beliefs</h2>
+
+<p>Approximate inference is very trendy among ghost hunters this season. For the next few questions, you will implement a particle filtering algorithm for tracking a single ghost.</p>
+
+<p>First, implement the functions <code class="highlighter-rouge">initializeUniformly</code> and <code class="highlighter-rouge">getBeliefDistribution</code> in the <code class="highlighter-rouge">ParticleFilter</code> class in <code class="highlighter-rouge">inference.py</code>. A particle (sample) is a ghost position in this inference problem. Note that, for initialization, particles should be evenly (not randomly) distributed across legal positions in order to ensure a uniform prior. We recommend thinking about how the mod operator is useful for <code class="highlighter-rouge">initializeUniformly</code>.</p>
+
+<p><strong>Note that the variable you store your particles in must be a list.</strong> A list is simply a collection of unweighted variables (positions in this case). Storing your particles as any other data type, such as a dictionary, is incorrect and will produce errors. The <code class="highlighter-rouge">getBeliefDistribution</code> method then takes the list of particles and converts it into a <code class="highlighter-rouge">DiscreteDistribution</code> object.</p>
+
+<p>To test your code and run the autograder for this question:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q5
+</code></pre></div></div>
+<hr />
+
+<h2 id="question-6-3-points-approximate-inference-observation">Question 6 (3 points): Approximate Inference Observation</h2>
+
+<p>Next, we will implement the <code class="highlighter-rouge">observeUpdate</code> method in the <code class="highlighter-rouge">ParticleFilter</code> class in <code class="highlighter-rouge">inference.py</code>. This method constructs a weight distribution over <code class="highlighter-rouge">self.particles</code> where the weight of a particle is the probability of the observation given Pacman’s position and that particle location. Then, we resample from this weighted distribution to construct our new list of particles.</p>
+
+<p>You should again use the function <code class="highlighter-rouge">self.getObservationProb</code> to find the probability of an observation given Pacman’s position, a potential ghost position, and the jail position. The sample method of the <code class="highlighter-rouge">DiscreteDistribution</code> class will also be useful. As a reminder, you can obtain Pacman’s position using <code class="highlighter-rouge">gameState.getPacmanPosition()</code>, and the jail position using <code class="highlighter-rouge">self.getJailPosition()</code>.</p>
+
+<p><strong>There is one special case that a correct implementation must handle.</strong> When all particles receive zero weight, the list of particles should be reinitialized by calling <code class="highlighter-rouge">initializeUniformly</code>. The total method of the <code class="highlighter-rouge">DiscreteDistribution</code> may be useful.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q6
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q6 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-7-3-points-approximate-inference-with-time-elapse">Question 7 (3 points): Approximate Inference with Time Elapse</h2>
+
+<p>Implement the <code class="highlighter-rouge">elapseTime</code> function in the <code class="highlighter-rouge">ParticleFilter</code> class in <code class="highlighter-rouge">inference.py</code>. This function should construct a new list of particles that corresponds to each existing particle in <code class="highlighter-rouge">self.particles</code> advancing a time step, and then assign this new list back to <code class="highlighter-rouge">self.particles</code>. When complete, you should be able to track ghosts nearly as effectively as with exact inference.</p>
+
+<p>Note that in this question, we will test both the <code class="highlighter-rouge">elapseTime</code> function in isolation, as well as the full implementation of the particle filter combining <code class="highlighter-rouge">elapseTime</code> and <code class="highlighter-rouge">observe</code>.</p>
+
+<p>As in the <code class="highlighter-rouge">elapseTime</code> method of the <code class="highlighter-rouge">ExactInference</code> class, you should use:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newPosDist <span class="o">=</span> self.getPositionDistribution<span class="o">(</span>gameState, oldPos<span class="o">)</span>
+</code></pre></div></div>
+<p>This line of code obtains the distribution over new positions for the ghost, given its previous position (<code class="highlighter-rouge">oldPos</code>). The sample method of the <code class="highlighter-rouge">DiscreteDistribution</code> class will also be useful.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q7
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q7 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p>Note that even with no graphics, this test may take several minutes to run.</p>
+
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-8-1-points-joint-particle-filter-observation">Question 8 (1 points): Joint Particle Filter Observation</h2>
+
+<p>So far, we have tracked each ghost independently, which works fine for the default <code class="highlighter-rouge">RandomGhost</code> or more advanced <code class="highlighter-rouge">DirectionalGhost</code>. However, the prized <code class="highlighter-rouge">DispersingGhost</code> chooses actions that avoid other ghosts. Since the ghosts’ transition models are no longer independent, all ghosts must be tracked jointly in a dynamic Bayes net!</p>
+
+<p>The Bayes net has the following structure, where the hidden variables G represent ghost positions and the emission variables E are the noisy distances to each ghost. This structure can be extended to more ghosts, but only two (a and b) are shown below.</p>
+
+<p><img src="../assets/images/dbn.png" alt="Directed Graphical Model" class="img-fluid center-image" style="width: 500px;" /></p>
+
+<p>You will now implement a particle filter that tracks multiple ghosts simultaneously. Each particle will represent a tuple of ghost positions that is a sample of where all the ghosts are at the present time. The code is already set up to extract marginal distributions about each ghost from the joint inference algorithm you will create, so that belief clouds about individual ghosts can be displayed.</p>
+
+<p>Complete the <code class="highlighter-rouge">initializeUniformly</code> method in <code class="highlighter-rouge">JointParticleFilter</code> in <code class="highlighter-rouge">inference.py</code>. Your initialization should be consistent with a uniform prior. You may find the Python <code class="highlighter-rouge">itertools</code> package helpful. Specifically, look at <code class="highlighter-rouge">itertools.product</code> to get an implementation of the Cartesian product. However, note that, if you use this, the permutations are not returned in a random order. Therefore, you must then shuffle the list of permutations in order to ensure even placement of particles across the board. After shuffling, you should use the mod operator to index into the permutations list to add particles to self.particles.</p>
+
+<p>For clarification, we did not need to shuffle in q5's <code class="highlighter-rouge">initializeUniformly</code> because q8, unlike q5, has some tests where <code class="highlighter-rouge">self.numParticles</code> is less than the total number of permutations, so we need to shuffle the list to ensure that the first <code class="highlighter-rouge">self.numParticles</code> items in your permutations list are spread uniformly across the entire board.</p>
+
+<p>As before, use <code class="highlighter-rouge">self.legalPositions</code> to obtain a list of positions a ghost may occupy. Also as before, <strong>the variable you store your particles in must be a list</strong>.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q8
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q8 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-9-3-points-joint-particle-filter-observation">Question 9 (3 points): Joint Particle Filter Observation</h2>
+
+<p>In this question, you will complete the <code class="highlighter-rouge">observeUpdate</code> method in the <code class="highlighter-rouge">JointParticleFilter</code> class of <code class="highlighter-rouge">inference.py</code>. A correct implementation will weight and resample the entire list of particles based on the observation of all ghost distances.</p>
+
+<p>To loop over all the ghosts, use:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numGhosts</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div></div>
+<p>You can still obtain Pacman’s position using <code class="highlighter-rouge">gameState.getPacmanPosition()</code>, but to get the jail position for a ghost, use <code class="highlighter-rouge">self.getJailPosition(i)</code>, since now there are multiple ghosts each with their own jail positions.</p>
+
+<p><strong>Your implementation should also again handle the special case when all particles receive zero weight.</strong> In this case, <code class="highlighter-rouge">self.particles</code> should be recreated from the prior distribution by calling <code class="highlighter-rouge">initializeUniformly</code>.</p>
+
+<p>As in the update method for the <code class="highlighter-rouge">ParticleFilter</code> class, you should again use the function <code class="highlighter-rouge">self.getObservationProb</code> to find the probability of an observation given Pacman’s position, a potential ghost position, and the jail position. The sample method of the <code class="highlighter-rouge">DiscreteDistribution</code> class will also be useful.</p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q9
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q9 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+
+<h2 id="question-10-3-points-joint-particle-filter-time-elapse-and-full-test">Question 10 (3 points): Joint Particle Filter Time Elapse and Full Test</h2>
+
+<p>Complete the <code class="highlighter-rouge">elapseTime</code> method in <code class="highlighter-rouge">JointParticleFilter</code> in <code class="highlighter-rouge">inference.py</code> to resample each particle correctly for the Bayes net. In particular, each ghost should draw a new position conditioned on the positions of all the ghosts at the previous time step.</p>
+
+<p>As in the last question, you can loop over the ghosts using:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numGhosts</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div></div>
+<p>Then, assuming that <code class="highlighter-rouge">i</code> refers to the index of the ghost, to obtain the distributions over new positions for that single ghost, given the list (<code class="highlighter-rouge">prevGhostPositions</code>) of previous positions of all of the ghosts, use:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">newPosDist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getPositionDistribution</span><span class="p">(</span><span class="n">gameState</span><span class="p">,</span> <span class="n">prevGhostPositions</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ghostAgents</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div></div>
+<p>Note that completing this question involves grading both question 9 and question 10. Since these questions involve joint distributions, they require more computational power (and time) to grade, so please be patient!</p>
+
+<p>As you run the autograder note that <code class="highlighter-rouge">q10/1-JointParticlePredict</code> and <code class="highlighter-rouge">q10/2-JointParticlePredict</code> test your <code class="highlighter-rouge">predict</code> implementations only, and <code class="highlighter-rouge">q10/3-JointParticleFull</code> tests both your <code class="highlighter-rouge">predict</code> and <code class="highlighter-rouge">update</code> implementations. Notice the difference between test 1 and test 3. In both tests, pacman knows that the ghosts will move to the sides of the gameboard. What is different between the tests, and why?</p>
+
+<p><img src="../assets/images/disperse.png" alt="Pacman Heatmap" class="img-fluid center-image" style="width: 400px;" /></p>
+
+<p>To run the autograder for this question and visualize the output:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q10
+</code></pre></div></div>
+<p>If you want to run this test (or any of the other tests) without graphics you can add the following flag:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python autograder.py <span class="nt">-q</span> q10 <span class="nt">--no-graphics</span>
+</code></pre></div></div>
+<p><strong>*IMPORTANT*</strong>: In general, it is possible sometimes for the autograder to time out if running the tests with graphics. To accurately determine whether or not your code is efficient enough, you should run the tests with the <code class="highlighter-rouge">--no-graphics</code> flag. If the autograder passes with this flag, then you will receive full points, even if the autograder times out with graphics.</p>
+
+<hr />
+<p><a id="Submission"></a></p>
+<h2 id="submission">Submission</h2>
+
+<p>Submit <code class="highlighter-rouge">tracking.token</code>, generated by running <code class="highlighter-rouge">submission_autograder.py</code>, to <strong>Project 4</strong> on Gradescope.</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python submission_autograder.py
+</code></pre></div></div>
+<p><em>Note:</em> <strong>You only need to submit <code class="highlighter-rouge">tracking.token</code>, generated by running <code class="highlighter-rouge">submission_autograder.py</code>.</strong> It contains the evaluation results from your local autograder, and a copy of all your code. You do not need to submit any other files.</p>
+
+<p>Please specify any partner you may have worked with and verify that both you and your partner are associated with the submission after submitting.</p>
+
+<p><em>Congratulations! Only one more project left.</em></p>
+
+      </div>
+    </div>
+    <footer class="py-4 container">
+  <div class="row text-center">
+    <div class="col-md-6 col-sm-12">
+      <h3 data-toc-skip><a href="javascript:void(0)">CS 188</a></h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Weekly Schedule</a>
+        </li>
+        <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Office Hours</a>
+        </li>
+        <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+      <h3 data-toc-skip><a href="../policies/index.html">Policies</a></h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item"><a href="../policies/index.html#Assignments" class="nav-link">Assignments</a>
+        </li>
+        <li class="nav-item"><a href="../policies/index.html#Exams" class="nav-link">Exams</a>
+        </li>
+        <li class="nav-item"><a href="../policies/index.html#Grading" class="nav-link">Grading</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/clipboard.min.js"></script>
+  <script src="../assets/js/codeselect.js"></script>
+</footer>
+
+  </div>
+
+</body>
+
+<!-- <script>w3.includeHTML();</script> -->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>

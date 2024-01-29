@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest.html">
+    <link rel="mask-icon" href="https://inst.eecs.berkeley.edu/~cs188/fa21/safari-pinned-tab.svg" color="#fdb515">
+    <meta name="apple-mobile-web-app-title" content="CS 188">
+    <meta name="application-name" content="CS 188">
+    <meta name="msapplication-TileColor" content="#3b7ea1">
+    <meta name="msapplication-TileImage" content="/~cs188/fa21/mstile-144x144.png">
+    <meta name="theme-color" content="#3b7ea1">
+
+    <title>
+      
+      Policies - CS 188: Introduction to Artificial Intelligence, Fall 2021
+      
+    </title>
+
+    <link rel="stylesheet" href="../assets/css/main.css" type="text/css">
+
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../assets/js/bootstrap-toc.min.js"></script>
+
+
+    <script src="../assets/js/jquery.qtip.min.js" type="text/javascript"></script>
+    <script src="../assets/js/moment.min.js"></script>
+    <script src="../assets/js/fullcalendar.min.js"></script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      CommonHTML: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      "HTML-CSS": {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      },
+      SVG: {
+      linebreaks: { automatic: true },
+      scale: 90,
+      preferredFont: "Latin Modern"
+      }
+      });
+    </script>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+
+  <body data-spy="scroll" data-target="#toc">
+    <div id="navscroll">
+      <nav id="navbar" class="navbar navbar-light navbar-expand-lg align-items-center">
+	<div class="container">
+	  <a class="navbar-brand" href="../index.html" style="color: #000;"><strong>CS 188</strong> | Fall 2021</a>
+	  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="navbar-collapse ml-auto collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav ml-auto">
+	      <li class="nav-item"><a href="../index.html" class="nav-link">Syllabus</a></li>
+	      <li class="nav-item active"><a href="index.html" class="nav-link active">Policies</a></li>
+	      <li class="nav-item"><a href="../projects/index.html" class="nav-link">Projects</a></li>
+	      <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Schedule</a></li>
+	      <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a></li>
+              <li class="nav-item">
+		<a class="nav-link" href="https://piazza.com/class/kscn4bxn5in2sn">Piazza
+		  <i class="fal fa-link"></i>
+		</a>
+              </li>
+            </ul>
+	  </div>
+	</div>
+      </nav>
+    </div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <script>
+      // ===== Scroll to Top ====
+      $(window).scroll(function() {
+      if ($(this).scrollTop() >= 50) {      // If page is scrolled more than 50px
+      $('#return-to-top').fadeIn(200);    // Fade in the arrow
+      } else {
+      $('#return-to-top').fadeOut(200);   // Else fade out the arrow
+      }
+      });
+      $('#return-to-top').click(function() {  // When arrow is clicked
+      $('body,html').animate({
+      scrollTop : 0                       // Scroll to top of body
+      }, 500);
+      });
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+    <script>var $j = jQuery.noConflict(true);</script>
+    <script>
+      $(document).ready(function(){
+      console.log($().jquery); // this prints v1.11.0
+      console.log($j().jquery); // this prints v3.1.0
+      });
+    </script>
+    <script src="../assets/js/parallax.min.js"></script>
+
+    <script src="../assets/js/main.min.js"></script>
+
+    <div class="container">
+
+      <!-- <div class="alert alert-warning"> -->
+      <!-- 	<i class="far fa-exclamation-triangle"></i> -->
+      <!-- 	<strong>Warning: Fall 2021 website is under construction.</strong> There may be misleading information from past semesters on this website, which may be different from the Fall 2021 offering of the course. We will remove this warning when the information on this website is accurate. -->
+      <!-- </div> -->
+
+      <!-- <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="3800" style="float: left; top: 5em; position: absolute; z-index: 1000">
+	   <div class="toast-header">
+	     <i class="fal fa-bell"></i>
+	     <strong class="mr-auto pl-1">Announcement</strong>
+	     <small class="text-white" id="announcementTime"></small>
+	     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	       <span aria-hidden="true">&times;</span>
+	     </button>
+	   </div>
+	   <div class="toast-body">
+	     <b>Lecture venue for changed AGAIN! Wednesday's (6/26) and future lectures will be held at DWINELLE 155.</b>
+	   </div>
+      </div> -->
+
+      <script>
+	// $('.toast').toast('show')
+	document.getElementById('announcementTime').innerHTML = moment([2020, 5, 25, 21, 35]).fromNow()
+      </script>
+
+
+      <div class="row">
+	<div class="col-sm-3">
+	  <nav id="toc" data-toggle="toc" class="sticky-top" style="top: 40px; margin-bottom: 40px"></nav>
+	</div>
+
+	<div class="col-sm-9">
+          <h1 class="mt-0">Policies</h1>
+
+	  <p><strong>Note: The syllabus is subject to change</strong></p>
+
+	  <h2 id="communication">Communication</h2>
+
+	  <p>There will be several routes of communication for this course:</p>
+
+	  <ul>
+	    <li>The main mode of electronic communication between students and staff, as well as amongst students, is through Piazza. It is intended for general questions about the course, clarifications about assignments, student questions to each other, discussions about material, and so on. We strongly encourage students to participate in discussion, ask, and answer questions through this site. The course staff will monitor discussions closely.</li>
+	    <li>If you need to contact the course staff privately, you should make a private post on Piazza. If you need to contact us by email, you should email <a href="javascript:copyText(&quot;cs188@berkeley.edu&quot;)">cs188@berkeley.edu</a>. You may of course contact the professors or GSIs directly, but Piazza will produce the fastest response.</li>
+	  </ul>
+
+	  <hr />
+
+	  <h2 id="prerequisites">Prerequisites</h2>
+
+	  <ul>
+	    <li><strong>CS 61A or 61B:</strong> Prior computer programming experience is expected (see below)</li>
+	    <li><strong>CS 70 or Math 55</strong>: Facility with basic concepts of propositional logic and probability are expected (see below)</li>
+	  </ul>
+
+	  <p><em>CS61A AND CS61B AND CS70 is the recommended background.</em></p>
+
+	  <p>The required math background in the second half of the course will be significantly greater than the first half. The self-diagnostic assignment Homework 0 will help check your preparation.</p>
+
+	  <p>Course programming assignments will be in Python. We do not assume that students have previous experience with the language, but we do expect you to learn the basics very rapidly. Project 0 is designed to teach you the basics of Python, but if you want to get a head start here is a good tutorial: <a href="http://www.acm.uiuc.edu/sigunix/workshops/crashpython/crashpython.pdf">ACM Python Tutorial</a>. Project 1 is a good representation of the programming level that will be required for subsequent projects in this class.</p>
+
+	  <hr />
+
+	  <p><a name="Assignments"></a></p>
+	  <h2 id="assignments">Assignments</h2>
+
+	  <p>This class includes <strong>~6 programming projects</strong>, and <strong>~10 homework assignments</strong>.</p>
+
+	  <p><a name="Late-Policy"></a></p>
+	  <h3 id="late-policy">Late Policy</h3>
+
+	  <p>Homeworks cannot be turned in late; you have to use your homework drops. Projects lose 20% of their total point value per day turned in late. However, projects also have slip days which can be used to delay the onset of the late policy. See the <a href="index.html#Homework-Drop-Policy">Homework Drop Policy</a>.</p>
+
+	  <p>This semester, both homeworks and projects will be due at <b>10:59 PM Pacific Time</b>. However, you will lose no points (and use no slip-days for projects), if you submit before the late deadline of <b>11:59 PM Pacific Time</b>. We strongly recommend you use this grace period to protect against technical issues, and to have your assignments finished before 10:59 PM. We will accept absolutely no submissions after the 11:59 PM late deadline, even after technical issues or emergencies.</p>
+
+	  <h3 id="collaboration">Collaboration</h3>
+
+	  <p>Project 0 is to be completed alone.  Projects 1 and after can be completed alone or in teams of two.  If done in a team of two, the person who submits needs to tag the other team member on Gradescope. However, it is important that the submission reflects the understanding of both team members. Homework is to be submitted individually, but may be discussed in groups. If discussed in a group, acknowledge your collaborators in the submission per standard academic practice.</p>
+	  <p> Please note that obtaining, sharing, and posting solutions to homework or projects is a violation of academic integrity. </p> <p>
+	    Please also note that sharing lecture recordings outside this class is prohibited due to privacy and accessibility concerns. </p>
+	  <h3 id="project-slip-days">Project Slip Days</h3>
+
+	  <p>Programming projects must be turned in electronically by the listed due date and time. You will have a total of <strong>5 slip days</strong> to be used across <strong>ALL</strong> projects to extend a deadline. Note that slip days are counted by the granularity of days, rounded up to the nearest day. For example, if you have yet to use your two slip days: for a project due at late deadline 11:59PM Pacific Time on Friday, any submission from Friday 11:59PM to Saturday 11:59PM will use up one slip day, any submission from Saturday 11:59PM to Sunday 11:59PM will use up two slip days, and any submissions after Sunday 11:59PM will begin being penalized by the late policy. Slip days will be applied to your grades at the end of the semester in a manner which maximizes your project grades. <strong>You may only use maximum two slip-days per project</strong>.</p>
+
+	  <p>Note: See <a href="index.html#Late-Policy">Late Policy</a> for late deadline details.</p>
+	  <h3 id="project-grading">Project Grading</h3>
+
+	  <p>Projects will by default be graded automatically for correctness, though we will review projects individually as necessary to ensure that they receive the credit they deserve. Projects can be submitted as often as you like before the deadline; we strongly encourage you to keep working until you get a full score.</p>
+
+	  <h3 id="homework">Homework</h3>
+
+	  <p>The homework (hosted on Gradescope) is meant to reinforce and give practice with concepts covered in class. The homework will consist of an autograded portion (instant feedback) and a challenge question (no instant feedback). Homeworks will be released on Wednesdays and due the following Tuesdays at 10:59PM Pacific Time.</p>
+
+	  <p><strong>Autograded component of HW:</strong> The autograded portion will be automatically graded for correctness, and you can submit as many times as you like up to the deadline; again we encourage you to work until you have fully solved this portion of the homework.</p>
+
+	  <p><strong>Challenge question component of HW:</strong> The challenge question is meant to make you think beyond strict repetition of what is covered in class and is used to reinforce conceptual material that you will see on exams. For the challenge question <b>only</b>, you must show your work on paper or tablet and submit it to Gradescope. The challenge question will be graded on correctness, and you must show all necessary work to receive full credit. However, you will be able to regain up to 75% of the points you missed on the question by resubmitting after the deadline with an explanation of what you got wrong in the first submission, why you think you got it wrong, and how you fixed your solution. Solutions to the challenge question will be released on the day after the homework is due (Wednesday). You will have until the following Tuesday at 10:59 PM Pacific Time to turn in the resubmission. Note that for the resubmission, if you do not have a prior submission you will not be able to regain any credit from making a resubmission. The intent is for you to reflect on the assignment to help prepare you for the exams, not to let you skip the assignment.</p>
+
+	  <p><strong>Note: Homeworks have no slip days.</strong></p>
+
+	  <!--<h3 id="written-homework-self-grading">Written Homework Self-Grading</h3>
+	      <p>Written homework will be self-graded in addition to being partially graded by CS 188 TAs. After the written homework deadline ends, HW solutions will be posted online. You will then be expected to read them and enter your own scores and comments for every part of every problem in the homework on a simple coarse scale:</p>
+
+	  <p><strong>0</strong> = Didn’t attempt or very very wrong</p>
+
+	  <p><strong>2</strong> = Got started and made some progress, but went off in the wrong direction or with no clear direction</p>
+
+	  <p><strong>5</strong> = Right direction and got half-way there</p>
+
+	  <p><strong>8</strong> = Mostly right but a minor thing missing or wrong</p>
+
+	  <p><strong>10</strong> = 100% correct</p>
+
+	  <p>You must also justify every self-grade score with a comment. If you are really confused about how to grade a particular problem, you should post on <a href="https://piazza.com/class/kdo94dnotzp1e5">Piazza</a>. This is not supposed to be a stressful process.</p>
+
+	  <p>Your self-grades will be due a week after the solutions are released. <strong>If you do not submit a self-grade, you will receive a zero on the corresponding written homework</strong>. Written homework grades will be calculated by taking your self-grades, and adjusting them by comparing to TA-graded sub-questions.</p>-->
+
+	  <p><a name="Homework-Drop-Policy"></a></p>
+	  <h3 id="homework-drop-policy">Homework Drop Policy</h3>
+
+	  <p>You will each be allowed to drop your <strong>lowest</strong> homework score. (When calculating final grades, this will happen automatically, we’ll just use your highest scoring submissions.)</p>
+	  
+
+	  <p>Note that this policy is also meant to deal with cases like internet issues while submitting, forgetting about the deadline, emergency situations, joining the class late, etc.</p>
+
+	  <h3 id="ethics">Ethics</h3>
+
+	  <p>Submissions should acknowledge all collaborators and sources consulted. All code and written responses should be original. We trust you all to submit your own work, but to protect the integrity of the course from anyone who doesn’t want to play by the rules, we will actively be checking for code plagiarism (both from current classmates and previous semesters). We are not lenient about cheating; we sympathize with <a href="http://www-bsac.eecs.berkeley.edu/~pister/etc/Cheating.htm">Kris Pister’s policy</a>.</p>
+
+	  <hr />
+
+	  <h2 id="extensions">Extensions for DSP</h2>
+	
+	  <p>Our course manager Michael-David will be managing extension requests and accommodations this semester. If you need to make an extension request due to exceptional circumstances or would like to request DSP extensions, please fill out <a href=https://forms.gle/KqsWouKUhpvVKipXA>this form</a> that will go directly to him.</p>
+
+	  <p>If you have any questions, concerns, or want to reach out to Michael-David directly, feel free to email him at eecs-course-management@eecs.berkeley.edu.</p>
+	
+	  <p>Extensions for projects and homeworks are generally granted only for DSP students whose advisor has submitted a DSP letter.</p>
+	  <!-- Make an extension request [**here**](https://forms.gle/kZQzRsqGH5UUmvGN6). If you do not hear back promptly, send Head TA Mesut an email. -->
+
+	  <p>In a project group, the DSP extension applies to both students in the group. Please include the name of your project partner in the extension request.</p>
+
+	  <p>Extensions should be requested well in advance of the deadline, to give staff a chance to respond.</p>
+
+	  <hr />
+
+	  <p><a name="Exams"></a></p>
+	  <h2 id="exams">Exams</h2>
+	  <p>The midterm exam time is 7-9 pm on 10/14.</p>
+
+	  <p>The final exam time is 11:30 am - 2:30 pm on 12/16.</p>
+
+	  <p><a name="Grading"></a></p>
+	  <h2 id="grading">Grading</h2>
+
+	  <p>Overall grades will be determined from:</p>
+
+	  <ul>
+	    <li>Projects (25%)</li>
+	    <li>Homework Assignments (20%)</li>
+	    <li>Midterm (20%)</li>
+	    <li>Final exam (35%)</li>
+	  </ul>
+
+	  <p>Grades are on the following fixed scale: (Refer to <a href="https://en.wikipedia.org/wiki/Interval_(mathematics)#Notations_for_intervals">Notations for Intervals</a> if you are not familiar with the notations below.)</p>
+
+	  <!-- <table class="table table-sm">
+	       <thead>
+		 <tr>
+		   <th style="border: 1px solid #000">Grade</th>
+		   <th style="border: 1px solid #000">Percentage (Range)</th>
+		 </tr>
+	       </thead>
+	       <tbody>
+		 <tr>
+		   <td>A</td>
+		   <td>[85, 100]</td>
+		 </tr>
+		 <tr>
+		   <td>A-</td>
+		   <td>[80, 85)</td>
+		 </tr>
+		 <tr>
+		   <td>B+</td>
+		   <td>[75, 80)</td>
+		 </tr>
+		 <tr>
+		   <td>B</td>
+		   <td>[70, 75)</td>
+		 </tr>
+		 <tr>
+		   <td>B-</td>
+		   <td>[65, 70)</td>
+		 </tr>
+		 <tr>
+		   <td>C+</td>
+		   <td>[60, 65)</td>
+		 </tr>
+		 <tr>
+		   <td>C</td>
+		   <td>[55, 60)</td>
+		 </tr>
+		 <tr>
+		   <td>C-</td>
+		   <td>[50, 55)</td>
+		 </tr>
+		 <tr>
+		   <td>D+</td>
+		   <td>[45, 50)</td>
+		 </tr>
+		 <tr>
+		   <td>D</td>
+		   <td>[40, 45)</td>
+		 </tr>
+		 <tr>
+		   <td>D-</td>
+		   <td>[35, 40)</td>
+		 </tr>
+		 <tr>
+		   <td>F</td>
+		   <td>[0, 35)</td>
+		 </tr>
+	       </tbody>
+	  </table> -->
+
+	  <div class="no-copy-button highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+		  | Grade |  Overall Percentage  |
+		  | ----- | -------------------- |
+		  | A     |       [85, 100]      |
+		  | A-    |       [80, 85)       |
+		  | B+    |       [75, 80)       |
+		  | B     |       [70, 75)       |
+		  | B-    |       [65, 70)       |
+		  | C+    |       [60, 65)       |
+		  | C     |       [55, 60)       |
+		  | C-    |       [50, 55)       |
+		  | D+    |       [45, 50)       |
+		  | D     |       [40, 45)       |
+		  | D-    |       [35, 40)       |
+		  | F     |       [0 , 35)       |
+	  </code></pre></div></div>
+
+	  <p>The instructors may adjust grades upward based on class participation, extra credit, etc. The grade of A+ will be awarded at the instructors’ discretion based on exceptional performance.</p>
+
+	  <p>If you are taking the class PNP, you will need to attain a letter grade of C- or higher AND take the final to pass. If you are taking the class SUS, you will need to attain a letter grade of B- or higher AND take the final to pass.</p>
+	  <p><strong>Regrade Policy:</strong> If you believe an error has been made in the grading of one of your exams or assignments, you may resubmit it for a regrade. Regrades for cases where we misapplied a rubric in an individual case are much more likely to be successful than regrades that argue about relative point values within the rubric, as the rubric is applied to the entire class. Because we will examine your entire submission in detail, your grade can go up or down as a result of a regrade request.</p>
+
+	  <hr />
+	  <h2 id="participation">Participation</h2>
+
+	  <strong>What are participation points?</strong>
+	  A form of extra credit to bump students who are close to grade boundaries into the next grade bin. All grade bins are posted above.
+	  <br>
+	  <br>
+	  
+	  <strong>How do I earn participation points?</strong>
+	  There are 3 distinct categories to accumulate up to a maximum total of 20 participation points in CS 188. This is meant to give all students the maximum flexibility to participate in a way they feel comfortable with.
+	  <br>
+	  <br>
+	  So in summary, Participation Score = min(Lecture + Piazza + Section, 20), where Lecture, Piazza, and Section are subcategories in which you can earn anywhere from 0 to 20 points.
+	  <br>
+	  <br>
+	  <strong>Lecture participation (max 20):</strong>
+	  Students will have the opportunity to interact with Professors Anca Dragan and Pieter Abbeel <!-- and a few staff members -->during live lectures. Actively asking / answering questions during lecture will help you accumulate points in this category. 
+	  <br>
+	  <br>
+	  <strong>Piazza participation (max 20):</strong>
+	  At the end of the semester, a Piazza participation score will be assigned to all students, where we will roughly grade everyone on a scale that rewards thought-provoking questions or insightful answers. Staff will assign Piazza grades manually based on these rough features, so there is no formula that exactly maps the number of contributions to the number of Piazza points you will receive. To put things into perspective out of a maximum of 20 points, less than 6% of students from Spring 2020 earned 10 points and the class median was 1 point.
+	  <br>
+	  <br>
+	  <strong>Section participation (max 20):</strong>
+	  We have discussion sections that span over a wide range of time, so please choose and regularly attend one section, especially if you are unable to attend live lectures. At the end of the semester, you will be asked to fill out a Google form to describe your interactions with 1 TA. This will be reviewed by the admin TA team and cross-checked by the TA you referenced in the form, and used to determine your section participation points. 
+	  <br>
+	  <br>
+	  Each participation point is worth 0.05% of your grade, capped at 20 points (equivalent to 1%, which is a fifth of the width of one grade bin). 
+	  <br>
+	  <br>
+	  <em>Please note that we will not round up anyone’s grades at the end of the semester beyond participation-point based extra credit. </em> <b>No exceptions.</b> So please take this opportunity to earn extra credit and actively participate.
+
+	  <hr />
+	  <h2 id="inclusion">Inclusion</h2>
+	  We believe in the crucial importance of creating a learning environment that is welcoming and respectful to students of all backgrounds. The following are specific steps that will help us in achieving this goal:
+	  <ul>
+	    <li>If you feel your academic performance has been impacted negatively due to a lack of inclusion, or due to experiences outside of class such as current events or family matters, please reach out to the instructors and staff. Our job is not only to teach but to support you in every way we can.</li>
+	    <li>If something happens in the course that runs counter to the goal of making every student feel safe, respected, and welcome, please contact the head TA or the instructors; if you don't feel comfortable contacting course staff, you can fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4NYHdUJ8IzYA1SoiTinWBybGWkj0mfmdnHAeygAxkZajelQ/viewform">this form</a> to anonymously let the department know.</li>
+	    <li>You may also consult a departmental <a href="https://diversity.berkeley.edu/faculty-equity-advisors">Faculty Equity Advisor</a>, or fill out the <a href="https://engineering.berkeley.edu/about/equity-and-inclusion/feedback/">anonymous feedback form</a> for the College of Engineering for equity and inclusion related feedback.</li>
+	    <li>If you have a preferred name or set of pronouns that differ from your legal name, you may designate a preferred name for the classroom by following these <a href="https://registrar.berkeley.edu/academic-records/your-name-records-rosters">steps</a>.</li>
+	    
+	    <li>As a member of the CS188 community, realize that you have an important duty to help other students feel respected in helping create an inclusive learning environment.</li>
+	  </ul>
+	  <br>
+
+	  <hr />
+
+	  <h2 id="Support During Remove Learning">Support During Remote Learning</h2>
+	  <p>From the College of Engineering:</p>
+	  <blockquote>
+	    <p>We understand that your specific situation may present challenges to class participation. Please contact the instructors if you would like to discuss these and co-develop strategies for engaging with the course.</p>
+	    <p>The Student Technology Equity Program (<a href="https://technology.berkeley.edu/STEP">STEP</a>) is available to help you access a laptop, Wi-Fi hotspot, and other peripherals.</p>
+	    <p>You will be alerted as to when synchronous sessions are about to be recorded. If you prefer not to be recorded, you may turn your video and microphone off. Please set your Zoom name to be the name you would like instructors to call you. You may optionally include your personal pronouns. Please set your Zoom picture to an appropriate profile picture of you to foster a sense of community and enhance interactions. If you are not comfortable using an image of yourself, you may use an appropriate picture of an avatar. We encourage participating with your video on to foster a sense of commnuity and enhance interactions. However, we understand that some students are not comfortable with video or may not be able to participate by video.</p>
+	  </blockquote>
+
+	  <hr />
+
+	  <h2 id="enrollment">Enrollment</h2>
+
+	  <p>Here are <a href="http://www.eecs.berkeley.edu/Policies/enrollment.shtml">the policies that govern admission into classes</a>, and here are some answers to <a href="http://www.eecs.berkeley.edu/Policies/enrollment.shtml">frequently asked questions about admission</a>. The course staff does not control enrollment!</p>
+
+	</div>
+      </div>
+      <footer class="py-4 container">
+	<div class="row text-center">
+	  <div class="col-md-6 col-sm-12">
+	    <h3 data-toc-skip><a href="javascript:void(0)">CS 188</a></h3>
+	    <ul class="nav nav-pills flex-column">
+              <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Weekly Schedule</a>
+              </li>
+              <li class="nav-item"><a href="../schedule/index.html" class="nav-link">Office Hours</a>
+              </li>
+              <li class="nav-item"><a href="../staff/index.html" class="nav-link">Staff</a>
+              </li>
+	    </ul>
+	  </div>
+
+	  <div class="col-md-6 col-sm-12">
+	    <h3 data-toc-skip><a href="index.html">Policies</a></h3>
+	    <ul class="nav nav-pills flex-column">
+              <li class="nav-item"><a href="index.html#Assignments" class="nav-link">Assignments</a>
+              </li>
+              <li class="nav-item"><a href="index.html#Exams" class="nav-link">Exams</a>
+              </li>
+              <li class="nav-item"><a href="index.html#Grading" class="nav-link">Grading</a>
+              </li>
+	    </ul>
+	  </div>
+	</div>
+
+	<script src="../assets/js/clipboard.min.js"></script>
+	<script src="../assets/js/codeselect.js"></script>
+      </footer>
+
+    </div>
+
+  </body>
+
+  <!-- <script>w3.includeHTML();</script> -->
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+</html>
